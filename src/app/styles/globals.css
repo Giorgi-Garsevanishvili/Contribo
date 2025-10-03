@@ -1,0 +1,9 @@
+@import "tailwindcss";
+
+@tailwind utilities;
+
+@layer components {
+  .btn {
+    @apply flex rounded-2xl shadow-2xl bg-amber-300 px-4 py-1.5 m-2;
+  }
+}
