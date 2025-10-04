@@ -7,25 +7,114 @@ generator client {
   provider = "prisma-client-js"
 }
 
-model User {
-  id            String          @id @default(cuid())
-  name          String?
-  email         String          @unique
-  emailVerified DateTime?
-  image         String?
-  role          Role            @default(regular)
-  accounts      Account[]
-  sessions      Session[]
-  // Optional for WebAuthn support
-  Authenticator Authenticator[]
+// #1 Decide on Delete Cascade position and tables
+// #2 Solve Time period for Membership and Position cases
+// #3 Define Rating adjustment and history
+// #4 Define HR warning / feedback tables and its related fields
+// #5 Define Event elated Tables
 
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+model User {
+  id             String          @id @default(cuid())
+  name           String?
+  email          String          @unique
+  emailVerified  DateTime?
+  image          String?
+  regionId       String?
+  region         Region?         @relation(fields: [regionId], references: [id])
+  roleId         String?
+  role           Role?           @relation(fields: [roleId], references: [id])
+  memberStatusId String?
+  memberStatus   MemberStatus?   @relation(fields: [memberStatusId], references: [id])
+  regStatus      RegStatus       @default(pending)
+  positionId     String?
+  position       Position?       @relation(fields: [positionId], references: [id])
+  accounts       Account[]
+  sessions       Session[]
+  // Optional for WebAuthn support
+  Authenticator  Authenticator[]
+  joinRequests   JoinRequest[]
+
+  createdAt           DateTime          @default(now())
+  updatedAt           DateTime          @updatedAt
+  memberStatusLogs    MemberStatusLog[]
+  memberStatusChanges MemberStatusLog[] @relation("MembershipChangedBy")
+  positionChanges     PositionHistory[] @relation("PositionChangedBy")
+  positionHistories   PositionHistory[]
 }
 
-enum Role {
-  admin
-  regular
+model Position {
+  id                String            @id @default(cuid())
+  name              String            @unique
+  users             User[]
+  positionHistories PositionHistory[]
+}
+
+model PositionHistory {
+  id          String   @id @default(cuid())
+  userId      String
+  positionId  String
+  changedAt   DateTime @default(now())
+  updatedById String?
+  changedBy   User?    @relation("PositionChangedBy", fields: [updatedById], references: [id])
+
+  user     User     @relation(fields: [userId], references: [id])
+  position Position @relation(fields: [positionId], references: [id])
+
+  @@index([userId])
+  @@index([updatedById])
+}
+
+model MemberStatus {
+  id               String            @id @default(cuid())
+  name             String            @unique
+  users            User[]
+  memberStatusLogs MemberStatusLog[]
+}
+
+model MemberStatusLog {
+  id             String   @id @default(cuid())
+  userId         String
+  memberStatusId String
+  changedAt      DateTime @default(now())
+  changedById    String?
+  changedBy      User?    @relation("MembershipChangedBy", fields: [changedById], references: [id])
+
+  user   User         @relation(fields: [userId], references: [id])
+  status MemberStatus @relation(fields: [memberStatusId], references: [id])
+
+  @@index([userId])
+  @@index([changedById])
+}
+
+model JoinRequest {
+  id       String    @id @default(cuid())
+  userId   String
+  regionId String
+  status   RegStatus @default(pending)
+
+  user   User   @relation(fields: [userId], references: [id])
+  region Region @relation(fields: [regionId], references: [id])
+}
+
+enum RegStatus {
+  pending
+  requested
+  approved
+  rejected
+}
+
+model Region {
+  id    String @id @default(cuid())
+  name  String @unique
+  users User[]
+
+  joinRequests JoinRequest[]
+}
+
+model Role {
+  id    String @id @default(uuid())
+  name  String @unique
+  users User[]
 }
 
 model Account {
