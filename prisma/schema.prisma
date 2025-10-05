@@ -7,12 +7,6 @@ generator client {
   provider = "prisma-client-js"
 }
 
-// #1 Decide on Delete Cascade position and tables
-// #2 Solve Time period for Membership and Position cases
-// #3 Define Rating adjustment and history
-// #4 Define HR warning / feedback tables and its related fields
-// #5 Define Event elated Tables
-
 model User {
   id             String          @id @default(cuid())
   name           String?
@@ -20,14 +14,17 @@ model User {
   emailVerified  DateTime?
   image          String?
   regionId       String?
-  region         Region?         @relation(fields: [regionId], references: [id])
+  region         Region?         @relation(fields: [regionId], references: [id], onDelete: SetNull)
   roleId         String?
-  role           Role?           @relation(fields: [roleId], references: [id])
+  role           Role?           @relation(fields: [roleId], references: [id], onDelete: SetNull)
   memberStatusId String?
-  memberStatus   MemberStatus?   @relation(fields: [memberStatusId], references: [id])
-  regStatus      RegStatus       @default(pending)
+  memberStatus   MemberStatus?   @relation(fields: [memberStatusId], references: [id], onDelete: SetNull)
+  regStatus      RegStatus       @default(PENDING)
   positionId     String?
-  position       Position?       @relation(fields: [positionId], references: [id])
+  position       Position?       @relation(fields: [positionId], references: [id], onDelete: SetNull)
+  rating         Int             @default(0)
+  deletedAt      DateTime?
+  deleted        Boolean         @default(false)
   accounts       Account[]
   sessions       Session[]
   // Optional for WebAuthn support
@@ -40,6 +37,29 @@ model User {
   memberStatusChanges MemberStatusLog[] @relation("MembershipChangedBy")
   positionChanges     PositionHistory[] @relation("PositionChangedBy")
   positionHistories   PositionHistory[]
+  ratingHistory       RatingHistory[]   @relation("UserRating")
+  createdRating       RatingHistory[]   @relation("CreatedRatingBy")
+}
+
+enum RatingAction {
+  INCREASE
+  DECREASE
+}
+
+model RatingHistory {
+  id          String       @id @default(cuid())
+  userId      String
+  value       Int
+  action      RatingAction
+  reason      String?
+  createdById String?
+  createdAt   DateTime     @default(now())
+
+  user      User  @relation("UserRating", fields: [userId], references: [id], onDelete: Cascade)
+  createdBy User? @relation("CreatedRatingBy", fields: [createdById], references: [id], onDelete: SetNull)
+
+  @@index([userId])
+  @@index([createdById])
 }
 
 model Position {
@@ -50,15 +70,17 @@ model Position {
 }
 
 model PositionHistory {
-  id          String   @id @default(cuid())
+  id          String    @id @default(cuid())
   userId      String
-  positionId  String
-  changedAt   DateTime @default(now())
+  positionId  String?
+  startedAt   DateTime  @default(now())
+  endedAt     DateTime?
+  changedAt   DateTime  @default(now())
   updatedById String?
-  changedBy   User?    @relation("PositionChangedBy", fields: [updatedById], references: [id])
+  changedBy   User?     @relation("PositionChangedBy", fields: [updatedById], references: [id], onDelete: Cascade)
 
-  user     User     @relation(fields: [userId], references: [id])
-  position Position @relation(fields: [positionId], references: [id])
+  user     User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  position Position? @relation(fields: [positionId], references: [id], onDelete: SetNull)
 
   @@index([userId])
   @@index([updatedById])
@@ -72,35 +94,39 @@ model MemberStatus {
 }
 
 model MemberStatusLog {
-  id             String   @id @default(cuid())
+  id             String    @id @default(cuid())
   userId         String
-  memberStatusId String
-  changedAt      DateTime @default(now())
+  memberStatusId String?
+  startedAt      DateTime  @default(now())
+  endedAt        DateTime?
+  changedAt      DateTime  @default(now())
   changedById    String?
-  changedBy      User?    @relation("MembershipChangedBy", fields: [changedById], references: [id])
+  changedBy      User?     @relation("MembershipChangedBy", fields: [changedById], references: [id], onDelete: SetNull)
 
-  user   User         @relation(fields: [userId], references: [id])
-  status MemberStatus @relation(fields: [memberStatusId], references: [id])
+  user   User          @relation(fields: [userId], references: [id], onDelete: Cascade)
+  status MemberStatus? @relation(fields: [memberStatusId], references: [id], onDelete: SetNull)
 
   @@index([userId])
   @@index([changedById])
 }
 
 model JoinRequest {
-  id       String    @id @default(cuid())
-  userId   String
-  regionId String
-  status   RegStatus @default(pending)
+  id          String    @id @default(cuid())
+  userId      String
+  regionId    String?
+  status      RegStatus @default(PENDING)
+  requestedAt DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
 
-  user   User   @relation(fields: [userId], references: [id])
-  region Region @relation(fields: [regionId], references: [id])
+  user   User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+  region Region? @relation(fields: [regionId], references: [id], onDelete: SetNull)
 }
 
 enum RegStatus {
-  pending
-  requested
-  approved
-  rejected
+  PENDING
+  REQUESTED
+  APPROVED
+  REJECTED
 }
 
 model Region {
