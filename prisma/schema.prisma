@@ -39,11 +39,75 @@ model User {
   positionHistories   PositionHistory[]
   ratingHistory       RatingHistory[]   @relation("UserRating")
   createdRating       RatingHistory[]   @relation("CreatedRatingBy")
+
+  eventAssignments     EventAssignment[]
+  providedFeedbacks    EventFeedback[]
+  scheduledEventEmails ScheduledEmails[]
 }
 
 enum RatingAction {
   INCREASE
   DECREASE
+}
+
+model Event {
+  id          String   @id @default(cuid())
+  name        String
+  location    String
+  startTime   DateTime
+  endTime     DateTime
+  description String
+  rating      Int?
+
+  feedback             EventFeedback[]
+  assignments          EventAssignment[]
+  scheduledEventEmails ScheduledEmails[]
+}
+
+model EventsRole {
+  id   String @id @default(cuid())
+  name String @unique
+
+  eventAssignment EventAssignment[]
+}
+
+model EventFeedback {
+  id       String  @id @default(cuid())
+  eventId  String
+  userId   String?
+  feedback String
+  rating   Int?
+
+  event Event @relation(fields: [eventId], references: [id], onDelete: Cascade)
+  user  User? @relation(fields: [userId], references: [id], onDelete: SetNull)
+}
+
+model ScheduledEmails {
+  id        String   @id @default(cuid())
+  userId    String
+  eventId   String
+  sent      Boolean  @default(false)
+  sendAt    DateTime
+  createdAt DateTime @default(now())
+
+  user  User  @relation(fields: [userId], references: [id], onDelete: Cascade)
+  event Event @relation(fields: [eventId], references: [id], onDelete: Cascade)
+}
+
+model EventAssignment {
+  id      String  @id @default(cuid())
+  eventId String
+  userId  String?
+  roleId  String?
+
+  comment    String?
+  assignedAt DateTime  @default(now())
+  validFrom  DateTime?
+  validTo    DateTime?
+
+  role  EventsRole? @relation(fields: [roleId], references: [id], onDelete: SetNull)
+  event Event       @relation(fields: [eventId], references: [id], onDelete: Cascade)
+  user  User?       @relation(fields: [userId], references: [id], onDelete: SetNull)
 }
 
 model RatingHistory {
@@ -77,7 +141,7 @@ model PositionHistory {
   endedAt     DateTime?
   changedAt   DateTime  @default(now())
   updatedById String?
-  changedBy   User?     @relation("PositionChangedBy", fields: [updatedById], references: [id], onDelete: Cascade)
+  changedBy   User?     @relation("PositionChangedBy", fields: [updatedById], references: [id], onDelete: SetNull)
 
   user     User      @relation(fields: [userId], references: [id], onDelete: Cascade)
   position Position? @relation(fields: [positionId], references: [id], onDelete: SetNull)
