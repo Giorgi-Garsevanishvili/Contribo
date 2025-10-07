@@ -1,36 +1,87 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 🧩 Contribo
 
-## Getting Started
+**Contribo** is an internal management platform designed to organize events, roles, and user participation efficiently.  
+It aims to simplify collaboration, automate routine tasks like feedback collection and email notifications, and maintain clear records of contributions within an organization.
 
-First, run the development server:
+---
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## 🚧 Project Status
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+> **Note:** Contribo is currently under active development.  
+> Core database models and backend structure are being defined and tested.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+---
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## 🎯 Main Features (Planned / In Progress)
 
-## Learn More
+- **User Management**  
+  Each user can have roles, ratings, and historical records of their position or membership changes.
 
-To learn more about Next.js, take a look at the following resources:
+- **Event System**  
+  Create and manage events with detailed information:
+  - Multiple role assignments per event
+  - Feedback collection from participants
+  - Automated follow-up notifications after event completion
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- **Rating & History Tracking**  
+  Every rating change, position update, or member status modification is stored with timestamps and responsible users.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+- **Scheduled Emails (Planned)**  
+  Automatic follow-up emails are sent 3 days after each event ends using external cron jobs (e.g., [cron-job.org](https://cron-job.org/en/)) and **Nodemailer**.
 
-## Deploy on Vercel
+---
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## 🧱 Tech Stack
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- **Framework:** [Next.js](https://nextjs.org/)
+- **Database:** PostgreSQL (via [Prisma ORM](https://www.prisma.io/))
+- **Authentication:** NextAuth.js
+- **Deployment:** Netlify (frontend) Or Vercel
+- **Email Automation:** Nodemailer + external cron service (planned)
+- **Language:** TypeScript
+
+---
+
+## 🗂️ Database Overview (Core Models)
+
+- `User` – stores user information, status, and history  
+- `Event` – includes event details, time, and feedback  
+- `EventAssignment` – connects users to roles within specific events  
+- `EventsRole` – defines available roles for events  
+- `EventFeedback` – collects participants’ comments and evaluations  
+- `RatingHistory`, `PositionHistory`, `MemberStatusLog` – track user-related changes over time
+- And more...
+
+---
+
+## 🔒 GDPR & Data Handling
+
+Contribo follows privacy-first principles:
+- Minimal personal data storage  
+- Data deletions cascade where appropriate  
+- Soft-deletion support for users (`deleted`, `deletedAt` fields)
+
+---
+
+## ⚙️ Development Notes
+
+- All features are currently being structured and tested in local environments.  
+- Cron-based automation and email delivery will be integrated after core event flow completion.  
+- Deployment and monitoring configurations will follow once the base logic is finalized.
+
+---
+
+## 🧠 Future Plans
+
+- Admin dashboard for managing users, roles, and events  
+- In-app analytics for participation and contribution  
+- Secure email template system for automated notifications  
+- Integration with organization-level authentication (OAuth providers)
+- AI based analyze for event summaries 
+- And many more... 
+
+---
+
+**Author:** Giorgi Garsevanishvili  
+**Project Name:** Contribo  
+**Status:** In Development 🚀
