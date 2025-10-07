@@ -43,6 +43,8 @@ model User {
   eventAssignments     EventAssignment[]
   providedFeedbacks    EventFeedback[]
   scheduledEventEmails ScheduledEmails[]
+  hrWarnings           HrWarning[]       @relation("HrWarnings")
+  createdHrWarning     HrWarning[]       @relation("CreatedHrWarnings")
 }
 
 enum RatingAction {
@@ -69,6 +71,38 @@ model EventsRole {
   name String @unique
 
   eventAssignment EventAssignment[]
+}
+
+model HrWarning {
+  id          String          @id @default(cuid())
+  name        String
+  typeId      String
+  type        HrWarningType   @relation(fields: [typeId], references: [id], onDelete: Cascade)
+  assigneeID  String
+  assignee    User            @relation("HrWarnings", fields: [assigneeID], references: [id], onDelete: Cascade)
+  comment     String?
+  status      HrWarningStatus @default(ACTIVE)
+  createdAt   DateTime        @default(now())
+  createdById String?
+  createdBy   User?           @relation("CreatedHrWarnings", fields: [createdById], references: [id], onDelete: SetNull)
+}
+
+model HrWarningType {
+  id   String @id @default(cuid())
+  name String @unique
+
+  hrWarning HrWarning[]
+}
+
+enum HrWarningStatus {
+  ACTIVE // The warning is currently valid
+  UNDER_REVIEW // Being reviewed by HR or management
+  APPROVED // Approved by supervisor or HR
+  ESCALATED // Escalated to higher authority
+  RESOLVED // Issue resolved, but kept for record
+  CANCELLED // Warning cancelled before approval
+  EXPIRED // Automatically expired after a date
+  ARCHIVED // Old but retained for historical record
 }
 
 model EventFeedback {
