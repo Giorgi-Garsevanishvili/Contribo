@@ -1,4 +1,5 @@
 import Link from "next/link";
+import AuthButton from "./AuthButton";
 
 const Nav = () => {
   return (
@@ -11,8 +12,9 @@ const Nav = () => {
           <Link href={"/admin"}>Admin</Link>
         </button>
         <button className="btn">
-          <Link href={"/main"}>Main</Link>
+          <Link href={"/client"}>Client</Link>
         </button>
+        <AuthButton />
       </div>
     </header>
   );

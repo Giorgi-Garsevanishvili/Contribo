@@ -1,6 +1,7 @@
 import Nav from "@/(components)/Nav";
-import "./styles/globals.css";
+import "../styles/globals.css";
 import { Metadata } from "next";
+import AuthProvider from "@/(components)/providers/authProvider";
 
 export const metadata: Metadata = {
   title: "Contribo - by Qirvex™",
@@ -24,8 +25,12 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body>
-        <Nav />
-        <div className="m-2">{children}</div>
+        <AuthProvider>
+          <Nav />
+          <div className="flex justify-center items-center w-screen h-screen m-0 p-0">
+            {children}
+          </div>
+        </AuthProvider>
       </body>
     </html>
   );

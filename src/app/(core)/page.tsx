@@ -1,4 +1,4 @@
-const page = () => {
+function page() {
   return (
     <div>page</div>
   )
