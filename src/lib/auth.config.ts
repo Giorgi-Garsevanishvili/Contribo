@@ -1,11 +1,22 @@
 import GitHub from "next-auth/providers/github";
 import type { NextAuthConfig } from "next-auth";
+import Google from "next-auth/providers/google";
+import Slack from "next-auth/providers/slack";
+import { prisma } from "./prisma";
 
 const authConfig: NextAuthConfig = {
   providers: [
     GitHub({
       clientId: process.env.GITHUB_ID,
       clientSecret: process.env.GITHUB_SECRET,
+    }),
+    Google({
+      clientId: process.env.GOOGLE_ID,
+      clientSecret: process.env.GOOGLE_SECRET,
+    }),
+    Slack({
+      clientId: process.env.SLACK_ID,
+      clientSecret: process.env.SLACK_SECRET,
     }),
   ],
   session: {
@@ -14,9 +25,22 @@ const authConfig: NextAuthConfig = {
   },
   callbacks: {
     async jwt({ token, user }) {
-      if (user) {
-        token.id = user.id;
-        token.role = user.role;
+      if (user?.email) {
+        const dbUser = await prisma.user.findUnique({
+          where: { email: user.email },
+          select: {
+            id: true,
+            role: { select: { name: true } },
+          },
+        });
+
+        if (dbUser) {
+          token.id = dbUser.id;
+          token.role = dbUser.role?.name as string
+        }
+
+        console.log("JWT callbacks", {user, token});
+        
       }
       return token;
     },

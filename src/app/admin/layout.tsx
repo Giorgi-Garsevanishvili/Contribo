@@ -3,6 +3,7 @@ import "../styles/globals.css";
 import { Metadata } from "next";
 import AuthProvider from "@/(components)/providers/authProvider";
 import Footer from "@/(components)/Footer";
+import SignOut from "@/(components)/sign-out";
 
 export const metadata: Metadata = {
   title: "Contribo - by Qirvex™",
@@ -30,6 +31,7 @@ export default function RootLayout({
           <div className="flex-grow flex justify-center items-center m-0 p-0">
             {children}
           </div>
+          <SignOut/>
           <Footer />
         </AuthProvider>
       </body>
