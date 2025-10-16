@@ -1,4 +1,3 @@
-import GitHub from "next-auth/providers/github";
 import type { NextAuthConfig } from "next-auth";
 import Google from "next-auth/providers/google";
 import Slack from "next-auth/providers/slack";
@@ -6,24 +5,41 @@ import { prisma } from "./prisma";
 
 const authConfig: NextAuthConfig = {
   providers: [
-    GitHub({
-      clientId: process.env.GITHUB_ID,
-      clientSecret: process.env.GITHUB_SECRET,
-    }),
     Google({
       clientId: process.env.GOOGLE_ID,
       clientSecret: process.env.GOOGLE_SECRET,
+      authorization: {
+        params: {
+          prompt: "select_account",
+        },
+      },
     }),
     Slack({
       clientId: process.env.SLACK_ID,
       clientSecret: process.env.SLACK_SECRET,
+      allowDangerousEmailAccountLinking: false,
     }),
   ],
   session: {
     strategy: "jwt",
     maxAge: 5 * 60, // 5 minutes
   },
+  //cookies: {} here I need to protect cookies in production...
   callbacks: {
+    async signIn({ user }) {
+      if (!user.email) return false;
+
+      const existingUser = await prisma.user.findUnique({
+        where: { email: user.email },
+      });
+
+      if (!existingUser) {
+        return "/unauthorized-user";
+      }
+
+      return true;
+    },
+
     async jwt({ token, user }) {
       if (user?.email) {
         const dbUser = await prisma.user.findUnique({
@@ -36,11 +52,8 @@ const authConfig: NextAuthConfig = {
 
         if (dbUser) {
           token.id = dbUser.id;
-          token.role = dbUser.role?.name as string
+          token.role = dbUser.role?.name as string;
         }
-
-        console.log("JWT callbacks", {user, token});
-        
       }
       return token;
     },

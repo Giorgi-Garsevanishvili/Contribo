@@ -1,3 +1,5 @@
+"server only";
+
 import { signOut } from "@/lib/auth";
 
 export default function SignOut() {

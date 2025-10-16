@@ -2,21 +2,19 @@
 
 import Image from "next/image";
 import SignInForm from "../(auth)/signin/page";
-import contriboBgFree from "../../../public/Ind Logo Contribo 2.png";
+import contriboBgFree from "../../../public/Ind-Logo-Contribo-2-no-fill.svg";
 
 async function MainPage() {
   return (
-    <main className="flex flex-col md:flex-row justify-center items-center">
-      <aside className="flex flex-col justify-center items-center m-5">
+    <main className="flex flex-col transition-all duration-200 md:flex-row justify-center items-center">
+      <aside className="flex flex-col justify-center items-center md:w-fit md:p-10  w-71 pl-1 pr-1 pt-6 pb-6 m-3 mt-3 rounded-4xl shadow-inner bg-qirvex-l shadow-gray-500">
         <Image
-          className="w-40 h-auto"
+          className="w-40 h-auto "
           src={contriboBgFree}
           alt="Contribo logo"
         />
-        <p className="hidden md:flex text-base w-80 p-1 mt-4 font-medium text-center">
-          Welcome Back Powering the future of volunteer engagement with smart
-          dashboards, real-time tracking, and AI-driven insights, all in one
-          scalable platform.
+        <p className="flex orbitron select-none text-[#163047]  text-sm w-auto p-0 mt-4 font-normal text-center">
+          &quotBuilt for those who build a better world.&quot
         </p>
       </aside>
       <section className="flex ">

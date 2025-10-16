@@ -1,3 +1,4 @@
+"server only";
 import { signIn } from "@/lib/auth";
 import { ReactNode } from "react";
 
