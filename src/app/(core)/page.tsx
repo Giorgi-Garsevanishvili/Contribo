@@ -5,6 +5,7 @@ import SignInForm from "../(auth)/signin/page";
 import contriboBgFree from "../../../public/Ind-Logo-Contribo-2-no-fill.svg";
 
 async function MainPage() {
+  await new Promise((resolve) => setTimeout(resolve, 3000));
   return (
     <main className="flex flex-col transition-all duration-200 md:flex-row justify-center items-center">
       <aside className="flex flex-col justify-center items-center md:w-fit md:p-10  w-71 pl-1 pr-1 pt-6 pb-6 m-3 mt-3 rounded-4xl shadow-inner bg-qirvex-l shadow-gray-500">
@@ -14,7 +15,7 @@ async function MainPage() {
           alt="Contribo logo"
         />
         <p className="flex orbitron select-none text-[#163047]  text-sm w-auto p-0 mt-4 font-normal text-center">
-          &quotBuilt for those who build a better world.&quot
+          &quot;Built for those who build a better world.&quot;
         </p>
       </aside>
       <section className="flex ">
