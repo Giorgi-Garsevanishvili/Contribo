@@ -3,7 +3,7 @@
 import UseAnimations from "react-useanimations";
 import loading2 from "react-useanimations/lib/loading2";
 
-function loading() {
+function Loading() {
   return (
     <div className="flex flex-col w-screen min-h-110 overflow-auto transition-all p-0 m-0 duration-300 justify-center items-center ">
       <UseAnimations animation={loading2} size={120} fillColor="#2b5a83" wrapperStyle={{borderRadius: "50%"}}/>
@@ -11,4 +11,4 @@ function loading() {
     </div>
   );
 }
-export default loading;
+export default Loading;

@@ -239,15 +239,27 @@ model Region {
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
 
-  users User[]
-
+  users        User[]
+  allowedUsers AllowedUser[]
   joinRequests JoinRequest[]
 }
 
+model AllowedUser {
+  id       String  @id @default(cuid())
+  email    String  @unique
+  roleId   String?
+  regionId String?
+  region   Region? @relation(fields: [regionId], references: [id], onDelete: SetNull)
+  role     Role?   @relation(fields: [roleId], references: [id], onDelete: SetNull)
+
+  createdAt DateTime @default(now())
+}
+
 model Role {
-  id    String @id @default(uuid())
-  name  String @unique
-  users User[]
+  id          String        @id @default(uuid())
+  name        String        @unique
+  users       User[]
+  allowedUser AllowedUser[]
 }
 
 model Account {

@@ -23,6 +23,10 @@ export default auth(async function middleware(req) {
     return NextResponse.redirect(new URL("/signin", req.url));
   }
 
+  if (pathname.startsWith("/console") && token.user?.role !== "QIRVEX") {
+    return NextResponse.redirect(new URL("/unauthorized", req.url));
+  }
+
   if (pathname.startsWith("/admin") && token.user?.role !== "ADMIN") {
     return NextResponse.redirect(new URL("/unauthorized", req.url));
   }
@@ -31,10 +35,9 @@ export default auth(async function middleware(req) {
     return NextResponse.redirect(new URL("/unauthorized", req.url));
   }
 
-
   return NextResponse.next();
 });
 
 export const config = {
-  matcher: ["/", "/client", "/admin", "/base"],
+  matcher: ["/", "/client", "/admin", "/base", "/console"],
 };

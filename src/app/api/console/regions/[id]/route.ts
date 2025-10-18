@@ -1,0 +1,110 @@
+import { prisma } from "@/lib/prisma";
+import { requireRole } from "@/lib/serverAuth";
+import { Prisma } from "@prisma/client";
+import { NextRequest, NextResponse } from "next/server";
+
+type Params = {
+  params: {
+    id: string;
+  };
+};
+
+type UpdateRegionPayload = Prisma.RegionUpdateInput;
+
+export const GET = async (_req: NextRequest, { params }: Params) => {
+  try {
+    await requireRole("QIRVEX");
+    const { id } = await params;
+    if (!id) {
+      return NextResponse.json(
+        { message: "Region ID is missing" },
+        { status: 400 }
+      );
+    }
+
+    const region = await prisma.region.findUnique({
+      where: { id },
+    });
+
+    if (!region) {
+      return NextResponse.json(
+        { message: `Region with id: ${id}, not found.` },
+        { status: 404 }
+      );
+    }
+
+    return NextResponse.json(region);
+  } catch (error: any) {
+    const message = error?.message || "Internal server error";
+    const status = error?.status || 500;
+
+    return NextResponse.json({ error: message }, { status });
+  }
+};
+
+export const PUT = async (req: NextRequest, { params }: Params) => {
+  try {
+    await requireRole("QIRVEX");
+    const { id } = await params;
+    if (!id) {
+      return NextResponse.json(
+        { message: "Region ID is missing" },
+        { status: 400 }
+      );
+    }
+
+    const body = (await req.json()) as UpdateRegionPayload;
+
+    if (!body || !Object.keys(body).length) {
+      return NextResponse.json(
+        { message: "At least one field must be provided to update." },
+        { status: 400 }
+      );
+    }
+
+    const region = await prisma.region.update({
+      where: { id },
+      data: body,
+    });
+
+    return NextResponse.json(
+      { message: `Region: ${region.name} updated successfully`, data: region },
+      { status: 200 }
+    );
+  } catch (error: any) {
+    const message = error?.message || "Internal server error";
+    const status = error?.status || 500;
+
+    return NextResponse.json({ error: message }, { status });
+  }
+};
+
+export const DELETE = async (_req: NextRequest, { params }: Params) => {
+  try {
+    //await requireRole("QIRVEX");
+    const { id } = await params;
+    if (!id) {
+      return NextResponse.json(
+        { message: "Region ID is missing" },
+        { status: 400 }
+      );
+    }
+
+    const deletedRegion = await prisma.region.delete({
+      where: { id },
+    });
+
+    return NextResponse.json(
+      {
+        message: `Region: ${deletedRegion.name}, deleted successfully`,
+        data: deletedRegion,
+      },
+      { status: 200 }
+    );
+  } catch (error: any) {
+    const message = error?.message || "Internal server error";
+    const status = error?.status || 500;
+
+    return NextResponse.json({ error: message }, { status });
+  }
+};

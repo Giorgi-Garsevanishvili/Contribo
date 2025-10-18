@@ -2,30 +2,33 @@
 
 import { NextRequest, NextResponse } from "next/server";
 import { prisma } from "../../../../lib/prisma";
-import { auth } from "../../../../lib/auth";
 import { requireRole } from "@/lib/serverAuth";
+import { Prisma } from "@prisma/client";
 
-type RegionData = {
-  name: string;
-  email?: string;
-  phone?: string;
-};
+type RegionData = Prisma.RegionCreateInput;
 
-export const POST = async (req: NextRequest, data: RegionData) => {
+export const POST = async (req: NextRequest) => {
   try {
     await requireRole("QIRVEX");
 
-    const newRegion = await prisma.region.create({ data });
+    const body = (await req.json()) as RegionData;
+
+    if (!body || !Object.keys(body)) {
+      return NextResponse.json(
+        { message: "At least one field must be provided to create region" },
+        { status: 400 }
+      );
+    }
+
+    const newRegion = await prisma.region.create({
+      data: body
+    });
 
     return NextResponse.json(
-      { message: "Region Created", data: newRegion },
+      { message: `Region: ${newRegion.name}  Created`, data: newRegion },
       { status: 200 }
     );
   } catch (error: any) {
-    if (error instanceof Error) {
-      const status = (error as any).status || 500;
-      return NextResponse.json({ error: error.message }, { status });
-    }
     return NextResponse.json(
       { error: error.message || "Internal server error" },
       { status: error.status || 500 }
@@ -33,21 +36,21 @@ export const POST = async (req: NextRequest, data: RegionData) => {
   }
 };
 
-export const GET = async (req: NextRequest) => {
+export const GET = async (_req: NextRequest) => {
   try {
     await requireRole("QIRVEX");
 
     const regions = await prisma.region.findMany();
 
-    if (!regions) {
-      return NextResponse.json({ message: "No data found" });
+    if (regions.length === 0) {
+      return NextResponse.json({ message: "No data found" }, { status: 404 });
     }
 
     return NextResponse.json(regions);
-  } catch (error) {
-    return NextResponse.json(
-      { error: "Internal server error" },
-      { status: 500 }
-    );
+  } catch (error: any) {
+    const message = error?.message || "Internal server error";
+    const status = error?.status || 500;
+
+    return NextResponse.json({ error: message }, { status });
   }
 };

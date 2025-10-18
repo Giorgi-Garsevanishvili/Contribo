@@ -11,9 +11,10 @@ export default async function RedirectPage() {
   }
 
   switch (session.user.role) {
+    case "QIRVEX":
+      redirect("/console");
     case "ADMIN":
       redirect("/admin");
-      return;
     default:
       redirect("/client");
   }

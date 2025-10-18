@@ -1,4 +1,3 @@
-import { NextResponse } from "next/server";
 import { auth } from "./auth";
 
 export const requireRole = async (role: string) => {
@@ -8,7 +7,7 @@ export const requireRole = async (role: string) => {
     const err = new Error("Unauthorized access");
     (err as any).status = 403;
     throw err;
-  } //Need to be fixed
+  }
 
   return session;
 };

@@ -24,18 +24,46 @@ const authConfig: NextAuthConfig = {
     strategy: "jwt",
     maxAge: 5 * 60, // 5 minutes
   },
-  //cookies: {} here I need to protect cookies in production...
+  cookies: {
+  sessionToken: {
+    name: "next-auth.session-token",
+    options: {
+      httpOnly: true,
+      sameSite: "lax",
+      path: "/",
+      secure: process.env.NODE_ENV === "production", // false in dev
+    },
+  },
+}
+,
+  events: {
+    async createUser({ user }) {
+      if (!user.email) return;
+
+      const allowed = await prisma.allowedUser.findUnique({
+        where: { email: user.email },
+      });
+
+      if (!allowed) return;
+
+      await prisma.user.update({
+        where: { id: user.id },
+        data: {
+          roleId: allowed.roleId,
+          regionId: allowed.regionId,
+        },
+      });
+    },
+  },
   callbacks: {
     async signIn({ user }) {
       if (!user.email) return false;
 
-      const existingUser = await prisma.user.findUnique({
+      const allowed = await prisma.allowedUser.findUnique({
         where: { email: user.email },
       });
 
-      if (!existingUser) {
-        return "/unauthorized-user";
-      }
+      if (!allowed) return "/unauthorized-user";
 
       return true;
     },
