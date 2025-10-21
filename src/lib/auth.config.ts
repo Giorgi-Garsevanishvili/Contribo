@@ -22,20 +22,19 @@ const authConfig: NextAuthConfig = {
   ],
   session: {
     strategy: "jwt",
-    maxAge: 5 * 60, // 5 minutes
+    maxAge: 20 * 60, // 5 minutes
   },
   cookies: {
-  sessionToken: {
-    name: "next-auth.session-token",
-    options: {
-      httpOnly: true,
-      sameSite: "lax",
-      path: "/",
-      secure: process.env.NODE_ENV === "production", // false in dev
+    sessionToken: {
+      name: "next-auth.session-token",
+      options: {
+        httpOnly: true,
+        sameSite: "lax",
+        path: "/",
+        secure: process.env.NODE_ENV === "production", // false in dev
+      },
     },
   },
-}
-,
   events: {
     async createUser({ user }) {
       if (!user.email) return;
@@ -75,12 +74,14 @@ const authConfig: NextAuthConfig = {
           select: {
             id: true,
             role: { select: { name: true } },
+            region: { select: { name: true } },
           },
         });
 
         if (dbUser) {
           token.id = dbUser.id;
           token.role = dbUser.role?.name as string;
+          token.region = dbUser.region?.name as string;
         }
       }
       return token;
@@ -89,6 +90,7 @@ const authConfig: NextAuthConfig = {
       if (session?.user && token) {
         session.user.id = token.id as string;
         session.user.role = token.role as string;
+        session.user.region = token.region as string
       }
       return session;
     },

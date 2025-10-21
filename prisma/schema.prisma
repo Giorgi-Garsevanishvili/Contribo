@@ -228,20 +228,28 @@ enum RegStatus {
 }
 
 model Region {
-  id          String   @id @default(cuid())
-  name        String   @unique
+  id          String       @id @default(cuid())
+  name        String       @unique
   logo        String?
-  email       String?  @unique
+  email       String?      @unique
   phone       String?
   description String?
   address     String?
   website     String?
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
+  createdAt   DateTime     @default(now())
+  updatedAt   DateTime     @updatedAt
+  status      RegionStatus @default(PENDING)
 
   users        User[]
   allowedUsers AllowedUser[]
   joinRequests JoinRequest[]
+}
+
+enum RegionStatus {
+  ACTIVE
+  PAUSED
+  DEACTIVATED
+  PENDING
 }
 
 model AllowedUser {

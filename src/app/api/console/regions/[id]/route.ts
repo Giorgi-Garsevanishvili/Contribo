@@ -1,3 +1,5 @@
+import "server-only";
+
 import { prisma } from "@/lib/prisma";
 import { requireRole } from "@/lib/serverAuth";
 import { Prisma } from "@prisma/client";
@@ -62,9 +64,33 @@ export const PUT = async (req: NextRequest, { params }: Params) => {
       );
     }
 
+    const existingRegion = await prisma.region.findUnique({ where: { id } });
+    if (!existingRegion) {
+      return NextResponse.json(
+        { message: `Region with id: ${id}, not found.` },
+        { status: 400 }
+      );
+    }
+
+    const disallowedKeys = ["id", "createdAt", "updatedAt"];
+    const safeBody = Object.fromEntries(
+      Object.entries(body).filter(([key]) => !disallowedKeys.includes(key))
+    );
+
+    const isChanged = Object.entries(safeBody).some(([key, value]) => {
+      return existingRegion[key as keyof typeof existingRegion] !== value;
+    });
+
+    if (!isChanged) {
+      return NextResponse.json(
+        { message: `No Changes Detected, update skipped.` },
+        { status: 400 }
+      );
+    }
+
     const region = await prisma.region.update({
       where: { id },
-      data: body,
+      data: safeBody,
     });
 
     return NextResponse.json(

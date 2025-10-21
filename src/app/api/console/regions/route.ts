@@ -1,4 +1,4 @@
-"server only";
+import "server-only";
 
 import { NextRequest, NextResponse } from "next/server";
 import { prisma } from "../../../../lib/prisma";
@@ -20,8 +20,15 @@ export const POST = async (req: NextRequest) => {
       );
     }
 
+    if (!body.name) {
+      return NextResponse.json(
+        { message: "Region name must be presented" },
+        { status: 400 }
+      );
+    }
+
     const newRegion = await prisma.region.create({
-      data: body
+      data: body,
     });
 
     return NextResponse.json(

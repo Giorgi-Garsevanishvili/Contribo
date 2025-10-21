@@ -8,12 +8,14 @@ declare module "next-auth" {
       email?: string | null;
       image?: string | null;
       role?: string;
+      region: string;
     };
   }
 
   interface User {
     id: string;
     role?: string;
+    region: string;
   }
 }
 
