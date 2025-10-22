@@ -266,6 +266,8 @@ model AllowedUser {
 model Role {
   id          String        @id @default(uuid())
   name        String        @unique
+  createdAt   DateTime      @default(now())
+  updatedAt   DateTime      @updatedAt
   users       User[]
   allowedUser AllowedUser[]
 }

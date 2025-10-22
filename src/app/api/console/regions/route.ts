@@ -4,7 +4,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { prisma } from "../../../../lib/prisma";
 import { requireRole } from "@/lib/serverAuth";
 import { Prisma } from "@prisma/client";
-
+import { handleError } from "@/lib/errors/handleErrors";
 type RegionData = Prisma.RegionCreateInput;
 
 export const POST = async (req: NextRequest) => {
@@ -35,11 +35,9 @@ export const POST = async (req: NextRequest) => {
       { message: `Region: ${newRegion.name}  Created`, data: newRegion },
       { status: 200 }
     );
-  } catch (error: any) {
-    return NextResponse.json(
-      { error: error.message || "Internal server error" },
-      { status: error.status || 500 }
-    );
+  } catch (error) {
+    const { status, message } = handleError(error);
+    return NextResponse.json({ error: message }, { status: status });
   }
 };
 
@@ -54,10 +52,8 @@ export const GET = async (_req: NextRequest) => {
     }
 
     return NextResponse.json(regions);
-  } catch (error: any) {
-    const message = error?.message || "Internal server error";
-    const status = error?.status || 500;
-
-    return NextResponse.json({ error: message }, { status });
+  } catch (error) {
+    const { status, message } = handleError(error);
+    return NextResponse.json({ error: message }, { status: status });
   }
 };

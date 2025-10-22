@@ -4,6 +4,7 @@ import { prisma } from "@/lib/prisma";
 import { requireRole } from "@/lib/serverAuth";
 import { Prisma } from "@prisma/client";
 import { NextRequest, NextResponse } from "next/server";
+import { handleError } from "@/lib/errors/handleErrors";
 
 type Params = {
   params: {
@@ -36,11 +37,9 @@ export const GET = async (_req: NextRequest, { params }: Params) => {
     }
 
     return NextResponse.json(region);
-  } catch (error: any) {
-    const message = error?.message || "Internal server error";
-    const status = error?.status || 500;
-
-    return NextResponse.json({ error: message }, { status });
+  } catch (error) {
+    const { status, message } = handleError(error);
+    return NextResponse.json({ error: message }, { status: status });
   }
 };
 
@@ -97,17 +96,15 @@ export const PUT = async (req: NextRequest, { params }: Params) => {
       { message: `Region: ${region.name} updated successfully`, data: region },
       { status: 200 }
     );
-  } catch (error: any) {
-    const message = error?.message || "Internal server error";
-    const status = error?.status || 500;
-
-    return NextResponse.json({ error: message }, { status });
+  } catch (error) {
+    const { status, message } = handleError(error);
+    return NextResponse.json({ error: message }, { status: status });
   }
 };
 
 export const DELETE = async (_req: NextRequest, { params }: Params) => {
   try {
-    //await requireRole("QIRVEX");
+    await requireRole("QIRVEX");
     const { id } = await params;
     if (!id) {
       return NextResponse.json(
@@ -127,10 +124,8 @@ export const DELETE = async (_req: NextRequest, { params }: Params) => {
       },
       { status: 200 }
     );
-  } catch (error: any) {
-    const message = error?.message || "Internal server error";
-    const status = error?.status || 500;
-
-    return NextResponse.json({ error: message }, { status });
+  } catch (error) {
+    const { status, message } = handleError(error);
+    return NextResponse.json({ error: message }, { status: status });
   }
 };

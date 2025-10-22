@@ -1,6 +1,6 @@
+import { handleError } from "@/lib/errors/handleErrors";
 import { prisma } from "@/lib/prisma";
 import { requireRole } from "@/lib/serverAuth";
-import { Prisma } from "@prisma/client";
 import { NextRequest, NextResponse } from "next/server";
 
 type CreateRoleData = {
@@ -22,12 +22,10 @@ export const GET = async (_req: NextRequest) => {
       );
     }
 
-    return NextResponse.json(roles);
-  } catch (error: any) {
-    const message = error?.message || "Internal server error";
-    const status = error?.status || 500;
-
-    return NextResponse.json({ error: message }, { status });
+    return NextResponse.json(roles, { status: 200 });
+  } catch (error) {
+    const { status, message } = handleError(error);
+    return NextResponse.json({ error: message }, { status: status });
   }
 };
 
@@ -57,13 +55,14 @@ export const POST = async (req: NextRequest) => {
 
     const role = await prisma.role.create({ data: standardizedData });
 
-    return NextResponse.json({
-      message: `Role: ${role.name}, created successfully`,
-    });
-  } catch (error: any) {
-    const message = error?.message || "Internal server error";
-    const status = error?.status || 500;
-
-    return NextResponse.json({ error: message }, { status });
+    return NextResponse.json(
+      {
+        message: `Role: ${role.name}, created successfully`,
+      },
+      { status: 201 }
+    );
+  } catch (error) {
+    const { status, message } = handleError(error);
+    return NextResponse.json({ error: message }, { status: status });
   }
 };
