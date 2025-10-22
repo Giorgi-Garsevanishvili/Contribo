@@ -4,7 +4,7 @@ import { handleError } from "@/lib/errors/handleErrors";
 import { prisma } from "@/lib/prisma";
 import { requireRole } from "@/lib/serverAuth";
 import { NextRequest, NextResponse } from "next/server";
-import { Prisma } from "@prisma/client";
+import { ReqStatus } from "@prisma/client";
 
 type Params = {
   params: {
@@ -20,7 +20,7 @@ type SoftDelete = {
   deleted: boolean;
   deletedAt: Date;
   rating: number;
-  reqStatus: string;
+  reqStatus: ReqStatus;
 };
 
 export const DELETE = async (_req: NextRequest, { params }: Params) => {
@@ -49,7 +49,7 @@ export const DELETE = async (_req: NextRequest, { params }: Params) => {
       deleted: true,
       deletedAt: new Date(),
       rating: 0,
-      reqStatus: "PENDING",
+      reqStatus: ReqStatus.PENDING,
     };
 
     await prisma.$transaction([
