@@ -67,7 +67,7 @@ export const PUT = async (req: NextRequest, { params }: Params) => {
     if (!existingRegion) {
       return NextResponse.json(
         { message: `Region with id: ${id}, not found.` },
-        { status: 400 }
+        { status: 404 }
       );
     }
 

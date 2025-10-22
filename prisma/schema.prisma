@@ -19,7 +19,7 @@ model User {
   role           Role?           @relation(fields: [roleId], references: [id], onDelete: SetNull)
   memberStatusId String?
   memberStatus   MemberStatus?   @relation(fields: [memberStatusId], references: [id], onDelete: SetNull)
-  regStatus      RegStatus       @default(PENDING)
+  reqStatus      ReqStatus       @default(PENDING)
   positionId     String?
   position       Position?       @relation(fields: [positionId], references: [id], onDelete: SetNull)
   rating         Int             @default(0)
@@ -69,8 +69,14 @@ model Event {
 model EventsRole {
   id   String @id @default(cuid())
   name String @unique
+  type GTypes @default(REGION)
 
   eventAssignment EventAssignment[]
+}
+
+enum GTypes {
+  SYSTEM
+  REGION
 }
 
 model HrWarning {
@@ -90,6 +96,7 @@ model HrWarning {
 model HrWarningType {
   id   String @id @default(cuid())
   name String @unique
+  type GTypes @default(REGION)
 
   hrWarning HrWarning[]
 }
@@ -163,6 +170,7 @@ model RatingHistory {
 model Position {
   id                String            @id @default(cuid())
   name              String            @unique
+  type              GTypes            @default(REGION)
   users             User[]
   positionHistories PositionHistory[]
 }
@@ -187,6 +195,7 @@ model PositionHistory {
 model MemberStatus {
   id               String            @id @default(cuid())
   name             String            @unique
+  type             GTypes            @default(REGION)
   users            User[]
   memberStatusLogs MemberStatusLog[]
 }
@@ -212,7 +221,7 @@ model JoinRequest {
   id          String    @id @default(cuid())
   userId      String
   regionId    String?
-  status      RegStatus @default(PENDING)
+  status      ReqStatus @default(PENDING)
   requestedAt DateTime  @default(now())
   updatedAt   DateTime  @updatedAt
 
@@ -220,7 +229,7 @@ model JoinRequest {
   region Region? @relation(fields: [regionId], references: [id], onDelete: SetNull)
 }
 
-enum RegStatus {
+enum ReqStatus {
   PENDING
   REQUESTED
   APPROVED
@@ -259,6 +268,7 @@ model AllowedUser {
   regionId String?
   region   Region? @relation(fields: [regionId], references: [id], onDelete: SetNull)
   role     Role?   @relation(fields: [roleId], references: [id], onDelete: SetNull)
+  type     GTypes  @default(REGION)
 
   createdAt DateTime @default(now())
 }
