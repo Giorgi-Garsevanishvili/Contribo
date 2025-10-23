@@ -41,9 +41,10 @@ export const DELETE = async (_req: NextRequest, { params }: Params) => {
       return NextResponse.json({ message: "user not found" }, { status: 404 });
     }
 
+    const anonymizedIdentifier = `deleted_${id}_${Date.now()}`;
     const userSoftData: SoftDelete = {
-      name: "SoftUser",
-      email: "SoftUser",
+      name: anonymizedIdentifier,
+      email: anonymizedIdentifier,
       image: null,
       roleId: null,
       deleted: true,
@@ -56,6 +57,8 @@ export const DELETE = async (_req: NextRequest, { params }: Params) => {
       prisma.allowedUser.delete({
         where: { email: user?.email },
       }),
+
+      prisma.account.deleteMany({ where: { userId: id } }),
 
       prisma.user.update({
         where: { id },

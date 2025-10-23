@@ -3,6 +3,7 @@ import { handleError } from "@/lib/errors/handleErrors";
 import { requireRole } from "@/lib/serverAuth";
 import { NextRequest, NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
+import { ReqStatus } from "@prisma/client";
 
 type Params = {
   params: {
@@ -18,7 +19,7 @@ type UserUpdateInput = {
   regionId?: string;
   roleId?: string;
   deleted?: boolean;
-  reqStatus?: string;
+  reqStatus?: ReqStatus;
 };
 
 export const GET = async (_req: NextRequest, { params }: Params) => {
@@ -105,22 +106,24 @@ export const DELETE = async (_req: NextRequest, { params }: Params) => {
 
     const user = await prisma.user.findUnique({
       where: { id },
-      select: { email: true },
+      select: { email: true, deleted: true },
     });
 
     if (!user) {
       return NextResponse.json({ message: "user not found" }, { status: 404 });
     }
 
-    const deletedFromAllowedList = await prisma.allowedUser.delete({
-      where: { email: user?.email },
-    });
+    if (!user.deleted) {
+      const deletedFromAllowedList = await prisma.allowedUser.delete({
+        where: { email: user?.email },
+      });
 
-    if (!deletedFromAllowedList) {
-      return NextResponse.json(
-        { message: "User deletion failed!" },
-        { status: 400 }
-      );
+      if (!deletedFromAllowedList) {
+        return NextResponse.json(
+          { message: "User deletion failed!" },
+          { status: 400 }
+        );
+      }
     }
 
     const deleted = await prisma.user.delete({ where: { id } });

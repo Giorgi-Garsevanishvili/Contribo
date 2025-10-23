@@ -10,7 +10,7 @@ type Params = {
   };
 };
 
-type hrWarningTypeUpdateInput = {
+type PositionUpdateInput = {
   name: string;
 };
 
@@ -23,18 +23,16 @@ export const GET = async (_req: NextRequest, { params }: Params) => {
       return NextResponse.json({ message: "Id is missing!" }, { status: 400 });
     }
 
-    const hrWarningType = await prisma.hrWarningType.findUnique({
-      where: { id },
-    });
+    const position = await prisma.position.findUnique({ where: { id } });
 
-    if (!hrWarningType) {
+    if (!position) {
       return NextResponse.json(
-        { message: `HR Warning Type with id: ${id}, not found` },
+        { message: `Position with id: ${id}, not found` },
         { status: 404 }
       );
     }
 
-    return NextResponse.json(hrWarningType);
+    return NextResponse.json(position);
   } catch (error) {
     const { status, message } = handleError(error);
     return NextResponse.json({ error: message }, { status: status });
@@ -50,7 +48,7 @@ export const PUT = async (req: NextRequest, { params }: Params) => {
       return NextResponse.json({ message: "Id is missing" }, { status: 400 });
     }
 
-    const body = (await req.json()) as hrWarningTypeUpdateInput;
+    const body = (await req.json()) as PositionUpdateInput;
 
     if (!body || !Object.keys(body)) {
       return NextResponse.json(
@@ -66,12 +64,12 @@ export const PUT = async (req: NextRequest, { params }: Params) => {
       );
     }
 
-    const updatedHrWarningType = await prisma.hrWarningType.update({
+    const updatedPosition = await prisma.position.update({
       where: { id },
       data: body,
     });
 
-    if (!updatedHrWarningType) {
+    if (!updatedPosition) {
       return NextResponse.json(
         { message: "something went wrong" },
         { status: 500 }
@@ -79,7 +77,7 @@ export const PUT = async (req: NextRequest, { params }: Params) => {
     }
 
     return NextResponse.json(
-      { message: `HR Warning Type Updated as: ${updatedHrWarningType.name}` },
+      { message: `Position Updated as: ${updatedPosition.name}` },
       { status: 200 }
     );
   } catch (error) {
@@ -97,12 +95,10 @@ export const DELETE = async (_req: NextRequest, { params }: Params) => {
       return NextResponse.json({ message: "Id is missing" }, { status: 400 });
     }
 
-    const deletedHrWarningType = await prisma.hrWarningType.delete({
-      where: { id },
-    });
+    const deletedPosition = await prisma.position.delete({ where: { id } });
 
     return NextResponse.json({
-      message: `HR Warning Type: ${deletedHrWarningType.name}, successfully deleted`,
+      message: `Position: ${deletedPosition.name}, successfully deleted`,
     });
   } catch (error) {
     const { status, message } = handleError(error);
