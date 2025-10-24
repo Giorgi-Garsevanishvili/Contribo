@@ -45,6 +45,7 @@ model User {
   scheduledEventEmails ScheduledEmails[]
   hrWarnings           HrWarning[]       @relation("HrWarnings")
   createdHrWarning     HrWarning[]       @relation("CreatedHrWarnings")
+  CreatedAllowedUser   AllowedUser[]
 }
 
 enum RatingAction {
@@ -266,11 +267,15 @@ model AllowedUser {
   email    String  @unique
   roleId   String?
   regionId String?
+  userId   String?
   region   Region? @relation(fields: [regionId], references: [id], onDelete: SetNull)
   role     Role?   @relation(fields: [roleId], references: [id], onDelete: SetNull)
   type     GTypes  @default(REGION)
 
-  createdAt DateTime @default(now())
+  createdBy User? @relation(fields: [userId], references: [id], onDelete: SetNull)
+
+  updatedAt DateTime? @updatedAt
+  createdAt DateTime  @default(now())
 }
 
 model Role {

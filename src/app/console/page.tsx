@@ -6,7 +6,8 @@ import Loading from "./loading";
 export default function ConsolePage() {
   const [data, setData] = useState<any[]>([]);
   const [roles, setRoles] = useState<any[]>([]);
-  const [isLoading, setIsLoading] = useState(true);
+  const [isLoadingRegion, setIsLoadingRegion] = useState(true);
+  const [isLoadingRole, setIsLoadingRole] = useState(true);
 
   const fetchData = async () => {
     try {
@@ -15,7 +16,7 @@ export default function ConsolePage() {
     } catch (error) {
       console.error("failed to fetch", error);
     } finally {
-      setIsLoading(false);
+      setIsLoadingRegion(false);
     }
   };
 
@@ -26,7 +27,7 @@ export default function ConsolePage() {
     } catch (error) {
       console.error("failed to fetch", error);
     } finally {
-      setIsLoading(false);
+      setIsLoadingRole(false);
     }
   };
 
@@ -42,76 +43,99 @@ export default function ConsolePage() {
       fetchData(); // ⬅️ re-fetch from server
     } catch (error) {
       console.error("Failed to delete region:", error);
+      return;
     }
   };
 
   const deleteRole = async (id: string) => {
     try {
-      setIsLoading(true);
+      setIsLoadingRole(true);
       await axios.delete(`/api/console/roles/${id}`);
       //alert(`Role with ID: ${id} successfully deleted`);
       fetchDataRoles(); // ⬅️ re-fetch from server
-      setIsLoading(false);
+      setIsLoadingRole(false);
     } catch (error) {
-      setIsLoading(false);
+      setIsLoadingRole(false);
       console.error("Failed to delete region:", error);
+      return;
     }
   };
 
-  if (isLoading) return <Loading />;
-  if (!data || data.length === 0) return <p>No regions found</p>;
+  if (isLoadingRegion) return <Loading />;
 
   return (
     <main className="flex justify-between w-lg">
       <div className="flex flex-col p-3 min-w-80">
         <h1 className="text-2xl font-semibold mb-4">Regions</h1>
-        <ul className="space-y-2 flex flex-col bg-white border-amber-200 border-2 rounded-2xl p-3 h-90 overflow-scroll">
-          {data.map((region) => (
-            <li key={region.id} className="border p-2 rounded-md">
-              <p>
-                <strong>Name:</strong> {region.name}
-              </p>
-              {region.logo && (
-                <img
-                  src={region.logo}
-                  alt={region.name}
-                  className="h-10 w-auto mt-2"
-                />
-              )}
-              <p>
-                <strong>Email:</strong> {region.email || "N/A"}
-              </p>
-              <p>
-                <strong>Phone:</strong> {region.phone || "N/A"}
-              </p>
+        {isLoadingRegion ? (
+          <Loading />
+        ) : (
+          <>
+            {!data || data.length === 0 ? (
+              <p>No regions found</p>
+            ) : (
+              <ul className="space-y-2 flex flex-col bg-white border-amber-200 border-2 rounded-2xl p-3 h-90 overflow-scroll">
+                {data.map((region) => (
+                  <li key={region.id} className="border p-2 rounded-md">
+                    <p>
+                      <strong>Name:</strong> {region.name}
+                    </p>
+                    {region.logo && (
+                      <img
+                        src={region.logo}
+                        alt={region.name}
+                        className="h-10 w-auto mt-2"
+                      />
+                    )}
+                    <p>
+                      <strong>Email:</strong> {region.email || "N/A"}
+                    </p>
+                    <p>
+                      <strong>Phone:</strong> {region.phone || "N/A"}
+                    </p>
 
-              <button
-                onClick={() => deleteRegion(region.id)}
-                className="font-bold text-sm text-white bg-red-600 rounded-2xl p-2 m-2"
-              >
-                Delete Region
-              </button>
-            </li>
-          ))}
-        </ul>
+                    <button
+                      onClick={() => deleteRegion(region.id)}
+                      className="font-bold text-sm text-white bg-red-600 rounded-2xl p-2 m-2"
+                    >
+                      Delete Region
+                    </button>
+                  </li>
+                ))}
+              </ul>
+            )}
+          </>
+        )}
       </div>
       <div className="flex flex-col p-3 min-w-80">
         <h1 className="text-2xl font-semibold mb-4">Roles</h1>
         <ul className="space-y-2 flex flex-col bg-white border-amber-200 border-2 rounded-2xl p-3 h-90 overflow-scroll">
-          {roles.map((roles) => (
-            <li key={roles.id} className="border p-2 rounded-md">
-              <p>
-                <strong>Name:</strong> {roles.name}
-              </p>
+          {isLoadingRole ? (
+            <Loading />
+          ) : (
+            <>
+              {!roles || roles.length === 0 ? (
+                <p>No Roles Found</p>
+              ) : (
+                <>
+                  {roles.map((roles) => (
+                    <li key={roles.id} className="border p-2 rounded-md">
+                      <p>
+                        <strong>Name:</strong> {roles.name}
+                      </p>
 
-              <button
-                onClick={() => deleteRole(roles.id)}
-                className="font-bold text-sm text-white bg-red-600 rounded-2xl p-2 m-2"
-              >
-                Delete Region
-              </button>
-            </li>
-          ))}
+                      <button
+                        onClick={() => deleteRole(roles.id)}
+                        className="font-bold text-sm text-white bg-red-600 rounded-2xl p-2 m-2"
+                      >
+                        Delete Roles
+                      </button>
+                    </li>
+                  ))}
+                </>
+              )}
+            </>
+          )}
         </ul>
       </div>
     </main>
