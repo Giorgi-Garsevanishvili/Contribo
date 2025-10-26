@@ -52,7 +52,7 @@ export const PUT = async (req: NextRequest, { params }: Params) => {
 
     const body = (await req.json()) as hrWarningTypeUpdateInput;
 
-    if (!body || !Object.keys(body)) {
+    if (!body || !Object.keys(body).length) {
       return NextResponse.json(
         { message: "Fields must be provided" },
         { status: 400 }

@@ -13,7 +13,7 @@ type Params = {
 type AllowedUserUpdate = {
   roleId: string;
   regionId: string;
-  userId: string;
+  creatorId: string;
 };
 
 export const GET = async (_req: NextRequest, { params }: Params) => {
@@ -48,7 +48,7 @@ export const PUT = async (req: NextRequest, { params }: Params) => {
     }
     const body = (await req.json()) as AllowedUserUpdate;
 
-    if (!body || !Object.keys(body)) {
+    if (!body || !Object.keys(body).length) {
       return NextResponse.json({
         message: "At least one field must be provided",
       });
@@ -56,7 +56,7 @@ export const PUT = async (req: NextRequest, { params }: Params) => {
 
     const safeBody = {
       ...body,
-      userId: thisUser.user.id,
+      creatorId: thisUser.user.id,
     };
 
     const updatedAllowedUser = await prisma.allowedUser.update({
@@ -82,9 +82,27 @@ export const PUT = async (req: NextRequest, { params }: Params) => {
 
 export const DELETE = async (req: NextRequest, { params }: Params) => {
   try {
-    await requireRole("");
+    await requireRole("QIRVEX");
     const { id } = await params;
-    const body = req.json();
+
+    if (!id) {
+      return NextResponse.json({ message: "Id is missing" }, { status: 400 });
+    }
+
+    const deletedAllowedUser = await prisma.allowedUser.delete({
+      where: { id },
+    });
+
+    if (!deletedAllowedUser) {
+      return NextResponse.json(
+        { message: "something went wrong!" },
+        { status: 400 }
+      );
+    }
+
+    return NextResponse.json({
+      message: `Allowed user: ${deletedAllowedUser.email}, delete successfully!`,
+    });
   } catch (error) {
     const { status, message } = handleError(error);
     return NextResponse.json({ error: message }, { status: status });

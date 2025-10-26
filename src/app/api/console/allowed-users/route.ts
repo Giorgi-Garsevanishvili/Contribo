@@ -39,7 +39,7 @@ export const POST = async (req: NextRequest) => {
 
     const body = (await req.json()) as allowedUserCreate;
 
-    if (!body || !Object.keys(body)) {
+    if (!body || !Object.keys(body).length) {
       return NextResponse.json(
         { message: "At least one filed must be provided" },
         { status: 400 }
@@ -56,7 +56,7 @@ export const POST = async (req: NextRequest) => {
     const safeBody = {
       ...body,
       type: GTypes.SYSTEM,
-      userId: thisUser.user.id,
+      creatorId: thisUser.user.id,
     };
 
     const newAllowedUser = await prisma.allowedUser.create({ data: safeBody });

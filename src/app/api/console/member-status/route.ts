@@ -36,7 +36,7 @@ export const POST = async (req: NextRequest) => {
 
     const body = (await req.json()) as memberStatusCreateInput;
 
-    if (!body || !Object.keys(body)) {
+    if (!body || !Object.keys(body).length) {
       return NextResponse.json(
         { message: "At least one field must be provided" },
         { status: 400 }

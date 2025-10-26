@@ -36,7 +36,7 @@ export const POST = async (req: NextRequest) => {
 
     const body = (await req.json()) as PositionCreateInput;
 
-    if (!body || !Object.keys(body)) {
+    if (!body || !Object.keys(body).length) {
       return NextResponse.json(
         { message: "At least one field must be provided" },
         { status: 400 }
@@ -64,7 +64,9 @@ export const POST = async (req: NextRequest) => {
       );
     }
 
-    return NextResponse.json({message: `Position ${newPosition.name}, successfully created!`})
+    return NextResponse.json({
+      message: `Position ${newPosition.name}, successfully created!`,
+    });
   } catch (error) {
     const { status, message } = handleError(error);
     return NextResponse.json({ error: message }, { status: status });

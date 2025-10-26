@@ -36,7 +36,7 @@ export const POST = async (req: NextRequest) => {
 
     const body = (await req.json()) as CreateRoleData;
 
-    if (!body || !Object.keys(body)) {
+    if (!body || !Object.keys(body).length) {
       return NextResponse.json(
         { message: "field must be provided to create role" },
         { status: 400 }

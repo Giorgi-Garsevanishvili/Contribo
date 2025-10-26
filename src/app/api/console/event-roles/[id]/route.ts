@@ -50,7 +50,7 @@ export const PUT = async (req: NextRequest, { params }: Params) => {
 
     const body = (await req.json()) as eventsRoleUpdateInput;
 
-    if (!body || !Object.keys(body)) {
+    if (!body || !Object.keys(body).length) {
       return NextResponse.json(
         { message: "Fields must be provided" },
         { status: 400 }

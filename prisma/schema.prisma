@@ -263,16 +263,16 @@ enum RegionStatus {
 }
 
 model AllowedUser {
-  id       String  @id @default(cuid())
-  email    String  @unique
-  roleId   String?
-  regionId String?
-  userId   String?
-  region   Region? @relation(fields: [regionId], references: [id], onDelete: SetNull)
-  role     Role?   @relation(fields: [roleId], references: [id], onDelete: SetNull)
-  type     GTypes  @default(REGION)
+  id        String  @id @default(cuid())
+  email     String  @unique
+  roleId    String?
+  regionId  String?
+  creatorId String?
+  region    Region? @relation(fields: [regionId], references: [id], onDelete: SetNull)
+  role      Role?   @relation(fields: [roleId], references: [id], onDelete: SetNull)
+  type      GTypes  @default(REGION)
 
-  createdBy User? @relation(fields: [userId], references: [id], onDelete: SetNull)
+  createdBy User? @relation(fields: [creatorId], references: [id], onDelete: SetNull)
 
   updatedAt DateTime? @updatedAt
   createdAt DateTime  @default(now())
