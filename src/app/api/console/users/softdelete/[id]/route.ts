@@ -4,23 +4,12 @@ import { handleError } from "@/lib/errors/handleErrors";
 import { prisma } from "@/lib/prisma";
 import { requireRole } from "@/lib/serverAuth";
 import { NextRequest, NextResponse } from "next/server";
-import { ReqStatus } from "@prisma/client";
+import { SoftDelete, SoftDeleteInputType } from "@/lib/zod";
 
 type Params = {
   params: {
     id: string;
   };
-};
-
-type SoftDelete = {
-  name: string;
-  email: string;
-  image: null;
-  roleId: null;
-  deleted: boolean;
-  deletedAt: Date;
-  rating: number;
-  reqStatus: ReqStatus;
 };
 
 export const DELETE = async (_req: NextRequest, { params }: Params) => {
@@ -42,16 +31,12 @@ export const DELETE = async (_req: NextRequest, { params }: Params) => {
     }
 
     const anonymizedIdentifier = `deleted_${id}_${Date.now()}`;
-    const userSoftData: SoftDelete = {
+    const userSoftInput: SoftDeleteInputType = {
       name: anonymizedIdentifier,
-      email: anonymizedIdentifier,
-      image: null,
-      roleId: null,
-      deleted: true,
-      deletedAt: new Date(),
-      rating: 0,
-      reqStatus: ReqStatus.PENDING,
+      email: `${anonymizedIdentifier}@delete.com`,
     };
+
+    const userSoftData = await SoftDelete.parseAsync(userSoftInput);
 
     await prisma.$transaction([
       prisma.allowedUser.delete({
