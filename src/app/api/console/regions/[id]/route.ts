@@ -5,14 +5,13 @@ import { requireRole } from "@/lib/serverAuth";
 import { Prisma } from "@prisma/client";
 import { NextRequest, NextResponse } from "next/server";
 import { handleError } from "@/lib/errors/handleErrors";
+import { RegionDataUpdate } from "@/lib/zod";
 
 type Params = {
   params: {
     id: string;
   };
 };
-
-type UpdateRegionPayload = Prisma.RegionUpdateInput;
 
 export const GET = async (_req: NextRequest, { params }: Params) => {
   try {
@@ -54,7 +53,8 @@ export const PUT = async (req: NextRequest, { params }: Params) => {
       );
     }
 
-    const body = (await req.json()) as UpdateRegionPayload;
+    const json = await req.json();
+    const body = RegionDataUpdate.parse(json);
 
     if (!body || !Object.keys(body).length) {
       return NextResponse.json(
@@ -71,12 +71,7 @@ export const PUT = async (req: NextRequest, { params }: Params) => {
       );
     }
 
-    const disallowedKeys = ["id", "createdAt", "updatedAt"];
-    const safeBody = Object.fromEntries(
-      Object.entries(body).filter(([key]) => !disallowedKeys.includes(key))
-    );
-
-    const isChanged = Object.entries(safeBody).some(([key, value]) => {
+    const isChanged = Object.entries(body).some(([key, value]) => {
       return existingRegion[key as keyof typeof existingRegion] !== value;
     });
 
@@ -89,7 +84,7 @@ export const PUT = async (req: NextRequest, { params }: Params) => {
 
     const region = await prisma.region.update({
       where: { id },
-      data: safeBody,
+      data: body,
     });
 
     return NextResponse.json(

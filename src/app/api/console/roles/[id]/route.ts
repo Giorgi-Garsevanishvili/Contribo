@@ -1,9 +1,10 @@
-import "server-only"
+import "server-only";
 
 import { handleError } from "@/lib/errors/handleErrors";
 import { prisma } from "@/lib/prisma";
 import { requireRole } from "@/lib/serverAuth";
 import { NextRequest, NextResponse } from "next/server";
+import { z } from "zod";
 
 type Params = {
   params: {
@@ -11,9 +12,10 @@ type Params = {
   };
 };
 
-type RoleUpdateData = {
-  name: string;
-};
+const RoleUpdateData = z
+  .object({
+    name: z.string().toUpperCase(),
+  }).strict();
 
 export const GET = async (_req: NextRequest, { params }: Params) => {
   try {
@@ -50,7 +52,8 @@ export const PUT = async (req: NextRequest, { params }: Params) => {
 
     const { id } = await params;
 
-    const body = (await req.json()) as RoleUpdateData;
+    const json = await req.json();
+    const body = RoleUpdateData.parse(json);
 
     if (!body || !Object.keys(body).length) {
       return NextResponse.json(
@@ -66,13 +69,9 @@ export const PUT = async (req: NextRequest, { params }: Params) => {
       );
     }
 
-    const standardizedData: RoleUpdateData = {
-      name: body.name.toUpperCase(),
-    };
-
     const updatedRole = await prisma.role.update({
       where: { id },
-      data: standardizedData,
+      data: body,
     });
 
     return NextResponse.json(

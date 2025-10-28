@@ -1,4 +1,4 @@
-import { ReqStatus } from "@prisma/client";
+import { RegionStatus, ReqStatus } from "@prisma/client";
 import { z } from "zod";
 
 export const SoftDelete = z
@@ -22,5 +22,36 @@ export const SoftDeleteInput = SoftDelete.partial({
   reqStatus: true,
 });
 
+export const UserUpdateInput = z
+  .object({
+    name: z.string().optional(),
+    email: z.email().optional(),
+    memberStatusId: z.string().optional(),
+    positionId: z.string().optional(),
+    regionId: z.string().optional(),
+    roleId: z.string().optional(),
+    deleted: z.boolean().optional(),
+    reqStatus: z.enum(ReqStatus).optional(),
+  })
+  .strict();
+
+export const RegionDataInput = z
+  .object({
+    name: z.string(),
+    logo: z.string().optional(),
+    email: z.email().optional(),
+    phone: z.string().optional(),
+    description: z.string().optional(),
+    address: z.string().optional(),
+    website: z.string().optional(),
+    status: z.enum(RegionStatus).optional(),
+  })
+  .strict();
+
+export const RegionDataUpdate = RegionDataInput.partial({
+  name: true,
+});
+
+export type UserUpdateInput = z.infer<typeof UserUpdateInput>;
 export type SoftDeleteType = z.infer<typeof SoftDelete>;
 export type SoftDeleteInputType = z.infer<typeof SoftDeleteInput>;

@@ -3,15 +3,15 @@ import "server-only";
 import { NextRequest, NextResponse } from "next/server";
 import { prisma } from "../../../../lib/prisma";
 import { requireRole } from "@/lib/serverAuth";
-import { Prisma } from "@prisma/client";
 import { handleError } from "@/lib/errors/handleErrors";
-type RegionData = Prisma.RegionCreateInput;
+import { RegionDataInput } from "@/lib/zod";
 
 export const POST = async (req: NextRequest) => {
   try {
     await requireRole("QIRVEX");
 
-    const body = (await req.json()) as RegionData;
+    const json = await req.json();
+    const body = RegionDataInput.parse(json);
 
     if (!body || !Object.keys(body).length) {
       return NextResponse.json(

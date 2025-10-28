@@ -3,10 +3,11 @@ import { handleError } from "@/lib/errors/handleErrors";
 import { prisma } from "@/lib/prisma";
 import { requireRole } from "@/lib/serverAuth";
 import { NextRequest, NextResponse } from "next/server";
+import { z } from "zod";
 
-type CreateRoleData = {
-  name: string;
-};
+const CreateRoleData = z.object({
+  name: z.string().toUpperCase(),
+}).strict();
 
 export const GET = async (_req: NextRequest) => {
   try {
@@ -34,7 +35,8 @@ export const POST = async (req: NextRequest) => {
   try {
     await requireRole("QIRVEX");
 
-    const body = (await req.json()) as CreateRoleData;
+    const json = await req.json();
+    const body = CreateRoleData.parse(json);
 
     if (!body || !Object.keys(body).length) {
       return NextResponse.json(
@@ -50,11 +52,7 @@ export const POST = async (req: NextRequest) => {
       );
     }
 
-    const standardizedData: CreateRoleData = {
-      name: body.name.toLocaleUpperCase(),
-    };
-
-    const role = await prisma.role.create({ data: standardizedData });
+    const role = await prisma.role.create({ data: body });
 
     return NextResponse.json(
       {

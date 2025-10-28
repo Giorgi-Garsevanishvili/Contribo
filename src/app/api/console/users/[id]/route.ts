@@ -3,23 +3,12 @@ import { handleError } from "@/lib/errors/handleErrors";
 import { requireRole } from "@/lib/serverAuth";
 import { NextRequest, NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
-import { ReqStatus } from "@prisma/client";
+import { UserUpdateInput } from "@/lib/zod"; 
 
 type Params = {
   params: {
     id: string;
   };
-};
-
-type UserUpdateInput = {
-  name?: string;
-  email?: string;
-  memberStatusId?: string;
-  positionId?: string;
-  regionId?: string;
-  roleId?: string;
-  deleted?: boolean;
-  reqStatus?: ReqStatus;
 };
 
 export const GET = async (_req: NextRequest, { params }: Params) => {
@@ -64,7 +53,8 @@ export const PUT = async (req: NextRequest, { params }: Params) => {
       );
     }
 
-    const body = (await req.json()) as UserUpdateInput;
+    const json = await req.json();
+    const body = UserUpdateInput.parse(json);
 
     if (!body || !Object.keys(body).length) {
       return NextResponse.json(
