@@ -3,12 +3,8 @@ import { handleError } from "@/lib/errors/handleErrors";
 import { requireRole } from "@/lib/serverAuth";
 import { NextRequest, NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
-import { GTypes } from "@prisma/client";
-
-type memberStatusCreateInput = {
-  name: string;
-  type: GTypes;
-};
+import { DefaultSystemValuesCreate } from "@/lib/zod";
+import z from "zod";
 
 export const GET = async (_req: NextRequest) => {
   try {
@@ -34,7 +30,8 @@ export const POST = async (req: NextRequest) => {
   try {
     await requireRole("QIRVEX");
 
-    const body = (await req.json()) as memberStatusCreateInput;
+    const json = (await req.json()) as z.infer<typeof DefaultSystemValuesCreate>;
+    const body = DefaultSystemValuesCreate.parse(json);
 
     if (!body || !Object.keys(body).length) {
       return NextResponse.json(
@@ -50,13 +47,8 @@ export const POST = async (req: NextRequest) => {
       );
     }
 
-    const safeBody = {
-      ...body,
-      type: "SYSTEM" as GTypes,
-    };
-
     const newMemberStatus = await prisma.memberStatus.create({
-      data: safeBody,
+      data: body,
     });
 
     if (!newMemberStatus) {

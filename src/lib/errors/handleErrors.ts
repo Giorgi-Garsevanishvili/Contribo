@@ -1,9 +1,10 @@
 import { Prisma } from "@prisma/client";
 import { LogicError } from "./logicError";
+import { ZodError } from "zod";
 
 export function handleError(error: unknown): {
   status: number;
-  message: string;
+  message: string | Object;
 } {
   // Prisma known errors
   if (error instanceof Prisma.PrismaClientKnownRequestError) {
@@ -20,6 +21,19 @@ export function handleError(error: unknown): {
       default:
         return { status: 500, message: `Database error: ${error.code}` };
     }
+  }
+
+  //zod errors
+  if (error instanceof ZodError) {
+    return {
+      status: 400,
+      message: {
+        errors: error.issues.map((issue) => ({
+          path: issue.path.join("."),
+          message: issue.message,
+        })),
+      },
+    };
   }
 
   // Prisma validation errors

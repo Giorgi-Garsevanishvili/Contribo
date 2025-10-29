@@ -3,15 +3,8 @@ import { handleError } from "@/lib/errors/handleErrors";
 import { requireRole } from "@/lib/serverAuth";
 import { NextRequest, NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
-import { GTypes } from "@prisma/client";
-
-type allowedUserCreate = {
-  email: string;
-  regionId?: string;
-  roleId?: string;
-  userId?: string;
-  type?: GTypes;
-};
+import z from "zod";
+import { AllowedUserCreate } from "@/lib/zod";
 
 export const GET = async (_req: NextRequest) => {
   try {
@@ -37,7 +30,9 @@ export const POST = async (req: NextRequest) => {
   try {
     const thisUser = await requireRole("QIRVEX");
 
-    const body = (await req.json()) as allowedUserCreate;
+    const json = (await req.json()) as z.infer<typeof AllowedUserCreate>;
+    const jsonWithCreator = { ...json, creatorId: thisUser.user.id };
+    const body = AllowedUserCreate.parse(jsonWithCreator);
 
     if (!body || !Object.keys(body).length) {
       return NextResponse.json(
@@ -53,13 +48,7 @@ export const POST = async (req: NextRequest) => {
       );
     }
 
-    const safeBody = {
-      ...body,
-      type: GTypes.SYSTEM,
-      creatorId: thisUser.user.id,
-    };
-
-    const newAllowedUser = await prisma.allowedUser.create({ data: safeBody });
+    const newAllowedUser = await prisma.allowedUser.create({ data: body });
 
     if (!newAllowedUser) {
       return NextResponse.json(

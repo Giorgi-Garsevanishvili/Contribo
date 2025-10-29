@@ -3,15 +3,13 @@ import { handleError } from "@/lib/errors/handleErrors";
 import { requireRole } from "@/lib/serverAuth";
 import { NextRequest, NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
+import { DefaultSystemValuesUpdate } from "@/lib/zod";
+import z from "zod";
 
 type Params = {
   params: {
     id: string;
   };
-};
-
-type MemberStatusUpdateInput = {
-  name: string;
 };
 
 export const GET = async (_req: NextRequest, { params }: Params) => {
@@ -50,7 +48,10 @@ export const PUT = async (req: NextRequest, { params }: Params) => {
       return NextResponse.json({ message: "Id is missing" }, { status: 400 });
     }
 
-    const body = (await req.json()) as MemberStatusUpdateInput;
+    const json = (await req.json()) as z.infer<
+      typeof DefaultSystemValuesUpdate
+    >;
+    const body = DefaultSystemValuesUpdate.parse(json);
 
     if (!body || !Object.keys(body).length) {
       return NextResponse.json(

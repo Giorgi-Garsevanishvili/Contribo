@@ -1,4 +1,4 @@
-import { RegionStatus, ReqStatus } from "@prisma/client";
+import { GTypes, RegionStatus, ReqStatus } from "@prisma/client";
 import { z } from "zod";
 
 export const SoftDelete = z
@@ -37,7 +37,7 @@ export const UserUpdateInput = z
 
 export const RegionDataInput = z
   .object({
-    name: z.string(),
+    name: z.string().toUpperCase(),
     logo: z.string().optional(),
     email: z.email().optional(),
     phone: z.string().optional(),
@@ -51,6 +51,30 @@ export const RegionDataInput = z
 export const RegionDataUpdate = RegionDataInput.partial({
   name: true,
 });
+
+// Allowed User Schema
+export const AllowedUserCreate = z
+  .object({
+    email: z.email(),
+    regionId: z.string().optional(),
+    roleId: z.string().optional(),
+    type: z.enum(GTypes).default(GTypes.SYSTEM),
+    creatorId: z.string(),
+  })
+  .strict();
+
+//Schemas for: Position, Member status, hr warning and event roles.
+export const DefaultSystemValuesCreate = z
+  .object({
+    name: z.string().toUpperCase(),
+    type: z.enum(GTypes).default(GTypes.REGION),
+  })
+  .strict();
+
+export const DefaultSystemValuesUpdate = DefaultSystemValuesCreate.omit({
+  type: true,
+}).partial();
+//-----------------------------------------------------------------
 
 export type UserUpdateInput = z.infer<typeof UserUpdateInput>;
 export type SoftDeleteType = z.infer<typeof SoftDelete>;
