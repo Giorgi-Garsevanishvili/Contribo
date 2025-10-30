@@ -2,10 +2,11 @@ import "../styles/globals.css";
 import { Metadata } from "next";
 import AuthProvider from "@/(components)/providers/authProvider";
 import Footer from "@/(components)/Footer";
-import SignOut from "@/(components)/sign-out";
+import Theme from "@/(components)/Theme";
+import ConsoleNav from "@/(components)/nav";
 
 export const metadata: Metadata = {
-  title: "Contribo - by Qirvex™",
+  title: "Console - Contribo - by Qirvex™",
   icons: {
     icon: [
       { url: "/favicon/favicon.ico" },
@@ -15,7 +16,7 @@ export const metadata: Metadata = {
     apple: "/favicon/apple-icon.png",
   },
   manifest: "/favicon/manifest.json",
-  description: "Volunteer Engagement Platform",
+  description: " Console - Volunteer Engagement Platform",
 };
 
 export default function RootLayout({
@@ -25,12 +26,13 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className="flex flex-col bg-qirvex p-0 m-0 w-screen h-screen ">
+      <body className="flex layout-body items-center transition-all duration-200 bg-qirvex-d flex-col bg-qirvex p-0 m-0 w-screen h-screen ">
         <AuthProvider>
+          <ConsoleNav page={"Console"}/>
           <div className="flex-grow flex justify-center items-center m-0 p-0">
             {children}
           </div>
-          <SignOut />
+          <Theme />
           <Footer />
         </AuthProvider>
       </body>

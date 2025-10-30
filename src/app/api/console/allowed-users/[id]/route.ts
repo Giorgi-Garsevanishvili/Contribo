@@ -3,17 +3,12 @@ import { handleError } from "@/lib/errors/handleErrors";
 import { requireRole } from "@/lib/serverAuth";
 import { NextRequest, NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
+import { AllowedUserUpdate } from "@/lib/zod";
 
 type Params = {
   params: {
     id: string;
   };
-};
-
-type AllowedUserUpdate = {
-  roleId: string;
-  regionId: string;
-  creatorId: string;
 };
 
 export const GET = async (_req: NextRequest, { params }: Params) => {
@@ -46,22 +41,22 @@ export const PUT = async (req: NextRequest, { params }: Params) => {
     if (!id) {
       return NextResponse.json({ message: "Id is missing!" }, { status: 400 });
     }
-    const body = (await req.json()) as AllowedUserUpdate;
+    const json = await req.json();
+    const jsonWithCreator = {
+      ...json,
+      creatorId: thisUser.user.id,
+    };
+    const body = AllowedUserUpdate.parse(jsonWithCreator);
 
-    if (!body || !Object.keys(body).length) {
+    if (!body.regionId && !body.roleId) {
       return NextResponse.json({
         message: "At least one field must be provided",
       });
     }
 
-    const safeBody = {
-      ...body,
-      creatorId: thisUser.user.id,
-    };
-
     const updatedAllowedUser = await prisma.allowedUser.update({
       where: { id },
-      data: safeBody,
+      data: body,
     });
 
     if (!updatedAllowedUser) {

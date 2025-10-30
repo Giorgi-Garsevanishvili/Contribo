@@ -63,6 +63,11 @@ export const AllowedUserCreate = z
   })
   .strict();
 
+export const AllowedUserUpdate = AllowedUserCreate.omit({
+  email: true,
+  type: true,
+}).partial();
+
 //Schemas for: Position, Member status, hr warning and event roles.
 export const DefaultSystemValuesCreate = z
   .object({
