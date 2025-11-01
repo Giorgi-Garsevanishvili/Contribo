@@ -10,7 +10,7 @@ export const GET = async (_req: NextRequest) => {
   try {
     await requireRole("QIRVEX");
 
-    const allowedUsers = await prisma.allowedUser.findMany();
+    const allowedUsers = await prisma.allowedUser.findMany({include:{role:true, region:true, createdBy:true}});
 
     if (!allowedUsers || allowedUsers.length === 0) {
       return NextResponse.json(

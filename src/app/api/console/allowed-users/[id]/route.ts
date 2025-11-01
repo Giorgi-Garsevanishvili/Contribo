@@ -20,7 +20,10 @@ export const GET = async (_req: NextRequest, { params }: Params) => {
       return NextResponse.json({ message: "Id is missing" }, { status: 400 });
     }
 
-    const allowedUser = await prisma.allowedUser.findUnique({ where: { id } });
+    const allowedUser = await prisma.allowedUser.findUnique({
+      where: { id },
+      include: { role: true, region: true, createdBy: true },
+    });
 
     if (!allowedUser) {
       return NextResponse.json({ message: "user not found" }, { status: 404 });
