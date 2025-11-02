@@ -1,6 +1,3 @@
-import AuthProvider from "@/(components)/providers/authProvider";
-import "../styles/globals.css";
-import Theme from "@/(components)/Theme";
 import Image from "next/image";
 import contriboImgQir from "../../../public/Contribo-qirvex-long-no-fill.svg";
 
