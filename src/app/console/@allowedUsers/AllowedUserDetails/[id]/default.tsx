@@ -35,7 +35,7 @@ function UsersComponent() {
   }, []);
 
   return (
-    <div className="flex w-[22rem] h-[25rem] items-start justify-center m-1 text-white p-1 bg-gray-500/75 rounded-xl">
+    <div className="flex w-[22rem] h-[28rem] items-start justify-center m-1 text-white p-1 shadow-md shadow-white bg-gray-500/75 rounded-xl">
       {isLoading ? (
         <LoadingComp />
       ) : (

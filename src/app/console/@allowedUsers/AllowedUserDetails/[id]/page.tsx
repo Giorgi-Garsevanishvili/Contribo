@@ -49,8 +49,8 @@ function UsersComponent() {
   }, [fetchUsers]);
 
   return (
-    <>
-      <div className="flex flex-col w-[22rem] h-[25rem] scroll-smooth overflow-y-auto items-center justify-center m-0 ove text-white bg-gray-500/75 rounded-t-lg">
+    <div className="flex flex-col m-2 shadow-md shadow-white rounded-lg">
+      <div className="flex flex-col w-[22rem] h-[28rem] scroll-smooth overflow-y-auto items-center justify-center m-0 ove text-white bg-gray-500/75 rounded-t-lg">
         {isLoading ? (
           <LoadingComp />
         ) : (
@@ -59,32 +59,57 @@ function UsersComponent() {
               <h1>Allowed User Details</h1>
             </div>
 
-            <div className="flex flex-col w-full h-full items-center justify-center">
-              <ul className="flex flex-col justify-center overflow-auto">
-                <li className="flex bg-gray-700 rounded-lg w-fit p-3 items-center justify-between">
+            <div className="flex flex-col w-full h-full items-center justify-start">
+              <ul className="flex flex-col justify-center overflow-auto w-[95%]">
+                <li className="flex bg-gray-700 rounded-lg w-full p-3 items-center justify-between">
                   <ul className="flex flex-col items-start justify-center">
-                    <li>Email: {user?.email}</li>
-                    <li>Region: {user?.region?.name || "Not Set"}</li>
-                    <li>Role: {user?.role?.name || "Not Set"}</li>
                     <li>
-                      Created By: {user?.createdBy?.name || "Unknown User"}
+                      Email:{" "}
+                      <span className="text-blue-300">{user?.email}</span>
                     </li>
-                    <li>Created At: {user?.createdAt.toDateString()}</li>
+                    <li>
+                      Region:{" "}
+                      <span className="text-blue-300">
+                        {user?.region?.name || "Not Set"}
+                      </span>
+                    </li>
+                    <li>
+                      Role:{" "}
+                      <span className="text-blue-300">
+                        {user?.role?.name || "Not Set"}
+                      </span>
+                    </li>
+                    <li>
+                      Created By:{" "}
+                      <span className="text-blue-300">
+                        {user?.createdBy?.name || "Unknown User"}
+                      </span>
+                    </li>
+                    <li>
+                      Created At:{" "}
+                      <span className="text-blue-300">
+                        {user?.createdAt.toDateString()}
+                      </span>
+                    </li>
                     <li>
                       Updated At:{" "}
-                      {user?.updatedAt?.toDateString() || "Not Updated"}
+                      <span className="text-blue-300">
+                        {user?.updatedAt?.toDateString() || "Not Updated"}
+                      </span>
                     </li>
-                    <li>Type: {user?.type}</li>
+                    <li>
+                      Type:<span className="text-blue-300"> {user?.type}</span>
+                    </li>
                   </ul>
                 </li>
               </ul>
               <div className="flex flex-row w-full justify-center items-center">
-                <button className="btn w-20 items-center justify-center bg-red-900 rounded-lg">
+                <button className="btn flex-grow items-center justify-center bg-red-900 rounded-lg">
                   <MdDeleteOutline size={20} />
                 </button>
                 <button
                   onClick={() => setIsUpdateOpen(!isUpdateOpen)}
-                  className={`btn w-20 justify-center items-center transition duration-300 ease-in-out ${
+                  className={`btn flex-grow justify-center items-center transition duration-300 ease-in-out ${
                     isUpdateOpen ? "bg-amber-500" : "bg-amber-100"
                   }  text-black rounded-lg `}
                 >
@@ -98,7 +123,7 @@ function UsersComponent() {
             </div>
 
             <form
-              className={`flex w-full transition duration-300 ease-in-out p-2 ${
+              className={`flex w-full transition duration-300 ease-in-out p-3 ${
                 isUpdateOpen
                   ? "opacity-100 pointer-events-auto visible"
                   : "opacity-0 pointer-events-none hidden"
@@ -145,7 +170,7 @@ function UsersComponent() {
           Back To List
         </Link>
       </div>
-    </>
+    </div>
   );
 }
 

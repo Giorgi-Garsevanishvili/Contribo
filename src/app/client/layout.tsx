@@ -24,16 +24,11 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
-      <body className="flex flex-col bg-qirvex p-0 m-0 w-screen h-screen ">
-        <AuthProvider>
-          <div className="flex-grow flex justify-center items-center m-0 p-0">
-            {children}
-          </div>
-          <SignOut />
-          <Footer />
-        </AuthProvider>
-      </body>
-    </html>
+    <body className="flex flex-col bg-qirvex p-0 m-0">
+      <div className="flex-grow flex justify-center items-center m-0 p-0">
+        {children}
+      </div>
+      <SignOut />
+    </body>
   );
 }

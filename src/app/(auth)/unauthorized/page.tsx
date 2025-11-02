@@ -6,7 +6,7 @@ const Unauthorized = async () => {
   const session = await auth();
 
   return (
-    <main className="flex flex-col items-center justify-center">
+    <div className="flex flex-col items-center justify-center">
       <div className="text-red-500 text-2xl p-6 m-3 bg-white shadow-lg rounded-3xl ">
         Unauthorized Access!
       </div>
@@ -14,7 +14,7 @@ const Unauthorized = async () => {
       <Link className="btn-log" href={"/"}>
         Back To Main
       </Link>
-    </main>
+    </div>
   );
 };
 export default Unauthorized;

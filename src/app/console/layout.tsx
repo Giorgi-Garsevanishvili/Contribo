@@ -27,20 +27,16 @@ export default function RootLayout({
   allowedUsers: React.ReactNode;
 }) {
   return (
-    <html lang="en">
-      <body className="flex layout-body items-center transition-all duration-200 bg-qirvex-d flex-col bg-qirvex p-0 m-0 w-screen h-screen ">
-        <AuthProvider>
-          <ConsoleNav page={"Console"} />
-          <div className="flex-grow flex justify-center items-start mt-15 m-0 p-0">
-            <main>
-              {children}
-              {allowedUsers}
-            </main>
-          </div>
-          <Theme />
-          <Footer />
-        </AuthProvider>
-      </body>
-    </html>
+    
+      <div className="flex flex-grow items-center justify-center transition-all duration-200 flex-col p-0 m-0">
+        <ConsoleNav page={"Console"} />
+        <div className="flex-grow flex justify-center items-center mt-10 m-0 p-0">
+          <main>
+            {children}
+            {allowedUsers}
+          </main>
+        </div>
+      </div>
+  
   );
 }

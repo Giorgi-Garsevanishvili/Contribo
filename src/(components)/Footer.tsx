@@ -1,7 +1,7 @@
 function Footer() {
   // const date = new Date();
   return (
-    <footer className="flex justify-center bg-transparent  overflow-hidden h-auto w-vw p-5 m-0">
+    <footer className="flex justify-center bg-transparent  overflow-hidden h-auto w-vw p-4 m-0">
       <div className="text-center m-0">
         <h1 className="orbitron text-lg font-bold text-[#34495e] m-0 inline-block select-none relative">
           <a target="_blank" className="dev-link" href="https://qirvex.dev/">
