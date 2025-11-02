@@ -5,17 +5,13 @@ import { prisma } from "@/lib/prisma";
 import { requireRole } from "@/lib/serverAuth";
 import { NextRequest, NextResponse } from "next/server";
 import { SoftDelete, SoftDeleteInputType } from "@/lib/zod";
+import { Context } from "@/types/general-types";
 
-type Params = {
-  params: {
-    id: string;
-  };
-};
 
-export const DELETE = async (_req: NextRequest, { params }: Params) => {
+export const DELETE = async (_req: NextRequest, context: Context) => {
   try {
     await requireRole("QIRVEX");
-    const { id } = await params;
+    const { id } = await context.params;
 
     if (!id) {
       return NextResponse.json({ message: "Id is missing." }, { status: 400 });

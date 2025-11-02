@@ -1,5 +1,4 @@
 import "server-only";
-"server only";
 
 import { auth } from "@/lib/auth";
 import { redirect } from "next/navigation";

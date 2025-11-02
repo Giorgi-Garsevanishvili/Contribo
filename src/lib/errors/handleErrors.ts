@@ -4,7 +4,7 @@ import { ZodError } from "zod";
 
 export function handleError(error: unknown): {
   status: number;
-  message: string | Object;
+  message: string | object;
 } {
   // Prisma known errors
   if (error instanceof Prisma.PrismaClientKnownRequestError) {

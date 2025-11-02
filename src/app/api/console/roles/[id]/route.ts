@@ -5,23 +5,19 @@ import { prisma } from "@/lib/prisma";
 import { requireRole } from "@/lib/serverAuth";
 import { NextRequest, NextResponse } from "next/server";
 import { z } from "zod";
+import { Context } from "@/types/general-types";
 
-type Params = {
-  params: {
-    id: string;
-  };
-};
 
 const RoleUpdateData = z
   .object({
     name: z.string().toUpperCase(),
   }).strict();
 
-export const GET = async (_req: NextRequest, { params }: Params) => {
+export const GET = async (_req: NextRequest, context: Context) => {
   try {
     await requireRole("QIRVEX");
 
-    const { id } = await params;
+    const { id } = await context.params;
 
     if (!id) {
       return NextResponse.json(
@@ -46,11 +42,11 @@ export const GET = async (_req: NextRequest, { params }: Params) => {
   }
 };
 
-export const PUT = async (req: NextRequest, { params }: Params) => {
+export const PUT = async (req: NextRequest, context: Context) => {
   try {
     await requireRole("QIRVEX");
 
-    const { id } = await params;
+    const { id } = await context.params;
 
     const json = await req.json();
     const body = RoleUpdateData.parse(json);
@@ -84,11 +80,11 @@ export const PUT = async (req: NextRequest, { params }: Params) => {
   }
 };
 
-export const DELETE = async (req: NextRequest, { params }: Params) => {
+export const DELETE = async (req: NextRequest, context: Context) => {
   try {
     await requireRole("QIRVEX");
 
-    const { id } = await params;
+    const { id } = await context.params;
 
     if (!id) {
       return NextResponse.json({ message: "Id is missing" }, { status: 400 });

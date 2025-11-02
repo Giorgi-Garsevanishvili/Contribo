@@ -2,21 +2,16 @@ import "server-only";
 
 import { prisma } from "@/lib/prisma";
 import { requireRole } from "@/lib/serverAuth";
-import { Prisma } from "@prisma/client";
 import { NextRequest, NextResponse } from "next/server";
 import { handleError } from "@/lib/errors/handleErrors";
 import { RegionDataUpdate } from "@/lib/zod";
+import { Context } from "@/types/general-types";
 
-type Params = {
-  params: {
-    id: string;
-  };
-};
 
-export const GET = async (_req: NextRequest, { params }: Params) => {
+export const GET = async (_req: NextRequest, context: Context) => {
   try {
     await requireRole("QIRVEX");
-    const { id } = await params;
+    const { id } = await context.params;
     if (!id) {
       return NextResponse.json(
         { message: "Region ID is missing" },
@@ -42,10 +37,10 @@ export const GET = async (_req: NextRequest, { params }: Params) => {
   }
 };
 
-export const PUT = async (req: NextRequest, { params }: Params) => {
+export const PUT = async (req: NextRequest, context: Context) => {
   try {
     await requireRole("QIRVEX");
-    const { id } = await params;
+    const { id } = await context.params;
     if (!id) {
       return NextResponse.json(
         { message: "Region ID is missing" },
@@ -97,10 +92,10 @@ export const PUT = async (req: NextRequest, { params }: Params) => {
   }
 };
 
-export const DELETE = async (_req: NextRequest, { params }: Params) => {
+export const DELETE = async (_req: NextRequest, context: Context) => {
   try {
     await requireRole("QIRVEX");
-    const { id } = await params;
+    const { id } = await context.params;
     if (!id) {
       return NextResponse.json(
         { message: "Region ID is missing" },

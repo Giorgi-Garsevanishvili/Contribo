@@ -3,7 +3,7 @@
 import LoadingComp from "@/(components)/LoadingComp";
 import { Prisma } from "@prisma/client";
 import axios from "axios";
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { MdDeleteOutline } from "react-icons/md";
 import Link from "next/link";
 import { useParams } from "next/navigation";
@@ -22,7 +22,7 @@ function UsersComponent() {
   const params = useParams();
   const { id } = params;
 
-  const fetchUsers = async () => {
+  const fetchUsers = useCallback(async () => {
     try {
       const response = await axios.get<AllowedUsersWithRelations>(
         `/api/console/allowed-users/${id}`
@@ -42,11 +42,11 @@ function UsersComponent() {
       console.log(error);
       return;
     }
-  };
+  }, [id]);
 
   useEffect(() => {
     fetchUsers();
-  }, []);
+  }, [fetchUsers]);
 
   return (
     <>
@@ -60,7 +60,7 @@ function UsersComponent() {
             </div>
 
             <div className="flex flex-col w-full h-full items-center justify-center">
-              <ul className="flex flex-col justify-center overflow-scroll">
+              <ul className="flex flex-col justify-center overflow-auto">
                 <li className="flex bg-gray-700 rounded-lg w-fit p-3 items-center justify-between">
                   <ul className="flex flex-col items-start justify-center">
                     <li>Email: {user?.email}</li>

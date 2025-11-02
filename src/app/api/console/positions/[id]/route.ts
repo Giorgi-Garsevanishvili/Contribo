@@ -5,17 +5,12 @@ import { NextRequest, NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
 import { DefaultSystemValuesUpdate } from "@/lib/zod";
 import z from "zod";
+import { Context } from "@/types/general-types";
 
-type Params = {
-  params: {
-    id: string;
-  };
-};
-
-export const GET = async (_req: NextRequest, { params }: Params) => {
+export const GET = async (_req: NextRequest, context: Context) => {
   try {
     await requireRole("QIRVEX");
-    const { id } = await params;
+    const { id } = await context.params;
 
     if (!id) {
       return NextResponse.json({ message: "Id is missing!" }, { status: 400 });
@@ -37,17 +32,19 @@ export const GET = async (_req: NextRequest, { params }: Params) => {
   }
 };
 
-export const PUT = async (req: NextRequest, { params }: Params) => {
+export const PUT = async (req: NextRequest, context: Context) => {
   try {
     await requireRole("QIRVEX");
-    const { id } = await params;
+    const { id } = await context.params;
 
     if (!id) {
       return NextResponse.json({ message: "Id is missing" }, { status: 400 });
     }
 
-    const json = (await req.json()) as z.infer<typeof DefaultSystemValuesUpdate>;
-    const body = DefaultSystemValuesUpdate.parse(json)
+    const json = (await req.json()) as z.infer<
+      typeof DefaultSystemValuesUpdate
+    >;
+    const body = DefaultSystemValuesUpdate.parse(json);
 
     if (!body || !Object.keys(body).length) {
       return NextResponse.json(
@@ -85,10 +82,10 @@ export const PUT = async (req: NextRequest, { params }: Params) => {
   }
 };
 
-export const DELETE = async (_req: NextRequest, { params }: Params) => {
+export const DELETE = async (_req: NextRequest, context: Context) => {
   try {
     await requireRole("QIRVEX");
-    const { id } = await params;
+    const { id } = await context.params;
 
     if (!id) {
       return NextResponse.json({ message: "Id is missing" }, { status: 400 });

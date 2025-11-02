@@ -4,7 +4,6 @@ import LoadingComp from "@/(components)/LoadingComp";
 import { Prisma } from "@prisma/client";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { LuUserRoundSearch } from "react-icons/lu";
 import { MdDeleteOutline } from "react-icons/md";
 import { AiOutlineUserAdd } from "react-icons/ai";
 import Link from "next/link";
@@ -44,7 +43,7 @@ function UsersComponent() {
           <div className="text-lg text-gray-800 font-bold pb-1 px-7 mb-3 rounded-b-3xl drop-shadow-sm shadow-white shadow-md">
             <h1>Allowed Users</h1>
           </div>
-          
+
           <div>
             <ul className="flex flex-wrap gap-3 justify-center overflow-y-auto">
               {userData.map((user, index) => (
