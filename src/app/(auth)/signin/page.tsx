@@ -1,7 +1,6 @@
 "client only";
 
-import SignIn from "@/(components)/sign-in";
-
+import SignIn from "@/(components)/authComp/sign-in";
 import { FaSlack } from "react-icons/fa";
 import { FcGoogle } from "react-icons/fc";
 

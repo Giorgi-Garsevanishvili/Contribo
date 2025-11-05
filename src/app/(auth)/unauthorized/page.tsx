@@ -1,4 +1,4 @@
-import SignOut from "@/(components)/sign-out";
+import SignOut from "@/(components)/authComp/sign-out";
 import { auth } from "@/lib/auth";
 import Link from "next/link";
 

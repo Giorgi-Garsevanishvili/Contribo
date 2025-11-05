@@ -1,9 +1,9 @@
 import React from "react";
-import SignOut from "./sign-out";
 import { auth } from "@/lib/auth";
 import Image from "next/image";
+import SignOut from "../authComp/sign-out";
 
-async function ConsoleNav({page}:{page:string}) {
+async function ConsoleNav({ page }: { page: string }) {
   const session = await auth();
   return (
     <nav className="flex flex-col items-center justify-center p-4">

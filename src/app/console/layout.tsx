@@ -1,6 +1,6 @@
 import "../styles/globals.css";
 import { Metadata } from "next";
-import ConsoleNav from "@/(components)/nav";
+import ConsoleNav from "@/(components)/panelComp/nav";
 
 export const metadata: Metadata = {
   title: "Console - Contribo - by Qirvex™",

@@ -1,12 +1,15 @@
 "use client";
 
-import LoadingComp from "@/(components)/LoadingComp";
-import { Prisma, Role } from "@prisma/client";
+import { Prisma } from "@prisma/client";
 import axios from "axios";
 import React, { FormEvent, useEffect, useState } from "react";
-import { AiOutlineUserAdd } from "react-icons/ai";
 import Link from "next/link";
-import DeleteButton from "@/(components)/DeleteButton";
+import LoadingComp from "@/(components)/generalComp/LoadingComp";
+import DeleteButton from "@/(components)/panelComp/DeleteButton";
+import AllowedUserComp, {
+  UserAddObj,
+  UserAddType,
+} from "@/(components)/panelComp/AllowedUserComp";
 
 type AllowedUsersWithRelations = Prisma.AllowedUserGetPayload<{
   include: { role: true; region: true; createdBy: true };
@@ -15,40 +18,27 @@ type AllowedUsersWithRelations = Prisma.AllowedUserGetPayload<{
 function UsersComponent() {
   const [userData, setUserData] = useState<AllowedUsersWithRelations[]>([]);
   const [isLoading, setIsLoading] = useState(true);
-  const [addOpened, setAddOpened] = useState(false);
-  const [userEmail, setUserEmail] = useState<{ email: string }>({ email: "" });
-  const [roles, setRoles] = useState<Role[]>([]);
 
-  const GetRoles = async () => {
-    try {
-      setIsLoading(true);
-      const response = await axios.get("/api/console/roles");
-      setRoles(response.data);
-    } catch (error) {
-      console.log(error);
-      return;
-    } finally {
-      setIsLoading(false);
-    }
-  };
-
-  const OpenAdd = () => {
-    !addOpened && roles.length === 0 ? GetRoles() : null;
-
-    setAddOpened(!addOpened);
-  };
+  const [userAdd, setUserAdd] = useState<UserAddType>(UserAddObj);
 
   const CreateAllowedUser = async (e: FormEvent<HTMLFormElement>) => {
     try {
+      e.preventDefault();
+
+      if (Object.values(userAdd).some((value) => value === "")) {
+        alert("All value is required");
+        return;
+      }
+
       setIsLoading(true);
       e.preventDefault();
-      await axios.post("/api/console/allowed-users", userEmail);
+      await axios.post("/api/console/allowed-users", userAdd);
       setIsLoading(false);
-      setUserEmail({ email: "" });
+      setUserAdd(UserAddObj);
       fetchUsers();
     } catch (error) {
       setIsLoading(false);
-      setUserEmail({ email: "" });
+      setUserAdd(UserAddObj);
       console.log(error);
       return;
     }
@@ -62,18 +52,6 @@ function UsersComponent() {
       );
       setUserData(data.data);
       setIsLoading(false);
-    } catch (error) {
-      setIsLoading(false);
-      console.log(error);
-      return;
-    }
-  };
-
-  const deleteAllowedUser = async (id: string) => {
-    try {
-      setIsLoading(true);
-      await axios.delete(`/api/console/allowed-users/${id}`);
-      fetchUsers();
     } catch (error) {
       setIsLoading(false);
       console.log(error);
@@ -116,69 +94,16 @@ function UsersComponent() {
                     <h5>{index + 1}.</h5>
                     <h5 className="mx-2">{user.email}</h5>
                   </Link>
-                  <DeleteButton onDelete={() => deleteAllowedUser(user.id)} />
+                  <DeleteButton id={user.id} method="allowedUser" />
                 </li>
               ))}
             </ul>
           </div>
-          <div className="flex bg-gray-800/70 flex-col  w-full border-t-2 border-gray-900/80 border-dotted items-center justify-center rounded-lg">
-            <button
-              onClick={OpenAdd}
-              className="flex btn w-full ease-in-out duration-300 transition items-center justify-center  bg-black rounded-lg m-0 mt-1.5"
-            >
-              {addOpened ? "Close Add User Section" : "Open Add User Section"}
-            </button>
-
-            <form
-              onSubmit={(e) => CreateAllowedUser(e)}
-              className={`flex flex-col w-full p-0.5 overflow-hidden ${
-                addOpened
-                  ? "max-h-40 opacity-100 pointer-events-auto"
-                  : "max-h-0 opacity-0 pointer-events-none"
-              }  items-center  justify-center ease-in-out duration-300 transition`}
-            >
-              <div className="flex flex-row w-full items-center justify-center">
-                <input
-                  name="email"
-                  value={userEmail.email}
-                  onChange={(e) => setUserEmail({ email: e.target.value })}
-                  type="email"
-                  placeholder="Add Allowed User Email"
-                  className="flex w-full text-black p-2 bg-white m-2 rounded-lg"
-                />
-                <button
-                  type="submit"
-                  className="flex btn items-center justify-center  bg-green-900 rounded-lg m-0.5 p-2.5"
-                >
-                  <AiOutlineUserAdd size={18} />
-                </button>
-              </div>
-              <div className="flex w-full items-center justify-center flex-row">
-                <form className="flex flex-row items-center justify-between w-[80%] p-1">
-                  <label htmlFor="role">Role: </label>
-                  <select
-                    className=" flex bg-amber-50 text-black flex-grow items-center justify-center mx-2 p-0.5 rounded-lg"
-                    name="role"
-                    id="role"
-                  >
-                    {roles.map((role) => (
-                      <option value={role.id}>{role.name}</option>
-                    ))}
-                  </select>
-                </form>
-                <form className="flex flex-row items-center justify-between w-[80%] p-1">
-                  <label htmlFor="role">Region: </label>
-                  <select
-                    className=" flex bg-amber-50 text-black flex-grow items-center justify-center mx-2 p-0.5 rounded-lg"
-                    name="role"
-                    id="role"
-                  >
-                    <option value="null">null</option>
-                  </select>
-                </form>
-              </div>
-            </form>
-          </div>
+          <AllowedUserComp
+            CreateAllowedUser={CreateAllowedUser}
+            userAdd={userAdd}
+            setAddUser={setUserAdd}
+          />
         </div>
       )}
     </div>

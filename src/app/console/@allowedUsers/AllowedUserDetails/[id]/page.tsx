@@ -1,14 +1,14 @@
 "use client";
 
-import LoadingComp from "@/(components)/LoadingComp";
 import { Prisma } from "@prisma/client";
 import axios from "axios";
 import React, { useCallback, useEffect, useState } from "react";
-import { MdDeleteOutline } from "react-icons/md";
 import Link from "next/link";
 import { useParams } from "next/navigation";
 import { FaRegEdit } from "react-icons/fa";
 import { TbEditOff } from "react-icons/tb";
+import LoadingComp from "@/(components)/generalComp/LoadingComp";
+import DeleteButton from "@/(components)/panelComp/DeleteButton";
 
 type AllowedUsersWithRelations = Prisma.AllowedUserGetPayload<{
   include: { role: true; region: true; createdBy: true };
@@ -104,9 +104,7 @@ function UsersComponent() {
                 </li>
               </ul>
               <div className="flex flex-row w-full justify-center items-center">
-                <button className="btn flex-grow items-center justify-center bg-red-900 rounded-lg">
-                  <MdDeleteOutline size={20} />
-                </button>
+                <DeleteButton id={user?.id} method="allowedUser" />
                 <button
                   onClick={() => setIsUpdateOpen(!isUpdateOpen)}
                   className={`btn flex-grow justify-center items-center transition duration-300 ease-in-out ${
