@@ -10,6 +10,12 @@ import AllowedUserComp, {
   UserAddObj,
   UserAddType,
 } from "@/(components)/panelComp/AllowedUserComp";
+import Alerts, {
+  AlertObj,
+  AlertType,
+  triggerAlert,
+} from "@/(components)/generalComp/Alerts";
+import { getClientErrorMessage } from "@/lib/errors/clientErrors";
 
 type AllowedUsersWithRelations = Prisma.AllowedUserGetPayload<{
   include: { role: true; region: true; createdBy: true };
@@ -19,13 +25,30 @@ function UsersComponent() {
   const [userData, setUserData] = useState<AllowedUsersWithRelations[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [userAdd, setUserAdd] = useState<UserAddType>(UserAddObj);
+  const [alert, setAlert] = useState<AlertType>(AlertObj);
+
+  useEffect(() => {
+    if (!alert.isOpened) return;
+
+    const timeoutId = setTimeout(
+      () => setAlert((prev) => ({ ...prev, isOpened: false })),
+      4500
+    );
+
+    return () => clearTimeout(timeoutId);
+  }, [alert.isOpened]);
 
   const CreateAllowedUser = async (e: FormEvent<HTMLFormElement>) => {
     try {
       e.preventDefault();
 
       if (Object.values(userAdd).some((value) => value === "")) {
-        alert("All value is required");
+        triggerAlert({
+          message: "All fields are required",
+          type: "warning",
+          isOpened: true,
+          setState: setAlert,
+        });
         return;
       }
 
@@ -33,12 +56,24 @@ function UsersComponent() {
       e.preventDefault();
       await axios.post("/api/console/allowed-users", userAdd);
       setIsLoading(false);
-      setUserAdd(UserAddObj);
+      triggerAlert({
+        message: "User Added",
+        type: "success",
+        isOpened: true,
+        setState: setAlert,
+      });
       fetchUsers();
+      setUserAdd(UserAddObj);
     } catch (error) {
+      const errorMessage = getClientErrorMessage(error);
       setIsLoading(false);
       setUserAdd(UserAddObj);
-      console.log(error);
+      triggerAlert({
+        message: errorMessage,
+        type: "error",
+        isOpened: true,
+        setState: setAlert,
+      });
       return;
     }
   };
@@ -52,8 +87,14 @@ function UsersComponent() {
       setUserData(data.data);
       setIsLoading(false);
     } catch (error) {
+      const errorMessage = getClientErrorMessage(error);
       setIsLoading(false);
-      console.log(error);
+      triggerAlert({
+        message: errorMessage,
+        type: "error",
+        isOpened: true,
+        setState: setAlert,
+      });
       return;
     }
   };
@@ -93,11 +134,20 @@ function UsersComponent() {
                     <h5>{index + 1}.</h5>
                     <h5 className="mx-2">{user.email}</h5>
                   </Link>
-                  <DeleteButton id={user.id} method="allowedUser" onDelete={fetchUsers} />
+                  <DeleteButton
+                    id={user.id}
+                    method="allowedUser"
+                    onDelete={fetchUsers}
+                  />
                 </li>
               ))}
             </ul>
           </div>
+          <Alerts
+            message={alert.message}
+            type={alert.type}
+            isOpened={alert.isOpened}
+          />
           <AllowedUserComp
             CreateAllowedUser={CreateAllowedUser}
             userAdd={userAdd}

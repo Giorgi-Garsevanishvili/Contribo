@@ -51,10 +51,10 @@ function AllowedUserComp({
   };
 
   return (
-    <div className="flex bg-gray-800/70 flex-col  w-full border-t-2 border-gray-900/80 border-dotted items-center justify-center rounded-lg">
+    <div className="flex bg-gray-800/70 flex-col w-full border-gray-900/80 items-center justify-center rounded-lg">
       <button
         onClick={OpenAdd}
-        className="flex btn w-full ease-in-out duration-300 transition items-center justify-center  bg-black rounded-lg m-0 mt-1.5"
+        className="flex btn w-full ease-in-out duration-300 transition items-center justify-center  bg-black rounded-lg m-0 "
       >
         {addOpened ? "Close Add User Section" : "Open Add User Section"}
       </button>
@@ -70,7 +70,7 @@ function AllowedUserComp({
               : "max-h-0 opacity-0 pointer-events-none"
           }  items-center  justify-center ease-in-out duration-300 transition`}
         >
-          <div className="flex flex-row w-full items-center justify-center">
+          <div className="flex flex-row w-full items-center m-1 justify-center">
             <input
               name="email"
               value={userAdd.email}
@@ -79,7 +79,7 @@ function AllowedUserComp({
               }
               type="email"
               placeholder="Add Allowed User Email"
-              className="flex w-full text-black p-2 bg-white m-2 rounded-lg"
+              className="flex w-full text-black p-2 bg-white m-0.5 rounded-lg"
             />
             <button
               type="submit"
@@ -96,7 +96,7 @@ function AllowedUserComp({
                 onChange={(e) =>
                   setAddUser((prev) => ({ ...prev, roleId: e.target.value }))
                 }
-                className=" flex bg-amber-50 text-black flex-grow items-center justify-center mx-2 p-0.5 rounded-lg"
+                className=" flex cursor-pointer bg-[#e7e7e7c7] text-black flex-grow items-center justify-center mx-2 p-0.5 rounded-md"
                 name="role"
                 id="role"
               >
@@ -116,7 +116,7 @@ function AllowedUserComp({
                 onChange={(e) =>
                   setAddUser((prev) => ({ ...prev, regionId: e.target.value }))
                 }
-                className=" flex bg-amber-50 text-black flex-grow items-center justify-center mx-2 p-0.5 rounded-lg"
+                className=" flex cursor-pointer bg-[#e7e7e7c7] text-black flex-grow items-center justify-center mx-2 p-0.5 rounded-md"
                 name="role"
                 id="role"
               >
