@@ -54,18 +54,21 @@ const allowedUserComp = createSlice({
         state.loadingRegions = "pending";
       })
       .addCase(fetchRegions.rejected, (state, action) => {
-        (state.loadingRegions = "failed"),
-          (state.errorRegions = action.error.message);
+        state.loadingRegions = "failed";
+        state.errorRegions = action.error.message;
       });
   },
 });
 
 export const rolesError = (state: RootState) => state.AllowedComp.errorRoles;
-export const rolesLoading = (state: RootState) => state.AllowedComp.loadingRoles;
+export const rolesLoading = (state: RootState) =>
+  state.AllowedComp.loadingRoles;
 export const getAllRoles = (state: RootState) => state.AllowedComp.roles;
 
-export const regionsError = (state: RootState) => state.AllowedComp.errorRegions;
-export const regionLoading = (state: RootState) => state.AllowedComp.loadingRegions;
-export const getAllRegion = (state: RootState) => state.AllowedComp.regions
+export const regionsError = (state: RootState) =>
+  state.AllowedComp.errorRegions;
+export const regionLoading = (state: RootState) =>
+  state.AllowedComp.loadingRegions;
+export const getAllRegion = (state: RootState) => state.AllowedComp.regions;
 
 export const allowedUserCompReducer = allowedUserComp.reducer;

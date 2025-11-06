@@ -8,6 +8,7 @@ type DeleteButtonProps = {
   method: DeleteMethod;
   id: string | undefined;
   disabled?: boolean;
+  onDelete?: () => void;
 };
 
 const deleteAllowedUser = async (id: string | undefined) => {
@@ -19,7 +20,7 @@ const deleteAllowedUser = async (id: string | undefined) => {
   }
 };
 
-function DeleteButton({ method, id, disabled }: DeleteButtonProps) {
+function DeleteButton({ method, id, disabled, onDelete }: DeleteButtonProps) {
   const [loading, setLoading] = useState(false);
   const handleDelete = async () => {
     try {
@@ -27,6 +28,7 @@ function DeleteButton({ method, id, disabled }: DeleteButtonProps) {
         case "allowedUser":
           setLoading(true);
           await deleteAllowedUser(id);
+          if (onDelete) onDelete();
           setLoading(false);
           break;
 
@@ -34,6 +36,7 @@ function DeleteButton({ method, id, disabled }: DeleteButtonProps) {
           break;
       }
     } catch (error) {
+      setLoading(false);
       console.error(`Failed to delete ${method}:`, error);
       alert(`Failed to delete ${method}`);
     }

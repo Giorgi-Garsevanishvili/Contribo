@@ -18,7 +18,6 @@ type AllowedUsersWithRelations = Prisma.AllowedUserGetPayload<{
 function UsersComponent() {
   const [userData, setUserData] = useState<AllowedUsersWithRelations[]>([]);
   const [isLoading, setIsLoading] = useState(true);
-
   const [userAdd, setUserAdd] = useState<UserAddType>(UserAddObj);
 
   const CreateAllowedUser = async (e: FormEvent<HTMLFormElement>) => {
@@ -80,7 +79,7 @@ function UsersComponent() {
               placeholder="Find by Email"
             />
           </div>
-          <div className="flex items-start justify-center mb-1 p-1 w-full px-3  overflow-auto">
+          <div className="flex items-start justify-center mb-1 p-1 w-full h-full px-3  overflow-auto">
             <ul className="flex flex-col flex-grow gap-2 items-start justify-center">
               {userData.map((user, index) => (
                 <li
@@ -94,7 +93,7 @@ function UsersComponent() {
                     <h5>{index + 1}.</h5>
                     <h5 className="mx-2">{user.email}</h5>
                   </Link>
-                  <DeleteButton id={user.id} method="allowedUser" />
+                  <DeleteButton id={user.id} method="allowedUser" onDelete={fetchUsers} />
                 </li>
               ))}
             </ul>

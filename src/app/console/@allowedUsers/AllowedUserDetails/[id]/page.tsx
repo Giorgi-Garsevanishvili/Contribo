@@ -9,6 +9,7 @@ import { FaRegEdit } from "react-icons/fa";
 import { TbEditOff } from "react-icons/tb";
 import LoadingComp from "@/(components)/generalComp/LoadingComp";
 import DeleteButton from "@/(components)/panelComp/DeleteButton";
+import { useRouter } from "next/navigation";
 
 type AllowedUsersWithRelations = Prisma.AllowedUserGetPayload<{
   include: { role: true; region: true; createdBy: true };
@@ -18,6 +19,7 @@ function UsersComponent() {
   const [user, setUser] = useState<AllowedUsersWithRelations>();
   const [isLoading, setIsLoading] = useState(true);
   const [isUpdateOpen, setIsUpdateOpen] = useState(false);
+  const router = useRouter();
 
   const params = useParams();
   const { id } = params;
@@ -104,7 +106,15 @@ function UsersComponent() {
                 </li>
               </ul>
               <div className="flex flex-row w-full justify-center items-center">
-                <DeleteButton id={user?.id} method="allowedUser" />
+                <DeleteButton
+                  id={user?.id}
+                  method="allowedUser"
+                  onDelete={() =>
+                    setTimeout(() => {
+                      router.push("/console");
+                    }, 500)
+                  }
+                />
                 <button
                   onClick={() => setIsUpdateOpen(!isUpdateOpen)}
                   className={`btn flex-grow justify-center items-center transition duration-300 ease-in-out ${
