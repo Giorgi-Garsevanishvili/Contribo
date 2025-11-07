@@ -16,6 +16,13 @@ import Alerts, {
   triggerAlert,
 } from "@/(components)/generalComp/Alerts";
 import { getClientErrorMessage } from "@/lib/errors/clientErrors";
+import { useDispatch, useSelector } from "react-redux";
+import { AppDispatch } from "@/redux/store";
+import {
+  alertState,
+  closeAlert,
+  setCompAlert,
+} from "@/redux/features/componentAlert/componentAlertSlice";
 
 type AllowedUsersWithRelations = Prisma.AllowedUserGetPayload<{
   include: { role: true; region: true; createdBy: true };
@@ -26,6 +33,25 @@ function UsersComponent() {
   const [isLoading, setIsLoading] = useState(true);
   const [userAdd, setUserAdd] = useState<UserAddType>(UserAddObj);
   const [alert, setAlert] = useState<AlertType>(AlertObj);
+
+  const dispatch = useDispatch<AppDispatch>();
+  const compAlertState = useSelector(alertState);
+
+  const triggerCompAlert = ({ message, type, isOpened }: AlertType) => {
+    dispatch(
+      setCompAlert({
+        message,
+        type,
+        isOpened,
+      })
+    );
+  };
+
+  useEffect(() => {
+    if (!compAlertState.isOpened) return;
+    const compTimeoutId = setTimeout(() => dispatch(closeAlert()), 3000);
+    return () => clearTimeout(compTimeoutId);
+  }, [compAlertState.isOpened]);
 
   useEffect(() => {
     if (!alert.isOpened) return;
@@ -112,6 +138,7 @@ function UsersComponent() {
           <div className="text-lg text-white bg-gray-900  font-bold px-7 pb-1 rounded-b-3xl drop-shadow-sm shadow-white shadow-md">
             <h1>Allowed Users</h1>
           </div>
+          <Alerts {...compAlertState} />
           <div className="flex w-full items-center mt-1 justify-center">
             <input
               className="flex w-full bg-gray-300 text-black p-2.5 m-2 rounded-lg"
@@ -137,7 +164,14 @@ function UsersComponent() {
                   <DeleteButton
                     id={user.id}
                     method="allowedUser"
-                    onDelete={fetchUsers}
+                    onDelete={() => {
+                      fetchUsers();
+                      triggerCompAlert({
+                        message: "user delete",
+                        type: "success",
+                        isOpened: true,
+                      });
+                    }}
                   />
                 </li>
               ))}
