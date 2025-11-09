@@ -7,7 +7,7 @@ export const CompAlert = () => {
   const compAlertState = useSelector(alertState);
 
   return (
-    <div>
+    <div className="flex items-center justify-center m-0 p-0 w-[95%]">
       <Alerts {...compAlertState} />
     </div>
   );

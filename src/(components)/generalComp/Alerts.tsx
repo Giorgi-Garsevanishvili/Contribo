@@ -39,13 +39,12 @@ function Alerts({ message, type, isOpened }: AlertType) {
     <section
       style={{
         borderTopColor: alertColor,
-        color: alertColor,
       }}
       className={`flex ${
         isOpened
-          ? "opacity-100 animate-pulse h-auto p-1.5 "
+          ? "opacity-100 h-auto p-1.5 "
           : "h-0 p-0 m-0 opacity-0 overflow-hidden"
-      } duration-500 transition-all w-full ease-in-out border-t-3  items-center justify-center bg-white rounded-t-md  `}
+      } duration-500 transition-all w-full ease-in-out border-t-6 font-bold text-amber-950 items-center justify-center bg-[#d4d4d4] rounded-sm  `}
     >
       {message}
     </section>

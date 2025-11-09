@@ -8,7 +8,7 @@ import { AppDispatch } from "@/redux/store";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
-const useCompAlertStet = () => {
+export const useCompAlert = () => {
   const dispatchAlertComp = useDispatch<AppDispatch>();
   const compAlertState = useSelector(alertState);
 

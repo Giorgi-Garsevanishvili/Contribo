@@ -1,3 +1,4 @@
+import { useCompAlert } from "@/hooks/useCompAlert";
 import axios from "axios";
 import React, { useState } from "react";
 import { MdDeleteOutline } from "react-icons/md";
@@ -22,12 +23,18 @@ const deleteAllowedUser = async (id: string | undefined) => {
 
 function DeleteButton({ method, id, disabled, onDelete }: DeleteButtonProps) {
   const [loading, setLoading] = useState(false);
+  const { triggerCompAlert } = useCompAlert();
   const handleDelete = async () => {
     try {
       switch (method) {
         case "allowedUser":
           setLoading(true);
           await deleteAllowedUser(id);
+          triggerCompAlert({
+            message: "User Deleted",
+            type: "success",
+            isOpened: true,
+          });
           if (onDelete) onDelete();
           setLoading(false);
           break;
