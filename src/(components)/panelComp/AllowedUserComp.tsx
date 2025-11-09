@@ -1,23 +1,18 @@
 import React, { FormEvent, useState } from "react";
 import { AiOutlineUserAdd } from "react-icons/ai";
 import LoadingComp from "../generalComp/LoadingComp";
-import { useDispatch, useSelector } from "react-redux";
-import {
-  fetchRoles,
-  getAllRoles,
-  rolesLoading,
-  regionLoading,
-  getAllRegion,
-  fetchRegions,
-  //rolesError,
-  //regionsError,
-} from "@/redux/features/allowedUsers/allowedRoleSlice";
-import { AppDispatch } from "@/redux/store";
+import RegionRoleSelect from "./RegionRoleSelect";
+import useRegionRole from "@/hooks/useRegionRole";
 
-export type UserAddType = typeof UserAddObj;
+export type UserAddType = {
+  email?: string;
+  roleId: string;
+  regionId: string;
+};
+
 export const UserAddObj = { email: "", roleId: "", regionId: "" };
 
-type AddAllowedUserProp = {
+export type AddAllowedUserProp = {
   CreateAllowedUser: (e: FormEvent<HTMLFormElement>) => void;
   setAddUser: React.Dispatch<React.SetStateAction<UserAddType>>;
   userAdd: UserAddType;
@@ -29,31 +24,12 @@ function AllowedUserComp({
   userAdd,
 }: AddAllowedUserProp) {
   const [addOpened, setAddOpened] = useState(false);
-
-  const dispatch = useDispatch<AppDispatch>();
-  const loadingRoles = useSelector(rolesLoading);
-  const loadingRegions = useSelector(regionLoading);
-  //const rolesErrorMsg = useSelector(rolesError);
-  //const regionErrorMsg = useSelector(regionsError);
-  const roles = useSelector(getAllRoles);
-  const regions = useSelector(getAllRegion);
-
-  const isLoading = loadingRegions === "pending" || loadingRoles === "pending";
-  //const error = rolesErrorMsg || regionErrorMsg;
-
-  const OpenAdd = () => {
-    const newOpenState = !addOpened;
-    setAddOpened(newOpenState);
-    if (newOpenState && roles.length === 0 && regions.length === 0) {
-      dispatch(fetchRoles());
-      dispatch(fetchRegions());
-    }
-  };
+  const { isLoading } = useRegionRole();
 
   return (
     <div className="flex bg-gray-800/70 flex-col w-full border-gray-900/80 items-center justify-center rounded-lg">
       <button
-        onClick={OpenAdd}
+        onClick={() => setAddOpened((prev) => !prev)}
         className="flex btn w-full ease-in-out duration-300 transition items-center justify-center  bg-black rounded-lg m-0 "
       >
         {addOpened ? "Close Add User Section" : "Open Add User Section"}
@@ -89,48 +65,7 @@ function AllowedUserComp({
               <AiOutlineUserAdd size={18} />
             </button>
           </div>
-          <div className="flex w-full items-center justify-center flex-row">
-            <div className="flex flex-row items-center justify-between w-[80%] p-1">
-              <label htmlFor="role">Role: </label>
-              <select
-                onChange={(e) =>
-                  setAddUser((prev) => ({ ...prev, roleId: e.target.value }))
-                }
-                className=" flex cursor-pointer bg-[#e7e7e7c7] text-black flex-grow items-center justify-center mx-2 p-0.5 rounded-md"
-                name="role"
-                id="role"
-              >
-                <option value=""></option>
-                {roles
-                  ? roles.map((role) => (
-                      <option key={role.id} value={role.id}>
-                        {role.name}
-                      </option>
-                    ))
-                  : "Oops! Something went wrong!"}
-              </select>
-            </div>
-            <div className="flex flex-row items-center justify-between w-[80%] p-1">
-              <label htmlFor="role">Region: </label>
-              <select
-                onChange={(e) =>
-                  setAddUser((prev) => ({ ...prev, regionId: e.target.value }))
-                }
-                className=" flex cursor-pointer bg-[#e7e7e7c7] text-black flex-grow items-center justify-center mx-2 p-0.5 rounded-md"
-                name="role"
-                id="role"
-              >
-                <option value=""></option>
-                {regions
-                  ? regions.map((region) => (
-                      <option key={region.id} value={region.id}>
-                        {region.name}
-                      </option>
-                    ))
-                  : "Oops! Something went wrong!"}
-              </select>
-            </div>
-          </div>
+          <RegionRoleSelect action={setAddUser} />
         </form>
       )}
     </div>

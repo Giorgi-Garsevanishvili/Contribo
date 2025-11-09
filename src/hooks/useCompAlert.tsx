@@ -29,7 +29,7 @@ export const useCompAlert = () => {
       3000
     );
     return () => clearTimeout(compTimeoutId);
-  }, [compAlertState.isOpened]);
+  }, [compAlertState.isOpened, dispatchAlertComp]);
 
   return { triggerCompAlert };
 };
