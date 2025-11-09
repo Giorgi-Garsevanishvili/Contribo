@@ -24,3 +24,4 @@ const componentAlertSlice = createSlice({
 export const alertState = (state: RootState) => state.componentAlert;
 export const { setCompAlert, closeAlert } = componentAlertSlice.actions;
 export const componentAlertReducer = componentAlertSlice.reducer;
+
