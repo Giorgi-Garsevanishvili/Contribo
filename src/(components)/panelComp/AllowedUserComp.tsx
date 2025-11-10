@@ -27,7 +27,7 @@ function AllowedUserComp({
   const { isLoading } = useRegionRole();
 
   return (
-    <div className="flex bg-gray-800/70 flex-col w-full border-gray-900/80 items-center justify-center rounded-lg">
+    <div className="flex bg-gray-800/20 p-2 border-2 shadow-sm shadow-white/60 border-[#3E4A56] flex-col w-full items-center justify-center rounded-lg">
       <button
         onClick={() => setAddOpened((prev) => !prev)}
         className="flex btn w-full ease-in-out duration-300 transition items-center justify-center  bg-black rounded-lg m-0 "
@@ -55,11 +55,11 @@ function AllowedUserComp({
               }
               type="email"
               placeholder="Add Allowed User Email"
-              className="flex w-full text-black p-2 bg-white m-0.5 rounded-lg"
+              className="flex w-full input-def m-0.5 p-1.5 "
             />
             <button
               type="submit"
-              className="flex btn items-center justify-center  bg-green-900 rounded-lg m-0.5 p-2.5"
+              className="flex btn items-center justify-center text-[#ffffff]  bg-[#48765b] rounded-lg m-0.5 p-2.5"
               disabled={isLoading}
             >
               <AiOutlineUserAdd size={18} />

@@ -11,6 +11,14 @@
   .orbitron {
     font-family: "Orbitron", sans-serif;
   }
+  
+  .select-def {
+    @apply flex cursor-pointer bg-[#090a0a62] py-2.5 px-0 w-full items-center justify-center text-center text-white/80 border-0 rounded-md border-b-2 border-gray-200 appearance-none focus:outline-none focus:ring-0 focus:border-gray-200 
+  }
+
+  .input-def {
+    @apply bg-[#ffffff47] text-[#ffffff] border-1 border-[#102438] shadow-xs shadow-white/60 p-2.5 m-2 rounded-lg;
+  }
 
   .btn-log {
     @apply flex rounded-2xl hover:shadow-lg hover:opacity-60 transition duration-300 ease-in-out text-white bg-black border-2 px-4 py-1.5 m-2 cursor-pointer shadow-2xl items-center justify-center content-between gap-2;

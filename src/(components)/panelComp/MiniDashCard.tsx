@@ -1,15 +1,8 @@
 "use client";
 
-import { Prisma } from "@prisma/client";
 import axios from "axios";
-import React, { FormEvent, useEffect, useState } from "react";
-import Link from "next/link";
+import React, { FC, FormEvent, useEffect, useState } from "react";
 import LoadingComp from "@/(components)/generalComp/LoadingComp";
-import DeleteButton from "@/(components)/panelComp/DeleteButton";
-import AllowedUserComp, {
-  UserAddObj,
-  UserAddType,
-} from "@/(components)/panelComp/AllowedUserComp";
 import Alerts, {
   AlertObj,
   AlertType,
@@ -18,14 +11,34 @@ import Alerts, {
 import { getClientErrorMessage } from "@/lib/errors/clientErrors";
 import { CompAlert } from "@/redux/features/componentAlert/compAlert";
 
-type AllowedUsersWithRelations = Prisma.AllowedUserGetPayload<{
-  include: { role: true; region: true; createdBy: true };
-}>;
+type MiniCompProps<T, U> = {
+  DataType?: T[];
+  DataAddType?: U;
+  dataAddObj: U;
+  axiosPost?: string;
+  axiosGet?: string;
+  title: string;
+  searchKey: keyof T;
+  CreationComponent?: FC<{
+    dataAdd: U;
+    setDataAdd: React.Dispatch<React.SetStateAction<U>>;
+    onSubmit: (e: React.FormEvent<HTMLFormElement>) => void;
+  }>;
+  renderItems?: (item: T, index: number) => React.ReactNode;
+};
 
-function UsersComponent() {
-  const [userData, setUserData] = useState<AllowedUsersWithRelations[]>([]);
+function MiniDashCard<T, U>({
+  dataAddObj,
+  axiosPost,
+  title,
+  axiosGet,
+  searchKey,
+  CreationComponent,
+  renderItems,
+}: MiniCompProps<T, U>) {
+  const [data, setData] = useState<T[]>([]);
   const [isLoading, setIsLoading] = useState(true);
-  const [userAdd, setUserAdd] = useState<UserAddType>(UserAddObj);
+  const [dataAdd, setDataAdd] = useState<U>(dataAddObj);
   const [alert, setAlert] = useState<AlertType>(AlertObj);
   const [searchTerm, setSearchTerm] = useState("");
 
@@ -40,11 +53,11 @@ function UsersComponent() {
     return () => clearTimeout(timeoutId);
   }, [alert.isOpened]);
 
-  const CreateAllowedUser = async (e: FormEvent<HTMLFormElement>) => {
+  const createFunction = async (e: FormEvent<HTMLFormElement>) => {
     try {
       e.preventDefault();
 
-      if (Object.values(userAdd).some((value) => value === "")) {
+      if (Object.values(data).some((value) => value === "")) {
         triggerAlert({
           message: "All fields are required",
           type: "warning",
@@ -56,20 +69,20 @@ function UsersComponent() {
 
       setIsLoading(true);
       e.preventDefault();
-      await axios.post("/api/console/allowed-users", userAdd);
+      await axios.post(`${axiosPost}`, dataAdd);
       setIsLoading(false);
       triggerAlert({
-        message: "User Added",
+        message: `${title} Added`,
         type: "success",
         isOpened: true,
         setState: setAlert,
       });
-      fetchUsers();
-      setUserAdd(UserAddObj);
+      fetchData();
+      setDataAdd(dataAddObj);
     } catch (error) {
       const errorMessage = getClientErrorMessage(error);
       setIsLoading(false);
-      setUserAdd(UserAddObj);
+      setDataAdd(dataAddObj);
       triggerAlert({
         message: errorMessage,
         type: "error",
@@ -80,13 +93,11 @@ function UsersComponent() {
     }
   };
 
-  const fetchUsers = async () => {
+  const fetchData = async () => {
     try {
       setIsLoading(true);
-      const data = await axios.get<AllowedUsersWithRelations[]>(
-        "/api/console/allowed-users"
-      );
-      setUserData(data.data);
+      const data = await axios.get<T[]>(`${axiosGet}`);
+      setData(data.data);
       setIsLoading(false);
     } catch (error) {
       const errorMessage = getClientErrorMessage(error);
@@ -102,17 +113,19 @@ function UsersComponent() {
   };
 
   useEffect(() => {
-    fetchUsers();
+    fetchData();
   }, []);
 
-  const filteredData = userData.filter((user) => {
+  const filteredData = data.filter((item) => {
     return searchTerm === ""
       ? true
-      : user.email.toLocaleLowerCase().includes(searchTerm.toLocaleLowerCase());
+      : String(item[searchKey])
+          .toLowerCase()
+          .includes(searchTerm.toLowerCase());
   });
 
   return (
-    <div className="flex flex-col items-center justify-center">
+    <div className="flex flex-col items-center m-1 justify-center">
       <CompAlert />
       <div className="flex w-[22rem] h-[28rem] items-start justify-center mt-0 m-2 text-white pt-0 p-0.5 bg-[#212833c8] rounded-xl shadow-md shadow-white ">
         {isLoading ? (
@@ -120,43 +133,21 @@ function UsersComponent() {
         ) : (
           <div className="flex flex-col justify-between items-center relative w-full h-full">
             <div className="text-lg text-white bg-gray-900  font-bold px-7 pb-1 rounded-b-3xl drop-shadow-sm shadow-white shadow-md">
-              <h1>Allowed Users</h1>
+              <h1>{title}</h1>
             </div>
             <div className="flex w-full items-center mt-1 justify-center">
               <input
                 className="flex w-full input-def"
                 type="text"
                 name="search"
-                placeholder="Find by Email"
+                placeholder={`Find by ${String(searchKey)}`}
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
               />
             </div>
             <div className="flex items-start justify-center mb-1 p-1 w-full h-full px-3  overflow-auto">
               <ul className="flex flex-col flex-grow gap-2 items-start justify-center">
-                {filteredData.length > 0 ? (
-                  filteredData.map((user, index) => (
-                    <li
-                      className="flex bg-gray-700 rounded-lg w-full p-1 items-center justify-between"
-                      key={user.id}
-                    >
-                      <Link
-                        href={`/console/AllowedUserDetails/${user.id}`}
-                        className="flex items-center justify-start bg-black/40 text-white m-1 pl-2 p-1 rounded-lg w-full"
-                      >
-                        <h5>{index + 1}.</h5>
-                        <h5 className="mx-2">{user.email}</h5>
-                      </Link>
-                      <DeleteButton
-                        id={user.id}
-                        method="allowedUser"
-                        onDelete={fetchUsers}
-                      />
-                    </li>
-                  ))
-                ) : (
-                  <p className="text-gray-300 text-sm mt-2">No users found.</p>
-                )}
+                <p className="text-gray-300 text-sm mt-2">No {title} found.</p>
               </ul>
             </div>
             <Alerts
@@ -164,11 +155,13 @@ function UsersComponent() {
               type={alert.type}
               isOpened={alert.isOpened}
             />
-            <AllowedUserComp
-              CreateAllowedUser={CreateAllowedUser}
-              userAdd={userAdd}
-              setAddUser={setUserAdd}
-            />
+            {CreationComponent ? (
+              <CreationComponent
+                dataAdd={dataAdd}
+                setDataAdd={setDataAdd}
+                onSubmit={createFunction}
+              />
+            ) : null}
           </div>
         )}
       </div>
@@ -176,4 +169,4 @@ function UsersComponent() {
   );
 }
 
-export default UsersComponent;
+export default MiniDashCard;

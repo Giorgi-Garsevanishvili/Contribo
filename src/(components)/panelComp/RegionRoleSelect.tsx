@@ -15,39 +15,37 @@ function RegionRoleSelect({ action }: RegionRoleSelectorType) {
   return (
     <div className="flex w-full items-center justify-center flex-row">
       <div className="flex flex-row items-center justify-between w-[80%] p-1">
-        <label htmlFor="role">Role: </label>
         <select
           onChange={(e) =>
             action((prev) => ({ ...prev, roleId: e.target.value }))
           }
-          className=" flex cursor-pointer bg-[#e7e7e7c7] text-black flex-grow items-center justify-center mx-2 p-0.5 rounded-md"
+          className="select-def"
           name="role"
           id="role"
         >
-          <option value=""></option>
+          <option className="bg-gray-700" value="">Select Role</option>
           {roles
             ? roles.map((role) => (
-                <option key={role.id} value={role.id}>
+                <option className="bg-gray-700" key={role.id} value={role.id}>
                   {role.name}
                 </option>
               ))
             : "Oops! Something went wrong!"}
         </select>
       </div>
-      <div className="flex flex-row items-center justify-between w-[80%] p-1">
-        <label htmlFor="role">Region: </label>
+      <div className="flex flex-col items-center justify-between w-[80%] p-1">
         <select
           onChange={(e) =>
             action((prev) => ({ ...prev, regionId: e.target.value }))
           }
-          className=" flex cursor-pointer bg-[#e7e7e7c7] text-black flex-grow items-center justify-center mx-2 p-0.5 rounded-md"
+          className="select-def"
           name="role"
           id="role"
         >
-          <option value=""></option>
+          <option className="bg-gray-700" value="">Select Region</option>
           {regions
             ? regions.map((region) => (
-                <option key={region.id} value={region.id}>
+                <option className="bg-gray-700" key={region.id} value={region.id}>
                   {region.name}
                 </option>
               ))

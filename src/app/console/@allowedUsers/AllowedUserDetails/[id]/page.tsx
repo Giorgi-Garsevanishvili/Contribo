@@ -163,7 +163,7 @@ function UsersComponent() {
                   />
                   <button
                     onClick={() => setIsUpdateOpen(!isUpdateOpen)}
-                    className={`btn flex-grow justify-center items-center transition duration-300 ease-in-out ${
+                    className={`btn flex flex-grow justify-center items-center rounded-lg  m-1 ${
                       isUpdateOpen ? "bg-amber-500" : "bg-amber-100"
                     }  text-black rounded-lg `}
                   >
@@ -178,18 +178,18 @@ function UsersComponent() {
 
               <form
                 onSubmit={updateUser}
-                className={`flex bg-gray-800/70 flex-col w-full border-gray-900/80 rounded-lg m-2 p-2 ${
+                className={`flex bg-gray-800/70 flex-col w-full border-gray-900/80 rounded-b-none rounded-lg mb-0 m-2 pt-0 p-2.5 ${
                   isUpdateOpen
                     ? "opacity-100 pointer-events-auto visible"
                     : "opacity-0 pointer-events-none hidden"
                 } items-center justify-center flex-col`}
               >
-                <label className="flex mb-2">Update Form</label>
+                <label className="flex items-center justify-center shadow-sm shadow-white/70 rounded-b-2xl mt-0 p-1 px-10 mb-2">Update Form</label>
                 <RegionRoleSelect action={setUserData} />
                 <button
                   type="submit"
                   disabled={userData.regionId === "" && userData.roleId === ""}
-                  className={`flex cursor-auto bg-green-800 p-2 mt-2.5 rounded-md w-full items-center justify-center`}
+                  className={`flex btn text-[#ffffff]  bg-[#48765b] p-1.5 mt-3 mb-0 rounded-md w-full items-center justify-center`}
                 >
                   Update User
                 </button>
