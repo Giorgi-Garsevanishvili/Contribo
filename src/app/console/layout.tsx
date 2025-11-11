@@ -1,7 +1,6 @@
 import "../styles/globals.css";
 import { Metadata } from "next";
 import ConsoleNav from "@/(components)/panelComp/nav";
-import MiniDashCard from "@/(components)/panelComp/MiniDashCard";
 
 export const metadata: Metadata = {
   title: "Console - Contribo - by Qirvex™",
@@ -20,9 +19,11 @@ export const metadata: Metadata = {
 export default function RootLayout({
   children,
   allowedUsers,
+  eventRoles
 }: {
   children: React.ReactNode;
   allowedUsers: React.ReactNode;
+  eventRoles: React.ReactNode
 }) {
   return (
     <div className="flex flex-grow items-center justify-center transition-all duration-200 flex-col p-0 m-0">
@@ -31,10 +32,7 @@ export default function RootLayout({
         <main className="flex flex-wrap justify-center items-center">
           {children}
           {allowedUsers}
-          <MiniDashCard title={"Default"} searchKey={"name"} dataAddObj={{}} ></MiniDashCard>
-          <MiniDashCard title={"Default 2"} searchKey={"name"} dataAddObj={{}} ></MiniDashCard>
-          <MiniDashCard title={"Default 3"} searchKey={"name"} dataAddObj={{}} ></MiniDashCard>
-          <MiniDashCard title={"Default 3"} searchKey={"name"} dataAddObj={{}} ></MiniDashCard>
+          {eventRoles}
         </main>
       </div>
     </div>

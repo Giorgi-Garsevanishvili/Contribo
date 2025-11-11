@@ -1,7 +1,7 @@
 "use client";
 
 import axios from "axios";
-import React, { FC, FormEvent, useEffect, useState } from "react";
+import React, { FormEvent, useEffect, useState } from "react";
 import LoadingComp from "@/(components)/generalComp/LoadingComp";
 import Alerts, {
   AlertObj,
@@ -10,35 +10,44 @@ import Alerts, {
 } from "@/(components)/generalComp/Alerts";
 import { getClientErrorMessage } from "@/lib/errors/clientErrors";
 import { CompAlert } from "@/redux/features/componentAlert/compAlert";
+import CreationComponent, {
+  AddDataObj,
+  DataAddType,
+  UserAddObj,
+  UserAddType,
+} from "./CreationComp";
 
-type MiniCompProps<T, U> = {
+type MiniCompProps<T, U extends UserAddType | DataAddType> = {
   DataType?: T[];
   DataAddType?: U;
-  dataAddObj: U;
-  axiosPost?: string;
-  axiosGet?: string;
+  axiosPost: string;
+  axiosGet: string;
   title: string;
   searchKey: keyof T;
-  CreationComponent?: FC<{
-    dataAdd: U;
-    setDataAdd: React.Dispatch<React.SetStateAction<U>>;
-    onSubmit: (e: React.FormEvent<HTMLFormElement>) => void;
-  }>;
+  type: "user" | "general";
   renderItems?: (item: T, index: number) => React.ReactNode;
 };
 
-function MiniDashCard<T, U>({
-  dataAddObj,
+function MiniDashCard<T, U extends UserAddType | DataAddType>({
   axiosPost,
   title,
   axiosGet,
   searchKey,
-  CreationComponent,
   renderItems,
+  type,
 }: MiniCompProps<T, U>) {
   const [data, setData] = useState<T[]>([]);
   const [isLoading, setIsLoading] = useState(true);
-  const [dataAdd, setDataAdd] = useState<U>(dataAddObj);
+  const dataClear = () => {
+    if (type === "user") {
+      return UserAddObj as U;
+    }
+    if (type === "general") {
+      return AddDataObj as U;
+    }
+    return {} as U;
+  };
+  const [dataAdd, setDataAdd] = useState<U>(dataClear);
   const [alert, setAlert] = useState<AlertType>(AlertObj);
   const [searchTerm, setSearchTerm] = useState("");
 
@@ -78,11 +87,11 @@ function MiniDashCard<T, U>({
         setState: setAlert,
       });
       fetchData();
-      setDataAdd(dataAddObj);
+      setDataAdd(dataClear);
     } catch (error) {
       const errorMessage = getClientErrorMessage(error);
       setIsLoading(false);
-      setDataAdd(dataAddObj);
+      setDataAdd(dataClear);
       triggerAlert({
         message: errorMessage,
         type: "error",
@@ -155,13 +164,33 @@ function MiniDashCard<T, U>({
               type={alert.type}
               isOpened={alert.isOpened}
             />
-            {CreationComponent ? (
+            {type === "user" ? (
               <CreationComponent
-                dataAdd={dataAdd}
-                setDataAdd={setDataAdd}
+                dataAdd={dataAdd as UserAddType}
+                setDataAdd={
+                  setDataAdd as React.Dispatch<
+                    React.SetStateAction<UserAddType>
+                  >
+                }
                 onSubmit={createFunction}
+                CompTitle={title}
+                type="user"
               />
-            ) : null}
+            ) : type === "general" ? (
+              <CreationComponent
+                dataAdd={dataAdd as DataAddType}
+                setDataAdd={
+                  setDataAdd as React.Dispatch<
+                    React.SetStateAction<DataAddType>
+                  >
+                }
+                onSubmit={createFunction}
+                CompTitle={title}
+                type="general"
+              />
+            ) : (
+              "Props are missing to display add component!"
+            )}
           </div>
         )}
       </div>
