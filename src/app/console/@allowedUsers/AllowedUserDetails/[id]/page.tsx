@@ -13,6 +13,7 @@ import { useRouter } from "next/navigation";
 import RegionRoleSelect from "@/(components)/panelComp/RegionRoleSelect";
 import { useCompAlert } from "@/hooks/useCompAlert";
 import { CompAlert } from "@/redux/features/componentAlert/compAlert";
+import { getClientErrorMessage } from "@/lib/errors/clientErrors";
 
 export type AllowedUsersWithRelations = Prisma.AllowedUserGetPayload<{
   include: { role: true; region: true; createdBy: true };
@@ -83,6 +84,12 @@ function UsersComponent() {
       setUserData(UserDataUpdateObj);
       setIsUpdateOpen(false);
     } catch (error) {
+      const errorMsg = getClientErrorMessage(error)
+      triggerCompAlert({
+        message: errorMsg,
+        type: "error",
+        isOpened: true,
+      });
       setIsLoading(false);
       console.log(error);
       return;

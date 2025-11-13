@@ -16,6 +16,7 @@ import CreationComponent, {
   UserAddObj,
   UserAddType,
 } from "./CreationComp";
+import ListComp, { AllowedUsersWithRelations, GeneralDataWithRelations } from "./ListComp";
 
 type MiniCompProps<T, U extends UserAddType | DataAddType> = {
   DataType?: T[];
@@ -25,7 +26,6 @@ type MiniCompProps<T, U extends UserAddType | DataAddType> = {
   title: string;
   searchKey: keyof T;
   type: "user" | "general";
-  renderItems?: (item: T, index: number) => React.ReactNode;
 };
 
 function MiniDashCard<T, U extends UserAddType | DataAddType>({
@@ -33,10 +33,9 @@ function MiniDashCard<T, U extends UserAddType | DataAddType>({
   title,
   axiosGet,
   searchKey,
-  renderItems,
   type,
 }: MiniCompProps<T, U>) {
-  const [data, setData] = useState<T[]>([]);
+  const [data, setData] = useState<[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const dataClear = () => {
     if (type === "user") {
@@ -105,7 +104,7 @@ function MiniDashCard<T, U extends UserAddType | DataAddType>({
   const fetchData = async () => {
     try {
       setIsLoading(true);
-      const data = await axios.get<T[]>(`${axiosGet}`);
+      const data = await axios.get<[]>(`${axiosGet}`);
       setData(data.data);
       setIsLoading(false);
     } catch (error) {
@@ -131,7 +130,7 @@ function MiniDashCard<T, U extends UserAddType | DataAddType>({
       : String(item[searchKey])
           .toLowerCase()
           .includes(searchTerm.toLowerCase());
-  });
+  })
 
   return (
     <div className="flex flex-col items-center m-1 justify-center">
@@ -156,7 +155,7 @@ function MiniDashCard<T, U extends UserAddType | DataAddType>({
             </div>
             <div className="flex items-start justify-center mb-1 p-1 w-full h-full px-3  overflow-auto">
               <ul className="flex flex-col flex-grow gap-2 items-start justify-center">
-                <p className="text-gray-300 text-sm mt-2">No {title} found.</p>
+                {type === "user" ? (<ListComp fetchData={fetchData} title={title} type={type} filteredData={filteredData}/>) : type === "general" ? (<ListComp fetchData={fetchData} title={title} type={type} filteredData={filteredData} />) : null}
               </ul>
             </div>
             <Alerts

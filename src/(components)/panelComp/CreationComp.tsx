@@ -34,7 +34,6 @@ type addDataProp =
 export const AddDataObj = { name: "" };
 export const UserAddObj = { email: "", roleId: "", regionId: "" };
 
-export type AddDataProp = {};
 
 function CreationComponent(props: addDataProp) {
   const [addOpened, setAddOpened] = useState(false);
@@ -56,7 +55,7 @@ function CreationComponent(props: addDataProp) {
         <LoadingComp />
       ) : (
         <form
-          onSubmit={(e) => props.onSubmit(e)}
+          onSubmit={(e) => onSubmit(e)}
           className={`flex flex-col w-full p-0.5 overflow-hidden ${
             addOpened
               ? "max-h-40 opacity-100 pointer-events-auto"
@@ -109,7 +108,7 @@ function CreationComponent(props: addDataProp) {
             )}
           </div>
           {type === "user" ? (
-            <RegionRoleSelect action={props.setDataAdd} />
+            <RegionRoleSelect action={setDataAdd} />
           ) : null}
         </form>
       )}
