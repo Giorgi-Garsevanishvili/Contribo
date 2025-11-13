@@ -3,7 +3,7 @@ import axios from "axios";
 import React, { useState } from "react";
 import { MdDeleteOutline } from "react-icons/md";
 
-type DeleteMethod = "allowedUser" | "user" | "region" | "role";
+export type DeleteMethod = "allowedUser" | "user" | "region" | "role";
 
 type DeleteButtonProps = {
   method: DeleteMethod;

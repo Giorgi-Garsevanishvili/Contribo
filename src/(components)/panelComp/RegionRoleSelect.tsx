@@ -6,11 +6,11 @@ type UserDataUpdateType = {
   email?: string;
 };
 
-type RegionRoleSelectorType = {
-  action: React.Dispatch<React.SetStateAction<UserDataUpdateType>>;
+type RegionRoleSelectorType<U> = {
+  action: React.Dispatch<React.SetStateAction<U>>;
 };
 
-function RegionRoleSelect({ action }: RegionRoleSelectorType) {
+function RegionRoleSelect<U>({ action }: RegionRoleSelectorType<U>) {
   const { roles, regions } = useRegionRole();
   return (
     <div className="flex w-full items-center justify-center flex-row">

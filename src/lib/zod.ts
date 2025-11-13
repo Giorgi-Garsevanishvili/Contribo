@@ -84,3 +84,4 @@ export const DefaultSystemValuesUpdate = DefaultSystemValuesCreate.omit({
 export type UserUpdateInput = z.infer<typeof UserUpdateInput>;
 export type SoftDeleteType = z.infer<typeof SoftDelete>;
 export type SoftDeleteInputType = z.infer<typeof SoftDeleteInput>;
+export type RegionUpdateDataType = z.infer<typeof RegionDataUpdate>

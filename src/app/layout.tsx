@@ -27,7 +27,7 @@ export default function RootLayout({
         <Providers>
           <main className="flex flex-grow transition-all duration-200 justify-center items-center flex-col p-0 m-0 w-screen min-h-full overflow-auto">
             {children}
-            <div className="flex flex-row">
+            {/* <div className="flex flex-row">
               <p className="flex max-w-40 text-wrap  p-3 h-auto items-center justify-center text-center bg-[#34495e]">
                 Primary text / title #34495e
               </p>
@@ -54,7 +54,7 @@ export default function RootLayout({
               <p className="flex max-w-40 text-wrap  p-3 h-auto items-center justify-center text-center bg-[#212833]">
                 Comp BG #212833
               </p>
-            </div>
+            </div> */}
           </main>
         </Providers>
       </body>

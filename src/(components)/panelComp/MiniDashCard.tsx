@@ -16,16 +16,15 @@ import CreationComponent, {
   UserAddObj,
   UserAddType,
 } from "./CreationComp";
-import ListComp, { AllowedUsersWithRelations, GeneralDataWithRelations } from "./ListComp";
+import ListComp from "./ListComp";
 
-type MiniCompProps<T, U extends UserAddType | DataAddType> = {
-  DataType?: T[];
-  DataAddType?: U;
+type MiniCompProps<T, U> = {
   axiosPost: string;
   axiosGet: string;
   title: string;
   searchKey: keyof T;
   type: "user" | "general";
+  detailPage: string;
 };
 
 function MiniDashCard<T, U extends UserAddType | DataAddType>({
@@ -34,6 +33,7 @@ function MiniDashCard<T, U extends UserAddType | DataAddType>({
   axiosGet,
   searchKey,
   type,
+  detailPage,
 }: MiniCompProps<T, U>) {
   const [data, setData] = useState<[]>([]);
   const [isLoading, setIsLoading] = useState(true);
@@ -130,7 +130,7 @@ function MiniDashCard<T, U extends UserAddType | DataAddType>({
       : String(item[searchKey])
           .toLowerCase()
           .includes(searchTerm.toLowerCase());
-  })
+  });
 
   return (
     <div className="flex flex-col items-center m-1 justify-center">
@@ -155,7 +155,23 @@ function MiniDashCard<T, U extends UserAddType | DataAddType>({
             </div>
             <div className="flex items-start justify-center mb-1 p-1 w-full h-full px-3  overflow-auto">
               <ul className="flex flex-col flex-grow gap-2 items-start justify-center">
-                {type === "user" ? (<ListComp fetchData={fetchData} title={title} type={type} filteredData={filteredData}/>) : type === "general" ? (<ListComp fetchData={fetchData} title={title} type={type} filteredData={filteredData} />) : null}
+                {type === "user" ? (
+                  <ListComp
+                    detailPage={detailPage}
+                    fetchData={fetchData}
+                    title={title}
+                    type={type}
+                    filteredData={filteredData}
+                  />
+                ) : type === "general" ? (
+                  <ListComp
+                    detailPage={detailPage}
+                    fetchData={fetchData}
+                    title={title}
+                    type={type}
+                    filteredData={filteredData}
+                  />
+                ) : null}
               </ul>
             </div>
             <Alerts

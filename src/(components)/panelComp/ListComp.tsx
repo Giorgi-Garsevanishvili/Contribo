@@ -1,13 +1,9 @@
 import React from "react";
 import DeleteButton from "./DeleteButton";
 import Link from "next/link";
-import { Prisma } from "@prisma/client";
+import { AllowedUsersWithRelations, GeneralDataWithRelations } from "@/types/general-types";
 
-export type AllowedUsersWithRelations = Prisma.AllowedUserGetPayload<{
-  include: { role: true; region: true; createdBy: true };
-}>;
 
-export type GeneralDataWithRelations = Prisma.RoleGetPayload<{}>;
 
 type ListCompParams =
   | {
@@ -15,16 +11,18 @@ type ListCompParams =
       filteredData: AllowedUsersWithRelations[];
       fetchData: () => void;
       title: string;
+      detailPage: string
     }
   | {
       type: "general";
       filteredData: GeneralDataWithRelations[];
       fetchData: () => void;
       title: string;
+      detailPage: string
     };
 
 function ListComp(props: ListCompParams) {
-  const { filteredData, type, fetchData, title } = props;
+  const { filteredData, type, fetchData, title, detailPage } = props;
   return (
     <div className="flex items-start justify-center mb-1 p-1 w-full h-full px-3  overflow-auto">
       <ul className="flex flex-col flex-grow gap-2 items-start justify-center">
@@ -36,7 +34,7 @@ function ListComp(props: ListCompParams) {
                 key={item.id}
               >
                 <Link
-                  href={`/console/AllowedUserDetails/${item.id}`}
+                  href={`/console/${detailPage}Details/${item.id}`}
                   className="flex items-center justify-start bg-black/40 text-white m-1 pl-2 p-1 rounded-lg w-full"
                 >
                   <h5>{index + 1}.</h5>
