@@ -1,9 +1,10 @@
 import React from "react";
-import DeleteButton from "./DeleteButton";
+import DeleteButton, { DeleteMethod } from "./DeleteButton";
 import Link from "next/link";
-import { AllowedUsersWithRelations, GeneralDataWithRelations } from "@/types/general-types";
-
-
+import {
+  AllowedUsersWithRelations,
+  GeneralDataWithRelations,
+} from "@/types/general-types";
 
 type ListCompParams =
   | {
@@ -11,18 +12,21 @@ type ListCompParams =
       filteredData: AllowedUsersWithRelations[];
       fetchData: () => void;
       title: string;
-      detailPage: string
+      detailPage: string;
+      deleteMethod: DeleteMethod;
     }
   | {
       type: "general";
       filteredData: GeneralDataWithRelations[];
       fetchData: () => void;
       title: string;
-      detailPage: string
+      detailPage: string;
+      deleteMethod: DeleteMethod;
     };
 
 function ListComp(props: ListCompParams) {
-  const { filteredData, type, fetchData, title, detailPage } = props;
+  const { filteredData, type, fetchData, title, detailPage, deleteMethod } =
+    props;
   return (
     <div className="flex items-start justify-center mb-1 p-1 w-full h-full px-3  overflow-auto">
       <ul className="flex flex-col flex-grow gap-2 items-start justify-center">
@@ -42,7 +46,7 @@ function ListComp(props: ListCompParams) {
                 </Link>
                 <DeleteButton
                   id={item.id}
-                  method="allowedUser"
+                  method={deleteMethod}
                   onDelete={fetchData}
                 />
               </li>
@@ -54,7 +58,7 @@ function ListComp(props: ListCompParams) {
                 key={item.id}
               >
                 <Link
-                  href={`/console/AllowedUserDetails/${item.id}`}
+                  href={`/console/${detailPage}Details/${item.id}`}
                   className="flex items-center justify-start bg-black/40 text-white m-1 pl-2 p-1 rounded-lg w-full"
                 >
                   <h5>{index + 1}.</h5>
@@ -62,7 +66,7 @@ function ListComp(props: ListCompParams) {
                 </Link>
                 <DeleteButton
                   id={item.id}
-                  method="allowedUser"
+                  method={deleteMethod}
                   onDelete={fetchData}
                 />
               </li>

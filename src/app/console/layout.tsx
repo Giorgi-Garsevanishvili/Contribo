@@ -20,12 +20,10 @@ export default function RootLayout({
   children,
   allowedUsers,
   eventRoles,
-  allowedCopy
 }: {
   children: React.ReactNode;
   allowedUsers: React.ReactNode;
-  eventRoles: React.ReactNode
-  allowedCopy: React.ReactNode
+  eventRoles: React.ReactNode;
 }) {
   return (
     <div className="flex flex-grow items-center justify-center transition-all duration-200 flex-col p-0 m-0">
@@ -35,7 +33,6 @@ export default function RootLayout({
           {children}
           {allowedUsers}
           {eventRoles}
-          {allowedCopy}
         </main>
       </div>
     </div>

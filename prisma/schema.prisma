@@ -32,7 +32,7 @@ model User {
   joinRequests   JoinRequest[]
 
   createdAt           DateTime          @default(now())
-  updatedAt           DateTime          @updatedAt
+  updatedAt           DateTime?         @updatedAt
   memberStatusLogs    MemberStatusLog[]
   memberStatusChanges MemberStatusLog[] @relation("MembershipChangedBy")
   positionChanges     PositionHistory[] @relation("PositionChangedBy")
@@ -62,15 +62,20 @@ model Event {
   description String
   rating      Int?
 
+  createdAt DateTime  @default(now())
+  updatedAt DateTime? @updatedAt
+
   feedback             EventFeedback[]
   assignments          EventAssignment[]
   scheduledEventEmails ScheduledEmails[]
 }
 
 model EventsRole {
-  id   String @id @default(cuid())
-  name String @unique
-  type GTypes @default(REGION)
+  id        String    @id @default(cuid())
+  name      String    @unique
+  createdAt DateTime  @default(now())
+  updatedAt DateTime? @updatedAt
+  type      GTypes    @default(REGION)
 
   eventAssignment EventAssignment[]
 }
@@ -90,14 +95,17 @@ model HrWarning {
   comment     String?
   status      HrWarningStatus @default(ACTIVE)
   createdAt   DateTime        @default(now())
+  updatedAt   DateTime?       @updatedAt
   createdById String?
   createdBy   User?           @relation("CreatedHrWarnings", fields: [createdById], references: [id], onDelete: SetNull)
 }
 
 model HrWarningType {
-  id   String @id @default(cuid())
-  name String @unique
-  type GTypes @default(REGION)
+  id        String    @id @default(cuid())
+  name      String    @unique
+  type      GTypes    @default(REGION)
+  createdAt DateTime  @default(now())
+  updatedAt DateTime? @updatedAt
 
   hrWarning HrWarning[]
 }
@@ -120,17 +128,21 @@ model EventFeedback {
   feedback String
   rating   Int?
 
+  createdAt DateTime  @default(now())
+  updatedAt DateTime? @updatedAt
+
   event Event @relation(fields: [eventId], references: [id], onDelete: Cascade)
   user  User? @relation(fields: [userId], references: [id], onDelete: SetNull)
 }
 
 model ScheduledEmails {
-  id        String   @id @default(cuid())
+  id        String    @id @default(cuid())
   userId    String
   eventId   String
-  sent      Boolean  @default(false)
+  sent      Boolean   @default(false)
   sendAt    DateTime
-  createdAt DateTime @default(now())
+  createdAt DateTime  @default(now())
+  updatedAt DateTime? @updatedAt
 
   user  User  @relation(fields: [userId], references: [id], onDelete: Cascade)
   event Event @relation(fields: [eventId], references: [id], onDelete: Cascade)
@@ -147,6 +159,9 @@ model EventAssignment {
   validFrom  DateTime?
   validTo    DateTime?
 
+  createdAt DateTime  @default(now())
+  updatedAt DateTime? @updatedAt
+
   role  EventsRole? @relation(fields: [roleId], references: [id], onDelete: SetNull)
   event Event       @relation(fields: [eventId], references: [id], onDelete: Cascade)
   user  User?       @relation(fields: [userId], references: [id], onDelete: SetNull)
@@ -160,6 +175,7 @@ model RatingHistory {
   reason      String?
   createdById String?
   createdAt   DateTime     @default(now())
+  updatedAt   DateTime?    @updatedAt
 
   user      User  @relation("UserRating", fields: [userId], references: [id], onDelete: Cascade)
   createdBy User? @relation("CreatedRatingBy", fields: [createdById], references: [id], onDelete: SetNull)
@@ -172,6 +188,8 @@ model Position {
   id                String            @id @default(cuid())
   name              String            @unique
   type              GTypes            @default(REGION)
+  createdAt         DateTime          @default(now())
+  updatedAt         DateTime?         @updatedAt
   users             User[]
   positionHistories PositionHistory[]
 }
@@ -186,6 +204,9 @@ model PositionHistory {
   updatedById String?
   changedBy   User?     @relation("PositionChangedBy", fields: [updatedById], references: [id], onDelete: SetNull)
 
+  createdAt DateTime  @default(now())
+  updatedAt DateTime? @updatedAt
+
   user     User      @relation(fields: [userId], references: [id], onDelete: Cascade)
   position Position? @relation(fields: [positionId], references: [id], onDelete: SetNull)
 
@@ -197,6 +218,8 @@ model MemberStatus {
   id               String            @id @default(cuid())
   name             String            @unique
   type             GTypes            @default(REGION)
+  createdAt        DateTime          @default(now())
+  updatedAt        DateTime?         @updatedAt
   users            User[]
   memberStatusLogs MemberStatusLog[]
 }
@@ -210,6 +233,9 @@ model MemberStatusLog {
   changedAt      DateTime  @default(now())
   changedById    String?
   changedBy      User?     @relation("MembershipChangedBy", fields: [changedById], references: [id], onDelete: SetNull)
+
+  createdAt DateTime  @default(now())
+  updatedAt DateTime? @updatedAt
 
   user   User          @relation(fields: [userId], references: [id], onDelete: Cascade)
   status MemberStatus? @relation(fields: [memberStatusId], references: [id], onDelete: SetNull)
@@ -282,7 +308,7 @@ model Role {
   id          String        @id @default(uuid())
   name        String        @unique
   createdAt   DateTime      @default(now())
-  updatedAt   DateTime?      @updatedAt
+  updatedAt   DateTime?     @updatedAt
   users       User[]
   allowedUser AllowedUser[]
 }

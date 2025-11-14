@@ -3,7 +3,14 @@ import axios from "axios";
 import React, { useState } from "react";
 import { MdDeleteOutline } from "react-icons/md";
 
-export type DeleteMethod = "allowedUser" | "user" | "region" | "role";
+export type DeleteMethod =
+  | "allowedUser"
+  | "region"
+  | "role"
+  | "eventRoles"
+  | "hrWarningsType"
+  | "memberStatus"
+  | "position";
 
 type DeleteButtonProps = {
   method: DeleteMethod;
@@ -12,36 +19,59 @@ type DeleteButtonProps = {
   onDelete?: () => void;
 };
 
-const deleteAllowedUser = async (id: string | undefined) => {
-  try {
-    await axios.delete(`/api/console/allowed-users/${id}`);
-  } catch (error) {
-    console.log(error);
-    return;
-  }
-};
-
 function DeleteButton({ method, id, disabled, onDelete }: DeleteButtonProps) {
   const [loading, setLoading] = useState(false);
   const { triggerCompAlert } = useCompAlert();
+
+  const deleteUrl = () => {
+    switch (method) {
+      case "allowedUser":
+        return "allowed-users";
+
+      case "eventRoles":
+        return "event-roles";
+
+      case "hrWarningsType":
+        return "hr-warning-type";
+
+      case "memberStatus":
+        return "member-status";
+
+      case "position":
+        return "positions";
+
+      case "region":
+        return "regions";
+
+      case "role":
+        return "roles";
+
+      default:
+        break;
+    }
+  };
+
+  const DeleteData = async (id: string | undefined) => {
+    const deleteURL = deleteUrl()
+    try {
+      await axios.delete(`/api/console/${deleteURL}/${id}`);
+    } catch (error) {
+      console.log(error);
+      return;
+    }
+  };
+
   const handleDelete = async () => {
     try {
-      switch (method) {
-        case "allowedUser":
-          setLoading(true);
-          await deleteAllowedUser(id);
-          triggerCompAlert({
-            message: "User Deleted",
-            type: "success",
-            isOpened: true,
-          });
-          if (onDelete) onDelete();
-          setLoading(false);
-          break;
-
-        default:
-          break;
-      }
+      setLoading(true);
+      await DeleteData(id);
+      triggerCompAlert({
+        message: `${method} Deleted`,
+        type: "success",
+        isOpened: true,
+      });
+      if (onDelete) onDelete();
+      setLoading(false);
     } catch (error) {
       setLoading(false);
       console.error(`Failed to delete ${method}:`, error);

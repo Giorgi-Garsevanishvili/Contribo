@@ -1,9 +1,5 @@
-import MiniDashCard from "@/(components)/panelComp/MiniDashCard";
+"use client";
 
-import React from "react";
-
-function eventRoles() {
-  return <MiniDashCard type="general" title="Event Role" searchKey={"name"} axiosGet="/api/console/event-roles" axiosPost="/api/console/event-roles" />;
+export default function ConsolePage() {
+  return;
 }
-
-export default eventRoles;

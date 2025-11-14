@@ -14,23 +14,15 @@ import { CompAlert } from "@/redux/features/componentAlert/compAlert";
 import { getClientErrorMessage } from "@/lib/errors/clientErrors";
 import {
   AllowedUsersWithRelations,
+  GeneralDataUpdateType,
   GeneralDataWithRelations,
+  RegionDataUpdateType,
+  UserDataUpdateType,
 } from "@/types/general-types";
-import { RegionUpdateDataType } from "@/lib/zod";
 import DeleteButton, { DeleteMethod } from "./DeleteButton";
-import { Region } from "@prisma/client";
+
 import ListDetailComp from "./ListDetailComp";
-
-type UserDataUpdateType = {
-  regionId: string;
-  roleId: string;
-};
-
-type GeneralDataUpdateType = {
-  name: string;
-};
-
-type RegionDataUpdateType = RegionUpdateDataType;
+import { Region } from "@prisma/client";
 
 const RegionDataUpdateObj = {
   name: "",
@@ -40,7 +32,6 @@ const RegionDataUpdateObj = {
   description: "",
   address: "",
   website: "",
-  status: "",
 };
 
 const UserDataUpdateObj = {
@@ -52,40 +43,68 @@ const GeneralDataUpdateObj = {
   name: "",
 };
 
-type MiniDashDetailsProps<T, U> = {
-  type: "user" | "general" | "region";
-  axiosGet: string;
-  axiosPut: string;
-  title: string;
-  deleteMethod: DeleteMethod;
-};
+type MiniDashDetailsProps =
+  | {
+      type: "user";
+      axiosGet: string;
+      axiosPut: string;
+      title: string;
+      deleteMethod: DeleteMethod;
+    }
+  | {
+      type: "general";
+      axiosGet: string;
+      axiosPut: string;
+      title: string;
+      deleteMethod: DeleteMethod;
+    }
+  | {
+      type: "region";
+      axiosGet: string;
+      axiosPut: string;
+      title: string;
+      deleteMethod: DeleteMethod;
+    };
 
 function MiniDashDetails<
-  T extends AllowedUsersWithRelations | Region | GeneralDataWithRelations,
-  U extends GeneralDataUpdateType | UserDataUpdateType | RegionDataUpdateType
->({
-  title,
-  axiosGet,
-  axiosPut,
-  type,
-  deleteMethod,
-}: MiniDashDetailsProps<T, U>) {
+  T extends Region & AllowedUsersWithRelations & GeneralDataWithRelations
+>({ title, axiosGet, axiosPut, type, deleteMethod }: MiniDashDetailsProps) {
   const router = useRouter();
   const [data, setData] = useState<T>();
-  const dataClear = () => {
-    if (type === "general") {
-      return GeneralDataUpdateObj as U;
-    }
-    if (type === "region") {
-      return RegionDataUpdateObj as U;
+
+  const [updateUserData, setUpdateUserData] =
+    useState<UserDataUpdateType>(UserDataUpdateObj);
+  const [updateRegionData, setUpdateRegionData] =
+    useState<RegionDataUpdateType>(RegionDataUpdateObj);
+  const [updateGeneralData, setUpdateGeneralData] =
+    useState<GeneralDataUpdateType>(GeneralDataUpdateObj);
+
+  const dataSwitch = () => {
+    if (type === "user") {
+      return {
+        data: updateUserData,
+        clean: () => setUpdateUserData(UserDataUpdateObj),
+      };
     }
 
-    if (type === "user") {
-      return UserDataUpdateObj as U;
+    if (type === "general") {
+      return {
+        data: updateGeneralData,
+        clean: () => setUpdateGeneralData(GeneralDataUpdateObj),
+      };
     }
-    return {} as U;
+
+    if (type === "region") {
+      return {
+        data: updateRegionData,
+        clean: () => setUpdateRegionData(RegionDataUpdateObj),
+      };
+    }
+
+    throw new Error("oop");
   };
-  const [updateData, setUpdateData] = useState<U>(dataClear);
+
+  const switcher = dataSwitch();
 
   const [isLoading, setIsLoading] = useState(true);
   const [isUpdateOpen, setIsUpdateOpen] = useState(false);
@@ -97,9 +116,7 @@ function MiniDashDetails<
 
   const fetchData = useCallback(async () => {
     try {
-      const response = await axios.get<AllowedUsersWithRelations>(
-        `${axiosGet}/${id}`
-      );
+      const response = await axios.get(`${axiosGet}/${id}`);
 
       const userData = {
         ...response.data,
@@ -115,14 +132,16 @@ function MiniDashDetails<
       console.log(error);
       return;
     }
-  }, [id]);
+  }, [id, axiosGet]);
 
-  const updateUser = async (e: FormEvent<HTMLFormElement>) => {
+  const updateDataFn = async (e: FormEvent<HTMLFormElement>) => {
     try {
       e.preventDefault();
       setIsLoading(true);
       const cleanPayload = Object.fromEntries(
-        Object.entries(updateData).filter(([_, value]) => value !== "")
+        Object.entries(switcher?.data).filter(
+          ([_, value]) => value !== "" && value !== undefined
+        )
       );
       await axios.put<AllowedUsersWithRelations>(
         `${axiosPut}/${id}`,
@@ -135,7 +154,7 @@ function MiniDashDetails<
         type: "success",
         isOpened: true,
       });
-      setUpdateData(dataClear);
+      switcher.clean();
       setIsUpdateOpen(false);
     } catch (error) {
       const errorMsg = getClientErrorMessage(error);
@@ -152,13 +171,13 @@ function MiniDashDetails<
 
   useEffect(() => {
     fetchData();
-  }, [fetchData]);
+  }, [id, axiosGet]);
 
   return (
-    <div className="flex flex-col items-center justify-center">
+    <div className="flex flex-col items-center m-2 justify-center">
       <CompAlert />
-      <div className="flex flex-col shadow-md shadow-white rounded-lg">
-        <div className="flex flex-col w-[22rem] h-[28rem] scroll-smooth overflow-y-auto items-center justify-center m-0 ove text-white bg-gray-500/75 rounded-t-lg">
+      <div className="flex w-[22rem] h-[28rem] flex-col shadow-md shadow-white rounded-lg">
+        <div className="flex flex-col w-full h-full scroll-smooth overflow-y-auto items-center justify-center m-0 ove text-white bg-gray-500/75 rounded-t-lg">
           {isLoading ? (
             <LoadingComp />
           ) : (
@@ -205,7 +224,7 @@ function MiniDashDetails<
               </div>
 
               <form
-                onSubmit={updateUser}
+                onSubmit={updateDataFn}
                 className={`flex bg-gray-800/70 flex-col w-full border-gray-900/80 rounded-b-none rounded-lg mb-0 m-2 pt-0 p-2.5 ${
                   isUpdateOpen
                     ? "opacity-100 pointer-events-auto visible"
@@ -215,10 +234,34 @@ function MiniDashDetails<
                 <label className="flex items-center justify-center shadow-sm shadow-white/70 rounded-b-2xl mt-0 p-1 px-10 mb-2">
                   Update Form
                 </label>
-                <RegionRoleSelect action={setUpdateData} />
+                {type === "user" ? (
+                  <RegionRoleSelect action={setUpdateUserData} />
+                ) : type === "general" ? (
+                  <>
+                    <div className="flex w-full">
+                      <input
+                        value={updateGeneralData.name}
+                        onChange={(e) =>
+                          setUpdateGeneralData({
+                            ...updateGeneralData,
+                            name: e.target.value,
+                          })
+                        }
+                        className="input-def flex w-full"
+                        placeholder="Enter New Name"
+                        type="text"
+                      />
+                    </div>
+                  </>
+                ) : null}
+
                 <button
                   type="submit"
-                  // disabled={userData.regionId === "" && userData.roleId === ""}
+                  disabled={
+                    !Object.values(switcher.data).some(
+                      (value) => value !== "" && value !== undefined
+                    )
+                  }
                   className={`flex btn text-[#ffffff]  bg-[#48765b] p-1.5 mt-3 mb-0 rounded-md w-full items-center justify-center`}
                 >
                   Update {title}

@@ -1,7 +1,7 @@
 "use client";
 
 import axios from "axios";
-import React, { FormEvent, useEffect, useState } from "react";
+import React, { FormEvent, useCallback, useEffect, useState } from "react";
 import LoadingComp from "@/(components)/generalComp/LoadingComp";
 import Alerts, {
   AlertObj,
@@ -17,14 +17,16 @@ import CreationComponent, {
   UserAddType,
 } from "./CreationComp";
 import ListComp from "./ListComp";
+import { DeleteMethod } from "./DeleteButton";
 
-type MiniCompProps<T, U> = {
+type MiniCompProps<T> = {
   axiosPost: string;
   axiosGet: string;
   title: string;
   searchKey: keyof T;
   type: "user" | "general";
   detailPage: string;
+  deleteMethod: DeleteMethod;
 };
 
 function MiniDashCard<T, U extends UserAddType | DataAddType>({
@@ -34,7 +36,8 @@ function MiniDashCard<T, U extends UserAddType | DataAddType>({
   searchKey,
   type,
   detailPage,
-}: MiniCompProps<T, U>) {
+  deleteMethod,
+}: MiniCompProps<T>) {
   const [data, setData] = useState<[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const dataClear = () => {
@@ -101,7 +104,7 @@ function MiniDashCard<T, U extends UserAddType | DataAddType>({
     }
   };
 
-  const fetchData = async () => {
+  const fetchData = useCallback( async () => {
     try {
       setIsLoading(true);
       const data = await axios.get<[]>(`${axiosGet}`);
@@ -118,11 +121,11 @@ function MiniDashCard<T, U extends UserAddType | DataAddType>({
       });
       return;
     }
-  };
+  },[axiosGet, setAlert]);
 
   useEffect(() => {
     fetchData();
-  }, []);
+  }, [fetchData]);
 
   const filteredData = data.filter((item) => {
     return searchTerm === ""
@@ -157,6 +160,7 @@ function MiniDashCard<T, U extends UserAddType | DataAddType>({
               <ul className="flex flex-col flex-grow gap-2 items-start justify-center">
                 {type === "user" ? (
                   <ListComp
+                    deleteMethod={deleteMethod}
                     detailPage={detailPage}
                     fetchData={fetchData}
                     title={title}
@@ -165,6 +169,7 @@ function MiniDashCard<T, U extends UserAddType | DataAddType>({
                   />
                 ) : type === "general" ? (
                   <ListComp
+                    deleteMethod={deleteMethod}
                     detailPage={detailPage}
                     fetchData={fetchData}
                     title={title}

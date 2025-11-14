@@ -10,7 +10,7 @@ type RegionRoleSelectorType<U> = {
   action: React.Dispatch<React.SetStateAction<U>>;
 };
 
-function RegionRoleSelect<U>({ action }: RegionRoleSelectorType<U>) {
+function RegionRoleSelect<U extends UserDataUpdateType>({ action }: RegionRoleSelectorType<U>) {
   const { roles, regions } = useRegionRole();
   return (
     <div className="flex w-full items-center justify-center flex-row">
