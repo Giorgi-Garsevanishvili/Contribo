@@ -4,11 +4,11 @@ import React from "react";
 function page() {
   return (
     <MiniDashDetails
-      type="user"
-      axiosGet="/api/console/allowed-users"
-      axiosPut="/api/console/allowed-users"
-      title="Allowed User"
-      deleteMethod="allowedUser"
+      type="general"
+      title="Roles"
+      axiosGet="/api/console/roles"
+      axiosPut="/api/console/roles"
+      deleteMethod="role"
     />
   );
 }

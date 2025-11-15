@@ -34,7 +34,6 @@ type addDataProp =
 export const AddDataObj = { name: "" };
 export const UserAddObj = { email: "", roleId: "", regionId: "" };
 
-
 function CreationComponent(props: addDataProp) {
   const [addOpened, setAddOpened] = useState(false);
   const { isLoading } = useRegionRole();
@@ -107,9 +106,7 @@ function CreationComponent(props: addDataProp) {
               "Add Type definition not provided!"
             )}
           </div>
-          {type === "user" ? (
-            <RegionRoleSelect action={setDataAdd} />
-          ) : null}
+          {type === "user" ? <RegionRoleSelect action={setDataAdd} /> : null}
         </form>
       )}
     </div>

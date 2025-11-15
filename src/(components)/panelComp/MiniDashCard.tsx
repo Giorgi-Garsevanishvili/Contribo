@@ -136,7 +136,7 @@ function MiniDashCard<T, U extends UserAddType | DataAddType>({
   });
 
   return (
-    <div className="flex flex-col items-center m-1 justify-center">
+    <div className="flex flex-col items-center m-0.5 justify-center">
       <CompAlert />
       <div className="flex w-[22rem] h-[28rem] items-start justify-center mt-0 m-2 text-white pt-0 p-0.5 bg-[#212833c8] rounded-xl shadow-md shadow-white ">
         {isLoading ? (

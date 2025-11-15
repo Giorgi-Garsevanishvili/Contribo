@@ -20,10 +20,20 @@ export default function RootLayout({
   children,
   allowedUsers,
   eventRoles,
+  hrWarningType,
+  memberStatus,
+  positions,
+  roles,
+  regions,
 }: {
   children: React.ReactNode;
   allowedUsers: React.ReactNode;
   eventRoles: React.ReactNode;
+  memberStatus: React.ReactNode;
+  positions: React.ReactNode;
+  roles: React.ReactNode;
+  hrWarningType: React.ReactNode;
+  regions: React.ReactNode;
 }) {
   return (
     <div className="flex flex-grow items-center justify-center transition-all duration-200 flex-col p-0 m-0">
@@ -33,6 +43,11 @@ export default function RootLayout({
           {children}
           {allowedUsers}
           {eventRoles}
+          {hrWarningType}
+          {memberStatus}
+          {positions}
+          {roles}
+          {regions}
         </main>
       </div>
     </div>

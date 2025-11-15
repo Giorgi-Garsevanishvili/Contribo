@@ -35,7 +35,7 @@ export const GET = async (_req: NextRequest, context: Context) => {
       );
     }
 
-    return NextResponse.json({ role }, { status: 200 });
+    return NextResponse.json(role);
   } catch (error) {
     const { status, message } = handleError(error);
     return NextResponse.json({ error: message }, { status: status });

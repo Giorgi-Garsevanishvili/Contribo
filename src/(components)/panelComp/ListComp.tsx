@@ -1,10 +1,10 @@
 import React from "react";
 import DeleteButton, { DeleteMethod } from "./DeleteButton";
-import Link from "next/link";
 import {
   AllowedUsersWithRelations,
   GeneralDataWithRelations,
 } from "@/types/general-types";
+import { useRouter } from "next/navigation";
 
 type ListCompParams =
   | {
@@ -27,6 +27,8 @@ type ListCompParams =
 function ListComp(props: ListCompParams) {
   const { filteredData, type, fetchData, title, detailPage, deleteMethod } =
     props;
+
+  const router = useRouter();
   return (
     <div className="flex items-start justify-center mb-1 p-1 w-full h-full px-3  overflow-auto">
       <ul className="flex flex-col flex-grow gap-2 items-start justify-center">
@@ -37,13 +39,15 @@ function ListComp(props: ListCompParams) {
                 className="flex bg-gray-700 rounded-lg w-full p-1 items-center justify-between"
                 key={item.id}
               >
-                <Link
-                  href={`/console/${detailPage}Details/${item.id}`}
+                <button
+                  onClick={() =>
+                    router.push(`/console/${detailPage}Details/${item.id}`)
+                  }
                   className="flex items-center justify-start bg-black/40 text-white m-1 pl-2 p-1 rounded-lg w-full"
                 >
                   <h5>{index + 1}.</h5>
                   <h5 className="mx-2">{item.email}</h5>
-                </Link>
+                </button>
                 <DeleteButton
                   id={item.id}
                   method={deleteMethod}
@@ -57,13 +61,15 @@ function ListComp(props: ListCompParams) {
                 className="flex bg-gray-700 rounded-lg w-full p-1 items-center justify-between"
                 key={item.id}
               >
-                <Link
-                  href={`/console/${detailPage}Details/${item.id}`}
+                <button
+                  onClick={() =>
+                    router.push(`/console/${detailPage}Details/${item.id}`)
+                  }
                   className="flex items-center justify-start bg-black/40 text-white m-1 pl-2 p-1 rounded-lg w-full"
                 >
                   <h5>{index + 1}.</h5>
                   <h5 className="mx-2">{item.name}</h5>
-                </Link>
+                </button>
                 <DeleteButton
                   id={item.id}
                   method={deleteMethod}
