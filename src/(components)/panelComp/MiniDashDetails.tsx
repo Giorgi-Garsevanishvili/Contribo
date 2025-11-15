@@ -3,7 +3,6 @@
 import axios from "axios";
 import React, { FormEvent, useCallback, useEffect, useState } from "react";
 import Link from "next/link";
-import { useParams } from "next/navigation";
 import { FaRegEdit } from "react-icons/fa";
 import { useRouter } from "next/navigation";
 import { IoClose } from "react-icons/io5";
@@ -45,6 +44,7 @@ const GeneralDataUpdateObj = {
 
 type MiniDashDetailsProps =
   | {
+      id: string | undefined;
       type: "user";
       axiosGet: string;
       axiosPut: string;
@@ -52,6 +52,7 @@ type MiniDashDetailsProps =
       deleteMethod: DeleteMethod;
     }
   | {
+      id: string | undefined;
       type: "general";
       axiosGet: string;
       axiosPut: string;
@@ -59,6 +60,7 @@ type MiniDashDetailsProps =
       deleteMethod: DeleteMethod;
     }
   | {
+      id: string | undefined;
       type: "region";
       axiosGet: string;
       axiosPut: string;
@@ -68,7 +70,7 @@ type MiniDashDetailsProps =
 
 function MiniDashDetails<
   T extends Region & AllowedUsersWithRelations & GeneralDataWithRelations
->({ title, axiosGet, axiosPut, type, deleteMethod }: MiniDashDetailsProps) {
+>({ title, axiosGet, axiosPut, type, deleteMethod, id }: MiniDashDetailsProps) {
   const router = useRouter();
   const [data, setData] = useState<T>();
 
@@ -111,29 +113,28 @@ function MiniDashDetails<
 
   const { triggerCompAlert } = useCompAlert();
 
-  const params = useParams();
-  const { id } = params;
+  const fetchData = useCallback(
+    async (id: string | undefined) => {
+      try {
+        const response = await axios.get(`${axiosGet}/${id}`);
 
-  const fetchData = useCallback(async () => {
-    try {
-      const response = await axios.get(`${axiosGet}/${id}`);
-
-      const userData = {
-        ...response.data,
-        createdAt: new Date(response.data.createdAt),
-        updatedAt: response.data.updatedAt
-          ? new Date(response.data.updatedAt)
-          : null,
-      };
-      setData(userData);
-      setIsLoading(false);
-    } catch (error) {
-      setIsLoading(false);
-      console.log(error);
-      return;
-    }
-  }, [id, axiosGet]);
-
+        const userData = {
+          ...response.data,
+          createdAt: new Date(response.data.createdAt),
+          updatedAt: response.data.updatedAt
+            ? new Date(response.data.updatedAt)
+            : null,
+        };
+        setData(userData);
+        setIsLoading(false);
+      } catch (error) {
+        setIsLoading(false);
+        console.log(error);
+        return;
+      }
+    },
+    [axiosGet]
+  );
   const updateDataFn = async (e: FormEvent<HTMLFormElement>) => {
     try {
       e.preventDefault();
@@ -148,7 +149,7 @@ function MiniDashDetails<
         cleanPayload
       );
 
-      fetchData();
+      fetchData(id);
       triggerCompAlert({
         message: `${title} Updated`,
         type: "success",
@@ -170,8 +171,8 @@ function MiniDashDetails<
   };
 
   useEffect(() => {
-    fetchData();
-  }, [id, axiosGet]);
+    fetchData(id);
+  }, [id, axiosGet, fetchData]);
 
   return (
     <div className="flex flex-col items-center m-1 justify-center">
@@ -196,7 +197,11 @@ function MiniDashDetails<
                   "Oops! Something is Missing in MiniComp Details"
                 )
               ) : (
-                "No data found!"
+                <>
+                  <div>
+                    <h3>Failed to fetch!</h3>
+                  </div>
+                </>
               )}
               <div className="flex flex-row w-full justify-center items-center">
                 <DeleteButton
@@ -273,6 +278,7 @@ function MiniDashDetails<
         <div className="flex flex-col w-full text-white border-gray-900/80 items-center justify-center">
           <Link
             href={"/console"}
+            replace
             className="flex btn w-full ease-in-out duration-300 transition items-center justify-center m-0 bg-black rounded-b-lg rounded-t-none"
           >
             Back To List

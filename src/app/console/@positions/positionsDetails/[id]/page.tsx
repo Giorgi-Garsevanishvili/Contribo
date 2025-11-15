@@ -1,9 +1,11 @@
 import MiniDashDetails from "@/(components)/panelComp/MiniDashDetails";
-import React from "react";
 
-function page() {
+function page({ params }: { params: { id: string } }) {
+  const id = params.id;
+
   return (
     <MiniDashDetails
+      id={id}
       type="general"
       title="Positions"
       axiosGet="/api/console/positions"

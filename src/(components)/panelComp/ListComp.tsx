@@ -43,7 +43,7 @@ function ListComp(props: ListCompParams) {
                   onClick={() =>
                     router.push(`/console/${detailPage}Details/${item.id}`)
                   }
-                  className="flex items-center justify-start bg-black/40 text-white m-1 pl-2 p-1 rounded-lg w-full"
+                  className="flex btn items-center justify-start bg-black/40 text-white m-1 pl-2 p-1 rounded-lg w-full"
                 >
                   <h5>{index + 1}.</h5>
                   <h5 className="mx-2">{item.email}</h5>
@@ -65,7 +65,7 @@ function ListComp(props: ListCompParams) {
                   onClick={() =>
                     router.push(`/console/${detailPage}Details/${item.id}`)
                   }
-                  className="flex items-center justify-start bg-black/40 text-white m-1 pl-2 p-1 rounded-lg w-full"
+                  className="flex btn items-center justify-start bg-black/40 text-white m-1 pl-2 p-1 rounded-lg w-full"
                 >
                   <h5>{index + 1}.</h5>
                   <h5 className="mx-2">{item.name}</h5>
