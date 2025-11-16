@@ -6,12 +6,13 @@ function eventRoles() {
   return (
     <MiniDashCard
       type="general"
+      subType="roles"
       deleteMethod="role"
       detailPage="roles"
       title="Roles"
       searchKey={"name"}
-      axiosGet="/api/console/roles"
       axiosPost="/api/console/roles"
+      axiosGet="/api/console/regions"
     />
   );
 }

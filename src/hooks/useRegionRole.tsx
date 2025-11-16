@@ -28,7 +28,14 @@ function useRegionRole() {
     }
   }, [dispatch, roles.length, regions.length, loadingRoles, loadingRegions]);
 
-  return { isLoading, roles, regions };
+  const refetchRoles = () => {
+    dispatch(fetchRoles());
+  };
+  const refetchRegions = () => {
+    dispatch(fetchRegions());
+  };
+
+  return { isLoading, roles, regions, refetchRegions, refetchRoles };
 }
 
 export default useRegionRole;

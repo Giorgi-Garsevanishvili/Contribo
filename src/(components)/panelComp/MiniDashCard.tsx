@@ -18,26 +18,29 @@ import CreationComponent, {
 } from "./CreationComp";
 import ListComp from "./ListComp";
 import { DeleteMethod } from "./DeleteButton";
+import useRegionRole from "@/hooks/useRegionRole";
 
-type MiniCompProps<T> = {
+type MiniCompProps = {
   axiosPost: string;
   axiosGet: string;
   title: string;
-  searchKey: keyof T;
+  searchKey: string;
   type: "user" | "general";
+  subType: "regions" | "roles";
   detailPage: string;
   deleteMethod: DeleteMethod;
 };
 
-function MiniDashCard<T, U extends UserAddType | DataAddType>({
+function MiniDashCard<U extends UserAddType | DataAddType>({
   axiosPost,
   title,
   axiosGet,
   searchKey,
   type,
   detailPage,
+  subType,
   deleteMethod,
-}: MiniCompProps<T>) {
+}: MiniCompProps) {
   const [data, setData] = useState<[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const dataClear = () => {
@@ -52,6 +55,7 @@ function MiniDashCard<T, U extends UserAddType | DataAddType>({
   const [dataAdd, setDataAdd] = useState<U>(dataClear);
   const [alert, setAlert] = useState<AlertType>(AlertObj);
   const [searchTerm, setSearchTerm] = useState("");
+  const { regions, roles, refetchRegions, refetchRoles } = useRegionRole();
 
   useEffect(() => {
     if (!alert.isOpened) return;
@@ -68,7 +72,7 @@ function MiniDashCard<T, U extends UserAddType | DataAddType>({
     try {
       e.preventDefault();
 
-      if (Object.values(data).some((value) => value === "")) {
+      if (Object.values(dataAdd).some((value) => value === "")) {
         triggerAlert({
           message: "All fields are required",
           type: "warning",
@@ -104,11 +108,14 @@ function MiniDashCard<T, U extends UserAddType | DataAddType>({
     }
   };
 
-  const fetchData = useCallback( async () => {
+  const fetchData = useCallback(async () => {
     try {
       setIsLoading(true);
-      const data = await axios.get<[]>(`${axiosGet}`);
-      setData(data.data);
+
+      if (type === "general" || type === "user" ) {
+        const data = await axios.get<[]>(`${axiosGet}`);
+        setData(data.data);
+      }
       setIsLoading(false);
     } catch (error) {
       const errorMessage = getClientErrorMessage(error);
@@ -121,16 +128,20 @@ function MiniDashCard<T, U extends UserAddType | DataAddType>({
       });
       return;
     }
-  },[axiosGet, setAlert]);
+  }, [axiosGet, setAlert, type]);
 
   useEffect(() => {
     fetchData();
   }, [fetchData]);
 
-  const filteredData = data.filter((item) => {
+  const DataDef =
+    subType === "regions" ? regions : subType === "roles" ? roles : data;
+
+  const filteredData = DataDef.filter((item) => {
+    const record = item as Record<string, any>;
     return searchTerm === ""
       ? true
-      : String(item[searchKey])
+      : String(record[searchKey])
           .toLowerCase()
           .includes(searchTerm.toLowerCase());
   });
@@ -165,7 +176,7 @@ function MiniDashCard<T, U extends UserAddType | DataAddType>({
                     fetchData={fetchData}
                     title={title}
                     type={type}
-                    filteredData={filteredData}
+                    filteredData={filteredData as any}
                   />
                 ) : type === "general" ? (
                   <ListComp
@@ -174,7 +185,7 @@ function MiniDashCard<T, U extends UserAddType | DataAddType>({
                     fetchData={fetchData}
                     title={title}
                     type={type}
-                    filteredData={filteredData}
+                    filteredData={filteredData as any}
                   />
                 ) : null}
               </ul>
@@ -197,6 +208,30 @@ function MiniDashCard<T, U extends UserAddType | DataAddType>({
                 type="user"
               />
             ) : type === "general" ? (
+              <CreationComponent
+                dataAdd={dataAdd as DataAddType}
+                setDataAdd={
+                  setDataAdd as React.Dispatch<
+                    React.SetStateAction<DataAddType>
+                  >
+                }
+                onSubmit={createFunction}
+                CompTitle={title}
+                type="general"
+              />
+            ) : type === "regions" ? (
+              <CreationComponent
+                dataAdd={dataAdd as DataAddType}
+                setDataAdd={
+                  setDataAdd as React.Dispatch<
+                    React.SetStateAction<DataAddType>
+                  >
+                }
+                onSubmit={createFunction}
+                CompTitle={title}
+                type="general"
+              />
+            ) : type === "roles" ? (
               <CreationComponent
                 dataAdd={dataAdd as DataAddType}
                 setDataAdd={

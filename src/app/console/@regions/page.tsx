@@ -6,12 +6,13 @@ function eventRoles() {
   return (
     <MiniDashCard
       type="general"
+      subType="regions"
       deleteMethod="region"
       detailPage="regions"
       title="Regions"
       searchKey={"name"}
-      axiosGet="/api/console/regions"
       axiosPost="/api/console/regions"
+      axiosGet="/api/console/regions"
     />
   );
 }

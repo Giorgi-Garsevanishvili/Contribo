@@ -25,7 +25,7 @@ export default function RootLayout({
     <html lang="en">
       <body className="flex layout-body flex-col w-full min-h-screen">
         <Providers>
-          <main className="flex flex-grow transition-all duration-200 justify-center items-center flex-col p-0 m-0 w-screen min-h-full overflow-auto">
+          <main className="flex flex-grow transition-all duration-200 justify-center items-center flex-col p-0 m-0 w-full min-h-full overflow-auto">
             {children}
             {/* <div className="flex flex-row">
               <p className="flex max-w-40 text-wrap  p-3 h-auto items-center justify-center text-center bg-[#34495e]">

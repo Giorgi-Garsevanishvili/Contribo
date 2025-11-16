@@ -38,8 +38,8 @@ export default function RootLayout({
   return (
     <div className="flex flex-grow items-center justify-center transition-all duration-200 flex-col p-0 m-0">
       <ConsoleNav page={"Console"} />
-      <div className="flex-grow flex justify-center items-center mt-10 m-0 p-0">
-        <main className="flex flex-wrap justify-center items-center">
+      <div className="flex-grow flex justify-center items-center mt-4 m-0 p-0">
+        <main className="flex flex-wrap justify-center m-0 items-center">
           {children}
           {allowedUsers}
           {eventRoles}
