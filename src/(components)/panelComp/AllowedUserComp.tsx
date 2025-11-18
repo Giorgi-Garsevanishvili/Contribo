@@ -24,7 +24,7 @@ function AllowedUserComp({
   userAdd,
 }: AddAllowedUserProp) {
   const [addOpened, setAddOpened] = useState(false);
-  const { isLoading } = useRegionRole();
+  const { loadingHook } = useRegionRole();
 
   return (
     <div className="flex bg-gray-800/20 p-2 border-2 shadow-sm shadow-white/60 border-[#3E4A56] flex-col w-full items-center justify-center rounded-lg">
@@ -35,7 +35,7 @@ function AllowedUserComp({
         {addOpened ? "Close Add User Section" : "Open Add User Section"}
       </button>
 
-      {isLoading ? (
+      {loadingHook ? (
         <LoadingComp />
       ) : (
         <form
@@ -60,7 +60,7 @@ function AllowedUserComp({
             <button
               type="submit"
               className="flex btn items-center justify-center text-[#ffffff]  bg-[#48765b] rounded-lg m-0.5 p-2.5"
-              disabled={isLoading}
+              disabled={loadingHook}
             >
               <AiOutlineUserAdd size={18} />
             </button>

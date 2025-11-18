@@ -1,4 +1,3 @@
-import { useEffect } from "react";
 import {
   fetchRegions,
   fetchRoles,
@@ -17,16 +16,8 @@ function useRegionRole() {
   const roles = useSelector(getAllRoles);
   const regions = useSelector(getAllRegion);
 
-  const isLoading = loadingRegions === "pending" || loadingRoles === "pending";
-
-  useEffect(() => {
-    if (roles.length === 0 && loadingRoles !== "pending") {
-      dispatch(fetchRoles());
-    }
-    if (regions.length === 0 && loadingRegions !== "pending") {
-      dispatch(fetchRegions());
-    }
-  }, [dispatch, roles.length, regions.length, loadingRoles, loadingRegions]);
+  const loadingHook =
+    loadingRegions === "pending" || loadingRoles === "pending";
 
   const refetchRoles = () => {
     dispatch(fetchRoles());
@@ -35,7 +26,7 @@ function useRegionRole() {
     dispatch(fetchRegions());
   };
 
-  return { isLoading, roles, regions, refetchRegions, refetchRoles };
+  return { loadingHook, roles, regions, refetchRegions, refetchRoles };
 }
 
 export default useRegionRole;

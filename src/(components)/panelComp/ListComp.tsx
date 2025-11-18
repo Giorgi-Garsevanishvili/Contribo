@@ -1,15 +1,12 @@
 import React from "react";
 import DeleteButton, { DeleteMethod } from "./DeleteButton";
-import {
-  AllowedUsersWithRelations,
-  GeneralDataWithRelations,
-} from "@/types/general-types";
 import { useRouter } from "next/navigation";
+import { FilteredDataType } from "./MiniDashCard";
 
 type ListCompParams =
   | {
       type: "user";
-      filteredData: AllowedUsersWithRelations[];
+      filteredData: FilteredDataType[];
       fetchData: () => void;
       title: string;
       detailPage: string;
@@ -17,7 +14,7 @@ type ListCompParams =
     }
   | {
       type: "general";
-      filteredData: GeneralDataWithRelations[];
+      filteredData: FilteredDataType[];
       fetchData: () => void;
       title: string;
       detailPage: string;
@@ -25,7 +22,7 @@ type ListCompParams =
     }
   | {
       type: "roles";
-      filteredData: GeneralDataWithRelations[];
+      filteredData: FilteredDataType[];
       fetchData: () => void;
       title: string;
       detailPage: string;
@@ -33,7 +30,7 @@ type ListCompParams =
     }
   | {
       type: "regions";
-      filteredData: GeneralDataWithRelations[];
+      filteredData: FilteredDataType[];
       fetchData: () => void;
       title: string;
       detailPage: string;

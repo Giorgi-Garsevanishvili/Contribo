@@ -7,11 +7,11 @@ import { NextRequest, NextResponse } from "next/server";
 import { z } from "zod";
 import { Context } from "@/types/general-types";
 
-
 const RoleUpdateData = z
   .object({
     name: z.string().toUpperCase(),
-  }).strict();
+  })
+  .strict();
 
 export const GET = async (_req: NextRequest, context: Context) => {
   try {
@@ -88,6 +88,20 @@ export const DELETE = async (req: NextRequest, context: Context) => {
 
     if (!id) {
       return NextResponse.json({ message: "Id is missing" }, { status: 400 });
+    }
+
+    const userData = await prisma.role.findUnique({
+      where: { id },
+      select: { name: true },
+    });
+
+    const declinedDeletion = ["ADMIN", "QIRVEX", "REGULAR"];
+
+    if (userData && declinedDeletion.includes(userData.name)) {
+      return NextResponse.json(
+        { message: "Default value declined to delete" },
+        { status: 500 }
+      );
     }
 
     const deleted = await prisma.role.delete({ where: { id } });

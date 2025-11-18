@@ -9,7 +9,6 @@ import Alerts, {
   triggerAlert,
 } from "@/(components)/generalComp/Alerts";
 import { getClientErrorMessage } from "@/lib/errors/clientErrors";
-import { CompAlert } from "@/redux/features/componentAlert/compAlert";
 import CreationComponent, {
   AddDataObj,
   DataAddType,
@@ -24,10 +23,18 @@ type MiniCompProps = {
   axiosPost: string;
   axiosGet: string;
   title: string;
-  searchKey: string;
+  searchKey: keyof FilteredDataType;
   type: "user" | "general" | "roles" | "regions";
   detailPage: string;
   deleteMethod: DeleteMethod;
+};
+
+export type FilteredDataType = {
+  name: string;
+  email?: string;
+  id: string;
+  createdAt: Date;
+  updatedAt: Date | null;
 };
 
 function MiniDashCard<U extends UserAddType | DataAddType>({
@@ -44,8 +51,7 @@ function MiniDashCard<U extends UserAddType | DataAddType>({
   const dataClear = () => {
     if (type === "user") {
       return UserAddObj as U;
-    }
-    if (type === "general") {
+    } else if (type === "general" || type === "regions" || type === "roles") {
       return AddDataObj as U;
     }
     return {} as U;
@@ -53,7 +59,8 @@ function MiniDashCard<U extends UserAddType | DataAddType>({
   const [dataAdd, setDataAdd] = useState<U>(dataClear);
   const [alert, setAlert] = useState<AlertType>(AlertObj);
   const [searchTerm, setSearchTerm] = useState("");
-  const { regions, roles, refetchRegions, refetchRoles } = useRegionRole();
+  const { regions, roles, refetchRegions, refetchRoles, loadingHook } =
+    useRegionRole();
 
   useEffect(() => {
     if (!alert.isOpened) return;
@@ -85,7 +92,7 @@ function MiniDashCard<U extends UserAddType | DataAddType>({
       await axios.post(`${axiosPost}`, dataAdd);
       setIsLoading(false);
       triggerAlert({
-        message: `${title} Added`,
+        message: `${title.toUpperCase()} Added`,
         type: "success",
         isOpened: true,
         setState: setAlert,
@@ -114,6 +121,14 @@ function MiniDashCard<U extends UserAddType | DataAddType>({
         const data = await axios.get<[]>(`${axiosGet}`);
         setData(data.data);
       }
+
+      if (type === "regions") {
+        refetchRegions();
+      }
+
+      if (type === "roles") {
+        refetchRoles();
+      }
       setIsLoading(false);
     } catch (error) {
       const errorMessage = getClientErrorMessage(error);
@@ -136,19 +151,21 @@ function MiniDashCard<U extends UserAddType | DataAddType>({
     type === "regions" ? regions : type === "roles" ? roles : data;
 
   const filteredData = DataDef.filter((item) => {
-    const record = item as Record<string, any>;
+    const value = item[searchKey as keyof typeof item];
+
+    if (typeof value !== "string") return false;
+
     return searchTerm === ""
       ? true
-      : String(record[searchKey])
-          .toLowerCase()
-          .includes(searchTerm.toLowerCase());
+      : value.toLowerCase().includes(searchTerm.toLowerCase());
   });
 
   return (
     <div className="flex flex-col items-center m-0.5 justify-center">
-      <CompAlert />
       <div className="flex w-[22rem] h-[28rem] items-start justify-center mt-0 m-2 text-white pt-0 p-0.5 bg-[#212833c8] rounded-xl shadow-md shadow-white ">
-        {isLoading ? (
+        {isLoading ||
+        (loadingHook && type === "regions") ||
+        (loadingHook && type === "roles") ? (
           <LoadingComp />
         ) : (
           <div className="flex flex-col justify-between items-center relative w-full h-full">
@@ -174,7 +191,7 @@ function MiniDashCard<U extends UserAddType | DataAddType>({
                     fetchData={fetchData}
                     title={title}
                     type={type}
-                    filteredData={filteredData as any}
+                    filteredData={filteredData as FilteredDataType[]}
                   />
                 ) : type === "general" ? (
                   <ListComp
@@ -183,7 +200,7 @@ function MiniDashCard<U extends UserAddType | DataAddType>({
                     fetchData={fetchData}
                     title={title}
                     type={type}
-                    filteredData={filteredData as any}
+                    filteredData={filteredData as FilteredDataType[]}
                   />
                 ) : type === "roles" ? (
                   <ListComp
@@ -192,7 +209,7 @@ function MiniDashCard<U extends UserAddType | DataAddType>({
                     fetchData={fetchData}
                     title={title}
                     type={type}
-                    filteredData={filteredData as any}
+                    filteredData={filteredData as FilteredDataType[]}
                   />
                 ) : type === "regions" ? (
                   <ListComp
@@ -201,7 +218,7 @@ function MiniDashCard<U extends UserAddType | DataAddType>({
                     fetchData={fetchData}
                     title={title}
                     type={type}
-                    filteredData={filteredData as any}
+                    filteredData={filteredData as FilteredDataType[]}
                   />
                 ) : null}
               </ul>

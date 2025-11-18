@@ -1,4 +1,5 @@
 import { useCompAlert } from "@/hooks/useCompAlert";
+import { getClientErrorMessage } from "@/lib/errors/clientErrors";
 import axios from "axios";
 import React, { useState } from "react";
 import { MdDeleteOutline } from "react-icons/md";
@@ -51,22 +52,13 @@ function DeleteButton({ method, id, disabled, onDelete }: DeleteButtonProps) {
     }
   };
 
-  const DeleteData = async (id: string | undefined) => {
-    const deleteURL = deleteUrl()
-    try {
-      await axios.delete(`/api/console/${deleteURL}/${id}`);
-    } catch (error) {
-      console.log(error);
-      return;
-    }
-  };
-
   const handleDelete = async () => {
+    const deleteURL = deleteUrl();
     try {
       setLoading(true);
-      await DeleteData(id);
+      await axios.delete(`/api/console/${deleteURL}/${id}`);
       triggerCompAlert({
-        message: `${method} Deleted`,
+        message: `${method.toUpperCase()} Deleted`,
         type: "success",
         isOpened: true,
       });
@@ -74,8 +66,12 @@ function DeleteButton({ method, id, disabled, onDelete }: DeleteButtonProps) {
       setLoading(false);
     } catch (error) {
       setLoading(false);
-      console.error(`Failed to delete ${method}:`, error);
-      alert(`Failed to delete ${method}`);
+      const errorMessage = getClientErrorMessage(error);
+      triggerCompAlert({
+        message: `Failed to delete ${method.toUpperCase()}. error: ${errorMessage}`,
+        type: "error",
+        isOpened: true,
+      });
     }
   };
 

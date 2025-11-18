@@ -26,7 +26,7 @@ export const useCompAlert = () => {
     if (!compAlertState.isOpened) return;
     const compTimeoutId = setTimeout(
       () => dispatchAlertComp(closeAlert()),
-      3000
+      5000
     );
     return () => clearTimeout(compTimeoutId);
   }, [compAlertState.isOpened, dispatchAlertComp]);

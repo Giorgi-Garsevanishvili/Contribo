@@ -1,6 +1,7 @@
 import "../styles/globals.css";
 import { Metadata } from "next";
 import ConsoleNav from "@/(components)/panelComp/nav";
+import { CompAlert } from "@/redux/features/componentAlert/compAlert";
 
 export const metadata: Metadata = {
   title: "Console - Contribo - by Qirvex™",
@@ -40,6 +41,7 @@ export default function RootLayout({
       <ConsoleNav page={"Console"} />
       <div className="flex-grow flex justify-center items-center mt-4 m-0 p-0">
         <main className="flex flex-wrap justify-center m-0 items-center">
+          <CompAlert />
           {children}
           {allowedUsers}
           {eventRoles}

@@ -29,6 +29,18 @@ type addDataProp =
       dataAdd: DataAddType;
       CompTitle: string;
       type: "general";
+    }  | {
+      onSubmit: (e: FormEvent<HTMLFormElement>) => void;
+      setDataAdd: React.Dispatch<React.SetStateAction<DataAddType>>;
+      dataAdd: DataAddType;
+      CompTitle: string;
+      type: "roles";
+    }  | {
+      onSubmit: (e: FormEvent<HTMLFormElement>) => void;
+      setDataAdd: React.Dispatch<React.SetStateAction<DataAddType>>;
+      dataAdd: DataAddType;
+      CompTitle: string;
+      type: "regions";
     };
 
 export const AddDataObj = { name: "" };
@@ -36,7 +48,7 @@ export const UserAddObj = { email: "", roleId: "", regionId: "" };
 
 function CreationComponent(props: addDataProp) {
   const [addOpened, setAddOpened] = useState(false);
-  const { isLoading } = useRegionRole();
+  const { loadingHook } = useRegionRole();
   const { onSubmit, CompTitle, type, setDataAdd, dataAdd } = props;
 
   return (
@@ -50,7 +62,7 @@ function CreationComponent(props: addDataProp) {
           : `Open Add ${CompTitle} Section`}
       </button>
 
-      {isLoading ? (
+      {loadingHook ? (
         <LoadingComp />
       ) : (
         <form
@@ -77,7 +89,7 @@ function CreationComponent(props: addDataProp) {
                 <button
                   type="submit"
                   className="flex btn items-center justify-center text-[#ffffff]  bg-[#48765b] rounded-lg m-0.5 p-2.5"
-                  disabled={isLoading}
+                  disabled={loadingHook}
                 >
                   <IoIosAddCircleOutline size={22} />
                 </button>
@@ -97,12 +109,52 @@ function CreationComponent(props: addDataProp) {
                 <button
                   type="submit"
                   className="flex btn items-center justify-center text-[#ffffff]  bg-[#48765b] rounded-lg m-0.5 p-2.5"
-                  disabled={isLoading}
+                  disabled={loadingHook}
                 >
                   <AiOutlineUserAdd size={18} />
                 </button>
               </>
-            ) : (
+            ) : type === "regions" ? (
+              <>
+                <input
+                  name="name"
+                  value={dataAdd.name}
+                  onChange={(e) =>
+                    setDataAdd((prev) => ({ ...prev, name: e.target.value }))
+                  }
+                  type="text"
+                  placeholder="Add Allowed User Email"
+                  className="flex w-full input-def m-0.5 p-1.5 "
+                />
+                <button
+                  type="submit"
+                  className="flex btn items-center justify-center text-[#ffffff]  bg-[#48765b] rounded-lg m-0.5 p-2.5"
+                  disabled={loadingHook}
+                >
+                  <AiOutlineUserAdd size={18} />
+                </button>
+              </>
+            ) : type === "roles" ? (
+              <>
+                <input
+                  name="name"
+                  value={dataAdd.name}
+                  onChange={(e) =>
+                    setDataAdd((prev) => ({ ...prev, name: e.target.value }))
+                  }
+                  type="text"
+                  placeholder="Add Allowed User Email"
+                  className="flex w-full input-def m-0.5 p-1.5 "
+                /> 
+                <button
+                  type="submit"
+                  className="flex btn items-center justify-center text-[#ffffff]  bg-[#48765b] rounded-lg m-0.5 p-2.5"
+                  disabled={loadingHook}
+                >
+                  <AiOutlineUserAdd size={18} />
+                </button>
+              </>
+            ) : ( 
               "Add Type definition not provided!"
             )}
           </div>
