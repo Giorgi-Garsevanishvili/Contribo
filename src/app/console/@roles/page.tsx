@@ -5,8 +5,7 @@ import React from "react";
 function eventRoles() {
   return (
     <MiniDashCard
-      type="general"
-      subType="roles"
+      type="roles"
       deleteMethod="role"
       detailPage="roles"
       title="Roles"

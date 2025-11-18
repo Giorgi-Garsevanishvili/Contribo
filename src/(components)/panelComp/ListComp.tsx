@@ -22,6 +22,22 @@ type ListCompParams =
       title: string;
       detailPage: string;
       deleteMethod: DeleteMethod;
+    }
+  | {
+      type: "roles";
+      filteredData: GeneralDataWithRelations[];
+      fetchData: () => void;
+      title: string;
+      detailPage: string;
+      deleteMethod: DeleteMethod;
+    }
+  | {
+      type: "regions";
+      filteredData: GeneralDataWithRelations[];
+      fetchData: () => void;
+      title: string;
+      detailPage: string;
+      deleteMethod: DeleteMethod;
     };
 
 function ListComp(props: ListCompParams) {
@@ -77,9 +93,51 @@ function ListComp(props: ListCompParams) {
                 />
               </li>
             ))
-          ) : (
-            <p className="text-gray-300 text-sm mt-2">No {title} found.</p>
-          )
+          ) : type === "regions" ? (
+            filteredData.map((item, index) => (
+              <li
+                className="flex bg-gray-700 rounded-lg w-full p-1 items-center justify-between"
+                key={item.id}
+              >
+                <button
+                  onClick={() =>
+                    router.push(`/console/${detailPage}Details/${item.id}`)
+                  }
+                  className="flex btn items-center justify-start bg-black/40 text-white m-1 pl-2 p-1 rounded-lg w-full"
+                >
+                  <h5>{index + 1}.</h5>
+                  <h5 className="mx-2">{item.name}</h5>
+                </button>
+                <DeleteButton
+                  id={item.id}
+                  method={deleteMethod}
+                  onDelete={fetchData}
+                />
+              </li>
+            ))
+          ) : type === "roles" ? (
+            filteredData.map((item, index) => (
+              <li
+                className="flex bg-gray-700 rounded-lg w-full p-1 items-center justify-between"
+                key={item.id}
+              >
+                <button
+                  onClick={() =>
+                    router.push(`/console/${detailPage}Details/${item.id}`)
+                  }
+                  className="flex btn items-center justify-start bg-black/40 text-white m-1 pl-2 p-1 rounded-lg w-full"
+                >
+                  <h5>{index + 1}.</h5>
+                  <h5 className="mx-2">{item.name}</h5>
+                </button>
+                <DeleteButton
+                  id={item.id}
+                  method={deleteMethod}
+                  onDelete={fetchData}
+                />
+              </li>
+            ))
+          ) : null
         ) : (
           <p className="text-gray-300 text-sm mt-2">No {title} found.</p>
         )}

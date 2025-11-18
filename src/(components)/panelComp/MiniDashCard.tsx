@@ -25,8 +25,7 @@ type MiniCompProps = {
   axiosGet: string;
   title: string;
   searchKey: string;
-  type: "user" | "general";
-  subType: "regions" | "roles";
+  type: "user" | "general" | "roles" | "regions";
   detailPage: string;
   deleteMethod: DeleteMethod;
 };
@@ -38,7 +37,6 @@ function MiniDashCard<U extends UserAddType | DataAddType>({
   searchKey,
   type,
   detailPage,
-  subType,
   deleteMethod,
 }: MiniCompProps) {
   const [data, setData] = useState<[]>([]);
@@ -112,7 +110,7 @@ function MiniDashCard<U extends UserAddType | DataAddType>({
     try {
       setIsLoading(true);
 
-      if (type === "general" || type === "user" ) {
+      if (type === "general" || type === "user") {
         const data = await axios.get<[]>(`${axiosGet}`);
         setData(data.data);
       }
@@ -135,7 +133,7 @@ function MiniDashCard<U extends UserAddType | DataAddType>({
   }, [fetchData]);
 
   const DataDef =
-    subType === "regions" ? regions : subType === "roles" ? roles : data;
+    type === "regions" ? regions : type === "roles" ? roles : data;
 
   const filteredData = DataDef.filter((item) => {
     const record = item as Record<string, any>;
@@ -179,6 +177,24 @@ function MiniDashCard<U extends UserAddType | DataAddType>({
                     filteredData={filteredData as any}
                   />
                 ) : type === "general" ? (
+                  <ListComp
+                    deleteMethod={deleteMethod}
+                    detailPage={detailPage}
+                    fetchData={fetchData}
+                    title={title}
+                    type={type}
+                    filteredData={filteredData as any}
+                  />
+                ) : type === "roles" ? (
+                  <ListComp
+                    deleteMethod={deleteMethod}
+                    detailPage={detailPage}
+                    fetchData={fetchData}
+                    title={title}
+                    type={type}
+                    filteredData={filteredData as any}
+                  />
+                ) : type === "regions" ? (
                   <ListComp
                     deleteMethod={deleteMethod}
                     detailPage={detailPage}
