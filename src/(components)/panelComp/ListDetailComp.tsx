@@ -21,10 +21,10 @@ type ListDetailCompProps =
 
 function ListDetailComp({ type, data }: ListDetailCompProps) {
   return (
-    <div className="flex flex-col w-full h-full items-center justify-start">
-      <ul className="flex flex-col justify-center overflow-auto w-[95%]">
+    <div className="flex flex-col w-full h-fit items-center justify-start">
+      <ul className="flex flex-col justify-start overflow-hidden w-[95%]">
         <li className="flex bg-gray-700 rounded-lg w-full p-3 items-center justify-between">
-          <ul className="flex flex-col items-start justify-center">
+          <ul className="flex flex-col items-start justify-center w-full">
             {type === "user" && (
               <>
                 <li>
@@ -51,7 +51,7 @@ function ListDetailComp({ type, data }: ListDetailCompProps) {
                 <li>
                   Created At:{" "}
                   <span className="text-blue-300">
-                    {data.createdAt.toDateString()}
+                    {data.createdAt.toISOString()}
                   </span>
                 </li>
                 <li>
@@ -74,13 +74,13 @@ function ListDetailComp({ type, data }: ListDetailCompProps) {
                 <li>
                   Created At:{" "}
                   <span className="text-blue-300">
-                    {data.createdAt.toString()}
+                    {data.createdAt.toLocaleString()}
                   </span>
                 </li>
                 <li>
                   Updated At:{" "}
                   <span className="text-blue-300">
-                    {data.updatedAt?.toString() || "Not Updated"}
+                    {data.updatedAt?.toLocaleString() || "Not Updated"}
                   </span>
                 </li>
               </>
@@ -88,6 +88,18 @@ function ListDetailComp({ type, data }: ListDetailCompProps) {
 
             {type === "region" && (
               <>
+                <div className="flex bg-accent text-black rounded-2xl mb-2 p-1 w-full items-center justify-center">
+                  {data.logo && data.logo.length > 5 ? (
+                    <img
+                      src={data.logo?.trim()}
+                      alt="Section Logo"
+                      className="rounded-2xl w-auto h-20"
+                    />
+                  ) : (
+                    "Logo Will Appear Here!"
+                  )}
+                </div>
+
                 <li>
                   Name: <span className="text-blue-300">{data.name}</span>
                 </li>
@@ -104,6 +116,12 @@ function ListDetailComp({ type, data }: ListDetailCompProps) {
                   <span className="text-blue-300">{data.address || "—"}</span>
                 </li>
                 <li>
+                  Description:{" "}
+                  <span className="text-blue-300 text-wrap">
+                    {data.description || "—"}
+                  </span>
+                </li>
+                <li>
                   Website:{" "}
                   <span className="text-blue-300">{data.website || "—"}</span>
                 </li>
@@ -113,13 +131,13 @@ function ListDetailComp({ type, data }: ListDetailCompProps) {
                 <li>
                   Created At:{" "}
                   <span className="text-blue-300">
-                    {data.createdAt.toString()}
+                    {data.createdAt.toLocaleString()}
                   </span>
                 </li>
                 <li>
                   Updated At:{" "}
                   <span className="text-blue-300">
-                    {data.updatedAt?.toString() || "Not Updated"}
+                    {data.updatedAt?.toLocaleString()|| "Not Updated"}
                   </span>
                 </li>
               </>

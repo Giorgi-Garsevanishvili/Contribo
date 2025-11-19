@@ -65,6 +65,20 @@ export const PUT = async (req: NextRequest, context: Context) => {
       );
     }
 
+    const roleData = await prisma.role.findUnique({
+      where: { id },
+      select: { name: true },
+    });
+
+    const declinedDeletion = ["ADMIN", "QIRVEX", "REGULAR"];
+
+    if (roleData && declinedDeletion.includes(roleData.name)) {
+      return NextResponse.json(
+        { message: "Default value declined to update" },
+        { status: 500 }
+      );
+    }
+
     const updatedRole = await prisma.role.update({
       where: { id },
       data: body,
@@ -90,14 +104,14 @@ export const DELETE = async (req: NextRequest, context: Context) => {
       return NextResponse.json({ message: "Id is missing" }, { status: 400 });
     }
 
-    const userData = await prisma.role.findUnique({
+    const roleData = await prisma.role.findUnique({
       where: { id },
       select: { name: true },
     });
 
     const declinedDeletion = ["ADMIN", "QIRVEX", "REGULAR"];
 
-    if (userData && declinedDeletion.includes(userData.name)) {
+    if (roleData && declinedDeletion.includes(roleData.name)) {
       return NextResponse.json(
         { message: "Default value declined to delete" },
         { status: 500 }
