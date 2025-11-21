@@ -1,6 +1,8 @@
+"use client";
 import { useCompAlert } from "@/hooks/useCompAlert";
 import { getClientErrorMessage } from "@/lib/errors/clientErrors";
 import axios from "axios";
+import { signOut } from "next-auth/react";
 import React, { useState } from "react";
 import { MdDeleteOutline } from "react-icons/md";
 
@@ -56,7 +58,14 @@ function DeleteButton({ method, id, disabled, onDelete }: DeleteButtonProps) {
     const deleteURL = deleteUrl();
     try {
       setLoading(true);
-      await axios.delete(`/api/console/${deleteURL}/${id}`);
+      const res = await axios.delete(`/api/console/${deleteURL}/${id}`);
+      if (res.data.requiresSignOut === true) {
+        console.log("go home");
+
+        await signOut({ callbackUrl: "/" });
+        return;
+      }
+
       triggerCompAlert({
         message: `${method.toUpperCase()} Deleted`,
         type: "success",

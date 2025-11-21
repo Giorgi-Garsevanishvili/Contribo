@@ -8,9 +8,10 @@ import { AllowedUserCreate } from "@/lib/zod";
 
 export const GET = async (_req: NextRequest) => {
   try {
-    await requireRole("QIRVEX");
+    const adminUser = await requireRole("ADMIN");
 
     const allowedUsers = await prisma.allowedUser.findMany({
+      where: { regionId: adminUser.user.regionId },
       include: { role: true, region: true, createdBy: true },
     });
 
@@ -30,10 +31,14 @@ export const GET = async (_req: NextRequest) => {
 
 export const POST = async (req: NextRequest) => {
   try {
-    const thisUser = await requireRole("QIRVEX");
+    const thisUser = await requireRole("ADMIN");
 
     const json = (await req.json()) as z.infer<typeof AllowedUserCreate>;
-    const jsonWithCreator = { ...json, creatorId: thisUser.user.id };
+    const jsonWithCreator = {
+      ...json,
+      creatorId: thisUser.user.id,
+      regionId: thisUser.user.regionId,
+    };
     const body = AllowedUserCreate.parse(jsonWithCreator);
 
     if (!body || !Object.keys(body).length) {

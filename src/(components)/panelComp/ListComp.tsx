@@ -1,3 +1,4 @@
+"use client"
 import React from "react";
 import DeleteButton, { DeleteMethod } from "./DeleteButton";
 import { useRouter } from "next/navigation";
@@ -43,7 +44,7 @@ function ListComp(props: ListCompParams) {
 
   const router = useRouter();
   return (
-    <div className="flex items-start justify-center mb-1 p-1 w-full h-full px-3  overflow-auto">
+    <div className="flex items-start justify-center mb-1 w-full h-full overflow-hidden">
       <ul className="flex flex-col flex-grow gap-2 items-start justify-center">
         {filteredData.length > 0 ? (
           type === "user" ? (

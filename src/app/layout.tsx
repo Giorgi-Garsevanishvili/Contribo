@@ -1,6 +1,7 @@
 import "../app/styles/globals.css";
 import { Metadata } from "next";
 import { Providers } from "@/(components)/providers/Providers";
+import AuthProvider from "@/(components)/providers/authProvider";
 
 export const metadata: Metadata = {
   title: "Contribo - by Qirvex™",
@@ -24,10 +25,11 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className="flex layout-body flex-col w-full min-h-screen">
-        <Providers>
-          <main className="flex flex-grow transition-all duration-200 justify-center items-center flex-col p-0 m-0 w-full min-h-full overflow-auto">
-            {children}
-            {/* <div className="flex flex-row">
+        <AuthProvider>
+          <Providers>
+            <main className="flex flex-grow transition-all duration-200 justify-center items-center flex-col p-0 m-0 w-full min-h-full overflow-auto">
+              {children}
+              {/* <div className="flex flex-row">
               <p className="flex max-w-40 text-wrap  p-3 h-auto items-center justify-center text-center bg-[#34495e]">
                 Primary text / title #34495e
               </p>
@@ -55,8 +57,9 @@ export default function RootLayout({
                 Comp BG #212833
               </p>
             </div> */}
-          </main>
-        </Providers>
+            </main>
+          </Providers>
+        </AuthProvider>
       </body>
     </html>
   );

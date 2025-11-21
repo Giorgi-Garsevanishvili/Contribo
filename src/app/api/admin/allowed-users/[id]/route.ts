@@ -8,7 +8,7 @@ import { Context } from "@/types/general-types";
 
 export const GET = async (_req: NextRequest, context: Context) => {
   try {
-    await requireRole("QIRVEX");
+    await requireRole("ADMIN");
     const { id } = await context.params;
 
     if (!id) {
@@ -33,7 +33,7 @@ export const GET = async (_req: NextRequest, context: Context) => {
 
 export const PUT = async (req: NextRequest, context: Context) => {
   try {
-    const thisUser = await requireRole("QIRVEX");
+    const thisUser = await requireRole("ADMIN");
     const { id } = await context.params;
 
     if (!id) {
@@ -77,7 +77,7 @@ export const PUT = async (req: NextRequest, context: Context) => {
 
 export const DELETE = async (req: NextRequest, context: Context) => {
   try {
-    const session = await requireRole("QIRVEX");
+    const session = await requireRole("ADMIN");
     const { id } = await context.params;
 
     if (!id) {

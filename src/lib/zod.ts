@@ -72,6 +72,13 @@ export const AllowedUserUpdate = AllowedUserCreate.omit({
 export const DefaultSystemValuesCreate = z
   .object({
     name: z.string().toUpperCase(),
+    type: z.enum(GTypes).default(GTypes.SYSTEM),
+  })
+  .strict();
+
+  export const DefaultSystemValuesCreateAdmin = z
+  .object({
+    name: z.string().toUpperCase(),
     type: z.enum(GTypes).default(GTypes.REGION),
   })
   .strict();
