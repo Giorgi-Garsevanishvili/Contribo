@@ -3,7 +3,7 @@ import { auth } from "./lib/auth";
 
 interface AuthToken {
   user?: {
-    role?: string;
+    roles?: string[];
   };
 }
 
@@ -23,15 +23,17 @@ export default auth(async function middleware(req) {
     return NextResponse.redirect(new URL("/signin", req.url));
   }
 
-  if (pathname.startsWith("/console") && token.user?.role !== "QIRVEX") {
+  const hasRole = (role: string) => token.user?.roles?.includes(role);
+
+  if (pathname.startsWith("/console") && !hasRole("QIRVEX")) {
     return NextResponse.redirect(new URL("/unauthorized", req.url));
   }
 
-  if (pathname.startsWith("/admin") && token.user?.role !== "ADMIN") {
+  if (pathname.startsWith("/admin") && !hasRole("ADMIN")) {
     return NextResponse.redirect(new URL("/unauthorized", req.url));
   }
 
-  if (pathname.startsWith("/client") && token.user?.role !== "CLIENT") {
+  if (pathname.startsWith("/client") && !hasRole("REGULAR")) {
     return NextResponse.redirect(new URL("/unauthorized", req.url));
   }
 
@@ -39,5 +41,11 @@ export default auth(async function middleware(req) {
 });
 
 export const config = {
-  matcher: ["/", "/client", "/admin", "/base", "/console"],
+  matcher: [
+    "/",
+    "/client",
+    "/admin",
+    "/base",
+    "/console",
+  ],
 };

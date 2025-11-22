@@ -60,8 +60,6 @@ function DeleteButton({ method, id, disabled, onDelete }: DeleteButtonProps) {
       setLoading(true);
       const res = await axios.delete(`/api/console/${deleteURL}/${id}`);
       if (res.data.requiresSignOut === true) {
-        console.log("go home");
-
         await signOut({ callbackUrl: "/" });
         return;
       }
@@ -81,6 +79,7 @@ function DeleteButton({ method, id, disabled, onDelete }: DeleteButtonProps) {
         type: "error",
         isOpened: true,
       });
+      console.log(error);
     }
   };
 

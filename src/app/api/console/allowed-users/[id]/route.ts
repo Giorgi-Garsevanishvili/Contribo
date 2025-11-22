@@ -57,7 +57,28 @@ export const PUT = async (req: NextRequest, context: Context) => {
       data: body,
     });
 
-    await prisma.user.update({where: {email: updatedAllowedUser.email}, data: {regionId: body.regionId, roleId: body.roleId}})
+    const user = await prisma.user.findUnique({
+      where: { email: updatedAllowedUser.email },
+    });
+
+    if (user && body.roleId) {
+      await prisma.user.update({
+        where: { id: user.id },
+        data: {
+          regionId: body.regionId,
+          roles: {
+            connect: [
+              { userId_roleId: { userId: user?.id, roleId: body.roleId } },
+            ],
+          },
+        },
+      });
+    } else {
+      return NextResponse.json(
+        { message: "user or body object is missing" },
+        { status: 500 }
+      );
+    }
 
     if (!updatedAllowedUser) {
       return NextResponse.json(
@@ -88,10 +109,14 @@ export const DELETE = async (req: NextRequest, context: Context) => {
       where: { id },
     });
 
-    await prisma.user.update({
+    const user = await prisma.user.findUnique({
       where: { email: deletedAllowedUser.email },
-      data: { roleId: null },
+      include: { roles: true },
     });
+
+    if (user) {
+      await prisma.userRole.deleteMany({ where: { userId: user.id } });
+    }
 
     if (!deletedAllowedUser) {
       return NextResponse.json(

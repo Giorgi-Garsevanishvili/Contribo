@@ -41,6 +41,7 @@ const authConfig: NextAuthConfig = {
 
       const allowed = await prisma.allowedUser.findUnique({
         where: { email: user.email },
+        select: { roleId: true, regionId: true },
       });
 
       if (!allowed) return;
@@ -48,8 +49,16 @@ const authConfig: NextAuthConfig = {
       await prisma.user.update({
         where: { id: user.id },
         data: {
-          roleId: allowed.roleId,
           regionId: allowed.regionId,
+          roles: allowed.roleId
+            ? {
+                create: {
+                  role: {
+                    connect: { id: allowed.roleId },
+                  },
+                },
+              }
+            : undefined,
         },
       });
     },
@@ -73,14 +82,16 @@ const authConfig: NextAuthConfig = {
           where: { email: user.email },
           select: {
             id: true,
-            role: { select: { name: true } },
-            region: { select: { name: true } },
+            roles: {
+              select: { role: { select: { name: true } } },
+            },
+            region: true,
           },
         });
 
         if (dbUser) {
           token.id = dbUser.id;
-          token.role = dbUser.role?.name as string;
+          token.roles = dbUser.roles.map((r) => r.role.name);
           token.region = dbUser.region?.name as string;
         }
       }
@@ -89,8 +100,8 @@ const authConfig: NextAuthConfig = {
     async session({ session, token }) {
       if (session?.user && token) {
         session.user.id = token.id as string;
-        session.user.role = token.role as string;
-        session.user.region = token.region as string
+        session.user.roles = token.roles as string[];
+        session.user.region = token.region as string;
       }
       return session;
     },

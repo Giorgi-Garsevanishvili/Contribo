@@ -109,6 +109,8 @@ function MiniDashCard<U extends UserAddType | DataAddType>({
         isOpened: true,
         setState: setAlert,
       });
+      console.log(error);
+      
       return;
     }
   };

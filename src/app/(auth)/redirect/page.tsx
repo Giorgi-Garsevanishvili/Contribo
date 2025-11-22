@@ -10,12 +10,19 @@ export default async function RedirectPage() {
     redirect("/signin");
   }
 
-  switch (session.user.role) {
-    case "QIRVEX":
-      redirect("/console");
-    case "ADMIN":
-      redirect("/admin");
-    default:
-      redirect("/client");
+  const roles = session?.user.roles as string[];
+
+  const priority = [
+    {name: "QIRVEX", path: "/console"},
+    {name: "ADMIN", path: "/admin"},
+    {name: "REGULAR", path: "/client"},
+  ]
+
+  for (const role of priority){
+    if(roles.includes(role.name)){
+      redirect(role.path)
+    }
   }
+
+  redirect("/unauthorized");
 }

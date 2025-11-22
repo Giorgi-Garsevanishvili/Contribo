@@ -148,7 +148,6 @@ function MiniDashDetails<
       );
       await axios.put(`${axiosPut}/${id}`, cleanPayload);
 
-      console.log(cleanPayload);
 
       fetchData(id);
       triggerCompAlert({
