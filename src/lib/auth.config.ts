@@ -41,7 +41,7 @@ const authConfig: NextAuthConfig = {
 
       const allowed = await prisma.allowedUser.findUnique({
         where: { email: user.email },
-        select: { roleId: true, regionId: true },
+        select: { regionId: true, id: true },
       });
 
       if (!allowed) return;
@@ -50,15 +50,7 @@ const authConfig: NextAuthConfig = {
         where: { id: user.id },
         data: {
           regionId: allowed.regionId,
-          roles: allowed.roleId
-            ? {
-                create: {
-                  role: {
-                    connect: { id: allowed.roleId },
-                  },
-                },
-              }
-            : undefined,
+          allowedUserId: allowed.id,
         },
       });
     },
@@ -78,7 +70,7 @@ const authConfig: NextAuthConfig = {
 
     async jwt({ token, user }) {
       if (user?.email) {
-        const dbUser = await prisma.user.findUnique({
+        const dbUser = await prisma.allowedUser.findUnique({
           where: { email: user.email },
           select: {
             id: true,

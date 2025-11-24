@@ -17,7 +17,7 @@ export const GET = async (_req: NextRequest, context: Context) => {
 
     const allowedUser = await prisma.allowedUser.findUnique({
       where: { id },
-      include: { role: true, region: true, createdBy: true },
+      include: { roles: true, region: true, createdBy: true },
     });
 
     if (!allowedUser) {
@@ -61,16 +61,11 @@ export const PUT = async (req: NextRequest, context: Context) => {
       where: { email: updatedAllowedUser.email },
     });
 
-    if (user && body.roleId) {
+    if (user) {
       await prisma.user.update({
         where: { id: user.id },
         data: {
           regionId: body.regionId,
-          roles: {
-            connect: [
-              { userId_roleId: { userId: user?.id, roleId: body.roleId } },
-            ],
-          },
         },
       });
     } else {
@@ -108,15 +103,6 @@ export const DELETE = async (req: NextRequest, context: Context) => {
     const deletedAllowedUser = await prisma.allowedUser.delete({
       where: { id },
     });
-
-    const user = await prisma.user.findUnique({
-      where: { email: deletedAllowedUser.email },
-      include: { roles: true },
-    });
-
-    if (user) {
-      await prisma.userRole.deleteMany({ where: { userId: user.id } });
-    }
 
     if (!deletedAllowedUser) {
       return NextResponse.json(

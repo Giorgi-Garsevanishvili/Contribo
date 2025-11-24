@@ -165,7 +165,6 @@ function MiniDashDetails<
         isOpened: true,
       });
       setIsLoading(false);
-      console.log(error);
       return;
     }
   };

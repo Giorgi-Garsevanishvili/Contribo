@@ -18,17 +18,20 @@ export const requireRole = async (role: string) => {
 
   const dbUser = await prisma.user.findUnique({
     where: { email: session.user.email },
-    include: { roles: { include: { role: true } } },
+    include: {
+      ownAllowance: {
+        select: { roles: { select: { role: { select: { name: true } } } } },
+      },
+    },
   });
 
-  if (!dbUser || dbUser.roles.length === 0) {
+  if (!dbUser || !dbUser.ownAllowance) {
     const err: AuthError = new Error("User has no role");
     err.status = 403;
     throw err;
   }
 
-  const hasRole = dbUser.roles.some((r) => r.role.name === role);
-
+  const hasRole = dbUser.ownAllowance.roles.some((r) => r.role.name === role);
   if (!hasRole) {
     const err: AuthError = new Error("Unauthorized access");
     err.status = 403;

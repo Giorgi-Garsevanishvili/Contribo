@@ -6,7 +6,7 @@ export type Context = {
 };
 
 export type AllowedUsersWithRelations = Prisma.AllowedUserGetPayload<{
-  include: { role: true; region: true; createdBy: true };
+  include: {roles: {include: {role: true}}, region: true; createdBy: true };
 }>;
 
 export type GeneralDataWithRelations = Position;

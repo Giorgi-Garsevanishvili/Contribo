@@ -15,7 +15,6 @@ model User {
   image          String?
   regionId       String?
   region         Region?         @relation(fields: [regionId], references: [id], onDelete: SetNull)
-  roles          UserRole[]      @relation("roleForUsers")
   memberStatusId String?
   memberStatus   MemberStatus?   @relation(fields: [memberStatusId], references: [id], onDelete: SetNull)
   reqStatus      ReqStatus       @default(PENDING)
@@ -44,8 +43,9 @@ model User {
   scheduledEventEmails ScheduledEmails[]
   hrWarnings           HrWarning[]       @relation("HrWarnings")
   createdHrWarning     HrWarning[]       @relation("CreatedHrWarnings")
-  CreatedAllowedUser   AllowedUser[] @relation("createdAllowanceBy")
-  ownAllowance AllowedUser[] @relation("ownAllowance")
+  CreatedAllowedUser   AllowedUser[]     @relation("createdAllowanceBy")
+  allowedUserId        String?           @unique
+  ownAllowance         AllowedUser?      @relation(fields: [allowedUserId], references: [id])
 }
 
 //Roles and Region data must be moved to allowed user table and make reference between user and allowed user so allowed user table will be main access and region controller for user, and during the fetch user we can include allowed user table and modify data based on that
@@ -275,7 +275,7 @@ model Region {
   address     String?
   website     String?
   createdAt   DateTime     @default(now())
-  updatedAt   DateTime     @updatedAt
+  updatedAt   DateTime?    @updatedAt
   status      RegionStatus @default(PENDING)
 
   users        User[]
@@ -294,36 +294,37 @@ model UserRole {
   userId String
   roleId String
 
-  user User @relation("roleForUsers", fields: [userId], references: [id])
-  role Role @relation("userForRoles", fields: [roleId], references: [id])
+  user AllowedUser @relation("roleForUsers", fields: [userId], references: [id])
+  role Role        @relation("userForRoles", fields: [roleId], references: [id])
 
   @@id([userId, roleId])
 }
 
 model AllowedUser {
-  id        String  @id @default(cuid())
-  email     String  @unique
-  roleId    String?
+  id    String @id @default(cuid())
+  email String @unique
+
   regionId  String?
   creatorId String?
   region    Region? @relation(fields: [regionId], references: [id], onDelete: SetNull)
-  role      Role?   @relation(fields: [roleId], references: [id], onDelete: SetNull)
-  type      GTypes  @default(REGION)
 
-  createdBy User? @relation("createdAllowanceBy",fields: [creatorId], references: [id], onDelete: SetNull)
+  type  GTypes     @default(REGION)
+  roles UserRole[] @relation("roleForUsers")
 
-  user User? @relation("ownAllowance",fields: [email], references: [email])
+  createdBy User? @relation("createdAllowanceBy", fields: [creatorId], references: [id], onDelete: SetNull)
+
+  userId    String?
+  user      User?     @relation
   updatedAt DateTime? @updatedAt
   createdAt DateTime  @default(now())
 }
 
 model Role {
-  id          String        @id @default(uuid())
-  name        String        @unique
-  createdAt   DateTime      @default(now())
-  updatedAt   DateTime?     @updatedAt
-  allowedUser AllowedUser[]
-  userRoles   UserRole[]    @relation("userForRoles")
+  id        String     @id @default(uuid())
+  name      String     @unique
+  createdAt DateTime   @default(now())
+  updatedAt DateTime?  @updatedAt
+  userRoles UserRole[] @relation("userForRoles")
 }
 
 model Account {

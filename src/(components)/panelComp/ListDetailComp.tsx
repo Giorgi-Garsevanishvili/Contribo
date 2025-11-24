@@ -38,9 +38,15 @@ function ListDetailComp({ type, data }: ListDetailCompProps) {
                 </li>
                 <li>
                   Role:{" "}
-                  <span className="text-blue-300">
-                    {data.role?.name || "Not Set"}
-                  </span>
+                  {data.roles.length > 0 ? (
+                    data.roles.map((roleItem, i) => (
+                      <span key={i} className="text-blue-300">
+                        {roleItem.role.name ?? "Not Set"}
+                      </span>
+                    ))
+                  ) : (
+                    <span className="text-blue-300">Not Set</span>
+                  )}
                 </li>
                 <li>
                   Created By:{" "}
@@ -137,7 +143,7 @@ function ListDetailComp({ type, data }: ListDetailCompProps) {
                 <li>
                   Updated At:{" "}
                   <span className="text-blue-300">
-                    {data.updatedAt?.toLocaleString()|| "Not Updated"}
+                    {data.updatedAt?.toLocaleString() || "Not Updated"}
                   </span>
                 </li>
               </>

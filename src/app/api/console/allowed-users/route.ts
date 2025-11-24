@@ -11,7 +11,7 @@ export const GET = async (_req: NextRequest) => {
     await requireRole("QIRVEX");
 
     const allowedUsers = await prisma.allowedUser.findMany({
-      include: { role: true, region: true, createdBy: true },
+      include: { roles: true, region: true, createdBy: true },
     });
 
     if (!allowedUsers || allowedUsers.length === 0) {
@@ -59,18 +59,12 @@ export const POST = async (req: NextRequest) => {
     if (
       user &&
       user.email &&
-      user.email === newAllowedUser.email &&
-      body.roleId
+      user.email === newAllowedUser.email
     ) {
       await prisma.user.update({
         where: { email: newAllowedUser.email },
         data: {
           regionId: body.regionId,
-          roles: {
-            create: {
-              role: { connect: {id: body.roleId}},
-            },
-          },
         },
       });
     }
