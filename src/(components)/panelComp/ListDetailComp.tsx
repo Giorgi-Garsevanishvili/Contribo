@@ -36,18 +36,20 @@ function ListDetailComp({ type, data }: ListDetailCompProps) {
                     {data.region?.name || "Not Set"}
                   </span>
                 </li>
+
                 <li>
                   Role:{" "}
                   {data.roles.length > 0 ? (
-                    data.roles.map((roleItem, i) => (
-                      <span key={i} className="text-blue-300">
-                        {roleItem.role.name ?? "Not Set"}
-                      </span>
-                    ))
+                    <span className="ml-2 text-blue-300">
+                      {data.roles
+                        .map((r) => r.role.name || "Not Set")
+                        .join(", ")}
+                    </span>
                   ) : (
                     <span className="text-blue-300">Not Set</span>
                   )}
                 </li>
+
                 <li>
                   Created By:{" "}
                   <span className="text-blue-300">

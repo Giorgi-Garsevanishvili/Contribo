@@ -17,7 +17,7 @@ export const GET = async (_req: NextRequest, context: Context) => {
 
     const allowedUser = await prisma.allowedUser.findUnique({
       where: { id },
-      include: { roles: true, region: true, createdBy: true },
+      include: { roles: {include: {role: true}}, region: true, createdBy: true },
     });
 
     if (!allowedUser) {

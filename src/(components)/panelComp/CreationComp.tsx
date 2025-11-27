@@ -67,11 +67,11 @@ function CreationComponent(props: addDataProp) {
       ) : (
         <form
           onSubmit={(e) => onSubmit(e)}
-          className={`flex flex-col w-full p-0.5 overflow-hidden ${
+          className={`flex-grow flex-col w-full p-0.5 overflow-hidden ${
             addOpened
               ? "max-h-40 opacity-100 pointer-events-auto"
               : "max-h-0 opacity-0 pointer-events-none"
-          }  items-center  justify-center ease-in-out duration-300 transition`}
+          }  items-center  justify-center ease-in-out duration-300 transition overflow-y-auto`}
         >
           <div className="flex flex-row w-full items-center m-1 justify-center">
             {type === "general" ? (
