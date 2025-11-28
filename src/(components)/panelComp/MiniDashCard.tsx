@@ -89,6 +89,8 @@ function MiniDashCard<U extends UserAddType | DataAddType>({
 
       setIsLoading(true);
       e.preventDefault();
+      console.log(dataAdd);
+      
       await axios.post(`${axiosPost}`, dataAdd);
       setIsLoading(false);
       triggerAlert({
@@ -100,6 +102,8 @@ function MiniDashCard<U extends UserAddType | DataAddType>({
       fetchData();
       setDataAdd(dataClear);
     } catch (error) {
+      console.log(error);
+      
       const errorMessage = getClientErrorMessage(error);
       setIsLoading(false);
       setDataAdd(dataClear);

@@ -17,7 +17,11 @@ export const GET = async (_req: NextRequest, context: Context) => {
 
     const allowedUser = await prisma.allowedUser.findUnique({
       where: { id },
-      include: { roles: {include: {role: true}}, region: true, createdBy: true },
+      include: {
+        roles: { include: { role: true } },
+        region: true,
+        createdBy: true,
+      },
     });
 
     if (!allowedUser) {
@@ -52,9 +56,20 @@ export const PUT = async (req: NextRequest, context: Context) => {
       });
     }
 
+    await prisma.userRole.deleteMany({ where: { userId: id } });
+
+    if (body.roleId && body.roleId.length > 0) {
+      await prisma.userRole.createMany({
+        data: body.roleId.map((roleId) => ({ userId: id, roleId })),
+      });
+    }
+
     const updatedAllowedUser = await prisma.allowedUser.update({
       where: { id },
-      data: body,
+      data: {
+        regionId: body.regionId,
+      },
+      include: { roles: { include: { role: true } } },
     });
 
     const user = await prisma.user.findUnique({
@@ -86,6 +101,8 @@ export const PUT = async (req: NextRequest, context: Context) => {
       message: `Allowed User with Email: ${updatedAllowedUser.email}, updated successfully`,
     });
   } catch (error) {
+    console.log(error);
+
     const { status, message } = handleError(error);
     return NextResponse.json({ error: message }, { status: status });
   }

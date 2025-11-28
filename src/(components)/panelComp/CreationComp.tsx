@@ -11,7 +11,7 @@ export type DataAddType = {
 
 export type UserAddType = {
   email?: string;
-  roleId: string;
+  roleId: string[];
   regionId: string;
 };
 
@@ -44,7 +44,7 @@ type addDataProp =
     };
 
 export const AddDataObj = { name: "" };
-export const UserAddObj = { email: "", roleId: "", regionId: "" };
+export const UserAddObj = { email: "", roleId: [""], regionId: "" };
 
 function CreationComponent(props: addDataProp) {
   const [addOpened, setAddOpened] = useState(false);
@@ -69,7 +69,7 @@ function CreationComponent(props: addDataProp) {
           onSubmit={(e) => onSubmit(e)}
           className={`flex-grow flex-col w-full p-0.5 overflow-hidden ${
             addOpened
-              ? "max-h-40 opacity-100 pointer-events-auto"
+              ? "max-h-full opacity-100 pointer-events-auto"
               : "max-h-0 opacity-0 pointer-events-none"
           }  items-center  justify-center ease-in-out duration-300 transition overflow-y-auto`}
         >

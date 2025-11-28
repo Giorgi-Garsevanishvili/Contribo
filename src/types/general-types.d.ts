@@ -13,7 +13,7 @@ export type GeneralDataWithRelations = Position;
 
 export type UserDataUpdateType = {
   regionId: string;
-  roleId: string;
+  roleId: string[];
 };
 
 export type GeneralDataUpdateType = {

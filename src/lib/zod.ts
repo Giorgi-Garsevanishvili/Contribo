@@ -57,7 +57,7 @@ export const AllowedUserCreate = z
   .object({
     email: z.email(),
     regionId: z.string().optional(),
-    roleId: z.string().optional(),
+    roleId: z.array(z.string()).optional(),
     type: z.enum(GTypes).default(GTypes.SYSTEM),
     creatorId: z.string(),
   })

@@ -294,8 +294,8 @@ model UserRole {
   userId String
   roleId String
 
-  user AllowedUser @relation("roleForUsers", fields: [userId], references: [id])
-  role Role        @relation("userForRoles", fields: [roleId], references: [id])
+  user AllowedUser @relation("roleForUsers", fields: [userId], references: [id], onDelete: Cascade)
+  role Role        @relation("userForRoles", fields: [roleId], references: [id], onDelete: Cascade)
 
   @@id([userId, roleId])
 }

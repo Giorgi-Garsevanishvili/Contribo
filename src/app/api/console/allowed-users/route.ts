@@ -50,17 +50,28 @@ export const POST = async (req: NextRequest) => {
       );
     }
 
-    const newAllowedUser = await prisma.allowedUser.create({ data: body });
+    const newAllowedUser = await prisma.allowedUser.create({
+      data: {
+        email: body.email,
+        regionId: body.regionId,
+        creatorId: thisUser.user.id,
+      },
+    });
+
+    if (body.roleId && body.roleId.length > 0) {
+      await prisma.userRole.createMany({
+        data: body.roleId.map((roleId) => ({
+          userId: newAllowedUser.id,
+          roleId: roleId,
+        })),
+      });
+    }
 
     const user = await prisma.user.findUnique({
       where: { email: newAllowedUser.email },
     });
 
-    if (
-      user &&
-      user.email &&
-      user.email === newAllowedUser.email
-    ) {
+    if (user && user.email && user.email === newAllowedUser.email) {
       await prisma.user.update({
         where: { email: newAllowedUser.email },
         data: {
@@ -81,6 +92,8 @@ export const POST = async (req: NextRequest) => {
     });
   } catch (error) {
     const { status, message } = handleError(error);
+    console.log(error);
+
     return NextResponse.json({ error: message }, { status: status });
   }
 };

@@ -36,7 +36,7 @@ const RegionDataUpdateObj = {
 
 const UserDataUpdateObj = {
   regionId: "",
-  roleId: "",
+  roleId: [""],
 };
 
 const GeneralDataUpdateObj = {
@@ -146,8 +146,9 @@ function MiniDashDetails<
           ([_, value]) => value !== "" && value !== undefined
         )
       );
-      await axios.put(`${axiosPut}/${id}`, cleanPayload);
+      console.log(cleanPayload);
 
+      await axios.put(`${axiosPut}/${id}`, cleanPayload);
 
       fetchData(id);
       triggerCompAlert({
@@ -158,6 +159,8 @@ function MiniDashDetails<
       switcher.clean();
       setIsUpdateOpen(false);
     } catch (error) {
+      console.log(error);
+
       const errorMsg = getClientErrorMessage(error);
       triggerCompAlert({
         message: errorMsg,
@@ -233,7 +236,7 @@ function MiniDashDetails<
                 Update Form
               </label>
               {type === "user" ? (
-                <RegionRoleSelect action={setUpdateUserData} />
+                <RegionRoleSelect user={data} action={setUpdateUserData} />
               ) : type === "region" ? (
                 <RegionDataUpdate action={setUpdateRegionData} />
               ) : type === "general" ? (

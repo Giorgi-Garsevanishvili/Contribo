@@ -1,17 +1,20 @@
 import useRegionRole from "@/hooks/useRegionRole";
+import { AllowedUsersWithRelations } from "@/types/general-types";
 
 type UserDataUpdateType = {
-  roleId: string;
+  roleId: string[];
   regionId: string;
   email?: string;
 };
 
 type RegionRoleSelectorType<U> = {
   action: React.Dispatch<React.SetStateAction<U>>;
+  user?: AllowedUsersWithRelations;
 };
 
 function RegionRoleSelect<U extends UserDataUpdateType>({
   action,
+  user,
 }: RegionRoleSelectorType<U>) {
   const { roles, regions } = useRegionRole();
   return (
@@ -23,8 +26,20 @@ function RegionRoleSelect<U extends UserDataUpdateType>({
                 <label htmlFor={role.id}>{role.name}</label>
                 <input
                   id={role.id}
+                  
                   onChange={(e) =>
-                    action((prev) => ({ ...prev, roleId: e.target.value }))
+                    action((prev) => {
+                      const id = role.id;
+                      const isChecked = e.target.checked;
+                      //Logic for check and for clear role need adjustments
+                      const cleanId = prev.roleId.filter((r) => r !== "");
+                      return {
+                        ...prev,
+                        roleId: isChecked
+                          ? [...cleanId, id]
+                          : cleanId.filter((r) => r !== id),
+                      };
+                    })
                   }
                   className="bg-gray-700 m-1"
                   type="checkbox"
