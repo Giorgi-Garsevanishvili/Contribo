@@ -1,5 +1,6 @@
 import useRegionRole from "@/hooks/useRegionRole";
 import { AllowedUsersWithRelations } from "@/types/general-types";
+import { useEffect } from "react";
 
 type UserDataUpdateType = {
   roleId: string[];
@@ -9,7 +10,7 @@ type UserDataUpdateType = {
 
 type RegionRoleSelectorType<U> = {
   action: React.Dispatch<React.SetStateAction<U>>;
-  user?: AllowedUsersWithRelations;
+  user?: UserDataUpdateType;
 };
 
 function RegionRoleSelect<U extends UserDataUpdateType>({
@@ -26,12 +27,11 @@ function RegionRoleSelect<U extends UserDataUpdateType>({
                 <label htmlFor={role.id}>{role.name}</label>
                 <input
                   id={role.id}
-                  
+                  checked={user?.roleId?.some((r) => r === role.id)}
                   onChange={(e) =>
                     action((prev) => {
                       const id = role.id;
                       const isChecked = e.target.checked;
-                      //Logic for check and for clear role need adjustments
                       const cleanId = prev.roleId.filter((r) => r !== "");
                       return {
                         ...prev,

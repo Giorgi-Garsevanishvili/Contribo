@@ -92,8 +92,6 @@ export const POST = async (req: NextRequest) => {
     });
   } catch (error) {
     const { status, message } = handleError(error);
-    console.log(error);
-
     return NextResponse.json({ error: message }, { status: status });
   }
 };

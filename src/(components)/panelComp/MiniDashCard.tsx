@@ -89,8 +89,7 @@ function MiniDashCard<U extends UserAddType | DataAddType>({
 
       setIsLoading(true);
       e.preventDefault();
-      console.log(dataAdd);
-      
+
       await axios.post(`${axiosPost}`, dataAdd);
       setIsLoading(false);
       triggerAlert({
@@ -102,8 +101,6 @@ function MiniDashCard<U extends UserAddType | DataAddType>({
       fetchData();
       setDataAdd(dataClear);
     } catch (error) {
-      console.log(error);
-      
       const errorMessage = getClientErrorMessage(error);
       setIsLoading(false);
       setDataAdd(dataClear);
@@ -113,7 +110,7 @@ function MiniDashCard<U extends UserAddType | DataAddType>({
         isOpened: true,
         setState: setAlert,
       });
-      
+
       return;
     }
   };
@@ -123,7 +120,7 @@ function MiniDashCard<U extends UserAddType | DataAddType>({
       setIsLoading(true);
 
       if (type === "general" || type === "user") {
-        setData([])
+        setData([]);
         const data = await axios.get<[]>(`${axiosGet}`);
         setData(data.data);
       }
@@ -139,6 +136,7 @@ function MiniDashCard<U extends UserAddType | DataAddType>({
     } catch (error) {
       const errorMessage = getClientErrorMessage(error);
       setIsLoading(false);
+
       triggerAlert({
         message: errorMessage,
         type: "error",

@@ -59,13 +59,18 @@ function DeleteButton({ method, id, disabled, onDelete }: DeleteButtonProps) {
     try {
       setLoading(true);
       const res = await axios.delete(`/api/console/${deleteURL}/${id}`);
-      if (res.data.requiresSignOut === true) {
-        await signOut({ callbackUrl: "/" });
-        return;
+      const signOutReq = res.data.requiresSignOut === true;
+      if (signOutReq) {
+        setTimeout(async () => {
+          await signOut({ callbackUrl: "/" });
+          return;
+        }, 4000);
       }
 
       triggerCompAlert({
-        message: `${method.toUpperCase()} Deleted`,
+        message: signOutReq
+          ? "Your Account Deleted"
+          : `${method.toUpperCase()} Deleted`,
         type: "success",
         isOpened: true,
       });
@@ -79,7 +84,6 @@ function DeleteButton({ method, id, disabled, onDelete }: DeleteButtonProps) {
         type: "error",
         isOpened: true,
       });
-      console.log(error);
     }
   };
 

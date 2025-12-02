@@ -96,13 +96,17 @@ export const PUT = async (req: NextRequest, context: Context) => {
         { status: 400 }
       );
     }
+    if (updatedAllowedUser.email === thisUser?.user.email) {
+      return NextResponse.json({
+        requiresSignOut: true,
+        message: "Your permissions were revoked",
+      });
+    }
 
     return NextResponse.json({
       message: `Allowed User with Email: ${updatedAllowedUser.email}, updated successfully`,
     });
   } catch (error) {
-    console.log(error);
-
     const { status, message } = handleError(error);
     return NextResponse.json({ error: message }, { status: status });
   }

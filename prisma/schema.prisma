@@ -45,7 +45,7 @@ model User {
   createdHrWarning     HrWarning[]       @relation("CreatedHrWarnings")
   CreatedAllowedUser   AllowedUser[]     @relation("createdAllowanceBy")
   allowedUserId        String?           @unique
-  ownAllowance         AllowedUser?      @relation(fields: [allowedUserId], references: [id])
+  ownAllowance         AllowedUser?      @relation(fields: [email], references: [email], onDelete: Cascade)
 }
 
 //Roles and Region data must be moved to allowed user table and make reference between user and allowed user so allowed user table will be main access and region controller for user, and during the fetch user we can include allowed user table and modify data based on that

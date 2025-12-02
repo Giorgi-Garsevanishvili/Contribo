@@ -10,6 +10,7 @@ import LoadingComp from "@/(components)/generalComp/LoadingComp";
 import RegionRoleSelect from "@/(components)/panelComp/RegionRoleSelect";
 import { useCompAlert } from "@/hooks/useCompAlert";
 import { getClientErrorMessage } from "@/lib/errors/clientErrors";
+import { signOut } from "next-auth/react";
 import {
   AllowedUsersWithRelations,
   GeneralDataUpdateType,
@@ -126,11 +127,12 @@ function MiniDashDetails<
             ? new Date(response.data.updatedAt)
             : null,
         };
+        const roleIds = userData.roles.map((r: { roleId: string }) => r.roleId);
+        setUpdateUserData({ regionId: "", roleId: roleIds });
         setData(userData);
         setIsLoading(false);
       } catch (error) {
         setIsLoading(false);
-        console.log(error);
         return;
       }
     },
@@ -146,21 +148,27 @@ function MiniDashDetails<
           ([_, value]) => value !== "" && value !== undefined
         )
       );
-      console.log(cleanPayload);
 
-      await axios.put(`${axiosPut}/${id}`, cleanPayload);
+      const res = await axios.put(`${axiosPut}/${id}`, cleanPayload);
+      const signOutReq = res.data.requiresSignOut === true;
+      if (signOutReq) {
+        setTimeout(async () => {
+          await signOut({ callbackUrl: "/" });
+          return;
+        }, 4000);
+      }
 
       fetchData(id);
       triggerCompAlert({
-        message: `${title} Updated`,
-        type: "success",
+        message: signOutReq
+          ? "Your account updated please sign in again!"
+          : `${title} Updated`,
+        type: signOutReq ? "warning" : "success",
         isOpened: true,
       });
       switcher.clean();
       setIsUpdateOpen(false);
     } catch (error) {
-      console.log(error);
-
       const errorMsg = getClientErrorMessage(error);
       triggerCompAlert({
         message: errorMsg,
@@ -236,7 +244,10 @@ function MiniDashDetails<
                 Update Form
               </label>
               {type === "user" ? (
-                <RegionRoleSelect user={data} action={setUpdateUserData} />
+                <RegionRoleSelect
+                  user={updateUserData}
+                  action={setUpdateUserData}
+                />
               ) : type === "region" ? (
                 <RegionDataUpdate action={setUpdateRegionData} />
               ) : type === "general" ? (
