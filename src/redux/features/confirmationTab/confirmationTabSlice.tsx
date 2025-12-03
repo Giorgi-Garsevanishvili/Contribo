@@ -3,8 +3,8 @@ import { ConfirmProp } from "./confirmationTab";
 import { RootState } from "@/redux/store";
 
 const initialState = {
-  title: "Would You Like To delete?",
-  message: "if you will delete this account user data will be fully erased!",
+  title: "",
+  message: "",
   opt1: "Yes",
   opt2: "No",
   isOpened: false,
@@ -17,15 +17,18 @@ const ConfirmationTabSlice = createSlice({
   reducers: {
     confirm(state) {
       state.confirmed = true;
+      state.isOpened = false
     },
     terminate(state) {
       state.confirmed = false;
+      state.isOpened = false;
     },
     setConfirmTab(state, action: PayloadAction<ConfirmProp>) {
       return { ...state, ...action.payload };
     },
     closeConfirmTab(state) {
-      state.isOpened === false;
+      state.isOpened = false;
+      state.confirmed = false;
     },
   },
 });

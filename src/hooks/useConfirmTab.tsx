@@ -1,6 +1,6 @@
-import { ConfirmProp } from "@/redux/features/confirmationTab/confirmationTab";
 import {
   closeConfirmTab,
+  confirm,
   ConfirmTabState,
   setConfirmTab,
   terminate,
@@ -9,36 +9,48 @@ import { AppDispatch } from "@/redux/store";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
-export const useConfirmTab = () => {
-  const dispatchConfirmComponent = useDispatch<AppDispatch>();
-  const confirmTabState = useSelector(ConfirmTabState);
+let resolver: ((value: boolean) => void) | null = null;
 
-  const triggerConfirmTab = ({
-    message,
-    isOpened,
-    title,
-    opt1,
-    opt2,
-  }: ConfirmProp) => {
-    dispatchConfirmComponent(
-      setConfirmTab({
-        message,
-        title,
-        isOpened,
-        opt1,
-        opt2,
-      })
-    );
+export const useConfirmTab = () => {
+  const dispatch = useDispatch<AppDispatch>();
+  const confirmState = useSelector(ConfirmTabState);
+
+  const ask = (props: {
+    title: string;
+    message: string;
+    value: string;
+    opt1?: string;
+    opt2?: string;
+  }): Promise<boolean> => {
+    return new Promise<boolean>((resolve) => {
+      resolver = resolve;
+
+      dispatch(setConfirmTab({ ...props, isOpened: true }));
+    });
+  };
+
+  const onConfirm = () => {
+    dispatch(confirm());
+    resolver?.(true);
+    resolver = null;
+  };
+
+  const onReject = () => {
+    dispatch(terminate());
+    resolver?.(false);
+    resolver = null;
   };
 
   useEffect(() => {
-    if (!confirmTabState.isOpened) return;
-    const compTimeoutId = setTimeout(() => {
-      dispatchConfirmComponent(closeConfirmTab());
-      dispatchConfirmComponent(terminate());
-    }, 5000);
-    return () => clearTimeout(compTimeoutId);
-  }, [confirmTabState.isOpened, dispatchConfirmComponent]);
+    if (!confirmState.isOpened) return;
+    const timeout = setTimeout(() => {
+      dispatch(closeConfirmTab());
+      dispatch(terminate());
+      resolver?.(false);
+      resolver = null;
+    }, 20000);
+    return () => clearTimeout(timeout);
+  }, [confirmState.isOpened]);
 
-  return { triggerConfirmTab };
+  return { ask, onConfirm, onReject, confirmState };
 };

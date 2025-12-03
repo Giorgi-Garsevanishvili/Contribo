@@ -6,7 +6,7 @@ import useRegionRole from "@/hooks/useRegionRole";
 
 export type UserAddType = {
   email?: string;
-  roleId: string;
+  roleId: string[];
   regionId: string;
 };
 

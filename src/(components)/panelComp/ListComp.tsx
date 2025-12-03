@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import React from "react";
 import DeleteButton, { DeleteMethod } from "./DeleteButton";
 import { useRouter } from "next/navigation";
@@ -64,6 +64,7 @@ function ListComp(props: ListCompParams) {
                 </button>
                 <DeleteButton
                   id={item.id}
+                  value={item.email}
                   method={deleteMethod}
                   onDelete={fetchData}
                 />
@@ -86,6 +87,7 @@ function ListComp(props: ListCompParams) {
                 </button>
                 <DeleteButton
                   id={item.id}
+                  value={item.name}
                   method={deleteMethod}
                   onDelete={fetchData}
                 />
@@ -109,6 +111,7 @@ function ListComp(props: ListCompParams) {
                 <DeleteButton
                   id={item.id}
                   method={deleteMethod}
+                  value={item.name}
                   onDelete={fetchData}
                 />
               </li>
@@ -130,6 +133,7 @@ function ListComp(props: ListCompParams) {
                 </button>
                 <DeleteButton
                   id={item.id}
+                  value={item.name}
                   method={deleteMethod}
                   onDelete={fetchData}
                 />

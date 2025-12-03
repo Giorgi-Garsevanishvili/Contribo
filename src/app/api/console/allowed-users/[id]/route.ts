@@ -72,24 +72,6 @@ export const PUT = async (req: NextRequest, context: Context) => {
       include: { roles: { include: { role: true } } },
     });
 
-    const user = await prisma.user.findUnique({
-      where: { email: updatedAllowedUser.email },
-    });
-
-    if (user) {
-      await prisma.user.update({
-        where: { id: user.id },
-        data: {
-          regionId: body.regionId,
-        },
-      });
-    } else {
-      return NextResponse.json(
-        { message: "user or body object is missing" },
-        { status: 500 }
-      );
-    }
-
     if (!updatedAllowedUser) {
       return NextResponse.json(
         { message: "something went wrong!" },

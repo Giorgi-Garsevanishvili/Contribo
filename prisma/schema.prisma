@@ -13,8 +13,6 @@ model User {
   email          String          @unique
   emailVerified  DateTime?
   image          String?
-  regionId       String?
-  region         Region?         @relation(fields: [regionId], references: [id], onDelete: SetNull)
   memberStatusId String?
   memberStatus   MemberStatus?   @relation(fields: [memberStatusId], references: [id], onDelete: SetNull)
   reqStatus      ReqStatus       @default(PENDING)
@@ -278,7 +276,6 @@ model Region {
   updatedAt   DateTime?    @updatedAt
   status      RegionStatus @default(PENDING)
 
-  users        User[]
   allowedUsers AllowedUser[]
   joinRequests JoinRequest[]
 }
@@ -305,7 +302,6 @@ model AllowedUser {
   email String @unique
 
   regionId  String?
-  creatorId String?
   region    Region? @relation(fields: [regionId], references: [id], onDelete: SetNull)
 
   type  GTypes     @default(REGION)
@@ -317,6 +313,7 @@ model AllowedUser {
   user      User?     @relation
   updatedAt DateTime? @updatedAt
   createdAt DateTime  @default(now())
+  creatorId String?
 }
 
 model Role {

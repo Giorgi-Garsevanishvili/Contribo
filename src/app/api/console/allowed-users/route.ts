@@ -67,19 +67,6 @@ export const POST = async (req: NextRequest) => {
       });
     }
 
-    const user = await prisma.user.findUnique({
-      where: { email: newAllowedUser.email },
-    });
-
-    if (user && user.email && user.email === newAllowedUser.email) {
-      await prisma.user.update({
-        where: { email: newAllowedUser.email },
-        data: {
-          regionId: body.regionId,
-        },
-      });
-    }
-
     if (!newAllowedUser) {
       return NextResponse.json(
         { message: "Something went wrong!" },

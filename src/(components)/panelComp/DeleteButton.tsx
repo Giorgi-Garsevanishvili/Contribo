@@ -1,9 +1,10 @@
 "use client";
 import { useCompAlert } from "@/hooks/useCompAlert";
+import { useConfirmTab } from "@/hooks/useConfirmTab";
 import { getClientErrorMessage } from "@/lib/errors/clientErrors";
 import axios from "axios";
 import { signOut } from "next-auth/react";
-import React, { useState } from "react";
+import { useState } from "react";
 import { MdDeleteOutline } from "react-icons/md";
 
 export type DeleteMethod =
@@ -19,12 +20,20 @@ type DeleteButtonProps = {
   method: DeleteMethod;
   id: string | undefined;
   disabled?: boolean;
+  value?: string;
   onDelete?: () => void;
 };
 
-function DeleteButton({ method, id, disabled, onDelete }: DeleteButtonProps) {
+function DeleteButton({
+  method,
+  id,
+  disabled,
+  onDelete,
+  value,
+}: DeleteButtonProps) {
   const [loading, setLoading] = useState(false);
   const { triggerCompAlert } = useCompAlert();
+  const { ask } = useConfirmTab();
 
   const deleteUrl = () => {
     switch (method) {
@@ -58,6 +67,20 @@ function DeleteButton({ method, id, disabled, onDelete }: DeleteButtonProps) {
     const deleteURL = deleteUrl();
     try {
       setLoading(true);
+      const confirmed = await ask({
+        title: `Would you like to delete`,
+        value: `${value?.toUpperCase() || method.toUpperCase()}?`,
+        message: `${
+          method.includes("allowedUser")
+            ? `By Deleting user all related data will permanently delete.`
+            : "Action is permanent!"
+        }`,
+      });
+
+      if (!confirmed) {
+        setLoading(false);
+        return;
+      }
       const res = await axios.delete(`/api/console/${deleteURL}/${id}`);
       const signOutReq = res.data.requiresSignOut === true;
       if (signOutReq) {
