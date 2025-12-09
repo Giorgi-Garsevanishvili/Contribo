@@ -11,8 +11,8 @@ export const GET = async (_req: NextRequest) => {
     const adminUser = await requireRole("ADMIN");
 
     const allowedUsers = await prisma.allowedUser.findMany({
-      where: { regionId: adminUser.user.regionId },
-      include: { role: true, region: true, createdBy: true },
+      where: { regionId: adminUser.user.ownAllowance?.regionId },
+      include: { roles: true, region: true, createdBy: true, user: true },
     });
 
     if (!allowedUsers || allowedUsers.length === 0) {
@@ -34,11 +34,7 @@ export const POST = async (req: NextRequest) => {
     const thisUser = await requireRole("ADMIN");
 
     const json = (await req.json()) as z.infer<typeof AllowedUserCreate>;
-    const jsonWithCreator = {
-      ...json,
-      creatorId: thisUser.user.id,
-      regionId: thisUser.user.regionId,
-    };
+    const jsonWithCreator = { ...json, creatorId: thisUser.user.id, regionId: thisUser.user.ownAllowance?.regionId };
     const body = AllowedUserCreate.parse(jsonWithCreator);
 
     if (!body || !Object.keys(body).length) {
@@ -55,16 +51,19 @@ export const POST = async (req: NextRequest) => {
       );
     }
 
-    const newAllowedUser = await prisma.allowedUser.create({ data: body });
-
-    const user = await prisma.user.findUnique({
-      where: { email: newAllowedUser.email },
+    const newAllowedUser = await prisma.allowedUser.create({
+      data: {
+        email: body.email,
+        creatorId: thisUser.user.id,
+      },
     });
 
-    if (user && user.email && user.email === newAllowedUser.email) {
-      await prisma.user.update({
-        where: { email: newAllowedUser.email },
-        data: { regionId: body.regionId, roleId: body.roleId },
+    if (body.roleId && body.roleId.length > 0) {
+      await prisma.userRole.createMany({
+        data: body.roleId.map((roleId) => ({
+          userId: newAllowedUser.id,
+          roleId: roleId,
+        })),
       });
     }
 

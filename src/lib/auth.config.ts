@@ -49,7 +49,6 @@ const authConfig: NextAuthConfig = {
       await prisma.user.update({
         where: { id: user.id },
         data: {
-          regionId: allowed.regionId,
           allowedUserId: allowed.id,
         },
       });
@@ -61,9 +60,16 @@ const authConfig: NextAuthConfig = {
 
       const allowed = await prisma.allowedUser.findUnique({
         where: { email: user.email },
+        include: {
+          region: true,
+          roles: { select: { role: { select: { name: true } } } },
+        },
       });
 
       if (!allowed) return "/unauthorized-user";
+
+      if (allowed.roles.some((r) => r.role.name === "RESTRICT"))
+        return "/unauthorized-user";
 
       return true;
     },

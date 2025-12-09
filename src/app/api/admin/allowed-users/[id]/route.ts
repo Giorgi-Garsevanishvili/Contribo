@@ -8,7 +8,7 @@ import { Context } from "@/types/general-types";
 
 export const GET = async (_req: NextRequest, context: Context) => {
   try {
-    await requireRole("ADMIN");
+    const thisUser = await requireRole("ADMIN");
     const { id } = await context.params;
 
     if (!id) {
@@ -16,8 +16,13 @@ export const GET = async (_req: NextRequest, context: Context) => {
     }
 
     const allowedUser = await prisma.allowedUser.findUnique({
-      where: { id },
-      include: { role: true, region: true, createdBy: true },
+      where: { id, regionId: thisUser.user.ownAllowance?.regionId },
+      include: {
+        roles: { include: { role: true } },
+        region: { select: { id: true, name: true, status: true } },
+        createdBy: { select: { name: true, id: true } },
+        user: true,
+      },
     });
 
     if (!allowedUser) {
@@ -46,28 +51,31 @@ export const PUT = async (req: NextRequest, context: Context) => {
     };
     const body = AllowedUserUpdate.parse(jsonWithCreator);
 
-    if (!body.regionId && !body.roleId) {
+    if (!body.roleId) {
       return NextResponse.json({
-        message: "At least one field must be provided",
+        message: "Role must be provided to update",
       });
     }
 
-    const updatedAllowedUser = await prisma.allowedUser.update({
-      where: { id },
-      data: body,
-    });
+    if (body.regionId) {
+      return NextResponse.json({
+        message:
+          "Admin is not allowed to modify region, please contact your console admin.",
+      });
+    }
 
-    await prisma.user.update({where: {email: updatedAllowedUser.email}, data: {regionId: body.regionId, roleId: body.roleId}})
+    await prisma.userRole.deleteMany({ where: { userId: id } });
 
-    if (!updatedAllowedUser) {
-      return NextResponse.json(
-        { message: "something went wrong!" },
-        { status: 400 }
-      );
+    if (body.roleId && body.roleId.length > 0) {
+      await prisma.userRole.createMany({
+        data: body.roleId.map((roleId) => ({ userId: id, roleId })),
+      });
+    } else {
+      return NextResponse.json({ message: "Role is not provided" });
     }
 
     return NextResponse.json({
-      message: `Allowed User with Email: ${updatedAllowedUser.email}, updated successfully`,
+      message: `Allowed User, ${thisUser.user.name}, updated successfully`,
     });
   } catch (error) {
     const { status, message } = handleError(error);
@@ -86,11 +94,6 @@ export const DELETE = async (req: NextRequest, context: Context) => {
 
     const deletedAllowedUser = await prisma.allowedUser.delete({
       where: { id },
-    });
-
-    await prisma.user.update({
-      where: { email: deletedAllowedUser.email },
-      data: { roleId: null },
     });
 
     if (!deletedAllowedUser) {

@@ -20,7 +20,7 @@ export const requireRole = async (role: string) => {
     where: { email: session.user.email },
     include: {
       ownAllowance: {
-        select: { roles: { select: { role: { select: { name: true } } } } },
+        select: { roles: { select: { role: { select: { name: true } } } }, region: true, regionId: true },
       },
     },
   });
