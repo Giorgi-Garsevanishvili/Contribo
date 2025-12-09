@@ -109,7 +109,7 @@ export const DELETE = async (req: NextRequest, context: Context) => {
       select: { name: true },
     });
 
-    const declinedDeletion = ["ADMIN", "QIRVEX", "REGULAR"];
+    const declinedDeletion = ["ADMIN", "QIRVEX", "REGULAR", "RESTRICT"];
 
     if (roleData && declinedDeletion.includes(roleData.name)) {
       return NextResponse.json(

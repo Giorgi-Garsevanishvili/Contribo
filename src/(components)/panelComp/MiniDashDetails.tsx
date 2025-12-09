@@ -214,6 +214,7 @@ function MiniDashDetails<
             <div className="flex flex-row w-full justify-center items-center">
               <DeleteButton
                 id={data?.id}
+                value={data?.name}
                 method={deleteMethod}
                 onDelete={() =>
                   setTimeout(() => {
