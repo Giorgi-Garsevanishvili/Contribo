@@ -120,16 +120,16 @@ function MiniDashDetails<
       try {
         const response = await axios.get(`${axiosGet}/${id}`);
 
-        const userData = {
+        const Data = {
           ...response.data,
           createdAt: new Date(response.data.createdAt),
           updatedAt: response.data.updatedAt
             ? new Date(response.data.updatedAt)
             : null,
         };
-        const roleIds = userData.roles.map((r: { roleId: string }) => r.roleId);
+        const roleIds = Data.roles?.map((r: { roleId: string }) => r.roleId);
         setUpdateUserData({ regionId: "", roleId: roleIds });
-        setData(userData);
+        setData(Data);
         setIsLoading(false);
       } catch (error) {
         setIsLoading(false);
@@ -185,7 +185,7 @@ function MiniDashDetails<
   }, [id, axiosGet, fetchData]);
 
   return (
-    <div className="flex w-[22rem] h-[28rem] flex-col shadow-md shadow-white rounded-lg">
+    <div className="flex w-[22rem] h-[28rem] flex-col shadow-md m-2 shadow-white rounded-lg">
       <div className="flex flex-col w-full h-full scroll-smooth overflow-y-auto items-center justify-center m-0  text-white bg-gray-500/75 rounded-t-lg">
         {isLoading ? (
           <LoadingComp />

@@ -83,7 +83,7 @@ function CreationComponent(props: addDataProp) {
                     setDataAdd((prev) => ({ ...prev, name: e.target.value }))
                   }
                   type="name"
-                  placeholder="Add Allowed User Email"
+                  placeholder={`Add ${CompTitle} name`}
                   className="flex w-full input-def m-0.5 p-1.5 "
                 />
                 <button

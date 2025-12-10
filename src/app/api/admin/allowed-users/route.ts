@@ -12,7 +12,7 @@ export const GET = async (_req: NextRequest) => {
 
     const allowedUsers = await prisma.allowedUser.findMany({
       where: { regionId: adminUser.user.ownAllowance?.regionId },
-      include: { roles: true, region: true, createdBy: true, user: true },
+      select: { id: true, email: true, user: { select: { name: true } } },
     });
 
     if (!allowedUsers || allowedUsers.length === 0) {
@@ -34,7 +34,11 @@ export const POST = async (req: NextRequest) => {
     const thisUser = await requireRole("ADMIN");
 
     const json = (await req.json()) as z.infer<typeof AllowedUserCreate>;
-    const jsonWithCreator = { ...json, creatorId: thisUser.user.id, regionId: thisUser.user.ownAllowance?.regionId };
+    const jsonWithCreator = {
+      ...json,
+      creatorId: thisUser.user.id,
+      regionId: thisUser.user.ownAllowance?.regionId,
+    };
     const body = AllowedUserCreate.parse(jsonWithCreator);
 
     if (!body || !Object.keys(body).length) {
