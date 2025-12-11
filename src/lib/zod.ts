@@ -6,10 +6,8 @@ export const SoftDelete = z
     name: z.string(),
     email: z.email(),
     image: z.null().default(null),
-    roleId: z.null().default(null),
     deleted: z.boolean().default(true),
     deletedAt: z.date().default(() => new Date()),
-    rating: z.number().optional(),
     reqStatus: z.enum(ReqStatus).default(ReqStatus.PENDING),
   })
   .strict();
@@ -28,8 +26,6 @@ export const UserUpdateInput = z
     email: z.email().optional(),
     memberStatusId: z.string().optional(),
     positionId: z.string().optional(),
-    regionId: z.string().optional(),
-    roleId: z.string().optional(),
     deleted: z.boolean().optional(),
     reqStatus: z.enum(ReqStatus).optional(),
   })

@@ -93,7 +93,7 @@ export const DELETE = async (req: NextRequest, context: Context) => {
     }
 
     const deletedAllowedUser = await prisma.allowedUser.delete({
-      where: { id },
+      where: { id, regionId: session.user.ownAllowance?.regionId },
     });
 
     if (!deletedAllowedUser) {

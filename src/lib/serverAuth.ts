@@ -20,13 +20,19 @@ export const requireRole = async (role: string) => {
     where: { email: session.user.email },
     include: {
       ownAllowance: {
-        select: { roles: { select: { role: { select: { name: true } } } }, region: true, regionId: true },
+        select: {
+          roles: { select: { role: { select: { name: true } } } },
+          region: true,
+          regionId: true,
+        },
       },
     },
   });
 
   if (!dbUser || !dbUser.ownAllowance) {
-    const err: AuthError = new Error("User has no role");
+    const err: AuthError = new Error(
+      "User has no role or FK is lost for Allowed user table in user table. If user have roles please contact DB Manager to fix lost FK based on Email linking."
+    );
     err.status = 403;
     throw err;
   }

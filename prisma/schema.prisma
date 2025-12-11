@@ -18,7 +18,6 @@ model User {
   reqStatus      ReqStatus       @default(PENDING)
   positionId     String?
   position       Position?       @relation(fields: [positionId], references: [id], onDelete: SetNull)
-  rating         Int             @default(0)
   deletedAt      DateTime?
   deleted        Boolean         @default(false)
   accounts       Account[]
@@ -43,8 +42,8 @@ model User {
   createdHrWarning     HrWarning[]       @relation("CreatedHrWarnings")
   CreatedAllowedUser   AllowedUser[]     @relation("createdAllowanceBy")
   allowedUserId        String?           @unique
-  ownAllowance         AllowedUser?      @relation(fields: [email], references: [email], onDelete: Cascade)
-}
+  ownAllowance         AllowedUser?      @relation(fields: [allowedUserId], references: [id], onDelete: Cascade)
+} 
 
 
 enum RatingAction {
