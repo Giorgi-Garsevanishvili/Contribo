@@ -186,7 +186,7 @@ function MiniDashCard<U extends UserAddType | DataAddType>({
                 onChange={(e) => setSearchTerm(e.target.value)}
               />
             </div>
-            <div className="flex items-start justify-center mb-1 p-1 w-full h-full px-3  overflow-y-auto overflow-hidden">
+            <div className="flex items-start justify-start mb-1 p-1 w-full h-full px-3  overflow-y-auto overflow-hidden">
               <ul className="flex flex-col flex-grow gap-2 items-start justify-center">
                 {type === "user" ? (
                   <ListComp

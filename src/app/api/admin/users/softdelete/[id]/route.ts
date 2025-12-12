@@ -5,17 +5,12 @@ import { prisma } from "@/lib/prisma";
 import { requireRole } from "@/lib/serverAuth";
 import { NextRequest, NextResponse } from "next/server";
 import { SoftDelete, SoftDeleteInputType } from "@/lib/zod";
+import { Context } from "@/types/general-types";
 
-type Params = {
-  params: {
-    id: string;
-  };
-};
-
-export const DELETE = async (_req: NextRequest, { params }: Params) => {
+export const DELETE = async (_req: NextRequest, context: Context) => {
   try {
-    await requireRole("QIRVEX");
-    const { id } = await params;
+    await requireRole("ADMIN");
+    const { id } = await context.params;
 
     if (!id) {
       return NextResponse.json({ message: "Id is missing." }, { status: 400 });
@@ -23,7 +18,7 @@ export const DELETE = async (_req: NextRequest, { params }: Params) => {
 
     const user = await prisma.user.findUnique({
       where: { id },
-      select: { email: true },
+      select: { email: true, id: true, ownAllowance: true },
     });
 
     if (!user) {
@@ -39,9 +34,12 @@ export const DELETE = async (_req: NextRequest, { params }: Params) => {
     const userSoftData = await SoftDelete.parseAsync(userSoftInput);
 
     await prisma.$transaction([
-      prisma.allowedUser.delete({
+      prisma.allowedUser.update({
         where: { email: user?.email },
+        data: { email: `${anonymizedIdentifier}@delete.com` },
       }),
+
+      prisma.userRole.deleteMany({ where: { userId: user.ownAllowance?.id } }),
 
       prisma.account.deleteMany({ where: { userId: id } }),
 
