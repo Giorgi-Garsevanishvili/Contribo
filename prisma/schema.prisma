@@ -17,6 +17,7 @@ model User {
   memberStatus   MemberStatus?   @relation(fields: [memberStatusId], references: [id], onDelete: SetNull)
   reqStatus      ReqStatus       @default(PENDING)
   positionId     String?
+  rating         Int             @default(0)
   position       Position?       @relation(fields: [positionId], references: [id], onDelete: SetNull)
   deletedAt      DateTime?
   deleted        Boolean         @default(false)
@@ -33,7 +34,8 @@ model User {
   positionChanges     PositionHistory[] @relation("PositionChangedBy")
   positionHistories   PositionHistory[]
   ratingHistory       RatingHistory[]   @relation("UserRating")
-  createdRating       RatingHistory[]   @relation("CreatedRatingBy")
+  createdRatings       RatingHistory[]   @relation("CreatedRatingBy")
+  updatedRatings RatingHistory[]   @relation("UpdatedRatingBy")
 
   eventAssignments     EventAssignment[]
   providedFeedbacks    EventFeedback[]
@@ -43,8 +45,7 @@ model User {
   CreatedAllowedUser   AllowedUser[]     @relation("createdAllowanceBy")
   allowedUserId        String?           @unique
   ownAllowance         AllowedUser?      @relation(fields: [allowedUserId], references: [id], onDelete: Cascade)
-} 
-
+}
 
 enum RatingAction {
   INCREASE
@@ -168,15 +169,19 @@ model EventAssignment {
 model RatingHistory {
   id          String       @id @default(cuid())
   userId      String
+  newValue    Int
+  oldValue    Int
   value       Int
   action      RatingAction
   reason      String?
   createdById String?
+  updatedById String?
   createdAt   DateTime     @default(now())
   updatedAt   DateTime?    @updatedAt
 
   user      User  @relation("UserRating", fields: [userId], references: [id], onDelete: Cascade)
   createdBy User? @relation("CreatedRatingBy", fields: [createdById], references: [id], onDelete: SetNull)
+  updatedBy User? @relation("UpdatedRatingBy", fields: [updatedById], references: [id], onDelete: SetNull)
 
   @@index([userId])
   @@index([createdById])
@@ -299,8 +304,8 @@ model AllowedUser {
   id    String @id @default(cuid())
   email String @unique
 
-  regionId  String?
-  region    Region? @relation(fields: [regionId], references: [id], onDelete: SetNull)
+  regionId String?
+  region   Region? @relation(fields: [regionId], references: [id], onDelete: SetNull)
 
   type  GTypes     @default(REGION)
   roles UserRole[] @relation("roleForUsers")

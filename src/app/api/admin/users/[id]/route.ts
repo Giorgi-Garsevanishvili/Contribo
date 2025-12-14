@@ -24,7 +24,7 @@ export const GET = async (_req: NextRequest, context: Context) => {
       include: {
         memberStatusLogs: true,
         positionHistories: true,
-        ratingHistory: true,
+        ratingHistory: {select: {id: true, newValue: true, value: true, action: true,}},
         eventAssignments: true,
         providedFeedbacks: true,
         hrWarnings: true,

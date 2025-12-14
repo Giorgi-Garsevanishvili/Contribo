@@ -1,4 +1,4 @@
-import { GTypes, RegionStatus, ReqStatus } from "@prisma/client";
+import { GTypes, RatingAction, RegionStatus, ReqStatus } from "@prisma/client";
 import { z } from "zod";
 
 export const SoftDelete = z
@@ -72,7 +72,7 @@ export const DefaultSystemValuesCreate = z
   })
   .strict();
 
-  export const DefaultSystemValuesCreateAdmin = z
+export const DefaultSystemValuesCreateAdmin = z
   .object({
     name: z.string().toUpperCase(),
     type: z.enum(GTypes).default(GTypes.REGION),
@@ -84,7 +84,27 @@ export const DefaultSystemValuesUpdate = DefaultSystemValuesCreate.omit({
 }).partial();
 //-----------------------------------------------------------------
 
+// Schemas for RatingHistory
+//-----------------------------------------------------------------
+export const RatingCreate = z
+  .object({
+    value: z.int(),
+    oldValue: z.int(),
+    newValue: z.int(),
+    userId: z.string(),
+    action: z.enum(RatingAction),
+    reason: z.string().optional(),
+    createdById: z.string(),
+  })
+  .strict();
+
+export const UpdateRating = z.object({
+  reason: z.string(),
+  updatedById: z.string(),
+});
+//-----------------------------------------------------------------
+
 export type UserUpdateInput = z.infer<typeof UserUpdateInput>;
 export type SoftDeleteType = z.infer<typeof SoftDelete>;
 export type SoftDeleteInputType = z.infer<typeof SoftDeleteInput>;
-export type RegionUpdateDataType = z.infer<typeof RegionDataUpdate>
+export type RegionUpdateDataType = z.infer<typeof RegionDataUpdate>;
