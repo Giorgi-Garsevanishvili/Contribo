@@ -24,7 +24,7 @@ export const GET = async (_req: NextRequest, context: Context) => {
 
     if (!data || data.length === 0) {
       return NextResponse.json({
-        message: `Rating History with ID:${id} not found!`,
+        message: `Rating History for user with ID:${id} not found!`,
       });
     }
 
@@ -108,9 +108,12 @@ export const POST = async (req: NextRequest, context: Context) => {
       return NextResponse.json("Rating creation failed!");
     }
 
-    return NextResponse.json({
-      message: `User Rating history crated and current updated. User: ${user.name}, Rating: ${value}`,
-    });
+    return NextResponse.json(
+      {
+        message: `User Rating history crated and current updated. User: ${user.name}, Rating: ${value}`,
+      },
+      { status: 201 }
+    );
   } catch (error) {
     const { status, message } = handleError(error);
     return NextResponse.json({ message: message }, { status: status });

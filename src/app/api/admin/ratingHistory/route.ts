@@ -6,7 +6,7 @@ import { NextRequest, NextResponse } from "next/server";
 export const GET = async (_req: NextRequest) => {
   try {
     const thisUser = await requireRole("ADMIN");
-    const rating = await prisma.ratingHistory.findMany({
+    const data = await prisma.ratingHistory.findMany({
       where: {
         user: {
           ownAllowance: { regionId: thisUser.user.ownAllowance?.regionId },
@@ -14,13 +14,13 @@ export const GET = async (_req: NextRequest) => {
       },
     });
 
-    if (!rating || rating.length === 0) {
+    if (!data || data.length === 0) {
       return NextResponse.json({
         message: "Rating History in your region not found!",
       });
     }
 
-    return NextResponse.json({ length: rating.length, data: rating });
+    return NextResponse.json({ length: data.length, data: data });
   } catch (error) {
     const { status, message } = handleError(error);
     return NextResponse.json({ message: message }, { status: status });
