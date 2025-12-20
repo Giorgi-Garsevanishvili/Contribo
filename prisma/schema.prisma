@@ -16,9 +16,7 @@ model User {
   memberStatusId String?
   memberStatus   MemberStatus?   @relation(fields: [memberStatusId], references: [id], onDelete: SetNull)
   reqStatus      ReqStatus       @default(PENDING)
-  positionId     String?
   rating         Int             @default(0)
-  position       Position?       @relation(fields: [positionId], references: [id], onDelete: SetNull)
   deletedAt      DateTime?
   deleted        Boolean         @default(false)
   accounts       Account[]
@@ -32,10 +30,11 @@ model User {
   memberStatusLogs    MemberStatusLog[]
   memberStatusChanges MemberStatusLog[] @relation("MembershipChangedBy")
   positionChanges     PositionHistory[] @relation("PositionChangedBy")
+  positionCreations   PositionHistory[] @relation("PositionCreatedBy")
   positionHistories   PositionHistory[]
   ratingHistory       RatingHistory[]   @relation("UserRating")
-  createdRatings       RatingHistory[]   @relation("CreatedRatingBy")
-  updatedRatings RatingHistory[]   @relation("UpdatedRatingBy")
+  createdRatings      RatingHistory[]   @relation("CreatedRatingBy")
+  updatedRatings      RatingHistory[]   @relation("UpdatedRatingBy")
 
   eventAssignments     EventAssignment[]
   providedFeedbacks    EventFeedback[]
@@ -193,7 +192,6 @@ model Position {
   type              GTypes            @default(REGION)
   createdAt         DateTime          @default(now())
   updatedAt         DateTime?         @updatedAt
-  users             User[]
   positionHistories PositionHistory[]
 }
 
@@ -203,9 +201,12 @@ model PositionHistory {
   positionId  String?
   startedAt   DateTime  @default(now())
   endedAt     DateTime?
+  ended       Boolean   @default(false)
   changedAt   DateTime  @default(now())
   updatedById String?
+  createdById String?
   changedBy   User?     @relation("PositionChangedBy", fields: [updatedById], references: [id], onDelete: SetNull)
+  createdBy   User?     @relation("PositionCreatedBy", fields: [createdById], references: [id])
 
   createdAt DateTime  @default(now())
   updatedAt DateTime? @updatedAt

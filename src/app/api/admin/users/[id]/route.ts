@@ -5,7 +5,6 @@ import { NextRequest, NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
 import { UserUpdateInput } from "@/lib/zod";
 import { Context } from "@/types/general-types";
-import { email } from "zod";
 
 export const GET = async (_req: NextRequest, context: Context) => {
   try {

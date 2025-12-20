@@ -6,6 +6,7 @@ import { Context } from "@/types/general-types";
 import { NextRequest, NextResponse } from "next/server";
 import z from "zod";
 
+//Depending on userId in params not history record id.
 export const GET = async (_req: NextRequest, context: Context) => {
   try {
     await requireRole("ADMIN");

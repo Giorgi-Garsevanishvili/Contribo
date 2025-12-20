@@ -12,13 +12,16 @@ async function ConsoleNav({ page }: { page: string }) {
           <h2>{session?.user.name}</h2>
         </div>
         <div className="flex flex-row items-center justify-between p-3 min-w-30 text-white">
-          <Image
-            className="rounded-2xl"
-            src={`${session?.user.image}`}
-            width={37}
-            height={37}
-            alt="user-photo"
-          />
+          {session ? (
+            <Image
+              className="rounded-2xl"
+              src={`${session?.user.image}`}
+              width={37}
+              height={37}
+              alt="user-photo"
+            />
+          ) : null}
+
           <SignOut />
         </div>
       </div>

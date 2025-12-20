@@ -13,6 +13,12 @@ export const GET = async (_req: NextRequest) => {
           ownAllowance: { regionId: thisUser.user.ownAllowance?.regionId },
         },
       },
+      select: {
+        id: true,
+        user: { select: { name: true } },
+        ended: true,
+        position: { select: { name: true } },
+      },
     });
 
     if (!data || data.length === 0) {
@@ -32,13 +38,14 @@ export const DELETE = async (_req: NextRequest) => {
   try {
     const thisUser = await requireRole("ADMIN");
 
-    const deleted = await prisma.ratingHistory.deleteMany({
+    const deleted = await prisma.positionHistory.deleteMany({
       where: {
         user: {
           ownAllowance: { regionId: thisUser.user.ownAllowance?.regionId },
         },
       },
     });
+    
 
     if (deleted.count === 0) {
       return NextResponse.json({ message: "Nothing Deleted!" });
