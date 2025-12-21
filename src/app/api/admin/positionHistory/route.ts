@@ -55,7 +55,7 @@ export const DELETE = async (_req: NextRequest) => {
       message: `All Position History records deleted for region: ${thisUser.user.ownAllowance?.region?.name}!`,
     });
   } catch (error) {
-    const { message, status } = handleError("ADMIN");
+    const { message, status } = handleError(error);
     return NextResponse.json({ message }, { status });
   }
 };

@@ -1,4 +1,10 @@
-import { GTypes, RatingAction, RegionStatus, ReqStatus } from "@prisma/client";
+import {
+  GTypes,
+  HrWarningStatus,
+  RatingAction,
+  RegionStatus,
+  ReqStatus,
+} from "@prisma/client";
 import { z } from "zod";
 
 export const SoftDelete = z
@@ -101,7 +107,7 @@ export const RatingCreate = z
 export const UpdateRating = z.object({
   reason: z.string(),
   updatedById: z.string(),
-});
+}).strict();
 //-----------------------------------------------------------------
 
 // Schemas for Position History
@@ -159,6 +165,28 @@ export const UpdatePositionHistory = z
       });
     }
   });
+//------------------------------------------------------------
+//
+// Schemas for HR Warnings
+//-----------------------------------------------------------------
+export const HrWarningCreate = z
+  .object({
+    name: z.string(),
+    typeId: z.string(),
+    assigneeId: z.string(),
+    comment: z.string().optional(),
+    status: z.enum(HrWarningStatus).default("ACTIVE"),
+    createdById: z.string(),
+  })
+  .strict();
+
+export const UpdateHrWarning = z.object({
+  name: z.string().optional(),
+  typeId: z.string().optional(),
+  comment: z.string().optional(),
+  status: z.enum(HrWarningStatus).optional(),
+  updatedById: z.string(),
+}).strict();
 //-----------------------------------------------------------------
 
 export type UserUpdateInput = z.infer<typeof UserUpdateInput>;
