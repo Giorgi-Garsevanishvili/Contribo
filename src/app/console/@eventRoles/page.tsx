@@ -10,8 +10,8 @@ function eventRoles() {
       detailPage="eventRoles"
       title="Event Role"
       searchKey={"name"}
-      axiosGet="/api/console/event-roles"
-      axiosPost="/api/console/event-roles"
+      axiosGet="/api/console/eventRoles"
+      axiosPost="/api/console/eventRoles"
     />
   );
 }

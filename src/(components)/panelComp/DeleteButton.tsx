@@ -38,16 +38,16 @@ function DeleteButton({
   const deleteUrl = () => {
     switch (method) {
       case "allowedUser":
-        return "allowed-users";
+        return "allowedUsers";
 
       case "eventRoles":
-        return "event-roles";
+        return "eventRoles";
 
       case "hrWarningsType":
-        return "hr-warning-type";
+        return "hrWarningsTypes";
 
       case "memberStatus":
-        return "member-status";
+        return "memberStatus";
 
       case "position":
         return "positions";

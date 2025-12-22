@@ -8,8 +8,8 @@ function page({ params }: { params: { id: string } }) {
       id={id}
       type="general"
       title="Member Status"
-      axiosGet="/api/console/member-status"
-      axiosPut="/api/console/member-status"
+      axiosGet="/api/console/memberStatus"
+      axiosPut="/api/console/memberStatus"
       deleteMethod="memberStatus"
     />
   );

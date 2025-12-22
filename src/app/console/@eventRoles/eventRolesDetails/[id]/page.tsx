@@ -8,8 +8,8 @@ function page({ params }: { params: { id: string } }) {
       id={id} 
       type="general"
       title="Event Roles"
-      axiosGet="/api/console/event-roles"
-      axiosPut="/api/console/event-roles"
+      axiosGet="/api/console/eventRoles"
+      axiosPut="/api/console/eventRoles"
       deleteMethod="eventRoles"
     />
   );

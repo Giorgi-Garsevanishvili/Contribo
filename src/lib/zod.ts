@@ -189,6 +189,65 @@ export const UpdateHrWarning = z.object({
 }).strict();
 //-----------------------------------------------------------------
 
+//------------------------------------------------------------
+//
+// Schemas for Member Status Log
+//-----------------------------------------------------------------
+export const MemberStatusLogCreate = z
+  .object({
+    userId: z.string(),
+    memberStatusId: z.string(),
+    startedAt: z.coerce.date().default(() => new Date()),
+    endedAt: z.coerce.date().optional().nullable(),
+    ended: z.boolean().optional(),
+    createdById: z.string(),
+  })
+  .strict()
+  .superRefine((data, ctx) => {
+    if (data.endedAt && data.endedAt < data.startedAt) {
+      ctx.addIssue({
+        path: ["endedAt"],
+        message: "End date cannot be earlier than start date",
+        code: "custom",
+      });
+    }
+
+    if (data.ended && !data.endedAt) {
+      ctx.addIssue({
+        path: ["endedAt"],
+        message: "End date is required when status log is marked as ended",
+        code: "custom",
+      });
+    }
+  });
+
+export const UpdateMemberStatusLog = z
+  .object({
+    startedAt: z.coerce.date().optional(),
+    endedAt: z.coerce.date().optional().nullable(),
+    ended: z.boolean().optional(),
+    updatedById: z.string(),
+  })
+  .strict()
+  .superRefine((data, ctx) => {
+    if (data.startedAt && data.endedAt && data.endedAt < data.startedAt) {
+      ctx.addIssue({
+        path: ["endedAt"],
+        message: "End date cannot be earlier than start date",
+        code: "custom",
+      });
+    }
+
+    if (data.ended === true && !data.endedAt) {
+      ctx.addIssue({
+        path: ["endedAt"],
+        message: "End date is required when marking as ended",
+        code: "custom",
+      });
+    }
+  });
+//-----------------------------------------------------------------
+
 export type UserUpdateInput = z.infer<typeof UserUpdateInput>;
 export type SoftDeleteType = z.infer<typeof SoftDelete>;
 export type SoftDeleteInputType = z.infer<typeof SoftDeleteInput>;

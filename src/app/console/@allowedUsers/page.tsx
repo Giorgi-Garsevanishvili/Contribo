@@ -9,8 +9,8 @@ function page() {
       detailPage="AllowedUser"
       title="Allowed Users"
       searchKey={"email"}
-      axiosGet="/api/console/allowed-users"
-      axiosPost="/api/console/allowed-users"
+      axiosGet="/api/console/allowedUsers"
+      axiosPost="/api/console/allowedUsers"
     />
   );
 }

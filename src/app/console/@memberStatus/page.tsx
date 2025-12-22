@@ -10,8 +10,8 @@ function eventRoles() {
       detailPage="memberStatus"
       title="Member Status"
       searchKey={"name"}
-      axiosGet="/api/console/member-status"
-      axiosPost="/api/console/member-status"
+      axiosGet="/api/console/memberStatus"
+      axiosPost="/api/console/memberStatus"
     />
   );
 }

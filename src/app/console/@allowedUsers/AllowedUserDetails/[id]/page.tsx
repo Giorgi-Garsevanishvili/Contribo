@@ -7,8 +7,8 @@ function page({ params }: { params: { id: string } }) {
     <MiniDashDetails
       id={id}
       type="user"
-      axiosGet="/api/console/allowed-users"
-      axiosPut="/api/console/allowed-users"
+      axiosGet="/api/console/allowedUsers"
+      axiosPut="/api/console/allowedUsers"
       title="Allowed User"
       deleteMethod="allowedUser"
     />

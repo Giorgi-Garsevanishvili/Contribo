@@ -8,25 +8,24 @@ generator client {
 }
 
 model User {
-  id             String          @id @default(cuid())
-  name           String?
-  email          String          @unique
-  emailVerified  DateTime?
-  image          String?
-  memberStatusId String?
-  memberStatus   MemberStatus?   @relation(fields: [memberStatusId], references: [id], onDelete: SetNull)
-  reqStatus      ReqStatus       @default(PENDING)
-  rating         Int             @default(0)
-  deletedAt      DateTime?
-  deleted        Boolean         @default(false)
-  accounts       Account[]
-  sessions       Session[]
+  id            String          @id @default(cuid())
+  name          String?
+  email         String          @unique
+  emailVerified DateTime?
+  image         String?
+  reqStatus     ReqStatus       @default(PENDING)
+  rating        Int             @default(0)
+  deletedAt     DateTime?
+  deleted       Boolean         @default(false)
+  accounts      Account[]
+  sessions      Session[]
   // Optional for WebAuthn support
-  Authenticator  Authenticator[]
-  joinRequests   JoinRequest[]
+  Authenticator Authenticator[]
+  joinRequests  JoinRequest[]
 
   createdAt           DateTime          @default(now())
   updatedAt           DateTime?         @updatedAt
+  memberStatusCreated MemberStatusLog[] @relation("CreatedMemberStatusLog")
   memberStatusLogs    MemberStatusLog[]
   memberStatusChanges MemberStatusLog[] @relation("MembershipChangedBy")
   positionChanges     PositionHistory[] @relation("PositionChangedBy")
@@ -208,7 +207,7 @@ model PositionHistory {
   changedAt   DateTime  @default(now())
   updatedById String?
   createdById String?
-  changedBy   User?     @relation("PositionChangedBy", fields: [updatedById], references: [id], onDelete: SetNull)
+  updatedBy   User?     @relation("PositionChangedBy", fields: [updatedById], references: [id], onDelete: SetNull)
   createdBy   User?     @relation("PositionCreatedBy", fields: [createdById], references: [id])
 
   createdAt DateTime  @default(now())
@@ -227,7 +226,6 @@ model MemberStatus {
   type             GTypes            @default(REGION)
   createdAt        DateTime          @default(now())
   updatedAt        DateTime?         @updatedAt
-  users            User[]
   memberStatusLogs MemberStatusLog[]
 }
 
@@ -237,9 +235,12 @@ model MemberStatusLog {
   memberStatusId String?
   startedAt      DateTime  @default(now())
   endedAt        DateTime?
-  changedAt      DateTime  @default(now())
-  changedById    String?
-  changedBy      User?     @relation("MembershipChangedBy", fields: [changedById], references: [id], onDelete: SetNull)
+  ended          Boolean   @default(false)
+  updatedById    String?
+  updatedBy      User?     @relation("MembershipChangedBy", fields: [updatedById], references: [id], onDelete: SetNull)
+
+  createdById String?
+  createdBy   User?   @relation("CreatedMemberStatusLog", fields: [createdById], references: [id], onDelete: SetNull)
 
   createdAt DateTime  @default(now())
   updatedAt DateTime? @updatedAt
@@ -248,7 +249,7 @@ model MemberStatusLog {
   status MemberStatus? @relation(fields: [memberStatusId], references: [id], onDelete: SetNull)
 
   @@index([userId])
-  @@index([changedById])
+  @@index([updatedById])
 }
 
 model JoinRequest {

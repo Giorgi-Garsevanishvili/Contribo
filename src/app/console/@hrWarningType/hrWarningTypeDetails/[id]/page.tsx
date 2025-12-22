@@ -8,8 +8,8 @@ function page({ params }: { params: { id: string } }) {
       id={id}
       type="general"
       title="HR Warning Type Details"
-      axiosGet="/api/console/hr-warning-type"
-      axiosPut="/api/console/hr-warning-type"
+      axiosGet="/api/console/hrWarningTypes"
+      axiosPut="/api/console/hrWarningTypes"
       deleteMethod="hrWarningsType"
     />
   );

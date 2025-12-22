@@ -1,7 +1,7 @@
 import { handleError } from "@/lib/errors/handleErrors";
 import { prisma } from "@/lib/prisma";
 import { requireRole } from "@/lib/serverAuth";
-import { UpdatePositionHistory } from "@/lib/zod";
+import { PositionHistoryCreate } from "@/lib/zod";
 import { Context } from "@/types/general-types";
 import { NextRequest, NextResponse } from "next/server";
 import z from "zod";
@@ -15,24 +15,24 @@ export const GET = async (_req: NextRequest, context: Context) => {
       return NextResponse.json({ message: "Id is missing!" });
     }
 
-    const data = await prisma.positionHistory.findUnique({
+    const data = await prisma.positionHistory.findMany({
       where: {
-        id,
+        userId: id,
         user: {
           ownAllowance: { regionId: thisUser.user.ownAllowance?.regionId },
         },
       },
-      include: {
+      select: {
         user: { select: { name: true } },
         position: { select: { name: true } },
-        createdBy: { select: { name: true } },
-        changedBy: { select: { name: true } },
+        id: true,
+        ended: true,
       },
     });
 
-    if (!data) {
+    if (!data || data.length === 0) {
       return NextResponse.json({
-        message: `Position History with ID:${id} not found!`,
+        message: `Position History for user with ID:${id} not found!`,
       });
     }
 
@@ -43,7 +43,7 @@ export const GET = async (_req: NextRequest, context: Context) => {
   }
 };
 
-export const PUT = async (req: NextRequest, context: Context) => {
+export const POST = async (req: NextRequest, context: Context) => {
   try {
     const thisUser = await requireRole("ADMIN");
     const { id } = await context.params;
@@ -52,49 +52,41 @@ export const PUT = async (req: NextRequest, context: Context) => {
       return NextResponse.json({ message: "id is missing!" });
     }
 
-    const json = (await req.json()) as z.infer<typeof UpdatePositionHistory>;
+    const user = await prisma.user.findUnique({
+      where: { id },
+      select: { positionHistories: { select: { ended: true } }, name: true },
+    });
+
+    const json = (await req.json()) as z.infer<typeof PositionHistoryCreate>;
     const jsonWithCreator = {
       ...json,
-      updatedById: thisUser.user.id,
+      userId: id,
+      createdById: thisUser.user.id,
     };
 
-    const body = UpdatePositionHistory.parse(jsonWithCreator);
+    const body = PositionHistoryCreate.parse(jsonWithCreator);
 
-    await prisma.positionHistory.update({
-      where: { id, ended: false },
+    if (user?.positionHistories.some((p) => !p.ended) && !body.ended === true) {
+      return NextResponse.json({
+        message: "User can`t have more then one unended position history.",
+      });
+    }
+
+    const res = await prisma.positionHistory.create({
       data: body,
+      include: { position: { select: { name: true } } },
     });
+
+    if (!res) {
+      return NextResponse.json("Position creation failed!");
+    }
 
     return NextResponse.json(
-      { message: "Position history Updated" },
-      { status: 200 }
+      {
+        message: `New Position History Created for User: ${user?.name}, with position: ${res.position?.name}`,
+      },
+      { status: 201 }
     );
-  } catch (error) {
-    const { message, status } = handleError(error);
-    return NextResponse.json({ message }, { status });
-  }
-};
-
-export const DELETE = async (_req: NextRequest, context: Context) => {
-  try {
-    await requireRole("ADMIN");
-    const { id } = await context.params;
-
-    if (!id) {
-      return NextResponse.json("Id is missing");
-    }
-
-    const deleted = await prisma.positionHistory.delete({
-      where: { id },
-    });
-
-    if (!deleted) {
-      return NextResponse.json({ message: "Nothing Deleted!" });
-    }
-
-    return NextResponse.json({
-      message: `Position History record deleted`,
-    });
   } catch (error) {
     const { message, status } = handleError(error);
     return NextResponse.json({ message }, { status });
