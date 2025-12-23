@@ -1,0 +1,2 @@
+-- AlterTable
+ALTER TABLE "JoinRequest" ALTER COLUMN "status" SET DEFAULT 'REQUESTED';

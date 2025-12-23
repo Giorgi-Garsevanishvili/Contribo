@@ -8,20 +8,21 @@ generator client {
 }
 
 model User {
-  id            String          @id @default(cuid())
-  name          String?
-  email         String          @unique
-  emailVerified DateTime?
-  image         String?
-  reqStatus     ReqStatus       @default(PENDING)
-  rating        Int             @default(0)
-  deletedAt     DateTime?
-  deleted       Boolean         @default(false)
-  accounts      Account[]
-  sessions      Session[]
+  id                  String          @id @default(cuid())
+  name                String?
+  email               String          @unique
+  emailVerified       DateTime?
+  image               String?
+  reqStatus           ReqStatus       @default(PENDING)
+  rating              Int             @default(0)
+  deletedAt           DateTime?
+  deleted             Boolean         @default(false)
+  accounts            Account[]
+  sessions            Session[]
   // Optional for WebAuthn support
-  Authenticator Authenticator[]
-  joinRequests  JoinRequest[]
+  Authenticator       Authenticator[]
+  joinRequests        JoinRequest[]
+  updatedJoinRequests JoinRequest[]   @relation("UpdatedJoinRequest")
 
   createdAt           DateTime          @default(now())
   updatedAt           DateTime?         @updatedAt
@@ -254,14 +255,16 @@ model MemberStatusLog {
 
 model JoinRequest {
   id          String    @id @default(cuid())
-  userId      String
+  createdById String
   regionId    String?
-  status      ReqStatus @default(PENDING)
+  status      ReqStatus @default(REQUESTED)
   requestedAt DateTime  @default(now())
   updatedAt   DateTime  @updatedAt
+  updatedById String?
+  updatedBy   User?     @relation("UpdatedJoinRequest", fields: [updatedById], references: [id], onDelete: SetNull)
 
-  user   User    @relation(fields: [userId], references: [id], onDelete: Cascade)
-  region Region? @relation(fields: [regionId], references: [id], onDelete: SetNull)
+  createdBy User    @relation(fields: [createdById], references: [id], onDelete: Cascade)
+  region    Region? @relation(fields: [regionId], references: [id], onDelete: SetNull)
 }
 
 enum ReqStatus {

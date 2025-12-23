@@ -104,10 +104,12 @@ export const RatingCreate = z
   })
   .strict();
 
-export const UpdateRating = z.object({
-  reason: z.string(),
-  updatedById: z.string(),
-}).strict();
+export const UpdateRating = z
+  .object({
+    reason: z.string(),
+    updatedById: z.string(),
+  })
+  .strict();
 //-----------------------------------------------------------------
 
 // Schemas for Position History
@@ -180,13 +182,15 @@ export const HrWarningCreate = z
   })
   .strict();
 
-export const UpdateHrWarning = z.object({
-  name: z.string().optional(),
-  typeId: z.string().optional(),
-  comment: z.string().optional(),
-  status: z.enum(HrWarningStatus).optional(),
-  updatedById: z.string(),
-}).strict();
+export const UpdateHrWarning = z
+  .object({
+    name: z.string().optional(),
+    typeId: z.string().optional(),
+    comment: z.string().optional(),
+    status: z.enum(HrWarningStatus).optional(),
+    updatedById: z.string(),
+  })
+  .strict();
 //-----------------------------------------------------------------
 
 //------------------------------------------------------------
@@ -247,6 +251,36 @@ export const UpdateMemberStatusLog = z
     }
   });
 //-----------------------------------------------------------------
+
+//
+// Schemas for Join Request
+//-----------------------------------------------------------------
+
+export const updateJoinRequest = z
+  .object({
+    updatedById: z.string(),
+    status: z.enum(ReqStatus).default("REQUESTED"),
+  })
+  .strict();
+
+//-----------------------------------------------------------------
+//
+// Schemas for Join Request For REGULAR access (For user endpoints)
+//------------------------------------------------------
+export const CreateJoinRequest = z
+  .object({
+    createdById: z.string(),
+    regionId: z.string(),
+  })
+  .strict();
+
+export const updateJoinRequestRegular = z
+  .object({
+    updatedById: z.string(),
+    regionId: z.string(),
+  })
+  .strict();
+//------------------------------------------------------
 
 export type UserUpdateInput = z.infer<typeof UserUpdateInput>;
 export type SoftDeleteType = z.infer<typeof SoftDelete>;
