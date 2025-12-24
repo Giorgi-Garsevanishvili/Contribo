@@ -282,6 +282,97 @@ export const updateJoinRequestRegular = z
   .strict();
 //------------------------------------------------------
 
+//-----------------------------------------------------------------
+//
+// Schemas for Events
+//------------------------------------------------------
+export const CreateEvent = z
+  .object({
+    name: z.string(),
+    location: z.string(),
+    startTime: z.coerce.date(),
+    endTime: z.coerce.date(),
+    description: z.string(),
+    createdById: z.string(),
+    regionId: z.string(),
+  })
+  .strict()
+  .superRefine((data, ctx) => {
+    if (data.startTime && data.endTime && data.endTime < data.startTime) {
+      ctx.addIssue({
+        path: ["endedAt"],
+        message: "End date cannot be earlier than start date",
+        code: "custom",
+      });
+    }
+  });
+
+export const updateEvent = z
+  .object({
+    name: z.string().optional(),
+    location: z.string().optional(),
+    startTime: z.coerce.date().optional(),
+    endTime: z.coerce.date().optional(),
+    description: z.string().optional(),
+    updatedById: z.string(),
+  })
+  .strict()
+  .superRefine((data, ctx) => {
+    if (data.startTime && data.endTime && data.endTime < data.startTime) {
+      ctx.addIssue({
+        path: ["endedAt"],
+        message: "End date cannot be earlier than start date",
+        code: "custom",
+      });
+    }
+  });
+//------------------------------------------------------
+
+//-----------------------------------------------------------------
+//
+// Schemas for Events Assignments
+//------------------------------------------------------
+export const CreateEventAssignment = z
+  .object({
+    eventId: z.string(),
+    userId: z.string(),
+    roleId: z.string(),
+    comment: z.string().optional(),
+    validFrom: z.coerce.date().optional(),
+    validTo: z.coerce.date().optional(),
+    createdById: z.string(),
+  })
+  .strict()
+  .superRefine((data, ctx) => {
+    if (data.validFrom && data.validTo && data.validTo < data.validFrom) {
+      ctx.addIssue({
+        path: ["endedAt"],
+        message: "End date cannot be earlier than start date",
+        code: "custom",
+      });
+    }
+  });
+
+export const updateEventAssignment = z
+  .object({
+    roleId: z.string().optional(),
+    comment: z.string().optional(),
+    validFrom: z.coerce.date().optional(),
+    validTo: z.coerce.date().optional(),
+    updatedById: z.string(),
+  })
+  .strict()
+  .superRefine((data, ctx) => {
+    if (data.validFrom && data.validTo && data.validTo < data.validFrom) {
+      ctx.addIssue({
+        path: ["endedAt"],
+        message: "End date cannot be earlier than start date",
+        code: "custom",
+      });
+    }
+  });
+//------------------------------------------------------
+
 export type UserUpdateInput = z.infer<typeof UserUpdateInput>;
 export type SoftDeleteType = z.infer<typeof SoftDelete>;
 export type SoftDeleteInputType = z.infer<typeof SoftDeleteInput>;

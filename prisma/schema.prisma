@@ -8,43 +8,56 @@ generator client {
 }
 
 model User {
-  id                  String          @id @default(cuid())
-  name                String?
-  email               String          @unique
-  emailVerified       DateTime?
-  image               String?
-  reqStatus           ReqStatus       @default(PENDING)
-  rating              Int             @default(0)
-  deletedAt           DateTime?
-  deleted             Boolean         @default(false)
-  accounts            Account[]
-  sessions            Session[]
+  id                     String            @id @default(cuid())
+  name                   String?
+  email                  String            @unique
+  emailVerified          DateTime?
+  image                  String?
+  reqStatus              ReqStatus         @default(PENDING)
+  rating                 Int               @default(0)
+  deletedAt              DateTime?
+  deleted                Boolean           @default(false)
+  accounts               Account[]
+  sessions               Session[]
   // Optional for WebAuthn support
-  Authenticator       Authenticator[]
-  joinRequests        JoinRequest[]
-  updatedJoinRequests JoinRequest[]   @relation("UpdatedJoinRequest")
-
-  createdAt           DateTime          @default(now())
-  updatedAt           DateTime?         @updatedAt
-  memberStatusCreated MemberStatusLog[] @relation("CreatedMemberStatusLog")
-  memberStatusLogs    MemberStatusLog[]
-  memberStatusChanges MemberStatusLog[] @relation("MembershipChangedBy")
-  positionChanges     PositionHistory[] @relation("PositionChangedBy")
-  positionCreations   PositionHistory[] @relation("PositionCreatedBy")
-  positionHistories   PositionHistory[]
-  ratingHistory       RatingHistory[]   @relation("UserRating")
-  createdRatings      RatingHistory[]   @relation("CreatedRatingBy")
-  updatedRatings      RatingHistory[]   @relation("UpdatedRatingBy")
-
-  eventAssignments     EventAssignment[]
-  providedFeedbacks    EventFeedback[]
-  scheduledEventEmails ScheduledEmails[]
-  hrWarnings           HrWarning[]       @relation("HrWarnings")
-  createdHrWarning     HrWarning[]       @relation("CreatedHrWarnings")
-  updatedHrWarnings    HrWarning[]       @relation("UpdatedHrWarnings")
-  CreatedAllowedUser   AllowedUser[]     @relation("createdAllowanceBy")
-  allowedUserId        String?           @unique
-  ownAllowance         AllowedUser?      @relation(fields: [allowedUserId], references: [id], onDelete: Cascade)
+  Authenticator          Authenticator[]
+  //-----------------------------------------
+  joinRequests           JoinRequest[]
+  updatedJoinRequests    JoinRequest[]     @relation("UpdatedJoinRequest")
+  //-----------------------------------------
+  createdAt              DateTime          @default(now())
+  updatedAt              DateTime?         @updatedAt
+  //-----------------------------------------
+  memberStatusCreated    MemberStatusLog[] @relation("CreatedMemberStatusLog")
+  memberStatusLogs       MemberStatusLog[]
+  memberStatusChanges    MemberStatusLog[] @relation("MembershipChangedBy")
+  //-----------------------------------------
+  positionChanges        PositionHistory[] @relation("PositionChangedBy")
+  positionCreations      PositionHistory[] @relation("PositionCreatedBy")
+  positionHistories      PositionHistory[]
+  //-----------------------------------------
+  ratingHistory          RatingHistory[]   @relation("UserRating")
+  createdRatings         RatingHistory[]   @relation("CreatedRatingBy")
+  updatedRatings         RatingHistory[]   @relation("UpdatedRatingBy")
+  //-----------------------------------------
+  createdEvents          Event[]           @relation("createdEvent")
+  updatedEvents          Event[]           @relation("UpdatedEvents")
+  //-----------------------------------------
+  providedFeedbacks      EventFeedback[]
+  //-----------------------------------------
+  scheduledEventEmails   ScheduledEmails[]
+  //-----------------------------------------
+  hrWarnings             HrWarning[]       @relation("HrWarnings")
+  createdHrWarning       HrWarning[]       @relation("CreatedHrWarnings")
+  updatedHrWarnings      HrWarning[]       @relation("UpdatedHrWarnings")
+  //-----------------------------------------
+  CreatedAllowedUser     AllowedUser[]     @relation("createdAllowanceBy")
+  allowedUserId          String?           @unique
+  ownAllowance           AllowedUser?      @relation(fields: [allowedUserId], references: [id], onDelete: Cascade)
+  //-----------------------------------------
+  eventAssignments       EventAssignment[]
+  CreatedEventAssignment EventAssignment[] @relation("CreatedEventAssignment")
+  UpdatedEventAssignment EventAssignment[] @relation("UpdatedEventAssignment")
 }
 
 enum RatingAction {
@@ -60,6 +73,15 @@ model Event {
   endTime     DateTime
   description String
   rating      Int?
+
+  regionId String?
+  region   Region? @relation("EventRegion", fields: [regionId], references: [id], onDelete: Cascade)
+
+  createdById String?
+  createdBy   User?   @relation("createdEvent", fields: [createdById], references: [id], onDelete: SetNull)
+
+  updatedById String?
+  updatedBy   User?   @relation("UpdatedEvents", fields: [updatedById], references: [id], onDelete: SetNull)
 
   createdAt DateTime  @default(now())
   updatedAt DateTime? @updatedAt
@@ -162,6 +184,11 @@ model EventAssignment {
 
   createdAt DateTime  @default(now())
   updatedAt DateTime? @updatedAt
+
+  createdById String?
+  createdBy   User?   @relation("CreatedEventAssignment", fields: [createdById], references: [id], onDelete: SetNull)
+  updatedById String?
+  updatedBy   User?   @relation("UpdatedEventAssignment", fields: [updatedById], references: [id], onDelete: SetNull)
 
   role  EventsRole? @relation(fields: [roleId], references: [id], onDelete: SetNull)
   event Event       @relation(fields: [eventId], references: [id], onDelete: Cascade)
@@ -289,6 +316,7 @@ model Region {
 
   allowedUsers AllowedUser[]
   joinRequests JoinRequest[]
+  Event        Event[]       @relation("EventRegion")
 }
 
 enum RegionStatus {

@@ -1,14 +1,19 @@
 import { handleError } from "@/lib/errors/handleErrors";
 import { prisma } from "@/lib/prisma";
 import { requireRole } from "@/lib/serverAuth";
+import { CreateEventAssignment } from "@/lib/zod";
+import { Context } from "@/types/general-types";
 import { NextRequest, NextResponse } from "next/server";
+import z from "zod";
 
-export const GET = async (_req: NextRequest) => {
+export const GET = async (_req: NextRequest, context: Context) => {
   try {
     const thisUser = await requireRole("ADMIN");
+    const { id } = await context.params;
 
     const data = await prisma.eventAssignment.findMany({
       where: {
+        eventId: id,
         event: { regionId: thisUser.user.ownAllowance?.regionId },
       },
       select: {
@@ -23,7 +28,7 @@ export const GET = async (_req: NextRequest) => {
 
     if (!data || data.length === 0) {
       return NextResponse.json({
-        message: "Events Assignments in your region not found!",
+        message: "Assignments For This Event not found!",
       });
     }
 
@@ -34,23 +39,33 @@ export const GET = async (_req: NextRequest) => {
   }
 };
 
-export const DELETE = async (_req: NextRequest) => {
+export const POST = async (req: NextRequest, context: Context) => {
   try {
     const thisUser = await requireRole("ADMIN");
+    const { id } = await context.params;
 
-    const deleted = await prisma.eventAssignment.deleteMany({
-      where: {
-        event: { regionId: thisUser.user.ownAllowance?.regionId },
+    const json = (await req.json()) as z.infer<typeof CreateEventAssignment>;
+    const jsonWithCreator = {
+      ...json,
+      createdById: thisUser.user.id,
+      eventId: id,
+    };
+    const body = CreateEventAssignment.parse(jsonWithCreator);
+
+    const response = await prisma.eventAssignment.create({
+      data: body,
+      select: {
+        event: { select: { name: true } },
+        user: { select: { name: true } },
       },
     });
 
-    if (deleted.count === 0) {
-      return NextResponse.json({ message: "Nothing Deleted!" });
-    }
-
-    return NextResponse.json({
-      message: `All Events Assignments for region: ${thisUser.user.ownAllowance?.region?.name} Deleted!`,
-    });
+    return NextResponse.json(
+      {
+        message: `Event Assignment for Event: ${response.event?.name}, Created For: ${response.user?.name}`,
+      },
+      { status: 201 }
+    );
   } catch (error) {
     const { message, status } = handleError(error);
     return NextResponse.json({ message }, { status });
