@@ -44,6 +44,7 @@ model User {
   updatedEvents          Event[]           @relation("UpdatedEvents")
   //-----------------------------------------
   providedFeedbacks      EventFeedback[]
+  updatedEventFeedback   EventFeedback[]   @relation("updatedFeedback")
   //-----------------------------------------
   scheduledEventEmails   ScheduledEmails[]
   //-----------------------------------------
@@ -150,6 +151,9 @@ model EventFeedback {
   userId   String?
   feedback String
   rating   Int?
+
+  updatedById String?
+  updatedBy   User?    @relation("updatedFeedback", fields: [updatedById], references: [id], onDelete: SetNull)
 
   createdAt DateTime  @default(now())
   updatedAt DateTime? @updatedAt
