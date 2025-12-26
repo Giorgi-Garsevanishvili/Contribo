@@ -44,7 +44,7 @@ function DeleteButton({
         return "eventRoles";
 
       case "hrWarningsType":
-        return "hrWarningsTypes";
+        return "hrWarningTypes";
 
       case "memberStatus":
         return "memberStatus";

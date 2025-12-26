@@ -13,13 +13,16 @@ export const GET = async (_req: NextRequest, context: Context) => {
       return NextResponse.json({ message: "Id is missing!" }, { status: 400 });
     }
 
-    const data = await prisma.eventFeedback.findUnique({
-      where: { id, event: { regionId: thisUser.user.ownAllowance?.regionId } },
+    const data = await prisma.eventFeedback.findMany({
+      where: {
+        eventId: id,
+        event: { regionId: thisUser.user.ownAllowance?.regionId },
+      },
     });
 
     if (!data) {
       return NextResponse.json(
-        { message: `Event Feedback with id: ${id}, not found` },
+        { message: `Feedbacks for event with id: ${id}, not found` },
         { status: 404 }
       );
     }
@@ -40,20 +43,19 @@ export const DELETE = async (_req: NextRequest, context: Context) => {
       return NextResponse.json({ message: "Id is Missing" }, { status: 400 });
     }
 
-    const deleted = await prisma.eventFeedback.delete({
-      where: { id, event: { regionId: thisUser.user.ownAllowance?.regionId } },
-      select: {
-        user: { select: { name: true } },
-        event: { select: { name: true } },
+    const deleted = await prisma.eventFeedback.deleteMany({
+      where: {
+        eventId: id,
+        event: { regionId: thisUser.user.ownAllowance?.regionId },
       },
     });
 
-    if (!deleted) {
+    if (!deleted || deleted.count === 0) {
       return NextResponse.json({ message: "Nothing Deleted" });
     }
 
     return NextResponse.json({
-      message: `Feedback for event: ${deleted.event.name}, made by: ${deleted.user?.name}, deleted!`,
+      message: `All Feedback deleted for this event!`,
     });
   } catch (error) {
     const { message, status } = handleError(error);

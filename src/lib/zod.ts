@@ -373,6 +373,27 @@ export const updateEventAssignment = z
   });
 //------------------------------------------------------
 
+//
+// Schemas for EventFeedback
+//------------------------------------------------------
+export const CreateEventFeedback = z
+  .object({
+    eventId: z.string(),
+    userId: z.string(),
+    feedback: z.string(),
+    rating: z.int(),
+  })
+  .strict();
+
+export const updateEventFeedback = z
+  .object({
+    feedback: z.string().optional(),
+    rating: z.int().optional(),
+    updatedById: z.string(),
+  })
+  .strict();
+//------------------------------------------------------
+
 export type UserUpdateInput = z.infer<typeof UserUpdateInput>;
 export type SoftDeleteType = z.infer<typeof SoftDelete>;
 export type SoftDeleteInputType = z.infer<typeof SoftDeleteInput>;
