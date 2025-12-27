@@ -33,7 +33,7 @@ export default auth(async function middleware(req) {
     return NextResponse.redirect(new URL("/unauthorized", req.url));
   }
 
-  if (pathname.startsWith("/client") && !hasRole("REGULAR")) {
+  if (pathname.startsWith("/volunteer") && !hasRole("REGULAR")) {
     return NextResponse.redirect(new URL("/unauthorized", req.url));
   }
 
@@ -43,9 +43,7 @@ export default auth(async function middleware(req) {
 export const config = {
   matcher: [
     "/",
-    "/client",
-    "/admin",
-    "/base",
+    "/volunteer",
     "/console",
   ],
 };

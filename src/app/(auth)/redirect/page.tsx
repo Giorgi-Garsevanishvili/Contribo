@@ -15,7 +15,7 @@ export default async function RedirectPage() {
   const priority = [
     {name: "QIRVEX", path: "/console"},
     {name: "ADMIN", path: "/admin"},
-    {name: "REGULAR", path: "/client"},
+    {name: "REGULAR", path: "/volunteer"},
   ]
 
   for (const role of priority){

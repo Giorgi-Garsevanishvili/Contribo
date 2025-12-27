@@ -1,6 +1,12 @@
+import JoinStats from "@/(components)/adminComp/JoinStats";
+import UserStats from "@/(components)/adminComp/UserStats";
+
 function Admin() {
   return (
-    <div>Admin</div>
-  )
+    <>
+      <UserStats />;
+      <JoinStats />
+    </>
+  );
 }
-export default Admin
+export default Admin;
