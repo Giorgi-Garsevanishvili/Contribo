@@ -50,7 +50,7 @@ export const useConfirmTab = () => {
       resolver = null;
     }, 20000);
     return () => clearTimeout(timeout);
-  }, [confirmState.isOpened]);
+  }, [confirmState.isOpened, dispatch]);
 
   return { ask, onConfirm, onReject, confirmState };
 };

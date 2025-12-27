@@ -1,7 +1,13 @@
 "use client";
 
 import axios from "axios";
-import React, { FormEvent, useCallback, useEffect, useState } from "react";
+import React, {
+  FormEvent,
+  useCallback,
+  useEffect,
+  useRef,
+  useState,
+} from "react";
 import Link from "next/link";
 import { FaRegEdit } from "react-icons/fa";
 import { useRouter } from "next/navigation";
@@ -114,6 +120,11 @@ function MiniDashDetails<
   const [isUpdateOpen, setIsUpdateOpen] = useState(false);
 
   const { triggerCompAlert } = useCompAlert();
+  const triggerCompAlertRef = useRef(triggerCompAlert);
+
+  useEffect(() => {
+    triggerCompAlertRef.current = triggerCompAlert;
+  }, [triggerCompAlert]);
 
   const fetchData = useCallback(
     async (id: string | undefined) => {
@@ -132,6 +143,11 @@ function MiniDashDetails<
         setData(Data);
         setIsLoading(false);
       } catch (error) {
+        triggerCompAlertRef.current({
+          message: `${error}`,
+          type: "error",
+          isOpened: true,
+        });
         setIsLoading(false);
         return;
       }

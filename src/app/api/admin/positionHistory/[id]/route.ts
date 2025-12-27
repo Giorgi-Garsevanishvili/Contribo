@@ -26,7 +26,7 @@ export const GET = async (_req: NextRequest, context: Context) => {
         user: { select: { name: true } },
         position: { select: { name: true } },
         createdBy: { select: { name: true } },
-        changedBy: { select: { name: true } },
+        updatedBy: { select: { name: true } },
       },
     });
 

@@ -1,6 +1,4 @@
 import useRegionRole from "@/hooks/useRegionRole";
-import { AllowedUsersWithRelations } from "@/types/general-types";
-import { useEffect } from "react";
 
 type UserDataUpdateType = {
   roleId: string[];

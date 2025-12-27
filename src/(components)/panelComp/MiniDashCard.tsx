@@ -1,7 +1,13 @@
 "use client";
 
 import axios from "axios";
-import React, { FormEvent, useCallback, useEffect, useState } from "react";
+import React, {
+  FormEvent,
+  useCallback,
+  useEffect,
+  useRef,
+  useState,
+} from "react";
 import LoadingComp from "@/(components)/generalComp/LoadingComp";
 import Alerts, {
   AlertObj,
@@ -61,6 +67,14 @@ function MiniDashCard<U extends UserAddType | DataAddType>({
   const [searchTerm, setSearchTerm] = useState("");
   const { regions, roles, refetchRegions, refetchRoles, loadingHook } =
     useRegionRole();
+
+  const refetchRegionsRef = useRef(refetchRegions);
+  const refetchRolesRef = useRef(refetchRoles);
+
+  useEffect(() => {
+    refetchRegionsRef.current = refetchRegions;
+    refetchRolesRef.current = refetchRoles;
+  }, [refetchRegions, refetchRoles]);
 
   useEffect(() => {
     if (!alert.isOpened) return;
@@ -126,11 +140,11 @@ function MiniDashCard<U extends UserAddType | DataAddType>({
       }
 
       if (type === "regions") {
-        refetchRegions();
+        refetchRegionsRef.current();
       }
 
       if (type === "roles") {
-        refetchRoles();
+        refetchRolesRef.current();
       }
       setIsLoading(false);
     } catch (error) {

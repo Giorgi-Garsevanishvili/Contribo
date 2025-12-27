@@ -1,7 +1,7 @@
 import { handleError } from "@/lib/errors/handleErrors";
 import { prisma } from "@/lib/prisma";
 import { requireRole } from "@/lib/serverAuth";
-import { RatingCreate, UpdateRating } from "@/lib/zod";
+import { RatingCreate } from "@/lib/zod";
 import { Context } from "@/types/general-types";
 import { NextRequest, NextResponse } from "next/server";
 import z from "zod";
