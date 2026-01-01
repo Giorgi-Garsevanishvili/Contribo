@@ -21,6 +21,7 @@ export const GET = async (_req: NextRequest) => {
 
     if (!data || data.length === 0) {
       return NextResponse.json({
+        data,
         message: "Join Request in your region not found!",
       });
     }

@@ -16,18 +16,18 @@ export const GET = async (_req: NextRequest, context: Context) => {
       return NextResponse.json({ message: "Id is missing!" }, { status: 400 });
     }
 
-    const hrWarningType = await prisma.hrWarningType.findUnique({
+    const data = await prisma.hrWarningType.findUnique({
       where: { id },
     });
 
-    if (!hrWarningType) {
+    if (!data) {
       return NextResponse.json(
-        { message: `HR Warning Type with id: ${id}, not found` },
+        { data, message: `HR Warning Type with id: ${id}, not found` },
         { status: 404 }
       );
     }
 
-    return NextResponse.json(hrWarningType);
+    return NextResponse.json(data);
   } catch (error) {
     const { status, message } = handleError(error);
     return NextResponse.json({ error: message }, { status: status });

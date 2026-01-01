@@ -23,7 +23,7 @@ export const GET = async (_req: NextRequest, context: Context) => {
     });
 
     if (!data) {
-      return NextResponse.json({
+      return NextResponse.json({data,
         message: "Join Request not found!",
       });
     }

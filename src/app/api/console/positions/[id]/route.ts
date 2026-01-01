@@ -16,16 +16,16 @@ export const GET = async (_req: NextRequest, context: Context) => {
       return NextResponse.json({ message: "Id is missing!" }, { status: 400 });
     }
 
-    const position = await prisma.position.findUnique({ where: { id } });
+    const data = await prisma.position.findUnique({ where: { id } });
 
-    if (!position) {
+    if (!data) {
       return NextResponse.json(
-        { message: `Position with id: ${id}, not found` },
+        { data, message: `Position with id: ${id}, not found` },
         { status: 404 }
       );
     }
 
-    return NextResponse.json(position);
+    return NextResponse.json(data);
   } catch (error) {
     const { status, message } = handleError(error);
     return NextResponse.json({ error: message }, { status: status });

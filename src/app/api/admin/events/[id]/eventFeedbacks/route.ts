@@ -22,7 +22,7 @@ export const GET = async (_req: NextRequest, context: Context) => {
 
     if (!data) {
       return NextResponse.json(
-        { message: `Feedbacks for event with id: ${id}, not found` },
+        {data, message: `Feedbacks for event with id: ${id}, not found` },
         { status: 404 }
       );
     }

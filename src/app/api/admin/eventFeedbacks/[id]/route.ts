@@ -19,7 +19,7 @@ export const GET = async (_req: NextRequest, context: Context) => {
 
     if (!data) {
       return NextResponse.json(
-        { message: `Event Feedback with id: ${id}, not found` },
+        {data, message: `Event Feedback with id: ${id}, not found` },
         { status: 404 }
       );
     }

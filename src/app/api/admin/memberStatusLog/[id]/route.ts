@@ -31,7 +31,7 @@ export const GET = async (_req: NextRequest, context: Context) => {
     });
 
     if (!data) {
-      return NextResponse.json({
+      return NextResponse.json({data,
         message: `Member Status Log with ID:${id} not found!`,
       });
     }

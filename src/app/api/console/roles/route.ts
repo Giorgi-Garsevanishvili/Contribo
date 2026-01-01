@@ -5,26 +5,26 @@ import { requireRole } from "@/lib/serverAuth";
 import { NextRequest, NextResponse } from "next/server";
 import { z } from "zod";
 
-const CreateRoleData = z.object({
-  name: z.string().toUpperCase(),
-}).strict();
+const CreateRoleData = z
+  .object({
+    name: z.string().toUpperCase(),
+  })
+  .strict();
 
 export const GET = async (_req: NextRequest) => {
   try {
     await requireRole("QIRVEX");
 
-    const roles = await prisma.role.findMany();
+    const data = await prisma.role.findMany();
 
-    if (roles.length === 0) {
+    if (data.length === 0) {
       return NextResponse.json(
-        {
-          message: "No Regions To display",
-        },
+        { data, message: "No Regions To display" },
         { status: 400 }
       );
     }
 
-    return NextResponse.json(roles, { status: 200 });
+    return NextResponse.json(data, { status: 200 });
   } catch (error) {
     const { status, message } = handleError(error);
     return NextResponse.json({ error: message }, { status: status });

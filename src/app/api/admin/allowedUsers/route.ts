@@ -8,21 +8,21 @@ import { AllowedUserCreate } from "@/lib/zod";
 
 export const GET = async (_req: NextRequest) => {
   try {
-    const adminUser = await requireRole("ADMIN");
+    const thisUser = await requireRole("ADMIN");
 
-    const allowedUsers = await prisma.allowedUser.findMany({
-      where: { regionId: adminUser.user.ownAllowance?.regionId },
+    const data = await prisma.allowedUser.findMany({
+      where: { regionId: thisUser.user.ownAllowance?.regionId },
       select: { id: true, email: true, user: { select: { name: true } } },
     });
 
-    if (!allowedUsers || allowedUsers.length === 0) {
+    if (!data || data.length === 0) {
       return NextResponse.json(
-        { message: "Allowed users not found" },
+        { data, message: "Allowed users not found" },
         { status: 404 }
       );
     }
 
-    return NextResponse.json(allowedUsers);
+    return NextResponse.json(data);
   } catch (error) {
     const { status, message } = handleError(error);
     return NextResponse.json({ error: message }, { status: status });

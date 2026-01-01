@@ -45,13 +45,16 @@ export const GET = async (_req: NextRequest) => {
   try {
     await requireRole("QIRVEX");
 
-    const regions = await prisma.region.findMany();
+    const data = await prisma.region.findMany();
 
-    if (regions.length === 0) {
-      return NextResponse.json({ message: "No data found" }, { status: 404 });
+    if (data.length === 0) {
+      return NextResponse.json(
+        { data, message: "No data found" },
+        { status: 404 }
+      );
     }
 
-    return NextResponse.json(regions);
+    return NextResponse.json(data);
   } catch (error) {
     const { status, message } = handleError(error);
     return NextResponse.json({ error: message }, { status: status });

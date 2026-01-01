@@ -10,16 +10,16 @@ export const GET = async (_req: NextRequest) => {
   try {
     await requireRole("QIRVEX");
 
-    const hrWarningType = await prisma.hrWarningType.findMany();
+    const data = await prisma.hrWarningType.findMany();
 
-    if (!hrWarningType || hrWarningType.length === 0) {
+    if (!data || data.length === 0) {
       return NextResponse.json(
-        { message: "HR Warning Type not found" },
+        { data, message: "HR Warning Type not found" },
         { status: 404 }
       );
     }
 
-    return NextResponse.json(hrWarningType);
+    return NextResponse.json(data);
   } catch (error) {
     const { status, message } = handleError(error);
     return NextResponse.json({ error: message }, { status: status });

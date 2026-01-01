@@ -10,16 +10,16 @@ export const GET = async (_req: NextRequest) => {
   try {
     await requireRole("QIRVEX");
 
-    const memberStatuses = await prisma.memberStatus.findMany();
+    const data = await prisma.memberStatus.findMany();
 
-    if (!memberStatuses || memberStatuses.length === 0) {
+    if (!data || data.length === 0) {
       return NextResponse.json(
-        { message: "Member status not found" },
+        { data, message: "Member status not found" },
         { status: 404 }
       );
     }
 
-    return NextResponse.json(memberStatuses);
+    return NextResponse.json(data);
   } catch (error) {
     const { status, message } = handleError(error);
     return NextResponse.json({ error: message }, { status: status });
@@ -30,7 +30,9 @@ export const POST = async (req: NextRequest) => {
   try {
     await requireRole("QIRVEX");
 
-    const json = (await req.json()) as z.infer<typeof DefaultSystemValuesCreate>;
+    const json = (await req.json()) as z.infer<
+      typeof DefaultSystemValuesCreate
+    >;
     const body = DefaultSystemValuesCreate.parse(json);
 
     if (!body || !Object.keys(body).length) {

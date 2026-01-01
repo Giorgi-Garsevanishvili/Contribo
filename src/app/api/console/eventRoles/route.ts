@@ -10,16 +10,16 @@ export const GET = async (_req: NextRequest) => {
   try {
     await requireRole("QIRVEX");
 
-    const eventsRoles = await prisma.eventsRole.findMany();
+    const data = await prisma.eventsRole.findMany();
 
-    if (!eventsRoles || eventsRoles.length === 0) {
+    if (!data || data.length === 0) {
       return NextResponse.json(
-        { message: "Events Roles not found" },
+        { data, message: "Events Roles not found" },
         { status: 404 }
       );
     }
 
-    return NextResponse.json(eventsRoles);
+    return NextResponse.json(data);
   } catch (error) {
     const { status, message } = handleError(error);
     return NextResponse.json({ error: message }, { status: status });

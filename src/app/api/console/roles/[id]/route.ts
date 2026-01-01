@@ -26,16 +26,16 @@ export const GET = async (_req: NextRequest, context: Context) => {
       );
     }
 
-    const role = await prisma.role.findUnique({ where: { id } });
+    const data = await prisma.role.findUnique({ where: { id } });
 
-    if (!role) {
+    if (!data) {
       return NextResponse.json(
-        { message: `Role with id: ${id}, not found ` },
+        { data, message: `Role with id: ${id}, not found ` },
         { status: 404 }
       );
     }
 
-    return NextResponse.json(role);
+    return NextResponse.json(data);
   } catch (error) {
     const { status, message } = handleError(error);
     return NextResponse.json({ error: message }, { status: status });

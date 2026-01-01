@@ -15,7 +15,7 @@ export const GET = async (_req: NextRequest, context: Context) => {
       return NextResponse.json({ message: "Id is missing" }, { status: 400 });
     }
 
-    const allowedUser = await prisma.allowedUser.findUnique({
+    const data = await prisma.allowedUser.findUnique({
       where: { id, regionId: thisUser.user.ownAllowance?.regionId },
       include: {
         roles: { include: { role: true } },
@@ -25,11 +25,14 @@ export const GET = async (_req: NextRequest, context: Context) => {
       },
     });
 
-    if (!allowedUser) {
-      return NextResponse.json({ message: "user not found" }, { status: 404 });
+    if (!data) {
+      return NextResponse.json(
+        { data, message: "user not found" },
+        { status: 404 }
+      );
     }
 
-    return NextResponse.json(allowedUser);
+    return NextResponse.json(data);
   } catch (error) {
     const { status, message } = handleError(error);
     return NextResponse.json({ error: message }, { status: status });

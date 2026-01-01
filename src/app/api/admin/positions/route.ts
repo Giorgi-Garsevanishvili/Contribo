@@ -8,16 +8,16 @@ export const GET = async (_req: NextRequest) => {
   try {
     await requireRole("ADMIN");
 
-    const positions = await prisma.position.findMany();
+    const data = await prisma.position.findMany();
 
-    if (!positions || positions.length === 0) {
+    if (!data || data.length === 0) {
       return NextResponse.json(
-        { message: "Positions not found" },
+        { data, message: "Positions not found" },
         { status: 404 }
       );
     }
 
-    return NextResponse.json(positions);
+    return NextResponse.json(data);
   } catch (error) {
     const { status, message } = handleError(error);
     return NextResponse.json({ error: message }, { status: status });

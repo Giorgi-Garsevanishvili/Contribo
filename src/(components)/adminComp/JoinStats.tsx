@@ -24,7 +24,7 @@ function JoinStats() {
     try {
       setIsLoading(true);
       const data = await axios.get("/api/admin/joinRequests");
-      setData(data.data);
+      setData(data.data.data);
       console.log(data.data);
 
       setIsLoading(false);

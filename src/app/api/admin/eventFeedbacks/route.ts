@@ -12,7 +12,7 @@ export const GET = async (_req: NextRequest) => {
     });
 
     if (!data || data.length === 0) {
-      return NextResponse.json({
+      return NextResponse.json({data,
         message: "Event Feedbacks not found for you region!",
       });
     }

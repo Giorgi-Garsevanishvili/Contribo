@@ -22,7 +22,7 @@ export const GET = async (_req: NextRequest) => {
     });
 
     if (!data || data.length === 0) {
-      return NextResponse.json({
+      return NextResponse.json({data,
         message: "Position History in your region not found!",
       });
     }

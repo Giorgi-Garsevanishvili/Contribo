@@ -20,7 +20,7 @@ export const GET = async (_req: NextRequest) => {
     });
 
     if (!data) {
-      return NextResponse.json({
+      return NextResponse.json({data,
         message: `Event feedbacks made by you not found!`,
       });
     }

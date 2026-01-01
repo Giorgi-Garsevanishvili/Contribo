@@ -31,7 +31,7 @@ export const GET = async (_req: NextRequest, context: Context) => {
     });
 
     if (!data) {
-      return NextResponse.json({
+      return NextResponse.json({data,
         message: `Position History with ID:${id} not found!`,
       });
     }

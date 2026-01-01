@@ -7,7 +7,6 @@ import { handleError } from "@/lib/errors/handleErrors";
 import { RegionDataUpdate } from "@/lib/zod";
 import { Context } from "@/types/general-types";
 
-
 export const GET = async (_req: NextRequest, context: Context) => {
   try {
     await requireRole("QIRVEX");
@@ -19,18 +18,18 @@ export const GET = async (_req: NextRequest, context: Context) => {
       );
     }
 
-    const region = await prisma.region.findUnique({
+    const data = await prisma.region.findUnique({
       where: { id },
     });
 
-    if (!region) {
+    if (!data) {
       return NextResponse.json(
-        { message: `Region with id: ${id}, not found.` },
+        { data, message: `Region with id: ${id}, not found.` },
         { status: 404 }
       );
     }
 
-    return NextResponse.json(region);
+    return NextResponse.json(data);
   } catch (error) {
     const { status, message } = handleError(error);
     return NextResponse.json({ error: message }, { status: status });

@@ -7,7 +7,6 @@ import { DefaultSystemValuesUpdate } from "@/lib/zod";
 import z from "zod";
 import { Context } from "@/types/general-types";
 
-
 export const GET = async (_req: NextRequest, context: Context) => {
   try {
     await requireRole("QIRVEX");
@@ -17,18 +16,18 @@ export const GET = async (_req: NextRequest, context: Context) => {
       return NextResponse.json({ message: "Id is missing!" }, { status: 400 });
     }
 
-    const memberStatus = await prisma.memberStatus.findUnique({
+    const data = await prisma.memberStatus.findUnique({
       where: { id },
     });
 
-    if (!memberStatus) {
+    if (!data) {
       return NextResponse.json(
-        { message: `Member Status with id: ${id}, not found` },
+        { data, message: `Member Status with id: ${id}, not found` },
         { status: 404 }
       );
     }
 
-    return NextResponse.json(memberStatus);
+    return NextResponse.json(data);
   } catch (error) {
     const { status, message } = handleError(error);
     return NextResponse.json({ error: message }, { status: status });

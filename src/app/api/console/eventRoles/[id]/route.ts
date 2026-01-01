@@ -16,16 +16,16 @@ export const GET = async (_req: NextRequest, context: Context) => {
       return NextResponse.json({ message: "Id is missing!" }, { status: 400 });
     }
 
-    const eventsRole = await prisma.eventsRole.findUnique({ where: { id } });
+    const data = await prisma.eventsRole.findUnique({ where: { id } });
 
-    if (!eventsRole) {
+    if (!data) {
       return NextResponse.json(
-        { message: `Events Role with id: ${id}, not found` },
+        { data, message: `Events Role with id: ${id}, not found` },
         { status: 404 }
       );
     }
 
-    return NextResponse.json(eventsRole);
+    return NextResponse.json(data);
   } catch (error) {
     const { status, message } = handleError(error);
     return NextResponse.json({ error: message }, { status: status });
