@@ -18,6 +18,7 @@ export const GET = async (_req: NextRequest) => {
         region: { select: { name: true } },
         createdBy: { select: { name: true } },
         updatedBy: { select: { name: true } },
+        rating:true,
         name: true,
         startTime: true,
       },

@@ -6,14 +6,14 @@ import { useCompAlert } from "@/hooks/useCompAlert";
 import { HiHandRaised } from "react-icons/hi2";
 import { useRouter } from "next/navigation";
 
-type UserData = {
+type Data = {
   id: string;
   region: { name: string };
   status: string;
 };
 
 function JoinStats() {
-  const [data, setData] = useState<UserData[]>([]);
+  const [data, setData] = useState<Data[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const router = useRouter();
 
@@ -25,7 +25,6 @@ function JoinStats() {
       setIsLoading(true);
       const data = await axios.get("/api/admin/joinRequests");
       setData(data.data.data);
-      console.log(data.data);
 
       setIsLoading(false);
     } catch (error) {

@@ -12,7 +12,15 @@ export const GET = async (_req: NextRequest) => {
       where: {
         ownAllowance: { regionId: thisUser.user.ownAllowance?.regionId },
       },
-      select: { id: true, name: true, email: true },
+      select: {
+        id: true,
+        name: true,
+        email: true,
+        memberStatusLogs: {
+          where: { ended: false },
+          select: { status: { select: { name: true } } },
+        },
+      },
     });
 
     if (!usersData || usersData.length === 0) {

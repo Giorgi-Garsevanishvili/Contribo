@@ -7,14 +7,19 @@ import Loading from "@/app/admin/loading";
 import { GiHeartInside } from "react-icons/gi";
 import { useRouter } from "next/navigation";
 
-type UserData = {
+type Data = {
   id: string;
   name: string;
   email: string;
+  memberStatusLogs: {
+    status: {
+      name: string;
+    } | null;
+  };
 };
 
 function UserStats() {
-  const [data, setData] = useState<UserData[]>([]);
+  const [data, setData] = useState<Data[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const router = useRouter();
 
@@ -24,9 +29,10 @@ function UserStats() {
   const fetchData = async () => {
     try {
       setIsLoading(true);
-      const data = await axios.get("/api/admin/users");
-      setData(data.data);
-
+      const response = await axios.get("/api/admin/users");
+      setData(response.data);
+      console.log(response.data);
+      
       setIsLoading(false);
     } catch (error) {
       setIsLoading(false);
@@ -50,7 +56,13 @@ function UserStats() {
         className={`flex hover:shadow-lg hover:opacity-80 duration-300 btn flex-col select-none w-[10rem] h-[10rem] items-center justify-center mt-0 m-2 text-white pt-0 p-0.5 bg-[#434d5f98] rounded-xl shadow-sm shadow-white `}
       >
         <GiHeartInside size={30} className="m-2" />
-        <h1 className={`text-2xl ${isLoading ? 'animate-spin' : ""} font-bold m-1`}>{isLoading ? "." : data.length}</h1>
+        <h1
+          className={`text-2xl ${
+            isLoading ? "animate-spin" : ""
+          } font-bold m-1`}
+        >
+          {isLoading ? "." : data.length}
+        </h1>
         <h3>Volunteer</h3>
       </button>
     </>
