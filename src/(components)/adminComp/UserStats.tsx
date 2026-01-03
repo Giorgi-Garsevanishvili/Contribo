@@ -63,7 +63,7 @@ function UserStats() {
 
   useEffect(() => {
     fetchData();
-  },[]);
+  }, []);
 
   return (
     <>
@@ -71,7 +71,9 @@ function UserStats() {
         onClick={() => router.push("admin/users")}
         onMouseEnter={() => setHover(true)}
         onMouseLeave={() => setHover(false)}
-        className={`flex hover:shadow-lg  hover:opacity-95 transition-all duration-300 btn flex-col select-none w-[10rem] h-[10rem] items-center justify-center mt-0 m-2 text-white pt-0 p-0.5 bg-[#434d5f98] rounded-xl shadow-sm shadow-white `}
+        className={`${
+          isLoading ? "animate-pulse" : ""
+        } flex hover:shadow-lg  hover:opacity-95 transition-all duration-300 btn flex-col select-none w-[10rem] h-[10rem] items-center justify-center mt-0 m-2 text-white pt-0 p-0.5 bg-[#434d5f98] rounded-xl shadow-sm shadow-white `}
       >
         {!hover ? (
           <>
@@ -80,7 +82,7 @@ function UserStats() {
               className={`text-2xl ${
                 isLoading ? "animate-spin transition-all duration-300" : ""
               } font-bold m-1`}
-              >
+            >
               {isLoading ? "." : data.length}
             </h1>
             <h3>Volunteer</h3>
@@ -88,11 +90,18 @@ function UserStats() {
         ) : (
           <div className="flex h-full flex-col pt-1.5 transition-all duration-300">
             <h1 className="mb-1">Member Statuses</h1>
-            {Object.keys(statusStats).length !== 0 ? Object.entries(statusStats).slice(0,3).map(([status, count]) => (
-              <div className="mt-1 p-0.5 border-2 rounded-lg text-sm" key={status}>
-                {status} : <span className="font-bold ">{count}</span>
-              </div>
-            )): "No Stats To Display"}
+            {Object.keys(statusStats).length !== 0
+              ? Object.entries(statusStats)
+                  .slice(0, 3)
+                  .map(([status, count]) => (
+                    <div
+                      className="mt-1 p-0.5 border-2 rounded-lg text-sm"
+                      key={status}
+                    >
+                      {status} : <span className="font-bold ">{count}</span>
+                    </div>
+                  ))
+              : "No Stats To Display"}
           </div>
         )}
       </button>
