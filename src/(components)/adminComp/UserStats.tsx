@@ -63,7 +63,7 @@ function UserStats() {
 
   useEffect(() => {
     fetchData();
-  }, []);
+  },[]);
 
   return (
     <>

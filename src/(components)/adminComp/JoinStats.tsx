@@ -40,7 +40,7 @@ function JoinStats() {
 
   useEffect(() => {
     fetchData();
-  }, []);
+  },[]);
 
   const requestLength = data.filter(
     (s) => s.status !== "APPROVED" && s.status !== "REJECTED"

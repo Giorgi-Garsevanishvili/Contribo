@@ -3,7 +3,6 @@ import { Metadata } from "next";
 import ConsoleNav from "@/(components)/panelComp/nav";
 import { CompAlert } from "@/redux/features/componentAlert/compAlert";
 import ConfirmTab from "@/redux/features/confirmationTab/confirmationTab";
-import UserStats from "@/(components)/adminComp/UserStats";
 
 export const metadata: Metadata = {
   title: "Console - Contribo - by Qirvex™",

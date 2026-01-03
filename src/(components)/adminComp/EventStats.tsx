@@ -10,7 +10,7 @@ type Data = {
   id: string;
   name: string;
   region: { name: string };
-  rating: Number | null;
+  rating: number | null;
 };
 
 function EventStats() {
@@ -56,7 +56,7 @@ function EventStats() {
 
   useEffect(() => {
     fetchData();
-  }, []);
+  },[]);
 
   return (
     <>
