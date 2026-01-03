@@ -3,7 +3,6 @@
 import axios from "axios";
 import React, { useEffect, useRef, useState } from "react";
 import { useCompAlert } from "@/hooks/useCompAlert";
-import Loading from "@/app/admin/loading";
 import { GiHeartInside } from "react-icons/gi";
 import { useRouter } from "next/navigation";
 
@@ -15,12 +14,15 @@ type Data = {
     status: {
       name: string;
     } | null;
-  };
+  }[];
 };
 
 function UserStats() {
   const [data, setData] = useState<Data[]>([]);
   const [isLoading, setIsLoading] = useState(true);
+  const [hover, setHover] = useState(false);
+  const [statusStats, setStatusStats] = useState<Record<string, number>>({});
+
   const router = useRouter();
 
   const { triggerCompAlert } = useCompAlert();
@@ -30,9 +32,9 @@ function UserStats() {
     try {
       setIsLoading(true);
       const response = await axios.get("/api/admin/users");
-      setData(response.data);
-      console.log(response.data);
-      
+      setData(response.data.data);
+      setMemberStatusValues(response.data.data);
+
       setIsLoading(false);
     } catch (error) {
       setIsLoading(false);
@@ -45,6 +47,20 @@ function UserStats() {
     return;
   };
 
+  const setMemberStatusValues = (value: Data[]) => {
+    const stats = value.reduce<Record<string, number>>((acc, user) => {
+      user.memberStatusLogs.forEach((log) => {
+        const statusName = log.status?.name;
+        if (!statusName) return;
+
+        acc[statusName] = (acc[statusName] || 0) + 1;
+      });
+      return acc;
+    }, {});
+
+    setStatusStats(stats);
+  };
+
   useEffect(() => {
     fetchData();
   }, []);
@@ -53,17 +69,32 @@ function UserStats() {
     <>
       <button
         onClick={() => router.push("admin/users")}
-        className={`flex hover:shadow-lg hover:opacity-80 duration-300 btn flex-col select-none w-[10rem] h-[10rem] items-center justify-center mt-0 m-2 text-white pt-0 p-0.5 bg-[#434d5f98] rounded-xl shadow-sm shadow-white `}
+        onMouseEnter={() => setHover(true)}
+        onMouseLeave={() => setHover(false)}
+        className={`flex hover:shadow-lg  hover:opacity-95 transition-all duration-300 btn flex-col select-none w-[10rem] h-[10rem] items-center justify-center mt-0 m-2 text-white pt-0 p-0.5 bg-[#434d5f98] rounded-xl shadow-sm shadow-white `}
       >
-        <GiHeartInside size={30} className="m-2" />
-        <h1
-          className={`text-2xl ${
-            isLoading ? "animate-spin" : ""
-          } font-bold m-1`}
-        >
-          {isLoading ? "." : data.length}
-        </h1>
-        <h3>Volunteer</h3>
+        {!hover ? (
+          <>
+            <GiHeartInside size={30} className="m-2" />
+            <h1
+              className={`text-2xl ${
+                isLoading ? "animate-spin transition-all duration-300" : ""
+              } font-bold m-1`}
+              >
+              {isLoading ? "." : data.length}
+            </h1>
+            <h3>Volunteer</h3>
+          </>
+        ) : (
+          <div className="flex h-full flex-col pt-1.5 transition-all duration-300">
+            <h1 className="mb-1">Member Statuses</h1>
+            {Object.keys(statusStats).length !== 0 ? Object.entries(statusStats).slice(0,3).map(([status, count]) => (
+              <div className="mt-1 p-0.5 border-2 rounded-lg text-sm" key={status}>
+                {status} : <span className="font-bold ">{count}</span>
+              </div>
+            )): "No Stats To Display"}
+          </div>
+        )}
       </button>
     </>
   );

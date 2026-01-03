@@ -31,12 +31,13 @@ export const GET = async (_req: NextRequest, context: Context) => {
     });
 
     if (!data) {
-      return NextResponse.json({data,
+      return NextResponse.json({
+        data,
         message: `Member Status Log with ID:${id} not found!`,
       });
     }
 
-    return NextResponse.json(data, { status: 200 });
+    return NextResponse.json({ data }, { status: 200 });
   } catch (error) {
     const { message, status } = handleError(error);
     return NextResponse.json({ message }, { status });

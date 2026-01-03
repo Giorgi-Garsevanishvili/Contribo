@@ -45,5 +45,6 @@ export const config = {
     "/",
     "/volunteer",
     "/console",
+    "/admin"
   ],
 };

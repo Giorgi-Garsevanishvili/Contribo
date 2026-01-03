@@ -8,7 +8,7 @@ export const GET = async (_req: NextRequest) => {
   try {
     const thisUser = await requireRole("ADMIN");
 
-    const usersData = await prisma.user.findMany({
+    const data = await prisma.user.findMany({
       where: {
         ownAllowance: { regionId: thisUser.user.ownAllowance?.regionId },
       },
@@ -23,11 +23,14 @@ export const GET = async (_req: NextRequest) => {
       },
     });
 
-    if (!usersData || usersData.length === 0) {
-      return NextResponse.json({ message: "Users for your region not found!" });
+    if (!data || data.length === 0) {
+      return NextResponse.json({
+        data,
+        message: "Users for your region not found!",
+      });
     }
 
-    return NextResponse.json(usersData);
+    return NextResponse.json({data}, { status: 200 });
   } catch (error) {
     const { status, message } = handleError(error);
     return NextResponse.json({ message: message }, { status: status });

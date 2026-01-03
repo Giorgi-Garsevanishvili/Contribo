@@ -26,8 +26,11 @@ function EventStats() {
     try {
       setIsLoading(true);
       const response = await axios.get("/api/admin/events");
-      setData(response.data);
-      calculateRating(response.data);
+      setData(response.data.data);
+
+      if (response.data.data.length > 0) {
+        calculateRating(response.data.data);
+      }
 
       setIsLoading(false);
     } catch (error) {
@@ -73,7 +76,9 @@ function EventStats() {
           <h3>Event</h3>
         </div>
         <div className="flex bg-white items-center border-gray-300 justify-center w-[10rem] p-1.5 m-0 rounded-b-xl">
-          <h3 className="text-black text-sm">{`Average Rating: ${rating} ⭐`}</h3>
+          <h3 className="text-black text-sm">
+            {`Average Rating: ${rating}`} &#10024;
+          </h3>
         </div>
       </button>
     </>
