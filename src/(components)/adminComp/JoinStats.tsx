@@ -62,7 +62,7 @@ function JoinStats() {
         >
           {isLoading ? "." : requestLength}
         </h1>
-        <h3>New Join Request</h3>
+        <h3>New Join Requests</h3>
       </button>
     </>
   );

@@ -73,7 +73,7 @@ function EventStats() {
           >
             {isLoading ? "." : data.length}
           </h1>
-          <h3>Event</h3>
+          <h3>Events</h3>
         </div>
         <div className="flex bg-white items-center border-gray-300 justify-center w-[10rem] p-1.5 m-0 rounded-b-xl">
           <h3 className="text-black text-sm">

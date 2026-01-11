@@ -1,3 +1,4 @@
+import AllowedStats from "@/(components)/adminComp/AllowedStats";
 import EventStats from "@/(components)/adminComp/EventStats";
 import HrWarningStats from "@/(components)/adminComp/HrWarningStats";
 import JoinStats from "@/(components)/adminComp/JoinStats";
@@ -10,6 +11,7 @@ function Admin() {
       <JoinStats />
       <EventStats />
       <HrWarningStats />
+      <AllowedStats/>
     </>
   );
 }
