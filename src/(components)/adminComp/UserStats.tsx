@@ -90,18 +90,26 @@ function UserStats() {
         ) : (
           <div className="flex h-full flex-col pt-1.5 transition-all duration-300">
             <h1 className="mb-1">Member Statuses</h1>
-            {Object.keys(statusStats).length !== 0
-              ? Object.entries(statusStats)
-                  .slice(0, 3)
-                  .map(([status, count]) => (
-                    <div
-                      className="mt-1 p-0.5 border-2 rounded-lg text-sm"
-                      key={status}
-                    >
-                      {status} : <span className="font-bold ">{count}</span>
-                    </div>
-                  ))
-              : "No Stats To Display"}
+            {Object.keys(statusStats).length !== 0 ? (
+              Object.entries(statusStats)
+                .slice(0, 3)
+                .map(([status, count]) => (
+                  <div
+                    className="mt-1 p-0.5 border-2 rounded-lg text-sm"
+                    key={status}
+                  >
+                    {status} : <span className="font-bold ">{count}</span>
+                  </div>
+                ))
+            ) : (
+              <h1
+                className={`text-2xl ${
+                  isLoading ? "animate-spin transition-all duration-300" : ""
+                } font-bold m-1`}
+              >
+                {isLoading ? "." : "No Data To Display"}
+              </h1>
+            )}
           </div>
         )}
       </button>
