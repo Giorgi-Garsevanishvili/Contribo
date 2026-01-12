@@ -3,8 +3,6 @@
 import axios from "axios";
 import React, { useEffect, useRef, useState } from "react";
 import { useCompAlert } from "@/hooks/useCompAlert";
-import { IoFileTrayStacked } from "react-icons/io5";
-import { useRouter } from "next/navigation";
 
 type Data = {
   id: string;
@@ -29,7 +27,6 @@ function VolunteerStats() {
       setIsLoading(true);
       const response = await axios.get("/api/admin/users");
       setMemberStatusValues(response.data.data);
-      console.log(response.data.data);
 
       setIsLoading(false);
     } catch (error) {
@@ -64,10 +61,10 @@ function VolunteerStats() {
   return (
     <>
       {
-        <div className={`${isLoading ? "animate-pulse " : ""} border-b-2 border-t-2 border-gray-600 rounded-lg py-2 flex flex-row w-full items-center justify-between select-none`}>
+        <div className={`${isLoading ? "animate-pulse " : ""} shadow-sm bg-gray-200/45  rounded-lg p-1.5 flex flex-row w-full items-center justify-between select-none`}>
           {isLoading ? (
             <h2
-              className={`text-2xl ${
+              className={`text-2xl text-black ${
                 isLoading ? "animate-spin transition-all duration-300" : ""
               } font-bold m-1`}
             >
@@ -78,7 +75,7 @@ function VolunteerStats() {
               .slice(0, 3)
               .map(([status, count]) => (
                 <div
-                  className="m-1.5 p-3 bg-[#434d5f98] border-2 rounded-lg text-sm"
+                  className="m-1.5 p-2.5 bg-[#434d5f98] border-2 rounded-lg"
                   key={status}
                 >
                   {status} : <span className="font-bold ">{count}</span>

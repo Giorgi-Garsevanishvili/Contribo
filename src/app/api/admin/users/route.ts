@@ -16,6 +16,7 @@ export const GET = async (_req: NextRequest) => {
         id: true,
         name: true,
         email: true,
+        image: true,
         memberStatusLogs: {
           where: { ended: false },
           select: { status: { select: { name: true } } },
