@@ -20,6 +20,7 @@ type Data = {
 function UsersList() {
   const [isLoading, setIsLoading] = useState(true);
   const [data, setData] = useState<Data[]>([]);
+  const [searchTerm, setSearchTerm] = useState("");
 
   const { triggerCompAlert } = useCompAlert();
   const triggerCompAlertRef = useRef(triggerCompAlert);
@@ -47,26 +48,73 @@ function UsersList() {
     fetchData();
   }, []);
 
+  const filteredData = data.filter((item) => {
+    const value = item["name" as keyof typeof item];
+
+    if (typeof value !== "string") return false;
+
+    return searchTerm === ""
+      ? true
+      : value.toLowerCase().includes(searchTerm.toLowerCase());
+  });
+
   return (
-    <div className="flex w-[80rem] flex-col mt-4">
-      {data.map((user) => (
-        <button className="flex btn select-none justify-between items-center bg-white/80 text-black p-2 flex-row m-1.5 rounded-lg" key={user.id}>
-          <Image
-            className="rounded-lg"
-            src={user.image}
-            alt="User Image"
-            width={50}
-            height={50}
-          />
-          <h3>{user.name}</h3>
-          <h3>
-            {
-              user.memberStatusLogs[user.memberStatusLogs.length - 1]?.status
-                ?.name ?? "No Status"
-            }
-          </h3>
-        </button>
-      ))}
+    <div
+      className={`flex ${
+        isLoading ? "w-30 h-30 items-center justify-center" : " w-auto"
+      } flex-col mt-4 shadow-sm bg-gray-200/45  rounded-lg p-1.5 select-none`}
+    >
+      <div
+        className={` ${
+          isLoading ? "hidden" : "flex"
+        } w-full items-center mt-1 justify-center`}
+      >
+        <input
+          className="flex text-sm w-full bg-gray-300 text-black input-def"
+          type="text"
+          name="search"
+          placeholder={`Find by Name`}
+          value={searchTerm}
+          onChange={(e) => setSearchTerm(e.target.value)}
+        />
+      </div>
+      {isLoading ? (
+        <h2
+          className={`text-sm text-black ${
+            isLoading ? "animate-spin transition-all duration-300" : ""
+          } font-bold`}
+        >
+          .
+        </h2>
+      ) : filteredData.length > 0 ? (
+        filteredData.map((user) => (
+          <button
+            className="flex btn select-none text-sm justify-between items-center bg-white/80 text-black p-2 flex-row m-1 rounded-lg"
+            key={user.id}
+          >
+            <div className="flex justify-center items-center">
+              <Image
+                className="rounded-lg mr-3"
+                src={user.image}
+                alt="User Image"
+                width={35}
+                height={35}
+              />
+              <h3 className="text-sm font-medium">{user.name}</h3>
+            </div>
+            <div className="md:flex hidden items-center pl-20 pr-5 justify-start">
+              <h3 className="font-medium">
+                {`Membership: ${
+                  user.memberStatusLogs[user.memberStatusLogs.length - 1]
+                    ?.status?.name ?? "No Status"
+                }`}
+              </h3>
+            </div>
+          </button>
+        ))
+      ) : (
+        "Users not found"
+      )}
     </div>
   );
 }

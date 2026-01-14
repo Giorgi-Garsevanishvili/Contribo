@@ -61,10 +61,10 @@ function VolunteerStats() {
   return (
     <>
       {
-        <div className={`${isLoading ? "animate-pulse " : ""} shadow-sm bg-gray-200/45  rounded-lg p-1.5 flex flex-row w-full items-center justify-between select-none`}>
+        <div className={`${isLoading ? "animate-pulse " : ""} text-sm shadow-sm bg-gray-200/45  rounded-lg p-1.5 flex flex-row w-full items-center justify-between select-none`}>
           {isLoading ? (
             <h2
-              className={`text-2xl text-black ${
+              className={`text-sm text-black ${
                 isLoading ? "animate-spin transition-all duration-300" : ""
               } font-bold m-1`}
             >
