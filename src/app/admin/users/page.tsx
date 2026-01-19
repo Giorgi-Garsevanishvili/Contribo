@@ -4,7 +4,7 @@ import VolunteerStats from "@/(components)/adminComp/users/VolunteersStats";
 import { useRouter } from "next/navigation";
 import { IoMdArrowRoundBack } from "react-icons/io";
 
-function Admin() {
+function UserList() {
   const route = useRouter();
   return (
     <>
@@ -30,4 +30,4 @@ function Admin() {
     </>
   );
 }
-export default Admin;
+export default UserList;

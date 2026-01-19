@@ -4,6 +4,8 @@ import axios from "axios";
 import React, { useEffect, useRef, useState } from "react";
 import { useCompAlert } from "@/hooks/useCompAlert";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
+
 
 type Data = {
   id: string;
@@ -24,7 +26,7 @@ function UsersList() {
 
   const { triggerCompAlert } = useCompAlert();
   const triggerCompAlertRef = useRef(triggerCompAlert);
-
+   const router = useRouter()
   const fetchData = async () => {
     try {
       setIsLoading(true);
@@ -88,7 +90,7 @@ function UsersList() {
         </h2>
       ) : filteredData.length > 0 ? (
         filteredData.map((user) => (
-          <button
+          <button onClick={() => router.push(`/admin/users/${user.id}`)}
             className="flex btn select-none text-sm justify-between items-center bg-white/80 text-black p-2 flex-row m-1 rounded-lg"
             key={user.id}
           >

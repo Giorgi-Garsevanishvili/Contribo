@@ -15,13 +15,16 @@ export const GET = async (_req: NextRequest, context: Context) => {
       return NextResponse.json({ message: "Id is missing" }, { status: 400 });
     }
 
-    const user = await prisma.user.findUnique({
+    const data = await prisma.user.findUnique({
       where: {
         id,
         ownAllowance: { regionId: thisUser.user.ownAllowance?.regionId },
       },
       include: {
-        memberStatusLogs: true,
+        memberStatusLogs: {
+          where: { ended: false },
+          select: { status: { select: { name: true } } },
+        },
         positionHistories: true,
         ratingHistory: {select: {id: true, newValue: true, value: true, action: true,}},
         eventAssignments: true,
@@ -34,14 +37,14 @@ export const GET = async (_req: NextRequest, context: Context) => {
       },
     });
 
-    if (!user) {
+    if (!data) {
       return NextResponse.json(
         { message: `User with id: ${id}, not found` },
         { status: 404 }
       );
     }
 
-    return NextResponse.json(user, { status: 200 });
+    return NextResponse.json({data}, { status: 200 });
   } catch (error) {
     const { status, message } = handleError(error);
     return NextResponse.json({ error: message }, { status: status });
