@@ -1,53 +1,40 @@
 import { NextResponse } from "next/server";
-import { auth } from "./lib/auth";
+import type { NextRequest } from "next/server";
 
-interface AuthToken {
-  user?: {
-    roles?: string[];
-  };
-}
-
-export default auth(async function middleware(req) {
+export function middleware(req: NextRequest) {
   const { pathname } = req.nextUrl;
-  const token = req.auth as AuthToken | null;
 
+  const session =
+    req.cookies.get("next-auth.session-token")?.value ||
+    req.cookies.get("__Secure-next-auth.session-token")?.value;
+
+  // Home page redirect
   if (pathname === "/") {
-    if (token) {
+    if (session) {
       return NextResponse.redirect(new URL("/redirect", req.url));
     }
-
     return NextResponse.next();
   }
 
-  if (!token) {
-    return NextResponse.redirect(new URL("/signin", req.url));
-  }
-
-  const hasRole = (role: string) => token.user?.roles?.includes(role);
-
-  if (pathname.startsWith("/console") && !hasRole("QIRVEX")) {
-    return NextResponse.redirect(new URL("/unauthorized", req.url));
-  }
-
-  if (pathname.startsWith("/admin") && !hasRole("ADMIN")) {
-    return NextResponse.redirect(new URL("/unauthorized", req.url));
-  }
-
-  if (pathname.startsWith("/volunteer") && !hasRole("REGULAR")) {
-    return NextResponse.redirect(new URL("/unauthorized", req.url));
+  // Protect routes
+  if (
+    pathname.startsWith("/admin") ||
+    pathname.startsWith("/console") ||
+    pathname.startsWith("/volunteer")
+  ) {
+    if (!session) {
+      return NextResponse.redirect(new URL("/signin", req.url));
+    }
   }
 
   return NextResponse.next();
-});
+}
 
 export const config = {
   matcher: [
     "/",
-    "/volunteer",
-    "/volunteer/:path*",
-    "/console",
-    "/console/:path*",
-    "/admin",
     "/admin/:path*",
+    "/console/:path*",
+    "/volunteer/:path*",
   ],
 };

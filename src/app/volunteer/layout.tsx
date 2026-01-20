@@ -3,6 +3,7 @@ import { Metadata } from "next";
 import ConsoleNav from "@/(components)/panelComp/nav";
 import { CompAlert } from "@/redux/features/componentAlert/compAlert";
 import ConfirmTab from "@/redux/features/confirmationTab/confirmationTab";
+import { requireRole } from "@/lib/guards";
 
 export const metadata: Metadata = {
   title: "Console - Contribo - by Qirvex™",
@@ -18,11 +19,14 @@ export const metadata: Metadata = {
   description: " Console - Volunteer Engagement Platform",
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
+
+  await requireRole("REGULAR")
+
   return (
     <div className="flex flex-grow items-center justify-center transition-all duration-200 flex-col p-0 m-0">
       <ConfirmTab />
