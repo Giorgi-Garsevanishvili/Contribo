@@ -44,8 +44,10 @@ export const config = {
   matcher: [
     "/",
     "/volunteer",
+    "/volunteer/:path*",
     "/console",
+    "/console/:path*",
     "/admin",
-    "/admin/users"
+    "/admin/:path*",
   ],
 };
