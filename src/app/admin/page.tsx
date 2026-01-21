@@ -7,7 +7,7 @@ import UserStats from "@/(components)/adminComp/UserStats";
 function Admin() {
   return (
     <>
-      <UserStats />;
+      <UserStats />
       <JoinStats />
       <EventStats />
       <HrWarningStats />

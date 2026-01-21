@@ -10,6 +10,7 @@ async function MainPage() {
     <div className="flex flex-col flex-grow transition-all duration-200 md:flex-row justify-center items-center min-h-full">
       <aside className="flex flex-col justify-center items-center md:w-fit md:p-10  w-71 pl-1 pr-1 pt-6 pb-6 m-3 mt-3 rounded-4xl shadow-inner bg-qirvex-l shadow-gray-500">
         <Image
+          priority
           className="w-40 h-auto "
           src={contriboBgFree}
           alt="Contribo logo"

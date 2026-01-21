@@ -14,6 +14,8 @@ import { HiWrenchScrewdriver } from "react-icons/hi2";
 import { FaUserEdit } from "react-icons/fa";
 import { MdFolderDelete } from "react-icons/md";
 import { MdDelete } from "react-icons/md";
+import { IoMdInformationCircleOutline } from "react-icons/io";
+import AccessData from "./AccessData";
 
 type Data = {
   CreatedAllowedUser: [];
@@ -44,17 +46,17 @@ type Data = {
     status: {
       name: string;
     } | null;
+    updatedBy: {
+      name: string;
+    } | null;
+    createdBy: {
+      name: string;
+    } | null;
+    updatedAt: string;
   }[];
   name: string;
   ownAllowance: {
-    createdAt: string;
-    creatorId: string;
-    email: string;
     id: string;
-    regionId: string;
-    type: string;
-    updatedAt: string;
-    userId: string | null;
   };
   positionHistories: [];
   providedFeedbacks: [];
@@ -72,6 +74,7 @@ function UserInfo() {
   const { triggerCompAlert } = useCompAlert();
   const triggerCompAlertRef = useRef(triggerCompAlert);
   const route = useRouter();
+  const [open, setOpen] = useState(false);
 
   const fetchData = async () => {
     try {
@@ -79,6 +82,7 @@ function UserInfo() {
       const response = await axios.get(`/api/admin/users/${params.userId}`);
 
       setData(response.data.data);
+      console.log(response.data.data);
 
       setIsLoading(false);
     } catch (error) {
@@ -111,9 +115,10 @@ function UserInfo() {
           >
             {data ? (
               <div className="flex flex-col md:flex-row items-center justify-center">
-                <div className="flex w-38 h-38">
+                <div className="flex w-38 h-38 m-1">
                   {data ? (
                     <Image
+                      priority
                       className="rounded-2xl shadow-sm"
                       src={data?.image}
                       alt="User Photo"
@@ -124,7 +129,7 @@ function UserInfo() {
                     "No Image To Display"
                   )}
                 </div>
-                <div className="flex flex-col ml-2 p-4 justify-start bg-gray-200/60 rounded-lg shadow-sm">
+                <div className="flex flex-col p-4 m-1 justify-start bg-gray-200/60 rounded-lg shadow-sm">
                   <h2 className="flex items-center">
                     <FaUser className="mr-2" size={22} /> {data.name}
                   </h2>
@@ -148,6 +153,44 @@ function UserInfo() {
                       data.memberStatusLogs[data.memberStatusLogs.length - 1]
                         ?.status?.name ?? "No Status"
                     }`}
+                    <button
+                      onMouseEnter={() => setOpen(true)}
+                      onMouseLeave={() => setOpen(false)}
+                      onClick={() => setOpen(!open)}
+                      className="ml-2 cursor-pointer text-gray-500"
+                    >
+                      <IoMdInformationCircleOutline size={22} />
+                      {open && (
+                        <div
+                          className="absolute z-50 w-auto rounded-md bg-gray-900/85 text-white text-xs p-2 shadow-lg
+                        left-1/2 -translate-x-1/2 mt-2"
+                        >
+                          <div className="flex flex-col justify-center items-start p-1">
+                            <h2 className="p-0.5">
+                              {`Created By: ${
+                                data.memberStatusLogs[
+                                  data.memberStatusLogs.length - 1
+                                ]?.createdBy?.name ?? "Unknown User"
+                              }`}
+                            </h2>
+                            <h2 className="p-0.5">
+                              {`Updated At: ${new Date(
+                                data.memberStatusLogs[
+                                  data.memberStatusLogs.length - 1
+                                ]?.updatedAt,
+                              ).toLocaleString()}`}
+                            </h2>
+                            <h2 className="p-0.5">
+                              {`Updated By: ${
+                                data.memberStatusLogs[
+                                  data.memberStatusLogs.length - 1
+                                ]?.updatedBy?.name ?? "Unknown User"
+                              }`}
+                            </h2>
+                          </div>
+                        </div>
+                      )}
+                    </button>
                   </h2>
                   <h2 className="flex items-center">
                     <FaStar className="mr-2" size={22} />{" "}
@@ -192,6 +235,9 @@ function UserInfo() {
           </div>
         </div>
       }
+      <div>
+        <AccessData id={data?.ownAllowance.id}></AccessData>
+      </div>
     </div>
   );
 }

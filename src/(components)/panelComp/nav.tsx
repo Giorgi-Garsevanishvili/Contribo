@@ -15,6 +15,7 @@ async function ConsoleNav({ page }: { page: string }) {
         <div className="flex flex-row items-center justify-between p-3 min-w-30 text-white">
           {session ? (
             <Image
+              priority
               className="rounded-2xl"
               src={`${session?.user.image}`}
               width={37}

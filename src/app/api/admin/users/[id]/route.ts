@@ -23,14 +23,21 @@ export const GET = async (_req: NextRequest, context: Context) => {
       include: {
         memberStatusLogs: {
           where: { ended: false },
-          select: { status: { select: { name: true } } },
+          select: {
+            updatedAt: true,
+            updatedBy: { select: { name: true } },
+            createdBy: { select: { name: true } },
+            status: { select: { name: true } },
+          },
         },
         positionHistories: true,
-        ratingHistory: {select: {id: true, newValue: true, value: true, action: true,}},
+        ratingHistory: {
+          select: { id: true, newValue: true, value: true, action: true },
+        },
         eventAssignments: true,
         providedFeedbacks: true,
         hrWarnings: true,
-        ownAllowance: true,
+        ownAllowance: { select: { id: true } },
         CreatedAllowedUser: {
           select: { id: true, email: true, createdAt: true },
         },
@@ -40,11 +47,11 @@ export const GET = async (_req: NextRequest, context: Context) => {
     if (!data) {
       return NextResponse.json(
         { message: `User with id: ${id}, not found` },
-        { status: 404 }
+        { status: 404 },
       );
     }
 
-    return NextResponse.json({data}, { status: 200 });
+    return NextResponse.json({ data }, { status: 200 });
   } catch (error) {
     const { status, message } = handleError(error);
     return NextResponse.json({ error: message }, { status: status });
@@ -69,7 +76,7 @@ export const PUT = async (req: NextRequest, context: Context) => {
     if (!existingUser) {
       return NextResponse.json(
         { message: `user with id:${id} not found` },
-        { status: 404 }
+        { status: 404 },
       );
     }
 
@@ -79,7 +86,7 @@ export const PUT = async (req: NextRequest, context: Context) => {
     if (!body || !Object.keys(body).length) {
       return NextResponse.json(
         { message: "At least one field must be provided to update" },
-        { status: 400 }
+        { status: 400 },
       );
     }
 
@@ -90,7 +97,7 @@ export const PUT = async (req: NextRequest, context: Context) => {
     if (!isChanged) {
       return NextResponse.json(
         { message: `No Changes Detected, update skipped.` },
-        { status: 400 }
+        { status: 400 },
       );
     }
 
@@ -135,7 +142,7 @@ export const DELETE = async (_req: NextRequest, context: Context) => {
         if (!deletedFromAllowedList) {
           return NextResponse.json(
             { message: "User deletion failed with AllowedUserID!" },
-            { status: 400 }
+            { status: 400 },
           );
         }
       } else {
@@ -147,7 +154,7 @@ export const DELETE = async (_req: NextRequest, context: Context) => {
         if (!deletedFromAllowedList) {
           return NextResponse.json(
             { message: "User deletion failed with Email!" },
-            { status: 400 }
+            { status: 400 },
           );
         }
       }

@@ -100,6 +100,7 @@ function ListDetailComp({ type, data }: ListDetailCompProps) {
                 <div className="flex bg-accent text-black rounded-2xl mb-2 p-1 w-full items-center justify-center">
                   {data.logo && data.logo.length > 5 ? (
                     <Image
+                      priority
                       src={data.logo?.trim()}
                       alt="Section Logo"
                       className="rounded-2xl w-auto h-20"

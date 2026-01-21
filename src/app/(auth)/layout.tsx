@@ -9,6 +9,7 @@ export default function LogInLayout({
   return (
     <div className="flex flex-col transition-all duration-200 justify-center items-center m-0 p-0">
       <Image
+        priority
         className="flex w-75 bg-white/75 rounded-3xl shadow-md shadow-gray-200"
         src={contriboImgQir}
         alt="Contribo by Qirvex™"
