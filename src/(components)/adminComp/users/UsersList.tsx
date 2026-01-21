@@ -31,7 +31,6 @@ function UsersList() {
       setIsLoading(true);
       const response = await axios.get("/api/admin/users");
       setData(response.data.data);
-      console.log(response.data.data);
 
       setIsLoading(false);
     } catch (error) {

@@ -82,7 +82,6 @@ function UserInfo() {
       const response = await axios.get(`/api/admin/users/${params.userId}`);
 
       setData(response.data.data);
-      console.log(response.data.data);
 
       setIsLoading(false);
     } catch (error) {

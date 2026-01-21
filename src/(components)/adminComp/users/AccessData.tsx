@@ -1,17 +1,16 @@
 "use client";
 import { useCompAlert } from "@/hooks/useCompAlert";
 import axios from "axios";
-import { useParams, useRouter } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 
 
-type Data = {};
+// type Data = {};
 //probably will pass ownAllowance Id from User data
 function AccessData({id}:{id: string | undefined}) {
 
   
   const [isLoading, setIsLoading] = useState(true);
-  const [data, setData] = useState<Data>();
+  const [data, setData] = useState();
   const { triggerCompAlert } = useCompAlert();
   const triggerCompAlertRef = useRef(triggerCompAlert);
 
@@ -22,7 +21,6 @@ function AccessData({id}:{id: string | undefined}) {
       const response = await axios.get(`/api/admin/allowedUsers/${id}`);
 
       setData(response.data.data);
-      console.log(response.data.data);
 
       setIsLoading(false);
     } catch (error) {
@@ -48,7 +46,6 @@ function AccessData({id}:{id: string | undefined}) {
           <div
             className={`${isLoading ? "animate-pulse transition-all duration-300" : ""} select-none flex p-2 items-center justify-center bg-gray-200/60 rounded-lg shadow-lg`}
           >
-
           </div>
         </div>
       }
