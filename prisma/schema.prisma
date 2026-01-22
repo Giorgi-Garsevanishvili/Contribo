@@ -55,6 +55,7 @@ model User {
   CreatedAllowedUser     AllowedUser[]     @relation("createdAllowanceBy")
   allowedUserId          String?           @unique
   ownAllowance           AllowedUser?      @relation(fields: [allowedUserId], references: [id], onDelete: Cascade)
+  UpdatedAllowance       AllowedUser[]     @relation("UpdatedAllowanceBy")
   //-----------------------------------------
   eventAssignments       EventAssignment[]
   CreatedEventAssignment EventAssignment[] @relation("CreatedEventAssignment")
@@ -153,7 +154,7 @@ model EventFeedback {
   rating   Int?
 
   updatedById String?
-  updatedBy   User?    @relation("updatedFeedback", fields: [updatedById], references: [id], onDelete: SetNull)
+  updatedBy   User?   @relation("updatedFeedback", fields: [updatedById], references: [id], onDelete: SetNull)
 
   createdAt DateTime  @default(now())
   updatedAt DateTime? @updatedAt
@@ -351,12 +352,14 @@ model AllowedUser {
   roles UserRole[] @relation("roleForUsers")
 
   createdBy User? @relation("createdAllowanceBy", fields: [creatorId], references: [id], onDelete: SetNull)
+  updatedBy User? @relation("UpdatedAllowanceBy", fields: [updatedById], references: [id], onDelete: SetNull)
 
-  userId    String?
-  user      User?     @relation
-  updatedAt DateTime? @updatedAt
-  createdAt DateTime  @default(now())
-  creatorId String?
+  userId      String?
+  user        User?     @relation
+  updatedAt   DateTime? @updatedAt
+  createdAt   DateTime  @default(now())
+  creatorId   String?
+  updatedById String?
 }
 
 model Role {

@@ -62,12 +62,14 @@ export const AllowedUserCreate = z
     roleId: z.array(z.string()).optional(),
     type: z.enum(GTypes).default(GTypes.SYSTEM),
     creatorId: z.string(),
+    updatedById: z.string().optional(),
   })
   .strict();
 
 export const AllowedUserUpdate = AllowedUserCreate.omit({
   email: true,
   type: true,
+  creatorId: true,
 }).partial();
 
 //Schemas for: Position, Member status, hr warning and event roles.

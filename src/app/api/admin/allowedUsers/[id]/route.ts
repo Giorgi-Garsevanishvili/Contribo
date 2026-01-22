@@ -18,21 +18,25 @@ export const GET = async (_req: NextRequest, context: Context) => {
     const data = await prisma.allowedUser.findUnique({
       where: { id, regionId: thisUser.user.ownAllowance?.regionId },
       include: {
-        roles: { include: { role: true } },
-        region: { select: { id: true, name: true, status: true } },
+        roles: { select: { role: { select: { name: true } } } },
+        region: { select: { name: true, status: true } },
         createdBy: { select: { name: true, id: true } },
-        user: true,
+      
+        user: { select: { name: true } },
+     
+        
+        updatedBy: {select:{name:true}}
       },
     });
 
     if (!data) {
       return NextResponse.json(
         { data, message: "user not found" },
-        { status: 404 }
+        { status: 404 },
       );
     }
 
-    return NextResponse.json(data);
+    return NextResponse.json({ data: data }, { status: 200 });
   } catch (error) {
     const { status, message } = handleError(error);
     return NextResponse.json({ error: message }, { status: status });
@@ -50,7 +54,7 @@ export const PUT = async (req: NextRequest, context: Context) => {
     const json = await req.json();
     const jsonWithCreator = {
       ...json,
-      creatorId: thisUser.user.id,
+      updatedById: thisUser.user.id,
     };
     const body = AllowedUserUpdate.parse(jsonWithCreator);
 
@@ -102,7 +106,7 @@ export const DELETE = async (req: NextRequest, context: Context) => {
     if (!deletedAllowedUser) {
       return NextResponse.json(
         { message: "something went wrong!" },
-        { status: 400 }
+        { status: 400 },
       );
     }
 

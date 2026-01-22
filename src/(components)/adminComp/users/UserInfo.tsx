@@ -100,15 +100,15 @@ function UserInfo() {
   }, []);
 
   return (
-    <div className="flex w-screen justify-center items-center">
+    <div className="flex flex-col w-full justify-center items-center">
+      <button
+        className="flex items-center border-1 justify-center btn p-2 text-center font-bold rounded-tr-md rounded-bl-md text-m bg-blue-950/70 text-white"
+        onClick={() => route.back()}
+      >
+        <IoMdArrowRoundBack size={25} />
+      </button>
       {
-        <div className="flex flex-col justify-center items-center">
-          <button
-            className="flex items-center border-1 justify-center btn p-2 text-center font-bold rounded-tr-md rounded-bl-md text-m bg-blue-950/70 text-white"
-            onClick={() => route.back()}
-          >
-            <IoMdArrowRoundBack size={25} />
-          </button>
+        <div className="flex m-2 justify-center items-center">
           <div
             className={`${isLoading ? "animate-pulse transition-all duration-300" : ""} select-none flex p-2 items-center justify-center bg-gray-200/60 rounded-lg shadow-lg`}
           >
@@ -232,11 +232,21 @@ function UserInfo() {
               </h3>
             )}
           </div>
+          <div
+            className={`flex m-2 ${isLoading ? " p-2 bg-gray-200/60 rounded-lg shadow-lg" : ""}`}
+          >
+            {data ? (
+              <AccessData id={data?.ownAllowance.id}></AccessData>
+            ) : (
+              <h3
+                className={`flex w-40 p-10 h-25  ${isLoading ? "animate-spin transition-all duration-300" : ""}`}
+              >
+                .
+              </h3>
+            )}
+          </div>
         </div>
       }
-      <div>
-        <AccessData id={data?.ownAllowance.id}></AccessData>
-      </div>
     </div>
   );
 }
