@@ -108,7 +108,7 @@ function UserInfo() {
         <IoMdArrowRoundBack size={25} />
       </button>
       {
-        <div className="flex m-2 justify-center items-center">
+        <div className="flex md:flex-row flex-col m-2 justify-center items-center">
           <div
             className={`${isLoading ? "animate-pulse transition-all duration-300" : ""} select-none flex p-2 items-center justify-center bg-gray-200/60 rounded-lg shadow-lg`}
           >
