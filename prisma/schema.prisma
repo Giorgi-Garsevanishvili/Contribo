@@ -27,6 +27,8 @@ model User {
   //-----------------------------------------
   createdAt              DateTime          @default(now())
   updatedAt              DateTime?         @updatedAt
+  updatedById            String?
+  updatedBy              User?             @relation("UpdatedByUser",fields: [updatedById], references: [id], onDelete: SetNull)
   //-----------------------------------------
   memberStatusCreated    MemberStatusLog[] @relation("CreatedMemberStatusLog")
   memberStatusLogs       MemberStatusLog[]
@@ -60,6 +62,7 @@ model User {
   eventAssignments       EventAssignment[]
   CreatedEventAssignment EventAssignment[] @relation("CreatedEventAssignment")
   UpdatedEventAssignment EventAssignment[] @relation("UpdatedEventAssignment")
+  updatedUsers           User[]            @relation("UpdatedByUser")
 }
 
 enum RatingAction {

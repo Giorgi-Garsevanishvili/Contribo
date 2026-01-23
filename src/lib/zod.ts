@@ -34,6 +34,7 @@ export const UserUpdateInput = z
     positionId: z.string().optional(),
     deleted: z.boolean().optional(),
     reqStatus: z.enum(ReqStatus).optional(),
+    updatedById: z.string()
   })
   .strict();
 

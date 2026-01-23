@@ -24,6 +24,7 @@ export const GET = async (_req: NextRequest, context: Context) => {
         memberStatusLogs: {
           where: { ended: false },
           select: {
+            createdAt: true,
             updatedAt: true,
             updatedBy: { select: { name: true } },
             createdBy: { select: { name: true } },
@@ -41,6 +42,7 @@ export const GET = async (_req: NextRequest, context: Context) => {
         CreatedAllowedUser: {
           select: { id: true, email: true, createdAt: true },
         },
+        updatedBy: { select: { name: true } },
       },
     });
 

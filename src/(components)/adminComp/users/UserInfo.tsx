@@ -20,7 +20,7 @@ import AccessData from "./AccessData";
 type Data = {
   CreatedAllowedUser: [];
   allowedUserId: string;
-  createdAt: Date;
+  createdAt: string;
   deleted: boolean;
   deletedAt: string | null;
   email: string;
@@ -53,6 +53,7 @@ type Data = {
       name: string;
     } | null;
     updatedAt: string;
+    createdAt: string;
   }[];
   name: string;
   ownAllowance: {
@@ -64,6 +65,9 @@ type Data = {
   ratingHistory: [];
   reqStatus: string;
   updatedAt: string;
+  updatedBy: {
+    name: string;
+  } | null;
 };
 
 function UserInfo() {
@@ -75,6 +79,7 @@ function UserInfo() {
   const triggerCompAlertRef = useRef(triggerCompAlert);
   const route = useRouter();
   const [open, setOpen] = useState(false);
+  const [openUpdate, setOpenUpdate] = useState(false);
 
   const fetchData = async () => {
     try {
@@ -144,6 +149,28 @@ function UserInfo() {
                     <HiWrenchScrewdriver className="mr-2" size={22} />
                     <strong className="mr-2">Last Update:</strong>{" "}
                     {new Date(data.updatedAt).toDateString()}
+                    <button
+                      onMouseEnter={() => setOpenUpdate(true)}
+                      onMouseLeave={() => setOpenUpdate(false)}
+                      onClick={() => setOpen(!open)}
+                      className="ml-2 cursor-pointer text-gray-500"
+                    >
+                      <IoMdInformationCircleOutline size={22} />
+                      {openUpdate && (
+                        <div
+                          className="absolute z-50 w-auto rounded-md bg-gray-900/85 text-white text-xs p-2 shadow-lg
+                        left-1/2 -translate-x-1/2 mt-2"
+                        >
+                          <div className="flex flex-col justify-center items-start p-1">
+                            <h2 className="p-0.5">
+                              {`Updated By: ${
+                                data.updatedBy?.name ?? "No Data"
+                              }`}
+                            </h2>
+                          </div>
+                        </div>
+                      )}
+                    </button>
                   </h2>
                   <h2 className="flex items-center">
                     <MdCardMembership className="mr-2" size={22} />
@@ -169,7 +196,22 @@ function UserInfo() {
                               {`Created By: ${
                                 data.memberStatusLogs[
                                   data.memberStatusLogs.length - 1
-                                ]?.createdBy?.name ?? "Unknown User"
+                                ]?.createdBy?.name ?? "No Data"
+                              }`}
+                            </h2>
+                            <h2 className="p-0.5">
+                              {`Created At: ${new Date(
+                                data.memberStatusLogs[
+                                  data.memberStatusLogs.length - 1
+                                ]?.createdAt,
+                              ).toLocaleString()}`}
+                            </h2>
+
+                            <h2 className="p-0.5">
+                              {`Updated By: ${
+                                data.memberStatusLogs[
+                                  data.memberStatusLogs.length - 1
+                                ]?.updatedBy?.name ?? "Unknown User"
                               }`}
                             </h2>
                             <h2 className="p-0.5">
@@ -178,13 +220,6 @@ function UserInfo() {
                                   data.memberStatusLogs.length - 1
                                 ]?.updatedAt,
                               ).toLocaleString()}`}
-                            </h2>
-                            <h2 className="p-0.5">
-                              {`Updated By: ${
-                                data.memberStatusLogs[
-                                  data.memberStatusLogs.length - 1
-                                ]?.updatedBy?.name ?? "Unknown User"
-                              }`}
                             </h2>
                           </div>
                         </div>
@@ -225,11 +260,16 @@ function UserInfo() {
                 </div>
               </div>
             ) : (
-              <h3
-                className={`flex w-40 p-10 h-25 ${isLoading ? "animate-spin transition-all duration-300" : ""}`}
+              <div
+                className={`flex flex-col justify-center items-center w-40 p-10 h-25}`}
               >
-                .
-              </h3>
+                <h3 className="mb-2">User Info</h3>
+                <h3
+                  className={`${isLoading ? "animate-spin transition-all duration-300" : ""}`}
+                >
+                  .
+                </h3>
+              </div>
             )}
           </div>
           <div
@@ -238,11 +278,16 @@ function UserInfo() {
             {data ? (
               <AccessData id={data?.ownAllowance.id}></AccessData>
             ) : (
-              <h3
-                className={`flex w-40 p-10 h-25  ${isLoading ? "animate-spin transition-all duration-300" : ""}`}
+              <div
+                className={`flex flex-col justify-center items-center w-40 p-10 h-25}`}
               >
-                .
-              </h3>
+                <h3 className="mb-2">Access Info</h3>
+                <h3
+                  className={`${isLoading ? "animate-spin transition-all duration-300" : ""}`}
+                >
+                  .
+                </h3>
+              </div>
             )}
           </div>
         </div>
