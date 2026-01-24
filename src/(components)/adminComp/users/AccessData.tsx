@@ -58,9 +58,9 @@ function AccessData({ id }: { id: string }) {
           <div
             className={`${isLoading ? "animate-pulse transition-all duration-300" : ""} select-none flex p-1 items-center justify-center bg-gray-200/60 rounded-lg shadow-lg`}
           >
-            <div className="flex flex-col bg-gray-200/60 p-3 rounded-lg">
+            <div className="flex flex-col bg-gray-200/60 p-1.5 rounded-lg">
               <h3 className="font-bold">Access Details</h3>
-              <div className="flex flex-col mt-1 text-xs">
+              <div className="flex flex-col mt-1 text-sm">
                 <h2>
                   <strong>User:</strong> {data?.user.name}
                 </h2>

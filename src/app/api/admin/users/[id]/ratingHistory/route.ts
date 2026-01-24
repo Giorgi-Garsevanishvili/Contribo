@@ -42,7 +42,7 @@ export const POST = async (req: NextRequest, context: Context) => {
     if (!body || !Object.keys(body).length) {
       return NextResponse.json(
         { message: "At least one filed must be provided" },
-        { status: 400 }
+        { status: 400 },
       );
     }
 
@@ -82,7 +82,7 @@ export const POST = async (req: NextRequest, context: Context) => {
       {
         message: `User Rating history crated and current updated. User: ${user.name}, Rating: ${value}`,
       },
-      { status: 201 }
+      { status: 201 },
     );
   } catch (error) {
     const { status, message } = handleError(error);
@@ -107,12 +107,13 @@ export const GET = async (_req: NextRequest, context: Context) => {
     });
 
     if (!data || data.length === 0) {
-      return NextResponse.json({data,
+      return NextResponse.json({
+        data,
         message: `Rating History for user with ID:${id} not found!`,
       });
     }
 
-    return NextResponse.json(data);
+    return NextResponse.json({ data: data });
   } catch (error) {
     const { status, message } = handleError(error);
     return NextResponse.json({ message: message }, { status: status });

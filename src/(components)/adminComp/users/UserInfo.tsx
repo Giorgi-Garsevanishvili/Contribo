@@ -16,6 +16,7 @@ import { MdFolderDelete } from "react-icons/md";
 import { MdDelete } from "react-icons/md";
 import { IoMdInformationCircleOutline } from "react-icons/io";
 import AccessData from "./AccessData";
+import { MdBadge } from "react-icons/md";
 
 type Data = {
   CreatedAllowedUser: [];
@@ -59,7 +60,13 @@ type Data = {
   ownAllowance: {
     id: string;
   };
-  positionHistories: [];
+  positionHistories: {
+    position: { name: string };
+    ended: boolean;
+    createdAt: string;
+    createdBy: { name: string };
+    startedAt: string;
+  }[];
   providedFeedbacks: [];
   rating: number;
   ratingHistory: [];
@@ -79,6 +86,7 @@ function UserInfo() {
   const triggerCompAlertRef = useRef(triggerCompAlert);
   const route = useRouter();
   const [open, setOpen] = useState(false);
+  const [openPosition, setOpenPosition] = useState(false);
   const [openUpdate, setOpenUpdate] = useState(false);
 
   const fetchData = async () => {
@@ -107,7 +115,7 @@ function UserInfo() {
   return (
     <div className="flex flex-col w-full justify-center items-center">
       <button
-        className="flex items-center border-1 justify-center btn p-2 text-center font-bold rounded-tr-md rounded-bl-md text-m bg-blue-950/70 text-white"
+        className="flex items-center border-1 justify-center btn p-2 m-0 text-center font-bold rounded-tr-md rounded-bl-md text-m bg-blue-950/70 text-white"
         onClick={() => route.back()}
       >
         <IoMdArrowRoundBack size={25} />
@@ -227,11 +235,65 @@ function UserInfo() {
                     </button>
                   </h2>
                   <h2 className="flex items-center">
+                    <MdBadge className="mr-2" size={22} />
+                    <strong className="mr-2">Position:</strong>{" "}
+                    {`${
+                      data.positionHistories[data.positionHistories.length - 1]
+                        ?.position?.name ?? "No Data"
+                    }`}
+                    <button
+                      onMouseEnter={() => setOpenPosition(true)}
+                      onMouseLeave={() => setOpenPosition(false)}
+                      onClick={() => setOpenPosition(!open)}
+                      className="ml-2 cursor-pointer text-gray-500"
+                    >
+                      <IoMdInformationCircleOutline size={22} />
+                      {openPosition && (
+                        <div
+                          className="absolute z-50 w-auto rounded-md bg-gray-900/85 text-white text-xs p-2 shadow-lg
+                        left-1/2 -translate-x-1/2 mt-2"
+                        >
+                          <div className="flex flex-col justify-center items-start p-1">
+                            <h2 className="p-0.5">
+                              {`Created By: ${
+                                data.positionHistories[
+                                  data.positionHistories.length - 1
+                                ]?.createdBy?.name ?? "No Data"
+                              }`}
+                            </h2>
+                            <h2 className="p-0.5">
+                              {`Created At: ${new Date(
+                                data.positionHistories[
+                                  data.positionHistories.length - 1
+                                ]?.createdAt,
+                              ).toLocaleString()}`}
+                            </h2>
+                            <h2 className="p-0.5">
+                              {`Started At: ${new Date(
+                                data.positionHistories[
+                                  data.positionHistories.length - 1
+                                ]?.startedAt,
+                              ).toLocaleString()}`}
+                            </h2>
+                            <h2 className="p-0.5">
+                              {`Active: ${
+                                data.positionHistories[
+                                  data.positionHistories.length - 1
+                                ]?.ended === false ? "✅" : "❌"
+                              }
+                             `}
+                            </h2>
+                          </div>
+                        </div>
+                      )}
+                    </button>
+                  </h2>
+                  <h2 className="flex mt-1 items-center">
                     <FaStar className="mr-2" size={22} />{" "}
                     <strong className="mr-2">Rating:</strong>{" "}
                     {
                       <div
-                        className={`border-2 px-1 rounded-lg ${data.rating > 40 ? "border-yellow-700 text-yellow-700" : data.rating > 80 ? "border-green-700 text-green-700" : "border-pink-700 text-pink-700"}`}
+                        className={`border-2 px-2 rounded-lg ${data.rating > 40 ? "border-yellow-700 text-yellow-700" : data.rating > 80 ? "border-green-700 text-green-700" : "border-pink-700 text-pink-700"}`}
                       >
                         {data.rating}
                       </div>

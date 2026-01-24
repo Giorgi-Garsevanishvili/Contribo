@@ -31,7 +31,16 @@ export const GET = async (_req: NextRequest, context: Context) => {
             status: { select: { name: true } },
           },
         },
-        positionHistories: true,
+        positionHistories: {
+          where: { ended: false },
+          select: {
+            ended: true,
+            createdAt: true,
+            startedAt: true,
+            position: { select: { name: true } },
+            createdBy: { select: { name: true } },
+          },
+        },
         ratingHistory: {
           select: { id: true, newValue: true, value: true, action: true },
         },

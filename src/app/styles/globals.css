@@ -8,7 +8,7 @@
 
 @layer components {
   .btn {
-    @apply flex rounded-2xl hover:shadow-lg hover:opacity-60 transition duration-300 ease-in-out shadow-2xl bg-amber-300 px-4 py-1.5 m-2 cursor-pointer;
+    @apply flex rounded-2xl items-center justify-center hover:shadow-sm hover:opacity-60 transition duration-300 ease-in-out shadow-lg bg-amber-300 px-4 py-1.5 m-2 cursor-pointer;
   }
 
   .orbitron {

@@ -31,12 +31,13 @@ export const GET = async (_req: NextRequest, context: Context) => {
     });
 
     if (!data || data.length === 0) {
-      return NextResponse.json({data,
+      return NextResponse.json({
+        data,
         message: `Member Status Log for user with ID:${id} not found!`,
       });
     }
 
-    return NextResponse.json(data, { status: 200 });
+    return NextResponse.json({ data: data }, { status: 200 });
   } catch (error) {
     const { message, status } = handleError(error);
     return NextResponse.json({ message }, { status });
@@ -85,7 +86,7 @@ export const POST = async (req: NextRequest, context: Context) => {
       {
         message: `New Member Status Log Created for User: ${user?.name}, with Status: ${res.status?.name}`,
       },
-      { status: 201 }
+      { status: 201 },
     );
   } catch (error) {
     const { message, status } = handleError(error);
