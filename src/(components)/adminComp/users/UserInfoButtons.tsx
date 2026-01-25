@@ -13,9 +13,15 @@ type Data = {
   assignee: { name: string };
 }[];
 
-type Props = { APIPath: string; title: string; Icon: IconType, URLPath:string };
+type Props = {
+  APIPath: string;
+  title: string;
+  Icon: IconType;
+  URLPath: string;
+  refetchKey?: number;
+};
 
-function UserInfoButtons({ APIPath, title, Icon, URLPath }: Props) {
+function UserInfoButtons({ APIPath, title, Icon, URLPath, refetchKey }: Props) {
   const params = useParams();
 
   const [isLoading, setIsLoading] = useState(true);
@@ -48,7 +54,7 @@ function UserInfoButtons({ APIPath, title, Icon, URLPath }: Props) {
 
   useEffect(() => {
     fetchData();
-  }, []);
+  }, [refetchKey]);
 
   return (
     <>
@@ -56,7 +62,7 @@ function UserInfoButtons({ APIPath, title, Icon, URLPath }: Props) {
         <>
           <button
             onClick={() => router.push(`/admin/${URLPath}/${params.userId}`)}
-            className="btn w-full md:w-auto bg-gray-300/85 hover:ring-2 ring-white "
+            className="btn flex-grow w-full md:w-auto bg-gray-300/85 hover:ring-2 ring-white "
           >
             <Icon size={23} className="m-2" /> {title}: {data.length}
           </button>

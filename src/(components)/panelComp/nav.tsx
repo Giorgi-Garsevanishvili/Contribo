@@ -10,7 +10,7 @@ async function ConsoleNav({ page }: { page: string }) {
   const currentRole = normalizePage(page);
 
   return (
-    <nav className="flex flex-col items-center justify-center p-4">
+    <nav className="flex flex-col items-center justify-center p-2">
       <div className="flex items-center justify-between p-4 flex-row shadow-md bg-[#2c435b90] w-auto h-15 rounded-3xl">
         <div className="flex flex-row items-center justify-between p-3 min-w-30 text-white">
           {session ? (

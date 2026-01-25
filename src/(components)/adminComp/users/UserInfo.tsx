@@ -77,7 +77,7 @@ type Data = {
   } | null;
 };
 
-function UserInfo() {
+function UserInfo({ openData }: { openData: boolean }) {
   const params = useParams();
 
   const [isLoading, setIsLoading] = useState(true);
@@ -115,7 +115,7 @@ function UserInfo() {
   return (
     <div className="flex flex-col w-full justify-center items-center">
       <button
-        className="flex items-center border-1 justify-center btn p-2 m-0 text-center font-bold rounded-tr-md rounded-bl-md text-m bg-blue-950/70 text-white"
+        className="md:flex hidden items-center border-1 justify-center btn p-2 m-0 text-center font-bold rounded-tr-md rounded-bl-md text-m bg-blue-950/70 text-white"
         onClick={() => route.back()}
       >
         <IoMdArrowRoundBack size={25} />
@@ -279,7 +279,9 @@ function UserInfo() {
                               {`Active: ${
                                 data.positionHistories[
                                   data.positionHistories.length - 1
-                                ]?.ended === false ? "✅" : "❌"
+                                ]?.ended === false
+                                  ? "✅"
+                                  : "❌"
                               }
                              `}
                             </h2>
@@ -335,7 +337,7 @@ function UserInfo() {
             )}
           </div>
           <div
-            className={`flex m-2 ${isLoading ? " p-2 bg-gray-200/60 rounded-lg shadow-lg" : ""}`}
+            className={`${openData ? "flex" : "hidden"} md:flex  m-2 ${isLoading ? " p-2 bg-gray-200/60 rounded-lg shadow-lg" : ""}`}
           >
             {data ? (
               <AccessData id={data?.ownAllowance.id}></AccessData>
