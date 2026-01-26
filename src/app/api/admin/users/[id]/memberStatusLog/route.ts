@@ -68,9 +68,12 @@ export const POST = async (req: NextRequest, context: Context) => {
     const body = MemberStatusLogCreate.parse(jsonWithCreator);
 
     if (user?.memberStatusLogs.some((p) => !p.ended) && !body.ended === true) {
-      return NextResponse.json({
-        message: "User can`t have more then one unended Member Status Log",
-      });
+      return NextResponse.json(
+        {
+          message: "User can`t have more then one unended Member Status Log",
+        },
+        { status: 500 },
+      );
     }
 
     const res = await prisma.memberStatusLog.create({
@@ -79,7 +82,10 @@ export const POST = async (req: NextRequest, context: Context) => {
     });
 
     if (!res) {
-      return NextResponse.json("Member Status creation failed!");
+      return NextResponse.json(
+        { message: "Member Status creation failed!" },
+        { status: 500 },
+      );
     }
 
     return NextResponse.json(

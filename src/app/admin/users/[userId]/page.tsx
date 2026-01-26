@@ -14,6 +14,7 @@ import { FaAngleLeft } from "react-icons/fa";
 import { FaAngleRight } from "react-icons/fa";
 import { BsFillShieldLockFill } from "react-icons/bs";
 import { IoMdAddCircle } from "react-icons/io";
+import MemberStatusLogCreate from "@/(components)/adminComp/users/MemberStatusLogCreate";
 
 function User() {
   const [refetchKey, setRefetch] = useState(0);
@@ -28,7 +29,7 @@ function User() {
 
   return (
     <div className="flex flex-col">
-      <UserInfo openData={openAccess} />
+      <UserInfo refetchKey={refetchKey} openData={openAccess} />
       <div
         className={`${openStats ? "flex" : "hidden"} md:flex-row md:flex flex-col items-center justify-between`}
       >
@@ -68,6 +69,11 @@ function User() {
           componentProps={{ onCreated: triggerRefetch }}
           title="Create HR Case"
           Component={HRCaseCreate}
+        />
+        <CreateDataWrapper
+          componentProps={{ onCreated: triggerRefetch }}
+          title="Create Member Status Log"
+          Component={MemberStatusLogCreate}
         />
       </div>
 

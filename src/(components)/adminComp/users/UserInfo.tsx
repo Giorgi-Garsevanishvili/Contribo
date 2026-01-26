@@ -77,7 +77,13 @@ type Data = {
   } | null;
 };
 
-function UserInfo({ openData }: { openData: boolean }) {
+function UserInfo({
+  openData,
+  refetchKey,
+}: {
+  openData: boolean;
+  refetchKey: number;
+}) {
   const params = useParams();
 
   const [isLoading, setIsLoading] = useState(true);
@@ -110,7 +116,7 @@ function UserInfo({ openData }: { openData: boolean }) {
 
   useEffect(() => {
     fetchData();
-  }, []);
+  }, [refetchKey]);
 
   return (
     <div className="flex flex-col w-full justify-center items-center">

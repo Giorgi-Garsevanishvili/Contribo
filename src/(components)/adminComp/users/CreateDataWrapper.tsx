@@ -16,7 +16,7 @@ function CreateDataWrapper<T extends object>({
   const [open, setOpen] = useState(false);
 
   return (
-    <div className="flex transition-all duration-300 flex-col shadow-sm rounded-2xl m-1 p-0 justify-between w-full bg-gray-200/60">
+    <div className="flex transition-all duration-300 flex-col shadow-sm rounded-2xl m-1 p-0 justify-between w-full bg-gray-100/85">
       <button
         onClick={() => setOpen(!open)}
         className="flex px-8 py-3 btn justify-between transition-all duration-300 w-full m-0 bg-gray-300/85 shadow-md mb-2"
