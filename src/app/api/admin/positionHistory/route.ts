@@ -22,12 +22,13 @@ export const GET = async (_req: NextRequest) => {
     });
 
     if (!data || data.length === 0) {
-      return NextResponse.json({data,
+      return NextResponse.json({
+        data,
         message: "Position History in your region not found!",
-      });
+      }, {status: 200});
     }
 
-    return NextResponse.json(data, { status: 200 });
+    return NextResponse.json({ data: data }, { status: 200 });
   } catch (error) {
     const { message, status } = handleError(error);
     return NextResponse.json({ message }, { status });
@@ -45,7 +46,6 @@ export const DELETE = async (_req: NextRequest) => {
         },
       },
     });
-    
 
     if (deleted.count === 0) {
       return NextResponse.json({ message: "Nothing Deleted!" });

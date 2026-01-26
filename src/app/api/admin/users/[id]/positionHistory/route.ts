@@ -68,9 +68,12 @@ export const POST = async (req: NextRequest, context: Context) => {
     const body = PositionHistoryCreate.parse(jsonWithCreator);
 
     if (user?.positionHistories.some((p) => !p.ended) && !body.ended === true) {
-      return NextResponse.json({
-        message: "User can`t have more then one unended position history.",
-      });
+      return NextResponse.json(
+        {
+          message: "User can`t have more then one unfinished position history.",
+        },
+        { status: 500 },
+      );
     }
 
     const res = await prisma.positionHistory.create({
@@ -79,7 +82,10 @@ export const POST = async (req: NextRequest, context: Context) => {
     });
 
     if (!res) {
-      return NextResponse.json("Position creation failed!");
+      return NextResponse.json(
+        { message: "Position creation failed!" },
+        { status: 500 },
+      );
     }
 
     return NextResponse.json(

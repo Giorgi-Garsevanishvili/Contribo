@@ -13,11 +13,11 @@ export const GET = async (_req: NextRequest) => {
     if (!data || data.length === 0) {
       return NextResponse.json(
         { data, message: "Positions not found" },
-        { status: 404 }
+        { status: 404 },
       );
     }
 
-    return NextResponse.json(data);
+    return NextResponse.json({ data: data }, { status: 200 });
   } catch (error) {
     const { status, message } = handleError(error);
     return NextResponse.json({ error: message }, { status: status });

@@ -15,6 +15,7 @@ import { FaAngleRight } from "react-icons/fa";
 import { BsFillShieldLockFill } from "react-icons/bs";
 import { IoMdAddCircle } from "react-icons/io";
 import MemberStatusLogCreate from "@/(components)/adminComp/users/MemberStatusLogCreate";
+import PositionHistoryCreate from "@/(components)/adminComp/users/PositionHistoryCreate.";
 
 function User() {
   const [refetchKey, setRefetch] = useState(0);
@@ -74,6 +75,11 @@ function User() {
           componentProps={{ onCreated: triggerRefetch }}
           title="Create Member Status Log"
           Component={MemberStatusLogCreate}
+        />
+        <CreateDataWrapper
+          componentProps={{ onCreated: triggerRefetch }}
+          title="Create Position History"
+          Component={PositionHistoryCreate}
         />
       </div>
 

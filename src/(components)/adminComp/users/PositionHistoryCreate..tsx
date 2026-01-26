@@ -13,21 +13,21 @@ type Data = {
 }[];
 
 type DataAddObj = {
-  memberStatusId: string;
+  positionId: string;
   startedAt: string;
   endedAt: string | null;
   ended: boolean;
 };
 
 export const DataAddObj = {
-  memberStatusId: "",
+  positionId: "",
   startedAt: "",
   ended: false,
 } as DataAddObj;
 
 type Props = { onCreated: () => void };
 
-function MemberStatusLogCreate({ onCreated }: Props) {
+function PositionHistoryCreate({ onCreated }: Props) {
   const [data, setData] = useState<Data>();
   const [isLoading, setIsLoading] = useState(true);
 
@@ -44,7 +44,7 @@ function MemberStatusLogCreate({ onCreated }: Props) {
       e.preventDefault();
       setIsLoading(true);
 
-      if (createData.memberStatusId === "" || createData.startedAt === "") {
+      if (createData.positionId === "" || createData.startedAt === "") {
         setIsLoading(false);
         return triggerCompAlertRef.current({
           message: `All fields with * should be filled `,
@@ -56,7 +56,7 @@ function MemberStatusLogCreate({ onCreated }: Props) {
       if (createData.ended === true && createData.endedAt === null) {
         setIsLoading(false);
         return triggerCompAlertRef.current({
-          message: `If Member Status Ended Provide End Date.`,
+          message: `If Position Mandate Ended Provide End Date.`,
           type: "error",
           isOpened: true,
         });
@@ -90,12 +90,12 @@ function MemberStatusLogCreate({ onCreated }: Props) {
         });
       }
 
-      await axios.post(`/api/admin/users/${userId}/memberStatusLog`, payload);
+      await axios.post(`/api/admin/users/${userId}/positionHistory`, payload);
 
       setIsLoading(false);
       setCreateData(DataAddObj);
       triggerCompAlertRef.current({
-        message: `Member Status Log Created`,
+        message: `Position History Created`,
         type: "success",
         isOpened: true,
       });
@@ -115,7 +115,7 @@ function MemberStatusLogCreate({ onCreated }: Props) {
   const fetchData = async () => {
     try {
       setIsLoading(true);
-      const response = await axios.get(`/api/admin/memberStatus`);
+      const response = await axios.get(`/api/admin/positions`);
 
       setData(response.data.data);
 
@@ -188,25 +188,25 @@ function MemberStatusLogCreate({ onCreated }: Props) {
 
             <div className="flex flex-grow">
               <select
-                value={createData.memberStatusId}
+                value={createData.positionId}
                 onChange={(e) =>
                   setCreateData((prev) => ({
                     ...prev,
-                    memberStatusId: e.target.value,
+                    positionId: e.target.value,
                   }))
                 }
                 className="flex-grow border-2 m-1 rounded-md p-1.5  bg-gray-400/95 text-white"
-                name="type"
-                id="type"
+                name="position"
+                id="position"
               >
-                <option value={""}>Status</option>
-                {data?.map((status) => (
-                  <option key={status.id} value={status.id}>
-                    {status.name}
+                <option value={""}>Position</option>
+                {data?.map((position) => (
+                  <option key={position.id} value={position.id}>
+                    {position.name}
                   </option>
                 ))}
               </select>
-              <label htmlFor="type">
+              <label htmlFor="position">
                 <strong className="text-red-500">*</strong>
               </label>
 
@@ -244,4 +244,4 @@ function MemberStatusLogCreate({ onCreated }: Props) {
   );
 }
 
-export default MemberStatusLogCreate;
+export default PositionHistoryCreate;

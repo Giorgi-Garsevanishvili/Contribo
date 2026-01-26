@@ -70,7 +70,7 @@ export const POST = async (req: NextRequest, context: Context) => {
     if (user?.memberStatusLogs.some((p) => !p.ended) && !body.ended === true) {
       return NextResponse.json(
         {
-          message: "User can`t have more then one unended Member Status Log",
+          message: "User can`t have more then one unfinished Member Status Log",
         },
         { status: 500 },
       );
