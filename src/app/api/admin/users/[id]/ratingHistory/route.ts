@@ -18,7 +18,7 @@ export const POST = async (req: NextRequest, context: Context) => {
     const user = await prisma.user.findUnique({ where: { id } });
 
     if (!user) {
-      return NextResponse.json({ message: "User not found!" });
+      return NextResponse.json({ message: "User not found!" }, { status: 404 });
     }
 
     const json = (await req.json()) as z.infer<typeof RatingCreate>;
@@ -75,7 +75,10 @@ export const POST = async (req: NextRequest, context: Context) => {
     });
 
     if (!data) {
-      return NextResponse.json("Rating creation failed!");
+      return NextResponse.json(
+        { message: "Rating creation failed!" },
+        { status: 400 },
+      );
     }
 
     return NextResponse.json(
@@ -107,10 +110,13 @@ export const GET = async (_req: NextRequest, context: Context) => {
     });
 
     if (!data || data.length === 0) {
-      return NextResponse.json({
-        data,
-        message: `Rating History for user with ID:${id} not found!`,
-      });
+      return NextResponse.json(
+        {
+          data,
+          message: `Rating History for user with ID:${id} not found!`,
+        },
+        { status: 200 },
+      );
     }
 
     return NextResponse.json({ data: data });

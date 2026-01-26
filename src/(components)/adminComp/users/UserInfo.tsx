@@ -301,7 +301,7 @@ function UserInfo({
                     <strong className="mr-2">Rating:</strong>{" "}
                     {
                       <div
-                        className={`border-2 px-2 rounded-lg ${data.rating > 40 ? "border-yellow-700 text-yellow-700" : data.rating > 80 ? "border-green-700 text-green-700" : "border-pink-700 text-pink-700"}`}
+                        className={`border-2 px-2 rounded-lg ${data.rating > 40 && data.rating <= 80 ? "border-yellow-700 text-yellow-700" : data.rating > 80 ? "border-green-700 text-green-700" : "border-pink-700 text-pink-700"}`}
                       >
                         {data.rating}
                       </div>
