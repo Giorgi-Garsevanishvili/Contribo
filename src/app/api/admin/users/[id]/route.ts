@@ -84,6 +84,7 @@ export const PUT = async (req: NextRequest, context: Context) => {
         ownAllowance: { regionId: thisUser.user.ownAllowance?.regionId },
       },
     });
+
     if (!existingUser) {
       return NextResponse.json(
         { message: `user with id:${id} not found` },
@@ -92,7 +93,9 @@ export const PUT = async (req: NextRequest, context: Context) => {
     }
 
     const json = await req.json();
-    const body = UserUpdateInput.parse(json);
+    const body = { ...json, updatedById: thisUser.user.id } as UserUpdateInput;
+
+    const bodyWithUpdater = UserUpdateInput.parse(body);
 
     if (!body || !Object.keys(body).length) {
       return NextResponse.json(
@@ -112,10 +115,54 @@ export const PUT = async (req: NextRequest, context: Context) => {
       );
     }
 
-    await prisma.user.update({ where: { id }, data: body });
+    // await prisma.user.update({ where: { id }, data: body });
+
+    const data = await prisma.$transaction(async (tx) => {
+      let allowanceUpdate = {};
+      const emailChanged =
+        bodyWithUpdater.email && bodyWithUpdater.email !== existingUser.email;
+
+      if (bodyWithUpdater.email && existingUser.allowedUserId)
+        allowanceUpdate = await tx.allowedUser.update({
+          where: { id: existingUser.allowedUserId },
+          data: { email: bodyWithUpdater.email },
+          select: { email: true },
+        });
+
+      const userUpdate = await tx.user.update({
+        where: { id },
+        data: bodyWithUpdater,
+        select: { email: true, name: true },
+      });
+
+      if (emailChanged) {
+        await tx.account.deleteMany({ where: { userId: id } });
+      }
+
+      return { userUpdate, allowanceUpdate, emailChanged };
+    });
+
+    if (!data) {
+      return NextResponse.json(
+        { message: "User Update Failed!" },
+        { status: 500 },
+      );
+    }
+
+    const responseMessage = data.emailChanged
+      ? `User: ${existingUser.name}, updated successfully. User must sign in again with their new email.`
+      : `User: ${existingUser.name}, updated successfully.`;
+
+    // Check if the admin is updating their own email
+    if (existingUser.id === thisUser.user.id && data.emailChanged) {
+      return NextResponse.json({
+        requiresSignOut: true,
+        message: "Your email has been updated. Please sign in again.",
+      });
+    }
 
     return NextResponse.json({
-      message: `User: ${existingUser.name}, updated successfully.`,
+      message: responseMessage,
     });
   } catch (error) {
     const { status, message } = handleError(error);

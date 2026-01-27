@@ -31,7 +31,11 @@ function User() {
 
   return (
     <div className="flex flex-col">
-      <UserInfo refetchKey={refetchKey} openData={openAccess} />
+      <UserInfo
+        onCreated={triggerRefetch}
+        refetchKey={refetchKey}
+        openData={openAccess}
+      />
       <div
         className={`${openStats ? "flex" : "hidden"} md:flex-row md:flex flex-col items-center justify-between`}
       >

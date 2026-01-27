@@ -5,7 +5,7 @@ import { useEffect, useRef, useState } from "react";
 
 type Data = {
   createdAt: string | null;
-  createdBy: { name: string }| null;
+  createdBy: { name: string } | null;
   email: string | null;
   region: {
     name: string;
@@ -21,7 +21,7 @@ type Data = {
   } | null;
 };
 
-function AccessData({ id }: { id: string }) {
+function AccessData({ id, refetchKey }: { id: string; refetchKey: number }) {
   const [isLoading, setIsLoading] = useState(true);
   const [data, setData] = useState<Data>();
   const { triggerCompAlert } = useCompAlert();
@@ -48,7 +48,7 @@ function AccessData({ id }: { id: string }) {
 
   useEffect(() => {
     fetchData();
-  }, []);
+  }, [refetchKey]);
 
   return (
     <div className="flex justify-center items-center">
@@ -93,7 +93,7 @@ function AccessData({ id }: { id: string }) {
                     ? new Date(data?.updatedAt).toLocaleString()
                     : "Data Not Found"}
                 </h2>
-                 <h2>
+                <h2>
                   <strong>Access Updated By:</strong>{" "}
                   {data?.updatedBy?.name || "No Data"}
                 </h2>

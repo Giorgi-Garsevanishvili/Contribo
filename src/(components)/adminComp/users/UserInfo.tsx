@@ -3,7 +3,7 @@ import { useCompAlert } from "@/hooks/useCompAlert";
 import axios from "axios";
 import Image from "next/image";
 import { useParams, useRouter } from "next/navigation";
-import { useEffect, useRef, useState } from "react";
+import { FormEvent, useEffect, useRef, useState } from "react";
 import { IoMdArrowRoundBack } from "react-icons/io";
 import { FaUser } from "react-icons/fa";
 import { MdEmail } from "react-icons/md";
@@ -17,6 +17,9 @@ import { MdDelete } from "react-icons/md";
 import { IoMdInformationCircleOutline } from "react-icons/io";
 import AccessData from "./AccessData";
 import { MdBadge } from "react-icons/md";
+import { IoIosCloseCircle } from "react-icons/io";
+import { getClientErrorMessage } from "@/lib/errors/clientErrors";
+import { signOut } from "next-auth/react";
 
 type Data = {
   CreatedAllowedUser: [];
@@ -77,14 +80,27 @@ type Data = {
   } | null;
 };
 
+type UserUpdate = {
+  name: string;
+  email: string;
+};
+
+const userUpdateObj = {
+  name: "",
+  email: "",
+} as UserUpdate;
+
 function UserInfo({
   openData,
   refetchKey,
+  onCreated,
 }: {
   openData: boolean;
   refetchKey: number;
+  onCreated: () => void;
 }) {
   const params = useParams();
+  const id = params.userId;
 
   const [isLoading, setIsLoading] = useState(true);
   const [data, setData] = useState<Data>();
@@ -94,11 +110,13 @@ function UserInfo({
   const [open, setOpen] = useState(false);
   const [openPosition, setOpenPosition] = useState(false);
   const [openUpdate, setOpenUpdate] = useState(false);
+  const [userUpdate, setUserUpdate] = useState<UserUpdate>(userUpdateObj);
+  const [openUserUpdate, setOpenUserUpdate] = useState(false);
 
   const fetchData = async () => {
     try {
       setIsLoading(true);
-      const response = await axios.get(`/api/admin/users/${params.userId}`);
+      const response = await axios.get(`/api/admin/users/${id}`);
 
       setData(response.data.data);
 
@@ -117,6 +135,67 @@ function UserInfo({
   useEffect(() => {
     fetchData();
   }, [refetchKey]);
+
+  const updateUser = async (e: FormEvent<HTMLFormElement>) => {
+    try {
+      e.preventDefault();
+      setIsLoading(true);
+
+      if (userUpdate.email === "" && userUpdate.name === "") {
+        setIsLoading(false);
+        return triggerCompAlertRef.current({
+          message: `At least one field should be provided`,
+          type: "error",
+          isOpened: true,
+        });
+      }
+
+      const payload: Partial<UserUpdate> = {};
+
+      if (userUpdate.name && userUpdate.name !== "") {
+        payload.name = userUpdate.name;
+      }
+
+      if (userUpdate.email && userUpdate.email !== "") {
+        payload.email = userUpdate.email;
+      }
+
+      const res = await axios.put(`/api/admin/users/${id}`, payload);
+
+      const signOutReq = res.data.requiresSignOut === true;
+      if (signOutReq) {
+        setTimeout(async () => {
+          await signOut({ callbackUrl: "/" });
+        }, 4000);
+      }
+
+      triggerCompAlert({
+        message: signOutReq
+          ? "Your account updated please sign in again!"
+          : `User Updated`,
+        type: signOutReq ? "warning" : "success",
+        isOpened: true,
+      });
+
+      setUserUpdate(userUpdateObj);
+
+      setIsLoading(false);
+      setOpenUserUpdate(false);
+      if (!signOutReq) {
+        onCreated();
+      }
+    } catch (error) {
+      const message = getClientErrorMessage(error);
+
+      setIsLoading(false);
+      triggerCompAlertRef.current({
+        message: `${message}`,
+        type: "error",
+        isOpened: true,
+      });
+    }
+    return;
+  };
 
   return (
     <div className="flex flex-col w-full justify-center items-center">
@@ -147,173 +226,207 @@ function UserInfo({
                     "No Image To Display"
                   )}
                 </div>
-                <div className="flex flex-col p-4 m-1 justify-start bg-gray-200/60 rounded-lg shadow-sm">
-                  <h2 className="flex items-center">
-                    <FaUser className="mr-2" size={22} /> {data.name}
-                  </h2>
-                  <h2 className="flex items-center">
-                    <MdEmail className="mr-2" size={22} /> {data.email}
-                  </h2>
-                  <h2 className="flex items-center">
-                    <IoTime className="mr-2" size={22} />
-                    <strong className="mr-2">Since:</strong>{" "}
-                    {new Date(data.createdAt).toDateString()}
-                  </h2>
-                  <h2 className="flex items-center">
-                    <HiWrenchScrewdriver className="mr-2" size={22} />
-                    <strong className="mr-2">Last Update:</strong>{" "}
-                    {new Date(data.updatedAt).toDateString()}
+                <div
+                  className={`flex flex-col p-4 m-1 justify-start bg-gray-200/60 rounded-lg shadow-sm`}
+                >
+                  <form
+                    onSubmit={updateUser}
+                    className={`${openUserUpdate ? "flex flex-col justify-center items-center" : "hidden"}`}
+                  >
+                    <input
+                      type="text"
+                      id="name"
+                      className="input-def p-2 m-1 w-full bg-gray-400/95 border-white text-white rounded-sm flex-grow"
+                      value={userUpdate.name}
+                      onChange={(e) =>
+                        setUserUpdate((prev) => ({
+                          ...prev,
+                          name: e.target.value,
+                        }))
+                      }
+                      placeholder="Name"
+                    />
+                    <input
+                      id="email"
+                      type="email"
+                      className="input-def p-2 m-1 w-full  bg-gray-400/95 border-white text-white rounded-sm flex-grow"
+                      value={userUpdate.email}
+                      onChange={(e) =>
+                        setUserUpdate((prev) => ({
+                          ...prev,
+                          email: e.target.value,
+                        }))
+                      }
+                      placeholder="Email"
+                    />
                     <button
-                      onMouseEnter={() => setOpenUpdate(true)}
-                      onMouseLeave={() => setOpenUpdate(false)}
-                      onClick={() => setOpen(!open)}
-                      className="ml-2 cursor-pointer text-gray-500"
+                      type="submit"
+                      disabled={!userUpdate.email && !userUpdate.name}
+                      className="btn flex-grow bg-[#48765b] text-white w-full"
                     >
-                      <IoMdInformationCircleOutline size={22} />
-                      {openUpdate && (
-                        <div
-                          className="absolute z-50 w-auto rounded-md bg-gray-900/85 text-white text-xs p-2 shadow-lg
-                        left-1/2 -translate-x-1/2 mt-2"
-                        >
-                          <div className="flex flex-col justify-center items-start p-1">
-                            <h2 className="p-0.5">
-                              {`Updated By: ${
-                                data.updatedBy?.name ?? "No Data"
-                              }`}
-                            </h2>
-                          </div>
-                        </div>
-                      )}
+                      Update User
                     </button>
-                  </h2>
-                  <h2 className="flex items-center">
-                    <MdCardMembership className="mr-2" size={22} />
-                    <strong className="mr-2">Status:</strong>{" "}
-                    {`${
-                      data.memberStatusLogs[data.memberStatusLogs.length - 1]
-                        ?.status?.name ?? "No Status"
-                    }`}
-                    <button
-                      onMouseEnter={() => setOpen(true)}
-                      onMouseLeave={() => setOpen(false)}
-                      onClick={() => setOpen(!open)}
-                      className="ml-2 cursor-pointer text-gray-500"
-                    >
-                      <IoMdInformationCircleOutline size={22} />
-                      {open && (
-                        <div
-                          className="absolute z-50 w-auto rounded-md bg-gray-900/85 text-white text-xs p-2 shadow-lg
-                        left-1/2 -translate-x-1/2 mt-2"
-                        >
-                          <div className="flex flex-col justify-center items-start p-1">
-                            <h2 className="p-0.5">
-                              {`Created By: ${
-                                data.memberStatusLogs[
-                                  data.memberStatusLogs.length - 1
-                                ]?.createdBy?.name ?? "No Data"
-                              }`}
-                            </h2>
-                            <h2 className="p-0.5">
-                              {`Created At: ${new Date(
-                                data.memberStatusLogs[
-                                  data.memberStatusLogs.length - 1
-                                ]?.createdAt,
-                              ).toLocaleString()}`}
-                            </h2>
-
-                            <h2 className="p-0.5">
-                              {`Updated By: ${
-                                data.memberStatusLogs[
-                                  data.memberStatusLogs.length - 1
-                                ]?.updatedBy?.name ?? "Unknown User"
-                              }`}
-                            </h2>
-                            <h2 className="p-0.5">
-                              {`Updated At: ${new Date(
-                                data.memberStatusLogs[
-                                  data.memberStatusLogs.length - 1
-                                ]?.updatedAt,
-                              ).toLocaleString()}`}
-                            </h2>
-                          </div>
-                        </div>
-                      )}
-                    </button>
-                  </h2>
-                  <h2 className="flex items-center">
-                    <MdBadge className="mr-2" size={22} />
-                    <strong className="mr-2">Position:</strong>{" "}
-                    {`${
-                      data.positionHistories[data.positionHistories.length - 1]
-                        ?.position?.name ?? "No Data"
-                    }`}
-                    <button
-                      onMouseEnter={() => setOpenPosition(true)}
-                      onMouseLeave={() => setOpenPosition(false)}
-                      onClick={() => setOpenPosition(!open)}
-                      className="ml-2 cursor-pointer text-gray-500"
-                    >
-                      <IoMdInformationCircleOutline size={22} />
-                      {openPosition && (
-                        <div
-                          className="absolute z-50 w-auto rounded-md bg-gray-900/85 text-white text-xs p-2 shadow-lg
-                        left-1/2 -translate-x-1/2 mt-2"
-                        >
-                          <div className="flex flex-col justify-center items-start p-1">
-                            <h2 className="p-0.5">
-                              {`Created By: ${
-                                data.positionHistories[
-                                  data.positionHistories.length - 1
-                                ]?.createdBy?.name ?? "No Data"
-                              }`}
-                            </h2>
-                            <h2 className="p-0.5">
-                              {`Created At: ${new Date(
-                                data.positionHistories[
-                                  data.positionHistories.length - 1
-                                ]?.createdAt,
-                              ).toLocaleString()}`}
-                            </h2>
-                            <h2 className="p-0.5">
-                              {`Started At: ${new Date(
-                                data.positionHistories[
-                                  data.positionHistories.length - 1
-                                ]?.startedAt,
-                              ).toLocaleString()}`}
-                            </h2>
-                            <h2 className="p-0.5">
-                              {`Active: ${
-                                data.positionHistories[
-                                  data.positionHistories.length - 1
-                                ]?.ended === false
-                                  ? "✅"
-                                  : "❌"
-                              }
-                             `}
-                            </h2>
-                          </div>
-                        </div>
-                      )}
-                    </button>
-                  </h2>
-                  <h2 className="flex mt-1 items-center">
-                    <FaStar className="mr-2" size={22} />{" "}
-                    <strong className="mr-2">Rating:</strong>{" "}
-                    {
-                      <div
-                        className={`border-2 px-2 rounded-lg ${data.rating > 40 && data.rating <= 80 ? "border-yellow-700 text-yellow-700" : data.rating > 80 ? "border-green-700 text-green-700" : "border-pink-700 text-pink-700"}`}
+                  </form>
+                  <div className={`${openUserUpdate ? "hidden" : ""}`}>
+                    <h2 className="flex items-center">
+                      <FaUser className="mr-2" size={22} /> {data.name}
+                    </h2>
+                    <h2 className="flex items-center">
+                      <MdEmail className="mr-2" size={22} /> {data.email}
+                    </h2>
+                    <h2 className="flex items-center">
+                      <IoTime className="mr-2" size={22} />
+                      <strong className="mr-2">Since:</strong>{" "}
+                      {new Date(data.createdAt).toDateString()}
+                    </h2>
+                    <h2 className="flex items-center">
+                      <HiWrenchScrewdriver className="mr-2" size={22} />
+                      <strong className="mr-2">Last Update:</strong>{" "}
+                      {new Date(data.updatedAt).toDateString()}
+                      <button
+                        onMouseEnter={() => setOpenUpdate(true)}
+                        onMouseLeave={() => setOpenUpdate(false)}
+                        onClick={() => setOpen(!open)}
+                        className="ml-2 cursor-pointer text-gray-500"
                       >
-                        {data.rating}
-                      </div>
-                    }
-                  </h2>
+                        <IoMdInformationCircleOutline size={22} />
+                        {openUpdate && (
+                          <div
+                            className="absolute z-50 w-auto rounded-md bg-gray-900/85 text-white text-xs p-2 shadow-lg
+                        left-1/2 -translate-x-1/2 mt-2"
+                          >
+                            <div className="flex flex-col justify-center items-start p-1">
+                              <h2 className="p-0.5">
+                                {`Updated By: ${
+                                  data.updatedBy?.name ?? "No Data"
+                                }`}
+                              </h2>
+                            </div>
+                          </div>
+                        )}
+                      </button>
+                    </h2>
+                    <h2 className="flex items-center">
+                      <MdCardMembership className="mr-2" size={22} />
+                      <strong className="mr-2">Status:</strong>{" "}
+                      {`${
+                        data.memberStatusLogs[data.memberStatusLogs.length - 1]
+                          ?.status?.name ?? "No Status"
+                      }`}
+                      <button
+                        onMouseEnter={() => setOpen(true)}
+                        onMouseLeave={() => setOpen(false)}
+                        onClick={() => setOpen(!open)}
+                        className="ml-2 cursor-pointer text-gray-500"
+                      >
+                        <IoMdInformationCircleOutline size={22} />
+                        {open && (
+                          <div
+                            className="absolute z-50 w-auto rounded-md bg-gray-900/85 text-white text-xs p-2 shadow-lg
+                        left-1/2 -translate-x-1/2 mt-2"
+                          >
+                            <div className="flex flex-col justify-center items-start p-1">
+                              <h2 className="p-0.5">
+                                {`Created By: ${
+                                  data.memberStatusLogs[
+                                    data.memberStatusLogs.length - 1
+                                  ]?.createdBy?.name ?? "No Data"
+                                }`}
+                              </h2>
+                              <h2 className="p-0.5">
+                                {`Created At: ${new Date(
+                                  data.memberStatusLogs[
+                                    data.memberStatusLogs.length - 1
+                                  ]?.createdAt,
+                                ).toLocaleString()}`}
+                              </h2>
+                            </div>
+                          </div>
+                        )}
+                      </button>
+                    </h2>
+                    <h2 className="flex items-center">
+                      <MdBadge className="mr-2" size={22} />
+                      <strong className="mr-2">Position:</strong>{" "}
+                      {`${
+                        data.positionHistories[
+                          data.positionHistories.length - 1
+                        ]?.position?.name ?? "No Data"
+                      }`}
+                      <button
+                        onMouseEnter={() => setOpenPosition(true)}
+                        onMouseLeave={() => setOpenPosition(false)}
+                        onClick={() => setOpenPosition(!open)}
+                        className="ml-2 cursor-pointer text-gray-500"
+                      >
+                        <IoMdInformationCircleOutline size={22} />
+                        {openPosition && (
+                          <div
+                            className="absolute z-50 w-auto rounded-md bg-gray-900/85 text-white text-xs p-2 shadow-lg
+                        left-1/2 -translate-x-1/2 mt-2"
+                          >
+                            <div className="flex flex-col justify-center items-start p-1">
+                              <h2 className="p-0.5">
+                                {`Created By: ${
+                                  data.positionHistories[
+                                    data.positionHistories.length - 1
+                                  ]?.createdBy?.name ?? "No Data"
+                                }`}
+                              </h2>
+                              <h2 className="p-0.5">
+                                {`Created At: ${new Date(
+                                  data.positionHistories[
+                                    data.positionHistories.length - 1
+                                  ]?.createdAt,
+                                ).toLocaleString()}`}
+                              </h2>
+                              <h2 className="p-0.5">
+                                {`Started At: ${new Date(
+                                  data.positionHistories[
+                                    data.positionHistories.length - 1
+                                  ]?.startedAt,
+                                ).toLocaleString()}`}
+                              </h2>
+                              <h2 className="p-0.5">
+                                {`Active: ${
+                                  data.positionHistories[
+                                    data.positionHistories.length - 1
+                                  ]?.ended === false
+                                    ? "✅"
+                                    : "❌"
+                                }
+                             `}
+                              </h2>
+                            </div>
+                          </div>
+                        )}
+                      </button>
+                    </h2>
+                    <h2 className="flex mt-1 items-center">
+                      <FaStar className="mr-2" size={22} />{" "}
+                      <strong className="mr-2">Rating:</strong>{" "}
+                      {
+                        <div
+                          className={`border-2 px-2 rounded-lg ${data.rating > 40 && data.rating <= 80 ? "border-yellow-700 text-yellow-700" : data.rating > 80 ? "border-green-700 text-green-700" : "border-pink-700 text-pink-700"}`}
+                        >
+                          {data.rating}
+                        </div>
+                      }
+                    </h2>
+                  </div>
                 </div>
                 <div className="flex flex-col w-full md:w-fit ">
                   <button
-                    className="flex btn  active:bg-blue-900/60 active:text-white active:opacity-50
-    focus-visible:bg-blue-900/60 focus-visible:text-white hover:bg-blue-900 hover:text-white hover:opacity-100 duration-300 transition-all bg-gray-300/70"
+                    onClick={() => setOpenUserUpdate(!openUserUpdate)}
+                    className={`flex ${openUserUpdate ? "bg-red-900/85 text-white" : "bg-gray-300/70"} btn  active:bg-blue-900/60 active:text-white active:opacity-50
+    focus-visible:bg-blue-900/60 focus-visible:text-white  hover:bg-blue-900 hover:text-white hover:opacity-100 duration-300 transition-all `}
                   >
-                    <FaUserEdit className="mr-2" size={22} /> Edit User
+                    {openUserUpdate ? (
+                      <IoIosCloseCircle className="mr-2 text-white" size={22} />
+                    ) : (
+                      <FaUserEdit className="mr-2" size={22} />
+                    )}
+                    {openUserUpdate ? "Close" : "Edit User"}
                   </button>
                   <button
                     className="flex btn  active:bg-orange-400/60 active:text-white active:opacity-50
@@ -346,7 +459,10 @@ function UserInfo({
             className={`${openData ? "flex" : "hidden"} md:flex  m-2 ${isLoading ? " p-2 bg-gray-200/60 rounded-lg shadow-lg" : ""}`}
           >
             {data ? (
-              <AccessData id={data?.ownAllowance.id}></AccessData>
+              <AccessData
+                refetchKey={refetchKey}
+                id={data?.ownAllowance.id}
+              ></AccessData>
             ) : (
               <div
                 className={`flex flex-col justify-center items-center w-40 p-10 h-25}`}

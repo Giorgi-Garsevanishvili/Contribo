@@ -30,10 +30,6 @@ export const UserUpdateInput = z
   .object({
     name: z.string().optional(),
     email: z.email().optional(),
-    memberStatusId: z.string().optional(),
-    positionId: z.string().optional(),
-    deleted: z.boolean().optional(),
-    reqStatus: z.enum(ReqStatus).optional(),
     updatedById: z.string()
   })
   .strict();

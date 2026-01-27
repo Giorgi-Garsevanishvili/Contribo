@@ -3,7 +3,7 @@ import { getClientErrorMessage } from "@/lib/errors/clientErrors";
 import { RatingAction } from "@prisma/client";
 import axios from "axios";
 import { useParams } from "next/navigation";
-import React, { FormEvent, useEffect, useRef, useState } from "react";
+import React, { FormEvent, useRef, useState } from "react";
 
 type DataAddObj = {
   newValue: number;
