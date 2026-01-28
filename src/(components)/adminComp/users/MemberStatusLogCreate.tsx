@@ -29,7 +29,7 @@ export const DataAddObj = {
 type Props = { onCreated: () => void };
 
 function MemberStatusLogCreate({ onCreated }: Props) {
-  const [isLoading, setIsLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(false);
 
   const params = useParams();
   const userId = params.userId;
@@ -112,14 +112,14 @@ function MemberStatusLogCreate({ onCreated }: Props) {
     return;
   };
 
-   const { data, isLoadingFetch } = useFetchData<Data>(
-      `/api/admin/memberStatus`,
-      [],
-    );
+  const { data, isLoadingFetch } = useFetchData<Data>(
+    `/api/admin/memberStatus`,
+    [],
+  );
 
   return (
     <div className="flex p-5 w-full">
-      {isLoading && isLoadingFetch ? (
+      {isLoading || isLoadingFetch ? (
         <h2 className="animate-pulse">Loading...</h2>
       ) : (
         <form
@@ -214,6 +214,7 @@ function MemberStatusLogCreate({ onCreated }: Props) {
               </label>
             </div>
             <button
+              disabled={isLoading}
               type="submit"
               className="btn flex-grow bg-[#48765b] text-white"
             >

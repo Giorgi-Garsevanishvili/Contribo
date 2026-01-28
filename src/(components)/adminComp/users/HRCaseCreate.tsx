@@ -77,7 +77,7 @@ function HRCaseCreate({ onCreated }: Props) {
 
   return (
     <div className="flex p-5 w-full">
-      {isLoading && isLoadingFetch ? (
+      {isLoading || isLoadingFetch ? (
         <h2 className="animate-pulse">Loading...</h2>
       ) : (
         <form
@@ -145,6 +145,7 @@ function HRCaseCreate({ onCreated }: Props) {
             </div>
 
             <button
+              disabled={isLoading}
               type="submit"
               className="btn flex-grow bg-[#48765b] text-white"
             >

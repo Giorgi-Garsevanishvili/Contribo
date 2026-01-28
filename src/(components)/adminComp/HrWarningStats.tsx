@@ -1,10 +1,9 @@
 "use client";
 
-import axios from "axios";
-import React, { useEffect, useRef, useState } from "react";
-import { useCompAlert } from "@/hooks/useCompAlert";
+import React, { useEffect, useState } from "react";
 import { IoFileTrayStacked } from "react-icons/io5";
 import { useRouter } from "next/navigation";
+import { useFetchData } from "@/hooks/useDataFetch";
 
 type Data = {
   id: string;
@@ -17,8 +16,6 @@ type Data = {
 };
 
 function HrWarningStats() {
-  const [data, setData] = useState<Data[]>([]);
-  const [isLoading, setIsLoading] = useState(true);
   const [hover, setHover] = useState(false);
   const [typeStats, setTypeStats] = useState<Record<string, number>>({});
   const [statusStats, setStatusStats] = useState<Record<string, number>>({});
@@ -26,28 +23,17 @@ function HrWarningStats() {
 
   const router = useRouter();
 
-  const { triggerCompAlert } = useCompAlert();
-  const triggerCompAlertRef = useRef(triggerCompAlert);
+  const { data, isLoadingFetch } = useFetchData<Data[]>(
+    "/api/admin/hrWarnings",
+    [],
+  );
 
-  const fetchData = async () => {
-    try {
-      setIsLoading(true);
-      const response = await axios.get("/api/admin/hrWarnings");
-      setData(response.data.data);
-      setWarningTypeStats(response.data.data);
-      setStatus(response.data.data);
-
-      setIsLoading(false);
-    } catch (error) {
-      setIsLoading(false);
-      triggerCompAlertRef.current({
-        message: `${error}`,
-        type: "error",
-        isOpened: true,
-      });
+  useEffect(() => {
+    if (data) {
+      setStatus(data);
+      setWarningTypeStats(data);
     }
-    return;
-  };
+  }, [data]);
 
   const setStatus = (value: Data[]) => {
     const stats = value.reduce<Record<string, number>>((acc, item) => {
@@ -73,10 +59,6 @@ function HrWarningStats() {
   };
 
   useEffect(() => {
-    fetchData();
-  }, []);
-
-  useEffect(() => {
     if (!hover) return;
 
     const intervalId = setInterval(() => {
@@ -94,17 +76,17 @@ function HrWarningStats() {
         onMouseLeave={() => {
           setHover(false);
         }}
-        className={`${isLoading ? "animate-pulse" : ""} flex hover:shadow-lg  hover:opacity-95 transition-all duration-300 btn flex-col select-none w-[10rem] h-[10rem] items-center justify-center mt-0 m-2 text-white pt-0 p-0.5 bg-[#434d5f98] rounded-xl shadow-sm shadow-white `}
+        className={`${isLoadingFetch ? "animate-pulse" : ""} flex hover:shadow-lg  hover:opacity-95 transition-all duration-300 btn flex-col select-none w-[10rem] h-[10rem] items-center justify-center mt-0 m-2 text-white pt-0 p-0.5 bg-[#434d5f98] rounded-xl shadow-sm shadow-white `}
       >
         {!hover ? (
           <>
             <IoFileTrayStacked size={30} className="m-2" />
             <h1
               className={`text-2xl ${
-                isLoading ? "animate-spin transition-all duration-300" : ""
+                isLoadingFetch ? "animate-spin transition-all duration-300" : ""
               } font-bold m-1`}
             >
-              {isLoading ? "." : data.length}
+              {isLoadingFetch ? "." : data?.length}
             </h1>
             <h3>HR Cases</h3>
           </>
@@ -116,20 +98,22 @@ function HrWarningStats() {
               } flex-col justify-center items-center`}
             >
               <h1 className="mb-1">HR Cases</h1>
-              {isLoading
-                ? <h3 className="animate-spin font-bold">.</h3>
-                : Object.keys(typeStats).length !== 0
-                ? Object.entries(typeStats)
-                    .slice(0, 3)
-                    .map(([status, count]) => (
-                      <div
-                        className="mt-1 p-1 border-2 rounded-lg text-sm"
-                        key={status}
-                      >
-                        {status} : <span className="font-bold ">{count}</span>
-                      </div>
-                    ))
-                : "No Stats To Display"}
+              {isLoadingFetch ? (
+                <h3 className="animate-spin font-bold">.</h3>
+              ) : Object.keys(typeStats).length !== 0 ? (
+                Object.entries(typeStats)
+                  .slice(0, 3)
+                  .map(([status, count]) => (
+                    <div
+                      className="mt-1 p-1 border-2 rounded-lg text-sm"
+                      key={status}
+                    >
+                      {status} : <span className="font-bold ">{count}</span>
+                    </div>
+                  ))
+              ) : (
+                "No Stats To Display"
+              )}
             </div>
             <div
               className={`${

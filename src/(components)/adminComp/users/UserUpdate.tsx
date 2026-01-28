@@ -115,7 +115,7 @@ function UserUpdate({ id, refetch }: { id: ParamValue; refetch: () => void }) {
           />
           <button
             type="submit"
-            disabled={!userUpdate.email && !userUpdate.name}
+            disabled={!userUpdate.email && !userUpdate.name && isLoading}
             className="btn flex-grow bg-[#48765b] text-white w-full"
           >
             Update User

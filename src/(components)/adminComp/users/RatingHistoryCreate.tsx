@@ -153,6 +153,7 @@ function RatingHistoryCreate({ onCreated }: Props) {
             </div>
 
             <button
+              disabled={isLoading}
               type="submit"
               className="btn flex-grow bg-[#48765b] text-white"
             >

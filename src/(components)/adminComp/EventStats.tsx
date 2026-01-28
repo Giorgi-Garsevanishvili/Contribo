@@ -1,10 +1,9 @@
 "use client";
 
-import axios from "axios";
-import React, { useEffect, useRef, useState } from "react";
-import { useCompAlert } from "@/hooks/useCompAlert";
+import React, { useEffect, useState } from "react";
 import { BsFillCalendarEventFill } from "react-icons/bs";
 import { useRouter } from "next/navigation";
+import { useFetchData } from "@/hooks/useDataFetch";
 
 type Data = {
   id: string;
@@ -14,35 +13,19 @@ type Data = {
 };
 
 function EventStats() {
-  const [data, setData] = useState<Data[]>([]);
   const [rating, setRating] = useState(0);
-  const [isLoading, setIsLoading] = useState(true);
   const router = useRouter();
 
-  const { triggerCompAlert } = useCompAlert();
-  const triggerCompAlertRef = useRef(triggerCompAlert);
+  const { data, isLoadingFetch } = useFetchData<Data[]>(
+    "/api/admin/events",
+    [],
+  );
 
-  const fetchData = async () => {
-    try {
-      setIsLoading(true);
-      const response = await axios.get("/api/admin/events");
-      setData(response.data.data);
-
-      if (response.data.data.length > 0) {
-        calculateRating(response.data.data);
-      }
-
-      setIsLoading(false);
-    } catch (error) {
-      setIsLoading(false);
-      triggerCompAlertRef.current({
-        message: `${error}`,
-        type: "error",
-        isOpened: true,
-      });
+  useEffect(() => {
+    if (data) {
+      calculateRating(data);
     }
-    return;
-  };
+  }, [data]);
 
   const calculateRating = (value: Data[]) => {
     const ratingData = value
@@ -54,24 +37,20 @@ function EventStats() {
     setRating(AverageRating);
   };
 
-  useEffect(() => {
-    fetchData();
-  },[]);
-
   return (
     <>
       <button
         onClick={() => router.push("admin/users")}
-        className={`${isLoading ? "animate-pulse" : ""} flex hover:shadow-lg hover:opacity-80 duration-300 btn flex-col select-none w-[10rem] h-[10rem] items-center justify-center mt-0 m-2 mb-0 text-white p-0 pt-4 bg-[#434d5f98] rounded-xl shadow-sm shadow-white `}
+        className={`${isLoadingFetch ? "animate-pulse" : ""} flex hover:shadow-lg hover:opacity-80 duration-300 btn flex-col select-none w-[10rem] h-[10rem] items-center justify-center mt-0 m-2 mb-0 text-white p-0 pt-4 bg-[#434d5f98] rounded-xl shadow-sm shadow-white `}
       >
         <BsFillCalendarEventFill size={30} className="m-2" />
         <div className="flex flex-row p-0 m-0 justify-center items-center flex-grow">
           <h1
             className={`text-2xl ${
-              isLoading ? "animate-spin" : ""
+              isLoadingFetch ? "animate-spin" : ""
             } font-bold mr-3`}
           >
-            {isLoading ? "." : data.length}
+            {isLoadingFetch ? "." : data?.length}
           </h1>
           <h3>Events</h3>
         </div>
