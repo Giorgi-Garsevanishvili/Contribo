@@ -1,8 +1,7 @@
 "use client";
 
-import axios from "axios";
-import React, { useEffect, useRef, useState } from "react";
-import { useCompAlert } from "@/hooks/useCompAlert";
+import React, { useEffect, useState } from "react";
+import { useFetchData } from "@/hooks/useDataFetch";
 
 type Data = {
   id: string;
@@ -16,56 +15,39 @@ type Data = {
 };
 
 function VolunteerStats() {
-  const [isLoading, setIsLoading] = useState(true);
   const [statusStats, setStatusStats] = useState<Record<string, number>>({});
 
-  const { triggerCompAlert } = useCompAlert();
-  const triggerCompAlertRef = useRef(triggerCompAlert);
-
-  const fetchData = async () => {
-    try {
-      setIsLoading(true);
-      const response = await axios.get("/api/admin/users");
-      setMemberStatusValues(response.data.data);
-
-      setIsLoading(false);
-    } catch (error) {
-      setIsLoading(false);
-      triggerCompAlertRef.current({
-        message: `${error}`,
-        type: "error",
-        isOpened: true,
-      });
-    }
-    return;
-  };
-
-  const setMemberStatusValues = (value: Data[]) => {
-    const stats = value.reduce<Record<string, number>>((acc, user) => {
-      user.memberStatusLogs.forEach((log) => {
-        const statusName = log.status?.name;
-        if (!statusName) return;
-
-        acc[statusName] = (acc[statusName] || 0) + 1;
-      });
-      return acc;
-    }, {});
-
-    setStatusStats(stats);
-  };
+  const { data, isLoadingFetch } = useFetchData<Data[]>(
+    "/api/admin/users",
+    [],
+  );
 
   useEffect(() => {
-    fetchData();
-  }, []);
+    if (data) {
+      const stats = data.reduce<Record<string, number>>((acc, user) => {
+        user.memberStatusLogs.forEach((log) => {
+          const statusName = log.status?.name;
+          if (!statusName) return;
+
+          acc[statusName] = (acc[statusName] || 0) + 1;
+        });
+        return acc;
+      }, {});
+
+      setStatusStats(stats);
+    }
+  }, [data]);
 
   return (
     <>
       {
-        <div className={`${isLoading ? "animate-pulse " : ""} text-sm shadow-sm bg-gray-200/45  rounded-lg p-1.5 flex flex-row w-full items-center justify-between select-none`}>
-          {isLoading ? (
+        <div
+          className={`${isLoadingFetch ? "animate-pulse " : ""} text-sm shadow-sm bg-gray-200/45  rounded-lg p-1.5 flex flex-row w-full items-center justify-between select-none`}
+        >
+          {isLoadingFetch ? (
             <h2
               className={`text-sm text-black ${
-                isLoading ? "animate-spin transition-all duration-300" : ""
+                isLoadingFetch ? "animate-spin transition-all duration-300" : ""
               } font-bold m-1`}
             >
               .

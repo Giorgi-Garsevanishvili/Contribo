@@ -1,8 +1,9 @@
 import { useCompAlert } from "@/hooks/useCompAlert";
+import { useFetchData } from "@/hooks/useDataFetch";
 import { HrWarningStatus } from "@prisma/client";
 import axios from "axios";
 import { useParams } from "next/navigation";
-import React, { FormEvent, useEffect, useRef, useState } from "react";
+import React, { FormEvent, useRef, useState } from "react";
 
 type Data = {
   createdAt: string;
@@ -22,13 +23,17 @@ export const CaseAddObj = {
 type Props = { onCreated: () => void };
 
 function HRCaseCreate({ onCreated }: Props) {
-  const [data, setData] = useState<Data>();
-  const [isLoading, setIsLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(false);
   const params = useParams();
   const userId = params.userId;
   const { triggerCompAlert } = useCompAlert();
   const triggerCompAlertRef = useRef(triggerCompAlert);
   const [createData, setCreateData] = useState(CaseAddObj);
+
+  const { data, isLoadingFetch } = useFetchData<Data>(
+    `/api/admin/hrWarningTypes`,
+    [],
+  );
 
   const createCase = async (e: FormEvent<HTMLFormElement>) => {
     try {
@@ -70,32 +75,9 @@ function HRCaseCreate({ onCreated }: Props) {
     return;
   };
 
-  const fetchData = async () => {
-    try {
-      setIsLoading(true);
-      const response = await axios.get(`/api/admin/hrWarningTypes`);
-
-      setData(response.data.data);
-
-      setIsLoading(false);
-    } catch (error) {
-      setIsLoading(false);
-      triggerCompAlertRef.current({
-        message: `${error}`,
-        type: "error",
-        isOpened: true,
-      });
-    }
-    return;
-  };
-
-  useEffect(() => {
-    fetchData();
-  }, []);
-
   return (
     <div className="flex p-5 w-full">
-      {isLoading ? (
+      {isLoading && isLoadingFetch ? (
         <h2 className="animate-pulse">Loading...</h2>
       ) : (
         <form

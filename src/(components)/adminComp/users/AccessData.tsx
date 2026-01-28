@@ -1,7 +1,7 @@
 "use client";
-import { useCompAlert } from "@/hooks/useCompAlert";
-import axios from "axios";
-import { useEffect, useRef, useState } from "react";
+
+import { useFetchData } from "@/hooks/useDataFetch";
+
 
 type Data = {
   createdAt: string | null;
@@ -21,34 +21,11 @@ type Data = {
   } | null;
 };
 
-function AccessData({ id, refetchKey }: { id: string; refetchKey: number }) {
-  const [isLoading, setIsLoading] = useState(true);
-  const [data, setData] = useState<Data>();
-  const { triggerCompAlert } = useCompAlert();
-  const triggerCompAlertRef = useRef(triggerCompAlert);
-
-  const fetchData = async () => {
-    try {
-      setIsLoading(true);
-      const response = await axios.get(`/api/admin/allowedUsers/${id}`);
-
-      setData(response.data.data);
-
-      setIsLoading(false);
-    } catch (error) {
-      setIsLoading(false);
-      triggerCompAlertRef.current({
-        message: `${error}`,
-        type: "error",
-        isOpened: true,
-      });
-    }
-    return;
-  };
-
-  useEffect(() => {
-    fetchData();
-  }, [refetchKey]);
+function AccessData({ id, refetchKey }: { id: string; refetchKey: boolean }) {
+  const { data, isLoadingFetch } = useFetchData<Data>(
+    `/api/admin/allowedUsers/${id}`,
+    [refetchKey],
+  );
 
   return (
     <div className="flex justify-center items-center">
@@ -56,7 +33,7 @@ function AccessData({ id, refetchKey }: { id: string; refetchKey: number }) {
         <div className="flex flex-col justify-center items-center">
           {" "}
           <div
-            className={`${isLoading ? "animate-pulse transition-all duration-300" : ""} select-none flex p-1 items-center justify-center bg-gray-200/60 rounded-lg shadow-lg`}
+            className={`${isLoadingFetch ? "animate-pulse transition-all duration-300" : ""} select-none flex p-1 items-center justify-center bg-gray-200/60 rounded-lg shadow-lg`}
           >
             <div className="flex flex-col bg-gray-200/60 p-1.5 rounded-lg">
               <h3 className="font-bold">Access Details</h3>

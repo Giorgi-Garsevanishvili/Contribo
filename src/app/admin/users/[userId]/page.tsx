@@ -32,7 +32,6 @@ function User() {
   return (
     <div className="flex flex-col">
       <UserInfo
-        onCreated={triggerRefetch}
         refetchKey={refetchKey}
         openData={openAccess}
       />

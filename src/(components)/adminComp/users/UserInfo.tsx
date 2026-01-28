@@ -1,9 +1,7 @@
 "use client";
-import { useCompAlert } from "@/hooks/useCompAlert";
-import axios from "axios";
 import Image from "next/image";
 import { useParams, useRouter } from "next/navigation";
-import { FormEvent, useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import { IoMdArrowRoundBack } from "react-icons/io";
 import { FaUser } from "react-icons/fa";
 import { MdEmail } from "react-icons/md";
@@ -18,8 +16,8 @@ import { IoMdInformationCircleOutline } from "react-icons/io";
 import AccessData from "./AccessData";
 import { MdBadge } from "react-icons/md";
 import { IoIosCloseCircle } from "react-icons/io";
-import { getClientErrorMessage } from "@/lib/errors/clientErrors";
-import { signOut } from "next-auth/react";
+import { useFetchData } from "@/hooks/useDataFetch";
+import UserUpdate from "./UserUpdate";
 
 type Data = {
   CreatedAllowedUser: [];
@@ -80,122 +78,34 @@ type Data = {
   } | null;
 };
 
-type UserUpdate = {
-  name: string;
-  email: string;
-};
-
-const userUpdateObj = {
-  name: "",
-  email: "",
-} as UserUpdate;
-
 function UserInfo({
   openData,
   refetchKey,
-  onCreated,
 }: {
   openData: boolean;
   refetchKey: number;
-  onCreated: () => void;
 }) {
   const params = useParams();
   const id = params.userId;
 
-  const [isLoading, setIsLoading] = useState(true);
-  const [data, setData] = useState<Data>();
-  const { triggerCompAlert } = useCompAlert();
-  const triggerCompAlertRef = useRef(triggerCompAlert);
   const route = useRouter();
   const [open, setOpen] = useState(false);
   const [openPosition, setOpenPosition] = useState(false);
   const [openUpdate, setOpenUpdate] = useState(false);
-  const [userUpdate, setUserUpdate] = useState<UserUpdate>(userUpdateObj);
   const [openUserUpdate, setOpenUserUpdate] = useState(false);
 
-  const fetchData = async () => {
-    try {
-      setIsLoading(true);
-      const response = await axios.get(`/api/admin/users/${id}`);
-
-      setData(response.data.data);
-
-      setIsLoading(false);
-    } catch (error) {
-      setIsLoading(false);
-      triggerCompAlertRef.current({
-        message: `${error}`,
-        type: "error",
-        isOpened: true,
-      });
-    }
-    return;
-  };
+  const { data, isLoadingFetch, refetch, success } = useFetchData<Data>(
+    `/api/admin/users/${id}`,
+    [],
+  );
 
   useEffect(() => {
-    fetchData();
+    setOpenUserUpdate(false);
+  }, [success]);
+
+  useEffect(() => {
+    refetch();
   }, [refetchKey]);
-
-  const updateUser = async (e: FormEvent<HTMLFormElement>) => {
-    try {
-      e.preventDefault();
-      setIsLoading(true);
-
-      if (userUpdate.email === "" && userUpdate.name === "") {
-        setIsLoading(false);
-        return triggerCompAlertRef.current({
-          message: `At least one field should be provided`,
-          type: "error",
-          isOpened: true,
-        });
-      }
-
-      const payload: Partial<UserUpdate> = {};
-
-      if (userUpdate.name && userUpdate.name !== "") {
-        payload.name = userUpdate.name;
-      }
-
-      if (userUpdate.email && userUpdate.email !== "") {
-        payload.email = userUpdate.email;
-      }
-
-      const res = await axios.put(`/api/admin/users/${id}`, payload);
-
-      const signOutReq = res.data.requiresSignOut === true;
-      if (signOutReq) {
-        setTimeout(async () => {
-          await signOut({ callbackUrl: "/" });
-        }, 4000);
-      }
-
-      triggerCompAlert({
-        message: signOutReq
-          ? "Your account updated please sign in again!"
-          : `User Updated`,
-        type: signOutReq ? "warning" : "success",
-        isOpened: true,
-      });
-
-      setUserUpdate(userUpdateObj);
-
-      setIsLoading(false);
-      setOpenUserUpdate(false);
-      if (!signOutReq) {
-        onCreated();
-      }
-    } catch (error) {
-      const message = getClientErrorMessage(error);
-
-      setIsLoading(false);
-      triggerCompAlertRef.current({
-        message: `${message}`,
-        type: "error",
-        isOpened: true,
-      });
-    }
-    return;
-  };
 
   return (
     <div className="flex flex-col w-full justify-center items-center">
@@ -208,7 +118,7 @@ function UserInfo({
       {
         <div className="flex md:flex-row flex-col m-2 justify-center items-center">
           <div
-            className={`${isLoading ? "animate-pulse transition-all duration-300" : ""} select-none flex p-2 items-center justify-center bg-gray-200/60 rounded-lg shadow-lg`}
+            className={`${isLoadingFetch ? "animate-pulse transition-all duration-300" : ""} select-none flex p-2 items-center justify-center bg-gray-200/60 rounded-lg shadow-lg`}
           >
             {data ? (
               <div className="flex flex-col md:flex-row items-center justify-center">
@@ -229,44 +139,11 @@ function UserInfo({
                 <div
                   className={`flex flex-col p-4 m-1 justify-start bg-gray-200/60 rounded-lg shadow-sm`}
                 >
-                  <form
-                    onSubmit={updateUser}
+                  <div
                     className={`${openUserUpdate ? "flex flex-col justify-center items-center" : "hidden"}`}
                   >
-                    <input
-                      type="text"
-                      id="name"
-                      className="input-def p-2 m-1 w-full bg-gray-400/95 border-white text-white rounded-sm flex-grow"
-                      value={userUpdate.name}
-                      onChange={(e) =>
-                        setUserUpdate((prev) => ({
-                          ...prev,
-                          name: e.target.value,
-                        }))
-                      }
-                      placeholder="Name"
-                    />
-                    <input
-                      id="email"
-                      type="email"
-                      className="input-def p-2 m-1 w-full  bg-gray-400/95 border-white text-white rounded-sm flex-grow"
-                      value={userUpdate.email}
-                      onChange={(e) =>
-                        setUserUpdate((prev) => ({
-                          ...prev,
-                          email: e.target.value,
-                        }))
-                      }
-                      placeholder="Email"
-                    />
-                    <button
-                      type="submit"
-                      disabled={!userUpdate.email && !userUpdate.name}
-                      className="btn flex-grow bg-[#48765b] text-white w-full"
-                    >
-                      Update User
-                    </button>
-                  </form>
+                    <UserUpdate id={id} refetch={refetch} />
+                  </div>
                   <div className={`${openUserUpdate ? "hidden" : ""}`}>
                     <h2 className="flex items-center">
                       <FaUser className="mr-2" size={22} /> {data.name}
@@ -448,7 +325,7 @@ function UserInfo({
               >
                 <h3 className="mb-2">User Info</h3>
                 <h3
-                  className={`${isLoading ? "animate-spin transition-all duration-300" : ""}`}
+                  className={`${isLoadingFetch ? "animate-spin transition-all duration-300" : ""}`}
                 >
                   .
                 </h3>
@@ -456,11 +333,11 @@ function UserInfo({
             )}
           </div>
           <div
-            className={`${openData ? "flex" : "hidden"} md:flex  m-2 ${isLoading ? " p-2 bg-gray-200/60 rounded-lg shadow-lg" : ""}`}
+            className={`${openData ? "flex" : "hidden"} md:flex  m-2 ${isLoadingFetch ? " p-2 bg-gray-200/60 rounded-lg shadow-lg" : ""}`}
           >
             {data ? (
               <AccessData
-                refetchKey={refetchKey}
+                refetchKey={isLoadingFetch}
                 id={data?.ownAllowance.id}
               ></AccessData>
             ) : (
@@ -469,7 +346,7 @@ function UserInfo({
               >
                 <h3 className="mb-2">Access Info</h3>
                 <h3
-                  className={`${isLoading ? "animate-spin transition-all duration-300" : ""}`}
+                  className={`${isLoadingFetch ? "animate-spin transition-all duration-300" : ""}`}
                 >
                   .
                 </h3>

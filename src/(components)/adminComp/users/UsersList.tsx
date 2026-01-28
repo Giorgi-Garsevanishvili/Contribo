@@ -1,10 +1,9 @@
 "use client";
 
-import axios from "axios";
-import React, { useEffect, useRef, useState } from "react";
-import { useCompAlert } from "@/hooks/useCompAlert";
+import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
+import { useFetchData } from "@/hooks/useDataFetch";
 
 type Data = {
   id: string;
@@ -19,36 +18,22 @@ type Data = {
 };
 
 function UsersList() {
-  const [isLoading, setIsLoading] = useState(true);
-  const [data, setData] = useState<Data[]>([]);
   const [searchTerm, setSearchTerm] = useState("");
-
-  const { triggerCompAlert } = useCompAlert();
-  const triggerCompAlertRef = useRef(triggerCompAlert);
   const router = useRouter();
-  const fetchData = async () => {
-    try {
-      setIsLoading(true);
-      const response = await axios.get("/api/admin/users");
-      setData(response.data.data);
+  const [list, setList] = useState<Data[]>([]);
 
-      setIsLoading(false);
-    } catch (error) {
-      setIsLoading(false);
-      triggerCompAlertRef.current({
-        message: `${error}`,
-        type: "error",
-        isOpened: true,
-      });
-    }
-    return;
-  };
+  const { data, isLoadingFetch } = useFetchData<Data[]>(
+    `/api/admin/users`,
+    [],
+  );
 
   useEffect(() => {
-    fetchData();
-  }, []);
+    if (data) {
+      setList(data);
+    }
+  }, [data]);
 
-  const filteredData = data.filter((item) => {
+  const filteredData = list?.filter((item) => {
     const value = item["name" as keyof typeof item];
 
     if (typeof value !== "string") return false;
@@ -61,12 +46,12 @@ function UsersList() {
   return (
     <div
       className={`flex ${
-        isLoading ? "w-30 h-30 items-center justify-center" : " w-auto"
+        isLoadingFetch ? "w-30 h-30 items-center justify-center" : " w-auto"
       } flex-col mt-4 shadow-sm bg-gray-200/45  rounded-lg p-1.5 select-none`}
     >
       <div
         className={` ${
-          isLoading ? "hidden" : "flex"
+          isLoadingFetch ? "hidden" : "flex"
         } w-full items-center mt-1 justify-center`}
       >
         <input
@@ -78,10 +63,10 @@ function UsersList() {
           onChange={(e) => setSearchTerm(e.target.value)}
         />
       </div>
-      {isLoading ? (
+      {isLoadingFetch ? (
         <h2
           className={`text-sm text-black ${
-            isLoading ? "animate-spin transition-all duration-300" : ""
+            isLoadingFetch ? "animate-spin transition-all duration-300" : ""
           } font-bold`}
         >
           .
