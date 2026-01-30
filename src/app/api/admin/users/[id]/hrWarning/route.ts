@@ -31,7 +31,7 @@ export const POST = async (req: NextRequest, context: Context) => {
       {
         message: `HR Warning: ${response.type.name}, Created for: ${response.assignee.name}`,
       },
-      { status: 201 }
+      { status: 201 },
     );
   } catch (error) {
     const { message, status } = handleError(error);
@@ -61,10 +61,15 @@ export const GET = async (_req: NextRequest, context: Context) => {
         name: true,
         type: { select: { name: true } },
         assignee: { select: { name: true } },
+        comment: true,
+        createdAt: true,
+        updatedAt: true,
+        createdBy: { select: { name: true } },
+        updatedBy: { select: { name: true } },
       },
     });
 
-    return NextResponse.json({data: data}, { status: 200 });
+    return NextResponse.json({ data: data }, { status: 200 });
   } catch (error) {
     const { message, status } = handleError(error);
     return NextResponse.json({ message }, { status });

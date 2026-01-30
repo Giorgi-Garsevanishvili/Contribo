@@ -34,7 +34,7 @@ function UserInfoButtons({ APIPath, title, Icon, URLPath, refetchKey }: Props) {
       {data ? (
         <>
           <button
-            onClick={() => router.push(`/admin/${URLPath}/${params.userId}`)}
+            onClick={() => router.push(`/admin/users/${params.userId}/${URLPath}`)}
             className="btn flex-grow w-full md:w-auto bg-gray-300/85 hover:ring-2 ring-white "
           >
             <Icon size={23} className="m-2" /> {title}: {data.length}

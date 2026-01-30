@@ -11,9 +11,9 @@ export const redirectByRole = async () => {
   const roles = session?.user.roles as string[];
 
   const priority = [
-    { name: "QIRVEX", path: "/console" },
-    { name: "ADMIN", path: "/admin" },
     { name: "REGULAR", path: "/volunteer" },
+    { name: "ADMIN", path: "/admin" },
+    { name: "QIRVEX", path: "/console" },
   ];
 
   for (const role of priority) {

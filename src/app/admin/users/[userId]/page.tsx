@@ -40,7 +40,7 @@ function User() {
       >
         <UserInfoButtons
           refetchKey={refetchKey}
-          URLPath="hrCases"
+          URLPath="hr-cases"
           Icon={IoFileTrayStacked}
           title="HR Cases"
           APIPath="hrWarning"
