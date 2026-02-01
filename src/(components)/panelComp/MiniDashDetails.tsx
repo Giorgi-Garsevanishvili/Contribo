@@ -27,8 +27,9 @@ import {
 import DeleteButton, { DeleteMethod } from "./DeleteButton";
 
 import ListDetailComp from "./ListDetailComp";
-import { Region } from "@prisma/client";
+
 import RegionDataUpdate from "./RegionUpdateComp";
+import { Region } from "@/generated/client";
 
 const RegionDataUpdateObj = {
   name: "",

@@ -1,7 +1,8 @@
-import { Region, Role } from "@prisma/client";
+
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 import { RootState } from "../../store";
+import { Region, Role } from "@/generated/client";
 
 export const fetchRoles = createAsyncThunk("roles/fetchAll", async () => {
   const response = await axios.get("/api/console/roles");

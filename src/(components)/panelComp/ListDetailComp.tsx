@@ -3,8 +3,8 @@ import {
   AllowedUsersWithRelations,
   GeneralDataWithRelations,
 } from "@/types/general-types";
-import { Region } from "@prisma/client";
 import Image from "next/image";
+import { Region } from "@/generated/client"; 
 
 type ListDetailCompProps =
   | {

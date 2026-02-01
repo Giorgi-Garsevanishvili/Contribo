@@ -1,5 +1,6 @@
+import { HrWarningStatus } from "@/generated/enums";
 import { useFetchData } from "@/hooks/useDataFetch";
-import { HrWarningStatus } from "@prisma/client";
+
 import { ParamValue } from "next/dist/server/request/params";
 import React, { useState } from "react";
 import { FaAngleDown } from "react-icons/fa";

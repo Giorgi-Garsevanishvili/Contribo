@@ -1,11 +1,6 @@
-import {
-  GTypes,
-  HrWarningStatus,
-  RatingAction,
-  RegionStatus,
-  ReqStatus,
-} from "@prisma/client";
-import { z } from "zod";
+import { GTypes, HrWarningStatus, RatingAction, RegionStatus, ReqStatus } from "@/generated/enums";
+import z from "zod";
+
 
 export const SoftDelete = z
   .object({
@@ -20,7 +15,6 @@ export const SoftDelete = z
 
 export const SoftDeleteInput = SoftDelete.partial({
   image: true,
-  roleId: true,
   deleted: true,
   deletedAt: true,
   reqStatus: true,

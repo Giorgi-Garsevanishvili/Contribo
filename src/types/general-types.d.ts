@@ -1,5 +1,5 @@
 import { RegionUpdateDataType } from "@/lib/zod";
-import { Position, Prisma } from "@prisma/client";
+import { Position, Prisma } from "../generated/client";
 
 export type Context = {
   params: Promise<{ id: string }>;

@@ -1,4 +1,5 @@
-import { RegionStatus } from "@prisma/client";
+import { RegionStatus } from "@/generated/enums";
+
 
 type RegionDataUpdateType = {
   name?: string;

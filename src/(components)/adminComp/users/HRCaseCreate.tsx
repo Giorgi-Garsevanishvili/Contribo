@@ -1,6 +1,6 @@
+import { HrWarningStatus } from "@/generated/enums";
 import { useCompAlert } from "@/hooks/useCompAlert";
 import { useFetchData } from "@/hooks/useDataFetch";
-import { HrWarningStatus } from "@prisma/client";
 import axios from "axios";
 import { useParams } from "next/navigation";
 import React, { FormEvent, useRef, useState } from "react";

@@ -1,6 +1,7 @@
+import { RatingAction } from "@/generated/enums";
 import { useCompAlert } from "@/hooks/useCompAlert";
 import { getClientErrorMessage } from "@/lib/errors/clientErrors";
-import { RatingAction } from "@prisma/client";
+
 import axios from "axios";
 import { useParams } from "next/navigation";
 import React, { FormEvent, useRef, useState } from "react";
