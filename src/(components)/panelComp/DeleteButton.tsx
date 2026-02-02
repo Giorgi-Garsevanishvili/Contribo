@@ -114,7 +114,7 @@ function DeleteButton({
     <button
       onClick={handleDelete}
       disabled={loading || disabled}
-      className={`btn flex flex-grow justify-center items-center bg-[#E74C3C] rounded-lg m-1 ${
+      className={`btn flex grow justify-center items-center bg-[#E74C3C] rounded-lg m-1 ${
         loading ? "opacity-50 cursor-not-allowed" : ""
       }`}
     >

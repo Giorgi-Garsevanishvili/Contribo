@@ -180,7 +180,7 @@ function MiniDashCard<U extends UserAddType | DataAddType>({
 
   return (
     <div className="flex flex-col items-center m-0.5 justify-center">
-      <div className="flex w-[22rem] h-[28rem] items-start justify-center mt-0 m-2 text-white pt-0 p-0.5 bg-[#434d5f98] rounded-xl shadow-md shadow-white ">
+      <div className="flex w-88 h-112 items-start justify-center mt-0 m-2 text-white pt-0 p-0.5 bg-[#434d5f98] rounded-xl shadow-md shadow-white ">
         {isLoading ||
         (loadingHook && type === "regions") ||
         (loadingHook && type === "roles") ? (
@@ -201,7 +201,7 @@ function MiniDashCard<U extends UserAddType | DataAddType>({
               />
             </div>
             <div className="flex items-start justify-start mb-1 p-1 w-full h-full px-3  overflow-y-auto overflow-hidden">
-              <ul className="flex flex-col flex-grow gap-2 items-start justify-center">
+              <ul className="flex flex-col grow gap-2 items-start justify-center">
                 {type === "user" ? (
                   <ListComp
                     deleteMethod={deleteMethod}

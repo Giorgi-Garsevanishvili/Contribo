@@ -17,19 +17,26 @@ export const GET = async (_req: NextRequest) => {
       },
       select: {
         id: true,
-        assignee: { select: { name: true } },
-        type: { select: { name: true } },
         status: true,
+        name: true,
+        type: { select: { name: true } },
+        assignee: { select: { name: true } },
+        comment: true,
+        createdAt: true,
+        updatedAt: true,
+        createdBy: { select: { name: true } },
+        updatedBy: { select: { name: true } },
       },
     });
 
     if (!data || data.length === 0) {
-      return NextResponse.json({data,
+      return NextResponse.json({
+        data,
         message: "HR Warnings in your region not found!",
       });
     }
 
-    return NextResponse.json({data}, { status: 200 });
+    return NextResponse.json({ data }, { status: 200 });
   } catch (error) {
     const { message, status } = handleError(error);
     return NextResponse.json({ message }, { status });

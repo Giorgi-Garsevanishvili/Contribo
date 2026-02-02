@@ -67,7 +67,7 @@ function CreationComponent(props: addDataProp) {
       ) : (
         <form
           onSubmit={(e) => onSubmit(e)}
-          className={`flex-grow flex-col w-full p-0.5 overflow-hidden ${
+          className={`grow flex-col w-full p-0.5 overflow-hidden ${
             addOpened
               ? "max-h-full opacity-100 pointer-events-auto"
               : "max-h-0 opacity-0 pointer-events-none"

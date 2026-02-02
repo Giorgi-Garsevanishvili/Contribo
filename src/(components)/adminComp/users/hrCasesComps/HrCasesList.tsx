@@ -1,8 +1,9 @@
+import HrCaseDeleteButton from "./HrCaseDeleteButton";
 import { HrWarningStatus } from "@/generated/enums";
 import { useFetchData } from "@/hooks/useDataFetch";
 
 import { ParamValue } from "next/dist/server/request/params";
-import React, { useState } from "react";
+import React, { useMemo, useState } from "react";
 import { FaAngleDown } from "react-icons/fa";
 import { FaAngleUp } from "react-icons/fa";
 
@@ -28,31 +29,95 @@ export const CasUpdateObj = {
   typeId: "",
 };
 
-function HrCasesList({ id }: { id: ParamValue }) {
+export const WARNING_STATUS_COLORS = {
+  ACTIVE: {
+    bg: "bg-red-100",
+    border: "border-red-300",
+    shadow: "shadow-red-200",
+  },
+  UNDER_REVIEW: {
+    bg: "bg-yellow-100",
+    border: "border-yellow-300",
+    shadow: "shadow-yellow-200",
+  },
+  APPROVED: {
+    bg: "bg-green-100",
+    border: "border-green-300",
+    shadow: "shadow-green-200",
+  },
+  ESCALATED: {
+    bg: "bg-orange-100",
+    border: "border-orange-300",
+    shadow: "shadow-orange-200",
+  },
+  RESOLVED: {
+    bg: "bg-blue-100",
+    border: "border-blue-300",
+    shadow: "shadow-blue-200",
+  },
+  CANCELLED: {
+    bg: "bg-gray-100",
+    border: "border-gray-300",
+    shadow: "shadow-gray-200",
+  },
+  EXPIRED: {
+    bg: "bg-purple-100",
+    border: "border-purple-300",
+    shadow: "shadow-purple-200",
+  },
+  ARCHIVED: {
+    bg: "bg-slate-100",
+    border: "border-slate-300",
+    shadow: "shadow-slate-200",
+  },
+} as const;
+
+const TYPE_ORDER = [
+  "ACTIVE",
+  "UNDER_REVIEW",
+  "ESCALATED",
+  "APPROVED",
+  "RESOLVED",
+  "EXPIRED",
+  "CANCELLED",
+  "ARCHIVED",
+];
+
+export type WarningStatus = keyof typeof WARNING_STATUS_COLORS;
+
+function HrCasesList({ fetchUrl }: { fetchUrl: string }) {
   const [isOpenId, setIsOpenId] = useState("");
   const [onEdit, setOnEdit] = useState("");
-  const { data, isLoadingFetch } = useFetchData<Data[]>(
-    `/api/admin/users/${id}/hrWarning`,
-    [],
-  );
+  const { data, isLoadingFetch, refetch } = useFetchData<Data[]>(fetchUrl, []);
 
   const { data: types, isLoadingFetch: isLoadingFetch2 } = useFetchData<Data[]>(
     `/api/admin/hrWarningTypes`,
     [],
   );
 
+  const sortedData = useMemo(() => {
+    if (!data) return [];
+
+    return [...data].sort((a, b) => {
+      const aIndex = TYPE_ORDER.indexOf(a.status);
+      const bIndex = TYPE_ORDER.indexOf(b.status);
+
+      return (aIndex === -1 ? 999 : aIndex) - (bIndex === -1 ? 999 : bIndex);
+    });
+  }, [data]);
+
   return (
     <div
-      className={`flex w-full items-center justify-center px-25 py-5 flex-col`}
+      className={`flex w-full items-center justify-center xl:px-25 xl:py-5 px-2 flex-col`}
     >
-      {isLoadingFetch ? (
+      {isLoadingFetch || isLoadingFetch2 ? (
         <div className="flex bg-gray-100/60 items-center rounded-lg shadow-lg p-10 justify-center">
           <h3 className="font-bold animate-spin">.</h3>
         </div>
-      ) : (
-        data?.map((item) => (
+      ) : sortedData && sortedData?.length > 0 ? (
+        sortedData?.map((item) => (
           <div
-            className="flex flex-col transition-all duration-300 shadow-sm rounded-2xl m-1 p-0 justify-between w-full bg-gray-100/85"
+            className={`flex ${WARNING_STATUS_COLORS[item.status as keyof typeof WARNING_STATUS_COLORS].border} border flex-col transition-all duration-300 shadow-sm rounded-2xl m-1 p-0 justify-between w-full bg-gray-100/85`}
             key={item.id}
           >
             <button
@@ -60,7 +125,7 @@ function HrCasesList({ id }: { id: ParamValue }) {
                 setIsOpenId(() => (isOpenId !== item.id ? item.id : "")),
                 setOnEdit("")
               )}
-              className=" flex lg:flex-row flex-col px-5 py-1.5 text-sm btn justify-between transition-all duration-300 w-full m-0 bg-gray-300/85 shadow-md mb-2"
+              className={`flex lg:flex-row  flex-col px-5 py-1.5 md:text-sm text-xs btn justify-between transition-all duration-300 w-full m-0 ${(item.status as keyof typeof WARNING_STATUS_COLORS) ? `${WARNING_STATUS_COLORS[item.status as keyof typeof WARNING_STATUS_COLORS].shadow} ${WARNING_STATUS_COLORS[item.status as keyof typeof WARNING_STATUS_COLORS].bg}` : WARNING_STATUS_COLORS.ARCHIVED} border shadow-lg mb-2`}
             >
               <h3>
                 <strong>Assignee: </strong> {item.assignee.name}
@@ -82,11 +147,13 @@ function HrCasesList({ id }: { id: ParamValue }) {
               )}
             </button>
             <div
-              className={`${isOpenId === item.id ? "flex" : "hidden"} lg:flex-row flex-col w-full items-center justify-center`}
+              className={`${isOpenId === item.id ? "flex" : "hidden"} lg:flex-row flex-col w-full  items-center justify-center`}
             >
               <div className="flex  lg:flex-row flex-col w-full items-center justify-start p-3">
-                <div className="flex flex-grow  bg-gray-100/70 rounded-lg lg:flex-row flex-col items-center justify-center py-10 px-10 m-2 gap-5">
-                  <div className="flex-col flex">
+                <div
+                  className={`flex grow ${(item.status as keyof typeof WARNING_STATUS_COLORS) ? `${WARNING_STATUS_COLORS[item.status as keyof typeof WARNING_STATUS_COLORS].border} ${WARNING_STATUS_COLORS[item.status as keyof typeof WARNING_STATUS_COLORS].bg}` : WARNING_STATUS_COLORS.ARCHIVED} border rounded-lg  md:flex-row flex-col items-center justify-center lg:py-10 w-full lg:px-10 p-4 m-2 gap-2`}
+                >
+                  <div className="flex-col w-full flex">
                     <h3>
                       <strong>Name: </strong>
                       {item.name}
@@ -97,14 +164,14 @@ function HrCasesList({ id }: { id: ParamValue }) {
                     </h3>
                     <h3>
                       <strong>Created At: </strong>
-                      {item.createdAt}
+                      {item.createdAt ? new Date(item.createdAt).toLocaleString() : "No Data"}
                     </h3>
                     <h3>
                       <strong>Updated At: </strong>
-                      {item.updatedAt ?? "No Data"}
+                      {item.updatedAt ? new Date(item.updatedAt).toLocaleString() : "No Data"}
                     </h3>
                   </div>
-                  <div className="flex-col flex lg:flex-1">
+                  <div className="flex-col w-full flex">
                     <h3>
                       <strong>Status: </strong>
                       {item.status}
@@ -124,13 +191,12 @@ function HrCasesList({ id }: { id: ParamValue }) {
                   </div>
                 </div>
                 <div
-                  className={`${onEdit === item.id ? "flex" : "hidden"} bg-gray-100/70 p-4 rounded-lg mx-2 flex-col lg:flex-row flex-grow items-center justify-between`}
+                  className={`${onEdit === item.id ? "flex" : "hidden"} bg-gray-100/70 p-4 rounded-lg mx-2 flex-col  lg:flex-row grow items-center justify-between`}
                 >
                   <div className="flex flex-col">
                     <div>
                       <input
-                        value={item.name}
-                        className="input-def  bg-gray-400/95 border-white text-white rounded-sm flex-grow"
+                        className="input-def  bg-gray-400/95 border-white text-white rounded-sm grow"
                         type="text"
                         name="name"
                         id="name"
@@ -140,10 +206,9 @@ function HrCasesList({ id }: { id: ParamValue }) {
                         <strong className="text-red-500">*</strong>
                       </label>
                     </div>
-                    <div className="flex flex-grow">
+                    <div className="flex grow">
                       <select
-                        value={item.type.name}
-                        className="flex-grow border-2 m-1 rounded-md p-1.5  bg-gray-400/95 text-white"
+                        className="grow border-2 m-1 rounded-md p-1.5  bg-gray-400/95 text-white"
                         name="type"
                         id="type"
                       >
@@ -157,10 +222,9 @@ function HrCasesList({ id }: { id: ParamValue }) {
                         <strong className="text-red-500">*</strong>
                       </label>
                     </div>
-                    <div className="flex flex-grow">
+                    <div className="flex grow">
                       <select
-                        value={item.status}
-                        className="flex-grow border-2 m-1 rounded-md p-1.5 bg-gray-400/95 text-white"
+                        className="grow border-2 m-1 rounded-md p-1.5 bg-gray-400/95 text-white"
                         name="status"
                         id="status"
                       >
@@ -176,8 +240,8 @@ function HrCasesList({ id }: { id: ParamValue }) {
                       </label>
                     </div>
                   </div>
-                  <div className="flex flex-col flex-grow  bg-gray-400/95 p-2 m-2 rounded-lg">
-                    <div className="flex flex-col  text-white flex-grow">
+                  <div className="flex flex-col grow  bg-gray-400/95 p-2 m-2 rounded-lg">
+                    <div className="flex flex-col  text-white grow">
                       <label className="px-3 flex" htmlFor="comment">
                         Comment <strong className="text-red-500 ml-2">*</strong>
                         <h2 className="italic ml-2 text-gray-300">
@@ -185,8 +249,7 @@ function HrCasesList({ id }: { id: ParamValue }) {
                         </h2>
                       </label>
                       <input
-                        value={item.comment}
-                        className="input-def  break-words text-wrap rounded-sm flex-grow border-white"
+                        className="input-def  wrap-break-word text-wrap rounded-sm grow border-white"
                         type="text"
                         maxLength={150}
                         name="comment"
@@ -197,8 +260,11 @@ function HrCasesList({ id }: { id: ParamValue }) {
                   </div>
                 </div>
               </div>
-              <div className="flex  m-4 lg:flex-col">
-                <button className="btn flex-grow">Delete</button>
+              <div className="flex p-1 md:m-4  lg:flex-col">
+                <HrCaseDeleteButton
+                  url={`/api/admin/hrWarnings/${item.id}`}
+                  fetchAction={refetch}
+                />
 
                 <button
                   className={`btn ${onEdit === item.id ? "flex" : "hidden"}`}
@@ -210,7 +276,7 @@ function HrCasesList({ id }: { id: ParamValue }) {
                   onClick={() => {
                     setOnEdit(onEdit === item.id ? "" : isOpenId);
                   }}
-                  className={`btn flex-grow`}
+                  className={`btn grow`}
                 >
                   {onEdit === item.id ? "Close" : "Edit"}
                 </button>
@@ -218,6 +284,10 @@ function HrCasesList({ id }: { id: ParamValue }) {
             </div>
           </div>
         ))
+      ) : (
+        <div className="flex bg-gray-100/60 items-center rounded-lg shadow-lg p-10 justify-center">
+          <h3 className="font-bold">No HR cases to display.</h3>
+        </div>
       )}
     </div>
   );

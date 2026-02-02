@@ -6,7 +6,7 @@ function BackButton() {
   const route = useRouter();
   return (
     <button
-      className="flex w-fit items-center border-1 justify-center btn p-2 text-center font-bold rounded-tr-md rounded-bl-md text-m bg-blue-950/70 text-white"
+      className="flex w-fit items-center border justify-center btn p-2 text-center font-bold rounded-tr-md rounded-bl-md text-m bg-blue-950/70 text-white"
       onClick={() => route.back()}
     >
       <IoMdArrowRoundBack size={25} />

@@ -110,7 +110,7 @@ function UserInfo({
   return (
     <div className="flex flex-col w-full justify-center items-center">
       <button
-        className="md:flex hidden items-center border-1 justify-center btn p-2 m-0 text-center font-bold rounded-tr-md rounded-bl-md text-m bg-blue-950/70 text-white"
+        className="md:flex hidden items-center border justify-center btn p-2 m-0 text-center font-bold rounded-tr-md rounded-bl-md text-m bg-blue-950/70 text-white"
         onClick={() => route.back()}
       >
         <IoMdArrowRoundBack size={25} />

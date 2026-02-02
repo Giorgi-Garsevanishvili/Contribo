@@ -126,9 +126,9 @@ function PositionHistoryCreate({ onCreated }: Props) {
           onSubmit={(e) => createCase(e)}
           className="flex-col md:flex-row flex justify-between w-full"
         >
-          <div className="flex flex-col flex-grow">
+          <div className="flex flex-col grow">
             <div className="flex md:flex-row flex-col  text-gray-500">
-              <div className="flex flex-col flex-grow">
+              <div className="flex flex-col grow">
                 <label className="ml-3" htmlFor="start">
                   Start Date <strong className="text-red-500">*</strong>
                 </label>
@@ -140,14 +140,14 @@ function PositionHistoryCreate({ onCreated }: Props) {
                       startedAt: e.target.value,
                     }))
                   }
-                  className="input-def  bg-gray-400/95 border-white text-white rounded-sm flex-grow"
+                  className="input-def  bg-gray-400/95 border-white text-white rounded-sm grow"
                   type="datetime-local"
                   name="start"
                   id="start"
                   placeholder="Start Date"
                 />
               </div>
-              <div className="flex flex-col flex-grow">
+              <div className="flex flex-col grow">
                 <label className="ml-3" htmlFor="end">
                   End Date
                 </label>
@@ -159,7 +159,7 @@ function PositionHistoryCreate({ onCreated }: Props) {
                       endedAt: e.target.value,
                     }))
                   }
-                  className="input-def  bg-gray-400/95 border-white text-white rounded-sm flex-grow"
+                  className="input-def  bg-gray-400/95 border-white text-white rounded-sm grow"
                   type="datetime-local"
                   name="end"
                   id="end"
@@ -168,7 +168,7 @@ function PositionHistoryCreate({ onCreated }: Props) {
               </div>
             </div>
 
-            <div className="flex flex-grow">
+            <div className="flex grow">
               <select
                 value={createData.positionId}
                 onChange={(e) =>
@@ -177,7 +177,7 @@ function PositionHistoryCreate({ onCreated }: Props) {
                     positionId: e.target.value,
                   }))
                 }
-                className="flex-grow border-2 m-1 rounded-md p-1.5  bg-gray-400/95 text-white"
+                className="grow border-2 m-1 rounded-md p-1.5  bg-gray-400/95 text-white"
                 name="position"
                 id="position"
               >
@@ -207,7 +207,7 @@ function PositionHistoryCreate({ onCreated }: Props) {
                   checked={createData.ended}
                   className="sr-only peer"
                 />
-                <div className="relative mx-2 w-11 h-6 bg-neutral-400 peer-focus:outline-none peer-focus:ring-1 peer-focus:ring-brand-soft dark:peer-focus:ring-gray-500 rounded-full peer peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-buffer after:content-[''] after:absolute after:top-[2px] after:start-[1px] after:bg-white after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-green-800"></div>
+                <div className="relative mx-2 w-11 h-6 bg-neutral-400 peer-focus:outline-none peer-focus:ring-1 peer-focus:ring-brand-soft dark:peer-focus:ring-gray-500 rounded-full peer peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-buffer after:content-[''] after:absolute after:top-0.5 after:start-px after:bg-white after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-green-800"></div>
                 <span className="select-none text-sm font-medium text-heading">
                   Ended
                 </span>
@@ -216,7 +216,7 @@ function PositionHistoryCreate({ onCreated }: Props) {
             <button
               disabled={isLoading}
               type="submit"
-              className="btn flex-grow bg-[#48765b] text-white"
+              className="btn grow bg-[#48765b] text-white"
             >
               Create
             </button>

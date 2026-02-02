@@ -45,7 +45,7 @@ function ListComp(props: ListCompParams) {
   const router = useRouter();
   return (
     <div className="flex items-start justify-center mb-1 w-full h-full overflow-hidden">
-      <ul className="flex flex-col flex-grow gap-2 items-start justify-center">
+      <ul className="flex flex-col grow gap-2 items-start justify-center">
         {filteredData.length > 0 ? (
           type === "user" ? (
             filteredData.map((item, index) => (

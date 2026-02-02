@@ -44,7 +44,7 @@ function EventStats() {
         className={`${isLoadingFetch ? "animate-pulse" : ""} flex hover:shadow-lg hover:opacity-80 duration-300 btn flex-col select-none w-[10rem] h-[10rem] items-center justify-center mt-0 m-2 mb-0 text-white p-0 pt-4 bg-[#434d5f98] rounded-xl shadow-sm shadow-white `}
       >
         <BsFillCalendarEventFill size={30} className="m-2" />
-        <div className="flex flex-row p-0 m-0 justify-center items-center flex-grow">
+        <div className="flex flex-row p-0 m-0 justify-center items-center grow">
           <h1
             className={`text-2xl ${
               isLoadingFetch ? "animate-spin" : ""

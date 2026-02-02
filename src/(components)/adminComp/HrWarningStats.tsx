@@ -71,12 +71,12 @@ function HrWarningStats() {
   return (
     <>
       <button
-        onClick={() => router.push("admin/users")}
+        onClick={() => router.push("admin/hr-warnings")}
         onMouseEnter={() => setHover(true)}
         onMouseLeave={() => {
           setHover(false);
         }}
-        className={`${isLoadingFetch ? "animate-pulse" : ""} flex hover:shadow-lg  hover:opacity-95 transition-all duration-300 btn flex-col select-none w-[10rem] h-[10rem] items-center justify-center mt-0 m-2 text-white pt-0 p-0.5 bg-[#434d5f98] rounded-xl shadow-sm shadow-white `}
+        className={`${isLoadingFetch ? "animate-pulse" : ""} flex hover:shadow-lg  hover:opacity-95 transition-all duration-300 btn flex-col select-none w-40 h-40 items-center justify-center mt-0 m-2 text-white pt-0 p-0.5 bg-[#434d5f98] rounded-xl shadow-sm shadow-white `}
       >
         {!hover ? (
           <>
@@ -120,9 +120,9 @@ function HrWarningStats() {
                 statsShow ? "flex" : "hidden"
               } flex-col h-full pt-1.5 transition-all duration-300 `}
             >
-              <h2 className="mb-1">Case Statuses</h2>
+              <h2 className="mb-0.5">Case Statuses</h2>
               {Object.keys(statusStats).length !== 0
-                ? Object.entries(statusStats).map(([type, count]) => (
+                ? Object.entries(statusStats).slice(0, 3).map(([type, count]) => (
                     <div
                       className="mt-1 p-1 border-2 rounded-lg text-sm"
                       key={type}
@@ -131,6 +131,7 @@ function HrWarningStats() {
                     </div>
                   ))
                 : "No Stats To Display"}
+                <h3>...</h3>
             </div>
           </>
         )}

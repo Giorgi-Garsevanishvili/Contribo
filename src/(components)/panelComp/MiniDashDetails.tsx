@@ -242,7 +242,7 @@ function MiniDashDetails<
 
               <button
                 onClick={() => setIsUpdateOpen(!isUpdateOpen)}
-                className={`btn flex flex-grow justify-center items-center rounded-lg  m-1 ${
+                className={`btn flex grow justify-center items-center rounded-lg  m-1 ${
                   isUpdateOpen ? "bg-amber-500" : "bg-amber-100"
                 }  text-black rounded-lg `}
               >

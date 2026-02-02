@@ -42,10 +42,10 @@ export default async function RootLayout({
   await requireRole("QIRVEX")
   
   return (
-    <div className="flex flex-grow items-center justify-center transition-all duration-200 flex-col p-0 m-0">
+    <div className="flex grow items-center justify-center transition-all duration-200 flex-col p-0 m-0">
       <ConfirmTab />
       <ConsoleNav page={"Console"} />
-      <div className="flex-grow flex justify-center items-center mt-4 m-0 p-0">
+      <div className="grow flex justify-center items-center mt-4 m-0 p-0">
         <main className="flex flex-wrap justify-center m-0 items-center">
           <CompAlert />
           {children}

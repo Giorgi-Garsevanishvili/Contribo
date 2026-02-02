@@ -28,7 +28,7 @@ export default function RootLayout({
       <body className="flex layout-body flex-col w-full min-h-screen">
         <AuthProvider>
           <Providers>
-            <main className="flex flex-grow transition-all duration-200 justify-center items-center flex-col p-0 m-0 w-full min-h-full overflow-auto">
+            <main className="flex grow transition-all duration-200 justify-center items-center flex-col p-0 m-0 w-full min-h-full overflow-auto">
               {children}
               <SpeedInsights />
             </main>

@@ -84,14 +84,14 @@ function HRCaseCreate({ onCreated }: Props) {
           onSubmit={(e) => createCase(e)}
           className="flex-col md:flex-row flex justify-between w-full"
         >
-          <div className="flex flex-col flex-grow">
-            <div className="flex flex-grow">
+          <div className="flex flex-col grow">
+            <div className="flex grow">
               <input
                 value={createData.name}
                 onChange={(e) =>
                   setCreateData((prev) => ({ ...prev, name: e.target.value }))
                 }
-                className="input-def  bg-gray-400/95 border-white text-white rounded-sm flex-grow"
+                className="input-def  bg-gray-400/95 border-white text-white rounded-sm grow"
                 type="text"
                 name="name"
                 id="name"
@@ -101,13 +101,13 @@ function HRCaseCreate({ onCreated }: Props) {
                 <strong className="text-red-500">*</strong>
               </label>
             </div>
-            <div className="flex flex-grow">
+            <div className="flex grow">
               <select
                 value={createData.typeId}
                 onChange={(e) =>
                   setCreateData((prev) => ({ ...prev, typeId: e.target.value }))
                 }
-                className="flex-grow border-2 m-1 rounded-md p-1.5  bg-gray-400/95 text-white"
+                className="grow border-2 m-1 rounded-md p-1.5  bg-gray-400/95 text-white"
                 name="type"
                 id="type"
               >
@@ -122,13 +122,13 @@ function HRCaseCreate({ onCreated }: Props) {
                 <strong className="text-red-500">*</strong>
               </label>
             </div>
-            <div className="flex flex-grow">
+            <div className="flex grow">
               <select
                 value={createData.status}
                 onChange={(e) =>
                   setCreateData((prev) => ({ ...prev, status: e.target.value }))
                 }
-                className="flex-grow border-2 m-1 rounded-md p-1.5 bg-gray-400/95 text-white"
+                className="grow border-2 m-1 rounded-md p-1.5 bg-gray-400/95 text-white"
                 name="status"
                 id="status"
               >
@@ -147,13 +147,13 @@ function HRCaseCreate({ onCreated }: Props) {
             <button
               disabled={isLoading}
               type="submit"
-              className="btn flex-grow bg-[#48765b] text-white"
+              className="btn grow bg-[#48765b] text-white"
             >
               Create
             </button>
           </div>
-          <div className="flex flex-col flex-grow  bg-gray-400/95 p-2 m-2 rounded-lg">
-            <div className="flex flex-col  text-white flex-grow">
+          <div className="flex flex-col grow  bg-gray-400/95 p-2 m-2 rounded-lg">
+            <div className="flex flex-col  text-white grow">
               <label className="px-3 flex" htmlFor="comment">
                 Comment <strong className="text-red-500 ml-2">*</strong>
                 <h2 className="italic ml-2 text-gray-300">Max: 150 word</h2>
@@ -166,7 +166,7 @@ function HRCaseCreate({ onCreated }: Props) {
                     comment: e.target.value,
                   }))
                 }
-                className="input-def break-words text-wrap rounded-sm flex-grow border-white"
+                className="input-def wrap-break-word text-wrap rounded-sm grow border-white"
                 type="text"
                 maxLength={150}
                 name="comment"

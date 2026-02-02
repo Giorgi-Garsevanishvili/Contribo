@@ -90,7 +90,7 @@ function UserUpdate({ id, refetch }: { id: ParamValue; refetch: () => void }) {
           <input
             type="text"
             id="name"
-            className="input-def p-2 m-1 w-full bg-gray-400/95 border-white text-white rounded-sm flex-grow"
+            className="input-def p-2 m-1 w-full bg-gray-400/95 border-white text-white rounded-sm grow"
             value={userUpdate.name}
             onChange={(e) =>
               setUserUpdate((prev) => ({
@@ -103,7 +103,7 @@ function UserUpdate({ id, refetch }: { id: ParamValue; refetch: () => void }) {
           <input
             id="email"
             type="email"
-            className="input-def p-2 m-1 w-full  bg-gray-400/95 border-white text-white rounded-sm flex-grow"
+            className="input-def p-2 m-1 w-full  bg-gray-400/95 border-white text-white rounded-sm grow"
             value={userUpdate.email}
             onChange={(e) =>
               setUserUpdate((prev) => ({
@@ -116,7 +116,7 @@ function UserUpdate({ id, refetch }: { id: ParamValue; refetch: () => void }) {
           <button
             type="submit"
             disabled={!userUpdate.email && !userUpdate.name && isLoading}
-            className="btn flex-grow bg-[#48765b] text-white w-full"
+            className="btn grow bg-[#48765b] text-white w-full"
           >
             Update User
           </button>

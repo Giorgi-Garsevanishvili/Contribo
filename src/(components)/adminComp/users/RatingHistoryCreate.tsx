@@ -76,9 +76,9 @@ function RatingHistoryCreate({ onCreated }: Props) {
           onSubmit={(e) => createCase(e)}
           className="flex-col md:flex-row flex justify-between w-full"
         >
-          <div className="flex flex-col flex-grow">
+          <div className="flex flex-col grow">
             <div className="flex md:flex-row flex-col  text-gray-500">
-              <div className="flex flex-col flex-grow  bg-gray-400/95 p-2 m-2 rounded-lg text-white max-w-50">
+              <div className="flex flex-col grow  bg-gray-400/95 p-2 m-2 rounded-lg text-white max-w-50">
                 <label className="ml-3" htmlFor="score">
                   Score <strong className="text-red-500">*</strong>
                 </label>
@@ -90,7 +90,7 @@ function RatingHistoryCreate({ onCreated }: Props) {
                       newValue: Number(e.target.value),
                     }))
                   }
-                  className="input-def  bg-gray-400/95 border-white text-white rounded-sm flex-grow"
+                  className="input-def  bg-gray-400/95 border-white text-white rounded-sm grow"
                   type="number"
                   name="score"
                   id="score"
@@ -118,15 +118,15 @@ function RatingHistoryCreate({ onCreated }: Props) {
                     value={createData.action}
                     className="sr-only peer"
                   />
-                  <div className="relative mx-2 w-11 h-6 bg-red-800 peer-focus:outline-none peer-focus:ring-1 peer-focus:ring-brand-soft dark:peer-focus:ring-gray-500 rounded-full peer peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-buffer after:content-[''] after:absolute after:top-[2px] after:start-[1px] after:bg-white after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-green-800"></div>
+                  <div className="relative mx-2 w-11 h-6 bg-red-800 peer-focus:outline-none peer-focus:ring-1 peer-focus:ring-brand-soft dark:peer-focus:ring-gray-500 rounded-full peer peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-buffer after:content-[''] after:absolute after:top-05 after:start-1px after:bg-white after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-green-800"></div>
                   <span className="select-none text-sm font-medium text-heading">
                     Increase
                   </span>
                 </label>
               </div>
-              <div className="flex flex-grow">
-                <div className="flex flex-col flex-grow  bg-gray-400/95 p-2 m-2 rounded-lg">
-                  <div className="flex flex-col  text-white flex-grow">
+              <div className="flex grow">
+                <div className="flex flex-col grow  bg-gray-400/95 p-2 m-2 rounded-lg">
+                  <div className="flex flex-col  text-white grow">
                     <label className="px-3 flex" htmlFor="reason">
                       Reason <strong className="text-red-500 ml-2">*</strong>
                       <h2 className="italic ml-2 text-gray-300">
@@ -141,7 +141,7 @@ function RatingHistoryCreate({ onCreated }: Props) {
                           reason: e.target.value,
                         }))
                       }
-                      className="input-def break-words text-wrap rounded-sm flex-grow border-white"
+                      className="input-def wrap-break-word text-wrap rounded-sm grow border-white"
                       type="text"
                       maxLength={150}
                       name="reason"
@@ -156,7 +156,7 @@ function RatingHistoryCreate({ onCreated }: Props) {
             <button
               disabled={isLoading}
               type="submit"
-              className="btn flex-grow bg-[#48765b] text-white"
+              className="btn grow bg-[#48765b] text-white"
             >
               Create
             </button>

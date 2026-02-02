@@ -26,12 +26,12 @@ export default async function RootLayout({
 }) {
   await requireRole("ADMIN")
   return (
-    <div className="flex w-full flex-grow items-center justify-center transition-all duration-200 flex-col p-0 m-0">
+    <div className="flex w-full grow items-center justify-center transition-all duration-200 flex-col p-0 m-0">
       <ConfirmTab />
       <div className="flex flex-row items-center justify-center">
         <ConsoleNav page={"ADMIN"} />
       </div>
-      <div className="flex-grow w-full flex justify-start items-start mt-2 m-0 p-0">
+      <div className="grow w-full flex justify-start items-start mt-2 m-0 p-0">
         <main className="flex w-full flex-wrap justify-center m-0 items-center">
           <CompAlert />
           {children}
