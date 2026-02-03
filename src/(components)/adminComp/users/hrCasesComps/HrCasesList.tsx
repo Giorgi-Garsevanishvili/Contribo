@@ -2,10 +2,11 @@ import HrCaseDeleteButton from "./HrCaseDeleteButton";
 import { HrWarningStatus } from "@/generated/enums";
 import { useFetchData } from "@/hooks/useDataFetch";
 
-import { ParamValue } from "next/dist/server/request/params";
-import React, { useMemo, useState } from "react";
+import { useMemo, useState } from "react";
 import { FaAngleDown } from "react-icons/fa";
 import { FaAngleUp } from "react-icons/fa";
+import { FaInfoCircle } from "react-icons/fa";
+import { IoIosCloseCircle } from "react-icons/io";
 
 type Data = {
   id: string;
@@ -87,6 +88,7 @@ export type WarningStatus = keyof typeof WARNING_STATUS_COLORS;
 
 function HrCasesList({ fetchUrl }: { fetchUrl: string }) {
   const [isOpenId, setIsOpenId] = useState("");
+  const [colorInfoOpen, setColorInfoOpen] = useState(false);
   const [onEdit, setOnEdit] = useState("");
   const { data, isLoadingFetch, refetch } = useFetchData<Data[]>(fetchUrl, []);
 
@@ -110,6 +112,40 @@ function HrCasesList({ fetchUrl }: { fetchUrl: string }) {
     <div
       className={`flex w-full items-center justify-center xl:px-25 xl:py-5 px-2 flex-col`}
     >
+      <div className="flex items-start justify-center">
+        <button
+          onClick={() => setColorInfoOpen(!colorInfoOpen)}
+          className="flex btn border border-gray-900/90 bg-gray-100/85 items-center rounded-2xl m-2 shadow-lg p-2 justify-center"
+        >
+          <FaInfoCircle size={30} />
+        </button>
+        <div
+          className={`${colorInfoOpen ? "fixed" : "hidden"} bg-gray-800/95 p-5 rounded-2xl shadow-lg shadow-white z-50 w-auto `}
+        >
+          <div className="flex items-center justify-between">
+            <h3 className="m-2 text-white">Color Definition of Cards</h3>
+            <button
+              onClick={() => setColorInfoOpen(!colorInfoOpen)}
+              className="flex btn border border-gray-900/90 bg-gray-100/85 items-center rounded-2xl shadow-lg p-0.5 justify-center"
+            >
+              <IoIosCloseCircle size={32} />
+            </button>
+          </div>
+          <div className="grid grid-cols-2">
+            {Object.entries(WARNING_STATUS_COLORS).map(
+              ([status, colors], index) => (
+                <div
+                  key={index}
+                  className={`${colors.bg} ${colors.border} ${colors.shadow} border shadow-md m-1 p-3 rounded-md`}
+                >
+                  {status}
+                </div>
+              ),
+            )}
+          </div>
+        </div>
+      </div>
+
       {isLoadingFetch || isLoadingFetch2 ? (
         <div className="flex bg-gray-100/60 items-center rounded-lg shadow-lg p-10 justify-center">
           <h3 className="font-bold animate-spin">.</h3>
@@ -164,11 +200,15 @@ function HrCasesList({ fetchUrl }: { fetchUrl: string }) {
                     </h3>
                     <h3>
                       <strong>Created At: </strong>
-                      {item.createdAt ? new Date(item.createdAt).toLocaleString() : "No Data"}
+                      {item.createdAt
+                        ? new Date(item.createdAt).toLocaleString()
+                        : "No Data"}
                     </h3>
                     <h3>
                       <strong>Updated At: </strong>
-                      {item.updatedAt ? new Date(item.updatedAt).toLocaleString() : "No Data"}
+                      {item.updatedAt
+                        ? new Date(item.updatedAt).toLocaleString()
+                        : "No Data"}
                     </h3>
                   </div>
                   <div className="flex-col w-full flex">
