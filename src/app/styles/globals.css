@@ -20,7 +20,7 @@
   }
 
   .input-def {
-    @apply bg-[#ffffff47] text-[#ffffff] border-1 border-[#102438] shadow-xs shadow-white/60 p-2.5 m-2 rounded-lg;
+    @apply bg-[#ffffff47] text-[#ffffff] border border-[#102438] shadow-xs shadow-white/60 p-1.5 m-2 rounded-lg;
   }
 
   .btn-log {
@@ -28,15 +28,15 @@
   }
 
   .bg-qirvex {
-    @apply [background-image:radial-gradient(rgba(0,0,0,0.067)_2px,transparent_0)] [background-size:22px_22px];
+    @apply bg-[radial-gradient(rgba(0,0,0,0.067)_2px,transparent_0)] bg-size-[22px_22px]
   }
 
   .bg-qirvex-l {
-    @apply bg-gray-100 [background-image:radial-gradient(rgba(0,0,0,0.067)_2px,transparent_0)] [background-size:22px_22px];
+    @apply bg-gray-100 bg-[radial-gradient(rgba(0,0,0,0.067)_2px,transparent_0)] bg-size-[22px_22px]
   }
 
   .bg-qirvex-d {
-    @apply bg-black [background-image:radial-gradient(rgba(255,255,255,0.095)_2px,transparent_0)] [background-size:22px_22px];
+    @apply bg-black bg-[radial-gradient(rgba(255,255,255,0.095)_2px,transparent_0)] bg-size-[22px_22px]
   }
 }
 

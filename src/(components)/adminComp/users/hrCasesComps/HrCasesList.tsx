@@ -1,12 +1,12 @@
 import HrCaseDeleteButton from "./HrCaseDeleteButton";
-import { HrWarningStatus } from "@/generated/enums";
-import { useFetchData } from "@/hooks/useDataFetch";
 
+import { useFetchData } from "@/hooks/useDataFetch";
 import { useMemo, useState } from "react";
 import { FaAngleDown } from "react-icons/fa";
 import { FaAngleUp } from "react-icons/fa";
 import { FaInfoCircle } from "react-icons/fa";
 import { IoIosCloseCircle } from "react-icons/io";
+import HrCaseUpdate from "./HrCaseUpdate";
 
 type Data = {
   id: string;
@@ -21,13 +21,6 @@ type Data = {
   assignee: {
     name: string;
   };
-};
-
-export const CasUpdateObj = {
-  name: "",
-  comment: "",
-  status: "",
-  typeId: "",
 };
 
 export const WARNING_STATUS_COLORS = {
@@ -91,11 +84,10 @@ function HrCasesList({ fetchUrl }: { fetchUrl: string }) {
   const [colorInfoOpen, setColorInfoOpen] = useState(false);
   const [onEdit, setOnEdit] = useState("");
   const { data, isLoadingFetch, refetch } = useFetchData<Data[]>(fetchUrl, []);
-
-  const { data: types, isLoadingFetch: isLoadingFetch2 } = useFetchData<Data[]>(
-    `/api/admin/hrWarningTypes`,
-    [],
-  );
+   const { data: types, isLoadingFetch: isLoadingFetchTypes } = useFetchData<Data[]>(
+      `/api/admin/hrWarningTypes`,
+      [],
+    );
 
   const sortedData = useMemo(() => {
     if (!data) return [];
@@ -146,7 +138,7 @@ function HrCasesList({ fetchUrl }: { fetchUrl: string }) {
         </div>
       </div>
 
-      {isLoadingFetch || isLoadingFetch2 ? (
+      {isLoadingFetch || isLoadingFetchTypes ? (
         <div className="flex bg-gray-100/60 items-center rounded-lg shadow-lg p-10 justify-center">
           <h3 className="font-bold animate-spin">.</h3>
         </div>
@@ -230,74 +222,8 @@ function HrCasesList({ fetchUrl }: { fetchUrl: string }) {
                     </h3>
                   </div>
                 </div>
-                <div
-                  className={`${onEdit === item.id ? "flex" : "hidden"} bg-gray-100/70 p-4 rounded-lg mx-2 flex-col  lg:flex-row grow items-center justify-between`}
-                >
-                  <div className="flex flex-col">
-                    <div>
-                      <input
-                        className="input-def  bg-gray-400/95 border-white text-white rounded-sm grow"
-                        type="text"
-                        name="name"
-                        id="name"
-                        placeholder="Name"
-                      />
-                      <label htmlFor="name">
-                        <strong className="text-red-500">*</strong>
-                      </label>
-                    </div>
-                    <div className="flex grow">
-                      <select
-                        className="grow border-2 m-1 rounded-md p-1.5  bg-gray-400/95 text-white"
-                        name="type"
-                        id="type"
-                      >
-                        {types?.map((type) => (
-                          <option key={type.id} value={type.id}>
-                            {type.name}
-                          </option>
-                        ))}
-                      </select>
-                      <label htmlFor="type">
-                        <strong className="text-red-500">*</strong>
-                      </label>
-                    </div>
-                    <div className="flex grow">
-                      <select
-                        className="grow border-2 m-1 rounded-md p-1.5 bg-gray-400/95 text-white"
-                        name="status"
-                        id="status"
-                      >
-                        <option value={""}>Status</option>
-                        {Object.values(HrWarningStatus).map((status) => (
-                          <option key={status} value={status}>
-                            {status}
-                          </option>
-                        ))}
-                      </select>
-                      <label htmlFor="status">
-                        <strong className="text-red-500">*</strong>
-                      </label>
-                    </div>
-                  </div>
-                  <div className="flex flex-col grow  bg-gray-400/95 p-2 m-2 rounded-lg">
-                    <div className="flex flex-col  text-white grow">
-                      <label className="px-3 flex" htmlFor="comment">
-                        Comment <strong className="text-red-500 ml-2">*</strong>
-                        <h2 className="italic ml-2 text-gray-300">
-                          Max: 150 word
-                        </h2>
-                      </label>
-                      <input
-                        className="input-def  wrap-break-word text-wrap rounded-sm grow border-white"
-                        type="text"
-                        maxLength={150}
-                        name="comment"
-                        id="comment"
-                        placeholder="Comment"
-                      />
-                    </div>
-                  </div>
+                <div className={`${onEdit === item.id ? "flex" : "hidden"}`}>
+                  <HrCaseUpdate refetch={refetch} id={item.id} extraData1={types} />
                 </div>
               </div>
               <div className="flex p-1 md:m-4  lg:flex-col">
@@ -305,13 +231,6 @@ function HrCasesList({ fetchUrl }: { fetchUrl: string }) {
                   url={`/api/admin/hrWarnings/${item.id}`}
                   fetchAction={refetch}
                 />
-
-                <button
-                  className={`btn ${onEdit === item.id ? "flex" : "hidden"}`}
-                >
-                  Update
-                </button>
-
                 <button
                   onClick={() => {
                     setOnEdit(onEdit === item.id ? "" : isOpenId);
