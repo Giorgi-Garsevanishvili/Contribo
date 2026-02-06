@@ -5,6 +5,7 @@ import axios from "axios";
 export function useFetchData<T>(url: string, dependencies: unknown[] = []) {
   const [data, setData] = useState<T>();
   const [success, setSuccess] = useState(false);
+  const [pagination, setPagination] = useState();
   const [isLoadingFetch, setIsLoadingFetch] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const { triggerCompAlert } = useCompAlert();
@@ -17,7 +18,14 @@ export function useFetchData<T>(url: string, dependencies: unknown[] = []) {
         setError(null);
         setSuccess(false);
         const response = await axios.get(url);
-        setData(response.data.data);
+        console.log(response);
+
+        const responseData = response.data?.records || response.data;
+        setData(responseData.data || responseData);
+        if (responseData.pagination) {
+          setPagination(responseData.pagination);
+        }
+        
         setSuccess(true);
         setIsLoadingFetch(false);
       } catch (error) {
@@ -41,7 +49,15 @@ export function useFetchData<T>(url: string, dependencies: unknown[] = []) {
       setError(null);
       setSuccess(false);
       const response = await axios.get(url);
-      setData(response.data.data);
+      const responseData = response.data?.records || response.data;
+      setData(responseData.data || responseData);
+      if (responseData.pagination) {
+        setPagination(responseData.pagination);
+        console.log(pagination);
+        
+      }
+      console.log(responseData);
+      
       setSuccess(true);
       setIsLoadingFetch(false);
     } catch (error) {

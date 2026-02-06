@@ -1,7 +1,7 @@
 "server only";
 
 import { signOut } from "@/lib/auth";
-import { FiLogOut } from "react-icons/fi";
+import SignOutButton from "./SignOutButton";
 
 export default function SignOut() {
   return (
@@ -12,9 +12,7 @@ export default function SignOut() {
         await signOut({ redirectTo: "/" });
       }}
     >
-      <button className="btn-log p-2 bg-transparent" type="submit">
-        <FiLogOut className="text-lg"/>
-      </button>
+      <SignOutButton />
     </form>
   );
 }

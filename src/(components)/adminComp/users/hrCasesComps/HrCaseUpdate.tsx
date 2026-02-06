@@ -53,7 +53,6 @@ function HrCaseUpdate({
       },
       {} as Record<string, string>,
     );
-    console.log(validatedData);
 
     setValidatedData(validated);
   }, [updateData]);
@@ -67,7 +66,10 @@ function HrCaseUpdate({
           <h3 className="font-bold animate-spin">.</h3>
         </div>
       ) : (
-        <div className="flex md:flex-row flex-col">
+        <form
+          onSubmit={triggerUpdateData}
+          className="flex md:flex-row flex-col"
+        >
           <div className="flex flex-col">
             <label className="ml-3" htmlFor="name">
               Name
@@ -157,13 +159,13 @@ function HrCaseUpdate({
                 isLoadingUpdate ||
                 Object.values(validatedData).every((val) => val === "")
               }
-              onClick={triggerUpdateData}
+              type="submit"
               className={`btn bg-green-900 text-white`}
             >
               Update
             </button>
           </div>
-        </div>
+        </form>
       )}
     </div>
   );

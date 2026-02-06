@@ -15,7 +15,6 @@ export function useDeleteData<T>(url: string, fetchAction?: () => void) {
       setError(null);
       setSuccess(false);
       const response = await axios.delete(url);
-      console.log(response.data.message);
 
       setSuccess(true);
       setIsLoadingDelete(false);
