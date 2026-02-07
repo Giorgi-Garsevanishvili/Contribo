@@ -23,6 +23,12 @@ function Pagination({
   onPageChange: (page: number) => void;
   onLimitChange: (limit: number) => void;
 }) {
+  const pageNumbersMobile: (number | string)[] = [];
+
+  for (let i = 1; i <= pagination.totalPages; i++) {
+    pageNumbersMobile.push(i);
+  }
+
   const getPageNumbers = (): (number | string)[] => {
     const pages: (number | string)[] = [];
     const maxVisible = 5;
@@ -120,7 +126,7 @@ function Pagination({
             name="page"
             id="page"
           >
-            {pageNumbers.map((page, index) => (
+            {pageNumbersMobile.map((page, index) => (
               <option key={index} value={page}>
                 {page}
               </option>
