@@ -65,7 +65,7 @@ function Pagination({
   const pageNumbers = getPageNumbers();
 
   return (
-    <div className="flex flex-col items-center justify-center bg-gray-300/80 p-2 m-3 rounded-lg">
+    <div className="flex flex-col items-center justify-center bg-gray-300/90 px-4 m-4 rounded-lg">
       Showing:{" "}
       <div className="text-sm text-gray-600">
         Showing{" "}
@@ -80,29 +80,29 @@ function Pagination({
         )}{" "}
         of {pagination.totalCount} results
       </div>
-      <div className="flex">
+      <div className="flex items-center justify-center">
         <button
           onClick={() => onPageChange(1)}
-          className="btn"
+          className="min-w-10 btn rounded-lg border transition-colors bg-white"
           disabled={!pagination?.hasPrevPage}
         >
-          <FaAngleDoubleLeft size={16} />
+          <FaAngleDoubleLeft size={14} />
         </button>
         <button
           onClick={() => onPageChange(pagination.currentPage - 1)}
-          className="btn"
+          className="min-w-10 btn rounded-lg border transition-colors bg-white"
           disabled={!pagination?.hasPrevPage}
         >
-          <FaAngleLeft size={16} />
+          <FaAngleLeft size={14} />
         </button>
-        <div className="flex p-2">
+        <div className="md:flex hidden p-2">
           {pageNumbers.map((page, index) => (
-            <button 
-            className={`min-w-10 btn px-3 py-2 rounded-lg border transition-colors ${
+            <button
+              className={`min-w-10 btn px-3 py-2 rounded-lg border transition-colors ${
                 page === pagination.currentPage
                   ? "bg-blue-500 text-white border-blue-500"
                   : page === "..."
-                    ? "cursor-default border-transparent"
+                    ? "cursor-default bg-white border-transparent"
                     : "bg-white hover:bg-gray-50"
               }`}
               disabled={page === "..."}
@@ -113,19 +113,33 @@ function Pagination({
             </button>
           ))}
         </div>
+        <div className="flex md:hidden">
+          <select
+            className="flex bg-white p-2 m-2 items-center justify-center rounded-lg"
+            onChange={(e) => onPageChange(Number(e.target.value))}
+            name="page"
+            id="page"
+          >
+            {pageNumbers.map((page, index) => (
+              <option key={index} value={page}>
+                {page}
+              </option>
+            ))}
+          </select>
+        </div>
         <button
           onClick={() => onPageChange(pagination.currentPage + 1)}
-          className="btn"
+          className="min-w-10 btn rounded-lg border transition-colors bg-white"
           disabled={!pagination?.hasNextPage}
         >
-          <FaAngleRight size={16} />
+          <FaAngleRight size={14} />
         </button>
         <button
           onClick={() => onPageChange(pagination.totalPages)}
-          className="btn"
+          className="min-w-10 btn rounded-lg border transition-colors bg-white"
           disabled={!pagination?.hasNextPage}
         >
-          <FaAngleDoubleRight size={16} />
+          <FaAngleDoubleRight size={14} />
         </button>
       </div>
     </div>

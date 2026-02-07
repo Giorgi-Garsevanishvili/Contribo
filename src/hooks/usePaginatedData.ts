@@ -12,7 +12,7 @@ type PaginationMeta = {
   hasPrevPage: boolean;
 };
 
-function usePaginatedData<T>(url: string, initialData: T) {
+function usePaginatedData<T>(url: string, initialData: T, dependencies?: unknown) {
   const [data, setData] = useState<T>(initialData);
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [error, setError] = useState<string | null>();
@@ -25,7 +25,7 @@ function usePaginatedData<T>(url: string, initialData: T) {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        if (!url) return;    
+        if (!url) return;
 
         if (abortControllerRef.current) {
           abortControllerRef.current.abort();
@@ -41,16 +41,19 @@ function usePaginatedData<T>(url: string, initialData: T) {
         setData(responseData.data || responseData);
         if (responseData.pagination) {
           setPagination(responseData.pagination);
-          console.log(pagination);
         }
+        setIsLoading(false);
       } catch (error) {
         setError(`${error}`);
+        if (error instanceof Error && error.name === "CanceledError") {
+          setIsLoading(true);
+          return;
+        }
         triggerCompAlertRef.current({
           message: `${error}`,
           type: "error",
           isOpened: true,
         });
-      } finally {
         setIsLoading(false);
       }
     };
@@ -61,7 +64,7 @@ function usePaginatedData<T>(url: string, initialData: T) {
         abortControllerRef.current.abort();
       }
     };
-  }, [url]);
+  }, [url, dependencies]);
 
   const refetch = async () => {
     try {
@@ -81,16 +84,19 @@ function usePaginatedData<T>(url: string, initialData: T) {
       setData(responseData.data || responseData);
       if (responseData.pagination) {
         setPagination(responseData.pagination);
-        console.log(pagination);
       }
+      setIsLoading(false);
     } catch (error) {
       setError(`${error}`);
+      if (error instanceof Error && error.name === "CanceledError") {
+        setIsLoading(true);
+        return;
+      }
       triggerCompAlertRef.current({
         message: `${error}`,
         type: "error",
         isOpened: true,
       });
-    } finally {
       setIsLoading(false);
     }
   };

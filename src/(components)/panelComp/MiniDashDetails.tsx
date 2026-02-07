@@ -202,7 +202,7 @@ function MiniDashDetails<
   }, [id, axiosGet, fetchData]);
 
   return (
-    <div className="flex w-[22rem] h-[28rem] flex-col shadow-md m-2 shadow-white rounded-lg">
+    <div className="flex w-88 h-112 flex-col shadow-md m-2 shadow-white rounded-lg">
       <div className="flex flex-col w-full h-full scroll-smooth overflow-y-auto items-center justify-center m-0  text-white bg-gray-500/75 rounded-t-lg">
         {isLoading ? (
           <LoadingComp />

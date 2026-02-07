@@ -26,7 +26,7 @@ export const GET = async (req: NextRequest) => {
     const skip = (page - 1) * limit;
 
     const totalCount = await prisma.allowedUser.count({
-      where: { regionId: thisUser.user.ownAllowance?.regionId },
+      where: whereClause
     });
 
     const totalPages = Math.ceil(totalCount / limit);

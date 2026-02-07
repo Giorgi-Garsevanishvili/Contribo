@@ -68,9 +68,9 @@ function HrCaseUpdate({
       ) : (
         <form
           onSubmit={triggerUpdateData}
-          className="flex md:flex-row flex-col"
+          className="flex md:flex-row grow flex-col"
         >
-          <div className="flex flex-col">
+          <div className="flex flex-col grow">
             <label className="ml-3" htmlFor="name">
               Name
             </label>
@@ -111,7 +111,7 @@ function HrCaseUpdate({
               </div>
             </div>
           </div>
-          <div className="flex flex-col grow">
+          <div className="flex flex-col">
             <div className="flex flex-col">
               <label className="ml-3" htmlFor="type">
                 Type
@@ -160,7 +160,7 @@ function HrCaseUpdate({
                 Object.values(validatedData).every((val) => val === "")
               }
               type="submit"
-              className={`btn bg-green-900 text-white`}
+              className={`btn w-full m-0 mt-2 bg-green-900 text-white`}
             >
               Update
             </button>

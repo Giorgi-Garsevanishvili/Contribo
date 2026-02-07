@@ -1,11 +1,11 @@
 import MiniDashDetails from "@/(components)/panelComp/MiniDashDetails";
 
-function page({ params }: { params: { id: string } }) {
-  const id = params.id;
+async function page({ params }: { params: Promise<{ id: string }> }) {
+  const { id } = await params;
 
   return (
     <MiniDashDetails
-      id={id} 
+      id={id}
       type="general"
       title="Event Roles"
       axiosGet="/api/console/eventRoles"

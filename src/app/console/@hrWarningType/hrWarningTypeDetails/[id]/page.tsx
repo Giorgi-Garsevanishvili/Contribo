@@ -1,7 +1,7 @@
 import MiniDashDetails from "@/(components)/panelComp/MiniDashDetails";
 
-function page({ params }: { params: { id: string } }) {
-  const id = params.id;
+async function page({ params }: { params: Promise<{ id: string }> }) {
+  const {id} = await params;
 
   return (
     <MiniDashDetails

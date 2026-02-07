@@ -113,9 +113,6 @@ function HrCasesList({ fetchUrl }: { fetchUrl: string }) {
   const sortedData = useMemo(() => {
     if (!data) return [];
     
-    console.log(pagination,"Pagination");
-    console.log(data,"data");
-    
     return [...data].sort((a, b) => {
       const aIndex = TYPE_ORDER.indexOf(a.status);
       const bIndex = TYPE_ORDER.indexOf(b.status);
@@ -124,12 +121,6 @@ function HrCasesList({ fetchUrl }: { fetchUrl: string }) {
     });
   }, [data]);
 
-  useEffect(() => {
-    if(data){
-       console.log(pagination);
-    console.log(data);
-    }
-  },[])
 
   return (
     <div

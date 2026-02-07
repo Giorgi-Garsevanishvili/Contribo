@@ -1,5 +1,4 @@
 import MiniDashCard from "@/(components)/panelComp/MiniDashCard";
-import React from "react";
 
 function page() {
   return (

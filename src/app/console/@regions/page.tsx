@@ -1,7 +1,5 @@
 import MiniDashCard from "@/(components)/panelComp/MiniDashCard";
 
-import React from "react";
-
 function eventRoles() {
   return (
     <MiniDashCard

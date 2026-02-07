@@ -1,5 +1,6 @@
 "use client";
 import { useFetchData } from "@/hooks/useDataFetch";
+import usePaginatedData from "@/hooks/usePaginatedData";
 import { useParams, useRouter } from "next/navigation";
 import { IconType } from "react-icons/lib";
 
@@ -24,9 +25,10 @@ function UserInfoButtons({ APIPath, title, Icon, URLPath, refetchKey }: Props) {
 
   const router = useRouter();
 
-  const { data, isLoadingFetch } = useFetchData<Data>(
-    `/api/admin/users/${params.userId}/${APIPath}`,
-    [refetchKey],
+  const { data, isLoading, pagination } = usePaginatedData<Data>(
+    `/api/admin/users/${params.userId}/${APIPath}?limit=100`,
+    [],
+    refetchKey,
   );
 
   return (
@@ -34,15 +36,18 @@ function UserInfoButtons({ APIPath, title, Icon, URLPath, refetchKey }: Props) {
       {data ? (
         <>
           <button
-            onClick={() => router.push(`/admin/users/${params.userId}/${URLPath}`)}
+            onClick={() =>
+              router.push(`/admin/users/${params.userId}/${URLPath}`)
+            }
             className="btn grow w-full md:w-auto bg-gray-300/85 hover:ring-2 ring-white "
           >
-            <Icon size={23} className="m-2" /> {title}: {data.length}
+            <Icon size={23} className="m-2" /> {title}:{" "}
+            {pagination ? pagination.totalCount : data.length}
           </button>
         </>
       ) : (
         <div
-          className={`flex ${isLoadingFetch ? "animate-pulse transition-all duration-300" : ""} flex-col rounded-md bg-gray-300/65 justify-center items-center w-45 p-3 m-1 h-10}`}
+          className={`flex ${isLoading ? "animate-pulse transition-all duration-300" : ""} flex-col rounded-md bg-gray-300/65 justify-center items-center w-45 p-3 m-1 h-10}`}
         >
           <h3 className="mb-2">{title}</h3>
           <h3>Loading...</h3>
