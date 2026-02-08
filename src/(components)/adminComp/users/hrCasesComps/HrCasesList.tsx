@@ -85,34 +85,51 @@ function HrCasesList({ fetchUrl }: { fetchUrl: string }) {
   const [isOpenId, setIsOpenId] = useState("");
   const [colorInfoOpen, setColorInfoOpen] = useState(false);
   const [onEdit, setOnEdit] = useState("");
-  const { data: types, isLoadingFetch: isLoadingFetchTypes } = useFetchData<Data[]>(
-    `/api/admin/hrWarningTypes`,
-    [],
-  );
-  
-  const [currentPage, setCurrentPage] = useState(1)
-  const [limit, setLimit] = useState(10)
-  
+  const { data: types, isLoadingFetch: isLoadingFetchTypes } = useFetchData<
+    Data[]
+  >(`/api/admin/hrWarningTypes`, []);
+
+  const [currentPage, setCurrentPage] = useState(1);
+  const [limit, setLimit] = useState(10);
+  const [statusFilter, setStatusFilter] = useState("");
+  const [typeFilter, setTypeFilter] = useState("");
+  const [searchQuery, setSearchQuery] = useState("");
+
   const paginatedUrl = useMemo(() => {
-    const params = new URLSearchParams()
-    params.append("page", currentPage.toString())
-    params.append("limit", limit.toString())
-    
-    return `${fetchUrl}?${params.toString()}`
-  }, [fetchUrl, currentPage, limit])
-  
-  const { data, isLoading: isLoadingFetch, refetch, pagination } = usePaginatedData<Data[]>(paginatedUrl, []);
+    const params = new URLSearchParams();
+    params.append("page", currentPage.toString());
+    params.append("limit", limit.toString());
+    params.append("status", statusFilter.toString());
+    params.append("type", typeFilter.toString());
+    params.append("search", searchQuery.toString());
+
+    return `${fetchUrl}?${params.toString()}`;
+  }, [fetchUrl, currentPage, limit, statusFilter,typeFilter,searchQuery]);
+
+  const {
+    data,
+    isLoading: isLoadingFetch,
+    refetch,
+    pagination,
+  } = usePaginatedData<Data[]>(paginatedUrl, []);
 
   const handlePageChange = (page: number) => {
-    setCurrentPage(page)
-    setIsOpenId("")
-    setOnEdit("")
-    window.scrollTo({top: 0, behavior: "smooth"})
-  } 
+    setCurrentPage(page);
+    setIsOpenId("");
+    setOnEdit("");
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
+
+  const handleLimitChange = (limit: number) => {
+    setLimit(limit);
+    setIsOpenId("");
+    setOnEdit("");
+    window.scroll({ top: 0, behavior: "smooth" });
+  };
 
   const sortedData = useMemo(() => {
     if (!data) return [];
-    
+
     return [...data].sort((a, b) => {
       const aIndex = TYPE_ORDER.indexOf(a.status);
       const bIndex = TYPE_ORDER.indexOf(b.status);
@@ -120,7 +137,6 @@ function HrCasesList({ fetchUrl }: { fetchUrl: string }) {
       return (aIndex === -1 ? 999 : aIndex) - (bIndex === -1 ? 999 : bIndex);
     });
   }, [data]);
-
 
   return (
     <div
@@ -245,7 +261,11 @@ function HrCasesList({ fetchUrl }: { fetchUrl: string }) {
                   </div>
                 </div>
                 <div className={`${onEdit === item.id ? "flex" : "hidden"}`}>
-                  <HrCaseUpdate refetch={refetch} id={item.id} extraData1={types} />
+                  <HrCaseUpdate
+                    refetch={refetch}
+                    id={item.id}
+                    extraData1={types}
+                  />
                 </div>
               </div>
               <div className="flex p-1 md:m-4  lg:flex-col">
@@ -263,16 +283,25 @@ function HrCasesList({ fetchUrl }: { fetchUrl: string }) {
                 </button>
               </div>
             </div>
-            
           </div>
         ))
       ) : (
         <div className="flex bg-gray-100/60 items-center rounded-lg shadow-lg p-10 justify-center">
           <h3 className="font-bold">No HR cases to display.</h3>
-          <button className="btn" onClick={refetch}>Refetch</button>
+          <button className="btn" onClick={refetch}>
+            Refetch
+          </button>
         </div>
       )}
-      {pagination ? <Pagination onLimitChange={refetch} onPageChange={handlePageChange} pagination={pagination} /> : "" }
+      {pagination ? (
+        <Pagination
+          onLimitChange={handleLimitChange}
+          onPageChange={handlePageChange}
+          pagination={pagination}
+        />
+      ) : (
+        ""
+      )}
     </div>
   );
 }

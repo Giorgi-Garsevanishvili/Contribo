@@ -16,7 +16,7 @@ export default function SignIn({ prov, icon }: SignInProps) {
         await signIn(`${prov}`, { redirectTo: "/redirect" });
       }}
     >
-      <button className="btn-log" type="submit">
+      <button className="btn-log w-full" type="submit">
         Log In By {prov.toLocaleUpperCase()} {icon}
       </button>
     </form>

@@ -72,8 +72,7 @@ function Pagination({
 
   return (
     <div className="flex flex-col items-center justify-center bg-gray-300/90 px-4 m-4 rounded-lg">
-      Showing:{" "}
-      <div className="text-sm text-gray-600">
+      <div className="text-sm mt-4 text-gray-600">
         Showing{" "}
         {Math.min(
           (pagination.currentPage - 1) * pagination.limit + 1,
@@ -89,14 +88,14 @@ function Pagination({
       <div className="flex items-center justify-center">
         <button
           onClick={() => onPageChange(1)}
-          className="min-w-10 btn rounded-lg border transition-colors bg-white"
+          className="btn rounded-lg border transition-colors bg-white"
           disabled={!pagination?.hasPrevPage}
         >
           <FaAngleDoubleLeft size={14} />
         </button>
         <button
           onClick={() => onPageChange(pagination.currentPage - 1)}
-          className="min-w-10 btn rounded-lg border transition-colors bg-white"
+          className="btn rounded-lg border transition-colors bg-white"
           disabled={!pagination?.hasPrevPage}
         >
           <FaAngleLeft size={14} />
@@ -104,7 +103,7 @@ function Pagination({
         <div className="md:flex hidden p-2">
           {pageNumbers.map((page, index) => (
             <button
-              className={`min-w-10 btn px-3 py-2 rounded-lg border transition-colors ${
+              className={`btn px-3 py-1 rounded-lg border transition-colors ${
                 page === pagination.currentPage
                   ? "bg-blue-500 text-white border-blue-500"
                   : page === "..."
@@ -135,18 +134,28 @@ function Pagination({
         </div>
         <button
           onClick={() => onPageChange(pagination.currentPage + 1)}
-          className="min-w-10 btn rounded-lg border transition-colors bg-white"
+          className=" btn rounded-lg border transition-colors bg-white"
           disabled={!pagination?.hasNextPage}
         >
           <FaAngleRight size={14} />
         </button>
         <button
           onClick={() => onPageChange(pagination.totalPages)}
-          className="min-w-10 btn rounded-lg border transition-colors bg-white"
+          className="btn rounded-lg border transition-colors bg-white"
           disabled={!pagination?.hasNextPage}
         >
           <FaAngleDoubleRight size={14} />
         </button>
+      </div>
+      <div className="m-2 bg-gray-100 rounded-2xl p-1 flex items-center justify-center">
+        <h3 className="m-1">Set Data Limit:</h3>
+        <select className="rounded-2xl border p-1" defaultValue={10} onChange={(e) => onLimitChange(Number(e.target.value))} name="limit" id="limit">
+            <option value="5">5</option>
+            <option value="10">10</option>
+            <option value="20">20</option>
+            <option value="50">50</option>
+            <option value="100">100</option>
+        </select>
       </div>
     </div>
   );

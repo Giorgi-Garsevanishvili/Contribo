@@ -1,8 +1,8 @@
 "client only";
 
 import Image from "next/image";
-import SignInForm from "../(auth)/signin/page";
 import contriboBgFree from "../../../public/Ind-Logo-Contribo-2-no-fill.svg";
+import SignInForm from "@/(components)/authComp/SignInForm";
 
 async function MainPage() {
   await new Promise((resolve) => setTimeout(resolve, 3000));
@@ -20,7 +20,7 @@ async function MainPage() {
         </p>
       </aside>
       <section className="flex ">
-        <SignInForm />
+        <SignInForm showLogo={false}/>
       </section>
     </div>
   );
