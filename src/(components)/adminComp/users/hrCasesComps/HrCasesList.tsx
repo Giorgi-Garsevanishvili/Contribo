@@ -9,6 +9,7 @@ import { IoIosCloseCircle } from "react-icons/io";
 import HrCaseUpdate from "./HrCaseUpdate";
 import usePaginatedData from "@/hooks/usePaginatedData";
 import Pagination from "@/(components)/generalComp/Pagination";
+import QueryFilter from "@/(components)/generalComp/QueryFilter";
 
 type Data = {
   id: string;
@@ -104,7 +105,7 @@ function HrCasesList({ fetchUrl }: { fetchUrl: string }) {
     params.append("search", searchQuery.toString());
 
     return `${fetchUrl}?${params.toString()}`;
-  }, [fetchUrl, currentPage, limit, statusFilter,typeFilter,searchQuery]);
+  }, [fetchUrl, currentPage, limit, statusFilter, typeFilter, searchQuery]);
 
   const {
     data,
@@ -112,6 +113,27 @@ function HrCasesList({ fetchUrl }: { fetchUrl: string }) {
     refetch,
     pagination,
   } = usePaginatedData<Data[]>(paginatedUrl, []);
+
+  const handleStatusFilterChange = (status: WarningStatus) => {
+    setStatusFilter(status);
+    setIsOpenId("");
+    setOnEdit("");
+    setCurrentPage(1);
+  };
+
+  const handleTypeFilterChange = (type: string) => {
+    setTypeFilter(type);
+    setIsOpenId("");
+    setOnEdit("");
+    setCurrentPage(1);
+  };
+
+  const handleSearchQuery = (searchQuery: string) => {
+    setSearchQuery(searchQuery);
+    setOnEdit("");
+    setIsOpenId("");
+    setCurrentPage(1);
+  };
 
   const handlePageChange = (page: number) => {
     setCurrentPage(page);
@@ -122,7 +144,7 @@ function HrCasesList({ fetchUrl }: { fetchUrl: string }) {
 
   const handleLimitChange = (limit: number) => {
     setLimit(limit);
-    setCurrentPage(1)
+    setCurrentPage(1);
     setIsOpenId("");
     setOnEdit("");
     window.scroll({ top: 0, behavior: "smooth" });
@@ -143,6 +165,9 @@ function HrCasesList({ fetchUrl }: { fetchUrl: string }) {
     <div
       className={`flex w-full items-center justify-center xl:px-25 xl:py-5 px-2 flex-col`}
     >
+      <>
+      <QueryFilter type={types} onSearchQueryChange={handleSearchQuery} onStatusFilterChange={handleStatusFilterChange} onTypeFilterChange={handleTypeFilterChange} />
+      </>
       <div className="flex items-start justify-center">
         <button
           onClick={() => setColorInfoOpen(!colorInfoOpen)}
