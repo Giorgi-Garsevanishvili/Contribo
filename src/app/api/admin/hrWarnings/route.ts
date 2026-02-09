@@ -82,7 +82,11 @@ export const GET = async (req: NextRequest) => {
 
     if (searchQuery && searchQuery.trim()) {
       whereClause.OR = [
-        { name: { contains: searchQuery.trim(), mode: "insensitive" } },
+        {
+          assignee: {
+            name: { contains: searchQuery.trim(), mode: "insensitive" },
+          },
+        },
         { comment: { contains: searchQuery.trim(), mode: "insensitive" } },
       ];
     }

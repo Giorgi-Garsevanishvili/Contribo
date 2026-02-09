@@ -12,7 +12,7 @@ function QueryFilter<T>({
   onSearchQueryChange: (search: string) => void;
 }) {
   return (
-    <div>
+    <div className="flex bg-gray-200/95 px-3 py-1 rounded-lg">
       {/* <div>
         <select name="type" id="type">
           {type?.map((type) => (
@@ -20,7 +20,7 @@ function QueryFilter<T>({
           ))}
         </select>
       </div> */}
-      <div className="flex border">
+      <div className="flex border rounded-2lg">
         <select
           onChange={(e) =>
             onStatusFilterChange(e.target.value as HrWarningStatus)
@@ -28,8 +28,9 @@ function QueryFilter<T>({
           name="status"
           id="status"
         >
-          {Object.entries(HrWarningStatus).map((status) => (
-            <option value={status[0]}>{status[0]}</option>
+          <option value=""></option>
+          {Object.entries(HrWarningStatus).map((status, index) => (
+            <option key={index} value={status[0]}>{status[0]}</option>
           ))}
         </select>
       </div >
