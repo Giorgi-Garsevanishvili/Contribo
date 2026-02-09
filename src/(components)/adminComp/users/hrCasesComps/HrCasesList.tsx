@@ -122,6 +122,7 @@ function HrCasesList({ fetchUrl }: { fetchUrl: string }) {
 
   const handleLimitChange = (limit: number) => {
     setLimit(limit);
+    setCurrentPage(1)
     setIsOpenId("");
     setOnEdit("");
     window.scroll({ top: 0, behavior: "smooth" });

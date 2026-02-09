@@ -122,6 +122,7 @@ function Pagination({
           <select
             className="flex bg-white p-2 m-2 items-center justify-center rounded-lg"
             onChange={(e) => onPageChange(Number(e.target.value))}
+            value={pagination.currentPage}
             name="page"
             id="page"
           >
