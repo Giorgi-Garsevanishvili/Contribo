@@ -18,6 +18,14 @@ type Data = {
   };
 };
 
+type DataType = {
+  createdAt: string;
+  id: string;
+  name: string;
+  type: string;
+  updatedAt: string;
+}[];
+
 export const CaseUpdateObj = {
   name: "",
   comment: "",
@@ -32,7 +40,7 @@ function HrCaseUpdate({
 }: {
   refetch: () => void;
   id: string;
-  extraData1?: Data[];
+  extraData1?: DataType;
 }) {
   const [updateData, setUpdateData] = useState(CaseUpdateObj);
   const [validatedData, setValidatedData] = useState({});

@@ -26,6 +26,14 @@ type Data = {
   };
 };
 
+type DataType = {
+  createdAt: string;
+  id: string;
+  name: string;
+  type: string;
+  updatedAt: string;
+}[];
+
 export const WARNING_STATUS_COLORS = {
   ACTIVE: {
     bg: "bg-red-100",
@@ -87,7 +95,7 @@ function HrCasesList({ fetchUrl }: { fetchUrl: string }) {
   const [colorInfoOpen, setColorInfoOpen] = useState(false);
   const [onEdit, setOnEdit] = useState("");
   const { data: types, isLoadingFetch: isLoadingFetchTypes } = useFetchData<
-    Data[]
+    DataType
   >(`/api/admin/hrWarningTypes`, []);
 
   const [currentPage, setCurrentPage] = useState(1);
@@ -165,10 +173,13 @@ function HrCasesList({ fetchUrl }: { fetchUrl: string }) {
     <div
       className={`flex w-full items-center justify-center xl:px-25 xl:py-5 px-2 flex-col`}
     >
-      <>
-      <QueryFilter type={types} onSearchQueryChange={handleSearchQuery} onStatusFilterChange={handleStatusFilterChange} onTypeFilterChange={handleTypeFilterChange} />
-      </>
-      <div className="flex items-start justify-center">
+      <div className="flex flex-col items-center md:flex-row m-2 justify-center">
+        <QueryFilter
+          typeData={types}
+          onSearchQueryChange={handleSearchQuery}
+          onStatusFilterChange={handleStatusFilterChange}
+          onTypeFilterChange={handleTypeFilterChange}
+        />
         <button
           onClick={() => setColorInfoOpen(!colorInfoOpen)}
           className="flex btn border border-gray-900/90 bg-gray-100/85 items-center rounded-2xl m-2 shadow-lg p-2 justify-center"
