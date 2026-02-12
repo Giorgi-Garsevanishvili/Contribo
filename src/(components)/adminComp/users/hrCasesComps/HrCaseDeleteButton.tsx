@@ -1,6 +1,14 @@
 import { useDeleteData } from "@/hooks/useDeleteData";
 
-function HrCaseDeleteButton({ url, fetchAction }: { url: string, fetchAction?: () => void }) {
+function HrCaseDeleteButton({
+  url,
+  fetchAction,
+  extraTXT,
+}: {
+  url: string;
+  fetchAction?: () => void;
+  extraTXT?: string;
+}) {
   const { deleteData, isLoadingDelete } = useDeleteData(url, fetchAction);
 
   return (
@@ -8,7 +16,7 @@ function HrCaseDeleteButton({ url, fetchAction }: { url: string, fetchAction?: (
       onClick={deleteData}
       className={`${isLoadingDelete ? "animate-pulse" : ""} btn grow bg-red-800 text-white `}
     >
-      Delete
+      {extraTXT ? `Delete ${extraTXT}` : "Delete"}
     </button>
   );
 }

@@ -113,10 +113,37 @@ export const GET = async (req: NextRequest, context: Context) => {
 
     const response = {
       data,
-      pagination
-    }
+      pagination,
+    };
 
     return NextResponse.json({ records: response }, { status: 200 });
+  } catch (error) {
+    const { message, status } = handleError(error);
+    return NextResponse.json({ message }, { status });
+  }
+};
+
+export const DELETE = async (_req: NextRequest, context: Context) => {
+  try {
+    const thisUser = await requireRole("ADMIN");
+    const { id } = await context.params;
+
+    const deleted = await prisma.hrWarning.deleteMany({
+      where: {
+        assignee: {
+          ownAllowance: { regionId: thisUser.user.ownAllowance?.regionId },
+          id
+        },
+      },
+    });
+
+    if (!deleted) {
+      return NextResponse.json({ message: "Nothing Deleted!" });
+    }
+
+    return NextResponse.json({
+      message: `${deleted.count} HR warnings, deleted. `,
+    });
   } catch (error) {
     const { message, status } = handleError(error);
     return NextResponse.json({ message }, { status });

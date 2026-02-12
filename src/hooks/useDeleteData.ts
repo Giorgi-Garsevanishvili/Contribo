@@ -1,6 +1,7 @@
 import { useRef, useState } from "react";
 import { useCompAlert } from "./useCompAlert";
 import axios from "axios";
+import { useConfirmTab } from "./useConfirmTab";
 
 export function useDeleteData<T>(url: string, fetchAction?: () => void) {
   const [success, setSuccess] = useState(false);
@@ -8,12 +9,31 @@ export function useDeleteData<T>(url: string, fetchAction?: () => void) {
   const [error, setError] = useState<string | null>(null);
   const { triggerCompAlert } = useCompAlert();
   const triggerCompAlertRef = useRef(triggerCompAlert);
+  const { ask } = useConfirmTab();
 
   const deleteData = async () => {
     try {
+      if (url === "") {
+        return triggerCompAlertRef.current({
+          message: `Provide valid API path.`,
+          type: "warning",
+          isOpened: true,
+        });
+      }
+
       setIsLoadingDelete(true);
       setError(null);
       setSuccess(false);
+      const confirmed = await ask({
+        title: `Would you like to delete`,
+        value: `All HR Warnings for User?`,
+        message: `Action is permanent!`,
+      });
+
+      if (!confirmed) {
+        setIsLoadingDelete(false);
+        return;
+      }
       const response = await axios.delete(url);
 
       setSuccess(true);
@@ -23,7 +43,7 @@ export function useDeleteData<T>(url: string, fetchAction?: () => void) {
         type: "success",
         isOpened: true,
       });
-      if(fetchAction) return fetchAction()
+      if (fetchAction) return fetchAction();
     } catch (error) {
       setIsLoadingDelete(false);
       setSuccess(false);

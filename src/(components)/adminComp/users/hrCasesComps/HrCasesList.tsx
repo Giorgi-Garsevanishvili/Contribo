@@ -1,7 +1,7 @@
 import HrCaseDeleteButton from "./HrCaseDeleteButton";
 
 import { useFetchData } from "@/hooks/useDataFetch";
-import { useEffect, useMemo, useState } from "react";
+import { useMemo, useState } from "react";
 import { FaAngleDown } from "react-icons/fa";
 import { FaAngleUp } from "react-icons/fa";
 import { FaInfoCircle } from "react-icons/fa";
@@ -10,6 +10,7 @@ import HrCaseUpdate from "./HrCaseUpdate";
 import usePaginatedData from "@/hooks/usePaginatedData";
 import Pagination from "@/(components)/generalComp/Pagination";
 import QueryFilter from "@/(components)/generalComp/QueryFilter";
+import { useParams } from "next/navigation";
 
 type Data = {
   id: string;
@@ -96,6 +97,8 @@ function HrCasesList({ fetchUrl }: { fetchUrl: string }) {
   const [onEdit, setOnEdit] = useState("");
   const { data: types, isLoadingFetch: isLoadingFetchTypes } =
     useFetchData<DataType>(`/api/admin/hrWarningTypes`, []);
+  const params = useParams();
+  const id = params.userId;
 
   const [currentPage, setCurrentPage] = useState(1);
   const [limit, setLimit] = useState(10);
@@ -103,7 +106,6 @@ function HrCasesList({ fetchUrl }: { fetchUrl: string }) {
   const [typeFilter, setTypeFilter] = useState("");
   const [searchQuery, setSearchQuery] = useState("");
   const [filterOn, setFilterOn] = useState(false);
-
   const paginatedUrl = useMemo(() => {
     const params = new URLSearchParams();
     params.append("page", currentPage.toString());
@@ -194,12 +196,23 @@ function HrCasesList({ fetchUrl }: { fetchUrl: string }) {
           onTypeFilterChange={handleTypeFilterChange}
           filterOn={filterOn}
         />
-        <button
-          onClick={() => setColorInfoOpen(!colorInfoOpen)}
-          className="flex btn border border-gray-900/90 bg-gray-100/85 items-center rounded-2xl m-2 shadow-lg p-2 justify-center"
-        >
-          <FaInfoCircle size={30} />
-        </button>
+        <div className="flex shadow-md shadow-white bg-gray-200/95 p-2 m-2 rounded-lg">
+          <button
+            onClick={() => setColorInfoOpen(!colorInfoOpen)}
+            className="flex btn border border-gray-900/90 bg-gray-100/85 items-center rounded-2xl m-2 shadow-lg p-2 justify-center"
+          >
+            <FaInfoCircle size={30} />
+          </button>
+          {sortedData.length > 0 ? (
+            <HrCaseDeleteButton
+              extraTXT="All"
+              url={`/api/admin/users/${id}/hrWarning`}
+              fetchAction={refetch}
+            />
+          ) : (
+            ""
+          )}
+        </div>
         <div
           className={`${colorInfoOpen ? "fixed" : "hidden"} bg-gray-800/95 p-5 rounded-2xl shadow-lg shadow-white z-50 w-auto `}
         >
