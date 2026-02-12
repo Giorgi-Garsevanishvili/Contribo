@@ -94,15 +94,15 @@ function HrCasesList({ fetchUrl }: { fetchUrl: string }) {
   const [isOpenId, setIsOpenId] = useState("");
   const [colorInfoOpen, setColorInfoOpen] = useState(false);
   const [onEdit, setOnEdit] = useState("");
-  const { data: types, isLoadingFetch: isLoadingFetchTypes } = useFetchData<
-    DataType
-  >(`/api/admin/hrWarningTypes`, []);
+  const { data: types, isLoadingFetch: isLoadingFetchTypes } =
+    useFetchData<DataType>(`/api/admin/hrWarningTypes`, []);
 
   const [currentPage, setCurrentPage] = useState(1);
   const [limit, setLimit] = useState(10);
   const [statusFilter, setStatusFilter] = useState("");
   const [typeFilter, setTypeFilter] = useState("");
   const [searchQuery, setSearchQuery] = useState("");
+  const [filterOn, setFilterOn] = useState(false);
 
   const paginatedUrl = useMemo(() => {
     const params = new URLSearchParams();
@@ -112,8 +112,17 @@ function HrCasesList({ fetchUrl }: { fetchUrl: string }) {
     params.append("type", typeFilter.toString());
     params.append("search", searchQuery.toString());
 
+    const hasFilter = statusFilter || typeFilter || searchQuery;
+    setFilterOn(!!hasFilter);
+
     return `${fetchUrl}?${params.toString()}`;
   }, [fetchUrl, currentPage, limit, statusFilter, typeFilter, searchQuery]);
+
+  const clearFilter = () => {
+    handleSearchQuery("");
+    handleTypeFilterChange("");
+    handleStatusFilterChange("");
+  };
 
   const {
     data,
@@ -122,7 +131,7 @@ function HrCasesList({ fetchUrl }: { fetchUrl: string }) {
     pagination,
   } = usePaginatedData<Data[]>(paginatedUrl, []);
 
-  const handleStatusFilterChange = (status: WarningStatus) => {
+  const handleStatusFilterChange = (status: string) => {
     setStatusFilter(status);
     setIsOpenId("");
     setOnEdit("");
@@ -175,10 +184,15 @@ function HrCasesList({ fetchUrl }: { fetchUrl: string }) {
     >
       <div className="flex flex-col items-center md:flex-row m-2 justify-center">
         <QueryFilter
+          searchValue={searchQuery}
+          statusValue={statusFilter}
+          typeValue={typeFilter}
+          clearFilter={clearFilter}
           typeData={types}
           onSearchQueryChange={handleSearchQuery}
           onStatusFilterChange={handleStatusFilterChange}
           onTypeFilterChange={handleTypeFilterChange}
+          filterOn={filterOn}
         />
         <button
           onClick={() => setColorInfoOpen(!colorInfoOpen)}

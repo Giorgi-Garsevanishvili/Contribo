@@ -71,7 +71,10 @@ function Pagination({
   const pageNumbers = getPageNumbers();
 
   return (
-    <div className="flex flex-col items-center justify-center bg-gray-300/90 px-4 m-4 rounded-lg">
+    <div className="flex flex-col shadow shadow-white items-center justify-center bg-gray-300/90 px-4 m-4 rounded-lg">
+      <div>
+        
+      </div>
       <div className="text-sm mt-4 text-gray-600">
         Showing{" "}
         {Math.min(
