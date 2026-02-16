@@ -17,7 +17,7 @@ function UserList() {
         <div className="flex flex-row items-center justify-center">
           <VolunteerStats />
         </div>
-        <div>
+        <div className="flex items-center justify-center">
           <UsersList />
         </div>
       </div>

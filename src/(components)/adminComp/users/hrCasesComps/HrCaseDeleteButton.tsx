@@ -4,12 +4,20 @@ function HrCaseDeleteButton({
   url,
   fetchAction,
   extraTXT,
+  value
 }: {
   url: string;
   fetchAction?: () => void;
   extraTXT?: string;
+  value:string
 }) {
-  const { deleteData, isLoadingDelete } = useDeleteData(url, fetchAction);
+  const { deleteData, isLoadingDelete } = useDeleteData(
+    url,
+    "Would you like to delete",
+    value,
+    "Action is permanent!",
+    fetchAction,
+  );
 
   return (
     <button

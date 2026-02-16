@@ -3,7 +3,13 @@ import { useCompAlert } from "./useCompAlert";
 import axios from "axios";
 import { useConfirmTab } from "./useConfirmTab";
 
-export function useDeleteData<T>(url: string, fetchAction?: () => void) {
+export function useDeleteData<T>(
+  url: string,
+  title: string,
+  value: string,
+  message: string,
+  fetchAction?: () => void,
+) {
   const [success, setSuccess] = useState(false);
   const [isLoadingDelete, setIsLoadingDelete] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -25,9 +31,9 @@ export function useDeleteData<T>(url: string, fetchAction?: () => void) {
       setError(null);
       setSuccess(false);
       const confirmed = await ask({
-        title: `Would you like to delete`,
-        value: `All HR Warnings for User?`,
-        message: `Action is permanent!`,
+        title,
+        value,
+        message,
       });
 
       if (!confirmed) {

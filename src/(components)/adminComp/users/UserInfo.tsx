@@ -18,6 +18,8 @@ import { MdBadge } from "react-icons/md";
 import { IoIosCloseCircle } from "react-icons/io";
 import { useFetchData } from "@/hooks/useDataFetch";
 import UserUpdate from "./UserUpdate";
+import { useDeleteData } from "@/hooks/useDeleteData";
+import { FcDeleteDatabase } from "react-icons/fc";
 
 type Data = {
   CreatedAllowedUser: [];
@@ -98,6 +100,23 @@ function UserInfo({
     `/api/admin/users/${id}`,
     [],
   );
+  const { deleteData: DeleteSoft, isLoadingDelete: softdeleteLoading } =
+    useDeleteData(
+      `/api/admin/users/${id}/softdelete`,
+      "Would You Like To Soft Delete",
+      `${data?.name}`,
+      "Action Is Permanent! User Identification Data will delete and access won`t be available for this user. current user activities will stay for internal statistical purposes without direct or indirect Identification of the owner of user. Later you can create new account for current user but this account data won`t be link anyhow to new user.",
+      refetch,
+    );
+
+    const { deleteData: DeleteFull, isLoadingDelete: fullDeleteLoading } =
+    useDeleteData(
+      `/api/admin/users/${id}`,
+      "Would You Like To Delete",
+      `${data?.name}`,
+      "Action Is Permanent! All Information and data related to user will be deleted",
+      refetch,
+    );
 
   useEffect(() => {
     setOpenUserUpdate(false);
@@ -118,12 +137,12 @@ function UserInfo({
       {
         <div className="flex md:flex-row flex-col m-2 justify-center items-center">
           <div
-            className={`${isLoadingFetch ? "animate-pulse transition-all duration-300" : ""} select-none flex p-2 items-center justify-center bg-gray-200/60 rounded-lg shadow-lg`}
+            className={`${isLoadingFetch || softdeleteLoading || fullDeleteLoading ? "animate-pulse transition-all duration-300" : ""} select-none flex p-2 items-center justify-center bg-gray-200/60 rounded-lg shadow-lg`}
           >
             {data ? (
               <div className="flex flex-col md:flex-row items-center justify-center">
                 <div className="flex w-38 h-38 m-1">
-                  {data ? (
+                  {data && data.image ? (
                     <Image
                       priority
                       className="rounded-2xl shadow-sm"
@@ -133,7 +152,7 @@ function UserInfo({
                       height={300}
                     />
                   ) : (
-                    "No Image To Display"
+                     <FcDeleteDatabase className="mr-2" size={25} />
                   )}
                 </div>
                 <div
@@ -306,12 +325,13 @@ function UserInfo({
                     {openUserUpdate ? "Close" : "Edit User"}
                   </button>
                   <button
+                  onClick={DeleteSoft}
                     className="flex btn  active:bg-orange-400/60 active:text-white active:opacity-50
     focus-visible:bg-orange-400/60 focus-visible:text-white hover:bg-orange-400/60 hover:text-white hover:opacity-100 duration-300 transition-all bg-gray-300/70"
                   >
                     <MdFolderDelete className="mr-2" size={22} /> Soft Delete
                   </button>
-                  <button
+                  <button onClick={DeleteFull}
                     className="flex btn  active:bg-red-700/60 active:text-white active:opacity-50
     focus-visible:bg-red-700/60 focus-visible:text-white hover:bg-red-700/60 hover:text-white hover:opacity-100 duration-300 transition-all bg-gray-300/70"
                   >
@@ -325,7 +345,7 @@ function UserInfo({
               >
                 <h3 className="mb-2">User Info</h3>
                 <h3
-                  className={`${isLoadingFetch ? "animate-spin transition-all duration-300" : ""}`}
+                  className={`${isLoadingFetch || softdeleteLoading || fullDeleteLoading ? "animate-spin transition-all duration-300" : ""}`}
                 >
                   .
                 </h3>
@@ -333,7 +353,7 @@ function UserInfo({
             )}
           </div>
           <div
-            className={`${openData ? "flex" : "hidden"} md:flex  m-2 ${isLoadingFetch ? " p-2 bg-gray-200/60 rounded-lg shadow-lg" : ""}`}
+            className={`${openData ? "flex" : "hidden"} md:flex  m-2 ${isLoadingFetch || softdeleteLoading || fullDeleteLoading ? " p-2 bg-gray-200/60 rounded-lg shadow-lg" : ""}`}
           >
             {data ? (
               <AccessData

@@ -208,6 +208,7 @@ function HrCasesList({ fetchUrl }: { fetchUrl: string }) {
               extraTXT="All"
               url={`/api/admin/users/${id}/hrWarning`}
               fetchAction={refetch}
+              value={`All HR warnings for ${sortedData[0].assignee.name}?`}
             />
           ) : (
             ""
@@ -336,6 +337,7 @@ function HrCasesList({ fetchUrl }: { fetchUrl: string }) {
                 <HrCaseDeleteButton
                   url={`/api/admin/hrWarnings/${item.id}`}
                   fetchAction={refetch}
+                  value={`${item.name} for ${item.assignee.name}`}
                 />
                 <button
                   onClick={() => {

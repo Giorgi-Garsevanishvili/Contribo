@@ -4,6 +4,7 @@ import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { useFetchData } from "@/hooks/useDataFetch";
+import { FcDeleteDatabase } from "react-icons/fc";
 
 type Data = {
   id: string;
@@ -22,10 +23,7 @@ function UsersList() {
   const router = useRouter();
   const [list, setList] = useState<Data[]>([]);
 
-  const { data, isLoadingFetch } = useFetchData<Data[]>(
-    `/api/admin/users`,
-    [],
-  );
+  const { data, isLoadingFetch } = useFetchData<Data[]>(`/api/admin/users`, []);
 
   useEffect(() => {
     if (data) {
@@ -46,7 +44,9 @@ function UsersList() {
   return (
     <div
       className={`flex ${
-        isLoadingFetch ? "w-30 h-30 items-center justify-center" : " w-auto"
+        isLoadingFetch
+          ? "w-30 h-30 items-center justify-center"
+          : " max-w-[85%]"
       } flex-col mt-4 shadow-sm bg-gray-200/45  rounded-lg p-1.5 select-none`}
     >
       <div
@@ -78,23 +78,32 @@ function UsersList() {
             className="flex btn select-none text-sm justify-between items-center bg-white/80 text-black p-2 flex-row m-1 rounded-lg"
             key={user.id}
           >
-            <div className="flex justify-center items-center">
-              <Image
-                priority
-                className="rounded-lg mr-3"
-                src={user.image}
-                alt="User Image"
-                width={35}
-                height={35}
-              />
-              <h3 className="text-sm font-medium">{user.name}</h3>
+            <div className="flex max-w-full justify-center items-center">
+              {user.image ? (
+                <Image
+                  priority
+                  className="rounded-lg mr-3"
+                  src={user.image}
+                  alt="User Image"
+                  width={35}
+                  height={35}
+                />
+              ) : (
+                <FcDeleteDatabase className="mr-2" size={25} />
+              )}
+
+              <h3 className="text-sm font-medium w-full flex overflow-hidden">
+                {user.name}
+              </h3>
             </div>
             <div className="md:flex hidden items-center pl-20 pr-5 justify-start">
               <h3 className="font-medium">
-                {`Membership: ${
-                  user.memberStatusLogs[user.memberStatusLogs.length - 1]
-                    ?.status?.name ?? "No Status"
-                }`}
+                {!user.name.startsWith("deleted")
+                  ? `Membership: ${
+                      user.memberStatusLogs[user.memberStatusLogs.length - 1]
+                        ?.status?.name ?? "No Status"
+                    }`
+                  : ""}
               </h3>
             </div>
           </button>
