@@ -46,7 +46,7 @@ function UsersList() {
       className={`flex ${
         isLoadingFetch
           ? "w-30 h-30 items-center justify-center"
-          : " max-w-[85%]"
+          : " w-auto"
       } flex-col mt-4 shadow-sm bg-gray-200/45  rounded-lg p-1.5 select-none`}
     >
       <div
@@ -78,7 +78,7 @@ function UsersList() {
             className="flex btn select-none text-sm justify-between items-center bg-white/80 text-black p-2 flex-row m-1 rounded-lg"
             key={user.id}
           >
-            <div className="flex max-w-full justify-center items-center">
+            <div className="flex justify-center items-center">
               {user.image ? (
                 <Image
                   priority
@@ -92,7 +92,7 @@ function UsersList() {
                 <FcDeleteDatabase className="mr-2" size={25} />
               )}
 
-              <h3 className="text-sm font-medium w-full flex overflow-hidden">
+              <h3 className="text-sm font-medium flex overflow-hidden">
                 {user.name}
               </h3>
             </div>

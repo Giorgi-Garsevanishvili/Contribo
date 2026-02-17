@@ -172,7 +172,7 @@ export const PUT = async (req: NextRequest, context: Context) => {
 
 export const DELETE = async (_req: NextRequest, context: Context) => {
   try {
-    await requireRole("ADMIN");
+    const thisUser = await requireRole("ADMIN");
     const { id } = await context.params;
 
     if (!id) {
@@ -181,41 +181,45 @@ export const DELETE = async (_req: NextRequest, context: Context) => {
 
     const user = await prisma.user.findUnique({
       where: { id },
-      select: { email: true, deleted: true, allowedUserId: true },
+      select: { email: true, deleted: true, allowedUserId: true, id:true },
     });
 
     if (!user) {
       return NextResponse.json({ message: "user not found" }, { status: 404 });
     }
 
-    //Based on DB schema if Allowed user table is deleted user table automatically deleting therefor Account table as well.
+    //Based on DB schema if Allowed user table is deleted user table automatically deleting therefore Account table as well.
 
-    if (!user.deleted) {
-      if (user.allowedUserId) {
-        // allowedUserId exists → delete by id
-        const deletedFromAllowedList = await prisma.allowedUser.delete({
-          where: { id: user.allowedUserId },
-        });
+    console.log("start");
 
-        if (!deletedFromAllowedList) {
-          return NextResponse.json(
-            { message: "User deletion failed with AllowedUserID!" },
-            { status: 400 },
-          );
-        }
-      } else {
-        // allowedUserId is NULL → fallback to delete by email
-        const deletedFromAllowedList = await prisma.allowedUser.delete({
-          where: { email: user.email },
-        });
+    if (user.allowedUserId) {
+      // allowedUserId exists → delete by id
+      const deletedFromAllowedList = await prisma.allowedUser.delete({
+        where: { id: user.allowedUserId },
+      });
 
-        if (!deletedFromAllowedList) {
-          return NextResponse.json(
-            { message: "User deletion failed with Email!" },
-            { status: 400 },
-          );
-        }
+      if (!deletedFromAllowedList) {
+        return NextResponse.json(
+          { message: "User deletion failed with AllowedUserID!" },
+          { status: 400 },
+        );
       }
+    } else {
+      // allowedUserId is NULL → fallback to delete by email
+      const deletedFromAllowedList = await prisma.allowedUser.delete({
+        where: { email: user.email },
+      });
+
+      if (!deletedFromAllowedList) {
+        return NextResponse.json(
+          { message: "User deletion failed with Email!" },
+          { status: 400 },
+        );
+      }
+    }
+
+    if(user.id === thisUser.user.id){
+      return NextResponse.json({message: `Your account deleted You will be logged out soon.`, logOut:true})
     }
 
     return NextResponse.json({
