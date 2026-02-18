@@ -44,9 +44,7 @@ function UsersList() {
   return (
     <div
       className={`flex ${
-        isLoadingFetch
-          ? "w-30 h-30 items-center justify-center"
-          : " w-auto"
+        isLoadingFetch ? "w-30 h-30 items-center justify-center" : " w-auto"
       } flex-col mt-4 shadow-sm bg-gray-200/45  rounded-lg p-1.5 select-none`}
     >
       <div
@@ -93,7 +91,11 @@ function UsersList() {
               )}
 
               <h3 className="text-sm font-medium flex overflow-hidden">
-                {user.name}
+                {user?.name && user.name.length > 30
+                  ? ` ${user.name.slice(0, 30)}...`
+                  : user
+                    ? ` ${user.name}`
+                    : "No Data"}
               </h3>
             </div>
             <div className="md:flex hidden items-center pl-20 pr-5 justify-start">

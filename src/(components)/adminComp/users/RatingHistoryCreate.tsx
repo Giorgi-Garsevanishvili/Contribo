@@ -82,12 +82,13 @@ function RatingHistoryCreate({ onCreated }: Props) {
                 <label className="ml-3" htmlFor="score">
                   Score <strong className="text-red-500">*</strong>
                 </label>
+
                 <input
                   value={createData.newValue}
                   onChange={(e) =>
                     setCreateData((prev) => ({
                       ...prev,
-                      newValue: Number(e.target.value),
+                      newValue: (Math.max(0,Number(e.target.value) || 0)),
                     }))
                   }
                   className="input-def  bg-gray-400/95 border-white text-white rounded-sm grow"
@@ -96,6 +97,28 @@ function RatingHistoryCreate({ onCreated }: Props) {
                   id="score"
                   placeholder="Score"
                 />
+                <div className="flex flex-col p-2 rounded-lg border">
+                  <div className="flex items-center justify-between">
+                    <h3>Min: 0</h3>
+                    <h3>{createData.newValue}</h3>
+                    <h3>Max: 50</h3>
+                  </div>
+                  <input
+                    value={createData.newValue}
+                    onChange={(e) =>
+                      setCreateData((prev) => ({
+                        ...prev,
+                        newValue: Number(e.target.value),
+                      }))
+                    }
+                    className="input-def  bg-gray-400/95 border-white text-white rounded-sm grow"
+                    type="range"
+                    min={0}
+                    max={50}
+                    name="score"
+                    id="score"
+                  />
+                </div>
               </div>
               <div className="flex flex-col items-center justify-center">
                 <label htmlFor="action">
@@ -118,7 +141,7 @@ function RatingHistoryCreate({ onCreated }: Props) {
                     value={createData.action}
                     className="sr-only peer"
                   />
-                  <div className="relative mx-2 w-11 h-6 bg-red-800 peer-focus:outline-none peer-focus:ring-1 peer-focus:ring-brand-soft dark:peer-focus:ring-gray-500 rounded-full peer peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-buffer after:content-[''] after:absolute after:top-05 after:start-1px after:bg-white after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-green-800"></div>
+                  <div className="relative mx-2 w-10 h-5 bg-red-800 peer-focus:outline-none peer-focus:ring-1 peer-focus:ring-brand-soft dark:peer-focus:ring-gray-500 rounded-full peer peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-buffer after:content-[''] after:absolute after:start-1px after:bg-white after:rounded-full after:ring-1 after:h-5 after:w-5 after:transition-all peer-checked:bg-green-800"></div>
                   <span className="select-none text-sm font-medium text-heading">
                     Increase
                   </span>

@@ -1,6 +1,6 @@
 import { useDeleteData } from "@/hooks/useDeleteData";
 
-function HrCaseDeleteButton({
+function DeleteButtonAdmin({
   url,
   fetchAction,
   extraTXT,
@@ -29,4 +29,4 @@ function HrCaseDeleteButton({
   );
 }
 
-export default HrCaseDeleteButton;
+export default DeleteButtonAdmin;

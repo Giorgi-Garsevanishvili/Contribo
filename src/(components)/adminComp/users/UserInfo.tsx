@@ -109,7 +109,7 @@ function UserInfo({
       refetch,
     );
 
-    const { deleteData: DeleteFull, isLoadingDelete: fullDeleteLoading } =
+  const { deleteData: DeleteFull, isLoadingDelete: fullDeleteLoading } =
     useDeleteData(
       `/api/admin/users/${id}`,
       "Would You Like To Delete",
@@ -152,7 +152,9 @@ function UserInfo({
                       height={300}
                     />
                   ) : (
-                     <FcDeleteDatabase className="mr-2" size={25} />
+                    <div className="flex items-center justify-center w-full h-full">
+                      <FcDeleteDatabase className="mr-2" size={60} />
+                    </div>
                   )}
                 </div>
                 <div
@@ -165,10 +167,20 @@ function UserInfo({
                   </div>
                   <div className={`${openUserUpdate ? "hidden" : ""}`}>
                     <h2 className="flex items-center">
-                      <FaUser className="mr-2" size={22} /> {data.name}
+                      <FaUser className="mr-2" size={22} />{" "}
+                      <span className="truncate">
+                        {data.name.length > 30
+                          ? `${data.name.slice(0,30)}...`
+                          : data.name}
+                      </span>
                     </h2>
                     <h2 className="flex items-center">
-                      <MdEmail className="mr-2" size={22} /> {data.email}
+                      <MdEmail className="mr-2" size={22} />{" "}
+                      <span className="truncate">
+                        {data.email.length > 30
+                          ? `${data.email.slice(0, 30)}...`
+                          : data.email}
+                      </span>
                     </h2>
                     <h2 className="flex items-center">
                       <IoTime className="mr-2" size={22} />
@@ -325,13 +337,14 @@ function UserInfo({
                     {openUserUpdate ? "Close" : "Edit User"}
                   </button>
                   <button
-                  onClick={DeleteSoft}
+                    onClick={DeleteSoft}
                     className="flex btn  active:bg-orange-400/60 active:text-white active:opacity-50
     focus-visible:bg-orange-400/60 focus-visible:text-white hover:bg-orange-400/60 hover:text-white hover:opacity-100 duration-300 transition-all bg-gray-300/70"
                   >
                     <MdFolderDelete className="mr-2" size={22} /> Soft Delete
                   </button>
-                  <button onClick={DeleteFull}
+                  <button
+                    onClick={DeleteFull}
                     className="flex btn  active:bg-red-700/60 active:text-white active:opacity-50
     focus-visible:bg-red-700/60 focus-visible:text-white hover:bg-red-700/60 hover:text-white hover:opacity-100 duration-300 transition-all bg-gray-300/70"
                   >

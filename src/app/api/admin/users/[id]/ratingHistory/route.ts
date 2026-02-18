@@ -106,7 +106,19 @@ export const GET = async (_req: NextRequest, context: Context) => {
       where: {
         userId: id,
       },
-      include: { user: { select: { name: true } } },
+      select: {
+        updatedBy: { select: { name: true } },
+        createdBy: { select: { name: true } },
+        user: { select: { name: true } },
+        action: true,
+        createdAt: true,
+        updatedAt: true,
+        newValue: true,
+        oldValue: true,
+        value: true,
+        reason: true,
+        id: true,
+      },
     });
 
     if (!data || data.length === 0) {
@@ -123,5 +135,32 @@ export const GET = async (_req: NextRequest, context: Context) => {
   } catch (error) {
     const { status, message } = handleError(error);
     return NextResponse.json({ message: message }, { status: status });
+  }
+};
+
+export const DELETE = async (_req: NextRequest, context: Context) => {
+  try {
+    const thisUser = await requireRole("ADMIN");
+    const { id } = await context.params;
+
+    const deleted = await prisma.ratingHistory.deleteMany({
+      where: {
+        user: {
+          ownAllowance: { regionId: thisUser.user.ownAllowance?.regionId },
+          id,
+        },
+      },
+    });
+
+    if (!deleted) {
+      return NextResponse.json({ message: "Nothing Deleted!" });
+    }
+
+    return NextResponse.json({
+      message: `${deleted.count} Rating Records, deleted. `,
+    });
+  } catch (error) {
+    const { message, status } = handleError(error);
+    return NextResponse.json({ message }, { status });
   }
 };

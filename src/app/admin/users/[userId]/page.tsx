@@ -47,7 +47,7 @@ function User() {
         />
         <UserInfoButtons
           refetchKey={refetchKey}
-          URLPath="ratingRecords"
+          URLPath="rating-records"
           Icon={MdOutlineQueryStats}
           title="Rating Records"
           APIPath="ratingHistory"

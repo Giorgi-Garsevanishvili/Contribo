@@ -2,7 +2,6 @@
 
 import { useFetchData } from "@/hooks/useDataFetch";
 
-
 type Data = {
   createdAt: string | null;
   createdBy: { name: string } | null;
@@ -38,11 +37,21 @@ function AccessData({ id, refetchKey }: { id: string; refetchKey: boolean }) {
             <div className="flex flex-col bg-gray-200/60 p-1.5 rounded-lg">
               <h3 className="font-bold">Access Details</h3>
               <div className="flex flex-col mt-1 text-sm">
-                <h2>
-                  <strong>User:</strong> {data?.user.name}
+                <h2 className="truncate">
+                  <strong>User:</strong>{" "}
+                  {data?.user.name && data.user.name.length > 30
+                    ? ` ${data.user.name.slice(0,30)}...`
+                    : data
+                      ? ` ${data.user.name}`
+                      : "No Data"}
                 </h2>
-                <h2>
-                  <strong>Access Email:</strong> {data?.email}
+                <h2 className="truncate">
+                  <strong>Access Email:</strong>
+                  {data?.email && data.email.length > 30
+                    ? ` ${data.email.slice(0, 30)}...`
+                    : data
+                      ? ` ${data.email}`
+                      : "No Data"}
                 </h2>
                 <h2>
                   <strong>Roles:</strong>{" "}

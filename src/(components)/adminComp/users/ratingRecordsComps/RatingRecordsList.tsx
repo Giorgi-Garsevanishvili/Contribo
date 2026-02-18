@@ -4,7 +4,6 @@ import { FaAngleDown } from "react-icons/fa";
 import { FaAngleUp } from "react-icons/fa";
 import { FaInfoCircle } from "react-icons/fa";
 import { IoIosCloseCircle } from "react-icons/io";
-import HrCaseUpdate from "./HrCaseUpdate";
 import usePaginatedData from "@/hooks/usePaginatedData";
 import Pagination from "@/(components)/generalComp/Pagination";
 import QueryFilter from "@/(components)/generalComp/QueryFilter";
@@ -13,17 +12,16 @@ import DeleteButtonAdmin from "../DeleteButtonAdmin";
 
 type Data = {
   id: string;
-  name: string;
-  status: string;
-  comment: string;
-  updatedAt: string | null;
-  createdAt: string | null;
+  action: "INCREASE" | "DECREASE";
   createdBy: { name: string } | null;
   updatedBy: { name: string } | null;
-  type: { name: string };
-  assignee: {
-    name: string;
-  };
+  createdAt: string;
+  updatedAt: string;
+  newValue: number;
+  oldValue: number;
+  reason: string;
+  user: { name: string } | null;
+  value: number;
 };
 
 type DataType = {
@@ -34,63 +32,22 @@ type DataType = {
   updatedAt: string;
 }[];
 
-export const WARNING_STATUS_COLORS = {
-  ACTIVE: {
+export const RATING_ACTION_COLORS = {
+  DECREASE: {
     bg: "bg-red-100",
     border: "border-red-300",
     shadow: "shadow-red-200",
   },
-  UNDER_REVIEW: {
-    bg: "bg-yellow-100",
-    border: "border-yellow-300",
-    shadow: "shadow-yellow-200",
-  },
-  APPROVED: {
+  INCREASE: {
     bg: "bg-green-100",
     border: "border-green-300",
     shadow: "shadow-green-200",
   },
-  ESCALATED: {
-    bg: "bg-orange-100",
-    border: "border-orange-300",
-    shadow: "shadow-orange-200",
-  },
-  RESOLVED: {
-    bg: "bg-blue-100",
-    border: "border-blue-300",
-    shadow: "shadow-blue-200",
-  },
-  CANCELLED: {
-    bg: "bg-gray-100",
-    border: "border-gray-300",
-    shadow: "shadow-gray-200",
-  },
-  EXPIRED: {
-    bg: "bg-purple-100",
-    border: "border-purple-300",
-    shadow: "shadow-purple-200",
-  },
-  ARCHIVED: {
-    bg: "bg-slate-100",
-    border: "border-slate-300",
-    shadow: "shadow-slate-200",
-  },
 } as const;
 
-const TYPE_ORDER = [
-  "ACTIVE",
-  "UNDER_REVIEW",
-  "ESCALATED",
-  "APPROVED",
-  "RESOLVED",
-  "EXPIRED",
-  "CANCELLED",
-  "ARCHIVED",
-];
+export type WarningStatus = keyof typeof RATING_ACTION_COLORS;
 
-export type WarningStatus = keyof typeof WARNING_STATUS_COLORS;
-
-function HrCasesList({ fetchUrl }: { fetchUrl: string }) {
+function RatingRecordsList({ fetchUrl }: { fetchUrl: string }) {
   const [isOpenId, setIsOpenId] = useState("");
   const [colorInfoOpen, setColorInfoOpen] = useState(false);
   const [onEdit, setOnEdit] = useState("");
@@ -119,11 +76,11 @@ function HrCasesList({ fetchUrl }: { fetchUrl: string }) {
     return `${fetchUrl}?${params.toString()}`;
   }, [fetchUrl, currentPage, limit, statusFilter, typeFilter, searchQuery]);
 
-  const clearFilter = () => {
-    handleSearchQuery("");
-    handleTypeFilterChange("");
-    handleStatusFilterChange("");
-  };
+  // const clearFilter = () => {
+  //   handleSearchQuery("");
+  //   handleTypeFilterChange("");
+  //   handleStatusFilterChange("");
+  // };
 
   const {
     data,
@@ -132,50 +89,48 @@ function HrCasesList({ fetchUrl }: { fetchUrl: string }) {
     pagination,
   } = usePaginatedData<Data[]>(paginatedUrl, []);
 
-  const handleStatusFilterChange = (status: string) => {
-    setStatusFilter(status);
-    setIsOpenId("");
-    setOnEdit("");
-    setCurrentPage(1);
-  };
+  // const handleStatusFilterChange = (status: string) => {
+  //   setStatusFilter(status);
+  //   setIsOpenId("");
+  //   setOnEdit("");
+  //   setCurrentPage(1);
+  // };
 
-  const handleTypeFilterChange = (type: string) => {
-    setTypeFilter(type);
-    setIsOpenId("");
-    setOnEdit("");
-    setCurrentPage(1);
-  };
+  // const handleTypeFilterChange = (type: string) => {
+  //   setTypeFilter(type);
+  //   setIsOpenId("");
+  //   setOnEdit("");
+  //   setCurrentPage(1);
+  // };
 
-  const handleSearchQuery = (searchQuery: string) => {
-    setSearchQuery(searchQuery);
-    setOnEdit("");
-    setIsOpenId("");
-    setCurrentPage(1);
-  };
+  // const handleSearchQuery = (searchQuery: string) => {
+  //   setSearchQuery(searchQuery);
+  //   setOnEdit("");
+  //   setIsOpenId("");
+  //   setCurrentPage(1);
+  // };
 
-  const handlePageChange = (page: number) => {
-    setCurrentPage(page);
-    setIsOpenId("");
-    setOnEdit("");
-    window.scrollTo({ top: 0, behavior: "smooth" });
-  };
+  // const handlePageChange = (page: number) => {
+  //   setCurrentPage(page);
+  //   setIsOpenId("");
+  //   setOnEdit("");
+  //   window.scrollTo({ top: 0, behavior: "smooth" });
+  // };
 
-  const handleLimitChange = (limit: number) => {
-    setLimit(limit);
-    setCurrentPage(1);
-    setIsOpenId("");
-    setOnEdit("");
-    window.scroll({ top: 0, behavior: "smooth" });
-  };
+  // const handleLimitChange = (limit: number) => {
+  //   setLimit(limit);
+  //   setCurrentPage(1);
+  //   setIsOpenId("");
+  //   setOnEdit("");
+  //   window.scroll({ top: 0, behavior: "smooth" });
+  // };
 
   const sortedData = useMemo(() => {
     if (!data) return [];
 
     return [...data].sort((a, b) => {
-      const aIndex = TYPE_ORDER.indexOf(a.status);
-      const bIndex = TYPE_ORDER.indexOf(b.status);
-
-      return (aIndex === -1 ? 999 : aIndex) - (bIndex === -1 ? 999 : bIndex);
+      console.log(data);
+      return new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime();
     });
   }, [data]);
 
@@ -184,7 +139,7 @@ function HrCasesList({ fetchUrl }: { fetchUrl: string }) {
       className={`flex w-full items-center justify-center xl:px-25 xl:py-5 px-2 flex-col`}
     >
       <div className="flex flex-col items-center md:flex-row m-2 justify-center">
-        <QueryFilter
+        {/* <QueryFilter
           searchValue={searchQuery}
           statusValue={statusFilter}
           typeValue={typeFilter}
@@ -194,7 +149,7 @@ function HrCasesList({ fetchUrl }: { fetchUrl: string }) {
           onStatusFilterChange={handleStatusFilterChange}
           onTypeFilterChange={handleTypeFilterChange}
           filterOn={filterOn}
-        />
+        /> */}
         <div className="flex shadow-md shadow-white bg-gray-200/95 p-2 m-2 rounded-lg">
           <button
             onClick={() => setColorInfoOpen(!colorInfoOpen)}
@@ -205,9 +160,9 @@ function HrCasesList({ fetchUrl }: { fetchUrl: string }) {
           {sortedData.length > 0 ? (
             <DeleteButtonAdmin
               extraTXT="All"
-              url={`/api/admin/users/${id}/hrWarning`}
+              url={`/api/admin/users/${id}/ratingHistory`}
               fetchAction={refetch}
-              value={`All HR warnings for ${sortedData[0].assignee.name}?`}
+              value={`All Rating Records for ${sortedData[0].user?.name}?`}
             />
           ) : (
             ""
@@ -226,7 +181,7 @@ function HrCasesList({ fetchUrl }: { fetchUrl: string }) {
             </button>
           </div>
           <div className="grid grid-cols-2">
-            {Object.entries(WARNING_STATUS_COLORS).map(
+            {Object.entries(RATING_ACTION_COLORS).map(
               ([status, colors], index) => (
                 <div
                   key={index}
@@ -247,7 +202,7 @@ function HrCasesList({ fetchUrl }: { fetchUrl: string }) {
       ) : sortedData && sortedData?.length > 0 ? (
         sortedData?.map((item) => (
           <div
-            className={`flex ${WARNING_STATUS_COLORS[item.status as keyof typeof WARNING_STATUS_COLORS].border} border flex-col transition-all duration-300 shadow-sm rounded-2xl m-1 p-0 justify-between w-full bg-gray-100/85`}
+            className={`flex ${RATING_ACTION_COLORS[item.action as keyof typeof RATING_ACTION_COLORS].border} border flex-col transition-all duration-300 shadow-sm rounded-2xl m-1 p-0 justify-between w-full bg-gray-100/85`}
             key={item.id}
           >
             <button
@@ -255,20 +210,16 @@ function HrCasesList({ fetchUrl }: { fetchUrl: string }) {
                 setIsOpenId(() => (isOpenId !== item.id ? item.id : "")),
                 setOnEdit("")
               )}
-              className={`flex lg:flex-row  flex-col px-5 py-1.5 md:text-sm text-xs btn justify-between transition-all duration-300 w-full m-0 ${(item.status as keyof typeof WARNING_STATUS_COLORS) ? `${WARNING_STATUS_COLORS[item.status as keyof typeof WARNING_STATUS_COLORS].shadow} ${WARNING_STATUS_COLORS[item.status as keyof typeof WARNING_STATUS_COLORS].bg}` : WARNING_STATUS_COLORS.ARCHIVED} border shadow-lg mb-2`}
+              className={`flex lg:flex-row  flex-col px-5 py-1.5 md:text-sm text-xs btn justify-between transition-all duration-300 w-full m-0 ${(item.action as keyof typeof RATING_ACTION_COLORS) ? `${RATING_ACTION_COLORS[item.action as keyof typeof RATING_ACTION_COLORS].shadow} ${RATING_ACTION_COLORS[item.action as keyof typeof RATING_ACTION_COLORS].bg}` : ""} border shadow-lg mb-2`}
             >
               <h3>
-                <strong>Assignee: </strong> {item.assignee.name}
+                <strong>User: </strong> {item.user?.name}
               </h3>
               <h3>
-                <strong>Case: </strong> {item.name}
+                <strong>Reason: </strong> {item.reason}
               </h3>
               <h3>
-                <strong>Status: </strong> {item.status}
-              </h3>
-              <h3>
-                <strong>Type: </strong>
-                {item.type.name}
+                <strong>Action: </strong> {item.action}
               </h3>
               {isOpenId === item.id ? (
                 <FaAngleUp className="animate-pulse" size={22} />
@@ -281,16 +232,12 @@ function HrCasesList({ fetchUrl }: { fetchUrl: string }) {
             >
               <div className="flex  lg:flex-row flex-col w-full items-center justify-start p-3">
                 <div
-                  className={`flex grow ${(item.status as keyof typeof WARNING_STATUS_COLORS) ? `${WARNING_STATUS_COLORS[item.status as keyof typeof WARNING_STATUS_COLORS].border} ${WARNING_STATUS_COLORS[item.status as keyof typeof WARNING_STATUS_COLORS].bg}` : WARNING_STATUS_COLORS.ARCHIVED} border rounded-lg  md:flex-row flex-col items-center justify-center lg:py-10 w-full lg:px-10 p-4 m-2 gap-2`}
+                  className={`flex flex-col grow ${(item.action as keyof typeof RATING_ACTION_COLORS) ? `${RATING_ACTION_COLORS[item.action as keyof typeof RATING_ACTION_COLORS].border} ${RATING_ACTION_COLORS[item.action as keyof typeof RATING_ACTION_COLORS].bg}` : ""} border rounded-lg  md:flex-row flex-col items-center justify-center lg:py-10 w-full lg:px-10 p-4 m-2 gap-2`}
                 >
                   <div className="flex-col w-full flex">
                     <h3>
-                      <strong>Name: </strong>
-                      {item.name}
-                    </h3>
-                    <h3>
-                      <strong>Type: </strong>
-                      {item.type.name}
+                      <strong>Action: </strong>
+                      {item.action}
                     </h3>
                     <h3>
                       <strong>Created At: </strong>
@@ -307,12 +254,8 @@ function HrCasesList({ fetchUrl }: { fetchUrl: string }) {
                   </div>
                   <div className="flex-col w-full flex">
                     <h3>
-                      <strong>Status: </strong>
-                      {item.status}
-                    </h3>
-                    <h3>
-                      <strong>Comment: </strong>
-                      {item.comment}
+                      <strong>Reason: </strong>
+                      {item.reason}
                     </h3>
                     <h3>
                       <strong>Created By: </strong>
@@ -323,20 +266,34 @@ function HrCasesList({ fetchUrl }: { fetchUrl: string }) {
                       {item.updatedBy?.name ?? "No Data"}
                     </h3>
                   </div>
+                  <div className="flex-col w-full flex">
+                    <h3>
+                      <strong>Old Score: </strong>
+                      {item.oldValue}
+                    </h3>
+                    <h3>
+                      <strong>Entered Score: </strong>
+                      {item.newValue}
+                    </h3>
+                    <h3>
+                      <strong>End Score: </strong>
+                      {item.value}
+                    </h3>
+                  </div>
                 </div>
-                <div className={`${onEdit === item.id ? "flex" : "hidden"}`}>
+                {/* <div className={`${onEdit === item.id ? "flex" : "hidden"}`}>
                   <HrCaseUpdate
                     refetch={refetch}
                     id={item.id}
                     extraData1={types}
                   />
-                </div>
+                </div> */}
               </div>
               <div className="flex p-1 md:m-4  lg:flex-col">
                 <DeleteButtonAdmin
-                  url={`/api/admin/hrWarnings/${item.id}`}
+                  url={`/api/admin/ratingHistory/${item.id}`}
                   fetchAction={refetch}
-                  value={`${item.name} for ${item.assignee.name}`}
+                  value={`${item.action} with value of ${item.value} for ${item.user?.name}`}
                 />
                 <button
                   onClick={() => {
@@ -358,7 +315,7 @@ function HrCasesList({ fetchUrl }: { fetchUrl: string }) {
           </button>
         </div>
       )}
-      {pagination ? (
+      {/* {pagination ? (
         <Pagination
           onLimitChange={handleLimitChange}
           onPageChange={handlePageChange}
@@ -366,9 +323,9 @@ function HrCasesList({ fetchUrl }: { fetchUrl: string }) {
         />
       ) : (
         ""
-      )}
+      )} */}
     </div>
   );
 }
 
-export default HrCasesList;
+export default RatingRecordsList;
