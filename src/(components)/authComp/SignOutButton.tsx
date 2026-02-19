@@ -19,7 +19,7 @@ function SignOutButton() {
   }
 
   return (
-    <button disabled={pending} className="btn-log p-2 bg-transparent" type="submit">
+    <button disabled={pending} className="btn rounded-lg text-gray-600 ring bg-white/70 p-2" type="submit">
       <FiLogOut className="text-lg" />
     </button>
   );
