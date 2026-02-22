@@ -1,9 +1,10 @@
 import "../styles/globals.css";
 import { Metadata } from "next";
-import ConsoleNav from "@/(components)/panelComp/nav";
 import { CompAlert } from "@/redux/features/componentAlert/compAlert";
 import ConfirmTab from "@/redux/features/confirmationTab/confirmationTab";
 import { requireRole } from "@/lib/guards";
+import SideBarToggle from "@/(components)/panelComp/SideBarToggle";
+import SideBar from "@/(components)/panelComp/SideBar";
 
 export const metadata: Metadata = {
   title: "Console - Contribo - by Qirvex™",
@@ -24,19 +25,18 @@ export default async function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
-  await requireRole("ADMIN")
+  await requireRole("ADMIN");
   return (
     <div className="flex w-full grow items-center justify-center transition-all duration-200 flex-col p-0 m-0">
       <ConfirmTab />
-      <div className="flex flex-row items-center justify-center">
-        <ConsoleNav page={"ADMIN"} />
-      </div>
-      <div className="grow w-full flex justify-start items-start mt-2 m-0 p-0">
-        <main className="flex w-full flex-wrap justify-center m-0 items-center">
-          <CompAlert />
-          {children}
-        </main>
-      </div>
+      <SideBarToggle sideBar={<SideBar page="ADMIN" />}>
+        <div className="grow w-full flex justify-start items-start mt-2 m-0 p-0">
+          <main className="flex w-full flex-wrap justify-center m-0 items-center">
+            <CompAlert />
+            {children}
+          </main>
+        </div>
+      </SideBarToggle>
     </div>
   );
 }

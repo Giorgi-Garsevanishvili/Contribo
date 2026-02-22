@@ -12,7 +12,7 @@ function SignOutButton() {
           <div>
             <h3 className="animate-spin p-5 text-6xl">.</h3>
           </div>
-          <h3 className="m-10">Logging Out...</h3>
+          <h3 className="m-10 text-white">Logging Out...</h3>
         </div>
       </div>
     );

@@ -1,17 +1,11 @@
 "server only";
 
-import { signOut } from "@/lib/auth";
+import { signOutAction } from "@/actions/auth";
 import SignOutButton from "./SignOutButton";
 
 export default function SignOut() {
   return (
-    <form
-      className="flex justify-center items-center"
-      action={async () => {
-        "use server";
-        await signOut({ redirectTo: "/" });
-      }}
-    >
+    <form className="flex justify-center items-center" action={signOutAction}>
       <SignOutButton />
     </form>
   );

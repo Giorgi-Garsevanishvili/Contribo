@@ -9,7 +9,7 @@ function SwitchPageButton({ name }: { name: string }) {
 
   return (
     <button
-      className="btn text-sm text-white bg-[#2c435b90] p-1.5 border"
+      className="btn rounded-lg text-sm text-white bg-[#2c435b90] p-1.5 border"
       onClick={() => router.push(`/${route}`)}
     >
       {name}

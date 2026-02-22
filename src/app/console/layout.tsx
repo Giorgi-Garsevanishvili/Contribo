@@ -4,8 +4,8 @@ import ConsoleNav from "@/(components)/panelComp/nav";
 import { CompAlert } from "@/redux/features/componentAlert/compAlert";
 import ConfirmTab from "@/redux/features/confirmationTab/confirmationTab";
 import { requireRole } from "@/lib/guards";
-import Sidebar from "@/(components)/panelComp/Sidebar";
-
+import SideBarToggle from "@/(components)/panelComp/SideBarToggle";
+import SideBar from "@/(components)/panelComp/SideBar";
 
 export const metadata: Metadata = {
   title: "Console - Contribo - by Qirvex™",
@@ -45,23 +45,20 @@ export default async function RootLayout({
   return (
     <div className="flex h-full w-full grow items-start justify-start transition-all duration-200 p-0 m-0">
       <ConfirmTab />
-      <div className="flex h-screen fixed w-70 left-0 z-20">
-        <Sidebar page="CONSOLE"/>
-      </div>
-      
-        <div className="ml-70 flex-1 flex overflow-y-auto m-0 p-0">
-          <main className="flex flex-wrap justify-center p-4 min-h-full m-0 items-center">
-            <CompAlert />
-            {children}
-            {allowedUsers}
-            {eventRoles}
-            {hrWarningType}
-            {memberStatus}
-            {positions}
-            {roles}
-            {regions}
-          </main>
-      </div>
+
+      <SideBarToggle sideBar={<SideBar page="CONSOLE" />}>
+        <main className="flex flex-wrap justify-center p-2 min-h-full m-0 items-center">
+          <CompAlert />
+          {children}
+          {allowedUsers}
+          {eventRoles}
+          {hrWarningType}
+          {memberStatus}
+          {positions}
+          {roles}
+          {regions}
+        </main>
+      </SideBarToggle>
     </div>
   );
 }

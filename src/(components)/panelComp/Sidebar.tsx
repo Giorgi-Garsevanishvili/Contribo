@@ -10,19 +10,18 @@ import SignOut from "../authComp/sign-out";
 import { auth } from "@/lib/auth";
 import Image from "next/image";
 import { FaStar } from "react-icons/fa";
-import { MdSettingsSuggest } from "react-icons/md";
 import { IoSettingsSharp } from "react-icons/io5";
 import { PiPlantFill } from "react-icons/pi";
-import Footer from "../generalComp/Footer";
 import SwitchPageButton from "../generalComp/SwitchPageButton";
 import { normalizePage, ROLE_ROUTE_MAP } from "@/lib/roleRoutes";
+import BrandMark from "../generalComp/BrandMark";
 
-async function Sidebar({ page }: { page: string }) {
+async function SideBar({ page }: { page: string }) {
   const session = await auth();
   const currentRole = normalizePage(page);
   return (
-    <aside className="w-70 h-full border-r border-slate-200 dark:border-border-dark flex flex-col bg-white dark:bg-surface-dark z-20">
-      <div className="p-6 flex items-center gap-3">
+    <aside className="w-60 h-full border-r border-slate-200 flex flex-col bg-gray-600 text-2xl z-1000">
+      <div className="p-6 flex items-center gap-3 text-gray-200">
         <div className="size-10 rounded-lg bg-primary flex items-center justify-center text-white">
           <span className="material-symbols-outlined">
             <SiGooglesearchconsole size={20} />
@@ -32,13 +31,13 @@ async function Sidebar({ page }: { page: string }) {
           <h1 className="text-sm font-bold tracking-tight uppercase">
             Qirvex Console
           </h1>
-          <p className="text-xs text-slate-500 dark:text-slate-400">
+          <p className="text-xs text-slate-300">
             System v{packageJson.version}
           </p>
         </div>
       </div>
-      <nav className="flex-1 px-4 space-y-1">
-        <div className="pt-4 pb-2 px-3 text-[10px] font-bold uppercase tracking-widest text-slate-400">
+      <nav className="flex-1 px-4 space-y-1 text-white overflow-auto">
+        <div className="pt-4 pb-2 px-3 text-[10px] font-bold uppercase tracking-widest text-slate-300">
           Switch Role
         </div>
         <div className="flex">
@@ -48,61 +47,61 @@ async function Sidebar({ page }: { page: string }) {
               <SwitchPageButton key={role} name={role} />
             ))}
         </div>
-        <div className="pt-4 pb-2 px-3 text-[10px] font-bold uppercase tracking-widest text-slate-400">
+        <div className="pt-4 pb-2 px-3 text-[10px] font-bold uppercase tracking-widest  text-slate-300">
           Console Actions
         </div>
         <a
-          className="flex items-center gap-3 px-3 py-2 rounded-lg bg-primary/10 text-primary group"
+          className="flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-slate-100 hover:text-black  group"
           href="#"
         >
           <span className="material-symbols-outlined text-[20px]">
-            <MdOutlineDashboard size={25} className="text-gray-800" />
+            <MdOutlineDashboard size={25} />
           </span>
           <span className="text-sm font-medium">Dashboard</span>
         </a>
         <a
-          className="flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-slate-100 dark:hover:bg-white/5 transition-colors group"
+          className="flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-slate-100 hover:text-black  transition-colors group"
           href="#"
         >
-          <span className="material-symbols-outlined text-[20px] text-slate-500 dark:text-slate-400">
-            <LuUsersRound size={25} className="text-gray-800" />
+          <span className="material-symbols-outlined text-[20px]">
+            <LuUsersRound size={25} />
           </span>
           <span className="text-sm font-medium">Users</span>
         </a>
         <a
-          className="flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-slate-100 dark:hover:bg-white/5 transition-colors group"
+          className="flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-slate-100 hover:text-black  transition-colors group"
           href="#"
         >
-          <span className="material-symbols-outlined text-[20px] text-slate-500 dark:text-slate-400">
-            <MdOutlineEvent size={25} className="text-gray-800" />
+          <span className="material-symbols-outlined text-[20px]">
+            <MdOutlineEvent size={25} />
           </span>
           <span className="text-sm font-medium">Events</span>
         </a>
         <a
-          className="flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-slate-100 dark:hover:bg-white/5 transition-colors group"
+          className="flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-slate-100 hover:text-black  transition-colors group"
           href="#"
         >
-          <span className="material-symbols-outlined text-[20px] text-slate-500 dark:text-slate-400">
-            <BiShieldQuarter size={25} className="text-gray-800" />
+          <span className="material-symbols-outlined text-[20px]">
+            <BiShieldQuarter size={25} />
           </span>
           <span className="text-sm font-medium">Permissions</span>
         </a>
-        <div className="pt-4 pb-2 px-3 text-[10px] font-bold uppercase tracking-widest text-slate-400">
+        <div className="pt-4 pb-2 px-3 text-[10px] font-bold uppercase tracking-widest text-slate-300">
           System Configuration
         </div>
         <a
-          className="flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-slate-100 dark:hover:bg-white/5 transition-colors group"
+          className="flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-slate-100 hover:text-black  transition-colors group"
           href="#"
         >
-          <span className="material-symbols-outlined text-[20px] text-slate-500 dark:text-slate-400">
-            <MdOutlineSettings size={25} className="text-gray-800" />
+          <span className="material-symbols-outlined text-[20px]">
+            <MdOutlineSettings size={25} />
           </span>
           <span className="text-sm font-medium">Global Settings</span>
         </a>
       </nav>
-      <Footer />
-      <div className="p-4 border-t border-slate-200 dark:border-border-dark">
-        <div className="flex items-center gap-3 p-2 rounded-xl bg-slate-200 dark:bg-background-dark/50">
+      <BrandMark />
+      <div className="p-4 border-t border-slate-200 ">
+        <div className="flex items-center gap-3 p-2 rounded-xl bg-slate-200">
           <div className="flex flex-col items-center justify-center">
             <div
               className={`size-8 items-center justify-center flex rounded-full overflow-hidden bg-blue-200`}
@@ -123,7 +122,7 @@ async function Sidebar({ page }: { page: string }) {
             </div>
             <div className="flex mt-1 grow w-full items-center justify-center gap-1">
               <FaStar size={12} className="text-yellow-500" />
-              <IoSettingsSharp size={12} className="text-gray-800" />
+              <IoSettingsSharp size={12} />
               <PiPlantFill size={12} className="text-green-800" />
             </div>
           </div>
@@ -134,13 +133,13 @@ async function Sidebar({ page }: { page: string }) {
               {session?.user.email}
             </p>
           </div>
-          <button className="text-sm text-slate-500  hover:text-primary transition-colors">
+          <div className="text-sm text-slate-500  hover:text-primary transition-colors">
             <SignOut />
-          </button>
+          </div>
         </div>
       </div>
     </aside>
   );
 }
 
-export default Sidebar;
+export default SideBar;
