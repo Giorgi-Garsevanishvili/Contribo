@@ -1,10 +1,7 @@
-import SignInForm from '@/(components)/authComp/SignInForm'
-
+import SignInForm from "@/(components)/authComp/SignInForm";
 
 function page() {
-  return (
-   <SignInForm showLogo/>
-  )
+  return <SignInForm showLogo />;
 }
 
-export default page
+export default page;

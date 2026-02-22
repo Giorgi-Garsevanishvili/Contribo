@@ -1,10 +1,9 @@
-import React from "react";
 import {
   AllowedUsersWithRelations,
   GeneralDataWithRelations,
 } from "@/types/general-types";
 import Image from "next/image";
-import { Region } from "@/generated/client"; 
+import { Region } from "@/generated/client";
 
 type ListDetailCompProps =
   | {

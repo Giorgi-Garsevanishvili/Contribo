@@ -1,5 +1,4 @@
 import { HrWarningStatus } from "@/generated/enums";
-import { useFetchData } from "@/hooks/useDataFetch";
 import { useUpdateData } from "@/hooks/useDataUpdate";
 import { useEffect, useState } from "react";
 

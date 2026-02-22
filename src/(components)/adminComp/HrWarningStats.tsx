@@ -1,9 +1,8 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { IoFileTrayStacked } from "react-icons/io5";
 import { useRouter } from "next/navigation";
-import { useFetchData } from "@/hooks/useDataFetch";
 import usePaginatedData from "@/hooks/usePaginatedData";
 
 type Data = {

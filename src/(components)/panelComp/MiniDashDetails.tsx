@@ -1,13 +1,7 @@
 "use client";
 
 import axios from "axios";
-import React, {
-  FormEvent,
-  useCallback,
-  useEffect,
-  useRef,
-  useState,
-} from "react";
+import { FormEvent, useCallback, useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { FaRegEdit } from "react-icons/fa";
 import { useRouter } from "next/navigation";
@@ -78,7 +72,7 @@ type MiniDashDetailsProps =
     };
 
 function MiniDashDetails<
-  T extends Region & AllowedUsersWithRelations & GeneralDataWithRelations
+  T extends Region & AllowedUsersWithRelations & GeneralDataWithRelations,
 >({ title, axiosGet, axiosPut, type, deleteMethod, id }: MiniDashDetailsProps) {
   const router = useRouter();
   const [data, setData] = useState<T>();
@@ -153,7 +147,7 @@ function MiniDashDetails<
         return;
       }
     },
-    [axiosGet]
+    [axiosGet],
   );
 
   const updateDataFn = async (e: FormEvent<HTMLFormElement>) => {
@@ -162,8 +156,8 @@ function MiniDashDetails<
       setIsLoading(true);
       const cleanPayload = Object.fromEntries(
         Object.entries(switcher?.data).filter(
-          ([_, value]) => value !== "" && value !== undefined
-        )
+          ([_, value]) => value !== "" && value !== undefined,
+        ),
       );
 
       const res = await axios.put(`${axiosPut}/${id}`, cleanPayload);
@@ -291,7 +285,7 @@ function MiniDashDetails<
                 type="submit"
                 disabled={
                   !Object.values(switcher.data).some(
-                    (value) => value !== "" && value !== undefined
+                    (value) => value !== "" && value !== undefined,
                   )
                 }
                 className={`flex btn text-[#ffffff]  bg-[#48765b] p-1.5 mt-3 mb-0 rounded-md w-full items-center justify-center`}

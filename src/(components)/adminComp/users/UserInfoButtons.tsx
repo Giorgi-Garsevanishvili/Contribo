@@ -1,5 +1,4 @@
 "use client";
-import { useFetchData } from "@/hooks/useDataFetch";
 import usePaginatedData from "@/hooks/usePaginatedData";
 import { useParams, useRouter } from "next/navigation";
 import { IconType } from "react-icons/lib";

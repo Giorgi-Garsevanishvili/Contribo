@@ -3,7 +3,7 @@ import { useFetchData } from "@/hooks/useDataFetch";
 import { getClientErrorMessage } from "@/lib/errors/clientErrors";
 import axios from "axios";
 import { useParams } from "next/navigation";
-import React, { FormEvent, useRef, useState } from "react";
+import { FormEvent, useRef, useState } from "react";
 
 type Data = {
   createdAt: string;

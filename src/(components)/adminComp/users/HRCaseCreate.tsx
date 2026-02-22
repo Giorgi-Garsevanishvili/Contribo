@@ -3,7 +3,7 @@ import { useCompAlert } from "@/hooks/useCompAlert";
 import { useFetchData } from "@/hooks/useDataFetch";
 import axios from "axios";
 import { useParams } from "next/navigation";
-import React, { FormEvent, useRef, useState } from "react";
+import { FormEvent, useRef, useState } from "react";
 
 type Data = {
   createdAt: string;

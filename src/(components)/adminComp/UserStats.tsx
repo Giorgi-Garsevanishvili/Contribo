@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { GiHeartInside } from "react-icons/gi";
 import { useRouter } from "next/navigation";
 import { useFetchData } from "@/hooks/useDataFetch";

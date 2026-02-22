@@ -1,6 +1,5 @@
 import "../styles/globals.css";
 import { Metadata } from "next";
-import ConsoleNav from "@/(components)/panelComp/nav";
 import { CompAlert } from "@/redux/features/componentAlert/compAlert";
 import ConfirmTab from "@/redux/features/confirmationTab/confirmationTab";
 import { requireRole } from "@/lib/guards";
@@ -31,14 +30,14 @@ export default async function RootLayout({
   return (
     <div className="flex grow items-center justify-center transition-all duration-200 flex-col p-0 m-0">
       <ConfirmTab />
-      <div className="grow flex justify-center items-center mt-4 m-0 p-0">
-        <SideBarToggle sideBar={<SideBar page="VOLUNTEER" />}>
+      <SideBarToggle sideBar={<SideBar page="VOLUNTEER" />}>
+        <div className="grow flex justify-center items-center mt-4 m-0 p-0">
           <main className="flex flex-wrap justify-center m-0 items-center">
             <CompAlert />
             {children}
           </main>
-        </SideBarToggle>
-      </div>
+        </div>
+      </SideBarToggle>
     </div>
   );
 }

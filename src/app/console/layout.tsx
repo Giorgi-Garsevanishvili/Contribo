@@ -1,6 +1,5 @@
 import "../styles/globals.css";
 import { Metadata } from "next";
-import ConsoleNav from "@/(components)/panelComp/nav";
 import { CompAlert } from "@/redux/features/componentAlert/compAlert";
 import ConfirmTab from "@/redux/features/confirmationTab/confirmationTab";
 import { requireRole } from "@/lib/guards";

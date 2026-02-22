@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useFetchData } from "@/hooks/useDataFetch";
 
 type Data = {
@@ -17,10 +17,7 @@ type Data = {
 function VolunteerStats() {
   const [statusStats, setStatusStats] = useState<Record<string, number>>({});
 
-  const { data, isLoadingFetch } = useFetchData<Data[]>(
-    "/api/admin/users",
-    [],
-  );
+  const { data, isLoadingFetch } = useFetchData<Data[]>("/api/admin/users", []);
 
   useEffect(() => {
     if (data) {

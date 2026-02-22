@@ -4,7 +4,7 @@ import { getClientErrorMessage } from "@/lib/errors/clientErrors";
 
 import axios from "axios";
 import { useParams } from "next/navigation";
-import React, { FormEvent, useRef, useState } from "react";
+import { FormEvent, useRef, useState } from "react";
 
 type DataAddObj = {
   newValue: number;
@@ -88,7 +88,7 @@ function RatingHistoryCreate({ onCreated }: Props) {
                   onChange={(e) =>
                     setCreateData((prev) => ({
                       ...prev,
-                      newValue: (Math.max(0,Number(e.target.value) || 0)),
+                      newValue: Math.max(0, Number(e.target.value) || 0),
                     }))
                   }
                   className="input-def  bg-gray-400/95 border-white text-white rounded-sm grow"

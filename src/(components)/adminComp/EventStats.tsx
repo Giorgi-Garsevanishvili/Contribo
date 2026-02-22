@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { BsFillCalendarEventFill } from "react-icons/bs";
 import { useRouter } from "next/navigation";
 import { useFetchData } from "@/hooks/useDataFetch";
@@ -54,7 +54,7 @@ function EventStats() {
           </h1>
           <h3>Events</h3>
         </div>
-        <div className="flex bg-white items-center border-gray-300 justify-center w-[10rem] p-1.5 m-0 rounded-b-xl">
+        <div className="flex bg-white items-center border-gray-300 justify-center w-40 p-1.5 m-0 rounded-b-xl">
           <h3 className="text-black text-sm">
             {`Average Rating: ${rating}`} &#10024;
           </h3>
