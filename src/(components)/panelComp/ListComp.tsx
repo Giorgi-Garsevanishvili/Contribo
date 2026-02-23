@@ -56,9 +56,11 @@ function ListComp(props: ListCompParams) {
                   onClick={() =>
                     router.push(`/console/${detailPage}Details/${item.id}`)
                   }
-                  className="flex btn items-center justify-start bg-black/40 text-white m-1 pl-2 p-1 rounded-lg w-full"
+                  className="flex btn items-center justify-start bg-black/40 text-white m-1 pl-2 p-1 w-full"
                 >
-                  <h5>{index + 1}.</h5>
+                  <h5 className="uppercase h-5 flex items-center justify-center p-3 w-5 text-gray-50 font-bold ring-1 ring-gray-900 rounded-2xl bg-gray-300/30">
+                    {item.email?.slice(0, 1)}
+                  </h5>
                   <h5 className="mx-2 w-48 flex justify-start items-center overflow-hidden">
                     {item.email}
                   </h5>

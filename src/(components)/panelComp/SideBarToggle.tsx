@@ -22,8 +22,9 @@ function SideBarToggle({
           {sideBar}
         </div>
       </div>
+      <div className="flex-1 overflow-y-auto relative">{children}</div>
       <button
-        className="btn sticky mr-4 bg-gray-600 rounded-lg p-1 h-fit w-fit text-white"
+        className={`btn ${open ? "left-60" : ""} bottom-0  absolute bg-gray-600 rounded-lg p-2 border h-fit w-fit text-white`}
         onClick={() => setOpen(!open)}
       >
         {open ? (
@@ -32,7 +33,6 @@ function SideBarToggle({
           <RiSidebarUnfoldFill size={35} />
         )}
       </button>
-      <div className="flex-1 overflow-y-auto relative">{children}</div>
     </div>
   );
 }

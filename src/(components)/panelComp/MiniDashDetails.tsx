@@ -196,14 +196,14 @@ function MiniDashDetails<
   }, [id, axiosGet, fetchData]);
 
   return (
-    <div className="flex w-88 h-112 flex-col shadow-md m-2 shadow-white rounded-lg">
-      <div className="flex flex-col w-full h-full scroll-smooth overflow-y-auto items-center justify-center m-0  text-white bg-gray-500/75 rounded-t-lg">
+    <div className="flex flex-col items-center m-0.5 justify-center">
+      <div className="flex flex-col w-88 h-112 items-start justify-center mt-0 m-1 text-white bg-[#434d5f98] rounded-md shadow-md shadow-white ">
         {isLoading ? (
           <LoadingComp />
         ) : (
           <div className=" flex flex-col justify-start items-center relative w-full h-full">
-            <div className="text-lg text-white font-bold p-1 px-7 mb-3 rounded-b-3xl drop-shadow-sm shadow-white shadow-md">
-              <h1>{title} Details</h1>
+            <div className="text-md flex items-center justify-between w-full uppercase text-white bg-gray-700 p-3.5 font-medium rounded-md drop-shadow-sm mb-2  shadow-white shadow-sm">
+              <h1>{title}</h1>
             </div>
             {data ? (
               type === "user" ? (
@@ -223,22 +223,24 @@ function MiniDashDetails<
               </>
             )}
             <div className="flex flex-row w-full justify-center items-center">
-              <DeleteButton
-                id={data?.id}
-                value={data?.name}
-                method={deleteMethod}
-                onDelete={() =>
-                  setTimeout(() => {
-                    router.push("/console");
-                  }, 500)
-                }
-              />
+              <div className="flex grow bg-red-900 rounded-md">
+                <DeleteButton
+                  id={data?.id}
+                  value={data?.name}
+                  method={deleteMethod}
+                  onDelete={() =>
+                    setTimeout(() => {
+                      router.push("/console");
+                    }, 500)
+                  }
+                />
+              </div>
 
               <button
                 onClick={() => setIsUpdateOpen(!isUpdateOpen)}
-                className={`btn flex grow justify-center items-center rounded-lg  m-1 ${
+                className={`btn p-2 flex grow justify-center items-center rounded-md  m-1 ${
                   isUpdateOpen ? "bg-amber-500" : "bg-amber-100"
-                }  text-black rounded-lg `}
+                }  text-black rounded-md `}
               >
                 {isUpdateOpen ? <IoClose size={20} /> : <FaRegEdit size={20} />}
               </button>
@@ -295,12 +297,11 @@ function MiniDashDetails<
             </form>
           </div>
         )}
-      </div>
-      <div className="flex flex-col w-full text-white border-gray-900/80 items-center justify-center">
+
         <Link
           href={"/console"}
           replace
-          className="flex btn w-full ease-in-out duration-300 transition items-center justify-center m-0 bg-black rounded-b-lg rounded-t-none"
+          className="flex btn w-full ease-in-out duration-300 rounded-t-none transition items-center justify-center m-0 rounded-b-md p-1.5 bg-black"
         >
           Back To List
         </Link>

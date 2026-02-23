@@ -24,6 +24,8 @@ import CreationComponent, {
 import ListComp from "./ListComp";
 import { DeleteMethod } from "./DeleteButton";
 import useRegionRole from "@/hooks/useRegionRole";
+import { HiMagnifyingGlass } from "react-icons/hi2";
+import { IoMdAdd } from "react-icons/io";
 
 type MiniCompProps = {
   axiosPost: string;
@@ -68,6 +70,7 @@ function MiniDashCard<U extends UserAddType | DataAddType>({
   const { regions, roles, refetchRegions, refetchRoles, loadingHook } =
     useRegionRole();
 
+  const [openCreation, setOpenCreation] = useState(false);
   const refetchRegionsRef = useRef(refetchRegions);
   const refetchRolesRef = useRef(refetchRoles);
 
@@ -81,7 +84,7 @@ function MiniDashCard<U extends UserAddType | DataAddType>({
 
     const timeoutId = setTimeout(
       () => setAlert((prev) => ({ ...prev, isOpened: false })),
-      4500
+      4500,
     );
 
     return () => clearTimeout(timeoutId);
@@ -180,17 +183,28 @@ function MiniDashCard<U extends UserAddType | DataAddType>({
 
   return (
     <div className="flex flex-col items-center m-0.5 justify-center">
-      <div className="flex w-88 h-112 items-start justify-center mt-0 m-2 text-white pt-0 p-0.5 bg-[#434d5f98] rounded-xl shadow-md shadow-white ">
+      <div className="flex w-88 h-112 items-start justify-center mt-0 m-1 text-white bg-gray-600/90 rounded-md shadow-sm shadow-white ">
         {isLoading ||
         (loadingHook && type === "regions") ||
         (loadingHook && type === "roles") ? (
           <LoadingComp />
         ) : (
           <div className="flex flex-col justify-between items-center relative w-full h-full">
-            <div className="text-lg text-white bg-gray-900  font-bold px-7 pb-1 rounded-b-3xl drop-shadow-sm shadow-white shadow-md">
+            <div className="text-md flex items-center justify-between w-full uppercase text-white bg-gray-900 p-2 font-medium rounded-md drop-shadow-sm shadow-white shadow-sm">
               <h1>{title}</h1>
+              <div
+                onClick={() => setOpenCreation((prev) => !prev)}
+                className="btn m-0 px-2 py-0.5 select-none duration-200 rounded-md bg-transparent"
+              >
+                {openCreation ? (
+                 <h3 className="flex justify-center items-center bg-red-900 p-1 rounded-md">close</h3>
+                ) : (
+                  <h3 className="flex bg-amber-700 justify-center items-center p-1 rounded-md">add {<IoMdAdd className="ml-2" size={20} />}</h3>
+                )}
+              </div>
             </div>
-            <div className="flex w-full items-center mt-1 justify-center">
+            <div className="flex w-full items-center justify-center">
+              <HiMagnifyingGlass size={22} className="ml-2" />
               <input
                 className="flex w-full input-def"
                 type="text"
@@ -248,6 +262,7 @@ function MiniDashCard<U extends UserAddType | DataAddType>({
             />
             {type === "user" ? (
               <CreationComponent
+                openTrigger={openCreation}
                 dataAdd={dataAdd as UserAddType}
                 setDataAdd={
                   setDataAdd as React.Dispatch<
@@ -260,6 +275,7 @@ function MiniDashCard<U extends UserAddType | DataAddType>({
               />
             ) : type === "general" ? (
               <CreationComponent
+                openTrigger={openCreation}
                 dataAdd={dataAdd as DataAddType}
                 setDataAdd={
                   setDataAdd as React.Dispatch<
@@ -272,6 +288,7 @@ function MiniDashCard<U extends UserAddType | DataAddType>({
               />
             ) : type === "regions" ? (
               <CreationComponent
+                openTrigger={openCreation}
                 dataAdd={dataAdd as DataAddType}
                 setDataAdd={
                   setDataAdd as React.Dispatch<
@@ -284,6 +301,7 @@ function MiniDashCard<U extends UserAddType | DataAddType>({
               />
             ) : type === "roles" ? (
               <CreationComponent
+                openTrigger={openCreation}
                 dataAdd={dataAdd as DataAddType}
                 setDataAdd={
                   setDataAdd as React.Dispatch<

@@ -8,7 +8,7 @@
 
 @layer components {
   .btn {
-    @apply flex rounded-2xl w-auto h-auto items-center justify-center hover:shadow-sm hover:opacity-60 transition duration-300 ease-in-out shadow-lg bg-amber-300  m-2 p-3 cursor-pointer disabled:opacity-40;
+    @apply flex rounded-2xl w-auto h-auto items-center justify-center hover:shadow-sm hover:opacity-70 transition duration-300 ease-in-out shadow-lg bg-amber-300  m-2 p-3 cursor-pointer disabled:opacity-40;
   }
 
   .orbitron {
@@ -20,7 +20,7 @@
   }
 
   .input-def {
-    @apply bg-[#ffffff47] text-[#ffffff] border border-[#102438] shadow-xs shadow-white/60 p-1.5 m-2 rounded-lg;
+    @apply bg-[#ffffff47] text-[#ffffff] border border-[#102438] pl-2 shadow-xs shadow-white/60 p-1.5 m-2 rounded-sm;
   }
 
   .btn-log {
@@ -36,7 +36,7 @@
   }
 
   .bg-qirvex-d {
-    @apply bg-black bg-[radial-gradient(rgba(255,255,255,0.095)_2px,transparent_0)] bg-size-[22px_22px]
+    @apply bg-gray-900 bg-[radial-gradient(rgba(255,255,255,0.095)_2px,transparent_0)] bg-size-[22px_22px]
   }
 }
 

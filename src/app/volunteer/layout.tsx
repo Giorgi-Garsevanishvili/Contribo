@@ -28,11 +28,11 @@ export default async function RootLayout({
   await requireRole("REGULAR");
 
   return (
-    <div className="flex grow items-center justify-center transition-all duration-200 flex-col p-0 m-0">
+    <div className="flex w-full grow items-center justify-center transition-all duration-200 flex-col p-0 m-0">
       <ConfirmTab />
-      <SideBarToggle sideBar={<SideBar page="VOLUNTEER" />}>
-        <div className="grow flex justify-center items-center mt-4 m-0 p-0">
-          <main className="flex flex-wrap justify-center m-0 items-center">
+      <SideBarToggle sideBar={<SideBar page="volunteer" />}>
+        <div className="grow w-full flex justify-start items-start mt-2 m-0 p-0">
+          <main className="flex w-full flex-wrap justify-center m-0 items-center">
             <CompAlert />
             {children}
           </main>

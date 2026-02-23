@@ -1,6 +1,8 @@
+import Link from "next/link";
+
 function BrandMark() {
   return (
-    <a target="_blank" className="dev-link" href="https://qirvex.dev/">
+    <Link target="_blank" className="dev-link" href="https://qirvex.dev/">
       <div className="flex justify-center bg-slate-100 rounded-md m-4  items-center overflow-hidden h-auto w-vw p-2">
         <div className="text-center flex items-center justify-center m-0">
           <p className="text-xs mr-1 text-slate-800">Powered By</p>
@@ -10,7 +12,7 @@ function BrandMark() {
           </h1>
         </div>
       </div>
-    </a>
+    </Link>
   );
 }
 export default BrandMark;

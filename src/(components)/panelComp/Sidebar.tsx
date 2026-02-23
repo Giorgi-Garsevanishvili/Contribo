@@ -1,9 +1,4 @@
 import packageJson from "../../../package.json";
-import { MdOutlineDashboard } from "react-icons/md";
-import { LuUsersRound } from "react-icons/lu";
-import { MdOutlineEvent } from "react-icons/md";
-import { BiShieldQuarter } from "react-icons/bi";
-import { MdOutlineSettings } from "react-icons/md";
 import { SiGooglesearchconsole } from "react-icons/si";
 import { FaUser } from "react-icons/fa";
 import SignOut from "../authComp/sign-out";
@@ -15,6 +10,10 @@ import { PiPlantFill } from "react-icons/pi";
 import SwitchPageButton from "../generalComp/SwitchPageButton";
 import { normalizePage, ROLE_ROUTE_MAP } from "@/lib/roleRoutes";
 import BrandMark from "../generalComp/BrandMark";
+import ContriboLogo from "../../../public/Ind-Logo-Contribo-4-no-fill.svg";
+import { MdSettingsSuggest } from "react-icons/md";
+import ConsoleSideBarActions from "./ConsoleSideBarActions";
+import AdminSideBarActions from "./AdminSideBarActions";
 
 async function SideBar({ page }: { page: string }) {
   const session = await auth();
@@ -22,14 +21,25 @@ async function SideBar({ page }: { page: string }) {
   return (
     <aside className="w-60 h-full border-r border-slate-200 flex flex-col bg-gray-600 text-2xl z-1000">
       <div className="p-6 flex items-center gap-3 text-gray-200">
-        <div className="size-10 rounded-lg bg-primary flex items-center justify-center text-white">
+        <div className="size-10 rounded-lg  flex items-center justify-center bg-white text-gray-900">
           <span className="material-symbols-outlined">
-            <SiGooglesearchconsole size={20} />
+            {currentRole === "console" ? (
+              <SiGooglesearchconsole size={25} />
+            ) : currentRole === "admin" ? (
+              <MdSettingsSuggest size={25} />
+            ) : (
+              <Image
+                width={35}
+                height={35}
+                src={ContriboLogo}
+                alt="Contribo Logo"
+              />
+            )}
           </span>
         </div>
         <div>
           <h1 className="text-sm font-bold tracking-tight uppercase">
-            Qirvex Console
+            {currentRole === "console" ? "Qirvex Console" : currentRole === "admin" ? "Contribo Admin" : "Volunteer Page"}
           </h1>
           <p className="text-xs text-slate-300">
             System v{packageJson.version}
@@ -47,57 +57,7 @@ async function SideBar({ page }: { page: string }) {
               <SwitchPageButton key={role} name={role} />
             ))}
         </div>
-        <div className="pt-4 pb-2 px-3 text-[10px] font-bold uppercase tracking-widest  text-slate-300">
-          Console Actions
-        </div>
-        <a
-          className="flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-slate-100 hover:text-black  group"
-          href="#"
-        >
-          <span className="material-symbols-outlined text-[20px]">
-            <MdOutlineDashboard size={25} />
-          </span>
-          <span className="text-sm font-medium">Dashboard</span>
-        </a>
-        <a
-          className="flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-slate-100 hover:text-black  transition-colors group"
-          href="#"
-        >
-          <span className="material-symbols-outlined text-[20px]">
-            <LuUsersRound size={25} />
-          </span>
-          <span className="text-sm font-medium">Users</span>
-        </a>
-        <a
-          className="flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-slate-100 hover:text-black  transition-colors group"
-          href="#"
-        >
-          <span className="material-symbols-outlined text-[20px]">
-            <MdOutlineEvent size={25} />
-          </span>
-          <span className="text-sm font-medium">Events</span>
-        </a>
-        <a
-          className="flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-slate-100 hover:text-black  transition-colors group"
-          href="#"
-        >
-          <span className="material-symbols-outlined text-[20px]">
-            <BiShieldQuarter size={25} />
-          </span>
-          <span className="text-sm font-medium">Permissions</span>
-        </a>
-        <div className="pt-4 pb-2 px-3 text-[10px] font-bold uppercase tracking-widest text-slate-300">
-          System Configuration
-        </div>
-        <a
-          className="flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-slate-100 hover:text-black  transition-colors group"
-          href="#"
-        >
-          <span className="material-symbols-outlined text-[20px]">
-            <MdOutlineSettings size={25} />
-          </span>
-          <span className="text-sm font-medium">Global Settings</span>
-        </a>
+        {currentRole === "console" ? <ConsoleSideBarActions /> : currentRole === "admin" ? <AdminSideBarActions /> : ""}
       </nav>
       <BrandMark />
       <div className="p-4 border-t border-slate-200 ">

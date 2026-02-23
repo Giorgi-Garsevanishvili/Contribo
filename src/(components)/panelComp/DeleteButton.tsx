@@ -5,7 +5,7 @@ import { getClientErrorMessage } from "@/lib/errors/clientErrors";
 import axios from "axios";
 import { signOut } from "next-auth/react";
 import { useState } from "react";
-import { MdDeleteOutline } from "react-icons/md";
+import { RiDeleteBin6Fill } from "react-icons/ri";
 
 export type DeleteMethod =
   | "allowedUser"
@@ -114,14 +114,14 @@ function DeleteButton({
     <button
       onClick={handleDelete}
       disabled={loading || disabled}
-      className={`btn flex grow justify-center items-center bg-[#E74C3C] rounded-lg m-1 ${
+      className={`btn flex grow justify-center items-center bg-transparent rounded-lg m-0 p-2 ${
         loading ? "opacity-50 cursor-not-allowed" : ""
       }`}
     >
       {loading ? (
-        <span className="loader border-t-transparent border-white border-2 rounded-full w-4 h-4 animate-spin" />
+        <span className="loader border-t-transparent border-white border-2 animate-spin" />
       ) : (
-        <MdDeleteOutline size={20} />
+        <RiDeleteBin6Fill size={20} />
       )}
     </button>
   );

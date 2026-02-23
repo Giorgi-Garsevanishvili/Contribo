@@ -1,9 +1,10 @@
-import React, { FormEvent, useState } from "react";
+import React, { FormEvent, useEffect, useState } from "react";
 import { IoIosAddCircleOutline } from "react-icons/io";
 import LoadingComp from "../generalComp/LoadingComp";
 import useRegionRole from "@/hooks/useRegionRole";
 import { AiOutlineUserAdd } from "react-icons/ai";
 import RegionRoleSelect from "./RegionRoleSelect";
+import { IoMdAdd } from "react-icons/io";
 
 export type DataAddType = {
   name: string;
@@ -22,6 +23,7 @@ type addDataProp =
       dataAdd: UserAddType;
       CompTitle: string;
       type: "user";
+      openTrigger: boolean;
     }
   | {
       onSubmit: (e: FormEvent<HTMLFormElement>) => void;
@@ -29,18 +31,23 @@ type addDataProp =
       dataAdd: DataAddType;
       CompTitle: string;
       type: "general";
-    }  | {
+      openTrigger: boolean;
+    }
+  | {
       onSubmit: (e: FormEvent<HTMLFormElement>) => void;
       setDataAdd: React.Dispatch<React.SetStateAction<DataAddType>>;
       dataAdd: DataAddType;
       CompTitle: string;
       type: "roles";
-    }  | {
+      openTrigger: boolean;
+    }
+  | {
       onSubmit: (e: FormEvent<HTMLFormElement>) => void;
       setDataAdd: React.Dispatch<React.SetStateAction<DataAddType>>;
       dataAdd: DataAddType;
       CompTitle: string;
       type: "regions";
+      openTrigger: boolean;
     };
 
 export const AddDataObj = { name: "" };
@@ -51,17 +58,14 @@ function CreationComponent(props: addDataProp) {
   const { loadingHook } = useRegionRole();
   const { onSubmit, CompTitle, type, setDataAdd, dataAdd } = props;
 
-  return (
-    <div className="flex bg-gray-800/20 p-2 border-2 shadow-sm shadow-white/60 border-[#3E4A56] flex-col w-full items-center justify-center rounded-lg">
-      <button
-        onClick={() => setAddOpened((prev) => !prev)}
-        className="flex btn w-full ease-in-out duration-300 transition items-center justify-center  bg-black rounded-lg m-0 "
-      >
-        {addOpened
-          ? `Close Add ${CompTitle} Section`
-          : `Open Add ${CompTitle} Section`}
-      </button>
+  useEffect(() => {
+    setAddOpened((prev) => !prev);
+  }, [props.openTrigger]);
 
+  return (
+    <div
+      className={`flex ${addOpened ? "p-2" : ""} bg-gray-800/20 border-2 shadow-sm shadow-white/60 border-[#3E4A56] flex-col w-full items-center justify-center rounded-lg`}
+    >
       {loadingHook ? (
         <LoadingComp />
       ) : (
@@ -145,7 +149,7 @@ function CreationComponent(props: addDataProp) {
                   type="text"
                   placeholder="Add Allowed User Email"
                   className="flex w-full input-def m-0.5 p-1.5 "
-                /> 
+                />
                 <button
                   type="submit"
                   className="flex btn items-center justify-center text-[#ffffff]  bg-[#48765b] rounded-lg m-0.5 p-2.5"
@@ -154,7 +158,7 @@ function CreationComponent(props: addDataProp) {
                   <AiOutlineUserAdd size={18} />
                 </button>
               </>
-            ) : ( 
+            ) : (
               "Add Type definition not provided!"
             )}
           </div>

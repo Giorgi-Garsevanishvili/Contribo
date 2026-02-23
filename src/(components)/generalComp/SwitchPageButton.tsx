@@ -8,8 +8,8 @@ function SwitchPageButton({ name }: { name: string }) {
   const route = ROLE_ROUTE_MAP[name] ?? "volunteer";
 
   return (
-    <button
-      className="btn rounded-lg text-sm text-white bg-[#2c435b90] p-1.5 border"
+    <button 
+      className="cursor-pointer transition-all m-1 rounded-md hover:text-primary hover:bg-white text-sm text-white bg-[#2c435b90] p-1.5 border"
       onClick={() => router.push(`/${route}`)}
     >
       {name}
