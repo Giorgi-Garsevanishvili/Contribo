@@ -54,17 +54,13 @@ export const AddDataObj = { name: "" };
 export const UserAddObj = { email: "", roleId: [""], regionId: "" };
 
 function CreationComponent(props: addDataProp) {
-  const [addOpened, setAddOpened] = useState(false);
   const { loadingHook } = useRegionRole();
   const { onSubmit, CompTitle, type, setDataAdd, dataAdd } = props;
 
-  useEffect(() => {
-    setAddOpened((prev) => !prev);
-  }, [props.openTrigger]);
 
   return (
     <div
-      className={`flex ${addOpened ? "p-2" : ""} bg-gray-800/20 border-2 shadow-sm shadow-white/60 border-[#3E4A56] flex-col w-full items-center justify-center rounded-lg`}
+      className={`flex ${props.openTrigger ? "p-2" : ""} bg-gray-800/20 border-2 shadow-sm shadow-white/60 border-[#3E4A56] flex-col w-full items-center justify-center rounded-lg`}
     >
       {loadingHook ? (
         <LoadingComp />
@@ -72,7 +68,7 @@ function CreationComponent(props: addDataProp) {
         <form
           onSubmit={(e) => onSubmit(e)}
           className={`grow flex-col w-full p-0.5 overflow-hidden ${
-            addOpened
+            props.openTrigger
               ? "max-h-full opacity-100 pointer-events-auto"
               : "max-h-0 opacity-0 pointer-events-none"
           }  items-center  justify-center ease-in-out duration-300 transition overflow-y-auto`}
