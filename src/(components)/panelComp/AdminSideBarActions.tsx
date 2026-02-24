@@ -27,7 +27,7 @@ function AdminSideBarActions() {
         <span className="text-sm font-medium">Dashboard</span>
       </Link>
       <Link
-        className={`flex ${currentPath === "/admin/users" ? "bg-white text-primary" : ""} items-center w-full gap-3 mb-0.5 px-3 py-2 rounded-lg hover:bg-slate-100 hover:text-black transition-colors group`}
+        className={`flex ${currentPath.startsWith("/admin/users") ? "bg-white text-primary" : ""} items-center w-full gap-3 mb-0.5 px-3 py-2 rounded-lg hover:bg-slate-100 hover:text-black transition-colors group`}
         href="/admin/users"
       >
         <span className="material-symbols-outlined text-[20px]">
@@ -36,7 +36,7 @@ function AdminSideBarActions() {
         <span className="text-sm font-medium">Users</span>
       </Link>
       <Link
-        className={`flex ${currentPath === "/admin/join-requests" ? "bg-white text-primary" : ""} items-center w-full gap-3 mb-0.5 px-3 py-2 rounded-lg hover:bg-slate-100 hover:text-black transition-colors group`}
+        className={`flex ${currentPath.startsWith("/admin/join-requests") ? "bg-white text-primary" : ""} items-center w-full gap-3 mb-0.5 px-3 py-2 rounded-lg hover:bg-slate-100 hover:text-black transition-colors group`}
         href="/admin/join-requests"
       >
         <span className="material-symbols-outlined text-[20px]">
@@ -45,7 +45,7 @@ function AdminSideBarActions() {
         <span className="text-sm font-medium">Join Requests</span>
       </Link>
       <Link
-        className={`flex ${currentPath === "/admin/hr-warnings" ? "bg-white text-primary" : ""} items-center w-full gap-3 mb-0.5 px-3 py-2 rounded-lg hover:bg-slate-100 hover:text-black transition-colors group`}
+        className={`flex ${currentPath.startsWith("/admin/hr-warnings") ? "bg-white text-primary" : ""} items-center w-full gap-3 mb-0.5 px-3 py-2 rounded-lg hover:bg-slate-100 hover:text-black transition-colors group`}
         href="/admin/hr-warnings"
       >
         <span className="material-symbols-outlined text-[20px]">
@@ -54,7 +54,7 @@ function AdminSideBarActions() {
         <span className="text-sm font-medium">HR Cases</span>
       </Link>
       <Link
-        className={`flex ${currentPath === "/admin/events" ? "bg-white text-primary" : ""} items-center w-full gap-3 mb-0.5 px-3 py-2 rounded-lg hover:bg-slate-100 hover:text-black transition-colors group`}
+        className={`flex ${currentPath.startsWith("/admin/events") ? "bg-white text-primary" : ""} items-center w-full gap-3 mb-0.5 px-3 py-2 rounded-lg hover:bg-slate-100 hover:text-black transition-colors group`}
         href="/admin/events"
       >
         <span className="material-symbols-outlined text-[20px]">
@@ -63,7 +63,7 @@ function AdminSideBarActions() {
         <span className="text-sm font-medium">Events</span>
       </Link>
       <Link
-        className={`flex ${currentPath === "/admin/accesses" ? "bg-white text-primary" : ""} items-center w-full gap-3 mb-0.5 px-3 py-2 rounded-lg hover:bg-slate-100 hover:text-black transition-colors group`}
+        className={`flex ${currentPath.startsWith("/admin/accesses") ? "bg-white text-primary" : ""} items-center w-full gap-3 mb-0.5 px-3 py-2 rounded-lg hover:bg-slate-100 hover:text-black transition-colors group`}
         href="/admin/accesses"
       >
         <span className="material-symbols-outlined text-[20px]">

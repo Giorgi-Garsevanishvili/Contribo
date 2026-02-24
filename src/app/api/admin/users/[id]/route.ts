@@ -190,8 +190,6 @@ export const DELETE = async (_req: NextRequest, context: Context) => {
 
     //Based on DB schema if Allowed user table is deleted user table automatically deleting therefore Account table as well.
 
-    console.log("start");
-
     if (user.allowedUserId) {
       // allowedUserId exists → delete by id
       const deletedFromAllowedList = await prisma.allowedUser.delete({

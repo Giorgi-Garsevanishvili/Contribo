@@ -8,7 +8,6 @@ function UserList() {
   return (
     <>
       <div className="flex w-screen justify-center items-center">
-        <BackButton />
         <h3 className=" bg-gray-900/65 p-2 rounded-lg text-white select-none border-b-2 border-white ">
           Members Statistics
         </h3>

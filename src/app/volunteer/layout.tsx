@@ -5,6 +5,7 @@ import ConfirmTab from "@/redux/features/confirmationTab/confirmationTab";
 import { requireRole } from "@/lib/guards";
 import SideBarToggle from "@/(components)/panelComp/SideBarToggle";
 import SideBar from "@/(components)/panelComp/SideBar";
+import WelcomeBar from "@/(components)/panelComp/WelcomeBar";
 
 export const metadata: Metadata = {
   title: "Console - Contribo - by Qirvex™",
@@ -31,9 +32,10 @@ export default async function RootLayout({
     <div className="flex w-full grow items-center justify-center transition-all duration-200 flex-col p-0 m-0">
       <ConfirmTab />
       <SideBarToggle sideBar={<SideBar page="volunteer" />}>
-        <div className="grow w-full flex justify-start items-start mt-2 m-0 p-0">
+        <div className="grow w-full flex justify-start items-start m-0 p-0">
           <main className="flex w-full flex-wrap justify-center m-0 items-center">
             <CompAlert />
+            <WelcomeBar />
             {children}
           </main>
         </div>

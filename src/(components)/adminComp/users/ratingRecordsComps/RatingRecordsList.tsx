@@ -129,7 +129,6 @@ function RatingRecordsList({ fetchUrl }: { fetchUrl: string }) {
     if (!data) return [];
 
     return [...data].sort((a, b) => {
-      console.log(data);
       return new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime();
     });
   }, [data]);

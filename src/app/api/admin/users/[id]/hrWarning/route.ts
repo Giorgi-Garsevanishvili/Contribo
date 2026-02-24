@@ -1,3 +1,4 @@
+import { HrWarningStatus } from "@/generated/enums";
 import {
   HrWarningWhereInput,
   HrWarningWhereUniqueInput,
@@ -59,6 +60,10 @@ export const GET = async (req: NextRequest, context: Context) => {
 
     const { searchParams } = new URL(req.url);
 
+    const statusFilter = searchParams.get("status");
+    const typeFilter = searchParams.get("type");
+    const searchQuery = searchParams.get("search");
+
     if (!id) {
       return NextResponse.json({ message: "Id is missing." }, { status: 400 });
     }
@@ -69,6 +74,26 @@ export const GET = async (req: NextRequest, context: Context) => {
         ownAllowance: { regionId: thisUser.user.ownAllowance?.regionId },
       },
     };
+
+    if (
+      statusFilter &&
+      Object.values(HrWarningStatus).includes(statusFilter as HrWarningStatus)
+    ) {
+      whereClause.status = statusFilter as HrWarningStatus;
+    }
+
+    if (typeFilter) {
+      whereClause.typeId = typeFilter;
+    }
+
+    if (searchQuery && searchQuery.trim()) {
+      whereClause.OR = [
+        {
+          name: { contains: searchQuery.trim(), mode: "insensitive" },
+        },
+        { comment: { contains: searchQuery.trim(), mode: "insensitive" } },
+      ];
+    }
 
     const page = Math.max(1, parseInt(searchParams.get("page") || "1"));
     const limit = Math.min(
@@ -132,7 +157,7 @@ export const DELETE = async (_req: NextRequest, context: Context) => {
       where: {
         assignee: {
           ownAllowance: { regionId: thisUser.user.ownAllowance?.regionId },
-          id
+          id,
         },
       },
     });

@@ -17,9 +17,16 @@ export const GET = async (_req: NextRequest) => {
         name: true,
         email: true,
         image: true,
+        rating: true,
         memberStatusLogs: {
           where: { ended: false },
           select: { status: { select: { name: true } } },
+        },
+        ownAllowance: {
+          select: {
+            region: { select: { name: true } },
+            roles: { select: { role: { select: { name: true } } } },
+          },
         },
       },
     });
@@ -31,7 +38,7 @@ export const GET = async (_req: NextRequest) => {
       });
     }
 
-    return NextResponse.json({data}, { status: 200 });
+    return NextResponse.json({ data }, { status: 200 });
   } catch (error) {
     const { status, message } = handleError(error);
     return NextResponse.json({ message: message }, { status: status });

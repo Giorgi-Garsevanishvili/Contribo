@@ -255,26 +255,30 @@ function HrCasesList({ fetchUrl }: { fetchUrl: string }) {
                 setIsOpenId(() => (isOpenId !== item.id ? item.id : "")),
                 setOnEdit("")
               )}
-              className={`flex lg:flex-row  flex-col px-5 py-1.5 md:text-sm text-xs btn justify-between transition-all duration-300 w-full m-0 ${(item.status as keyof typeof WARNING_STATUS_COLORS) ? `${WARNING_STATUS_COLORS[item.status as keyof typeof WARNING_STATUS_COLORS].shadow} ${WARNING_STATUS_COLORS[item.status as keyof typeof WARNING_STATUS_COLORS].bg}` : WARNING_STATUS_COLORS.ARCHIVED} border shadow-lg mb-2`}
+              className={`grid grid-rows-5 md:gap-3 grid-cols-1 md:grid-rows-1 md:grid-cols-5 start-0 left-0 right-0 px-5 py-1.5 md:text-sm text-xs btn transition-all duration-300 w-full m-0 ${(item.status as keyof typeof WARNING_STATUS_COLORS) ? `${WARNING_STATUS_COLORS[item.status as keyof typeof WARNING_STATUS_COLORS].shadow} ${WARNING_STATUS_COLORS.ARCHIVED.bg}` : WARNING_STATUS_COLORS.ARCHIVED} border shadow-lg mb-2`}
             >
-              <h3>
-                <strong>Assignee: </strong> {item.assignee.name}
-              </h3>
-              <h3>
-                <strong>Case: </strong> {item.name}
-              </h3>
-              <h3>
+              <h3
+                className={` ${WARNING_STATUS_COLORS[item.status as keyof typeof WARNING_STATUS_COLORS].bg} flex items-center justify-center border  ${WARNING_STATUS_COLORS[item.status as keyof typeof WARNING_STATUS_COLORS].border} rounded-md gap-1 p-0.5 truncate`}
+              >
                 <strong>Status: </strong> {item.status}
               </h3>
-              <h3>
+              <h3 className="flex items-center justify-start gap-1 truncate">
+                <strong>Assignee: </strong> {item.assignee.name}
+              </h3>
+              <h3 className="flex items-center justify-start gap-1 truncate">
+                <strong>Case: </strong> {item.name}
+              </h3>
+              <h3 className="flex items-center justify-start gap-1 truncate">
                 <strong>Type: </strong>
                 {item.type.name}
               </h3>
-              {isOpenId === item.id ? (
-                <FaAngleUp className="animate-pulse" size={22} />
-              ) : (
-                <FaAngleDown className="animate-pulse" size={22} />
-              )}
+              <div className="flex justify-end items-end">
+                {isOpenId === item.id ? (
+                  <FaAngleUp className="animate-pulse " size={22} />
+                ) : (
+                  <FaAngleDown className="animate-pulse " size={22} />
+                )}
+              </div>
             </button>
             <div
               className={`${isOpenId === item.id ? "flex" : "hidden"} lg:flex-row flex-col w-full  items-center justify-center`}
