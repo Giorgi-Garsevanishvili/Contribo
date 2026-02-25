@@ -1,6 +1,7 @@
 import { HrWarningStatus } from "@/generated/enums";
 import { useUpdateData } from "@/hooks/useDataUpdate";
 import { useEffect, useState } from "react";
+import { ImSpinner9 } from "react-icons/im";
 
 type Data = {
   id: string;
@@ -70,7 +71,7 @@ function HrCaseUpdate({
     >
       {isLoadingUpdate ? (
         <div className="flex bg-gray-100/60 items-center rounded-lg shadow-lg p-10 justify-center">
-          <h3 className="font-bold animate-spin">.</h3>
+          <ImSpinner9   className="animate-spin" size={40} />
         </div>
       ) : (
         <form

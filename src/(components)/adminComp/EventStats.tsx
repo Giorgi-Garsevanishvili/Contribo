@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { BsFillCalendarEventFill } from "react-icons/bs";
 import { useRouter } from "next/navigation";
 import { useFetchData } from "@/hooks/useDataFetch";
+import { ImSpinner9 } from "react-icons/im";
 
 type Data = {
   id: string;
@@ -50,7 +51,19 @@ function EventStats() {
               isLoadingFetch ? "animate-spin" : ""
             } font-bold mr-3`}
           >
-            {isLoadingFetch ? "." : data?.length}
+            {isLoadingFetch ? (
+              <div
+                className={`text-sm ${
+                  isLoadingFetch
+                    ? "animate-spin transition-all duration-300"
+                    : ""
+                } font-bold`}
+              >
+                <ImSpinner9 className="animate-spin" size={25} />
+              </div>
+            ) : (
+              data?.length
+            )}
           </h1>
           <h3>Events</h3>
         </div>

@@ -3,6 +3,7 @@
 import { BsFillShieldLockFill } from "react-icons/bs";
 import { useRouter } from "next/navigation";
 import { useFetchData } from "@/hooks/useDataFetch";
+import { ImSpinner9 } from "react-icons/im";
 
 type Data = {
   id: string;
@@ -39,7 +40,19 @@ function AllowedStats() {
                 isLoadingFetch ? "animate-spin transition-all duration-300" : ""
               } font-bold m-1`}
             >
-              {isLoadingFetch ? "." : data?.length}
+              {isLoadingFetch ? (
+                <div
+                  className={`text-sm ${
+                    isLoadingFetch
+                      ? "animate-spin transition-all duration-300"
+                      : ""
+                  } font-bold`}
+                >
+                  <ImSpinner9 className="animate-spin" size={25} />
+                </div>
+              ) : (
+                data?.length
+              )}
             </h1>
             <h3>Accesses</h3>
           </>

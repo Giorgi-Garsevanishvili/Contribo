@@ -1,15 +1,14 @@
 import { useFetchData } from "@/hooks/useDataFetch";
 import { useMemo, useState } from "react";
-import { FaAngleDown } from "react-icons/fa";
-import { FaAngleUp } from "react-icons/fa";
 import { FaInfoCircle } from "react-icons/fa";
 import { IoIosCloseCircle } from "react-icons/io";
-import HrCaseUpdate from "./HrCaseUpdate";
 import usePaginatedData from "@/hooks/usePaginatedData";
 import Pagination from "@/(components)/generalComp/Pagination";
 import QueryFilter from "@/(components)/generalComp/QueryFilter";
 import { useParams } from "next/navigation";
 import DeleteButtonAdmin from "../DeleteButtonAdmin";
+import { ImSpinner9 } from "react-icons/im";
+import HrCaseCard from "./HrCaseCard";
 
 type Data = {
   id: string;
@@ -36,42 +35,42 @@ type DataType = {
 
 export const WARNING_STATUS_COLORS = {
   ACTIVE: {
-    bg: "bg-red-100",
-    border: "border-red-300",
-    shadow: "shadow-red-200",
+    bg: "bg-[#00aeef]/20",
+    border: "border-[#00aeef]",
+    shadow: "shadow-[#00aeef]",
   },
   UNDER_REVIEW: {
-    bg: "bg-yellow-100",
-    border: "border-yellow-300",
-    shadow: "shadow-yellow-200",
-  },
-  APPROVED: {
-    bg: "bg-green-100",
-    border: "border-green-300",
-    shadow: "shadow-green-200",
+    bg: "bg-[#f47b20]/20",
+    border: "border-[#f47b20]",
+    shadow: "shadow-[#f47b20]",
   },
   ESCALATED: {
-    bg: "bg-orange-100",
-    border: "border-orange-300",
-    shadow: "shadow-orange-200",
+    bg: "bg-[#ec008c]/20",
+    border: "border-[#ec008c]",
+    shadow: "shadow-[#ec008c]",
+  },
+  APPROVED: {
+    bg: "bg-[#7ac143]/20",
+    border: "border-[#7ac143]",
+    shadow: "shadow-[#7ac143]",
   },
   RESOLVED: {
-    bg: "bg-blue-100",
-    border: "border-blue-300",
-    shadow: "shadow-blue-200",
+    bg: "bg-[#2e3192]/20",
+    border: "border-[#2e3192]",
+    shadow: "shadow-[#2e3192]",
   },
   CANCELLED: {
-    bg: "bg-gray-100",
-    border: "border-gray-300",
-    shadow: "shadow-gray-200",
+    bg: "bg-black/20",
+    border: "border-black",
+    shadow: "shadow-black",
   },
   EXPIRED: {
-    bg: "bg-purple-100",
-    border: "border-purple-300",
-    shadow: "shadow-purple-200",
+    bg: "bg-gray-400/20",
+    border: "border-gray-400",
+    shadow: "shadow-gray-300",
   },
   ARCHIVED: {
-    bg: "bg-slate-100",
+    bg: "bg-slate-100/20",
     border: "border-slate-300",
     shadow: "shadow-slate-200",
   },
@@ -106,17 +105,17 @@ function HrCasesList({ fetchUrl }: { fetchUrl: string }) {
   const [searchQuery, setSearchQuery] = useState("");
   const [filterOn, setFilterOn] = useState(false);
   const paginatedUrl = useMemo(() => {
-    const params = new URLSearchParams();
-    params.append("page", currentPage.toString());
-    params.append("limit", limit.toString());
-    params.append("status", statusFilter.toString());
-    params.append("type", typeFilter.toString());
-    params.append("search", searchQuery.toString());
+    const searchParams = new URLSearchParams();
+    searchParams.append("page", currentPage.toString());
+    searchParams.append("limit", limit.toString());
+    searchParams.append("status", statusFilter.toString());
+    searchParams.append("type", typeFilter.toString());
+    searchParams.append("search", searchQuery.toString());
 
     const hasFilter = statusFilter || typeFilter || searchQuery;
     setFilterOn(!!hasFilter);
 
-    return `${fetchUrl}?${params.toString()}`;
+    return `${fetchUrl}?${searchParams.toString()}`;
   }, [fetchUrl, currentPage, limit, statusFilter, typeFilter, searchQuery]);
 
   const clearFilter = () => {
@@ -209,9 +208,7 @@ function HrCasesList({ fetchUrl }: { fetchUrl: string }) {
               fetchAction={refetch}
               value={`All HR warnings for ${sortedData[0].assignee.name}?`}
             />
-          ) : (
-            ""
-          )}
+          ) : null}
         </div>
         <div
           className={`${colorInfoOpen ? "fixed" : "hidden"} bg-gray-800/95 p-5 rounded-2xl shadow-lg shadow-white z-50 w-auto `}
@@ -242,117 +239,20 @@ function HrCasesList({ fetchUrl }: { fetchUrl: string }) {
 
       {isLoadingFetch || isLoadingFetchTypes ? (
         <div className="flex bg-gray-100/60 items-center rounded-lg shadow-lg p-10 justify-center">
-          <h3 className="font-bold animate-spin">.</h3>
+          <ImSpinner9 className="animate-spin" size={40} />
         </div>
-      ) : sortedData && sortedData?.length > 0 ? (
+      ) : sortedData && types && sortedData?.length > 0 ? (
         sortedData?.map((item) => (
-          <div
-            className={`flex ${WARNING_STATUS_COLORS[item.status as keyof typeof WARNING_STATUS_COLORS].border} border flex-col transition-all duration-300 shadow-sm rounded-2xl m-1 p-0 justify-between w-full bg-gray-100/85`}
+          <HrCaseCard
             key={item.id}
-          >
-            <button
-              onClick={() => (
-                setIsOpenId(() => (isOpenId !== item.id ? item.id : "")),
-                setOnEdit("")
-              )}
-              className={`grid grid-rows-5 md:gap-3 grid-cols-1 md:grid-rows-1 md:grid-cols-5 start-0 left-0 right-0 px-5 py-1.5 md:text-sm text-xs btn transition-all duration-300 w-full m-0 ${(item.status as keyof typeof WARNING_STATUS_COLORS) ? `${WARNING_STATUS_COLORS[item.status as keyof typeof WARNING_STATUS_COLORS].shadow} ${WARNING_STATUS_COLORS.ARCHIVED.bg}` : WARNING_STATUS_COLORS.ARCHIVED} border shadow-lg mb-2`}
-            >
-              <h3
-                className={` ${WARNING_STATUS_COLORS[item.status as keyof typeof WARNING_STATUS_COLORS].bg} flex items-center justify-center border  ${WARNING_STATUS_COLORS[item.status as keyof typeof WARNING_STATUS_COLORS].border} rounded-md gap-1 p-0.5 truncate`}
-              >
-                <strong>Status: </strong> {item.status}
-              </h3>
-              <h3 className="flex items-center justify-start gap-1 truncate">
-                <strong>Assignee: </strong> {item.assignee.name}
-              </h3>
-              <h3 className="flex items-center justify-start gap-1 truncate">
-                <strong>Case: </strong> {item.name}
-              </h3>
-              <h3 className="flex items-center justify-start gap-1 truncate">
-                <strong>Type: </strong>
-                {item.type.name}
-              </h3>
-              <div className="flex justify-end items-end">
-                {isOpenId === item.id ? (
-                  <FaAngleUp className="animate-pulse " size={22} />
-                ) : (
-                  <FaAngleDown className="animate-pulse " size={22} />
-                )}
-              </div>
-            </button>
-            <div
-              className={`${isOpenId === item.id ? "flex" : "hidden"} lg:flex-row flex-col w-full  items-center justify-center`}
-            >
-              <div className="flex  lg:flex-row flex-col w-full items-center justify-start p-3">
-                <div
-                  className={`flex grow ${(item.status as keyof typeof WARNING_STATUS_COLORS) ? `${WARNING_STATUS_COLORS[item.status as keyof typeof WARNING_STATUS_COLORS].border} ${WARNING_STATUS_COLORS[item.status as keyof typeof WARNING_STATUS_COLORS].bg}` : WARNING_STATUS_COLORS.ARCHIVED} border rounded-lg  md:flex-row flex-col items-center justify-center lg:py-10 w-full lg:px-10 p-4 m-2 gap-2`}
-                >
-                  <div className="flex-col w-full flex">
-                    <h3>
-                      <strong>Name: </strong>
-                      {item.name}
-                    </h3>
-                    <h3>
-                      <strong>Type: </strong>
-                      {item.type.name}
-                    </h3>
-                    <h3>
-                      <strong>Created At: </strong>
-                      {item.createdAt
-                        ? new Date(item.createdAt).toLocaleString()
-                        : "No Data"}
-                    </h3>
-                    <h3>
-                      <strong>Updated At: </strong>
-                      {item.updatedAt
-                        ? new Date(item.updatedAt).toLocaleString()
-                        : "No Data"}
-                    </h3>
-                  </div>
-                  <div className="flex-col w-full flex">
-                    <h3>
-                      <strong>Status: </strong>
-                      {item.status}
-                    </h3>
-                    <h3>
-                      <strong>Comment: </strong>
-                      {item.comment}
-                    </h3>
-                    <h3>
-                      <strong>Created By: </strong>
-                      {item.createdBy?.name ?? "No Data"}
-                    </h3>
-                    <h3>
-                      <strong>Updated By: </strong>
-                      {item.updatedBy?.name ?? "No Data"}
-                    </h3>
-                  </div>
-                </div>
-                <div className={`${onEdit === item.id ? "flex" : "hidden"}`}>
-                  <HrCaseUpdate
-                    refetch={refetch}
-                    id={item.id}
-                    extraData1={types}
-                  />
-                </div>
-              </div>
-              <div className="flex p-1 md:m-4  lg:flex-col">
-                <DeleteButtonAdmin
-                  url={`/api/admin/hrWarnings/${item.id}`}
-                  fetchAction={refetch}
-                  value={`${item.name} for ${item.assignee.name}`}
-                />
-                <button
-                  onClick={() => {
-                    setOnEdit(onEdit === item.id ? "" : isOpenId);
-                  }}
-                  className={`btn grow`}
-                >
-                  {onEdit === item.id ? "Close" : "Edit"}
-                </button>
-              </div>
-            </div>
-          </div>
+            item={item}
+            types={types}
+            setOnEdit={setOnEdit}
+            setIsOpenId={setIsOpenId}
+            onEdit={onEdit}
+            isOpenId={isOpenId}
+            refetch={refetch}
+          />
         ))
       ) : (
         <div className="flex bg-gray-100/60 items-center rounded-lg shadow-lg p-10 justify-center">
@@ -368,9 +268,7 @@ function HrCasesList({ fetchUrl }: { fetchUrl: string }) {
           onPageChange={handlePageChange}
           pagination={pagination}
         />
-      ) : (
-        ""
-      )}
+      ) : null}
     </div>
   );
 }

@@ -3,9 +3,10 @@ import { Metadata } from "next";
 import { CompAlert } from "@/redux/features/componentAlert/compAlert";
 import ConfirmTab from "@/redux/features/confirmationTab/confirmationTab";
 import { requireRole } from "@/lib/guards";
-import SideBarToggle from "@/(components)/panelComp/SideBarToggle";
-import SideBar from "@/(components)/panelComp/SideBar";
-import WelcomeBar from "@/(components)/panelComp/WelcomeBar";
+import SideBarToggle from "@/(components)/generalComp/SideBarToggle";
+import SideBar from "@/(components)/generalComp/SideBar";
+import WelcomeBar from "@/(components)/generalComp/WelcomeBar";
+
 
 export const metadata: Metadata = {
   title: "Console - Contribo - by Qirvex™",

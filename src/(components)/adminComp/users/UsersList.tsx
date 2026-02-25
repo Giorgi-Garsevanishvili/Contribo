@@ -7,6 +7,8 @@ import { useFetchData } from "@/hooks/useDataFetch";
 import { FcDeleteDatabase } from "react-icons/fc";
 import { IoMdGlobe } from "react-icons/io";
 import { FaStar } from "react-icons/fa";
+import usePaginatedData from "@/hooks/usePaginatedData";
+import { ImSpinner9 } from "react-icons/im";
 
 type Data = {
   id: string;
@@ -30,7 +32,7 @@ function UsersList() {
   const router = useRouter();
   const [list, setList] = useState<Data[]>([]);
 
-  const { data, isLoadingFetch } = useFetchData<Data[]>(`/api/admin/users`, []);
+  const { data, isLoading } = usePaginatedData<Data[]>(`/api/admin/users`, []);
 
   useEffect(() => {
     if (data) {
@@ -51,12 +53,12 @@ function UsersList() {
   return (
     <div
       className={`flex ${
-        isLoadingFetch ? "w-30 h-30 items-center justify-center" : " w-auto"
+        isLoading ? "w-30 h-30 items-center justify-center" : " w-auto"
       } flex-col mt-4 shadow-sm bg-gray-300/90  rounded-lg p-1.5 select-none`}
     >
       <div
         className={` ${
-          isLoadingFetch ? "hidden" : "flex"
+          isLoading ? "hidden" : "flex"
         } w-full items-center mt-1 justify-center`}
       >
         <input
@@ -68,14 +70,14 @@ function UsersList() {
           onChange={(e) => setSearchTerm(e.target.value)}
         />
       </div>
-      {isLoadingFetch ? (
-        <h2
+      {isLoading ? (
+        <div
           className={`text-sm text-black ${
-            isLoadingFetch ? "animate-spin transition-all duration-300" : ""
+            isLoading ? "animate-spin transition-all duration-300" : ""
           } font-bold`}
         >
-          .
-        </h2>
+          <ImSpinner9 className="animate-spin" size={25} />
+        </div>
       ) : filteredData.length > 0 ? (
         <>
           <div className="grid font-bold text-sm grid-cols-5 gap-4 uppercase grid-rows-1 select-none justify-start items-center bg-gray-100/80 text-gray-700 p-2 m-1 rounded-lg">
@@ -127,7 +129,7 @@ function UsersList() {
               </div>
 
               <div className="md:flex hidden truncate">
-                <h3 className="font-medium bg-gray-300/40 items-center justify-center flex w-1/2 rounded-sm py-1.5 border border-gray-400/50">
+                <h3 className="font-medium bg-gray-300/40 items-center justify-center flex w-1/2 rounded-sm py-1.5 border border-gray-400/50 truncate">
                   {!user.name.startsWith("deleted")
                     ? ` ${
                         user.memberStatusLogs[user.memberStatusLogs.length - 1]
@@ -147,7 +149,10 @@ function UsersList() {
               <div className="md:flex hidden">
                 <div className="font-medium flex gap-2 truncate">
                   {user.ownAllowance.roles.map((role, index) => (
-                    <h2 key={index} className="rounded-lg border px-1.5 py-0.5 bg-gray-300/50 border-gray-500/50">
+                    <h2
+                      key={index}
+                      className="rounded-lg border px-1.5 py-0.5 bg-gray-300/50 border-gray-500/50"
+                    >
                       {role.role.name}
                     </h2>
                   ))}

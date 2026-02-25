@@ -4,6 +4,7 @@ import axios from "axios";
 import { signOut } from "next-auth/react";
 import { getClientErrorMessage } from "@/lib/errors/clientErrors";
 import { useCompAlert } from "@/hooks/useCompAlert";
+import { ImSpinner9 } from "react-icons/im";
 
 type UserUpdate = {
   name: string;
@@ -84,7 +85,13 @@ function UserUpdate({ id, refetch }: { id: ParamValue; refetch: () => void }) {
       className={`flex flex-col justify-center items-center`}
     >
       {isLoading ? (
-        "Loading..."
+        <div
+          className={`text-sm text-black ${
+            isLoading ? "animate-spin transition-all duration-300" : ""
+          } font-bold`}
+        >
+          <ImSpinner9 className="animate-spin" size={25} />
+        </div>
       ) : (
         <>
           <input

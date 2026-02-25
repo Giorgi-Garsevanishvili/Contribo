@@ -3,6 +3,7 @@
 import { HiHandRaised } from "react-icons/hi2";
 import { useRouter } from "next/navigation";
 import { useFetchData } from "@/hooks/useDataFetch";
+import { ImSpinner9 } from "react-icons/im";
 
 type Data = {
   id: string;
@@ -35,7 +36,17 @@ function JoinStats() {
             isLoadingFetch ? "animate-spin" : ""
           } font-bold m-1`}
         >
-          {isLoadingFetch ? "." : requestLength}
+          {isLoadingFetch ? (
+            <div
+              className={`text-sm ${
+                isLoadingFetch ? "animate-spin transition-all duration-300" : ""
+              } font-bold`}
+            >
+              <ImSpinner9 className="animate-spin" size={25} />
+            </div>
+          ) : (
+            requestLength
+          )}
         </h1>
         <h3>New Join Requests</h3>
       </button>

@@ -1,7 +1,5 @@
 import { useFetchData } from "@/hooks/useDataFetch";
 import { useMemo, useState } from "react";
-import { FaAngleDown } from "react-icons/fa";
-import { FaAngleUp } from "react-icons/fa";
 import { FaInfoCircle } from "react-icons/fa";
 import { IoIosCloseCircle } from "react-icons/io";
 import usePaginatedData from "@/hooks/usePaginatedData";
@@ -9,6 +7,8 @@ import Pagination from "@/(components)/generalComp/Pagination";
 import QueryFilter from "@/(components)/generalComp/QueryFilter";
 import { useParams } from "next/navigation";
 import DeleteButtonAdmin from "../DeleteButtonAdmin";
+import { ImSpinner9 } from "react-icons/im";
+import RatingCard from "./RatingCard";
 
 type Data = {
   id: string;
@@ -45,7 +45,7 @@ export const RATING_ACTION_COLORS = {
   },
 } as const;
 
-export type WarningStatus = keyof typeof RATING_ACTION_COLORS;
+export type RatingAction = keyof typeof RATING_ACTION_COLORS;
 
 function RatingRecordsList({ fetchUrl }: { fetchUrl: string }) {
   const [isOpenId, setIsOpenId] = useState("");
@@ -163,9 +163,7 @@ function RatingRecordsList({ fetchUrl }: { fetchUrl: string }) {
               fetchAction={refetch}
               value={`All Rating Records for ${sortedData[0].user?.name}?`}
             />
-          ) : (
-            ""
-          )}
+          ) : null}
         </div>
         <div
           className={`${colorInfoOpen ? "fixed" : "hidden"} bg-gray-800/95 p-5 rounded-2xl shadow-lg shadow-white z-50 w-auto `}
@@ -196,115 +194,18 @@ function RatingRecordsList({ fetchUrl }: { fetchUrl: string }) {
 
       {isLoadingFetch || isLoadingFetchTypes ? (
         <div className="flex bg-gray-100/60 items-center rounded-lg shadow-lg p-10 justify-center">
-          <h3 className="font-bold animate-spin">.</h3>
+          <ImSpinner9 className="animate-spin" size={25} />
         </div>
       ) : sortedData && sortedData?.length > 0 ? (
         sortedData?.map((item) => (
-          <div
-            className={`flex ${RATING_ACTION_COLORS[item.action as keyof typeof RATING_ACTION_COLORS].border} border flex-col transition-all duration-300 shadow-sm rounded-2xl m-1 p-0 justify-between w-full bg-gray-100/85`}
-            key={item.id}
-          >
-            <button
-              onClick={() => (
-                setIsOpenId(() => (isOpenId !== item.id ? item.id : "")),
-                setOnEdit("")
-              )}
-              className={`flex lg:flex-row  flex-col px-5 py-1.5 md:text-sm text-xs btn justify-between transition-all duration-300 w-full m-0 ${(item.action as keyof typeof RATING_ACTION_COLORS) ? `${RATING_ACTION_COLORS[item.action as keyof typeof RATING_ACTION_COLORS].shadow} ${RATING_ACTION_COLORS[item.action as keyof typeof RATING_ACTION_COLORS].bg}` : ""} border shadow-lg mb-2`}
-            >
-              <h3>
-                <strong>User: </strong> {item.user?.name}
-              </h3>
-              <h3>
-                <strong>Reason: </strong> {item.reason}
-              </h3>
-              <h3>
-                <strong>Action: </strong> {item.action}
-              </h3>
-              {isOpenId === item.id ? (
-                <FaAngleUp className="animate-pulse" size={22} />
-              ) : (
-                <FaAngleDown className="animate-pulse" size={22} />
-              )}
-            </button>
-            <div
-              className={`${isOpenId === item.id ? "flex" : "hidden"} lg:flex-row flex-col w-full  items-center justify-center`}
-            >
-              <div className="flex  lg:flex-row flex-col w-full items-center justify-start p-3">
-                <div
-                  className={`flex flex-col grow ${(item.action as keyof typeof RATING_ACTION_COLORS) ? `${RATING_ACTION_COLORS[item.action as keyof typeof RATING_ACTION_COLORS].border} ${RATING_ACTION_COLORS[item.action as keyof typeof RATING_ACTION_COLORS].bg}` : ""} border rounded-lg  md:flex-row flex-col items-center justify-center lg:py-10 w-full lg:px-10 p-4 m-2 gap-2`}
-                >
-                  <div className="flex-col w-full flex">
-                    <h3>
-                      <strong>Action: </strong>
-                      {item.action}
-                    </h3>
-                    <h3>
-                      <strong>Created At: </strong>
-                      {item.createdAt
-                        ? new Date(item.createdAt).toLocaleString()
-                        : "No Data"}
-                    </h3>
-                    <h3>
-                      <strong>Updated At: </strong>
-                      {item.updatedAt
-                        ? new Date(item.updatedAt).toLocaleString()
-                        : "No Data"}
-                    </h3>
-                  </div>
-                  <div className="flex-col w-full flex">
-                    <h3>
-                      <strong>Reason: </strong>
-                      {item.reason}
-                    </h3>
-                    <h3>
-                      <strong>Created By: </strong>
-                      {item.createdBy?.name ?? "No Data"}
-                    </h3>
-                    <h3>
-                      <strong>Updated By: </strong>
-                      {item.updatedBy?.name ?? "No Data"}
-                    </h3>
-                  </div>
-                  <div className="flex-col w-full flex">
-                    <h3>
-                      <strong>Old Score: </strong>
-                      {item.oldValue}
-                    </h3>
-                    <h3>
-                      <strong>Entered Score: </strong>
-                      {item.newValue}
-                    </h3>
-                    <h3>
-                      <strong>End Score: </strong>
-                      {item.value}
-                    </h3>
-                  </div>
-                </div>
-                {/* <div className={`${onEdit === item.id ? "flex" : "hidden"}`}>
-                  <HrCaseUpdate
-                    refetch={refetch}
-                    id={item.id}
-                    extraData1={types}
-                  />
-                </div> */}
-              </div>
-              <div className="flex p-1 md:m-4  lg:flex-col">
-                <DeleteButtonAdmin
-                  url={`/api/admin/ratingHistory/${item.id}`}
-                  fetchAction={refetch}
-                  value={`${item.action} with value of ${item.value} for ${item.user?.name}`}
-                />
-                <button
-                  onClick={() => {
-                    setOnEdit(onEdit === item.id ? "" : isOpenId);
-                  }}
-                  className={`btn grow`}
-                >
-                  {onEdit === item.id ? "Close" : "Edit"}
-                </button>
-              </div>
-            </div>
-          </div>
+          <RatingCard
+            item={item}
+            isOpenId={isOpenId}
+            onEdit={onEdit}
+            setIsOpenId={setIsOpenId}
+            setOnEdit={setOnEdit}
+            refetch={refetch}
+          />
         ))
       ) : (
         <div className="flex bg-gray-100/60 items-center rounded-lg shadow-lg p-10 justify-center">

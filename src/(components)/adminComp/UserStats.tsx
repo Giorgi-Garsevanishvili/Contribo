@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { GiHeartInside } from "react-icons/gi";
 import { useRouter } from "next/navigation";
 import { useFetchData } from "@/hooks/useDataFetch";
+import { ImSpinner9 } from "react-icons/im";
 
 type Data = {
   id: string;
@@ -62,7 +63,19 @@ function UserStats() {
                 isLoadingFetch ? "animate-spin transition-all duration-300" : ""
               } font-bold m-1`}
             >
-              {isLoadingFetch ? "." : data?.length}
+              {isLoadingFetch ? (
+                <div
+                  className={`text-sm ${
+                    isLoadingFetch
+                      ? "animate-spin transition-all duration-300"
+                      : ""
+                  } font-bold`}
+                >
+                  <ImSpinner9 className="animate-spin" size={25} />
+                </div>
+              ) : (
+                data?.length
+              )}
             </h1>
             <h3>Volunteers</h3>
           </>

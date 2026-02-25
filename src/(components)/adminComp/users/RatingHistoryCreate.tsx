@@ -5,6 +5,7 @@ import { getClientErrorMessage } from "@/lib/errors/clientErrors";
 import axios from "axios";
 import { useParams } from "next/navigation";
 import { FormEvent, useRef, useState } from "react";
+import { ImSpinner9 } from "react-icons/im";
 
 type DataAddObj = {
   newValue: number;
@@ -68,9 +69,9 @@ function RatingHistoryCreate({ onCreated }: Props) {
   };
 
   return (
-    <div className="flex p-5 w-full">
+    <div className="flex items-center justify-center p-5 w-full">
       {isLoading ? (
-        <h2 className="animate-pulse">Loading...</h2>
+        <ImSpinner9 className="animate-spin" size={25} />
       ) : (
         <form
           onSubmit={(e) => createCase(e)}

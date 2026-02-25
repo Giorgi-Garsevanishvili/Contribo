@@ -1,7 +1,6 @@
 "use client";
 
 import HrCasesList from "@/(components)/adminComp/users/hrCasesComps/HrCasesList";
-import BackButton from "@/(components)/generalComp/BackButton";
 import { useParams } from "next/navigation";
 
 function User() {

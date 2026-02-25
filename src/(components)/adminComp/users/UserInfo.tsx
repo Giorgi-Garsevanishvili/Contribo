@@ -20,6 +20,7 @@ import { useFetchData } from "@/hooks/useDataFetch";
 import UserUpdate from "./UserUpdate";
 import { useDeleteData } from "@/hooks/useDeleteData";
 import { FcDeleteDatabase } from "react-icons/fc";
+import { ImSpinner9 } from "react-icons/im";
 
 type Data = {
   CreatedAllowedUser: [];
@@ -128,12 +129,6 @@ function UserInfo({
 
   return (
     <div className="flex flex-col w-full justify-center items-center">
-      <button
-        className="md:flex hidden items-center border justify-center btn p-2 m-0 text-center font-bold rounded-tr-md rounded-bl-md text-m bg-blue-950/70 text-white"
-        onClick={() => route.back()}
-      >
-        <IoMdArrowRoundBack size={25} />
-      </button>
       {
         <div className="flex md:flex-row flex-col m-2 justify-center items-center">
           <div
@@ -170,7 +165,7 @@ function UserInfo({
                       <FaUser className="mr-2" size={22} />{" "}
                       <span className="truncate">
                         {data.name.length > 30
-                          ? `${data.name.slice(0,30)}...`
+                          ? `${data.name.slice(0, 30)}...`
                           : data.name}
                       </span>
                     </h2>
@@ -356,12 +351,8 @@ function UserInfo({
               <div
                 className={`flex flex-col justify-center items-center w-40 p-10 h-25}`}
               >
-                <h3 className="mb-2">User Info</h3>
-                <h3
-                  className={`${isLoadingFetch || softdeleteLoading || fullDeleteLoading ? "animate-spin transition-all duration-300" : ""}`}
-                >
-                  .
-                </h3>
+                <h3 className="mb-4">User Info</h3>
+                <ImSpinner9 className="animate-spin" size={25} />
               </div>
             )}
           </div>
@@ -377,12 +368,8 @@ function UserInfo({
               <div
                 className={`flex flex-col justify-center items-center w-40 p-10 h-25}`}
               >
-                <h3 className="mb-2">Access Info</h3>
-                <h3
-                  className={`${isLoadingFetch ? "animate-spin transition-all duration-300" : ""}`}
-                >
-                  .
-                </h3>
+                <h3 className="mb-4">Access Info</h3>
+                <ImSpinner9 className="animate-spin" size={25} />
               </div>
             )}
           </div>

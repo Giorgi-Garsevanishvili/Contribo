@@ -1,7 +1,6 @@
 "use client";
 
 import RatingRecordsList from "@/(components)/adminComp/users/ratingRecordsComps/RatingRecordsList";
-import BackButton from "@/(components)/generalComp/BackButton";
 import { useParams } from "next/navigation";
 
 function User() {

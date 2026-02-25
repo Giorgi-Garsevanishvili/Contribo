@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { IoFileTrayStacked } from "react-icons/io5";
 import { useRouter } from "next/navigation";
 import usePaginatedData from "@/hooks/usePaginatedData";
+import { ImSpinner9 } from "react-icons/im";
 
 type Data = {
   id: string;
@@ -86,7 +87,17 @@ function HrWarningStats() {
                 isLoading ? "animate-spin transition-all duration-300" : ""
               } font-bold m-1`}
             >
-              {isLoading ? "." : pagination?.totalCount}
+              {isLoading ? (
+                <div
+                  className={`text-sm ${
+                    isLoading ? "animate-spin transition-all duration-300" : ""
+                  } font-bold`}
+                >
+                  <ImSpinner9 className="animate-spin" size={25} />
+                </div>
+              ) : (
+                pagination?.totalCount
+              )}
             </h1>
             <h3>HR Cases</h3>
           </>

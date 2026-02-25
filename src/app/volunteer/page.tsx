@@ -1,6 +1,4 @@
-import WelcomeBar from "@/(components)/panelComp/WelcomeBar";
-
 async function Admin() {
-  return 
+  return;
 }
 export default Admin;
