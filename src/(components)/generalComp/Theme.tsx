@@ -43,7 +43,7 @@ function Theme() {
   return (
     <button
       onClick={toggleTheme}
-      className="fixed bottom-6 z-999 right-6 bg-gray-200 rounded-4xl p-2 text-3xl shadow-gray-300 shadow-sm focus:opacity-100 hover:shadow-md cursor-pointer hover:opacity-75 duration-200"
+      className="fixed bottom-25 z-999 right-2 md:right-6 md:bottom-5 ring ring-gray-900/30 bg-gray-200 rounded-4xl p-2 text-3xl shadow-gray-300 shadow-sm focus:opacity-100 hover:shadow-md cursor-pointer hover:opacity-75 duration-200"
     >
       {dark ? <HiOutlineSun /> : <FaMoon />}
     </button>

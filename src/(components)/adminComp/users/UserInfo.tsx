@@ -91,7 +91,6 @@ function UserInfo({
   const params = useParams();
   const id = params.userId;
 
-  const route = useRouter();
   const [open, setOpen] = useState(false);
   const [openPosition, setOpenPosition] = useState(false);
   const [openUpdate, setOpenUpdate] = useState(false);
@@ -298,7 +297,7 @@ function UserInfo({
                                     ? "✅"
                                     : "❌"
                                 }
-                             `}
+                            `}
                               </h2>
                             </div>
                           </div>

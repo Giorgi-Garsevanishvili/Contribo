@@ -6,6 +6,7 @@ import { requireRole } from "@/lib/guards";
 import SideBarToggle from "@/(components)/generalComp/SideBarToggle";
 import SideBar from "@/(components)/generalComp/SideBar";
 import WelcomeBar from "@/(components)/generalComp/WelcomeBar";
+import MobileBar from "@/(components)/generalComp/MobileBar";
 
 export const metadata: Metadata = {
   title: "Console - Contribo - by Qirvex™",
@@ -59,6 +60,7 @@ export default async function RootLayout({
           {roles}
           {regions}
         </main>
+        <MobileBar page="CONSOLE" />
       </SideBarToggle>
     </div>
   );

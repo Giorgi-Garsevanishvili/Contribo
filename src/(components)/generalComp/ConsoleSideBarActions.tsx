@@ -7,8 +7,8 @@ import { usePathname } from "next/navigation";
 function ConsoleSideBarActions() {
   const currentPath = usePathname();
   return (
-    <div className="flex flex-col items-start justify-start w-full">
-      <div className="pt-4 pb-2 px-3 text-[10px] font-bold uppercase tracking-widest  text-slate-300">
+    <div className="flex md:flex-col md:items-start md:justify-start w-full">
+      <div className="pt-4 hidden md:flex pb-2 px-3 text-[10px] font-bold uppercase tracking-widest  text-slate-300">
         Console Actions
       </div>
       <Link

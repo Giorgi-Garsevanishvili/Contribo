@@ -6,6 +6,7 @@ import { requireRole } from "@/lib/guards";
 import SideBarToggle from "@/(components)/generalComp/SideBarToggle";
 import SideBar from "@/(components)/generalComp/SideBar";
 import WelcomeBar from "@/(components)/generalComp/WelcomeBar";
+import MobileBar from "@/(components)/generalComp/MobileBar";
 
 
 export const metadata: Metadata = {
@@ -33,12 +34,13 @@ export default async function RootLayout({
     <div className="flex w-full grow items-center justify-center transition-all duration-200 flex-col p-0 m-0">
       <ConfirmTab />
       <SideBarToggle sideBar={<SideBar page="volunteer" />}>
-        <div className="grow w-full flex justify-start items-start m-0 p-0">
+        <div className="grow w-full flex justify-start items-start mb-22 md:mb-0 m-0 p-0">
           <main className="flex w-full flex-wrap justify-center m-0 items-center">
             <CompAlert />
             <WelcomeBar />
             {children}
           </main>
+          <MobileBar page="volunteer" />
         </div>
       </SideBarToggle>
     </div>
