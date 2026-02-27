@@ -7,6 +7,7 @@ import SideBarToggle from "@/(components)/generalComp/SideBarToggle";
 import SideBar from "@/(components)/generalComp/SideBar";
 import WelcomeBar from "@/(components)/generalComp/WelcomeBar";
 import MobileBar from "@/(components)/generalComp/MobileBar";
+import NavBar from "@/(components)/generalComp/NavBar";
 
 
 export const metadata: Metadata = {
@@ -37,6 +38,7 @@ export default async function RootLayout({
         <div className="grow w-full flex justify-start items-start mb-22 md:mb-0 m-0 p-0">
           <main className="flex w-full flex-wrap justify-center m-0 items-center">
             <CompAlert />
+            <NavBar page="volunteer" />
             <WelcomeBar />
             {children}
           </main>

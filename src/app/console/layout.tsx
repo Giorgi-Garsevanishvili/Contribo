@@ -7,6 +7,7 @@ import SideBarToggle from "@/(components)/generalComp/SideBarToggle";
 import SideBar from "@/(components)/generalComp/SideBar";
 import WelcomeBar from "@/(components)/generalComp/WelcomeBar";
 import MobileBar from "@/(components)/generalComp/MobileBar";
+import NavBar from "@/(components)/generalComp/NavBar";
 
 export const metadata: Metadata = {
   title: "Console - Contribo - by Qirvex™",
@@ -51,6 +52,7 @@ export default async function RootLayout({
         <main className="flex flex-wrap justify-center min-h-full m-0 items-center">
           <CompAlert />
           <WelcomeBar />
+          <NavBar page="CONSOLE" />
           {children}
           {allowedUsers}
           {eventRoles}

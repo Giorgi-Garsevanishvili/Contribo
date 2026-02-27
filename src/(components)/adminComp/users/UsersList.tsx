@@ -3,12 +3,12 @@
 import { useEffect, useState } from "react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
-import { useFetchData } from "@/hooks/useDataFetch";
 import { FcDeleteDatabase } from "react-icons/fc";
 import { IoMdGlobe } from "react-icons/io";
 import { FaStar } from "react-icons/fa";
 import usePaginatedData from "@/hooks/usePaginatedData";
 import { ImSpinner9 } from "react-icons/im";
+import { IoIosArrowForward } from "react-icons/io";
 
 type Data = {
   id: string;
@@ -80,7 +80,7 @@ function UsersList() {
         </div>
       ) : filteredData.length > 0 ? (
         <>
-          <div className="grid font-bold text-sm grid-cols-5 gap-4 uppercase grid-rows-1 select-none justify-start items-center bg-gray-100/80 text-gray-700 p-2 m-1 rounded-lg">
+          <div className=" hidden md:grid font-bold text-sm grid-cols-5 gap-4 uppercase grid-rows-1 select-none justify-start items-center bg-gray-100/80 text-gray-700 p-2 m-1 rounded-lg">
             <h3 className="flex justify-start items-center">Name & Email</h3>
             <div className="grid grid-cols-2 gap-2 justify-start items-center">
               <h3 className=" flex overflow-hidden">MemberShip</h3>
@@ -98,7 +98,7 @@ function UsersList() {
           {filteredData.map((user) => (
             <button
               onClick={() => router.push(`/admin/users/${user.id}`)}
-              className="grid grid-cols-5 gap-4 grid-rows-1 btn select-none text-sm justify-start items-center bg-white/80 text-black p-2 m-1 rounded-lg"
+              className="grid grid-cols-[2fr_auto] md:grid-cols-5 gap-1 md:gap-4 grid-rows-1 btn select-none text-sm justify-start items-center bg-white/80 text-black p-2 m-1 rounded-lg"
               key={user.id}
             >
               <div className="flex justify-start items-center">
@@ -114,18 +114,17 @@ function UsersList() {
                 ) : (
                   <FcDeleteDatabase className="mr-2" size={25} />
                 )}
-                <div className="flex justify-start flex-col truncate px-2 py-1.5">
+                <div className="flex grow justify-start flex-col truncate px-2 py-1.5">
                   <h3 className="text-sm font-bold flex overflow-hidden truncate">
-                    {user?.name && user.name.length > 30
-                      ? ` ${user.name.slice(0, 30)}...`
-                      : user
-                        ? ` ${user.name}`
-                        : "No Data"}
+                    {user.name}
                   </h3>
                   <h3 className="flex truncate text-xs text-gray-600">
                     {user.email}
                   </h3>
                 </div>
+              </div>
+              <div className="w-8 flex md:hidden items-center justify-center">
+                <IoIosArrowForward />
               </div>
 
               <div className="md:flex hidden truncate">

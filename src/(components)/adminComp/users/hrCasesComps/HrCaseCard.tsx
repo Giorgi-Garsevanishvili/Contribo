@@ -109,7 +109,7 @@ function HrCaseCard({
           setIsOpenId(isOpenId !== item.id ? item.id : ""),
           setOnEdit("")
         )}
-        className={`grid grid-rows-5 md:gap-3 grid-cols-1 md:grid-rows-1 md:grid-cols-5 start-0 left-0 right-0 px-5 py-1.5 md:text-sm text-xs btn transition-all duration-300 w-full m-0 ${statusColors ? `${statusColors.shadow} ${WARNING_STATUS_COLORS.ARCHIVED.bg}` : WARNING_STATUS_COLORS.ARCHIVED} border shadow-lg mb-2`}
+        className={`grid grid-rows-5 md:gap-3 grid-cols-1 md:grid-rows-1 md:grid-cols-5 inset-s-0 left-0 right-0 px-5 py-1.5 md:text-sm text-xs btn transition-all duration-300 w-full m-0 ${statusColors ? `${statusColors.shadow} ${WARNING_STATUS_COLORS.ARCHIVED.bg}` : WARNING_STATUS_COLORS.ARCHIVED} border shadow-lg mb-2`}
       >
         <h3
           className={` ${statusColors.bg} flex items-center justify-center border  ${statusColors.border} rounded-md gap-1 p-0.5 truncate`}
