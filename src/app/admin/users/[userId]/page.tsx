@@ -98,7 +98,7 @@ function User() {
       >
         {openExtras ? <FaAngleLeft /> : <FaAngleRight />}
       </button>
-      <div className={`${openExtras ? "flex" : "hidden"} z-1000`}>
+      <div className={`${openExtras ? "flex" : "hidden"} z-150`}>
         <button
           onClick={() => setOpenAccess(!openAccess)}
           className={`fixed ${openAccess ? "border-black bg-gray-200" : "bg-gray-400"} md:hidden bottom-25 left-18 rounded-4xl p-2 text-3xl shadow-gray-300 shadow-sm focus:opacity-100 hover:shadow-md cursor-pointer ring-1 ring-gray-800/85 transition-all hover:opacity-75 duration-300`}

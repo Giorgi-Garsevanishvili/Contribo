@@ -19,7 +19,7 @@ async function SideBar({ page }: { page: string }) {
   const session = await auth();
   const currentRole = normalizePage(page);
   return (
-    <aside className="w-60 h-full border-r border-slate-200 flex flex-col bg-gray-600 text-2xl z-1000">
+    <aside className="w-60 h-full border-r border-slate-200 flex flex-col bg-gray-600 text-2xl z-150">
       <div className="p-6 flex items-center gap-3 text-gray-200">
         <div className="size-10 rounded-lg  flex items-center justify-center bg-white text-gray-900">
           <span className="material-symbols-outlined">

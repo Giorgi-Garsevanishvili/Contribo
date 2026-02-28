@@ -18,7 +18,7 @@ function AdminSideBarActions() {
         Admin Actions
       </div>
       <Link
-        className={`flex px-4 text-center  md:flex-row flex-col ${currentPath === "/admin" ? "bg-white text-primary" : "bg-gray-600"} items-center w-full md:gap-3 p-2 m-0.5 md:mb-0.5 px-4 md:px-3 md:py-2 rounded-lg hover:bg-slate-100 hover:text-black transition-colors  bg-gray-700/95 group`}
+        className={`flex px-4 md:ring-0 ring-1 ring-gray-300/30 text-center  md:flex-row flex-col ${currentPath === "/admin" ? "bg-white text-primary" : "bg-gray-600"} items-center w-full md:gap-3 p-2 m-0.5 md:mb-0.5 px-4 md:px-3 md:py-2 rounded-lg hover:bg-slate-100 hover:text-black transition-colors  bg-gray-700/95 group`}
         href="/admin"
       >
         <span className="material-symbols-outlined text-[20px]">
@@ -27,7 +27,7 @@ function AdminSideBarActions() {
         <span className="text-sm font-medium">Home</span>
       </Link>
       <Link
-        className={`flex px-4 text-center  md:flex-row flex-col ${currentPath.startsWith("/admin/users") ? "bg-white text-primary" : "bg-gray-600"} items-center w-full md:gap-3 p-2 m-0.5 md:mb-0.5 px-4 md:px-3 md:py-2 rounded-lg hover:bg-slate-100 hover:text-black transition-colors  bg-gray-700/95 group`}
+        className={`flex px-4 md:ring-0 ring-1 ring-gray-300/30 text-center  md:flex-row flex-col ${currentPath.startsWith("/admin/users") ? "bg-white text-primary" : "bg-gray-600"} items-center w-full md:gap-3 p-2 m-0.5 md:mb-0.5 px-4 md:px-3 md:py-2 rounded-lg hover:bg-slate-100 hover:text-black transition-colors  bg-gray-700/95 group`}
         href="/admin/users"
       >
         <span className="material-symbols-outlined text-[20px]">
@@ -36,7 +36,7 @@ function AdminSideBarActions() {
         <span className="text-sm font-medium">Users</span>
       </Link>
       <Link
-        className={`flex px-4 text-center  md:flex-row flex-col ${currentPath.startsWith("/admin/join-requests") ? "bg-white text-primary" : "bg-gray-600"} items-center w-full md:gap-3 p-2 m-0.5 md:mb-0.5 px-4 md:px-3 md:py-2 rounded-lg hover:bg-slate-100 hover:text-black transition-colors  bg-gray-700/95 group`}
+        className={`flex px-4 md:ring-0 ring-1 ring-gray-300/30 text-center  md:flex-row flex-col ${currentPath.startsWith("/admin/join-requests") ? "bg-white text-primary" : "bg-gray-600"} items-center w-full md:gap-3 p-2 m-0.5 md:mb-0.5 px-4 md:px-3 md:py-2 rounded-lg hover:bg-slate-100 hover:text-black transition-colors  bg-gray-700/95 group`}
         href="/admin/join-requests"
       >
         <span className="material-symbols-outlined text-[20px]">
@@ -48,7 +48,7 @@ function AdminSideBarActions() {
         <span className="text-sm flex md:hidden font-medium">Joins</span>
       </Link>
       <Link
-        className={`flex px-4 text-center  md:flex-row flex-col ${currentPath.startsWith("/admin/hr-warnings") ? "bg-white text-primary" : "bg-gray-600"} items-center w-full md:gap-3 p-2 m-0.5 md:mb-0.5 px-4 md:px-3 md:py-2 rounded-lg hover:bg-slate-100 hover:text-black transition-colors  bg-gray-700/95 group`}
+        className={`flex px-4 md:ring-0 ring-1 ring-gray-300/30 text-center  md:flex-row flex-col ${currentPath.startsWith("/admin/hr-warnings") ? "bg-white text-primary" : "bg-gray-600"} items-center w-full md:gap-3 p-2 m-0.5 md:mb-0.5 px-4 md:px-3 md:py-2 rounded-lg hover:bg-slate-100 hover:text-black transition-colors  bg-gray-700/95 group`}
         href="/admin/hr-warnings"
       >
         <span className="material-symbols-outlined text-[20px]">
@@ -58,7 +58,7 @@ function AdminSideBarActions() {
         <span className="text-sm flex md:hidden font-medium">Cases</span>
       </Link>
       <Link
-        className={`flex px-4 text-center  md:flex-row flex-col ${currentPath.startsWith("/admin/events") ? "bg-white text-primary" : "bg-gray-600"} items-center w-full md:gap-3 p-2 m-0.5 md:mb-0.5 px-4 md:px-3 md:py-2 rounded-lg hover:bg-slate-100 hover:text-black transition-colors  bg-gray-700/95 group`}
+        className={`flex px-4 md:ring-0 ring-1 ring-gray-300/30 text-center  md:flex-row flex-col ${currentPath.startsWith("/admin/events") ? "bg-white text-primary" : "bg-gray-600"} items-center w-full md:gap-3 p-2 m-0.5 md:mb-0.5 px-4 md:px-3 md:py-2 rounded-lg hover:bg-slate-100 hover:text-black transition-colors  bg-gray-700/95 group`}
         href="/admin/events"
       >
         <span className="material-symbols-outlined text-[20px]">
@@ -67,7 +67,7 @@ function AdminSideBarActions() {
         <span className="text-sm font-medium">Events</span>
       </Link>
       <Link
-        className={`flex px-4 text-center  md:flex-row flex-col ${currentPath.startsWith("/admin/accesses") ? "bg-white text-primary" : "bg-gray-600"} items-center w-full md:gap-3 p-2 m-0.5 md:mb-0.5 px-4 md:px-3 md:py-2 rounded-lg hover:bg-slate-100 hover:text-black transition-colors  bg-gray-700/95 group`}
+        className={`flex px-4 md:ring-0 ring-1 ring-gray-300/30 text-center  md:flex-row flex-col ${currentPath.startsWith("/admin/accesses") ? "bg-white text-primary" : "bg-gray-600"} items-center w-full md:gap-3 p-2 m-0.5 md:mb-0.5 px-4 md:px-3 md:py-2 rounded-lg hover:bg-slate-100 hover:text-black transition-colors  bg-gray-700/95 group`}
         href="/admin/accesses"
       >
         <span className="material-symbols-outlined text-[20px]">

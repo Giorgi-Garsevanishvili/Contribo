@@ -8,7 +8,7 @@ async function MobileBar({ page }: { page: string }) {
   const session = await auth();
   const currentRole = normalizePage(page);
   return (
-    <div className="w-full h-20 content-center items-center bottom-0 md:hidden border-r border-slate-200 fixed flex-col text-2xl z-1000">
+    <div className="w-full h-20 content-center items-center bottom-0 md:hidden border-r border-slate-200 fixed flex-col text-2xl z-150">
       <nav className="flex w-full h-full items-center justify-start  space-y-1 text-white overflow-auto">
         <SwitchRole page={page} session={session} />
         <div className="ml-22">
