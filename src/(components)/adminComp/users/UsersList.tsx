@@ -10,6 +10,15 @@ import usePaginatedData from "@/hooks/usePaginatedData";
 import { ImSpinner9 } from "react-icons/im";
 import { IoIosArrowForward } from "react-icons/io";
 import Pagination from "@/(components)/generalComp/Pagination";
+import QueryFilter from "@/(components)/generalComp/QueryFilter";
+import { useFetchData } from "@/hooks/useDataFetch";
+
+type RoleRegionMembershipDataType = {
+  id: string;
+  name: string;
+  createdAt: Date;
+  updatedAt: Date | null;
+}[];
 
 type Data = {
   id: string;
@@ -29,27 +38,80 @@ type Data = {
 };
 
 function UsersList() {
-  const [searchTerm, setSearchTerm] = useState("");
   const router = useRouter();
-  const [list, setList] = useState<Data[]>([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [limit, setLimit] = useState(10);
+  const [searchQuery, setSearchQuery] = useState("");
+
+  const { data: roles, isLoadingFetch: isLoadingFetchRoles } =
+    useFetchData<RoleRegionMembershipDataType>(`/api/admin/roles`, []);
+  const { data: regions, isLoadingFetch: isLoadingFetchRegions } =
+    useFetchData<RoleRegionMembershipDataType>(`/api/admin/regions`, []);
+  const { data: membership, isLoadingFetch: isLoadingFetchMembership } =
+    useFetchData<RoleRegionMembershipDataType>(`/api/admin/memberStatus`, []);
+
+  const [regionFilter, setRegionFilter] = useState("");
+  const [roleFilter, setRoleFilter] = useState("");
+  const [membershipFilter, setMembershipFilter] = useState("");
+
+  const [filterOn, setFilterOn] = useState(false);
+
   const paginatedUrl = useMemo(() => {
     const searchParams = new URLSearchParams();
     searchParams.append("page", currentPage.toString());
     searchParams.append("limit", limit.toString());
+    searchParams.append("search", searchQuery.toString());
+    searchParams.append("region", regionFilter.toString());
+    searchParams.append("role", roleFilter.toString());
+    searchParams.append("membership", membershipFilter.toString());
+
+    const hasFilter =
+      regionFilter || membershipFilter || roleFilter || searchQuery;
+    setFilterOn(!!hasFilter);
 
     return `/api/admin/users?${searchParams.toString()}`;
-  }, [limit, currentPage]);
+  }, [
+    limit,
+    currentPage,
+    searchQuery,
+    regionFilter,
+    roleFilter,
+    membershipFilter,
+  ]);
 
   const { data, isLoading, pagination } = usePaginatedData<Data[]>(
     paginatedUrl,
     [],
   );
 
+  const clearFilter = () => {
+    handleSearchQuery("");
+    handleRegionFilterChange("");
+    handleRoleFilterChange("");
+    setCurrentPage(1);
+  };
+
+  const handleSearchQuery = (searchQuery: string) => {
+    setSearchQuery(searchQuery);
+    setCurrentPage(1);
+  };
+
   const handlePageChange = (page: number) => {
     setCurrentPage(page);
     window.scrollTo({ top: 0, behavior: "smooth" });
+  };
+
+  const handleRoleFilterChange = (role: string) => {
+    setRoleFilter(role);
+    setCurrentPage(1);
+  };
+  const handleRegionFilterChange = (region: string) => {
+    setRegionFilter(region);
+    setCurrentPage(1);
+  };
+  const handleMembershipFilterChange = (membership: string) => {
+    setMembershipFilter(membership);
+    setCurrentPage(1);
   };
 
   const handleLimitChange = (limit: number) => {
@@ -58,51 +120,39 @@ function UsersList() {
     window.scroll({ top: 0, behavior: "smooth" });
   };
 
-  useEffect(() => {
-    if (data) {
-      setList(data);
-    }
-  }, [data]);
-
-  const filteredData = list?.filter((item) => {
-    const value = item["name" as keyof typeof item];
-
-    if (typeof value !== "string") return false;
-
-    return searchTerm === ""
-      ? true
-      : value.toLowerCase().includes(searchTerm.toLowerCase());
-  });
-
   return (
     <div
       className={`flex ${
-        isLoading ? "w-30 h-30 items-center justify-center" : " w-auto"
+        isLoading ? "items-center justify-center" : " w-auto"
       } flex-col mt-4 shadow-sm bg-gray-300/90 m-2  rounded-lg p-1.5 select-none`}
     >
-      <div
-        className={` ${
-          isLoading ? "hidden" : "flex"
-        } w-full items-center mt-1 justify-center`}
-      >
-        <input
-          className="flex text-sm w-full bg-gray-300 text-black input-def"
-          type="text"
-          name="search"
-          placeholder={`Find by Name`}
-          value={searchTerm}
-          onChange={(e) => setSearchTerm(e.target.value)}
+      <div className="flex text-black m-1 mb-2 w-full items-center justify-center">
+        <QueryFilter
+          filterType="USERS"
+          searchValue={searchQuery}
+          filterOn={filterOn}
+          clearFilter={clearFilter}
+          onSearchQueryChange={handleSearchQuery}
+          roleData={roles}
+          roleValue={roleFilter}
+          onRoleFilterChange={handleRoleFilterChange}
+          regionData={regions}
+          regionValue={regionFilter}
+          onRegionFilterChange={handleRegionFilterChange}
+          membershipData={membership}
+          membershipValue={membershipFilter}
+          onMembershipFilterChange={handleMembershipFilterChange}
         />
       </div>
       {isLoading ? (
         <div
-          className={`text-sm text-black ${
+          className={`text-sm m-2 text-black ${
             isLoading ? "animate-spin transition-all duration-300" : ""
           } font-bold`}
         >
           <ImSpinner9 className="animate-spin" size={25} />
         </div>
-      ) : filteredData.length > 0 ? (
+      ) : data.length > 0 ? (
         <>
           <div className=" hidden md:grid font-bold text-sm grid-cols-5 gap-4 uppercase grid-rows-1 select-none justify-start items-center bg-gray-100/80 text-gray-700 p-2 m-1 rounded-lg">
             <h3 className="flex justify-start items-center">Name & Email</h3>
@@ -119,7 +169,7 @@ function UsersList() {
               <h3 className="font-medium">Rating</h3>
             </div>
           </div>
-          {filteredData.map((user) => (
+          {data.map((user) => (
             <button
               onClick={() => router.push(`/admin/users/${user.id}`)}
               className="grid grid-cols-[2fr_auto] md:grid-cols-5 gap-1 md:gap-4 grid-rows-1 btn select-none text-sm justify-start items-center bg-white/80 text-black p-2 m-1 rounded-lg"

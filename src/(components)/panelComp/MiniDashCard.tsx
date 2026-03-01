@@ -2,6 +2,7 @@
 
 import axios from "axios";
 import React, {
+  BaseSyntheticEvent,
   FormEvent,
   useCallback,
   useEffect,
@@ -90,7 +91,7 @@ function MiniDashCard<U extends UserAddType | DataAddType>({
     return () => clearTimeout(timeoutId);
   }, [alert.isOpened]);
 
-  const createFunction = async (e: FormEvent<HTMLFormElement>) => {
+  const createFunction = async (e: BaseSyntheticEvent) => {
     try {
       e.preventDefault();
 

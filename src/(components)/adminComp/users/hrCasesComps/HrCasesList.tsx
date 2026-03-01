@@ -100,7 +100,7 @@ function HrCasesList({ fetchUrl }: { fetchUrl: string }) {
 
   const [currentPage, setCurrentPage] = useState(1);
   const [limit, setLimit] = useState(10);
-  const [statusFilter, setStatusFilter] = useState("");
+  const [statusFilter, setStatusFilter] = useState(""); 
   const [typeFilter, setTypeFilter] = useState("");
   const [searchQuery, setSearchQuery] = useState("");
   const [filterOn, setFilterOn] = useState(false);
@@ -184,6 +184,7 @@ function HrCasesList({ fetchUrl }: { fetchUrl: string }) {
     >
       <div className="flex flex-col items-center md:flex-row m-2 justify-center">
         <QueryFilter
+          filterType="HR-CASES"
           searchValue={searchQuery}
           statusValue={statusFilter}
           typeValue={typeFilter}

@@ -56,7 +56,7 @@ export const GET = async (req: NextRequest) => {
     const skip = (page - 1) * limit;
 
     const searchQuery = searchParams.get("search");
-    const regionFilter = searchParams.get("filter");
+    const regionFilter = searchParams.get("region");
     const roleFilter = searchParams.get("role");
     const membershipFilter = searchParams.get("membership");
 
@@ -75,12 +75,16 @@ export const GET = async (req: NextRequest) => {
       ];
     }
 
-    if (regionFilter && whereClause.ownAllowance) {
-      whereClause.ownAllowance.regionId = regionFilter;
+    if (regionFilter && whereClause.ownAllowance?.regionId) {
+      whereClause.ownAllowance = {
+        ...whereClause.ownAllowance,
+        regionId: regionFilter,
+      };
     }
 
-    if (roleFilter) {
+    if (roleFilter && whereClause.ownAllowance?.roles) {
       whereClause.ownAllowance = {
+        ...whereClause.ownAllowance,
         roles: {
           some: { roleId: roleFilter },
         },

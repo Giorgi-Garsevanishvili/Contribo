@@ -1,10 +1,14 @@
-import React, { FormEvent, useEffect, useState } from "react";
+import React, {
+  BaseSyntheticEvent,
+  FormEvent,
+  useEffect,
+  useState,
+} from "react";
 import { IoIosAddCircleOutline } from "react-icons/io";
 import LoadingComp from "../generalComp/LoadingComp";
 import useRegionRole from "@/hooks/useRegionRole";
 import { AiOutlineUserAdd } from "react-icons/ai";
 import RegionRoleSelect from "./RegionRoleSelect";
-import { IoMdAdd } from "react-icons/io";
 
 export type DataAddType = {
   name: string;
@@ -18,7 +22,7 @@ export type UserAddType = {
 
 type addDataProp =
   | {
-      onSubmit: (e: FormEvent<HTMLFormElement>) => void;
+      onSubmit: (e: BaseSyntheticEvent) => void;
       setDataAdd: React.Dispatch<React.SetStateAction<UserAddType>>;
       dataAdd: UserAddType;
       CompTitle: string;
@@ -26,7 +30,7 @@ type addDataProp =
       openTrigger: boolean;
     }
   | {
-      onSubmit: (e: FormEvent<HTMLFormElement>) => void;
+      onSubmit: (e: BaseSyntheticEvent) => void;
       setDataAdd: React.Dispatch<React.SetStateAction<DataAddType>>;
       dataAdd: DataAddType;
       CompTitle: string;
@@ -34,7 +38,7 @@ type addDataProp =
       openTrigger: boolean;
     }
   | {
-      onSubmit: (e: FormEvent<HTMLFormElement>) => void;
+      onSubmit: (e: BaseSyntheticEvent) => void;
       setDataAdd: React.Dispatch<React.SetStateAction<DataAddType>>;
       dataAdd: DataAddType;
       CompTitle: string;
@@ -42,7 +46,7 @@ type addDataProp =
       openTrigger: boolean;
     }
   | {
-      onSubmit: (e: FormEvent<HTMLFormElement>) => void;
+      onSubmit: (e: BaseSyntheticEvent) => void;
       setDataAdd: React.Dispatch<React.SetStateAction<DataAddType>>;
       dataAdd: DataAddType;
       CompTitle: string;
@@ -56,7 +60,6 @@ export const UserAddObj = { email: "", roleId: [""], regionId: "" };
 function CreationComponent(props: addDataProp) {
   const { loadingHook } = useRegionRole();
   const { onSubmit, CompTitle, type, setDataAdd, dataAdd } = props;
-
 
   return (
     <div

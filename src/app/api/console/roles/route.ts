@@ -19,7 +19,7 @@ export const GET = async (_req: NextRequest) => {
 
     if (data.length === 0) {
       return NextResponse.json(
-        { data, message: "No Regions To display" },
+        { data, message: "No Roles To display" },
         { status: 400 }
       );
     }
