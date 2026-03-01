@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { FcDeleteDatabase } from "react-icons/fc";
@@ -9,6 +9,7 @@ import { FaStar } from "react-icons/fa";
 import usePaginatedData from "@/hooks/usePaginatedData";
 import { ImSpinner9 } from "react-icons/im";
 import { IoIosArrowForward } from "react-icons/io";
+import Pagination from "@/(components)/generalComp/Pagination";
 
 type Data = {
   id: string;
@@ -31,8 +32,31 @@ function UsersList() {
   const [searchTerm, setSearchTerm] = useState("");
   const router = useRouter();
   const [list, setList] = useState<Data[]>([]);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [limit, setLimit] = useState(10);
+  const paginatedUrl = useMemo(() => {
+    const searchParams = new URLSearchParams();
+    searchParams.append("page", currentPage.toString());
+    searchParams.append("limit", limit.toString());
 
-  const { data, isLoading } = usePaginatedData<Data[]>(`/api/admin/users`, []);
+    return `/api/admin/users?${searchParams.toString()}`;
+  }, [limit, currentPage]);
+
+  const { data, isLoading, pagination } = usePaginatedData<Data[]>(
+    paginatedUrl,
+    [],
+  );
+
+  const handlePageChange = (page: number) => {
+    setCurrentPage(page);
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
+
+  const handleLimitChange = (limit: number) => {
+    setLimit(limit);
+    setCurrentPage(1);
+    window.scroll({ top: 0, behavior: "smooth" });
+  };
 
   useEffect(() => {
     if (data) {
@@ -54,7 +78,7 @@ function UsersList() {
     <div
       className={`flex ${
         isLoading ? "w-30 h-30 items-center justify-center" : " w-auto"
-      } flex-col mt-4 shadow-sm bg-gray-300/90  rounded-lg p-1.5 select-none`}
+      } flex-col mt-4 shadow-sm bg-gray-300/90 m-2  rounded-lg p-1.5 select-none`}
     >
       <div
         className={` ${
@@ -164,6 +188,15 @@ function UsersList() {
               </div>
             </button>
           ))}
+          {pagination ? (
+            <div className=" text-black">
+              <Pagination
+                pagination={pagination}
+                onLimitChange={handleLimitChange}
+                onPageChange={handlePageChange}
+              />{" "}
+            </div>
+          ) : null}
         </>
       ) : (
         "Users not found"

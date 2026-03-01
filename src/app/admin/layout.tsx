@@ -33,11 +33,11 @@ export default async function RootLayout({
     <div className="flex w-full grow items-center justify-center transition-all duration-200 flex-col p-0 m-0">
       <ConfirmTab />
       <SideBarToggle sideBar={<SideBar page="ADMIN" />}>
-        <div className="grow w-full flex justify-start items-start mb-22 md:mb-0 m-0 p-0">
+        <div className="grow w-full flex flex-col justify-center items-center mb-22 md:mb-0 m-0 p-0">
+          <NavBar page="ADMIN" />
+          <WelcomeBar />
           <main className="flex w-full flex-wrap justify-center m-0 items-center">
             <CompAlert />
-            <NavBar page="ADMIN" />
-            <WelcomeBar />
             {children}
           </main>
         </div>

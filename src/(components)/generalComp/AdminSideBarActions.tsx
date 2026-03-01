@@ -13,7 +13,7 @@ function AdminSideBarActions() {
   const currentPath = usePathname();
 
   return (
-    <div className="flex md:flex-col items-center md:items-start md:justify-between h-fit w-full">
+    <div className="flex md:flex-col m-0 items-center md:items-start md:justify-between h-fit w-full">
       <div className="pt-4 hidden md:flex pb-2 px-3 text-[10px] font-bold uppercase tracking-widest  text-slate-300">
         Admin Actions
       </div>

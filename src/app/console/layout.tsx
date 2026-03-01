@@ -49,19 +49,21 @@ export default async function RootLayout({
       <ConfirmTab />
 
       <SideBarToggle sideBar={<SideBar page="CONSOLE" />}>
-        <main className="flex flex-wrap justify-center min-h-full m-0 items-center">
-          <CompAlert />
-          <WelcomeBar />
+        <div className="grow w-full flex flex-col justify-center items-center mb-22 md:mb-0 m-0 p-0">
           <NavBar page="CONSOLE" />
-          {children}
-          {allowedUsers}
-          {eventRoles}
-          {hrWarningType}
-          {memberStatus}
-          {positions}
-          {roles}
-          {regions}
-        </main>
+          <WelcomeBar />
+          <main className="flex flex-wrap justify-center min-h-full m-0 items-center">
+            <CompAlert />
+            {children}
+            {allowedUsers}
+            {eventRoles}
+            {hrWarningType}
+            {memberStatus}
+            {positions}
+            {roles}
+            {regions}
+          </main>
+        </div>
         <MobileBar page="CONSOLE" />
       </SideBarToggle>
     </div>
