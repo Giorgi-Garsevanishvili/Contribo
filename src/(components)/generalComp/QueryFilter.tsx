@@ -22,7 +22,7 @@ type FilterType = "UNIVERSAL" | "HR-CASES" | "USERS";
 type FilterPropType =
   | {
       filterType: "HR-CASES";
-      typeData?: DataType; // For HR Cases
+      typeData: DataType; // For HR Cases
       typeValue: string; // For HR Cases
       statusValue: string; // For HR Cases
       searchValue: string;
@@ -34,14 +34,11 @@ type FilterPropType =
     }
   | {
       filterType: "USERS";
-      roleData?: RoleRegionMembershipDataType;
-      regionData?: RoleRegionMembershipDataType;
-      membershipData?: RoleRegionMembershipDataType;
-      regionValue: string;
+      roleData: RoleRegionMembershipDataType;
+      membershipData: RoleRegionMembershipDataType;
       roleValue: string;
       membershipValue: string;
       searchValue: string;
-      onRegionFilterChange: (region: string) => void;
       onRoleFilterChange: (role: string) => void;
       onMembershipFilterChange: (membership: string) => void;
       onSearchQueryChange: (search: string) => void;
@@ -51,7 +48,7 @@ type FilterPropType =
 
 function QueryFilter(props: FilterPropType) {
   return (
-    <div className="flex flex-col shadow-md shadow-white bg-gray-200/95 px-5 rounded-lg">
+    <div className="flex w-[20rem] md:w-auto  flex-col md:shadow-md shadow-white bg-gray-200/95 md:px-5 rounded-lg">
       <div className="flex mt-2 items-center justify-center">
         <h3 className="px-4">Filter</h3>
         <IoFilterSharp size={20} />
@@ -60,9 +57,9 @@ function QueryFilter(props: FilterPropType) {
       <div className="flex flex-col p-1 md:flex-row">
         {props.filterType === "HR-CASES" ? (
           <div
-            /** This Is Filters For HR cases */ className="flex flex-col p-1 md:flex-row"
+            /** This Is Filters For HR cases */ className="flex md:overflow-auto  overflow-x-scroll p-1 flex-row"
           >
-            <div className="flex m-2 w-full items-center justify-between">
+            <div className="flex bg-gray-300 ring-1 ring-gray-600/30 md:ring-0 p-1 rounded-md md:bg-transparent m-2 w-full items-center justify-between">
               <label
                 htmlFor="type"
                 className="text-gray-700 flex items-center justify-center m-0.5 h-full"
@@ -86,7 +83,7 @@ function QueryFilter(props: FilterPropType) {
                 ))}
               </select>
             </div>
-            <div className="flex m-2 w-full items-center justify-between">
+            <div className="flex bg-gray-300 ring-1 ring-gray-600/30 md:ring-0 p-1 rounded-md md:bg-transparent m-2 w-full items-center justify-between">
               <label
                 htmlFor="status"
                 className="text-gray-700 flex items-center justify-center m-0.5 h-full"
@@ -115,9 +112,9 @@ function QueryFilter(props: FilterPropType) {
           </div>
         ) : props.filterType === "USERS" ? (
           <div
-            /** This Is Filters For Users List */ className="flex flex-col p-1 md:flex-row"
+            /** This Is Filters For Users List */ className="flex md:overflow-auto  overflow-x-scroll p-1 flex-row"
           >
-            <div className="flex m-2 w-full items-center justify-between">
+            <div className="flex bg-gray-300 ring-1 ring-gray-600/30 md:ring-0 p-1 rounded-md md:bg-transparent m-2 w-full items-center justify-between">
               <label
                 htmlFor="type"
                 className="text-gray-700 flex items-center justify-center m-1 h-full"
@@ -141,31 +138,7 @@ function QueryFilter(props: FilterPropType) {
                 ))}
               </select>
             </div>
-            <div className="flex m-2 w-full items-center justify-between">
-              <label
-                htmlFor="type"
-                className="text-gray-700 flex items-center justify-center m-1 h-full"
-              >
-                Region:
-              </label>
-              <select
-                value={props.regionValue}
-                onChange={(e) => props.onRegionFilterChange(e.target.value)}
-                className="text-center px-0.5 h-fit rounded-sm bg-gray-300 cursor-pointer"
-                name="type"
-                id="type"
-              >
-                <option className="p-0 m-0" value="">
-                  ALL
-                </option>
-                {props.regionData?.map((item, index) => (
-                  <option key={index} value={item.id}>
-                    {item.name}
-                  </option>
-                ))}
-              </select>
-            </div>
-            <div className="flex m-2 w-full items-center justify-between">
+            <div className="flex bg-gray-300 ring-1 ring-gray-600/30 md:ring-0 p-1 rounded-md md:bg-transparent m-2 w-full items-center justify-between">
               <label
                 htmlFor="type"
                 className="text-gray-700 flex items-center justify-center m-1 h-full"
@@ -202,6 +175,7 @@ function QueryFilter(props: FilterPropType) {
             id="search"
           />
         </div>
+      </div>
         <button
           onClick={props.clearFilter}
           className={`${props.filterOn ? "flex" : "hidden"} btn px-5 py-0 bg-orange-100`}
@@ -209,7 +183,6 @@ function QueryFilter(props: FilterPropType) {
           Clear
           <MdFilterListOff className="mx-2" size={20} />
         </button>
-      </div>
     </div>
   );
 }

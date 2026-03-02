@@ -12,6 +12,7 @@ import { IoIosArrowForward } from "react-icons/io";
 import Pagination from "@/(components)/generalComp/Pagination";
 import QueryFilter from "@/(components)/generalComp/QueryFilter";
 import { useFetchData } from "@/hooks/useDataFetch";
+import { RiRefreshLine } from "react-icons/ri";
 
 type RoleRegionMembershipDataType = {
   id: string;
@@ -79,7 +80,7 @@ function UsersList() {
     membershipFilter,
   ]);
 
-  const { data, isLoading, pagination } = usePaginatedData<Data[]>(
+  const { data, isLoading, pagination, refetch } = usePaginatedData<Data[]>(
     paginatedUrl,
     [],
   );
@@ -123,26 +124,33 @@ function UsersList() {
   return (
     <div
       className={`flex ${
-        isLoading ? "items-center justify-center" : " w-auto"
-      } flex-col mt-4 shadow-sm bg-gray-300/90 m-2  rounded-lg p-1.5 select-none`}
+        isLoading ? "" : " w-auto"
+      } flex-col items-center justify-center mt-4 shadow-sm bg-gray-300/90 m-2  rounded-lg p-1.5 select-none`}
     >
       <div className="flex text-black m-1 mb-2 w-full items-center justify-center">
-        <QueryFilter
-          filterType="USERS"
-          searchValue={searchQuery}
-          filterOn={filterOn}
-          clearFilter={clearFilter}
-          onSearchQueryChange={handleSearchQuery}
-          roleData={roles}
-          roleValue={roleFilter}
-          onRoleFilterChange={handleRoleFilterChange}
-          regionData={regions}
-          regionValue={regionFilter}
-          onRegionFilterChange={handleRegionFilterChange}
-          membershipData={membership}
-          membershipValue={membershipFilter}
-          onMembershipFilterChange={handleMembershipFilterChange}
-        />
+        {roles && membership ? (
+          <QueryFilter
+            filterType="USERS"
+            searchValue={searchQuery}
+            filterOn={filterOn}
+            clearFilter={clearFilter}
+            onSearchQueryChange={handleSearchQuery}
+            roleData={roles}
+            roleValue={roleFilter}
+            onRoleFilterChange={handleRoleFilterChange}
+            membershipData={membership}
+            membershipValue={membershipFilter}
+            onMembershipFilterChange={handleMembershipFilterChange}
+          />
+        ) : (
+          <div
+            className={`text-sm m-2 text-black ${
+              isLoading ? "animate-spin transition-all duration-300" : ""
+            } font-bold`}
+          >
+            <ImSpinner9 className="animate-spin" size={25} />
+          </div>
+        )}
       </div>
       {isLoading ? (
         <div
@@ -152,105 +160,120 @@ function UsersList() {
         >
           <ImSpinner9 className="animate-spin" size={25} />
         </div>
-      ) : data.length > 0 ? (
-        <>
-          <div className=" hidden md:grid font-bold text-sm grid-cols-5 gap-4 uppercase grid-rows-1 select-none justify-start items-center bg-gray-100/80 text-gray-700 p-2 m-1 rounded-lg">
-            <h3 className="flex justify-start items-center">Name & Email</h3>
-            <div className="grid grid-cols-2 gap-2 justify-start items-center">
-              <h3 className=" flex overflow-hidden">MemberShip</h3>
-            </div>
-            <div className="md:flex hidden">
-              <h3 className="font-medium">Region</h3>
-            </div>
-            <div className="md:flex hidden">
-              <h3 className="font-medium">Role</h3>
-            </div>
-            <div className="md:flex hidden">
-              <h3 className="font-medium">Rating</h3>
-            </div>
-          </div>
-          {data.map((user) => (
-            <button
-              onClick={() => router.push(`/admin/users/${user.id}`)}
-              className="grid grid-cols-[2fr_auto] md:grid-cols-5 gap-1 md:gap-4 grid-rows-1 btn select-none text-sm justify-start items-center bg-white/80 text-black p-2 m-1 rounded-lg"
-              key={user.id}
-            >
-              <div className="flex justify-start items-center">
-                {user.image ? (
-                  <Image
-                    priority
-                    className="rounded-lg mr-3"
-                    src={user.image}
-                    alt="User Image"
-                    width={35}
-                    height={35}
-                  />
-                ) : (
-                  <FcDeleteDatabase className="mr-2" size={25} />
-                )}
-                <div className="flex grow justify-start flex-col truncate px-2 py-1.5">
-                  <h3 className="text-sm font-bold flex overflow-hidden truncate">
-                    {user.name}
-                  </h3>
-                  <h3 className="flex truncate text-xs text-gray-600">
-                    {user.email}
-                  </h3>
-                </div>
-              </div>
-              <div className="w-8 flex md:hidden items-center justify-center">
-                <IoIosArrowForward />
-              </div>
-
-              <div className="md:flex hidden truncate">
-                <h3 className="font-medium bg-gray-300/40 items-center justify-center flex w-1/2 rounded-sm py-1.5 border border-gray-400/50 truncate">
-                  {!user.name.startsWith("deleted")
-                    ? ` ${
-                        user.memberStatusLogs[user.memberStatusLogs.length - 1]
-                          ?.status?.name ?? "No Status"
-                      }`
-                    : ""}
-                </h3>
-              </div>
-
-              <div className="md:flex hidden jus items-center gap-1.5">
-                <IoMdGlobe size={18} className="text-gray-500" />
-                <h3 className="font-medium truncate">
-                  {user.ownAllowance.region.name}
-                </h3>
-              </div>
-
-              <div className="md:flex hidden">
-                <div className="font-medium flex gap-2 truncate">
-                  {user.ownAllowance.roles.map((role, index) => (
-                    <h2
-                      key={index}
-                      className="rounded-lg border px-1.5 py-0.5 bg-gray-300/50 border-gray-500/50"
-                    >
-                      {role.role.name}
-                    </h2>
-                  ))}
-                </div>
-              </div>
-
-              <div className="md:flex hidden font-bold items-start justify-start">
-                <FaStar size={18} className="text-yellow-500" />
-                <h3 className=" ml-2">{user.rating}</h3>
-              </div>
-            </button>
-          ))}
-          {pagination ? (
-            <div className=" text-black">
-              <Pagination
-                pagination={pagination}
-                onLimitChange={handleLimitChange}
-                onPageChange={handlePageChange}
-              />{" "}
-            </div>
-          ) : null}
-        </>
       ) : (
-        "Users not found"
+        <div className="flex flex-col">
+          {data.length > 0 ? (
+            <>
+              <div className=" hidden md:grid font-bold text-sm grid-cols-5 gap-4 uppercase grid-rows-1 select-none justify-start items-center bg-gray-100/80 text-gray-700 p-2 m-1 rounded-lg">
+                <h3 className="flex justify-start items-center">
+                  Name & Email
+                </h3>
+                <div className="grid grid-cols-2 gap-2 justify-start items-center">
+                  <h3 className=" flex overflow-hidden">MemberShip</h3>
+                </div>
+                <div className="md:flex hidden">
+                  <h3 className="font-medium">Region</h3>
+                </div>
+                <div className="md:flex hidden">
+                  <h3 className="font-medium">Role</h3>
+                </div>
+                <div className="md:flex hidden">
+                  <h3 className="font-medium">Rating</h3>
+                </div>
+              </div>
+              {data.map((user) => (
+                <button
+                  onClick={() => router.push(`/admin/users/${user.id}`)}
+                  className="grid grid-cols-[2fr_auto] md:grid-cols-5 gap-1 md:gap-4 grid-rows-1 btn select-none text-sm justify-start items-center bg-white/80 text-black p-2 m-1 rounded-lg"
+                  key={user.id}
+                >
+                  <div className="flex justify-start items-center">
+                    {user.image ? (
+                      <Image
+                        priority
+                        className="rounded-lg mr-3"
+                        src={user.image}
+                        alt="User Image"
+                        width={35}
+                        height={35}
+                      />
+                    ) : (
+                      <FcDeleteDatabase className="mr-2" size={25} />
+                    )}
+                    <div className="flex grow justify-start flex-col truncate px-2 py-1.5">
+                      <h3 className="text-sm font-bold flex overflow-hidden truncate">
+                        {user.name}
+                      </h3>
+                      <h3 className="flex truncate text-xs text-gray-600">
+                        {user.email}
+                      </h3>
+                    </div>
+                  </div>
+                  <div className="w-8 flex md:hidden items-center justify-center">
+                    <IoIosArrowForward />
+                  </div>
+
+                  <div className="md:flex hidden truncate">
+                    <h3 className="font-medium bg-gray-300/40 items-center justify-center flex w-1/2 rounded-sm py-1.5 border border-gray-400/50 truncate">
+                      {!user.name.startsWith("deleted")
+                        ? ` ${
+                            user.memberStatusLogs[
+                              user.memberStatusLogs.length - 1
+                            ]?.status?.name ?? "No Status"
+                          }`
+                        : ""}
+                    </h3>
+                  </div>
+
+                  <div className="md:flex hidden jus items-center gap-1.5">
+                    <IoMdGlobe size={18} className="text-gray-500" />
+                    <h3 className="font-medium truncate">
+                      {user.ownAllowance.region.name}
+                    </h3>
+                  </div>
+
+                  <div className="md:flex hidden">
+                    <div className="font-medium flex gap-2 truncate">
+                      {user.ownAllowance.roles.map((role, index) => (
+                        <h2
+                          key={index}
+                          className="rounded-lg border px-1.5 py-0.5 bg-gray-300/50 border-gray-500/50"
+                        >
+                          {role.role.name}
+                        </h2>
+                      ))}
+                    </div>
+                  </div>
+
+                  <div className="md:flex hidden font-bold items-start justify-start">
+                    <FaStar size={18} className="text-yellow-500" />
+                    <h3 className=" ml-2">{user.rating}</h3>
+                  </div>
+                </button>
+              ))}
+            </>
+          ) : (
+            <div className="flex flex-col mt-2 text-black bg-gray-100/60 items-center rounded-lg shadow-lg p-10 justify-center">
+              <h3 className="font-bold">No Users to display.</h3>
+              <button
+                className="btn text-gray-300 bg-cyan-900"
+                onClick={refetch}
+              >
+                <RiRefreshLine size={22} className="mr-2" /> Refetch
+              </button>
+            </div>
+          )}
+        </div>
       )}
+      {pagination ? (
+        <div className=" text-black">
+          <Pagination
+            pagination={pagination}
+            onLimitChange={handleLimitChange}
+            onPageChange={handlePageChange}
+          />{" "}
+        </div>
+      ) : null}
     </div>
   );
 }

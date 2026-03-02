@@ -9,6 +9,7 @@ import { useParams } from "next/navigation";
 import DeleteButtonAdmin from "../DeleteButtonAdmin";
 import { ImSpinner9 } from "react-icons/im";
 import HrCaseCard from "./HrCaseCard";
+import { RiRefreshLine } from "react-icons/ri";
 
 type Data = {
   id: string;
@@ -100,7 +101,7 @@ function HrCasesList({ fetchUrl }: { fetchUrl: string }) {
 
   const [currentPage, setCurrentPage] = useState(1);
   const [limit, setLimit] = useState(10);
-  const [statusFilter, setStatusFilter] = useState(""); 
+  const [statusFilter, setStatusFilter] = useState("");
   const [typeFilter, setTypeFilter] = useState("");
   const [searchQuery, setSearchQuery] = useState("");
   const [filterOn, setFilterOn] = useState(false);
@@ -183,18 +184,29 @@ function HrCasesList({ fetchUrl }: { fetchUrl: string }) {
       className={`flex w-full items-center justify-center xl:px-25 xl:py-5 px-2 flex-col`}
     >
       <div className="flex flex-col items-center md:flex-row m-2 justify-center">
-        <QueryFilter
-          filterType="HR-CASES"
-          searchValue={searchQuery}
-          statusValue={statusFilter}
-          typeValue={typeFilter}
-          clearFilter={clearFilter}
-          typeData={types}
-          onSearchQueryChange={handleSearchQuery}
-          onStatusFilterChange={handleStatusFilterChange}
-          onTypeFilterChange={handleTypeFilterChange}
-          filterOn={filterOn}
-        />
+        <div className="flex text-black m-1 mb-2 w-full items-center justify-center">
+          {types ? (
+            <QueryFilter
+              filterType="HR-CASES"
+              searchValue={searchQuery}
+              statusValue={statusFilter}
+              typeValue={typeFilter}
+              clearFilter={clearFilter}
+              typeData={types}
+              onSearchQueryChange={handleSearchQuery}
+              onStatusFilterChange={handleStatusFilterChange}
+              onTypeFilterChange={handleTypeFilterChange}
+              filterOn={filterOn}
+            />
+          ) : (
+            <div
+              className={`text-sm m-2 p-5 rounded-md bg-gray-300 text-black font-bold`}
+            >
+              <ImSpinner9 className="animate-spin" size={25} />
+            </div>
+          )}
+        </div>
+
         <div className="flex shadow-md shadow-white bg-gray-200/95 p-2 m-2 rounded-lg">
           <button
             onClick={() => setColorInfoOpen(!colorInfoOpen)}
@@ -256,10 +268,10 @@ function HrCasesList({ fetchUrl }: { fetchUrl: string }) {
           />
         ))
       ) : (
-        <div className="flex bg-gray-100/60 items-center rounded-lg shadow-lg p-10 justify-center">
-          <h3 className="font-bold">No HR cases to display.</h3>
-          <button className="btn" onClick={refetch}>
-            Refetch
+        <div className="flex flex-col mt-2 text-black bg-gray-100/90  items-center rounded-lg shadow-lg p-10 justify-center">
+          <h3 className="font-bold">No HR Cases to display.</h3>
+          <button className="btn text-gray-300 bg-cyan-900" onClick={refetch}>
+            <RiRefreshLine size={22} className="mr-2" /> Refetch
           </button>
         </div>
       )}

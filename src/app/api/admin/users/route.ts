@@ -75,13 +75,6 @@ export const GET = async (req: NextRequest) => {
       ];
     }
 
-    if (regionFilter && whereClause.ownAllowance?.regionId) {
-      whereClause.ownAllowance = {
-        ...whereClause.ownAllowance,
-        regionId: regionFilter,
-      };
-    }
-
     if (roleFilter && whereClause.ownAllowance?.roles) {
       whereClause.ownAllowance = {
         ...whereClause.ownAllowance,

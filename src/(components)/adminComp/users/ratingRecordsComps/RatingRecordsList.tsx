@@ -199,6 +199,7 @@ function RatingRecordsList({ fetchUrl }: { fetchUrl: string }) {
       ) : sortedData && sortedData?.length > 0 ? (
         sortedData?.map((item) => (
           <RatingCard
+            key={item.id}
             item={item}
             isOpenId={isOpenId}
             onEdit={onEdit}
