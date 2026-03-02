@@ -1,4 +1,4 @@
-import { HrWarningStatus } from "@/generated/enums";
+import { HrWarningStatus, RatingAction } from "@/generated/enums";
 import { IoFilterSharp } from "react-icons/io5";
 import { MdFilterListOff } from "react-icons/md";
 
@@ -17,7 +17,7 @@ type DataType = {
   updatedAt: string;
 }[];
 
-type FilterType = "UNIVERSAL" | "HR-CASES" | "USERS";
+type FilterType = "UNIVERSAL" | "HR-CASES" | "USERS" | "RATING";
 
 type FilterPropType =
   | {
@@ -41,6 +41,16 @@ type FilterPropType =
       searchValue: string;
       onRoleFilterChange: (role: string) => void;
       onMembershipFilterChange: (membership: string) => void;
+      onSearchQueryChange: (search: string) => void;
+      filterOn: boolean;
+      clearFilter: () => void;
+    }
+  | {
+      filterType: "RATING";
+
+      searchValue: string;
+      actionValue: string;
+      onActionFilterChange: (action: string) => void;
       onSearchQueryChange: (search: string) => void;
       filterOn: boolean;
       clearFilter: () => void;
@@ -116,7 +126,7 @@ function QueryFilter(props: FilterPropType) {
           >
             <div className="flex bg-gray-300 ring-1 ring-gray-600/30 md:ring-0 p-1 rounded-md md:bg-transparent m-2 w-full items-center justify-between">
               <label
-                htmlFor="type"
+                htmlFor="role"
                 className="text-gray-700 flex items-center justify-center m-1 h-full"
               >
                 Role:
@@ -125,8 +135,8 @@ function QueryFilter(props: FilterPropType) {
                 value={props.roleValue}
                 onChange={(e) => props.onRoleFilterChange(e.target.value)}
                 className="text-center px-0.5 h-fit rounded-sm bg-gray-300 cursor-pointer"
-                name="type"
-                id="type"
+                name="role"
+                id="role"
               >
                 <option className="p-0 m-0" value="">
                   ALL
@@ -140,7 +150,7 @@ function QueryFilter(props: FilterPropType) {
             </div>
             <div className="flex bg-gray-300 ring-1 ring-gray-600/30 md:ring-0 p-1 rounded-md md:bg-transparent m-2 w-full items-center justify-between">
               <label
-                htmlFor="type"
+                htmlFor="membership"
                 className="text-gray-700 flex items-center justify-center m-1 h-full"
               >
                 Membership:
@@ -149,8 +159,8 @@ function QueryFilter(props: FilterPropType) {
                 value={props.membershipValue}
                 onChange={(e) => props.onMembershipFilterChange(e.target.value)}
                 className="text-center px-0.5 h-fit rounded-sm bg-gray-300 cursor-pointer"
-                name="type"
-                id="type"
+                name="membership"
+                id="membership"
               >
                 <option className="p-0 m-0" value="">
                   ALL
@@ -158,6 +168,35 @@ function QueryFilter(props: FilterPropType) {
                 {props.membershipData?.map((item, index) => (
                   <option key={index} value={item.id}>
                     {item.name}
+                  </option>
+                ))}
+              </select>
+            </div>
+          </div>
+        ) : props.filterType === "RATING" ? (
+          <div
+            /** This Is Filters For Rating List */ className="flex md:overflow-auto  overflow-x-scroll p-1 flex-row"
+          >
+            <div className="flex bg-gray-300 ring-1 ring-gray-600/30 md:ring-0 p-1 rounded-md md:bg-transparent m-2 w-full items-center justify-between">
+              <label
+                htmlFor="type"
+                className="text-gray-700 flex items-center justify-center m-1 h-full"
+              >
+                Action
+              </label>
+              <select
+                value={props.actionValue}
+                onChange={(e) => props.onActionFilterChange(e.target.value)}
+                className="text-center px-0.5 h-fit rounded-sm bg-gray-300 cursor-pointer"
+                name="action"
+                id="action"
+              >
+                <option className="p-0 m-0" value="">
+                  ALL
+                </option>
+                {Object.values(RatingAction)?.map((item, index) => (
+                  <option key={index} value={item}>
+                    {item}
                   </option>
                 ))}
               </select>
@@ -176,13 +215,13 @@ function QueryFilter(props: FilterPropType) {
           />
         </div>
       </div>
-        <button
-          onClick={props.clearFilter}
-          className={`${props.filterOn ? "flex" : "hidden"} btn px-5 py-0 bg-orange-100`}
-        >
-          Clear
-          <MdFilterListOff className="mx-2" size={20} />
-        </button>
+      <button
+        onClick={props.clearFilter}
+        className={`${props.filterOn ? "flex" : "hidden"} btn px-5 py-0 bg-orange-100`}
+      >
+        Clear
+        <MdFilterListOff className="mx-2" size={20} />
+      </button>
     </div>
   );
 }

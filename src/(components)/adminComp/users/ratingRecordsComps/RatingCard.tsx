@@ -1,6 +1,9 @@
 import { FaAngleDown } from "react-icons/fa";
 import { FaAngleUp } from "react-icons/fa";
 import DeleteButtonAdmin from "../DeleteButtonAdmin";
+import RatingUpdate from "./RatingRecordUpdate";
+
+import { TbPencil, TbPencilCancel } from "react-icons/tb";
 
 type Data = {
   id: string;
@@ -136,13 +139,9 @@ function RatingCard({
               </h3>
             </div>
           </div>
-          {/* <div className={`${onEdit === item.id ? "flex" : "hidden"}`}>
-                  <HrCaseUpdate
-                    refetch={refetch}
-                    id={item.id}
-                    extraData1={types}
-                  />
-                </div> */}
+          <div className={`${onEdit === item.id ? "flex" : "hidden"}`}>
+            <RatingUpdate refetch={refetch} id={item.id} />
+          </div>
         </div>
         <div className="flex p-1 md:m-4  lg:flex-col">
           <DeleteButtonAdmin
@@ -154,9 +153,17 @@ function RatingCard({
             onClick={() => {
               setOnEdit(onEdit === item.id ? "" : isOpenId);
             }}
-            className={`btn grow`}
+            className={`btn ${onEdit === item.id ? "bg-gray-600" : "bg-blue-950"}  text-white grow`}
           >
-            {onEdit === item.id ? "Close" : "Edit"}
+            {onEdit === item.id ? (
+              <>
+                <TbPencilCancel size={22} className="mr-2" /> Close
+              </>
+            ) : (
+              <>
+                <TbPencil size={22} className="mr-2" /> Edit{" "}
+              </>
+            )}
           </button>
         </div>
       </div>

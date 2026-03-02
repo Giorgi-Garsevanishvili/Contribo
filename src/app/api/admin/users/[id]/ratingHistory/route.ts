@@ -1,3 +1,5 @@
+import { RatingAction } from "@/generated/enums";
+import { RatingHistoryWhereInput } from "@/generated/models";
 import { handleError } from "@/lib/errors/handleErrors";
 import { prisma } from "@/lib/prisma";
 import { requireRole } from "@/lib/serverAuth";
@@ -5,6 +7,15 @@ import { RatingCreate } from "@/lib/zod";
 import { Context } from "@/types/general-types";
 import { NextRequest, NextResponse } from "next/server";
 import z from "zod";
+
+type PaginationMeta = {
+  currentPage: number;
+  totalPages: number;
+  totalCount: number;
+  limit: number;
+  hasNextPage: boolean;
+  hasPrevPage: boolean;
+};
 
 export const POST = async (req: NextRequest, context: Context) => {
   try {
@@ -59,7 +70,7 @@ export const POST = async (req: NextRequest, context: Context) => {
       const oldRecords = await tx.ratingHistory.findMany({
         where: { userId: id },
         orderBy: { createdAt: "desc" },
-        skip: 30,
+        skip: 1000,
         select: { id: true },
       });
 
@@ -93,7 +104,7 @@ export const POST = async (req: NextRequest, context: Context) => {
   }
 };
 
-export const GET = async (_req: NextRequest, context: Context) => {
+export const GET = async (req: NextRequest, context: Context) => {
   try {
     await requireRole("ADMIN");
     const { id } = await context.params;
@@ -102,10 +113,51 @@ export const GET = async (_req: NextRequest, context: Context) => {
       return NextResponse.json({ message: "Id is missing!" });
     }
 
+    const { searchParams } = new URL(req.url);
+
+    const actionFilter = searchParams.get("action");
+    const searchQuery = searchParams.get("search");
+
+    const whereClause: RatingHistoryWhereInput = {
+      userId: id,
+    };
+
+    if (actionFilter) {
+      whereClause.action = actionFilter as RatingAction;
+    }
+
+    if (searchQuery && searchQuery.trim()) {
+      whereClause.OR = [
+        {
+          reason: { contains: searchQuery.trim(), mode: "insensitive" },
+        },
+      ];
+    }
+
+    const page = Math.max(1, parseInt(searchParams.get("page") || "1"));
+    const limit = Math.min(
+      100,
+      Math.max(1, parseInt(searchParams.get("limit") || "10")),
+    );
+    const skip = (page - 1) * limit;
+
+    const totalCount = await prisma.ratingHistory.count({ where: whereClause });
+
+    const totalPages = Math.ceil(totalCount / limit);
+    const hasNextPage = page < totalPages;
+    const hasPrevPage = page > 1;
+
+    const pagination: PaginationMeta = {
+      currentPage: page,
+      totalCount,
+      totalPages,
+      limit,
+      hasNextPage,
+      hasPrevPage,
+    };
+
     const data = await prisma.ratingHistory.findMany({
-      where: {
-        userId: id,
-      },
+      where: whereClause,
       select: {
         updatedBy: { select: { name: true } },
         createdBy: { select: { name: true } },
@@ -119,9 +171,17 @@ export const GET = async (_req: NextRequest, context: Context) => {
         reason: true,
         id: true,
       },
+      orderBy: { createdAt: "desc" },
+      take: limit,
+      skip,
     });
 
-    if (!data || data.length === 0) {
+    const response = {
+      data,
+      pagination,
+    };
+
+    if (!response.data || response.data.length === 0) {
       return NextResponse.json(
         {
           data,
@@ -131,7 +191,7 @@ export const GET = async (_req: NextRequest, context: Context) => {
       );
     }
 
-    return NextResponse.json({ data: data });
+    return NextResponse.json({ records: response }, { status: 200 });
   } catch (error) {
     const { status, message } = handleError(error);
     return NextResponse.json({ message: message }, { status: status });

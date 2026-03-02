@@ -224,18 +224,20 @@ function HrCasesList({ fetchUrl }: { fetchUrl: string }) {
           ) : null}
         </div>
         <div
-          className={`${colorInfoOpen ? "fixed" : "hidden"} bg-gray-800/95 p-5 rounded-2xl shadow-lg shadow-white z-50 w-auto `}
+          className={`${colorInfoOpen ? "fixed" : "hidden"} bg-gray-800/95 p-5 bottom-20 rounded-2xl shadow-md shadow-white z-200 w-auto `}
         >
           <div className="flex items-center justify-between">
-            <h3 className="m-2 text-white">Color Definition of Cards</h3>
+            <div>
+              <h3 className="m-2 text-white">Color Definition of Cards</h3>
+            </div>
             <button
               onClick={() => setColorInfoOpen(!colorInfoOpen)}
-              className="flex btn border border-gray-900/90 bg-gray-100/85 items-center rounded-2xl shadow-lg p-0.5 justify-center"
+              className="absolute -top-12 right-0 btn border md:-top-4 flex md:relative border-gray-900/90 bg-gray-100/85 items-center rounded-2xl shadow-lg p-0.5 justify-center"
             >
               <IoIosCloseCircle size={32} />
             </button>
           </div>
-          <div className="grid grid-cols-2">
+          <div className="grid bg-gray-200 text-gray-900 rounded-md p-2 grid-cols-2">
             {Object.entries(WARNING_STATUS_COLORS).map(
               ([status, colors], index) => (
                 <div

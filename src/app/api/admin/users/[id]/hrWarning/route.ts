@@ -1,8 +1,5 @@
 import { HrWarningStatus } from "@/generated/enums";
-import {
-  HrWarningWhereInput,
-  HrWarningWhereUniqueInput,
-} from "@/generated/models";
+import { HrWarningWhereInput } from "@/generated/models";
 import { handleError } from "@/lib/errors/handleErrors";
 import { prisma } from "@/lib/prisma";
 import { requireRole } from "@/lib/serverAuth";

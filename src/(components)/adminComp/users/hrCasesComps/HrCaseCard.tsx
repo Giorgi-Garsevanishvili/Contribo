@@ -2,6 +2,7 @@ import HrCaseUpdate from "./HrCaseUpdate";
 import { FaAngleDown } from "react-icons/fa";
 import { FaAngleUp } from "react-icons/fa";
 import DeleteButtonAdmin from "../DeleteButtonAdmin";
+import { TbPencil, TbPencilCancel } from "react-icons/tb";
 type Data = {
   id: string;
   name: string;
@@ -194,11 +195,19 @@ function HrCaseCard({
           />
           <button
             onClick={() => {
-              setOnEdit(onEdit === item.id ? "" : item.id);
+              setOnEdit(onEdit === item.id ? "" : isOpenId);
             }}
-            className={`btn grow`}
+            className={`btn ${onEdit === item.id ? "bg-gray-600" : "bg-blue-950"}  text-white grow`}
           >
-            {onEdit === item.id ? "Close" : "Edit"}
+            {onEdit === item.id ? (
+              <>
+                <TbPencilCancel size={22} className="mr-2" /> Close
+              </>
+            ) : (
+              <>
+                <TbPencil size={22} className="mr-2" /> Edit{" "}
+              </>
+            )}
           </button>
         </div>
       </div>
