@@ -61,6 +61,17 @@ export const PUT = async (req: NextRequest, context: Context) => {
 
     const body = UpdateMemberStatusLog.parse(jsonWithCreator);
 
+    const recordEnded = await prisma.memberStatusLog.findUnique({
+      where: { id, ended: true },
+    });
+
+    if (recordEnded) {
+      return NextResponse.json(
+        { message: "MemberStatusLog Record Closed Can`t Update" },
+        { status: 200 },
+      );
+    }
+
     await prisma.memberStatusLog.update({
       where: { id, ended: false },
       data: body,

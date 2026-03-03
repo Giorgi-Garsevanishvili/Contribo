@@ -27,7 +27,14 @@ export const GET = async (_req: NextRequest, context: Context) => {
         status: { select: { name: true } },
         id: true,
         ended: true,
+        createdAt: true,
+        updatedAt: true,
+        createdBy: { select: { name: true } },
+        updatedBy: { select: { name: true } },
+        startedAt: true,
+        endedAt: true,
       },
+      orderBy: { startedAt: "desc" },
     });
 
     if (!data || data.length === 0) {
@@ -94,6 +101,33 @@ export const POST = async (req: NextRequest, context: Context) => {
       },
       { status: 201 },
     );
+  } catch (error) {
+    const { message, status } = handleError(error);
+    return NextResponse.json({ message }, { status });
+  }
+};
+
+export const DELETE = async (_req: NextRequest, context: Context) => {
+  try {
+    const thisUser = await requireRole("ADMIN");
+    const { id } = await context.params;
+
+    const deleted = await prisma.memberStatusLog.deleteMany({
+      where: {
+        user: {
+          ownAllowance: { regionId: thisUser.user.ownAllowance?.regionId },
+          id,
+        },
+      },
+    });
+
+    if (!deleted) {
+      return NextResponse.json({ message: "Nothing Deleted!" });
+    }
+
+    return NextResponse.json({
+      message: `${deleted.count} Membership Log Records, deleted. `,
+    });
   } catch (error) {
     const { message, status } = handleError(error);
     return NextResponse.json({ message }, { status });

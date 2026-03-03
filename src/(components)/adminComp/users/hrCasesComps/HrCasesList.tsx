@@ -207,7 +207,7 @@ function HrCasesList({ fetchUrl }: { fetchUrl: string }) {
           )}
         </div>
 
-        <div className="flex shadow-md shadow-white bg-gray-200/95 p-2 m-2 rounded-lg">
+        <div className="flex w-full shadow-md shadow-white bg-gray-200/95 p-2 m-2 rounded-lg">
           <button
             onClick={() => setColorInfoOpen(!colorInfoOpen)}
             className="flex btn border border-gray-900/90 bg-gray-100/85 items-center rounded-2xl m-2 shadow-lg p-2 justify-center"
@@ -216,7 +216,7 @@ function HrCasesList({ fetchUrl }: { fetchUrl: string }) {
           </button>
           {sortedData.length > 0 ? (
             <DeleteButtonAdmin
-            styleClass="bg-red-900 text-white"
+              styleClass="bg-red-900 text-white"
               extraTXT="Delete All"
               url={`/api/admin/users/${id}/hrWarning`}
               fetchAction={refetch}

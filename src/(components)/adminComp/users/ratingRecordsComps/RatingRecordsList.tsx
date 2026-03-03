@@ -202,10 +202,7 @@ function RatingRecordsList({ fetchUrl }: { fetchUrl: string }) {
         ))
       ) : (
         <div className="flex bg-gray-100/60 items-center rounded-lg shadow-lg p-10 justify-center">
-          <h3 className="font-bold">No HR cases to display.</h3>
-          <button className="btn" onClick={refetch}>
-            Refetch
-          </button>
+          <h3 className="font-bold">No Rating Records to display.</h3>
         </div>
       )}
       {pagination ? (

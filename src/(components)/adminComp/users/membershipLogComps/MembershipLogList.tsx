@@ -3,11 +3,11 @@ import usePaginatedData from "@/hooks/usePaginatedData";
 import { useParams } from "next/navigation";
 import DeleteButtonAdmin from "../DeleteButtonAdmin";
 import { ImSpinner9 } from "react-icons/im";
-import PositionCard from "./PositionCard";
+import MembershipCard from "./MembershipCard";
 
 type Data = {
   user: { name: true };
-  position: { name: true };
+  status: { name: true };
   id: string;
   ended: boolean;
   createdAt: string;
@@ -18,7 +18,7 @@ type Data = {
   endedAt: string;
 };
 
-function PositionHistoryList({ fetchUrl }: { fetchUrl: string }) {
+function MembershipList({ fetchUrl }: { fetchUrl: string }) {
   const [onEdit, setOnEdit] = useState("");
   const params = useParams();
   const id = params.userId;
@@ -47,9 +47,9 @@ function PositionHistoryList({ fetchUrl }: { fetchUrl: string }) {
             <DeleteButtonAdmin
               styleClass="bg-red-900 text-white"
               extraTXT="Delete All"
-              url={`/api/admin/users/${id}/positionHistory`}
+              url={`/api/admin/users/${id}/memberStatusLog`}
               fetchAction={refetch}
-              value={`All Position History Records for ${data[0].user?.name}?`}
+              value={`All Membership Log Records for ${data[0].user?.name}?`}
             />
           </div>
         ) : null}
@@ -61,7 +61,7 @@ function PositionHistoryList({ fetchUrl }: { fetchUrl: string }) {
         </div>
       ) : sortedData && sortedData?.length > 0 ? (
         sortedData?.map((item) => (
-          <PositionCard
+          <MembershipCard
             key={item.id}
             item={item}
             onEdit={onEdit}
@@ -71,11 +71,11 @@ function PositionHistoryList({ fetchUrl }: { fetchUrl: string }) {
         ))
       ) : (
         <div className="flex bg-gray-100/60 items-center rounded-lg shadow-lg p-10 justify-center">
-          <h3 className="font-bold">No Position Histories to display.</h3>
+          <h3 className="font-bold">No Membership Logs to display.</h3>
         </div>
       )}
     </div>
   );
 }
 
-export default PositionHistoryList;
+export default MembershipList;

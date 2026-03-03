@@ -31,10 +31,7 @@ function User() {
 
   return (
     <div className="flex flex-col">
-      <UserInfo
-        refetchKey={refetchKey}
-        openData={openAccess}
-      />
+      <UserInfo refetchKey={refetchKey} openData={openAccess} />
       <div
         className={`${openStats ? "flex" : "hidden"} md:flex-row md:flex flex-col items-center justify-between`}
       >
@@ -61,7 +58,7 @@ function User() {
         />
         <UserInfoButtons
           refetchKey={refetchKey}
-          URLPath="memberStatusRecords"
+          URLPath="membership-log"
           Icon={FaBoxArchive}
           title="Member Status Logs"
           APIPath="memberStatusLog"

@@ -106,3 +106,30 @@ export const POST = async (req: NextRequest, context: Context) => {
     return NextResponse.json({ message }, { status });
   }
 };
+
+export const DELETE = async (_req: NextRequest, context: Context) => {
+  try {
+    const thisUser = await requireRole("ADMIN");
+    const { id } = await context.params;
+
+    const deleted = await prisma.positionHistory.deleteMany({
+      where: {
+        user: {
+          ownAllowance: { regionId: thisUser.user.ownAllowance?.regionId },
+          id,
+        },
+      },
+    });
+
+    if (!deleted) {
+      return NextResponse.json({ message: "Nothing Deleted!" });
+    }
+
+    return NextResponse.json({
+      message: `${deleted.count} Position History Records, deleted. `,
+    });
+  } catch (error) {
+    const { message, status } = handleError(error);
+    return NextResponse.json({ message }, { status });
+  }
+};
