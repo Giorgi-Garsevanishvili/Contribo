@@ -51,7 +51,7 @@ export function useDeleteData<T>(
         isOpened: true,
       });
       if (response.data.logOut) {
-       return setTimeout(async () => {
+        return setTimeout(async () => {
           await signOut({ callbackUrl: "/" });
         }, 4000);
       }
@@ -61,7 +61,6 @@ export function useDeleteData<T>(
       setSuccess(false);
       setError(`${error}`);
       console.log(error);
-      
 
       triggerCompAlertRef.current({
         message: `${error}`,

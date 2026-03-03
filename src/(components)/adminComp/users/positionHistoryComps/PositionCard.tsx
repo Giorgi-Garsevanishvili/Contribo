@@ -87,7 +87,7 @@ function PositionCard({
               </button>
               <DeleteButtonAdmin
                 styleClass="bg-transparent hover:text-red-900 hover:border-red-600/40 w-fit h-fit p-1 m-0  border-gray-500/30 border"
-                url={`/api/admin/ratingHistory/${item.id}`}
+                url={`/api/admin/positionHistory/${item.id}`}
                 fetchAction={refetch}
                 value={`Position: ${item.position.name} for ${item.user?.name}`}
               />

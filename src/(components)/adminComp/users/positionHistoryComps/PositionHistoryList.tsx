@@ -47,9 +47,9 @@ function PositionHistoryList({ fetchUrl }: { fetchUrl: string }) {
             <DeleteButtonAdmin
               styleClass="bg-red-900 text-white"
               extraTXT="Delete All"
-              url={`/api/admin/users/${id}/ratingHistory`}
+              url={`/api/admin/users/${id}/positionHistory`}
               fetchAction={refetch}
-              value={`All Rating Records for ${data[0].user?.name}?`}
+              value={`All Position History Records for ${data[0].user?.name}?`}
             />
           ) : null}
         </div>

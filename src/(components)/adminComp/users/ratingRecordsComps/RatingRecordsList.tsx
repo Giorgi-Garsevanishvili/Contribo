@@ -144,7 +144,8 @@ function RatingRecordsList({ fetchUrl }: { fetchUrl: string }) {
           </button>
           {sortedData.length > 0 ? (
             <DeleteButtonAdmin
-              extraTXT="All"
+              styleClass="bg-red-900 text-white"
+              extraTXT=" Delete All"
               url={`/api/admin/users/${id}/ratingHistory`}
               fetchAction={refetch}
               value={`All Rating Records for ${sortedData[0].user?.name}?`}

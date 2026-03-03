@@ -143,25 +143,26 @@ function RatingCard({
             <RatingUpdate refetch={refetch} id={item.id} />
           </div>
         </div>
-        <div className="flex p-1 md:m-4  lg:flex-col">
+        <div className="flex p-1 m-2 gap-2 items-center w-full md:w-auto  justify-center  lg:flex-col">
           <DeleteButtonAdmin
+            styleClass="bg-transparent hover:text-red-900 hover:border-red-600/40 w-fit h-fit p-1 m-0  border-gray-500/30 border"
             url={`/api/admin/ratingHistory/${item.id}`}
             fetchAction={refetch}
             value={`${item.action} with value of ${item.value} for ${item.user?.name}`}
           />
           <button
             onClick={() => {
-              setOnEdit(onEdit === item.id ? "" : isOpenId);
+              setOnEdit(onEdit === item.id ? "" : item.id);
             }}
-            className={`btn ${onEdit === item.id ? "bg-gray-600" : "bg-blue-950"}  text-white grow`}
+            className={`btn items-center justify-center  ${onEdit === item.id ? "bg-gray-600 border-red-600/40 text-red-900" : "hover:text-blue-950 hover:border-blue-800"} bg-transparent m-0 p-1 border border-gray-500/30 h-fit w-fit grow`}
           >
             {onEdit === item.id ? (
               <>
-                <TbPencilCancel size={22} className="mr-2" /> Close
+                <TbPencilCancel size={22} />
               </>
             ) : (
               <>
-                <TbPencil size={22} className="mr-2" /> Edit{" "}
+                <TbPencil size={22} />
               </>
             )}
           </button>
