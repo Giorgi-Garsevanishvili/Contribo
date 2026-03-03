@@ -1,15 +1,19 @@
 import { useDeleteData } from "@/hooks/useDeleteData";
+import { RiDeleteBin6Fill } from "react-icons/ri";
+import { ClassNameValue } from "tailwind-merge";
 
 function DeleteButtonAdmin({
   url,
   fetchAction,
   extraTXT,
-  value
+  value,
+  styleClass,
 }: {
   url: string;
   fetchAction?: () => void;
   extraTXT?: string;
-  value:string
+  value: string;
+  styleClass: ClassNameValue
 }) {
   const { deleteData, isLoadingDelete } = useDeleteData(
     url,
@@ -22,9 +26,16 @@ function DeleteButtonAdmin({
   return (
     <button
       onClick={deleteData}
-      className={`${isLoadingDelete ? "animate-pulse" : ""} btn grow bg-red-800 text-white `}
+      className={`${isLoadingDelete ? "animate-pulse" : ""} btn grow ${styleClass}`}
     >
-      {extraTXT ? `Delete ${extraTXT}` : "Delete"}
+      {extraTXT ? (
+        <>
+          {" "}
+          <RiDeleteBin6Fill size={22} className="mr-2" /> {extraTXT}
+        </>
+      ) : (
+        <RiDeleteBin6Fill size={22} />
+      )}
     </button>
   );
 }

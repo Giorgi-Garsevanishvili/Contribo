@@ -27,7 +27,14 @@ export const GET = async (_req: NextRequest, context: Context) => {
         position: { select: { name: true } },
         id: true,
         ended: true,
+        createdAt: true,
+        updatedAt: true,
+        createdBy: { select: { name: true } },
+        updatedBy: { select: { name: true } },
+        startedAt: true,
+        endedAt: true,
       },
+      orderBy: {startedAt: "desc", }
     });
 
     if (!data || data.length === 0) {

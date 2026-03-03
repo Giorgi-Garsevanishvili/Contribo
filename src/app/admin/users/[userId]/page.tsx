@@ -54,7 +54,7 @@ function User() {
         />
         <UserInfoButtons
           refetchKey={refetchKey}
-          URLPath="positionRecords"
+          URLPath="position-history"
           Icon={MdWorkHistory}
           title="Position History"
           APIPath="positionHistory"

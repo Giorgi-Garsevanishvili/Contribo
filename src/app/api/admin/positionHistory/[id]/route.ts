@@ -31,7 +31,8 @@ export const GET = async (_req: NextRequest, context: Context) => {
     });
 
     if (!data) {
-      return NextResponse.json({data,
+      return NextResponse.json({
+        data,
         message: `Position History with ID:${id} not found!`,
       });
     }
@@ -60,6 +61,17 @@ export const PUT = async (req: NextRequest, context: Context) => {
 
     const body = UpdatePositionHistory.parse(jsonWithCreator);
 
+    const recordEnded = await prisma.positionHistory.findUnique({
+      where: { id, ended: true },
+    });
+
+    if (recordEnded) {
+      return NextResponse.json(
+        { message: "Position Record Closed Can`t Update" },
+        { status: 200 },
+      );
+    }
+
     await prisma.positionHistory.update({
       where: { id, ended: false },
       data: body,
@@ -67,7 +79,7 @@ export const PUT = async (req: NextRequest, context: Context) => {
 
     return NextResponse.json(
       { message: "Position history Updated" },
-      { status: 200 }
+      { status: 200 },
     );
   } catch (error) {
     const { message, status } = handleError(error);

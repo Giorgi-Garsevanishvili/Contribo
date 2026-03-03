@@ -138,9 +138,9 @@ function HrCaseCard({
       <div
         className={`${isOpenId === item.id ? "flex" : "hidden"} lg:flex-row flex-col w-full  items-center justify-center`}
       >
-        <div className="flex  lg:flex-row flex-col w-full items-center justify-start p-3">
+        <div className="flex  lg:flex-row flex-col w-full items-center justify-start py-3 p-1">
           <div
-            className={`flex grow ${statusColors ? `${statusColors.border} ${statusColors.bg}` : WARNING_STATUS_COLORS.ARCHIVED} border rounded-lg  md:flex-row flex-col items-center justify-center lg:py-10 w-full lg:px-10 p-4 m-2 gap-2`}
+            className={`flex grow ${statusColors ? `${statusColors.border} ${statusColors.bg}` : WARNING_STATUS_COLORS.ARCHIVED} border rounded-lg  md:flex-row flex-col items-center justify-center lg:py-10 w-full lg:px-10 mx-2 my-1 p-4 gap-2`}
           >
             <div className="flex-col w-full flex">
               <h3>
@@ -187,25 +187,26 @@ function HrCaseCard({
             <HrCaseUpdate refetch={refetch} id={item.id} extraData1={types} />
           </div>
         </div>
-        <div className="flex p-1 md:m-4  lg:flex-col">
+        <div className="flex p-1 m-2 gap-2 items-center w-full md:w-auto  justify-center  lg:flex-col">
           <DeleteButtonAdmin
+            styleClass="bg-transparent hover:text-red-900 hover:border-red-600/40 w-fit h-fit p-1 m-0  border-gray-500/30 border"
             url={`/api/admin/hrWarnings/${item.id}`}
             fetchAction={refetch}
             value={`${item.name} for ${item.assignee.name}`}
           />
           <button
             onClick={() => {
-              setOnEdit(onEdit === item.id ? "" : isOpenId);
+              setOnEdit(onEdit === item.id ? "" : item.id);
             }}
-            className={`btn ${onEdit === item.id ? "bg-gray-600" : "bg-blue-950"}  text-white grow`}
+            className={`btn items-center justify-center ${onEdit === item.id ? "bg-gray-600 border-red-600/40 text-red-900" : "hover:text-blue-950 hover:border-blue-800"} bg-transparent  p-1 border border-gray-500/30 h-fit m-0 w-fit grow`}
           >
             {onEdit === item.id ? (
               <>
-                <TbPencilCancel size={22} className="mr-2" /> Close
+                <TbPencilCancel size={22} />
               </>
             ) : (
               <>
-                <TbPencil size={22} className="mr-2" /> Edit{" "}
+                <TbPencil size={22} />
               </>
             )}
           </button>

@@ -216,7 +216,8 @@ function HrCasesList({ fetchUrl }: { fetchUrl: string }) {
           </button>
           {sortedData.length > 0 ? (
             <DeleteButtonAdmin
-              extraTXT="All"
+            styleClass="bg-red-900 text-white"
+              extraTXT="Delete All"
               url={`/api/admin/users/${id}/hrWarning`}
               fetchAction={refetch}
               value={`All HR warnings for ${sortedData[0].assignee.name}?`}

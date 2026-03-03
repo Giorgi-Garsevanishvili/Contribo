@@ -1,15 +1,6 @@
-import { HrWarningStatus } from "@/generated/enums";
 import { useUpdateData } from "@/hooks/useDataUpdate";
 import { useEffect, useState } from "react";
 import { ImSpinner9 } from "react-icons/im";
-
-type DataType = {
-  createdAt: string;
-  id: string;
-  name: string;
-  type: string;
-  updatedAt: string;
-}[];
 
 export const CaseUpdateObj = {
   reason: "",

@@ -60,6 +60,8 @@ export function useDeleteData<T>(
       setIsLoadingDelete(false);
       setSuccess(false);
       setError(`${error}`);
+      console.log(error);
+      
 
       triggerCompAlertRef.current({
         message: `${error}`,
