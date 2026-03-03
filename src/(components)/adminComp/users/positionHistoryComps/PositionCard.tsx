@@ -2,6 +2,7 @@ import DeleteButtonAdmin from "../DeleteButtonAdmin";
 import { TbPencil, TbPencilCancel } from "react-icons/tb";
 import PositionUpdate from "./PositionHistoryUpdate";
 import { VscDebugBreakpointLogUnverified } from "react-icons/vsc";
+import { FaLandmarkDome } from "react-icons/fa6";
 
 type Data = {
   user: { name: true };
@@ -37,7 +38,13 @@ function PositionCard({
       >
         <div className="flex m-3 flex-col w-full items-center justify-start">
           <div
-            className={`flex flex-col grow bg-gray-200/70  border rounded-lg  md:flex-row  items-center justify-center m-4  w-full p-2 `}
+            className={`text-gray-800 text-sm italic gap-2 flex absolute top-0 left-2 items-center justify-center rounded-md m-0 p-1.5`}
+          >
+            <FaLandmarkDome size={18} />
+            <h3>Position History Log Card</h3>
+          </div>
+          <div
+            className={`flex flex-col grow border-gray-400/30  bg-gray-200/70  border rounded-lg  md:flex-row  items-center justify-center m-6  w-full p-2 `}
           >
             <div className="flex gap-6 items-center justify-center">
               <div className="flex flex-col">

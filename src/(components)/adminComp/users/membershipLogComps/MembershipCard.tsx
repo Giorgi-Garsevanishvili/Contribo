@@ -2,6 +2,7 @@ import DeleteButtonAdmin from "../DeleteButtonAdmin";
 import { TbPencil, TbPencilCancel } from "react-icons/tb";
 import { VscDebugBreakpointLogUnverified } from "react-icons/vsc";
 import MembershipUpdate from "./MembershipLogUpdate";
+import { FaAddressCard } from "react-icons/fa";
 
 type Data = {
   user: { name: true };
@@ -37,7 +38,13 @@ function MembershipCard({
       >
         <div className="flex m-3 flex-col w-full items-center justify-start">
           <div
-            className={`flex flex-col grow bg-gray-200/70  border rounded-lg  md:flex-row  items-center justify-center m-4  w-full p-2 `}
+            className={`text-gray-800 text-sm italic gap-2 flex absolute top-0 left-2 items-center justify-center rounded-md m-0 p-1.5`}
+          >
+            <FaAddressCard size={18} />
+            <h3>Membership Status Log Card</h3>
+          </div>
+          <div
+            className={`flex flex-col grow border-gray-400/30  bg-gray-200/70  border rounded-lg  md:flex-row  items-center justify-center m-6  w-full p-2 `}
           >
             <div className="flex gap-6 items-center justify-center w-full">
               <div className="flex flex-col">
@@ -94,7 +101,11 @@ function MembershipCard({
             </div>
           </div>
           <div className={`${onEdit === item.id ? "flex" : "hidden"}`}>
-            <MembershipUpdate ended={item.ended} refetch={refetch} id={item.id} />
+            <MembershipUpdate
+              ended={item.ended}
+              refetch={refetch}
+              id={item.id}
+            />
           </div>
         </div>
         <div className="md:absolute left-5 items-start m-2 md:m-0 text-xs gap-3 text-gray-600 italic bottom-1 flex">
