@@ -47,10 +47,16 @@ type FilterPropType =
     }
   | {
       filterType: "RATING";
-
       searchValue: string;
       actionValue: string;
       onActionFilterChange: (action: string) => void;
+      onSearchQueryChange: (search: string) => void;
+      filterOn: boolean;
+      clearFilter: () => void;
+    }
+  | {
+      filterType: "STANDARD";
+      searchValue: string;
       onSearchQueryChange: (search: string) => void;
       filterOn: boolean;
       clearFilter: () => void;
@@ -202,7 +208,7 @@ function QueryFilter(props: FilterPropType) {
               </select>
             </div>
           </div>
-        ) : null}
+        ) : props.filterType === "STANDARD" ? null : null}
         <div className="flex items-center justify-center">
           <input
             value={props.searchValue}

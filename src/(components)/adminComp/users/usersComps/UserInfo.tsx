@@ -13,7 +13,6 @@ import { FaUserEdit } from "react-icons/fa";
 import { MdFolderDelete } from "react-icons/md";
 import { MdDelete } from "react-icons/md";
 import { IoMdInformationCircleOutline } from "react-icons/io";
-import AccessData from "./AccessData";
 import { MdBadge } from "react-icons/md";
 import { IoIosCloseCircle } from "react-icons/io";
 import { useFetchData } from "@/hooks/useDataFetch";
@@ -21,6 +20,7 @@ import UserUpdate from "./UserUpdate";
 import { useDeleteData } from "@/hooks/useDeleteData";
 import { FcDeleteDatabase } from "react-icons/fc";
 import { ImSpinner9 } from "react-icons/im";
+import AccessData from "../AccessData";
 
 type Data = {
   CreatedAllowedUser: [];

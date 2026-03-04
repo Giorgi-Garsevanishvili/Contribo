@@ -26,7 +26,7 @@ export const GET = async (req: NextRequest) => {
     const skip = (page - 1) * limit;
 
     const totalCount = await prisma.allowedUser.count({
-      where: whereClause
+      where: whereClause,
     });
 
     const totalPages = Math.ceil(totalCount / limit);
@@ -44,36 +44,52 @@ export const GET = async (req: NextRequest) => {
 
     //Search Params
 
-    const regionFilter = searchParams.get("region")
-    const searchQuery = searchParams.get("search")
+    const searchQuery = searchParams.get("search");
 
-    if(regionFilter){
-      whereClause.regionId = regionFilter
-    }
-
-    if(searchQuery && searchQuery.trim()){
+    if (searchQuery && searchQuery.trim()) {
       whereClause.OR = [
-        {user: {name: {contains: searchQuery.trim(), mode: "insensitive"}}}
-      ]
+        {
+          user: {
+            email: { contains: searchQuery.trim(), mode: "insensitive" },
+          },
+        },
+        {
+          user: { name: { contains: searchQuery.trim(), mode: "insensitive" } },
+        },
+      ];
     }
-
-
-   
 
     const data = await prisma.allowedUser.findMany({
       where: whereClause,
-      select: { id: true, email: true, user: { select: { name: true , ownAllowance:{select:{regionId:true}}} } },
-      orderBy: {createdAt: "desc"},
+      select: {
+        id: true,
+        email: true,
+        createdAt: true,
+        updatedAt: true,
+        createdBy: { select: { name: true } },
+        updatedBy: { select: { name: true } },
+        user: {
+          select: {
+            image: true,
+            name: true,
+            memberStatusLogs: {
+              where: { ended: false },
+              select: { status: { select: { name: true } } },
+            },
+            ownAllowance: {
+              select: {
+                regionId: true,
+                region: { select: { name: true } },
+                roles: { select: { role: { select: { name: true } } } },
+              },
+            },
+          },
+        },
+      },
+      orderBy: { createdAt: "desc" },
       skip,
       take: limit,
     });
-
-    if (!data || data.length === 0) {
-      return NextResponse.json(
-        { data, message: "Allowed users not found" },
-        { status: 404 },
-      );
-    }
 
     const response = {
       data,

@@ -2,8 +2,6 @@
 
 import CreateDataWrapper from "@/(components)/adminComp/users/CreateDataWrapper";
 import HRCaseCreate from "@/(components)/adminComp/users/HRCaseCreate";
-import UserInfo from "@/(components)/adminComp/users/UserInfo";
-import UserInfoButtons from "@/(components)/adminComp/users/UserInfoButtons";
 import { useState } from "react";
 import { FaBoxArchive } from "react-icons/fa6";
 import { IoFileTrayStacked } from "react-icons/io5";
@@ -17,6 +15,8 @@ import { IoMdAddCircle } from "react-icons/io";
 import MemberStatusLogCreate from "@/(components)/adminComp/users/MemberStatusLogCreate";
 import PositionHistoryCreate from "@/(components)/adminComp/users/PositionHistoryCreate.";
 import RatingHistoryCreate from "@/(components)/adminComp/users/RatingHistoryCreate";
+import UserInfoButtons from "@/(components)/adminComp/users/usersComps/UserInfoButtons";
+import UserInfo from "@/(components)/adminComp/users/usersComps/UserInfo";
 
 function User() {
   const [refetchKey, setRefetch] = useState(0);

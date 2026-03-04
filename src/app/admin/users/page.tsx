@@ -1,5 +1,6 @@
 "use client";
-import UsersList from "@/(components)/adminComp/users/UsersList";
+
+import UsersList from "@/(components)/adminComp/users/usersComps/UsersList";
 import VolunteerStats from "@/(components)/adminComp/users/VolunteersStats";
 
 function UserList() {

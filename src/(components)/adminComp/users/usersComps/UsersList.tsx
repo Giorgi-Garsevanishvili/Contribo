@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
+import { useMemo, useState } from "react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { FcDeleteDatabase } from "react-icons/fc";
@@ -46,8 +46,6 @@ function UsersList() {
 
   const { data: roles, isLoadingFetch: isLoadingFetchRoles } =
     useFetchData<RoleRegionMembershipDataType>(`/api/admin/roles`, []);
-  const { data: regions, isLoadingFetch: isLoadingFetchRegions } =
-    useFetchData<RoleRegionMembershipDataType>(`/api/admin/regions`, []);
   const { data: membership, isLoadingFetch: isLoadingFetchMembership } =
     useFetchData<RoleRegionMembershipDataType>(`/api/admin/memberStatus`, []);
 
