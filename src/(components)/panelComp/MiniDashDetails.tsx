@@ -201,7 +201,7 @@ function MiniDashDetails<
         {isLoading ? (
           <LoadingComp />
         ) : (
-          <div className=" flex flex-col justify-start items-center relative w-full h-full">
+          <div className="flex overflow-y-auto overflow-hidden flex-col justify-start items-center relative w-full h-full">
             <div className="text-md flex items-center justify-between w-full uppercase text-white bg-gray-700 p-3.5 font-medium rounded-md drop-shadow-sm mb-2  shadow-white shadow-sm">
               <h1>{title}</h1>
             </div>

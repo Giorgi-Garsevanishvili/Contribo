@@ -2,17 +2,17 @@
 
 import { useMemo, useState } from "react";
 import Image from "next/image";
-import { useRouter } from "next/navigation";
 import { FcDeleteDatabase } from "react-icons/fc";
 import { IoMdGlobe, IoMdMore } from "react-icons/io";
 import usePaginatedData from "@/hooks/usePaginatedData";
 import { ImSpinner9 } from "react-icons/im";
-import { IoIosArrowForward } from "react-icons/io";
 import Pagination from "@/(components)/generalComp/Pagination";
 import QueryFilter from "@/(components)/generalComp/QueryFilter";
 import { RiRefreshLine } from "react-icons/ri";
 import { FaPersonWalkingLuggage } from "react-icons/fa6";
 import { MdExpandLess, MdExpandMore } from "react-icons/md";
+import AccessToggle from "./AccessToggle";
+import { useFetchData } from "@/hooks/useDataFetch";
 
 type Data = {
   id: string;
@@ -42,16 +42,27 @@ type Data = {
         role: {
           name: string;
         };
+        roleId: string;
       }[];
     } | null;
   } | null;
 };
+
+type RoleData = {
+  id: string;
+  name: string;
+  createdAt: Date;
+  updatedAt: Date | null;
+}[];
 
 function AccessList() {
   const [currentPage, setCurrentPage] = useState(1);
   const [toggleInfo, setToggleInfo] = useState("");
   const [limit, setLimit] = useState(10);
   const [searchQuery, setSearchQuery] = useState("");
+
+  const { data: roles, isLoadingFetch } =
+    useFetchData<RoleData>("/api/admin/roles");
 
   const [filterOn, setFilterOn] = useState(false);
 
@@ -209,48 +220,50 @@ function AccessList() {
                     </div>
                   </div>
 
-                  <div className="md:flex hidden border border-gray-600/30 truncate rounded-md flex-col justify-center items-center">
-                    <h3 className="flex md:hidden p-0.5 font-bold">
-                      Grant Admin Access
-                    </h3>
-                    <label className="inline-flex m-4 items-center cursor-pointer">
-                      <span className="select-none text-sm font-medium text-heading">
-                        Deny
-                      </span>
-                      <input
-                        // onChange={(prev) => !prev}
-                        // checked={true}
-                        type="checkbox"
-                        // value={createData.action}
-                        className="sr-only peer"
+                  <div className="hidden md:flex items-center justify-center">
+                    {isLoading ? (
+                      <div className="flex bg-gray-100/60 items-center rounded-lg shadow-lg p-2 justify-center">
+                        <ImSpinner9 className="animate-spin" size={20} />
+                      </div>
+                    ) : roles ? (
+                      <AccessToggle
+                        user={access.user?.name ?? "User"}
+                        refetchList={refetch}
+                        roleData={roles}
+                        AccessUrl={`/api/admin/allowedUsers/${access.id}`}
+                        userRoles={
+                          access.user?.ownAllowance?.roles.map(
+                            (role) => role.roleId,
+                          ) ?? []
+                        }
+                        role="ADMIN"
                       />
-                      <div className="relative mx-2 w-10 h-5 bg-red-800 peer-focus:outline-none peer-focus:ring-1 peer-focus:ring-brand-soft dark:peer-focus:ring-gray-500 rounded-full peer peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-buffer after:content-[''] after:absolute after:start-1px after:bg-white after:rounded-full after:ring-1 after:h-5 after:w-5 after:transition-all peer-checked:bg-green-800"></div>
-                      <span className="select-none text-sm font-medium text-heading">
-                        Grant
-                      </span>
-                    </label>
+                    ) : (
+                      "Fetch Failed"
+                    )}
                   </div>
 
-                  <div className="md:flex hidden border border-gray-600/30 truncate rounded-md flex-col justify-center items-center">
-                    <h3 className="flex md:hidden p-1 font-bold">
-                      Restrict Access
-                    </h3>
-                    <label className="inline-flex m-4 items-center cursor-pointer">
-                      <span className="select-none text-sm font-medium text-heading">
-                        Deny
-                      </span>
-                      <input
-                        // onChange={(prev) => !prev}
-                        // checked={true}
-                        type="checkbox"
-                        // value={createData.action}
-                        className="sr-only peer"
+                  <div className="hidden md:flex items-center justify-center">
+                    {isLoading ? (
+                      <div className="flex bg-gray-100/60 items-center rounded-lg shadow-lg p-2 justify-center">
+                        <ImSpinner9 className="animate-spin" size={20} />
+                      </div>
+                    ) : roles ? (
+                      <AccessToggle
+                        user={access.user?.name ?? "User"}
+                        refetchList={refetch}
+                        roleData={roles}
+                        AccessUrl={`/api/admin/allowedUsers/${access.id}`}
+                        userRoles={
+                          access.user?.ownAllowance?.roles.map(
+                            (role) => role.roleId,
+                          ) ?? []
+                        }
+                        role="RESTRICT"
                       />
-                      <div className="relative mx-2 w-10 h-5 bg-red-800 peer-focus:outline-none peer-focus:ring-1 peer-focus:ring-brand-soft dark:peer-focus:ring-gray-500 rounded-full peer peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-buffer after:content-[''] after:absolute after:start-1px after:bg-white after:rounded-full after:ring-1 after:h-5 after:w-5 after:transition-all peer-checked:bg-green-800"></div>
-                      <span className="select-none text-sm font-medium text-heading">
-                        Grant
-                      </span>
-                    </label>
+                    ) : (
+                      "Fetch Failed"
+                    )}
                   </div>
 
                   <div className="md:flex hidden w-full items-center justify-center ">
@@ -283,47 +296,54 @@ function AccessList() {
                     <h3 className="flex md:hidden font-bold">
                       Grant Admin Access:
                     </h3>
-                    <div className="flex border border-gray-600/30 truncate rounded-md flex-col justify-center items-center">
-                      <label className="inline-flex m-4 items-center cursor-pointer">
-                        <span className="select-none text-sm font-medium text-heading">
-                          Deny
-                        </span>
-                        <input
-                          // onChange={(prev) => !prev}
-                          // checked={true}
-                          type="checkbox"
-                          // value={createData.action}
-                          className="sr-only peer"
+                    <div className="md:hidden flex items-center justify-center">
+                      {isLoading ? (
+                        <div className="flex bg-gray-100/60 items-center rounded-lg shadow-lg p-2 justify-center">
+                          <ImSpinner9 className="animate-spin" size={20} />
+                        </div>
+                      ) : roles ? (
+                        <AccessToggle
+                          user={access.user?.name ?? "User"}
+                          refetchList={refetch}
+                          roleData={roles}
+                          AccessUrl={`/api/admin/allowedUsers/${access.id}`}
+                          userRoles={
+                            access.user?.ownAllowance?.roles.map(
+                              (role) => role.roleId,
+                            ) ?? []
+                          }
+                          role="ADMIN"
                         />
-                        <div className="relative mx-2 w-10 h-5 bg-red-800 peer-focus:outline-none peer-focus:ring-1 peer-focus:ring-brand-soft dark:peer-focus:ring-gray-500 rounded-full peer peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-buffer after:content-[''] after:absolute after:start-1px after:bg-white after:rounded-full after:ring-1 after:h-5 after:w-5 after:transition-all peer-checked:bg-green-800"></div>
-                        <span className="select-none text-sm font-medium text-heading">
-                          Grant
-                        </span>
-                      </label>
+                      ) : (
+                        "Fetch Failed"
+                      )}
                     </div>
 
                     <h3 className="flex md:hidden p-1 font-bold">
                       Restrict Access:
                     </h3>
-                    <div className="flex border border-gray-600/30 truncate rounded-md flex-col justify-center items-center">
-                      <label className="inline-flex m-4 items-center cursor-pointer">
-                        <span className="select-none text-sm font-medium text-heading">
-                          Deny
-                        </span>
-                        <input
-                          // onChange={(prev) => !prev}
-                          // checked={true}
-                          type="checkbox"
-                          // value={createData.action}
-                          className="sr-only peer"
+                    <div className="md:hidden flex items-center justify-center">
+                      {isLoading ? (
+                        <div className="flex bg-gray-100/60 items-center rounded-lg shadow-lg p-2 justify-center">
+                          <ImSpinner9 className="animate-spin" size={20} />
+                        </div>
+                      ) : roles ? (
+                        <AccessToggle
+                          user={access.user?.name ?? "User"}
+                          refetchList={refetch}
+                          roleData={roles}
+                          AccessUrl={`/api/admin/allowedUsers/${access.id}`}
+                          userRoles={
+                            access.user?.ownAllowance?.roles.map(
+                              (role) => role.roleId,
+                            ) ?? []
+                          }
+                          role="RESTRICT"
                         />
-                        <div className="relative mx-2 w-10 h-5 bg-red-800 peer-focus:outline-none peer-focus:ring-1 peer-focus:ring-brand-soft dark:peer-focus:ring-gray-500 rounded-full peer peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-buffer after:content-[''] after:absolute after:start-1px after:bg-white after:rounded-full after:ring-1 after:h-5 after:w-5 after:transition-all peer-checked:bg-green-800"></div>
-                        <span className="select-none text-sm font-medium text-heading">
-                          Grant
-                        </span>
-                      </label>
+                      ) : (
+                        "Fetch Failed"
+                      )}
                     </div>
-
                     <div className="w-full items-center justify-center flex">
                       <button className="btn w-full items-center justify-center p-2 md:w-fit h-fit bg-gray-400/40 text-gray-950 border border-gray-700/20 hover:border-red-800 hover:text-red-800 ">
                         <FaPersonWalkingLuggage size={22} />

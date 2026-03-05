@@ -80,7 +80,9 @@ export const GET = async (req: NextRequest) => {
               select: {
                 regionId: true,
                 region: { select: { name: true } },
-                roles: { select: { role: { select: { name: true } } } },
+                roles: {
+                  select: { role: { select: { name: true } }, roleId: true },
+                },
               },
             },
           },

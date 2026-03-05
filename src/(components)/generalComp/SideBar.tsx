@@ -50,7 +50,7 @@ async function SideBar({ page }: { page: string }) {
         <div className="pt-4 pb-2 px-3 text-[10px] font-bold uppercase tracking-widest text-slate-300">
           Switch Role
         </div>
-        <div className="flex">
+        <div className="flex flex-wrap">
           {session?.user.roles
             ?.filter((role) => ROLE_ROUTE_MAP[role] !== currentRole)
             .map((role) => (

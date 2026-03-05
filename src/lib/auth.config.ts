@@ -187,6 +187,21 @@ const authConfig: NextAuthConfig = {
           token.region = dbUser.region?.name as string;
         }
       }
+
+      if (!user && token.email) {
+        const dbUser = await prisma.allowedUser.findUnique({
+          where: { id: token.id as string },
+          select: {
+            roles: { select: { role: { select: { name: true } } } },
+            region: true,
+          },
+        });
+
+        if (dbUser) {
+          token.roles = dbUser.roles.map((r) => r.role.name);
+          token.region = dbUser.region?.name as string;
+        }
+      }
       return token;
     },
     async session({ session, token }) {

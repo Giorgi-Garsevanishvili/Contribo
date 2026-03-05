@@ -1,6 +1,7 @@
 import { useRef, useState } from "react";
 import { useCompAlert } from "./useCompAlert";
 import axios from "axios";
+import { useSession } from "next-auth/react";
 
 export function useUpdateData(url: string, data: {}, fetchAction: () => void) {
   const [success, setSuccess] = useState(false);
@@ -8,6 +9,7 @@ export function useUpdateData(url: string, data: {}, fetchAction: () => void) {
   const [error, setError] = useState<string | null>(null);
   const { triggerCompAlert } = useCompAlert();
   const triggerCompAlertRef = useRef(triggerCompAlert);
+  const { update } = useSession();
 
   const triggerUpdateData = async () => {
     try {
@@ -43,6 +45,8 @@ export function useUpdateData(url: string, data: {}, fetchAction: () => void) {
         type: "error",
         isOpened: true,
       });
+    } finally {
+      await update();
     }
   };
 
