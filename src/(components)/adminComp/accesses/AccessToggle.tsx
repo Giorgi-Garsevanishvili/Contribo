@@ -1,6 +1,5 @@
 import { useConfirmTab } from "@/hooks/useConfirmTab";
 import { useUpdateData } from "@/hooks/useDataUpdate";
-import { redirect } from "next/navigation";
 import { useEffect, useState } from "react";
 
 type RoleData = {
@@ -42,12 +41,6 @@ function AccessToggle({
   useEffect(() => {
     if (!userRolesUpdate.roleId) return;
     triggerUpdateData();
-
-    if (role === "RESTRICT") {
-      setTimeout(() => {
-        redirect("/");
-      }, 3000);
-    }
   }, [userRolesUpdate]);
 
   const handleToggle = async () => {

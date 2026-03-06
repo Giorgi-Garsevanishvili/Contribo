@@ -2,6 +2,7 @@ import { useRef, useState } from "react";
 import { useCompAlert } from "./useCompAlert";
 import axios from "axios";
 import { useSession } from "next-auth/react";
+import { redirect } from "next/navigation";
 
 export function useUpdateData(url: string, data: {}, fetchAction: () => void) {
   const [success, setSuccess] = useState(false);
@@ -34,7 +35,6 @@ export function useUpdateData(url: string, data: {}, fetchAction: () => void) {
         type: "success",
         isOpened: true,
       });
-      if (fetchAction) return fetchAction();
     } catch (error) {
       setIsLoadingUpdate(false);
       setSuccess(false);
@@ -46,8 +46,33 @@ export function useUpdateData(url: string, data: {}, fetchAction: () => void) {
         isOpened: true,
       });
     } finally {
-      await update();
+      const updatedSession = await update();
+      if (updatedSession?.user.roles?.includes("RESTRICT")) {
+        triggerCompAlertRef.current({
+          message: "Your Access Restricted",
+          type: "warning",
+          isOpened: true,
+        });
+        return setTimeout(() => {
+          redirect("/restricted");
+        }, 6000);
+      }
+
+      const admin = updatedSession?.user.roles?.includes("ADMIN");
+
+      if (!admin) {
+        triggerCompAlertRef.current({
+          message: "Your Admin Access Revoked",
+          type: "warning",
+          isOpened: true,
+        });
+        return setTimeout(() => {
+          redirect("/unauthorized");
+        }, 6000);
+      }
     }
+
+    if (fetchAction) return fetchAction();
   };
 
   return { triggerUpdateData, isLoadingUpdate, error, success };

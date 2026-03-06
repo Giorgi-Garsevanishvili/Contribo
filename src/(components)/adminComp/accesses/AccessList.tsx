@@ -3,7 +3,7 @@
 import { useMemo, useState } from "react";
 import Image from "next/image";
 import { FcDeleteDatabase } from "react-icons/fc";
-import { IoMdGlobe, IoMdMore } from "react-icons/io";
+import { IoMdGlobe } from "react-icons/io";
 import usePaginatedData from "@/hooks/usePaginatedData";
 import { ImSpinner9 } from "react-icons/im";
 import Pagination from "@/(components)/generalComp/Pagination";
