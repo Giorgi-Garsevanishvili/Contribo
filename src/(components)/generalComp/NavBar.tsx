@@ -1,13 +1,9 @@
 import { auth } from "@/lib/auth";
 import Image from "next/image";
 import SignOut from "../authComp/sign-out";
-import SwitchPageButton from "../generalComp/SwitchPageButton";
-import { normalizePage, ROLE_ROUTE_MAP } from "../../lib/roleRoutes";
-import HomeButton from "../generalComp/HomeButton";
 
 async function NavBar({ page }: { page: string }) {
   const session = await auth();
-  const currentRole = normalizePage(page);
 
   return (
     <nav className="flex md:hidden flex-col mb-2 items-center justify-center p-2">
@@ -23,8 +19,14 @@ async function NavBar({ page }: { page: string }) {
               alt="user-photo"
             />
           ) : null}
-          <div className="flex flex-row items-center justify-between p-3 min-w-30 select-none text-white">
+          <div className="flex flex-col truncate items-center justify-between p-3 min-w-30 select-none text-white">
             <h2>{session?.user.name}</h2>
+            {
+              <h2 className="text-xs mt-1 italic text-gray-400 flex">
+                Region:{" "}
+                {session?.user.region ? session?.user.region : "No Region"}
+              </h2>
+            }
           </div>
           <SignOut />
         </div>

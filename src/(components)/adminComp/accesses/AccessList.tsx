@@ -9,10 +9,10 @@ import { ImSpinner9 } from "react-icons/im";
 import Pagination from "@/(components)/generalComp/Pagination";
 import QueryFilter from "@/(components)/generalComp/QueryFilter";
 import { RiRefreshLine } from "react-icons/ri";
-import { FaPersonWalkingLuggage } from "react-icons/fa6";
 import { MdExpandLess, MdExpandMore } from "react-icons/md";
 import AccessToggle from "./AccessToggle";
 import { useFetchData } from "@/hooks/useDataFetch";
+import RemoveRegionRoles from "./RemoveRegionRoles";
 
 type Data = {
   id: string;
@@ -267,9 +267,11 @@ function AccessList() {
                   </div>
 
                   <div className="md:flex hidden w-full items-center justify-center ">
-                    <button className="btn w-full items-center justify-center p-2 md:w-fit h-fit bg-gray-400/40 text-gray-950 border border-gray-700/20 hover:border-red-800 hover:text-red-800 ">
-                      <FaPersonWalkingLuggage size={22} />
-                    </button>
+                    <RemoveRegionRoles
+                      allowedUserId={access.id}
+                      refetch={refetch}
+                      user={access}
+                    />
                   </div>
 
                   <div
@@ -344,11 +346,11 @@ function AccessList() {
                         "Fetch Failed"
                       )}
                     </div>
-                    <div className="w-full items-center justify-center flex">
-                      <button className="btn w-full items-center justify-center p-2 md:w-fit h-fit bg-gray-400/40 text-gray-950 border border-gray-700/20 hover:border-red-800 hover:text-red-800 ">
-                        <FaPersonWalkingLuggage size={22} />
-                      </button>
-                    </div>
+                    <RemoveRegionRoles
+                      allowedUserId={access.id}
+                      refetch={refetch}
+                      user={access}
+                    />
                   </div>
                   <div className="md:absolute right-2 items-start m-2 md:m-0 text-xs gap-3 text-gray-600/50 italic bottom-0.5 flex">
                     <h2 className="text-xm italic ">

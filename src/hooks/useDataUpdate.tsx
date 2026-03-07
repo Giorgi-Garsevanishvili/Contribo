@@ -29,23 +29,12 @@ export function useUpdateData(url: string, data: {}, fetchAction: () => void) {
       const response = await axios.put(url, data);
 
       setSuccess(true);
-      setIsLoadingUpdate(false);
       triggerCompAlertRef.current({
         message: response.data.message,
         type: "success",
         isOpened: true,
       });
-    } catch (error) {
-      setIsLoadingUpdate(false);
-      setSuccess(false);
-      setError(`${error}`);
 
-      triggerCompAlertRef.current({
-        message: `${error}`,
-        type: "error",
-        isOpened: true,
-      });
-    } finally {
       const updatedSession = await update();
       if (updatedSession?.user.roles?.includes("RESTRICT")) {
         triggerCompAlertRef.current({
@@ -70,9 +59,20 @@ export function useUpdateData(url: string, data: {}, fetchAction: () => void) {
           redirect("/unauthorized");
         }, 6000);
       }
-    }
 
-    if (fetchAction) return fetchAction();
+      if (fetchAction) return fetchAction();
+    } catch (error) {
+      setSuccess(false);
+      setError(`${error}`);
+
+      triggerCompAlertRef.current({
+        message: `${error}`,
+        type: "error",
+        isOpened: true,
+      });
+    } finally {
+      setIsLoadingUpdate(false);
+    }
   };
 
   return { triggerUpdateData, isLoadingUpdate, error, success };

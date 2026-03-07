@@ -39,7 +39,11 @@ async function SideBar({ page }: { page: string }) {
         </div>
         <div>
           <h1 className="text-sm font-bold tracking-tight uppercase">
-            {currentRole === "console" ? "Qirvex Console" : currentRole === "admin" ? "Contribo Admin" : "Volunteer Page"}
+            {currentRole === "console"
+              ? "Qirvex Console"
+              : currentRole === "admin"
+                ? "Contribo Admin"
+                : "Volunteer Page"}
           </h1>
           <p className="text-xs text-slate-300">
             System v{packageJson.version}
@@ -57,7 +61,13 @@ async function SideBar({ page }: { page: string }) {
               <SwitchPageButton key={role} name={role} />
             ))}
         </div>
-        {currentRole === "console" ? <ConsoleSideBarActions /> : currentRole === "admin" ? <AdminSideBarActions /> : ""}
+        {currentRole === "console" ? (
+          <ConsoleSideBarActions />
+        ) : currentRole === "admin" ? (
+          <AdminSideBarActions />
+        ) : (
+          ""
+        )}
       </nav>
       <BrandMark />
       <div className="p-4 border-t border-slate-200 ">
@@ -81,10 +91,22 @@ async function SideBar({ page }: { page: string }) {
               )}
             </div>
             <div className="flex mt-1 grow w-full items-center justify-center gap-1">
-              <FaStar size={12} className="text-yellow-500" />
-              <IoSettingsSharp size={12} />
-              <PiPlantFill size={12} className="text-green-800" />
+              {session?.user.roles?.map((r, index) =>
+                r.includes("ADMIN") ? (
+                  <PiPlantFill key={index} size={12} className="text-green-800" />
+                ) : r.includes("REGULAR") ? (
+                  <FaStar size={12} key={index} className="text-yellow-500" />
+                ) : r.includes("QIRVEX") ? (
+                  <IoSettingsSharp key={index} size={12} />
+                ) : null,
+              )}
             </div>
+            {
+              <h2 className="text-[10px] mt-1 italic text-gray-400 flex">
+                Region:{" "}
+                {session?.user.region ? session?.user.region : "No Region"}
+              </h2>
+            }
           </div>
           <div className="flex-1 overflow-hidden">
             <p className="text-xs font-bold truncate">{session?.user.name}</p>
