@@ -8,38 +8,37 @@ import { FaPersonWalkingLuggage } from "react-icons/fa6";
 import { ImSpinner9 } from "react-icons/im";
 
 type Data = {
-  id: string;
-  email: string;
-  updatedAt: Date | null;
-  createdAt: Date;
-  createdBy: {
-    name: string | null;
-  } | null;
-  updatedBy: {
-    name: string | null;
-  } | null;
-  user: {
-    name: string | null;
-    image: string | null;
-    memberStatusLogs: {
-      status: {
-        name: string;
-      } | null;
-    }[];
-    ownAllowance: {
-      regionId: string | null;
-      region: {
-        name: string;
-      } | null;
-      roles: {
+    user: {
+        image: string | null;
+        name: string | null;
+        memberStatusLogs: {
+            status: {
+                name: string;
+            } | null;
+        }[];
+    } | null;
+    id: string;
+    createdBy: {
+        name: string | null;
+    } | null;
+    createdAt: Date;
+    updatedBy: {
+        name: string | null;
+    } | null;
+    updatedAt: Date | null;
+    email: string;
+    roles: {
         role: {
-          name: string;
+            name: string;
         };
         roleId: string;
-      }[];
+    }[];
+    regionId: string | null;
+    region: {
+        name: string;
     } | null;
-  } | null;
-};
+}
+
 
 function RemoveRegionRoles({
   allowedUserId,
@@ -62,7 +61,7 @@ function RemoveRegionRoles({
         title: `Would You Like To Remove`,
         message:
           "This Action will remove user from your region and update user role to default regular status.",
-        value: ` ${user.user?.name} From Region? (${user.user?.ownAllowance?.region?.name})`,
+        value: ` ${user.user?.name} From Region? (${user.region?.name})`,
       });
 
       if (!confirm) return;

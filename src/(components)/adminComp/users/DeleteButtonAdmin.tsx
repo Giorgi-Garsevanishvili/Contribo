@@ -8,25 +8,27 @@ function DeleteButtonAdmin({
   extraTXT,
   value,
   styleClass,
+  message,
 }: {
   url: string;
   fetchAction?: () => void;
   extraTXT?: string;
   value: string;
-  styleClass: ClassNameValue
+  styleClass: ClassNameValue;
+  message?: string;
 }) {
   const { deleteData, isLoadingDelete } = useDeleteData(
     url,
     "Would you like to delete",
     value,
-    "Action is permanent!",
+    message || "Action is permanent!",
     fetchAction,
   );
 
   return (
     <button
       onClick={deleteData}
-      className={`${isLoadingDelete ? "animate-pulse" : ""} btn grow ${styleClass}`}
+      className={`${isLoadingDelete ? "animate-pulse" : ""} btn ${styleClass}`}
     >
       {extraTXT ? (
         <>

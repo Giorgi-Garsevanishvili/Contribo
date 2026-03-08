@@ -27,7 +27,7 @@ export const GET = async (_req: NextRequest) => {
     return NextResponse.json(data, { status: 200 });
   } catch (error) {
     const { status, message } = handleError(error);
-    return NextResponse.json({ error: message }, { status: status });
+    return NextResponse.json({ message }, { status: status });
   }
 };
 
@@ -62,6 +62,6 @@ export const POST = async (req: NextRequest) => {
     );
   } catch (error) {
     const { status, message } = handleError(error);
-    return NextResponse.json({ error: message }, { status: status });
+    return NextResponse.json({ message }, { status: status });
   }
 };

@@ -3,7 +3,7 @@
 import { useMemo, useState } from "react";
 import Image from "next/image";
 import { FcDeleteDatabase } from "react-icons/fc";
-import { IoMdGlobe } from "react-icons/io";
+import { IoMdAdd, IoMdGlobe } from "react-icons/io";
 import usePaginatedData from "@/hooks/usePaginatedData";
 import { ImSpinner9 } from "react-icons/im";
 import Pagination from "@/(components)/generalComp/Pagination";
@@ -13,38 +13,40 @@ import { MdExpandLess, MdExpandMore } from "react-icons/md";
 import AccessToggle from "./AccessToggle";
 import { useFetchData } from "@/hooks/useDataFetch";
 import RemoveRegionRoles from "./RemoveRegionRoles";
+import GrantAccessComp from "./GrantAccessComp";
+import DeleteButtonAdmin from "../users/DeleteButtonAdmin";
+import { useSession } from "next-auth/react";
+import { FaRegCircleDot } from "react-icons/fa6";
 
 type Data = {
-  id: string;
-  email: string;
-  updatedAt: Date | null;
-  createdAt: Date;
-  createdBy: {
-    name: string | null;
-  } | null;
-  updatedBy: {
-    name: string | null;
-  } | null;
   user: {
-    name: string | null;
     image: string | null;
+    name: string | null;
     memberStatusLogs: {
       status: {
         name: string;
       } | null;
     }[];
-    ownAllowance: {
-      regionId: string | null;
-      region: {
-        name: string;
-      } | null;
-      roles: {
-        role: {
-          name: string;
-        };
-        roleId: string;
-      }[];
-    } | null;
+  } | null;
+  id: string;
+  createdBy: {
+    name: string | null;
+  } | null;
+  createdAt: Date;
+  updatedBy: {
+    name: string | null;
+  } | null;
+  updatedAt: Date | null;
+  email: string;
+  roles: {
+    role: {
+      name: string;
+    };
+    roleId: string;
+  }[];
+  regionId: string | null;
+  region: {
+    name: string;
   } | null;
 };
 
@@ -58,8 +60,10 @@ type RoleData = {
 function AccessList() {
   const [currentPage, setCurrentPage] = useState(1);
   const [toggleInfo, setToggleInfo] = useState("");
-  const [limit, setLimit] = useState(10);
+  const [limit, setLimit] = useState(5);
   const [searchQuery, setSearchQuery] = useState("");
+  const [openCreation, setOpenCreation] = useState(false);
+  const updateSession = useSession();
 
   const { data: roles, isLoadingFetch } =
     useFetchData<RoleData>("/api/admin/roles");
@@ -112,13 +116,28 @@ function AccessList() {
     >
       <div className="flex text-black m-1 mb-2 w-full items-center justify-center">
         {
-          <QueryFilter
-            filterType="STANDARD"
-            searchValue={searchQuery}
-            filterOn={filterOn}
-            clearFilter={clearFilter}
-            onSearchQueryChange={handleSearchQuery}
-          />
+          <div className="flex items-center justify-center flex-col md:flex-row">
+            <QueryFilter
+              filterType="STANDARD"
+              searchValue={searchQuery}
+              filterOn={filterOn}
+              clearFilter={clearFilter}
+              onSearchQueryChange={handleSearchQuery}
+            />
+            {openCreation ? <GrantAccessComp refetch={refetch} /> : null}
+            <button
+              onClick={() => setOpenCreation((prev) => !prev)}
+              className={`btn m-2 md:w-fit border-white p-2 transition-all justify-center items-center uppercase h-fit w-full bg-gray-700 border text-white select-none duration-200 rounded-md`}
+            >
+              {openCreation ? (
+                "Close"
+              ) : (
+                <div className="flex">
+                  Add <IoMdAdd className="ml-2" size={20} />{" "}
+                </div>
+              )}
+            </button>
+          </div>
         }
       </div>
       {isLoading ? (
@@ -133,7 +152,7 @@ function AccessList() {
         <div className="flex w-full justify-center items-center flex-col">
           {data.length > 0 ? (
             <>
-              <div className=" hidden md:grid font-bold text-sm grid-cols-6 w-full gap-4 uppercase grid-rows-1 select-none justify-start items-center bg-gray-100/80 text-gray-700 p-1 px-3 m-1 rounded-lg">
+              <div className=" hidden md:grid font-bold text-sm grid-cols-[1fr_0.5fr_1fr_0.9fr_0.9fr_0.23fr_0.23fr] w-full gap-4 uppercase grid-rows-1 select-none justify-start items-center bg-gray-100/80 text-gray-700 p-1 px-3 m-1 rounded-lg">
                 <h3 className="flex justify-start items-center">
                   Name & Email
                 </h3>
@@ -150,12 +169,15 @@ function AccessList() {
                   <h3 className="font-medium">Restrict Access</h3>
                 </div>
                 <div className="md:flex justify-center hidden">
-                  <h3 className="font-medium">Remove From Region</h3>
+                  <h3 className="font-medium">Kick</h3>
+                </div>
+                <div className="md:flex justify-center hidden">
+                  <h3 className="font-medium">Delete</h3>
                 </div>
               </div>
               {data.map((access) => (
                 <div
-                  className="md:grid relative pb-5 flex flex-col  w-full  md:grid-cols-6 gap-1 md:gap-4 md:grid-rows-1 select-none text-sm justify-start items-center bg-white/80 text-black p-1 px-3 m-1 rounded-lg"
+                  className={`md:grid ${updateSession.data?.user.id === access.id ? "border-2 border-green-900 bg-green-100/50" : "bg-white/80"} relative pb-5 flex flex-col  w-full  md:grid-cols-[1fr_0.5fr_1fr_0.9fr_0.9fr_0.23fr_0.23fr] gap-1 md:gap-4 md:grid-rows-1 select-none text-sm justify-start items-center  text-black p-1 px-3 m-1 rounded-lg`}
                   key={access.id}
                 >
                   <div className="flex border-b border-gray-600/30 rounded-md mb-2 md:border-0 p-1 justify-start items-center">
@@ -178,6 +200,11 @@ function AccessList() {
                       <h3 className="flex truncate text-xs text-gray-600">
                         {access.email}
                       </h3>
+                      {updateSession.data?.user.id === access.id ? (
+                        <div className="flex gap-2 items-center justify-center absolute bottom-1.5 left-1.5 truncate text-xs text-green-900">
+                          My Account <FaRegCircleDot size={10} />
+                        </div>
+                      ) : null}
                     </div>
                     <button
                       onClick={() =>
@@ -198,17 +225,15 @@ function AccessList() {
                   <div className="md:flex hidden justify-center items-center gap-1.5">
                     <IoMdGlobe size={18} className="text-gray-500" />
                     <h3 className="font-medium truncate">
-                      {access.user?.ownAllowance?.region
-                        ? access.user.ownAllowance.region.name
-                        : "No Data"}
+                      {access.region ? access.region.name : "No Data"}
                     </h3>
                   </div>
 
                   <div className="md:flex hidden border border-gray-600/30 p-2 pt-0 md:pt-2 rounded-md flex-col md:flex-row justify-center items-center md:justify-start">
                     <h3 className="flex md:hidden p-1 font-bold">Roles</h3>
                     <div className="font-medium flex gap-2 truncate">
-                      {access.user?.ownAllowance
-                        ? access.user.ownAllowance.roles.map((role, index) => (
+                      {access
+                        ? access.roles.map((role, index) => (
                             <h2
                               key={index}
                               className="rounded-lg border px-1.5 py-0.5 bg-gray-300/50 border-gray-500/50"
@@ -232,9 +257,7 @@ function AccessList() {
                         roleData={roles}
                         AccessUrl={`/api/admin/allowedUsers/${access.id}`}
                         userRoles={
-                          access.user?.ownAllowance?.roles.map(
-                            (role) => role.roleId,
-                          ) ?? []
+                          access.roles.map((role) => role.roleId) ?? []
                         }
                         role="ADMIN"
                       />
@@ -255,9 +278,7 @@ function AccessList() {
                         roleData={roles}
                         AccessUrl={`/api/admin/allowedUsers/${access.id}`}
                         userRoles={
-                          access.user?.ownAllowance?.roles.map(
-                            (role) => role.roleId,
-                          ) ?? []
+                          access.roles.map((role) => role.roleId) ?? []
                         }
                         role="RESTRICT"
                       />
@@ -274,23 +295,31 @@ function AccessList() {
                     />
                   </div>
 
+                  <div className="md:flex hidden w-full items-center justify-center ">
+                    <DeleteButtonAdmin
+                      url={`/api/admin/allowedUsers/${access.id}`}
+                      fetchAction={refetch}
+                      value={`Access For ${access.user?.name || access.email}`}
+                      styleClass="items-center justify-center p-2 md:w-fit h-fit bg-gray-400/40 text-gray-950 border border-gray-700/20 hover:border-red-800 hover:text-red-800"
+                      message="This Action will delete Access with all user related data"
+                    />
+                  </div>
+
                   <div
                     className={`md:hidden ${toggleInfo === access.id ? "flex" : "hidden"} rounded-md bg-gray-400/20 border border-gray-700/40 w-full p-2 gap-1 flex-col`}
                   >
                     <h3 className="flex md:hidden p-1 font-bold">Roles</h3>
                     <div className="flex md:hidden border border-gray-600/30 p-2 rounded-md flex-col md:flex-row justify-center items-center md:justify-start">
                       <div className="font-medium flex gap-2 truncate">
-                        {access.user?.ownAllowance
-                          ? access.user.ownAllowance.roles.map(
-                              (role, index) => (
-                                <h2
-                                  key={index}
-                                  className="rounded-lg border px-1.5 py-0.5 bg-gray-300/50 border-gray-500/50"
-                                >
-                                  {role.role.name}
-                                </h2>
-                              ),
-                            )
+                        {access
+                          ? access.roles.map((role, index) => (
+                              <h2
+                                key={index}
+                                className="rounded-lg border px-1.5 py-0.5 bg-gray-300/50 border-gray-500/50"
+                              >
+                                {role.role.name}
+                              </h2>
+                            ))
                           : "No Data"}
                       </div>
                     </div>
@@ -310,9 +339,7 @@ function AccessList() {
                           roleData={roles}
                           AccessUrl={`/api/admin/allowedUsers/${access.id}`}
                           userRoles={
-                            access.user?.ownAllowance?.roles.map(
-                              (role) => role.roleId,
-                            ) ?? []
+                            access.roles.map((role) => role.roleId) ?? []
                           }
                           role="ADMIN"
                         />
@@ -336,15 +363,23 @@ function AccessList() {
                           roleData={roles}
                           AccessUrl={`/api/admin/allowedUsers/${access.id}`}
                           userRoles={
-                            access.user?.ownAllowance?.roles.map(
-                              (role) => role.roleId,
-                            ) ?? []
+                            access.roles.map((role) => role.roleId) ?? []
                           }
                           role="RESTRICT"
                         />
                       ) : (
                         "Fetch Failed"
                       )}
+                    </div>
+                    <h3 className="flex md:hidden font-bold">Delete Access</h3>
+                    <div className="md:hidden flex items-center justify-center">
+                      <DeleteButtonAdmin
+                        url={`/api/admin/allowedUsers/${access.id}`}
+                        fetchAction={refetch}
+                        value={`Access For ${access.user?.name || access.email}`}
+                        styleClass="w-full items-center justify-center p-2 md:w-fit h-fit bg-gray-400/40 text-gray-950 border border-gray-700/20 hover:border-red-800 hover:text-red-800"
+                        message="This Action will delete Access with all user related data"
+                      />
                     </div>
                     <RemoveRegionRoles
                       allowedUserId={access.id}

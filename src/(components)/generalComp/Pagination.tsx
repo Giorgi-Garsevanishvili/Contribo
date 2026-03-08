@@ -152,7 +152,7 @@ function Pagination({
         <h3 className="m-1">Set Data Limit:</h3>
         <select
           className="rounded-2xl border p-1"
-          defaultValue={10}
+          defaultValue={pagination.limit}
           onChange={(e) => onLimitChange(Number(e.target.value))}
           name="limit"
           id="limit"

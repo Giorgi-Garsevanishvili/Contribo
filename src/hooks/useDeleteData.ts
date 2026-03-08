@@ -50,11 +50,20 @@ export function useDeleteData<T>(
         type: "success",
         isOpened: true,
       });
+
       if (response.data.logOut) {
         return setTimeout(async () => {
           await signOut({ callbackUrl: "/" });
         }, 4000);
       }
+
+      const signOutReq = response.data.requiresSignOut === true;
+      if (signOutReq) {
+        return setTimeout(async () => {
+          await signOut({ callbackUrl: "/" });
+        }, 4000);
+      }
+
       if (fetchAction) return fetchAction();
     } catch (error) {
       setIsLoadingDelete(false);

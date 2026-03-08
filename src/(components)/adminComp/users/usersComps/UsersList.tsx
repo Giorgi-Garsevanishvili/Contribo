@@ -13,6 +13,8 @@ import Pagination from "@/(components)/generalComp/Pagination";
 import QueryFilter from "@/(components)/generalComp/QueryFilter";
 import { useFetchData } from "@/hooks/useDataFetch";
 import { RiRefreshLine } from "react-icons/ri";
+import { FaRegCircleDot } from "react-icons/fa6";
+import { useSession } from "next-auth/react";
 
 type RoleRegionMembershipDataType = {
   id: string;
@@ -43,6 +45,7 @@ function UsersList() {
   const [currentPage, setCurrentPage] = useState(1);
   const [limit, setLimit] = useState(10);
   const [searchQuery, setSearchQuery] = useState("");
+  const updateSession = useSession();
 
   const { data: roles, isLoadingFetch: isLoadingFetchRoles } =
     useFetchData<RoleRegionMembershipDataType>(`/api/admin/roles`, []);
@@ -67,6 +70,8 @@ function UsersList() {
     const hasFilter =
       regionFilter || membershipFilter || roleFilter || searchQuery;
     setFilterOn(!!hasFilter);
+
+    console.log(updateSession);
 
     return `/api/admin/users?${searchParams.toString()}`;
   }, [
@@ -182,7 +187,7 @@ function UsersList() {
               {data.map((user) => (
                 <button
                   onClick={() => router.push(`/admin/users/${user.id}`)}
-                  className="grid grid-cols-[2fr_auto] md:grid-cols-5 gap-1 md:gap-4 grid-rows-1 btn select-none text-sm justify-start items-center bg-white/80 text-black p-2 m-1 rounded-lg"
+                  className={`${updateSession.data?.user.email === user.email ? "border-2 border-green-900 bg-green-100/50" : "bg-white/80"} grid grid-cols-[2fr_auto] md:grid-cols-5 gap-1 md:gap-4 grid-rows-1 btn select-none text-sm justify-start items-center  text-black p-2 m-1 rounded-lg`}
                   key={user.id}
                 >
                   <div className="flex justify-start items-center">
@@ -205,6 +210,11 @@ function UsersList() {
                       <h3 className="flex truncate text-xs text-gray-600">
                         {user.email}
                       </h3>
+                      {updateSession.data?.user.email === user.email ? (
+                        <div className="flex gap-2 items-center justify-start mt-0.5 italic  truncate text-xs text-green-900">
+                          My Account <FaRegCircleDot size={10} />
+                        </div>
+                      ) : null}
                     </div>
                   </div>
                   <div className="w-8 flex md:hidden items-center justify-center">

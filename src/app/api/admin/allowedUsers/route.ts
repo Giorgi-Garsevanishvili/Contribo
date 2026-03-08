@@ -68,6 +68,11 @@ export const GET = async (req: NextRequest) => {
         updatedAt: true,
         createdBy: { select: { name: true } },
         updatedBy: { select: { name: true } },
+        region: { select: { name: true } },
+        regionId: true,
+        roles: {
+          select: { role: { select: { name: true } }, roleId: true },
+        },
         user: {
           select: {
             image: true,
@@ -75,15 +80,6 @@ export const GET = async (req: NextRequest) => {
             memberStatusLogs: {
               where: { ended: false },
               select: { status: { select: { name: true } } },
-            },
-            ownAllowance: {
-              select: {
-                regionId: true,
-                region: { select: { name: true } },
-                roles: {
-                  select: { role: { select: { name: true } }, roleId: true },
-                },
-              },
             },
           },
         },
@@ -101,7 +97,7 @@ export const GET = async (req: NextRequest) => {
     return NextResponse.json({ records: response }, { status: 200 });
   } catch (error) {
     const { status, message } = handleError(error);
-    return NextResponse.json({ error: message }, { status: status });
+    return NextResponse.json({ message }, { status: status });
   }
 };
 
@@ -110,11 +106,7 @@ export const POST = async (req: NextRequest) => {
     const thisUser = await requireRole("ADMIN");
 
     const json = (await req.json()) as z.infer<typeof AllowedUserCreate>;
-    const jsonWithCreator = {
-      ...json,
-      creatorId: thisUser.user.id,
-      regionId: thisUser.user.ownAllowance?.regionId,
-    };
+    const jsonWithCreator = { ...json, creatorId: thisUser.user.id };
     const body = AllowedUserCreate.parse(jsonWithCreator);
 
     if (!body || !Object.keys(body).length) {
@@ -124,9 +116,9 @@ export const POST = async (req: NextRequest) => {
       );
     }
 
-    if (!body.email) {
+    if (!body.email && !body.roleId) {
       return NextResponse.json(
-        { message: "Email and type field must be provided" },
+        { message: "Email and Role field must be provided" },
         { status: 400 },
       );
     }
@@ -134,6 +126,7 @@ export const POST = async (req: NextRequest) => {
     const newAllowedUser = await prisma.allowedUser.create({
       data: {
         email: body.email,
+        regionId: thisUser.user.ownAllowance?.regionId,
         creatorId: thisUser.user.id,
       },
     });
@@ -159,6 +152,6 @@ export const POST = async (req: NextRequest) => {
     });
   } catch (error) {
     const { status, message } = handleError(error);
-    return NextResponse.json({ error: message }, { status: status });
+    return NextResponse.json({ message }, { status: status });
   }
 };

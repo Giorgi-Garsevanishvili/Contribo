@@ -198,9 +198,13 @@ function MiniDashCard<U extends UserAddType | DataAddType>({
                 className="btn m-0 px-2 py-0.5 select-none duration-200 rounded-md bg-transparent"
               >
                 {openCreation ? (
-                 <h3 className="flex justify-center items-center bg-red-900 p-1 rounded-md">close</h3>
+                  <h3 className="flex justify-center items-center bg-red-900 p-1 rounded-md">
+                    close
+                  </h3>
                 ) : (
-                  <h3 className="flex bg-amber-700 justify-center items-center p-1 rounded-md">add {<IoMdAdd className="ml-2" size={20} />}</h3>
+                  <h3 className="flex bg-amber-700 justify-center items-center p-1 rounded-md">
+                    add {<IoMdAdd className="ml-2" size={20} />}
+                  </h3>
                 )}
               </div>
             </div>

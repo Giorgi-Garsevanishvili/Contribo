@@ -54,6 +54,6 @@ export const DELETE = async (_req: NextRequest, context: Context) => {
     });
   } catch (error) {
     const { status, message } = handleError(error);
-    return NextResponse.json({ error: message }, { status: status });
+    return NextResponse.json({ message }, { status: status });
   }
 };
