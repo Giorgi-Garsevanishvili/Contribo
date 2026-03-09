@@ -4,6 +4,8 @@ import RemoveRegionRoles from "./RemoveRegionRoles";
 import AccessToggle from "./AccessToggle";
 import { ImSpinner9 } from "react-icons/im";
 import { IoMdGlobe } from "react-icons/io";
+import AccessBoxMobile from "./AccessBoxMobile";
+import DetailsInfo from "./DetailsInfo";
 
 type Data = {
   user: {
@@ -137,6 +139,16 @@ function AccessCard({
           message="This Action will delete Access with all user related data"
         />
       </div>
+
+      <AccessBoxMobile
+        isLoading={isLoading}
+        roles={roles}
+        refetch={refetch}
+        toggleInfo={toggleInfo}
+        access={access}
+      />
+
+      <DetailsInfo details={access} />
     </>
   );
 }

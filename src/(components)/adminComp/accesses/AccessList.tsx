@@ -212,18 +212,6 @@ function AccessList() {
                       access={access}
                     />
                   ) : null}
-
-                  {roles ? (
-                    <AccessBoxMobile
-                      isLoading={isLoading}
-                      roles={roles}
-                      refetch={refetch}
-                      toggleInfo={toggleInfo}
-                      access={access}
-                    />
-                  ) : null}
-
-                  <DetailsInfo details={access} />
                 </div>
               ))}
             </>
