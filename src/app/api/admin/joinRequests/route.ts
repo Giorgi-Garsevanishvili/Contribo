@@ -1,11 +1,53 @@
+import { ReqStatus } from "@/generated/enums";
 import { handleError } from "@/lib/errors/handleErrors";
 import { prisma } from "@/lib/prisma";
 import { requireRole } from "@/lib/serverAuth";
 import { NextRequest, NextResponse } from "next/server";
 
-export const GET = async (_req: NextRequest) => {
+type joinRequestResponse = {
+  id: string;
+  region: {
+    name: string;
+  } | null;
+  createdBy: {
+    name: string | null;
+  };
+  status: ReqStatus;
+};
+
+type PaginationMeta = {
+  currentPage: number;
+  totalPages: number;
+  totalCount: number;
+  limit: number;
+  hasNextPage: boolean;
+  hasPrevPage: boolean;
+};
+
+type ApiResponse = {
+  data: joinRequestResponse[];
+  pagination: PaginationMeta;
+};
+
+export const GET = async (req: NextRequest) => {
   try {
     const thisUser = await requireRole("ADMIN");
+
+    const { searchParams } = new URL(req.url);
+
+    //pagination params with validation
+    const page = Math.max(1, parseInt(searchParams.get("page") || "1"));
+    const limit = Math.min(
+      100,
+      Math.max(1, parseInt(searchParams.get("limit") || "10")),
+    );
+    const skip = (page - 1) * limit;
+
+    //Pagination
+
+    const totalCount = await prisma.joinRequest.count({
+      where: { regionId: thisUser.user.ownAllowance?.regionId },
+    });
 
     const data = await prisma.joinRequest.findMany({
       where: {
@@ -13,11 +55,23 @@ export const GET = async (_req: NextRequest) => {
       },
       select: {
         id: true,
-        createdBy: { select: { name: true } },
+        createdBy: { select: { name: true, image: true } },
         region: { select: { name: true } },
         status: true,
+        requestedAt: true,
       },
+      orderBy: {
+        requestedAt: "desc",
+      },
+      skip,
+      take: limit,
     });
+
+    //Calculate Pagination metaData
+
+    const totalPages = Math.ceil(totalCount / limit);
+    const hasNextPage = page < totalPages;
+    const hasPrevPage = page > 1;
 
     if (!data || data.length === 0) {
       return NextResponse.json({
@@ -26,7 +80,19 @@ export const GET = async (_req: NextRequest) => {
       });
     }
 
-    return NextResponse.json({data}, { status: 200 });
+    const response: ApiResponse = {
+      data,
+      pagination: {
+        currentPage: page,
+        totalPages,
+        totalCount,
+        limit,
+        hasNextPage,
+        hasPrevPage,
+      },
+    };
+
+    return NextResponse.json({ records: response }, { status: 200 });
   } catch (error) {
     const { message, status } = handleError(error);
     return NextResponse.json({ message }, { status });
