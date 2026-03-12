@@ -64,9 +64,10 @@ function RatingRecordsList({ fetchUrl }: { fetchUrl: string }) {
     params.append("page", currentPage.toString());
     params.append("limit", limit.toString());
     params.append("action", actionFilter.toString());
-    params.append("search", searchQuery.toString());
-
-    const hasFilter = actionFilter || searchQuery;
+    if (searchQuery.length >= 3) {
+      params.append("search", searchQuery);
+    }
+    const hasFilter = actionFilter || (searchQuery.length >= 3 && searchQuery);
     setFilterOn(!!hasFilter);
 
     return `${fetchUrl}?${params.toString()}`;

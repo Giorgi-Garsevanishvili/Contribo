@@ -111,9 +111,12 @@ function HrCasesList({ fetchUrl }: { fetchUrl: string }) {
     searchParams.append("limit", limit.toString());
     searchParams.append("status", statusFilter.toString());
     searchParams.append("type", typeFilter.toString());
-    searchParams.append("search", searchQuery.toString());
+    if (searchQuery.length >= 3) {
+      searchParams.append("search", searchQuery);
+    }
 
-    const hasFilter = statusFilter || typeFilter || searchQuery;
+    const hasFilter =
+      statusFilter || typeFilter || (searchQuery.length >= 3 && searchQuery);
     setFilterOn(!!hasFilter);
 
     return `${fetchUrl}?${searchParams.toString()}`;

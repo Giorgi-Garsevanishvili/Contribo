@@ -75,9 +75,11 @@ function AccessList() {
     const searchParams = new URLSearchParams();
     searchParams.append("page", currentPage.toString());
     searchParams.append("limit", limit.toString());
-    searchParams.append("search", searchQuery.toString());
+    if (searchQuery.length >= 3) {
+      searchParams.append("search", searchQuery);
+    }
 
-    const hasFilter = searchQuery;
+    const hasFilter = searchQuery.length >= 3 && searchQuery;
     setFilterOn(!!hasFilter);
 
     return `/api/admin/allowedUsers?${searchParams.toString()}`;

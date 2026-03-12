@@ -62,13 +62,18 @@ function UsersList() {
     const searchParams = new URLSearchParams();
     searchParams.append("page", currentPage.toString());
     searchParams.append("limit", limit.toString());
-    searchParams.append("search", searchQuery.toString());
     searchParams.append("region", regionFilter.toString());
     searchParams.append("role", roleFilter.toString());
     searchParams.append("membership", membershipFilter.toString());
+    if (searchQuery.length >= 3) {
+      searchParams.append("search", searchQuery);
+    }
 
     const hasFilter =
-      regionFilter || membershipFilter || roleFilter || searchQuery;
+      regionFilter ||
+      membershipFilter ||
+      roleFilter ||
+      (searchQuery.length >= 3 && searchQuery);
     setFilterOn(!!hasFilter);
 
     console.log(updateSession);
