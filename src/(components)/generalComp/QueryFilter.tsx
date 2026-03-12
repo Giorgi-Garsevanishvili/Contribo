@@ -1,4 +1,4 @@
-import { HrWarningStatus, RatingAction } from "@/generated/enums";
+import { HrWarningStatus, RatingAction, ReqStatus } from "@/generated/enums";
 import { IoFilterSharp } from "react-icons/io5";
 import { MdFilterListOff } from "react-icons/md";
 
@@ -58,6 +58,15 @@ type FilterPropType =
       filterType: "STANDARD";
       searchValue: string;
       onSearchQueryChange: (search: string) => void;
+      filterOn: boolean;
+      clearFilter: () => void;
+    }
+  | {
+      filterType: "JOIN_REQUEST";
+      searchValue: string;
+      statusValue: string;
+      onSearchQueryChange: (search: string) => void;
+      onStatusFilterChange: (status: string) => void;
       filterOn: boolean;
       clearFilter: () => void;
     };
@@ -201,6 +210,35 @@ function QueryFilter(props: FilterPropType) {
                   ALL
                 </option>
                 {Object.values(RatingAction)?.map((item, index) => (
+                  <option key={index} value={item}>
+                    {item}
+                  </option>
+                ))}
+              </select>
+            </div>
+          </div>
+        ) : props.filterType === "JOIN_REQUEST" ? (
+          <div
+            /** This Is Filters For Rating List */ className="flex md:overflow-auto  overflow-x-scroll p-1 flex-row"
+          >
+            <div className="flex bg-gray-300 ring-1 ring-gray-600/30 md:ring-0 p-1 rounded-md md:bg-transparent m-2 w-full items-center justify-between">
+              <label
+                htmlFor="type"
+                className="text-gray-700 flex items-center justify-center m-1 h-full"
+              >
+                Status
+              </label>
+              <select
+                value={props.statusValue}
+                onChange={(e) => props.onStatusFilterChange(e.target.value)}
+                className="text-center px-0.5 h-fit rounded-sm bg-gray-300 cursor-pointer"
+                name="action"
+                id="action"
+              >
+                <option className="p-0 m-0" value="">
+                  ALL
+                </option>
+                {Object.values(ReqStatus)?.map((item, index) => (
                   <option key={index} value={item}>
                     {item}
                   </option>

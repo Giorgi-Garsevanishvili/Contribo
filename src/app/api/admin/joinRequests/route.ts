@@ -1,3 +1,4 @@
+import { Prisma } from "@/generated/client";
 import { ReqStatus } from "@/generated/enums";
 import { handleError } from "@/lib/errors/handleErrors";
 import { prisma } from "@/lib/prisma";
@@ -43,16 +44,40 @@ export const GET = async (req: NextRequest) => {
     );
     const skip = (page - 1) * limit;
 
+    //filter params
+
+    const statusFilter = searchParams.get("status");
+    const searchQuery = searchParams.get("search");
+
+    const whereClause: Prisma.JoinRequestWhereInput = {
+      regionId: thisUser.user.ownAllowance?.regionId,
+    };
+
+    if (
+      statusFilter &&
+      Object.values(ReqStatus).includes(statusFilter as ReqStatus)
+    ) {
+      whereClause.status = statusFilter as ReqStatus;
+    }
+
+    if (searchQuery && searchQuery.trim()) {
+      whereClause.OR = [
+        {
+          createdBy: {
+            name: { contains: searchQuery.trim(), mode: "insensitive" },
+          },
+        },
+      ];
+    }
+
     //Pagination
 
     const totalCount = await prisma.joinRequest.count({
-      where: { regionId: thisUser.user.ownAllowance?.regionId },
+      where: whereClause,
     });
 
     const data = await prisma.joinRequest.findMany({
-      where: {
-        regionId: thisUser.user.ownAllowance?.regionId,
-      },
+      where: whereClause,
       select: {
         id: true,
         createdBy: { select: { name: true, image: true } },

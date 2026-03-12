@@ -48,9 +48,9 @@ function JoinRequestCard({ joinData }: { joinData: Data }) {
   const statusColors = JOIN_STATUS_COLORS[statusKey];
   return (
     <div
-      className={`md:grid  relative content-center bg-white/80 flex flex-col  w-full  md:grid-cols-[1fr_1fr_1fr_1fr_0.8fr] gap-1 md:gap-7 md:grid-rows-1 select-none text-sm justify-start items-center px-3 text-black p-1 m-1 rounded-lg`}
+      className={`md:grid ${joinData.status === "REJECTED" || joinData.status === "APPROVED" ? " opacity-50" : ""} relative content-center flex flex-col  w-full  md:grid-cols-[1fr_1fr_1fr_1fr_0.8fr] gap-1 md:gap-7 md:grid-rows-1  bg-white/80 select-none text-sm justify-start items-center px-3 text-black p-1 m-1 rounded-lg`}
     >
-      <div className="flex  border-b border-gray-600/30 rounded-md md:border-0 p-1 justify-start truncate items-center">
+      <div className="flex md:w-auto w-full  border-b border-gray-600/30 rounded-md md:border-0 p-1 justify-start truncate items-center">
         {joinData.createdBy?.image ? (
           <Image
             priority
@@ -72,34 +72,43 @@ function JoinRequestCard({ joinData }: { joinData: Data }) {
         </div>
       </div>
 
-      <div className="flex justify-center font-medium gap-2">
-        <IoMdGlobe size={18} className="text-gray-500" />
-        <h3>{joinData.region?.name}</h3>
+      <div className="flex w-full justify-center items-center gap-2">
+        <h3 className="flex w-full md:hidden font-bold">Region Requested:</h3>
+        <div className="flex w-full justify-center font-medium gap-2">
+          <IoMdGlobe size={18} className="text-gray-500" />
+          <h3>{joinData.region?.name}</h3>
+        </div>
       </div>
 
-      <h3 className="flex justify-center text-gray-600 truncate">
-        {joinData.requestedAt
-          ? new Date(joinData.requestedAt).toDateString()
-          : "No Data"}
-      </h3>
+      <div className="flex w-full justify-center items-center gap-2">
+        <h3 className="flex w-full md:hidden font-bold">Requested Date:</h3>
+        <h3 className="flex w-full justify-center text-gray-600 truncate">
+          {joinData.requestedAt
+            ? new Date(joinData.requestedAt).toDateString()
+            : "No Data"}
+        </h3>
+      </div>
 
-      <h3
-        className={`flex border rounded-md p-1 ${statusColors.bg} ${statusColors.border} ${statusColors.font} justify-center font-medium truncate`}
-      >
-        {joinData.region ? joinData.status : "No Data"}
-      </h3>
+      <div className="flex w-full justify-center items-center gap-2">
+        <h3 className="flex md:hidden font-bold">Status:</h3>
+        <div
+          className={`flex border w-full rounded-md p-0.5 md:p-1 ${statusColors.bg} ${statusColors.border} ${statusColors.font} justify-center text-xs md:text-sm font-medium truncate`}
+        >
+          {joinData.region ? joinData.status : "No Data"}
+        </div>
+      </div>
 
-      <div className="flex gap-1.5 justify-center items-center">
+      <div className="flex gap-1.5 m-2 md:m-0 w-full justify-center items-center">
         {joinData.status === "REJECTED" || joinData.status === "APPROVED" ? (
           <button className="flex justify-center text-orange-700 cursor-pointer hover:underline transition-all duration-200">
             View Details
           </button>
         ) : (
           <>
-            <button className="btn h-fit p-1.5 border border-green-800 bg-green-500/20  m-0 rounded-sm w-fit">
+            <button className="btn h-fit hover:opacity-30 p-1.5 border border-green-800 bg-green-500/20  m-0 rounded-sm w-full md:w-fit">
               <FaCheck size={15} />
             </button>
-            <button className="btn h-fit p-1.5 border border-red-800 bg-red-500/20 m-0 rounded-sm w-fit">
+            <button className="btn h-fit hover:opacity-30 p-1.5 border border-red-800 bg-red-500/20 m-0 rounded-sm w-full md:w-fit">
               <IoClose size={15} />
             </button>
           </>
