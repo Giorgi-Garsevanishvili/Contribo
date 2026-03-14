@@ -93,7 +93,7 @@ function MembershipCard({
                 )}
               </button>
               <DeleteButtonAdmin
-                styleClass="bg-transparent hover:text-red-900 hover:border-red-600/40 w-fit h-fit p-1 m-0  border-gray-500/30 border"
+                styleClass="bg-transparent grow hover:text-red-900 hover:border-red-600/40 w-fit h-fit p-1 m-0  border-gray-500/30 border"
                 url={`/api/admin/memberStatusLog/${item.id}`}
                 fetchAction={refetch}
                 value={`Member Status: ${item.status.name} for ${item.user?.name}`}

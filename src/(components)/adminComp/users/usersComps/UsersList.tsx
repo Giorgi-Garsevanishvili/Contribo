@@ -76,8 +76,6 @@ function UsersList() {
       (searchQuery.length >= 3 && searchQuery);
     setFilterOn(!!hasFilter);
 
-    console.log(updateSession);
-
     return `/api/admin/users?${searchParams.toString()}`;
   }, [
     limit,

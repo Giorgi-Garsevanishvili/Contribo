@@ -189,7 +189,7 @@ function HrCaseCard({
         </div>
         <div className="flex p-1 m-2 gap-2 items-center w-full md:w-auto  justify-center  lg:flex-col">
           <DeleteButtonAdmin
-            styleClass="bg-transparent hover:text-red-900 hover:border-red-600/40 w-fit h-fit p-1 m-0  border-gray-500/30 border"
+            styleClass="bg-transparent grow hover:text-red-900 hover:border-red-600/40 w-fit h-fit p-1 m-0  border-gray-500/30 border"
             url={`/api/admin/hrWarnings/${item.id}`}
             fetchAction={refetch}
             value={`${item.name} for ${item.assignee.name}`}

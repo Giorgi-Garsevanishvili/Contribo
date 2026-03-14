@@ -18,14 +18,27 @@ export const GET = async (_req: NextRequest, context: Context) => {
     const data = await prisma.allowedUser.findUnique({
       where: { id, regionId: thisUser.user.ownAllowance?.regionId },
       select: {
-        roles: { select: { role: { select: { name: true } } } },
-        region: { select: { name: true, status: true } },
-        createdBy: { select: { name: true, id: true } },
-        updatedAt: true,
-        user: { select: { name: true } },
-        createdAt: true,
+        id: true,
         email: true,
+        createdAt: true,
+        updatedAt: true,
+        createdBy: { select: { name: true } },
         updatedBy: { select: { name: true } },
+        region: { select: { name: true, status:true } },
+        regionId: true,
+        roles: {
+          select: { role: { select: { name: true } }, roleId: true },
+        },
+        user: {
+          select: {
+            image: true,
+            name: true,
+            memberStatusLogs: {
+              where: { ended: false },
+              select: { status: { select: { name: true } } },
+            },
+          },
+        },
       },
     });
 

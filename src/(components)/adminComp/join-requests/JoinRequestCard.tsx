@@ -1,9 +1,9 @@
 import { ReqStatus } from "@/generated/enums";
 import Image from "next/image";
-import { FaCheck } from "react-icons/fa6";
 import { FcDeleteDatabase } from "react-icons/fc";
 import { IoMdGlobe } from "react-icons/io";
-import { IoClose } from "react-icons/io5";
+import JoinReqDetails from "./JoinReqDetails";
+import JoinReqActions from "./JoinReqActions";
 
 export const JOIN_STATUS_COLORS = {
   APPROVED: {
@@ -28,8 +28,6 @@ export const JOIN_STATUS_COLORS = {
   },
 } as const;
 
-const STATUS_ORDER = ["APPROVED", "PENDING", "REQUESTED", "REJECTED"];
-
 type Data = {
   id: string;
   region: {
@@ -41,9 +39,17 @@ type Data = {
   };
   status: ReqStatus;
   requestedAt: string;
+  updatedAt: string;
+  updatedBy: { name: string | null };
 };
 
-function JoinRequestCard({ joinData }: { joinData: Data }) {
+function JoinRequestCard({
+  joinData,
+  refetch,
+}: {
+  joinData: Data;
+  refetch: () => void;
+}) {
   const statusKey = joinData.status as keyof typeof JOIN_STATUS_COLORS;
   const statusColors = JOIN_STATUS_COLORS[statusKey];
   return (
@@ -100,18 +106,13 @@ function JoinRequestCard({ joinData }: { joinData: Data }) {
 
       <div className="flex gap-1.5 m-2 md:m-0 w-full justify-center items-center">
         {joinData.status === "REJECTED" || joinData.status === "APPROVED" ? (
-          <button className="flex justify-center text-orange-700 cursor-pointer hover:underline transition-all duration-200">
-            View Details
-          </button>
+          <JoinReqDetails joinData={joinData} />
         ) : (
-          <>
-            <button className="btn h-fit hover:opacity-30 p-1.5 border border-green-800 bg-green-500/20  m-0 rounded-sm w-full md:w-fit">
-              <FaCheck size={15} />
-            </button>
-            <button className="btn h-fit hover:opacity-30 p-1.5 border border-red-800 bg-red-500/20 m-0 rounded-sm w-full md:w-fit">
-              <IoClose size={15} />
-            </button>
-          </>
+          <JoinReqActions
+            id={joinData.id}
+            refetch={refetch}
+            currentStatus={joinData.status}
+          />
         )}
       </div>
     </div>

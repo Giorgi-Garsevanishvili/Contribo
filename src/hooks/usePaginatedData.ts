@@ -12,10 +12,14 @@ type PaginationMeta = {
   hasPrevPage: boolean;
 };
 
-function usePaginatedData<T>(url: string, initialData: T, dependencies?: unknown) {
+function usePaginatedData<T>(
+  url: string,
+  initialData: T,
+  dependencies?: unknown,
+) {
   const [data, setData] = useState<T>(initialData);
   const [isLoading, setIsLoading] = useState<boolean>(false);
-  const [error, setError] = useState<string | null>();
+  const [error, setError] = useState<boolean>(false);
   const [pagination, setPagination] = useState<PaginationMeta | null>();
 
   const { triggerCompAlert } = useCompAlert();
@@ -33,7 +37,7 @@ function usePaginatedData<T>(url: string, initialData: T, dependencies?: unknown
 
         abortControllerRef.current = new AbortController();
         setIsLoading(true);
-        setError(null);
+        setError(false);
         const response = await axios.get(url, {
           signal: abortControllerRef.current.signal,
         });
@@ -44,11 +48,11 @@ function usePaginatedData<T>(url: string, initialData: T, dependencies?: unknown
         }
         setIsLoading(false);
       } catch (error) {
-        setError(`${error}`);
         if (error instanceof Error && error.name === "CanceledError") {
           setIsLoading(true);
           return;
         }
+        setError(true);
         triggerCompAlertRef.current({
           message: `${error}`,
           type: "error",
@@ -76,7 +80,7 @@ function usePaginatedData<T>(url: string, initialData: T, dependencies?: unknown
 
       abortControllerRef.current = new AbortController();
       setIsLoading(true);
-      setError(null);
+      setError(false);
       const response = await axios.get(url, {
         signal: abortControllerRef.current.signal,
       });
@@ -87,7 +91,7 @@ function usePaginatedData<T>(url: string, initialData: T, dependencies?: unknown
       }
       setIsLoading(false);
     } catch (error) {
-      setError(`${error}`);
+      setError(true);
       if (error instanceof Error && error.name === "CanceledError") {
         setIsLoading(true);
         return;

@@ -1,8 +1,11 @@
 "use client";
 
 import { useFetchData } from "@/hooks/useDataFetch";
+import { redirect } from "next/navigation";
+import { MdReadMore } from "react-icons/md";
 
 type Data = {
+  id: true;
   createdAt: string | null;
   createdBy: { name: string } | null;
   email: string | null;
@@ -34,8 +37,19 @@ function AccessData({ id, refetchKey }: { id: string; refetchKey: boolean }) {
           <div
             className={`${isLoadingFetch ? "animate-pulse transition-all duration-300" : ""} select-none flex p-1 items-center justify-center bg-gray-200/60 rounded-lg shadow-lg`}
           >
-            <div className="flex flex-col bg-gray-200/60 p-1.5 rounded-lg">
+            <div className="flex relative flex-col bg-gray-200/60 p-1.5 rounded-lg">
               <h3 className="font-bold">Access Details</h3>
+              {isLoadingFetch ? (
+                ""
+              ) : (
+                <button
+                  onClick={() => redirect(`/admin/accesses/${data?.id}`)}
+                  className="flex btn p-1 rounded-md bg-gray-600 text-white m-0 h-fit w-fit absolute right-2"
+                >
+                  <MdReadMore size={23} />
+                </button>
+              )}
+
               <div className="flex flex-col mt-1 text-sm">
                 <h2 className="truncate">
                   <strong>User:</strong>{" "}

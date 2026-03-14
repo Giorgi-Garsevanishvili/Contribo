@@ -6,6 +6,15 @@ import { Context } from "@/types/general-types";
 import { NextRequest, NextResponse } from "next/server";
 import z from "zod";
 
+class TransactionError extends Error {
+  constructor(
+    public message: string,
+    public status: number,
+  ) {
+    super(message);
+  }
+}
+
 export const GET = async (_req: NextRequest, context: Context) => {
   try {
     const thisUser = await requireRole("ADMIN");
@@ -23,9 +32,7 @@ export const GET = async (_req: NextRequest, context: Context) => {
     });
 
     if (!data) {
-      return NextResponse.json({data,
-        message: "Join Request not found!",
-      });
+      return NextResponse.json({ data, message: "Join Request not found!" });
     }
 
     return NextResponse.json(data, { status: 200 });
@@ -60,14 +67,49 @@ export const PUT = async (req: NextRequest, context: Context) => {
 
     const body = updateJoinRequest.parse(jsonWithCreator);
 
-    const response = await prisma.joinRequest.update({
-      where: { id, regionId: thisUser.user.ownAllowance?.regionId },
-      data: body,
+    const data = await prisma.$transaction(async (tx) => {
+      const request = await tx.joinRequest.findUnique({
+        where: { id },
+        select: {
+          status: true,
+          regionId: true,
+          createdBy: { select: { allowedUserId: true } },
+        },
+      });
+
+      if (!request) {
+        throw new TransactionError("Request Not Found", 500);
+      }
+
+      if (body.status === "APPROVED") {
+        if (!request?.createdBy.allowedUserId) {
+          throw new TransactionError("User Not Found", 500);
+        }
+        const updateUser = await tx.allowedUser.update({
+          where: { id: request.createdBy.allowedUserId },
+          data: { regionId: request.regionId },
+        });
+
+        if (!updateUser) {
+          throw new TransactionError("Failed To Update User Region", 500);
+        }
+      }
+
+      const updatedRequest = await tx.joinRequest.update({
+        where: { id, regionId: thisUser.user.ownAllowance?.regionId },
+        data: body,
+      });
+
+      if (!updatedRequest) {
+        throw new TransactionError("Failed To Update Request ", 500);
+      }
+
+      return { updatedRequest };
     });
 
     return NextResponse.json(
-      { message: `Join Request Updated to ${response.status}` },
-      { status: 200 }
+      { message: `Join Request Updated to ${data.updatedRequest.status}` },
+      { status: 200 },
     );
   } catch (error) {
     const { message, status } = handleError(error);

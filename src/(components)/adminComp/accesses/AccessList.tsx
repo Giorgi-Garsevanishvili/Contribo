@@ -14,9 +14,7 @@ import { useFetchData } from "@/hooks/useDataFetch";
 import GrantAccessComp from "./GrantAccessComp";
 import { useSession } from "next-auth/react";
 import { FaRegCircleDot } from "react-icons/fa6";
-import DetailsInfo from "./DetailsInfo";
 import AccessListTitleBar from "./AccessListTitleBar";
-import AccessBoxMobile from "./AccessBoxMobile";
 import AccessCard from "./AccessCard";
 
 type Data = {

@@ -84,6 +84,8 @@ export const GET = async (req: NextRequest) => {
         region: { select: { name: true } },
         status: true,
         requestedAt: true,
+        updatedAt: true,
+        updatedBy: { select: { name: true } },
       },
       orderBy: {
         requestedAt: "desc",

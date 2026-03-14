@@ -19,6 +19,8 @@ type Data = {
   };
   status: ReqStatus;
   requestedAt: string;
+  updatedAt: string;
+  updatedBy: { name: string | null };
 };
 
 function JoinRequestsList() {
@@ -81,7 +83,7 @@ function JoinRequestsList() {
     <div
       className={`flex ${
         isLoadingFetch ? "" : " w-auto"
-      } flex-col items-center justify-center mt-4 shadow-sm bg-gray-300/90 m-2  rounded-lg p-1.5 select-none`}
+      } flex-col items-center relative justify-center mt-4 shadow-sm bg-gray-300/90 m-2  rounded-lg p-1.5 select-none`}
     >
       <div className="flex text-black m-1 mb-2 w-full items-center justify-center">
         <QueryFilter
@@ -100,7 +102,9 @@ function JoinRequestsList() {
           <ImSpinner9 className="animate-spin" size={40} />
         </div>
       ) : data && data?.length > 0 ? (
-        data?.map((JoinData) => <JoinRequestCard joinData={JoinData} />)
+        data?.map((JoinData) => (
+          <JoinRequestCard refetch={refetch} key={JoinData.id} joinData={JoinData} />
+        ))
       ) : (
         <div className="flex flex-col mt-2 text-black bg-gray-100/90  items-center rounded-lg shadow-lg p-10 justify-center">
           <h3 className="font-bold">No Join Requests to display.</h3>
