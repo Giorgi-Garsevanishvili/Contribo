@@ -126,6 +126,16 @@ function UserInfo({
     refetch();
   }, [refetchKey]);
 
+  const getHighResImage = (url: string) => {
+    if (url.includes("googleusercontent.com")) {
+      return url.replace(/=s\d+-c/, "=s300-c");
+    }
+    if (url.includes("avatars.githubusercontent.com")) {
+      return `${url.split("?")[0]}?size=300`;
+    }
+    return url;
+  };
+
   return (
     <div className="flex flex-col w-full justify-center items-center">
       {
@@ -135,12 +145,12 @@ function UserInfo({
           >
             {data ? (
               <div className="flex flex-col md:flex-row items-center justify-center">
-                <div className="flex w-38 h-38 m-1">
+                <div className="flex w-52 rounded-md h-auto m-1">
                   {data && data.image ? (
                     <Image
                       priority
-                      className="rounded-2xl shadow-sm"
-                      src={data?.image}
+                      className="rounded-md shadow-sm"
+                      src={getHighResImage(data.image)}
                       alt="User Photo"
                       width={300}
                       height={300}

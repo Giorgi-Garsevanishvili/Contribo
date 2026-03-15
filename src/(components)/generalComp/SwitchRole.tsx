@@ -15,15 +15,15 @@ function SwitchRole({
   const [openToggle, setOpenToggle] = useState(false);
 
   return (
-    <>
+    <div className="flex flex-col w-full h-fit">
       <button
         onClick={() => setOpenToggle(!openToggle)}
-        className="btn absolute h-full rounded-none ml-0 w-20 border-r border-gray-950/40 bg-gray-700/95 rounded-r-md text-[10px] font-bold uppercase tracking-widest text-slate-300 m-0 p-3"
+        className={`btn ${openToggle ? " bg-gray-100/90 text-gray-600 border-gray-300/60" : "text-white bg-gray-500/65"} m-0 flex  px-10 py-1 transition-all shadow-sm duration-300 uppercase items-center justify-center  text-lg rounded-b-md rounded-t-none shadow-white select-none  `}
       >
-        <h2 className="bg-gray-300 text-gray-950 p-3 rounded-md">Switch Role</h2>
+        Switch Role
       </button>
       <div
-        className={`${openToggle ? "flex" : "hidden"} items-start w-fit h-fit p-1 border border-gray-950/40 left-0.5 transition-all duration-300 gap-1 bg-gray-400/70 rounded-md absolute bottom-20 flex-col `}
+        className={`${openToggle ? "flex" : "hidden"} w-full items-center justify-center mt-0.5 h-fit p-1 border border-gray-950/40 transition-all duration-300 gap-1 bg-gray-400/90 rounded-md`}
       >
         {session?.user.roles
           ?.filter((role) => ROLE_ROUTE_MAP[role] !== currentRole)
@@ -31,7 +31,7 @@ function SwitchRole({
             <SwitchPageButton key={role} name={role} />
           ))}
       </div>
-    </>
+    </div>
   );
 }
 

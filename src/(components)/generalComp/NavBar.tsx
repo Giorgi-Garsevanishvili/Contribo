@@ -1,6 +1,7 @@
 import { auth } from "@/lib/auth";
 import Image from "next/image";
 import SignOut from "../authComp/sign-out";
+import SwitchRole from "./SwitchRole";
 
 async function NavBar({ page }: { page: string }) {
   const session = await auth();
@@ -22,7 +23,7 @@ async function NavBar({ page }: { page: string }) {
           <div className="flex flex-col truncate items-center justify-between p-3 min-w-30 select-none text-white">
             <h2>{session?.user.name}</h2>
             {
-              <h2 className="text-xs mt-1 italic text-gray-400 flex">
+              <h2 className="text-xs mt-1 italic text-gray-200 flex">
                 Region:{" "}
                 {session?.user.region ? session?.user.region : "No Region"}
               </h2>
@@ -31,9 +32,12 @@ async function NavBar({ page }: { page: string }) {
           <SignOut />
         </div>
       </div>
-      <p className="flex bg-gray-500/65 px-10 py-1 text-lg rounded-b-md shadow-md select-none text-white ">
-        {page}
-      </p>
+      <div className="flex gap-2 items-start justify-center w-full">
+        <p className="flex bg-gray-500/65 px-10 py-1 h-fit text-lg rounded-b-md shadow-md select-none text-white ">
+          {page}
+        </p>
+        <SwitchRole page={page} session={session} />
+      </div>
     </nav>
   );
 }
