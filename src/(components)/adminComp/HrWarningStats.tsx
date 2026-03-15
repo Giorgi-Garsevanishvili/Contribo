@@ -77,7 +77,7 @@ function HrWarningStats() {
         onMouseLeave={() => {
           setHover(false);
         }}
-        className={`${isLoading ? "animate-pulse" : ""} flex hover:shadow-lg  hover:opacity-95 transition-all duration-300 btn flex-col select-none w-40 h-40 items-center justify-center mt-0 m-2 text-white pt-0 p-0.5 bg-[#434d5f98] rounded-xl shadow-sm shadow-white `}
+        className={`${isLoading ? "animate-pulse" : ""} flex backdrop-blur-xs hover:shadow-lg  hover:opacity-95 transition-all duration-300 btn flex-col select-none w-40 h-40 items-center justify-center mt-0 m-2 text-white pt-0 p-0.5 bg-[#434d5f98] rounded-xl shadow-sm shadow-white `}
       >
         {!hover ? (
           <>

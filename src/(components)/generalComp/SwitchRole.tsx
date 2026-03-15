@@ -16,16 +16,16 @@ function SwitchRole({
   const [openToggle, setOpenToggle] = useState(false);
 
   return (
-    <div className="flex flex-col w-full h-fit">
+    <div className="flex justify-center items-center flex-col w-full h-fit relative">
       <button
         onClick={() => setOpenToggle(!openToggle)}
-        className={`btn ${openToggle ? "bg-gray-100/90" : "text-white bg-gray-500/65"} m-0 flex px-6 py-1 transition-all duration-300 uppercase items-center justify-center border border-t-0 border-gray-400/80  text-lg rounded-b-md rounded-t-none select-none gap-3  `}
+        className={`btn ${openToggle ? "bg-gray-100/90" : "text-white bg-gray-500/65"} m-0 flex px-6 py-1 transition-all duration-500 uppercase items-center justify-center   text-lg shadow-inner shadow-gray-600 rounded-md mt-1 select-none gap-3  `}
       >
-        Switch Role
+        {page}
         {openToggle ? <IoIosArrowUp /> : <IoIosArrowDown />}
       </button>
       <div
-        className={`${openToggle ? "flex" : "hidden"} w-full items-center justify-center mt-0.5 h-fit p-1 border border-gray-950/40 transition-all duration-300 gap-1 bg-gray-400/90 rounded-md`}
+        className={`${openToggle ? "flex" : "hidden"} absolute items-center -bottom-15 justify-center w-fit mt-0.5 h-fit p-1 border border-gray-800/30 transition-all duration-300 gap-1 bg-gray-200 shadow-2xl shadow-gray-500 rounded-md`}
       >
         {session?.user.roles
           ?.filter((role) => ROLE_ROUTE_MAP[role] !== currentRole)

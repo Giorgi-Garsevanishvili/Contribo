@@ -7,8 +7,8 @@ async function NavBar({ page }: { page: string }) {
   const session = await auth();
 
   return (
-    <nav className="flex md:hidden flex-col mb-2 items-center justify-center p-2">
-      <div className="flex items-center justify-between p-4 flex-row shadow-md bg-[#2c435b90] w-auto h-15 rounded-lg">
+    <nav className="flex w-svw z-200 md:hidden flex-col mb-2 items-center justify-center p-2">
+      <div className="flex items-center justify-between p-4 flex-row shadow-md bg-gray-700/70 w-auto h-15 rounded-lg">
         <div className="flex flex-row items-center justify-between p-3 min-w-30 text-white">
           {session ? (
             <Image
@@ -33,9 +33,6 @@ async function NavBar({ page }: { page: string }) {
         </div>
       </div>
       <div className="flex gap-2 items-start justify-center w-fit">
-        <p className="flex bg-gray-500/65  border-gray-400/80 border border-t-0 px-8 py-1 h-fit text-lg rounded-b-md shadow-md select-none text-white ">
-          {page}
-        </p>
         <SwitchRole page={page} session={session} />
       </div>
     </nav>

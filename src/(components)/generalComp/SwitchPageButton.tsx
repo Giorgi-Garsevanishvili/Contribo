@@ -8,7 +8,7 @@ function SwitchPageButton({ name }: { name: string }) {
 
   return (
     <button 
-      className="cursor-pointer transition-all m-1 rounded-md hover:text-primary hover:bg-white text-sm text-white bg-[#2c435b90] p-1.5 border"
+      className="cursor-pointer shadow-inner shadow-gray-800 transition-all m-1 rounded-md hover:text-primary hover:bg-white text-sm text-white bg-gray-500 p-1.5 border"
       onClick={() => router.push(`/${route}`)}
     >
       {name}

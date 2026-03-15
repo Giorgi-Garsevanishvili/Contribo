@@ -40,7 +40,7 @@ function VolunteerStats() {
     <>
       {
         <div
-          className={`${isLoadingFetch ? "animate-pulse " : ""} text-sm shadow-sm bg-gray-200/70  rounded-lg p-1.5 flex flex-row w-full items-center justify-between select-none`}
+          className={`${isLoadingFetch ? "animate-pulse " : ""} gap-1.5 text-sm shadow-sm bg-gray-200/70  rounded-lg p-1.5 flex w-full items-center justify-between select-none`}
         >
           {isLoadingFetch ? (
             <div
@@ -55,7 +55,7 @@ function VolunteerStats() {
               .slice(0, 3)
               .map(([status, count]) => (
                 <div
-                  className="m-1.5 p-2.5 bg-[#434d5f98] border-2 rounded-lg"
+                  className="p-1.5 bg-[#434d5f98] border-2 rounded-lg"
                   key={status}
                 >
                   {status} : <span className="font-bold ">{count}</span>
