@@ -32,8 +32,8 @@ async function NavBar({ page }: { page: string }) {
           <SignOut />
         </div>
       </div>
-      <div className="flex gap-2 items-start justify-center w-full">
-        <p className="flex bg-gray-500/65 px-10 py-1 h-fit text-lg rounded-b-md shadow-md select-none text-white ">
+      <div className="flex gap-2 items-start justify-center w-fit">
+        <p className="flex bg-gray-500/65  border-gray-400/80 border border-t-0 px-8 py-1 h-fit text-lg rounded-b-md shadow-md select-none text-white ">
           {page}
         </p>
         <SwitchRole page={page} session={session} />

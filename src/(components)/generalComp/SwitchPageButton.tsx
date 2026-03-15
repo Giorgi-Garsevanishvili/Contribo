@@ -1,7 +1,6 @@
 "use client";
 import { ROLE_ROUTE_MAP } from "@/lib/roleRoutes";
 import { useRouter } from "next/navigation";
-import React from "react";
 
 function SwitchPageButton({ name }: { name: string }) {
   const router = useRouter();
