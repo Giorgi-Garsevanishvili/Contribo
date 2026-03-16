@@ -72,15 +72,35 @@ export type HrWarningType = Prisma.HrWarningTypeModel
  */
 export type EventFeedback = Prisma.EventFeedbackModel
 /**
- * Model ScheduledEmails
+ * Model FeedbackRequest
  * 
  */
-export type ScheduledEmails = Prisma.ScheduledEmailsModel
+export type FeedbackRequest = Prisma.FeedbackRequestModel
+/**
+ * Model AvailabilitySlot
+ * 
+ */
+export type AvailabilitySlot = Prisma.AvailabilitySlotModel
+/**
+ * Model AvailabilityEntry
+ * 
+ */
+export type AvailabilityEntry = Prisma.AvailabilityEntryModel
+/**
+ * Model EntryCancelRequest
+ * 
+ */
+export type EntryCancelRequest = Prisma.EntryCancelRequestModel
 /**
  * Model EventAssignment
  * 
  */
 export type EventAssignment = Prisma.EventAssignmentModel
+/**
+ * Model AssignmentCancelRequest
+ * 
+ */
+export type AssignmentCancelRequest = Prisma.AssignmentCancelRequestModel
 /**
  * Model RatingHistory
  * 

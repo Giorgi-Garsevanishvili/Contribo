@@ -24,7 +24,7 @@ export const GET = async (_req: NextRequest, context: Context) => {
         updatedAt: true,
         createdBy: { select: { name: true } },
         updatedBy: { select: { name: true } },
-        region: { select: { name: true, status:true } },
+        region: { select: { name: true, status: true } },
         regionId: true,
         roles: {
           select: { role: { select: { name: true } }, roleId: true },
@@ -94,8 +94,13 @@ export const PUT = async (req: NextRequest, context: Context) => {
       return NextResponse.json({ message: "Role is not provided" });
     }
 
+    const user = await prisma.allowedUser.findUnique({
+      where: { id },
+      select: { user: { select: { name: true } } },
+    });
+
     return NextResponse.json({
-      message: `Allowed User, ${thisUser.user.name}, updated successfully`,
+      message: `Allowed User, ${user?.user?.name}, updated successfully`,
     });
   } catch (error) {
     const { status, message } = handleError(error);

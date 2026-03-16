@@ -20,7 +20,7 @@ function ConfirmTab() {
         confirmState.isOpened
           ? "w-screen h-screen bg-gray-900/85"
           : "pointer-events-none opacity-0"
-      }  z-50`}
+      }  z-210`}
     >
       <div className="flex bg-gray-300 p-15 mt-20 rounded-2xl shadow-2xl">
         <div className="flex flex-col">

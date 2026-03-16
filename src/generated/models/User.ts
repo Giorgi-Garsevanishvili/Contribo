@@ -299,7 +299,7 @@ export type UserWhereInput = {
   updatedEvents?: Prisma.EventListRelationFilter
   providedFeedbacks?: Prisma.EventFeedbackListRelationFilter
   updatedEventFeedback?: Prisma.EventFeedbackListRelationFilter
-  scheduledEventEmails?: Prisma.ScheduledEmailsListRelationFilter
+  feedbackRequests?: Prisma.FeedbackRequestListRelationFilter
   hrWarnings?: Prisma.HrWarningListRelationFilter
   createdHrWarning?: Prisma.HrWarningListRelationFilter
   updatedHrWarnings?: Prisma.HrWarningListRelationFilter
@@ -310,6 +310,14 @@ export type UserWhereInput = {
   CreatedEventAssignment?: Prisma.EventAssignmentListRelationFilter
   UpdatedEventAssignment?: Prisma.EventAssignmentListRelationFilter
   updatedUsers?: Prisma.UserListRelationFilter
+  createdAvailabilitySlots?: Prisma.AvailabilitySlotListRelationFilter
+  updatedAvailabilitySlots?: Prisma.AvailabilitySlotListRelationFilter
+  availabilityEntries?: Prisma.AvailabilityEntryListRelationFilter
+  UpdatedAvailabilityEntries?: Prisma.AvailabilityEntryListRelationFilter
+  entryCancelRequests?: Prisma.EntryCancelRequestListRelationFilter
+  reviewedEntryCancelRequests?: Prisma.EntryCancelRequestListRelationFilter
+  assignmentCancelRequests?: Prisma.AssignmentCancelRequestListRelationFilter
+  reviewedAssignmentCancelRequests?: Prisma.AssignmentCancelRequestListRelationFilter
 }
 
 export type UserOrderByWithRelationInput = {
@@ -345,7 +353,7 @@ export type UserOrderByWithRelationInput = {
   updatedEvents?: Prisma.EventOrderByRelationAggregateInput
   providedFeedbacks?: Prisma.EventFeedbackOrderByRelationAggregateInput
   updatedEventFeedback?: Prisma.EventFeedbackOrderByRelationAggregateInput
-  scheduledEventEmails?: Prisma.ScheduledEmailsOrderByRelationAggregateInput
+  feedbackRequests?: Prisma.FeedbackRequestOrderByRelationAggregateInput
   hrWarnings?: Prisma.HrWarningOrderByRelationAggregateInput
   createdHrWarning?: Prisma.HrWarningOrderByRelationAggregateInput
   updatedHrWarnings?: Prisma.HrWarningOrderByRelationAggregateInput
@@ -356,6 +364,14 @@ export type UserOrderByWithRelationInput = {
   CreatedEventAssignment?: Prisma.EventAssignmentOrderByRelationAggregateInput
   UpdatedEventAssignment?: Prisma.EventAssignmentOrderByRelationAggregateInput
   updatedUsers?: Prisma.UserOrderByRelationAggregateInput
+  createdAvailabilitySlots?: Prisma.AvailabilitySlotOrderByRelationAggregateInput
+  updatedAvailabilitySlots?: Prisma.AvailabilitySlotOrderByRelationAggregateInput
+  availabilityEntries?: Prisma.AvailabilityEntryOrderByRelationAggregateInput
+  UpdatedAvailabilityEntries?: Prisma.AvailabilityEntryOrderByRelationAggregateInput
+  entryCancelRequests?: Prisma.EntryCancelRequestOrderByRelationAggregateInput
+  reviewedEntryCancelRequests?: Prisma.EntryCancelRequestOrderByRelationAggregateInput
+  assignmentCancelRequests?: Prisma.AssignmentCancelRequestOrderByRelationAggregateInput
+  reviewedAssignmentCancelRequests?: Prisma.AssignmentCancelRequestOrderByRelationAggregateInput
 }
 
 export type UserWhereUniqueInput = Prisma.AtLeast<{
@@ -394,7 +410,7 @@ export type UserWhereUniqueInput = Prisma.AtLeast<{
   updatedEvents?: Prisma.EventListRelationFilter
   providedFeedbacks?: Prisma.EventFeedbackListRelationFilter
   updatedEventFeedback?: Prisma.EventFeedbackListRelationFilter
-  scheduledEventEmails?: Prisma.ScheduledEmailsListRelationFilter
+  feedbackRequests?: Prisma.FeedbackRequestListRelationFilter
   hrWarnings?: Prisma.HrWarningListRelationFilter
   createdHrWarning?: Prisma.HrWarningListRelationFilter
   updatedHrWarnings?: Prisma.HrWarningListRelationFilter
@@ -405,6 +421,14 @@ export type UserWhereUniqueInput = Prisma.AtLeast<{
   CreatedEventAssignment?: Prisma.EventAssignmentListRelationFilter
   UpdatedEventAssignment?: Prisma.EventAssignmentListRelationFilter
   updatedUsers?: Prisma.UserListRelationFilter
+  createdAvailabilitySlots?: Prisma.AvailabilitySlotListRelationFilter
+  updatedAvailabilitySlots?: Prisma.AvailabilitySlotListRelationFilter
+  availabilityEntries?: Prisma.AvailabilityEntryListRelationFilter
+  UpdatedAvailabilityEntries?: Prisma.AvailabilityEntryListRelationFilter
+  entryCancelRequests?: Prisma.EntryCancelRequestListRelationFilter
+  reviewedEntryCancelRequests?: Prisma.EntryCancelRequestListRelationFilter
+  assignmentCancelRequests?: Prisma.AssignmentCancelRequestListRelationFilter
+  reviewedAssignmentCancelRequests?: Prisma.AssignmentCancelRequestListRelationFilter
 }, "id" | "email" | "allowedUserId">
 
 export type UserOrderByWithAggregationInput = {
@@ -478,7 +502,7 @@ export type UserCreateInput = {
   updatedEvents?: Prisma.EventCreateNestedManyWithoutUpdatedByInput
   providedFeedbacks?: Prisma.EventFeedbackCreateNestedManyWithoutUserInput
   updatedEventFeedback?: Prisma.EventFeedbackCreateNestedManyWithoutUpdatedByInput
-  scheduledEventEmails?: Prisma.ScheduledEmailsCreateNestedManyWithoutUserInput
+  feedbackRequests?: Prisma.FeedbackRequestCreateNestedManyWithoutUserInput
   hrWarnings?: Prisma.HrWarningCreateNestedManyWithoutAssigneeInput
   createdHrWarning?: Prisma.HrWarningCreateNestedManyWithoutCreatedByInput
   updatedHrWarnings?: Prisma.HrWarningCreateNestedManyWithoutUpdatedByInput
@@ -489,6 +513,14 @@ export type UserCreateInput = {
   CreatedEventAssignment?: Prisma.EventAssignmentCreateNestedManyWithoutCreatedByInput
   UpdatedEventAssignment?: Prisma.EventAssignmentCreateNestedManyWithoutUpdatedByInput
   updatedUsers?: Prisma.UserCreateNestedManyWithoutUpdatedByInput
+  createdAvailabilitySlots?: Prisma.AvailabilitySlotCreateNestedManyWithoutCreatedByInput
+  updatedAvailabilitySlots?: Prisma.AvailabilitySlotCreateNestedManyWithoutUpdatedByInput
+  availabilityEntries?: Prisma.AvailabilityEntryCreateNestedManyWithoutUserInput
+  UpdatedAvailabilityEntries?: Prisma.AvailabilityEntryCreateNestedManyWithoutUpdatedByInput
+  entryCancelRequests?: Prisma.EntryCancelRequestCreateNestedManyWithoutRequestedByInput
+  reviewedEntryCancelRequests?: Prisma.EntryCancelRequestCreateNestedManyWithoutReviewedByInput
+  assignmentCancelRequests?: Prisma.AssignmentCancelRequestCreateNestedManyWithoutRequestedByInput
+  reviewedAssignmentCancelRequests?: Prisma.AssignmentCancelRequestCreateNestedManyWithoutReviewedByInput
 }
 
 export type UserUncheckedCreateInput = {
@@ -523,7 +555,7 @@ export type UserUncheckedCreateInput = {
   updatedEvents?: Prisma.EventUncheckedCreateNestedManyWithoutUpdatedByInput
   providedFeedbacks?: Prisma.EventFeedbackUncheckedCreateNestedManyWithoutUserInput
   updatedEventFeedback?: Prisma.EventFeedbackUncheckedCreateNestedManyWithoutUpdatedByInput
-  scheduledEventEmails?: Prisma.ScheduledEmailsUncheckedCreateNestedManyWithoutUserInput
+  feedbackRequests?: Prisma.FeedbackRequestUncheckedCreateNestedManyWithoutUserInput
   hrWarnings?: Prisma.HrWarningUncheckedCreateNestedManyWithoutAssigneeInput
   createdHrWarning?: Prisma.HrWarningUncheckedCreateNestedManyWithoutCreatedByInput
   updatedHrWarnings?: Prisma.HrWarningUncheckedCreateNestedManyWithoutUpdatedByInput
@@ -533,6 +565,14 @@ export type UserUncheckedCreateInput = {
   CreatedEventAssignment?: Prisma.EventAssignmentUncheckedCreateNestedManyWithoutCreatedByInput
   UpdatedEventAssignment?: Prisma.EventAssignmentUncheckedCreateNestedManyWithoutUpdatedByInput
   updatedUsers?: Prisma.UserUncheckedCreateNestedManyWithoutUpdatedByInput
+  createdAvailabilitySlots?: Prisma.AvailabilitySlotUncheckedCreateNestedManyWithoutCreatedByInput
+  updatedAvailabilitySlots?: Prisma.AvailabilitySlotUncheckedCreateNestedManyWithoutUpdatedByInput
+  availabilityEntries?: Prisma.AvailabilityEntryUncheckedCreateNestedManyWithoutUserInput
+  UpdatedAvailabilityEntries?: Prisma.AvailabilityEntryUncheckedCreateNestedManyWithoutUpdatedByInput
+  entryCancelRequests?: Prisma.EntryCancelRequestUncheckedCreateNestedManyWithoutRequestedByInput
+  reviewedEntryCancelRequests?: Prisma.EntryCancelRequestUncheckedCreateNestedManyWithoutReviewedByInput
+  assignmentCancelRequests?: Prisma.AssignmentCancelRequestUncheckedCreateNestedManyWithoutRequestedByInput
+  reviewedAssignmentCancelRequests?: Prisma.AssignmentCancelRequestUncheckedCreateNestedManyWithoutReviewedByInput
 }
 
 export type UserUpdateInput = {
@@ -566,7 +606,7 @@ export type UserUpdateInput = {
   updatedEvents?: Prisma.EventUpdateManyWithoutUpdatedByNestedInput
   providedFeedbacks?: Prisma.EventFeedbackUpdateManyWithoutUserNestedInput
   updatedEventFeedback?: Prisma.EventFeedbackUpdateManyWithoutUpdatedByNestedInput
-  scheduledEventEmails?: Prisma.ScheduledEmailsUpdateManyWithoutUserNestedInput
+  feedbackRequests?: Prisma.FeedbackRequestUpdateManyWithoutUserNestedInput
   hrWarnings?: Prisma.HrWarningUpdateManyWithoutAssigneeNestedInput
   createdHrWarning?: Prisma.HrWarningUpdateManyWithoutCreatedByNestedInput
   updatedHrWarnings?: Prisma.HrWarningUpdateManyWithoutUpdatedByNestedInput
@@ -577,6 +617,14 @@ export type UserUpdateInput = {
   CreatedEventAssignment?: Prisma.EventAssignmentUpdateManyWithoutCreatedByNestedInput
   UpdatedEventAssignment?: Prisma.EventAssignmentUpdateManyWithoutUpdatedByNestedInput
   updatedUsers?: Prisma.UserUpdateManyWithoutUpdatedByNestedInput
+  createdAvailabilitySlots?: Prisma.AvailabilitySlotUpdateManyWithoutCreatedByNestedInput
+  updatedAvailabilitySlots?: Prisma.AvailabilitySlotUpdateManyWithoutUpdatedByNestedInput
+  availabilityEntries?: Prisma.AvailabilityEntryUpdateManyWithoutUserNestedInput
+  UpdatedAvailabilityEntries?: Prisma.AvailabilityEntryUpdateManyWithoutUpdatedByNestedInput
+  entryCancelRequests?: Prisma.EntryCancelRequestUpdateManyWithoutRequestedByNestedInput
+  reviewedEntryCancelRequests?: Prisma.EntryCancelRequestUpdateManyWithoutReviewedByNestedInput
+  assignmentCancelRequests?: Prisma.AssignmentCancelRequestUpdateManyWithoutRequestedByNestedInput
+  reviewedAssignmentCancelRequests?: Prisma.AssignmentCancelRequestUpdateManyWithoutReviewedByNestedInput
 }
 
 export type UserUncheckedUpdateInput = {
@@ -611,7 +659,7 @@ export type UserUncheckedUpdateInput = {
   updatedEvents?: Prisma.EventUncheckedUpdateManyWithoutUpdatedByNestedInput
   providedFeedbacks?: Prisma.EventFeedbackUncheckedUpdateManyWithoutUserNestedInput
   updatedEventFeedback?: Prisma.EventFeedbackUncheckedUpdateManyWithoutUpdatedByNestedInput
-  scheduledEventEmails?: Prisma.ScheduledEmailsUncheckedUpdateManyWithoutUserNestedInput
+  feedbackRequests?: Prisma.FeedbackRequestUncheckedUpdateManyWithoutUserNestedInput
   hrWarnings?: Prisma.HrWarningUncheckedUpdateManyWithoutAssigneeNestedInput
   createdHrWarning?: Prisma.HrWarningUncheckedUpdateManyWithoutCreatedByNestedInput
   updatedHrWarnings?: Prisma.HrWarningUncheckedUpdateManyWithoutUpdatedByNestedInput
@@ -621,6 +669,14 @@ export type UserUncheckedUpdateInput = {
   CreatedEventAssignment?: Prisma.EventAssignmentUncheckedUpdateManyWithoutCreatedByNestedInput
   UpdatedEventAssignment?: Prisma.EventAssignmentUncheckedUpdateManyWithoutUpdatedByNestedInput
   updatedUsers?: Prisma.UserUncheckedUpdateManyWithoutUpdatedByNestedInput
+  createdAvailabilitySlots?: Prisma.AvailabilitySlotUncheckedUpdateManyWithoutCreatedByNestedInput
+  updatedAvailabilitySlots?: Prisma.AvailabilitySlotUncheckedUpdateManyWithoutUpdatedByNestedInput
+  availabilityEntries?: Prisma.AvailabilityEntryUncheckedUpdateManyWithoutUserNestedInput
+  UpdatedAvailabilityEntries?: Prisma.AvailabilityEntryUncheckedUpdateManyWithoutUpdatedByNestedInput
+  entryCancelRequests?: Prisma.EntryCancelRequestUncheckedUpdateManyWithoutRequestedByNestedInput
+  reviewedEntryCancelRequests?: Prisma.EntryCancelRequestUncheckedUpdateManyWithoutReviewedByNestedInput
+  assignmentCancelRequests?: Prisma.AssignmentCancelRequestUncheckedUpdateManyWithoutRequestedByNestedInput
+  reviewedAssignmentCancelRequests?: Prisma.AssignmentCancelRequestUncheckedUpdateManyWithoutReviewedByNestedInput
 }
 
 export type UserCreateManyInput = {
@@ -945,18 +1001,110 @@ export type UserUpdateOneWithoutProvidedFeedbacksNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutProvidedFeedbacksInput, Prisma.UserUpdateWithoutProvidedFeedbacksInput>, Prisma.UserUncheckedUpdateWithoutProvidedFeedbacksInput>
 }
 
-export type UserCreateNestedOneWithoutScheduledEventEmailsInput = {
-  create?: Prisma.XOR<Prisma.UserCreateWithoutScheduledEventEmailsInput, Prisma.UserUncheckedCreateWithoutScheduledEventEmailsInput>
-  connectOrCreate?: Prisma.UserCreateOrConnectWithoutScheduledEventEmailsInput
+export type UserCreateNestedOneWithoutFeedbackRequestsInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutFeedbackRequestsInput, Prisma.UserUncheckedCreateWithoutFeedbackRequestsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutFeedbackRequestsInput
   connect?: Prisma.UserWhereUniqueInput
 }
 
-export type UserUpdateOneRequiredWithoutScheduledEventEmailsNestedInput = {
-  create?: Prisma.XOR<Prisma.UserCreateWithoutScheduledEventEmailsInput, Prisma.UserUncheckedCreateWithoutScheduledEventEmailsInput>
-  connectOrCreate?: Prisma.UserCreateOrConnectWithoutScheduledEventEmailsInput
-  upsert?: Prisma.UserUpsertWithoutScheduledEventEmailsInput
+export type UserUpdateOneRequiredWithoutFeedbackRequestsNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutFeedbackRequestsInput, Prisma.UserUncheckedCreateWithoutFeedbackRequestsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutFeedbackRequestsInput
+  upsert?: Prisma.UserUpsertWithoutFeedbackRequestsInput
   connect?: Prisma.UserWhereUniqueInput
-  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutScheduledEventEmailsInput, Prisma.UserUpdateWithoutScheduledEventEmailsInput>, Prisma.UserUncheckedUpdateWithoutScheduledEventEmailsInput>
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutFeedbackRequestsInput, Prisma.UserUpdateWithoutFeedbackRequestsInput>, Prisma.UserUncheckedUpdateWithoutFeedbackRequestsInput>
+}
+
+export type UserCreateNestedOneWithoutCreatedAvailabilitySlotsInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutCreatedAvailabilitySlotsInput, Prisma.UserUncheckedCreateWithoutCreatedAvailabilitySlotsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutCreatedAvailabilitySlotsInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserCreateNestedOneWithoutUpdatedAvailabilitySlotsInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutUpdatedAvailabilitySlotsInput, Prisma.UserUncheckedCreateWithoutUpdatedAvailabilitySlotsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutUpdatedAvailabilitySlotsInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserUpdateOneWithoutCreatedAvailabilitySlotsNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutCreatedAvailabilitySlotsInput, Prisma.UserUncheckedCreateWithoutCreatedAvailabilitySlotsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutCreatedAvailabilitySlotsInput
+  upsert?: Prisma.UserUpsertWithoutCreatedAvailabilitySlotsInput
+  disconnect?: Prisma.UserWhereInput | boolean
+  delete?: Prisma.UserWhereInput | boolean
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutCreatedAvailabilitySlotsInput, Prisma.UserUpdateWithoutCreatedAvailabilitySlotsInput>, Prisma.UserUncheckedUpdateWithoutCreatedAvailabilitySlotsInput>
+}
+
+export type UserUpdateOneWithoutUpdatedAvailabilitySlotsNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutUpdatedAvailabilitySlotsInput, Prisma.UserUncheckedCreateWithoutUpdatedAvailabilitySlotsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutUpdatedAvailabilitySlotsInput
+  upsert?: Prisma.UserUpsertWithoutUpdatedAvailabilitySlotsInput
+  disconnect?: Prisma.UserWhereInput | boolean
+  delete?: Prisma.UserWhereInput | boolean
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutUpdatedAvailabilitySlotsInput, Prisma.UserUpdateWithoutUpdatedAvailabilitySlotsInput>, Prisma.UserUncheckedUpdateWithoutUpdatedAvailabilitySlotsInput>
+}
+
+export type UserCreateNestedOneWithoutAvailabilityEntriesInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutAvailabilityEntriesInput, Prisma.UserUncheckedCreateWithoutAvailabilityEntriesInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutAvailabilityEntriesInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserCreateNestedOneWithoutUpdatedAvailabilityEntriesInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutUpdatedAvailabilityEntriesInput, Prisma.UserUncheckedCreateWithoutUpdatedAvailabilityEntriesInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutUpdatedAvailabilityEntriesInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserUpdateOneRequiredWithoutAvailabilityEntriesNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutAvailabilityEntriesInput, Prisma.UserUncheckedCreateWithoutAvailabilityEntriesInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutAvailabilityEntriesInput
+  upsert?: Prisma.UserUpsertWithoutAvailabilityEntriesInput
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutAvailabilityEntriesInput, Prisma.UserUpdateWithoutAvailabilityEntriesInput>, Prisma.UserUncheckedUpdateWithoutAvailabilityEntriesInput>
+}
+
+export type UserUpdateOneWithoutUpdatedAvailabilityEntriesNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutUpdatedAvailabilityEntriesInput, Prisma.UserUncheckedCreateWithoutUpdatedAvailabilityEntriesInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutUpdatedAvailabilityEntriesInput
+  upsert?: Prisma.UserUpsertWithoutUpdatedAvailabilityEntriesInput
+  disconnect?: Prisma.UserWhereInput | boolean
+  delete?: Prisma.UserWhereInput | boolean
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutUpdatedAvailabilityEntriesInput, Prisma.UserUpdateWithoutUpdatedAvailabilityEntriesInput>, Prisma.UserUncheckedUpdateWithoutUpdatedAvailabilityEntriesInput>
+}
+
+export type UserCreateNestedOneWithoutEntryCancelRequestsInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutEntryCancelRequestsInput, Prisma.UserUncheckedCreateWithoutEntryCancelRequestsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutEntryCancelRequestsInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserCreateNestedOneWithoutReviewedEntryCancelRequestsInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutReviewedEntryCancelRequestsInput, Prisma.UserUncheckedCreateWithoutReviewedEntryCancelRequestsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutReviewedEntryCancelRequestsInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserUpdateOneRequiredWithoutEntryCancelRequestsNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutEntryCancelRequestsInput, Prisma.UserUncheckedCreateWithoutEntryCancelRequestsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutEntryCancelRequestsInput
+  upsert?: Prisma.UserUpsertWithoutEntryCancelRequestsInput
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutEntryCancelRequestsInput, Prisma.UserUpdateWithoutEntryCancelRequestsInput>, Prisma.UserUncheckedUpdateWithoutEntryCancelRequestsInput>
+}
+
+export type UserUpdateOneWithoutReviewedEntryCancelRequestsNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutReviewedEntryCancelRequestsInput, Prisma.UserUncheckedCreateWithoutReviewedEntryCancelRequestsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutReviewedEntryCancelRequestsInput
+  upsert?: Prisma.UserUpsertWithoutReviewedEntryCancelRequestsInput
+  disconnect?: Prisma.UserWhereInput | boolean
+  delete?: Prisma.UserWhereInput | boolean
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutReviewedEntryCancelRequestsInput, Prisma.UserUpdateWithoutReviewedEntryCancelRequestsInput>, Prisma.UserUncheckedUpdateWithoutReviewedEntryCancelRequestsInput>
 }
 
 export type UserCreateNestedOneWithoutCreatedEventAssignmentInput = {
@@ -1005,6 +1153,36 @@ export type UserUpdateOneWithoutEventAssignmentsNestedInput = {
   delete?: Prisma.UserWhereInput | boolean
   connect?: Prisma.UserWhereUniqueInput
   update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutEventAssignmentsInput, Prisma.UserUpdateWithoutEventAssignmentsInput>, Prisma.UserUncheckedUpdateWithoutEventAssignmentsInput>
+}
+
+export type UserCreateNestedOneWithoutAssignmentCancelRequestsInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutAssignmentCancelRequestsInput, Prisma.UserUncheckedCreateWithoutAssignmentCancelRequestsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutAssignmentCancelRequestsInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserCreateNestedOneWithoutReviewedAssignmentCancelRequestsInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutReviewedAssignmentCancelRequestsInput, Prisma.UserUncheckedCreateWithoutReviewedAssignmentCancelRequestsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutReviewedAssignmentCancelRequestsInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserUpdateOneRequiredWithoutAssignmentCancelRequestsNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutAssignmentCancelRequestsInput, Prisma.UserUncheckedCreateWithoutAssignmentCancelRequestsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutAssignmentCancelRequestsInput
+  upsert?: Prisma.UserUpsertWithoutAssignmentCancelRequestsInput
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutAssignmentCancelRequestsInput, Prisma.UserUpdateWithoutAssignmentCancelRequestsInput>, Prisma.UserUncheckedUpdateWithoutAssignmentCancelRequestsInput>
+}
+
+export type UserUpdateOneWithoutReviewedAssignmentCancelRequestsNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutReviewedAssignmentCancelRequestsInput, Prisma.UserUncheckedCreateWithoutReviewedAssignmentCancelRequestsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutReviewedAssignmentCancelRequestsInput
+  upsert?: Prisma.UserUpsertWithoutReviewedAssignmentCancelRequestsInput
+  disconnect?: Prisma.UserWhereInput | boolean
+  delete?: Prisma.UserWhereInput | boolean
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutReviewedAssignmentCancelRequestsInput, Prisma.UserUpdateWithoutReviewedAssignmentCancelRequestsInput>, Prisma.UserUncheckedUpdateWithoutReviewedAssignmentCancelRequestsInput>
 }
 
 export type UserCreateNestedOneWithoutRatingHistoryInput = {
@@ -1312,7 +1490,7 @@ export type UserCreateWithoutUpdatedUsersInput = {
   updatedEvents?: Prisma.EventCreateNestedManyWithoutUpdatedByInput
   providedFeedbacks?: Prisma.EventFeedbackCreateNestedManyWithoutUserInput
   updatedEventFeedback?: Prisma.EventFeedbackCreateNestedManyWithoutUpdatedByInput
-  scheduledEventEmails?: Prisma.ScheduledEmailsCreateNestedManyWithoutUserInput
+  feedbackRequests?: Prisma.FeedbackRequestCreateNestedManyWithoutUserInput
   hrWarnings?: Prisma.HrWarningCreateNestedManyWithoutAssigneeInput
   createdHrWarning?: Prisma.HrWarningCreateNestedManyWithoutCreatedByInput
   updatedHrWarnings?: Prisma.HrWarningCreateNestedManyWithoutUpdatedByInput
@@ -1322,6 +1500,14 @@ export type UserCreateWithoutUpdatedUsersInput = {
   eventAssignments?: Prisma.EventAssignmentCreateNestedManyWithoutUserInput
   CreatedEventAssignment?: Prisma.EventAssignmentCreateNestedManyWithoutCreatedByInput
   UpdatedEventAssignment?: Prisma.EventAssignmentCreateNestedManyWithoutUpdatedByInput
+  createdAvailabilitySlots?: Prisma.AvailabilitySlotCreateNestedManyWithoutCreatedByInput
+  updatedAvailabilitySlots?: Prisma.AvailabilitySlotCreateNestedManyWithoutUpdatedByInput
+  availabilityEntries?: Prisma.AvailabilityEntryCreateNestedManyWithoutUserInput
+  UpdatedAvailabilityEntries?: Prisma.AvailabilityEntryCreateNestedManyWithoutUpdatedByInput
+  entryCancelRequests?: Prisma.EntryCancelRequestCreateNestedManyWithoutRequestedByInput
+  reviewedEntryCancelRequests?: Prisma.EntryCancelRequestCreateNestedManyWithoutReviewedByInput
+  assignmentCancelRequests?: Prisma.AssignmentCancelRequestCreateNestedManyWithoutRequestedByInput
+  reviewedAssignmentCancelRequests?: Prisma.AssignmentCancelRequestCreateNestedManyWithoutReviewedByInput
 }
 
 export type UserUncheckedCreateWithoutUpdatedUsersInput = {
@@ -1356,7 +1542,7 @@ export type UserUncheckedCreateWithoutUpdatedUsersInput = {
   updatedEvents?: Prisma.EventUncheckedCreateNestedManyWithoutUpdatedByInput
   providedFeedbacks?: Prisma.EventFeedbackUncheckedCreateNestedManyWithoutUserInput
   updatedEventFeedback?: Prisma.EventFeedbackUncheckedCreateNestedManyWithoutUpdatedByInput
-  scheduledEventEmails?: Prisma.ScheduledEmailsUncheckedCreateNestedManyWithoutUserInput
+  feedbackRequests?: Prisma.FeedbackRequestUncheckedCreateNestedManyWithoutUserInput
   hrWarnings?: Prisma.HrWarningUncheckedCreateNestedManyWithoutAssigneeInput
   createdHrWarning?: Prisma.HrWarningUncheckedCreateNestedManyWithoutCreatedByInput
   updatedHrWarnings?: Prisma.HrWarningUncheckedCreateNestedManyWithoutUpdatedByInput
@@ -1365,6 +1551,14 @@ export type UserUncheckedCreateWithoutUpdatedUsersInput = {
   eventAssignments?: Prisma.EventAssignmentUncheckedCreateNestedManyWithoutUserInput
   CreatedEventAssignment?: Prisma.EventAssignmentUncheckedCreateNestedManyWithoutCreatedByInput
   UpdatedEventAssignment?: Prisma.EventAssignmentUncheckedCreateNestedManyWithoutUpdatedByInput
+  createdAvailabilitySlots?: Prisma.AvailabilitySlotUncheckedCreateNestedManyWithoutCreatedByInput
+  updatedAvailabilitySlots?: Prisma.AvailabilitySlotUncheckedCreateNestedManyWithoutUpdatedByInput
+  availabilityEntries?: Prisma.AvailabilityEntryUncheckedCreateNestedManyWithoutUserInput
+  UpdatedAvailabilityEntries?: Prisma.AvailabilityEntryUncheckedCreateNestedManyWithoutUpdatedByInput
+  entryCancelRequests?: Prisma.EntryCancelRequestUncheckedCreateNestedManyWithoutRequestedByInput
+  reviewedEntryCancelRequests?: Prisma.EntryCancelRequestUncheckedCreateNestedManyWithoutReviewedByInput
+  assignmentCancelRequests?: Prisma.AssignmentCancelRequestUncheckedCreateNestedManyWithoutRequestedByInput
+  reviewedAssignmentCancelRequests?: Prisma.AssignmentCancelRequestUncheckedCreateNestedManyWithoutReviewedByInput
 }
 
 export type UserCreateOrConnectWithoutUpdatedUsersInput = {
@@ -1402,7 +1596,7 @@ export type UserCreateWithoutUpdatedByInput = {
   updatedEvents?: Prisma.EventCreateNestedManyWithoutUpdatedByInput
   providedFeedbacks?: Prisma.EventFeedbackCreateNestedManyWithoutUserInput
   updatedEventFeedback?: Prisma.EventFeedbackCreateNestedManyWithoutUpdatedByInput
-  scheduledEventEmails?: Prisma.ScheduledEmailsCreateNestedManyWithoutUserInput
+  feedbackRequests?: Prisma.FeedbackRequestCreateNestedManyWithoutUserInput
   hrWarnings?: Prisma.HrWarningCreateNestedManyWithoutAssigneeInput
   createdHrWarning?: Prisma.HrWarningCreateNestedManyWithoutCreatedByInput
   updatedHrWarnings?: Prisma.HrWarningCreateNestedManyWithoutUpdatedByInput
@@ -1413,6 +1607,14 @@ export type UserCreateWithoutUpdatedByInput = {
   CreatedEventAssignment?: Prisma.EventAssignmentCreateNestedManyWithoutCreatedByInput
   UpdatedEventAssignment?: Prisma.EventAssignmentCreateNestedManyWithoutUpdatedByInput
   updatedUsers?: Prisma.UserCreateNestedManyWithoutUpdatedByInput
+  createdAvailabilitySlots?: Prisma.AvailabilitySlotCreateNestedManyWithoutCreatedByInput
+  updatedAvailabilitySlots?: Prisma.AvailabilitySlotCreateNestedManyWithoutUpdatedByInput
+  availabilityEntries?: Prisma.AvailabilityEntryCreateNestedManyWithoutUserInput
+  UpdatedAvailabilityEntries?: Prisma.AvailabilityEntryCreateNestedManyWithoutUpdatedByInput
+  entryCancelRequests?: Prisma.EntryCancelRequestCreateNestedManyWithoutRequestedByInput
+  reviewedEntryCancelRequests?: Prisma.EntryCancelRequestCreateNestedManyWithoutReviewedByInput
+  assignmentCancelRequests?: Prisma.AssignmentCancelRequestCreateNestedManyWithoutRequestedByInput
+  reviewedAssignmentCancelRequests?: Prisma.AssignmentCancelRequestCreateNestedManyWithoutReviewedByInput
 }
 
 export type UserUncheckedCreateWithoutUpdatedByInput = {
@@ -1446,7 +1648,7 @@ export type UserUncheckedCreateWithoutUpdatedByInput = {
   updatedEvents?: Prisma.EventUncheckedCreateNestedManyWithoutUpdatedByInput
   providedFeedbacks?: Prisma.EventFeedbackUncheckedCreateNestedManyWithoutUserInput
   updatedEventFeedback?: Prisma.EventFeedbackUncheckedCreateNestedManyWithoutUpdatedByInput
-  scheduledEventEmails?: Prisma.ScheduledEmailsUncheckedCreateNestedManyWithoutUserInput
+  feedbackRequests?: Prisma.FeedbackRequestUncheckedCreateNestedManyWithoutUserInput
   hrWarnings?: Prisma.HrWarningUncheckedCreateNestedManyWithoutAssigneeInput
   createdHrWarning?: Prisma.HrWarningUncheckedCreateNestedManyWithoutCreatedByInput
   updatedHrWarnings?: Prisma.HrWarningUncheckedCreateNestedManyWithoutUpdatedByInput
@@ -1456,6 +1658,14 @@ export type UserUncheckedCreateWithoutUpdatedByInput = {
   CreatedEventAssignment?: Prisma.EventAssignmentUncheckedCreateNestedManyWithoutCreatedByInput
   UpdatedEventAssignment?: Prisma.EventAssignmentUncheckedCreateNestedManyWithoutUpdatedByInput
   updatedUsers?: Prisma.UserUncheckedCreateNestedManyWithoutUpdatedByInput
+  createdAvailabilitySlots?: Prisma.AvailabilitySlotUncheckedCreateNestedManyWithoutCreatedByInput
+  updatedAvailabilitySlots?: Prisma.AvailabilitySlotUncheckedCreateNestedManyWithoutUpdatedByInput
+  availabilityEntries?: Prisma.AvailabilityEntryUncheckedCreateNestedManyWithoutUserInput
+  UpdatedAvailabilityEntries?: Prisma.AvailabilityEntryUncheckedCreateNestedManyWithoutUpdatedByInput
+  entryCancelRequests?: Prisma.EntryCancelRequestUncheckedCreateNestedManyWithoutRequestedByInput
+  reviewedEntryCancelRequests?: Prisma.EntryCancelRequestUncheckedCreateNestedManyWithoutReviewedByInput
+  assignmentCancelRequests?: Prisma.AssignmentCancelRequestUncheckedCreateNestedManyWithoutRequestedByInput
+  reviewedAssignmentCancelRequests?: Prisma.AssignmentCancelRequestUncheckedCreateNestedManyWithoutReviewedByInput
 }
 
 export type UserCreateOrConnectWithoutUpdatedByInput = {
@@ -1510,7 +1720,7 @@ export type UserUpdateWithoutUpdatedUsersInput = {
   updatedEvents?: Prisma.EventUpdateManyWithoutUpdatedByNestedInput
   providedFeedbacks?: Prisma.EventFeedbackUpdateManyWithoutUserNestedInput
   updatedEventFeedback?: Prisma.EventFeedbackUpdateManyWithoutUpdatedByNestedInput
-  scheduledEventEmails?: Prisma.ScheduledEmailsUpdateManyWithoutUserNestedInput
+  feedbackRequests?: Prisma.FeedbackRequestUpdateManyWithoutUserNestedInput
   hrWarnings?: Prisma.HrWarningUpdateManyWithoutAssigneeNestedInput
   createdHrWarning?: Prisma.HrWarningUpdateManyWithoutCreatedByNestedInput
   updatedHrWarnings?: Prisma.HrWarningUpdateManyWithoutUpdatedByNestedInput
@@ -1520,6 +1730,14 @@ export type UserUpdateWithoutUpdatedUsersInput = {
   eventAssignments?: Prisma.EventAssignmentUpdateManyWithoutUserNestedInput
   CreatedEventAssignment?: Prisma.EventAssignmentUpdateManyWithoutCreatedByNestedInput
   UpdatedEventAssignment?: Prisma.EventAssignmentUpdateManyWithoutUpdatedByNestedInput
+  createdAvailabilitySlots?: Prisma.AvailabilitySlotUpdateManyWithoutCreatedByNestedInput
+  updatedAvailabilitySlots?: Prisma.AvailabilitySlotUpdateManyWithoutUpdatedByNestedInput
+  availabilityEntries?: Prisma.AvailabilityEntryUpdateManyWithoutUserNestedInput
+  UpdatedAvailabilityEntries?: Prisma.AvailabilityEntryUpdateManyWithoutUpdatedByNestedInput
+  entryCancelRequests?: Prisma.EntryCancelRequestUpdateManyWithoutRequestedByNestedInput
+  reviewedEntryCancelRequests?: Prisma.EntryCancelRequestUpdateManyWithoutReviewedByNestedInput
+  assignmentCancelRequests?: Prisma.AssignmentCancelRequestUpdateManyWithoutRequestedByNestedInput
+  reviewedAssignmentCancelRequests?: Prisma.AssignmentCancelRequestUpdateManyWithoutReviewedByNestedInput
 }
 
 export type UserUncheckedUpdateWithoutUpdatedUsersInput = {
@@ -1554,7 +1772,7 @@ export type UserUncheckedUpdateWithoutUpdatedUsersInput = {
   updatedEvents?: Prisma.EventUncheckedUpdateManyWithoutUpdatedByNestedInput
   providedFeedbacks?: Prisma.EventFeedbackUncheckedUpdateManyWithoutUserNestedInput
   updatedEventFeedback?: Prisma.EventFeedbackUncheckedUpdateManyWithoutUpdatedByNestedInput
-  scheduledEventEmails?: Prisma.ScheduledEmailsUncheckedUpdateManyWithoutUserNestedInput
+  feedbackRequests?: Prisma.FeedbackRequestUncheckedUpdateManyWithoutUserNestedInput
   hrWarnings?: Prisma.HrWarningUncheckedUpdateManyWithoutAssigneeNestedInput
   createdHrWarning?: Prisma.HrWarningUncheckedUpdateManyWithoutCreatedByNestedInput
   updatedHrWarnings?: Prisma.HrWarningUncheckedUpdateManyWithoutUpdatedByNestedInput
@@ -1563,6 +1781,14 @@ export type UserUncheckedUpdateWithoutUpdatedUsersInput = {
   eventAssignments?: Prisma.EventAssignmentUncheckedUpdateManyWithoutUserNestedInput
   CreatedEventAssignment?: Prisma.EventAssignmentUncheckedUpdateManyWithoutCreatedByNestedInput
   UpdatedEventAssignment?: Prisma.EventAssignmentUncheckedUpdateManyWithoutUpdatedByNestedInput
+  createdAvailabilitySlots?: Prisma.AvailabilitySlotUncheckedUpdateManyWithoutCreatedByNestedInput
+  updatedAvailabilitySlots?: Prisma.AvailabilitySlotUncheckedUpdateManyWithoutUpdatedByNestedInput
+  availabilityEntries?: Prisma.AvailabilityEntryUncheckedUpdateManyWithoutUserNestedInput
+  UpdatedAvailabilityEntries?: Prisma.AvailabilityEntryUncheckedUpdateManyWithoutUpdatedByNestedInput
+  entryCancelRequests?: Prisma.EntryCancelRequestUncheckedUpdateManyWithoutRequestedByNestedInput
+  reviewedEntryCancelRequests?: Prisma.EntryCancelRequestUncheckedUpdateManyWithoutReviewedByNestedInput
+  assignmentCancelRequests?: Prisma.AssignmentCancelRequestUncheckedUpdateManyWithoutRequestedByNestedInput
+  reviewedAssignmentCancelRequests?: Prisma.AssignmentCancelRequestUncheckedUpdateManyWithoutReviewedByNestedInput
 }
 
 export type UserUpsertWithWhereUniqueWithoutUpdatedByInput = {
@@ -1630,7 +1856,7 @@ export type UserCreateWithoutCreatedEventsInput = {
   updatedEvents?: Prisma.EventCreateNestedManyWithoutUpdatedByInput
   providedFeedbacks?: Prisma.EventFeedbackCreateNestedManyWithoutUserInput
   updatedEventFeedback?: Prisma.EventFeedbackCreateNestedManyWithoutUpdatedByInput
-  scheduledEventEmails?: Prisma.ScheduledEmailsCreateNestedManyWithoutUserInput
+  feedbackRequests?: Prisma.FeedbackRequestCreateNestedManyWithoutUserInput
   hrWarnings?: Prisma.HrWarningCreateNestedManyWithoutAssigneeInput
   createdHrWarning?: Prisma.HrWarningCreateNestedManyWithoutCreatedByInput
   updatedHrWarnings?: Prisma.HrWarningCreateNestedManyWithoutUpdatedByInput
@@ -1641,6 +1867,14 @@ export type UserCreateWithoutCreatedEventsInput = {
   CreatedEventAssignment?: Prisma.EventAssignmentCreateNestedManyWithoutCreatedByInput
   UpdatedEventAssignment?: Prisma.EventAssignmentCreateNestedManyWithoutUpdatedByInput
   updatedUsers?: Prisma.UserCreateNestedManyWithoutUpdatedByInput
+  createdAvailabilitySlots?: Prisma.AvailabilitySlotCreateNestedManyWithoutCreatedByInput
+  updatedAvailabilitySlots?: Prisma.AvailabilitySlotCreateNestedManyWithoutUpdatedByInput
+  availabilityEntries?: Prisma.AvailabilityEntryCreateNestedManyWithoutUserInput
+  UpdatedAvailabilityEntries?: Prisma.AvailabilityEntryCreateNestedManyWithoutUpdatedByInput
+  entryCancelRequests?: Prisma.EntryCancelRequestCreateNestedManyWithoutRequestedByInput
+  reviewedEntryCancelRequests?: Prisma.EntryCancelRequestCreateNestedManyWithoutReviewedByInput
+  assignmentCancelRequests?: Prisma.AssignmentCancelRequestCreateNestedManyWithoutRequestedByInput
+  reviewedAssignmentCancelRequests?: Prisma.AssignmentCancelRequestCreateNestedManyWithoutReviewedByInput
 }
 
 export type UserUncheckedCreateWithoutCreatedEventsInput = {
@@ -1674,7 +1908,7 @@ export type UserUncheckedCreateWithoutCreatedEventsInput = {
   updatedEvents?: Prisma.EventUncheckedCreateNestedManyWithoutUpdatedByInput
   providedFeedbacks?: Prisma.EventFeedbackUncheckedCreateNestedManyWithoutUserInput
   updatedEventFeedback?: Prisma.EventFeedbackUncheckedCreateNestedManyWithoutUpdatedByInput
-  scheduledEventEmails?: Prisma.ScheduledEmailsUncheckedCreateNestedManyWithoutUserInput
+  feedbackRequests?: Prisma.FeedbackRequestUncheckedCreateNestedManyWithoutUserInput
   hrWarnings?: Prisma.HrWarningUncheckedCreateNestedManyWithoutAssigneeInput
   createdHrWarning?: Prisma.HrWarningUncheckedCreateNestedManyWithoutCreatedByInput
   updatedHrWarnings?: Prisma.HrWarningUncheckedCreateNestedManyWithoutUpdatedByInput
@@ -1684,6 +1918,14 @@ export type UserUncheckedCreateWithoutCreatedEventsInput = {
   CreatedEventAssignment?: Prisma.EventAssignmentUncheckedCreateNestedManyWithoutCreatedByInput
   UpdatedEventAssignment?: Prisma.EventAssignmentUncheckedCreateNestedManyWithoutUpdatedByInput
   updatedUsers?: Prisma.UserUncheckedCreateNestedManyWithoutUpdatedByInput
+  createdAvailabilitySlots?: Prisma.AvailabilitySlotUncheckedCreateNestedManyWithoutCreatedByInput
+  updatedAvailabilitySlots?: Prisma.AvailabilitySlotUncheckedCreateNestedManyWithoutUpdatedByInput
+  availabilityEntries?: Prisma.AvailabilityEntryUncheckedCreateNestedManyWithoutUserInput
+  UpdatedAvailabilityEntries?: Prisma.AvailabilityEntryUncheckedCreateNestedManyWithoutUpdatedByInput
+  entryCancelRequests?: Prisma.EntryCancelRequestUncheckedCreateNestedManyWithoutRequestedByInput
+  reviewedEntryCancelRequests?: Prisma.EntryCancelRequestUncheckedCreateNestedManyWithoutReviewedByInput
+  assignmentCancelRequests?: Prisma.AssignmentCancelRequestUncheckedCreateNestedManyWithoutRequestedByInput
+  reviewedAssignmentCancelRequests?: Prisma.AssignmentCancelRequestUncheckedCreateNestedManyWithoutReviewedByInput
 }
 
 export type UserCreateOrConnectWithoutCreatedEventsInput = {
@@ -1721,7 +1963,7 @@ export type UserCreateWithoutUpdatedEventsInput = {
   createdEvents?: Prisma.EventCreateNestedManyWithoutCreatedByInput
   providedFeedbacks?: Prisma.EventFeedbackCreateNestedManyWithoutUserInput
   updatedEventFeedback?: Prisma.EventFeedbackCreateNestedManyWithoutUpdatedByInput
-  scheduledEventEmails?: Prisma.ScheduledEmailsCreateNestedManyWithoutUserInput
+  feedbackRequests?: Prisma.FeedbackRequestCreateNestedManyWithoutUserInput
   hrWarnings?: Prisma.HrWarningCreateNestedManyWithoutAssigneeInput
   createdHrWarning?: Prisma.HrWarningCreateNestedManyWithoutCreatedByInput
   updatedHrWarnings?: Prisma.HrWarningCreateNestedManyWithoutUpdatedByInput
@@ -1732,6 +1974,14 @@ export type UserCreateWithoutUpdatedEventsInput = {
   CreatedEventAssignment?: Prisma.EventAssignmentCreateNestedManyWithoutCreatedByInput
   UpdatedEventAssignment?: Prisma.EventAssignmentCreateNestedManyWithoutUpdatedByInput
   updatedUsers?: Prisma.UserCreateNestedManyWithoutUpdatedByInput
+  createdAvailabilitySlots?: Prisma.AvailabilitySlotCreateNestedManyWithoutCreatedByInput
+  updatedAvailabilitySlots?: Prisma.AvailabilitySlotCreateNestedManyWithoutUpdatedByInput
+  availabilityEntries?: Prisma.AvailabilityEntryCreateNestedManyWithoutUserInput
+  UpdatedAvailabilityEntries?: Prisma.AvailabilityEntryCreateNestedManyWithoutUpdatedByInput
+  entryCancelRequests?: Prisma.EntryCancelRequestCreateNestedManyWithoutRequestedByInput
+  reviewedEntryCancelRequests?: Prisma.EntryCancelRequestCreateNestedManyWithoutReviewedByInput
+  assignmentCancelRequests?: Prisma.AssignmentCancelRequestCreateNestedManyWithoutRequestedByInput
+  reviewedAssignmentCancelRequests?: Prisma.AssignmentCancelRequestCreateNestedManyWithoutReviewedByInput
 }
 
 export type UserUncheckedCreateWithoutUpdatedEventsInput = {
@@ -1765,7 +2015,7 @@ export type UserUncheckedCreateWithoutUpdatedEventsInput = {
   createdEvents?: Prisma.EventUncheckedCreateNestedManyWithoutCreatedByInput
   providedFeedbacks?: Prisma.EventFeedbackUncheckedCreateNestedManyWithoutUserInput
   updatedEventFeedback?: Prisma.EventFeedbackUncheckedCreateNestedManyWithoutUpdatedByInput
-  scheduledEventEmails?: Prisma.ScheduledEmailsUncheckedCreateNestedManyWithoutUserInput
+  feedbackRequests?: Prisma.FeedbackRequestUncheckedCreateNestedManyWithoutUserInput
   hrWarnings?: Prisma.HrWarningUncheckedCreateNestedManyWithoutAssigneeInput
   createdHrWarning?: Prisma.HrWarningUncheckedCreateNestedManyWithoutCreatedByInput
   updatedHrWarnings?: Prisma.HrWarningUncheckedCreateNestedManyWithoutUpdatedByInput
@@ -1775,6 +2025,14 @@ export type UserUncheckedCreateWithoutUpdatedEventsInput = {
   CreatedEventAssignment?: Prisma.EventAssignmentUncheckedCreateNestedManyWithoutCreatedByInput
   UpdatedEventAssignment?: Prisma.EventAssignmentUncheckedCreateNestedManyWithoutUpdatedByInput
   updatedUsers?: Prisma.UserUncheckedCreateNestedManyWithoutUpdatedByInput
+  createdAvailabilitySlots?: Prisma.AvailabilitySlotUncheckedCreateNestedManyWithoutCreatedByInput
+  updatedAvailabilitySlots?: Prisma.AvailabilitySlotUncheckedCreateNestedManyWithoutUpdatedByInput
+  availabilityEntries?: Prisma.AvailabilityEntryUncheckedCreateNestedManyWithoutUserInput
+  UpdatedAvailabilityEntries?: Prisma.AvailabilityEntryUncheckedCreateNestedManyWithoutUpdatedByInput
+  entryCancelRequests?: Prisma.EntryCancelRequestUncheckedCreateNestedManyWithoutRequestedByInput
+  reviewedEntryCancelRequests?: Prisma.EntryCancelRequestUncheckedCreateNestedManyWithoutReviewedByInput
+  assignmentCancelRequests?: Prisma.AssignmentCancelRequestUncheckedCreateNestedManyWithoutRequestedByInput
+  reviewedAssignmentCancelRequests?: Prisma.AssignmentCancelRequestUncheckedCreateNestedManyWithoutReviewedByInput
 }
 
 export type UserCreateOrConnectWithoutUpdatedEventsInput = {
@@ -1823,7 +2081,7 @@ export type UserUpdateWithoutCreatedEventsInput = {
   updatedEvents?: Prisma.EventUpdateManyWithoutUpdatedByNestedInput
   providedFeedbacks?: Prisma.EventFeedbackUpdateManyWithoutUserNestedInput
   updatedEventFeedback?: Prisma.EventFeedbackUpdateManyWithoutUpdatedByNestedInput
-  scheduledEventEmails?: Prisma.ScheduledEmailsUpdateManyWithoutUserNestedInput
+  feedbackRequests?: Prisma.FeedbackRequestUpdateManyWithoutUserNestedInput
   hrWarnings?: Prisma.HrWarningUpdateManyWithoutAssigneeNestedInput
   createdHrWarning?: Prisma.HrWarningUpdateManyWithoutCreatedByNestedInput
   updatedHrWarnings?: Prisma.HrWarningUpdateManyWithoutUpdatedByNestedInput
@@ -1834,6 +2092,14 @@ export type UserUpdateWithoutCreatedEventsInput = {
   CreatedEventAssignment?: Prisma.EventAssignmentUpdateManyWithoutCreatedByNestedInput
   UpdatedEventAssignment?: Prisma.EventAssignmentUpdateManyWithoutUpdatedByNestedInput
   updatedUsers?: Prisma.UserUpdateManyWithoutUpdatedByNestedInput
+  createdAvailabilitySlots?: Prisma.AvailabilitySlotUpdateManyWithoutCreatedByNestedInput
+  updatedAvailabilitySlots?: Prisma.AvailabilitySlotUpdateManyWithoutUpdatedByNestedInput
+  availabilityEntries?: Prisma.AvailabilityEntryUpdateManyWithoutUserNestedInput
+  UpdatedAvailabilityEntries?: Prisma.AvailabilityEntryUpdateManyWithoutUpdatedByNestedInput
+  entryCancelRequests?: Prisma.EntryCancelRequestUpdateManyWithoutRequestedByNestedInput
+  reviewedEntryCancelRequests?: Prisma.EntryCancelRequestUpdateManyWithoutReviewedByNestedInput
+  assignmentCancelRequests?: Prisma.AssignmentCancelRequestUpdateManyWithoutRequestedByNestedInput
+  reviewedAssignmentCancelRequests?: Prisma.AssignmentCancelRequestUpdateManyWithoutReviewedByNestedInput
 }
 
 export type UserUncheckedUpdateWithoutCreatedEventsInput = {
@@ -1867,7 +2133,7 @@ export type UserUncheckedUpdateWithoutCreatedEventsInput = {
   updatedEvents?: Prisma.EventUncheckedUpdateManyWithoutUpdatedByNestedInput
   providedFeedbacks?: Prisma.EventFeedbackUncheckedUpdateManyWithoutUserNestedInput
   updatedEventFeedback?: Prisma.EventFeedbackUncheckedUpdateManyWithoutUpdatedByNestedInput
-  scheduledEventEmails?: Prisma.ScheduledEmailsUncheckedUpdateManyWithoutUserNestedInput
+  feedbackRequests?: Prisma.FeedbackRequestUncheckedUpdateManyWithoutUserNestedInput
   hrWarnings?: Prisma.HrWarningUncheckedUpdateManyWithoutAssigneeNestedInput
   createdHrWarning?: Prisma.HrWarningUncheckedUpdateManyWithoutCreatedByNestedInput
   updatedHrWarnings?: Prisma.HrWarningUncheckedUpdateManyWithoutUpdatedByNestedInput
@@ -1877,6 +2143,14 @@ export type UserUncheckedUpdateWithoutCreatedEventsInput = {
   CreatedEventAssignment?: Prisma.EventAssignmentUncheckedUpdateManyWithoutCreatedByNestedInput
   UpdatedEventAssignment?: Prisma.EventAssignmentUncheckedUpdateManyWithoutUpdatedByNestedInput
   updatedUsers?: Prisma.UserUncheckedUpdateManyWithoutUpdatedByNestedInput
+  createdAvailabilitySlots?: Prisma.AvailabilitySlotUncheckedUpdateManyWithoutCreatedByNestedInput
+  updatedAvailabilitySlots?: Prisma.AvailabilitySlotUncheckedUpdateManyWithoutUpdatedByNestedInput
+  availabilityEntries?: Prisma.AvailabilityEntryUncheckedUpdateManyWithoutUserNestedInput
+  UpdatedAvailabilityEntries?: Prisma.AvailabilityEntryUncheckedUpdateManyWithoutUpdatedByNestedInput
+  entryCancelRequests?: Prisma.EntryCancelRequestUncheckedUpdateManyWithoutRequestedByNestedInput
+  reviewedEntryCancelRequests?: Prisma.EntryCancelRequestUncheckedUpdateManyWithoutReviewedByNestedInput
+  assignmentCancelRequests?: Prisma.AssignmentCancelRequestUncheckedUpdateManyWithoutRequestedByNestedInput
+  reviewedAssignmentCancelRequests?: Prisma.AssignmentCancelRequestUncheckedUpdateManyWithoutReviewedByNestedInput
 }
 
 export type UserUpsertWithoutUpdatedEventsInput = {
@@ -1920,7 +2194,7 @@ export type UserUpdateWithoutUpdatedEventsInput = {
   createdEvents?: Prisma.EventUpdateManyWithoutCreatedByNestedInput
   providedFeedbacks?: Prisma.EventFeedbackUpdateManyWithoutUserNestedInput
   updatedEventFeedback?: Prisma.EventFeedbackUpdateManyWithoutUpdatedByNestedInput
-  scheduledEventEmails?: Prisma.ScheduledEmailsUpdateManyWithoutUserNestedInput
+  feedbackRequests?: Prisma.FeedbackRequestUpdateManyWithoutUserNestedInput
   hrWarnings?: Prisma.HrWarningUpdateManyWithoutAssigneeNestedInput
   createdHrWarning?: Prisma.HrWarningUpdateManyWithoutCreatedByNestedInput
   updatedHrWarnings?: Prisma.HrWarningUpdateManyWithoutUpdatedByNestedInput
@@ -1931,6 +2205,14 @@ export type UserUpdateWithoutUpdatedEventsInput = {
   CreatedEventAssignment?: Prisma.EventAssignmentUpdateManyWithoutCreatedByNestedInput
   UpdatedEventAssignment?: Prisma.EventAssignmentUpdateManyWithoutUpdatedByNestedInput
   updatedUsers?: Prisma.UserUpdateManyWithoutUpdatedByNestedInput
+  createdAvailabilitySlots?: Prisma.AvailabilitySlotUpdateManyWithoutCreatedByNestedInput
+  updatedAvailabilitySlots?: Prisma.AvailabilitySlotUpdateManyWithoutUpdatedByNestedInput
+  availabilityEntries?: Prisma.AvailabilityEntryUpdateManyWithoutUserNestedInput
+  UpdatedAvailabilityEntries?: Prisma.AvailabilityEntryUpdateManyWithoutUpdatedByNestedInput
+  entryCancelRequests?: Prisma.EntryCancelRequestUpdateManyWithoutRequestedByNestedInput
+  reviewedEntryCancelRequests?: Prisma.EntryCancelRequestUpdateManyWithoutReviewedByNestedInput
+  assignmentCancelRequests?: Prisma.AssignmentCancelRequestUpdateManyWithoutRequestedByNestedInput
+  reviewedAssignmentCancelRequests?: Prisma.AssignmentCancelRequestUpdateManyWithoutReviewedByNestedInput
 }
 
 export type UserUncheckedUpdateWithoutUpdatedEventsInput = {
@@ -1964,7 +2246,7 @@ export type UserUncheckedUpdateWithoutUpdatedEventsInput = {
   createdEvents?: Prisma.EventUncheckedUpdateManyWithoutCreatedByNestedInput
   providedFeedbacks?: Prisma.EventFeedbackUncheckedUpdateManyWithoutUserNestedInput
   updatedEventFeedback?: Prisma.EventFeedbackUncheckedUpdateManyWithoutUpdatedByNestedInput
-  scheduledEventEmails?: Prisma.ScheduledEmailsUncheckedUpdateManyWithoutUserNestedInput
+  feedbackRequests?: Prisma.FeedbackRequestUncheckedUpdateManyWithoutUserNestedInput
   hrWarnings?: Prisma.HrWarningUncheckedUpdateManyWithoutAssigneeNestedInput
   createdHrWarning?: Prisma.HrWarningUncheckedUpdateManyWithoutCreatedByNestedInput
   updatedHrWarnings?: Prisma.HrWarningUncheckedUpdateManyWithoutUpdatedByNestedInput
@@ -1974,6 +2256,14 @@ export type UserUncheckedUpdateWithoutUpdatedEventsInput = {
   CreatedEventAssignment?: Prisma.EventAssignmentUncheckedUpdateManyWithoutCreatedByNestedInput
   UpdatedEventAssignment?: Prisma.EventAssignmentUncheckedUpdateManyWithoutUpdatedByNestedInput
   updatedUsers?: Prisma.UserUncheckedUpdateManyWithoutUpdatedByNestedInput
+  createdAvailabilitySlots?: Prisma.AvailabilitySlotUncheckedUpdateManyWithoutCreatedByNestedInput
+  updatedAvailabilitySlots?: Prisma.AvailabilitySlotUncheckedUpdateManyWithoutUpdatedByNestedInput
+  availabilityEntries?: Prisma.AvailabilityEntryUncheckedUpdateManyWithoutUserNestedInput
+  UpdatedAvailabilityEntries?: Prisma.AvailabilityEntryUncheckedUpdateManyWithoutUpdatedByNestedInput
+  entryCancelRequests?: Prisma.EntryCancelRequestUncheckedUpdateManyWithoutRequestedByNestedInput
+  reviewedEntryCancelRequests?: Prisma.EntryCancelRequestUncheckedUpdateManyWithoutReviewedByNestedInput
+  assignmentCancelRequests?: Prisma.AssignmentCancelRequestUncheckedUpdateManyWithoutRequestedByNestedInput
+  reviewedAssignmentCancelRequests?: Prisma.AssignmentCancelRequestUncheckedUpdateManyWithoutReviewedByNestedInput
 }
 
 export type UserCreateWithoutHrWarningsInput = {
@@ -2007,7 +2297,7 @@ export type UserCreateWithoutHrWarningsInput = {
   updatedEvents?: Prisma.EventCreateNestedManyWithoutUpdatedByInput
   providedFeedbacks?: Prisma.EventFeedbackCreateNestedManyWithoutUserInput
   updatedEventFeedback?: Prisma.EventFeedbackCreateNestedManyWithoutUpdatedByInput
-  scheduledEventEmails?: Prisma.ScheduledEmailsCreateNestedManyWithoutUserInput
+  feedbackRequests?: Prisma.FeedbackRequestCreateNestedManyWithoutUserInput
   createdHrWarning?: Prisma.HrWarningCreateNestedManyWithoutCreatedByInput
   updatedHrWarnings?: Prisma.HrWarningCreateNestedManyWithoutUpdatedByInput
   CreatedAllowedUser?: Prisma.AllowedUserCreateNestedManyWithoutCreatedByInput
@@ -2017,6 +2307,14 @@ export type UserCreateWithoutHrWarningsInput = {
   CreatedEventAssignment?: Prisma.EventAssignmentCreateNestedManyWithoutCreatedByInput
   UpdatedEventAssignment?: Prisma.EventAssignmentCreateNestedManyWithoutUpdatedByInput
   updatedUsers?: Prisma.UserCreateNestedManyWithoutUpdatedByInput
+  createdAvailabilitySlots?: Prisma.AvailabilitySlotCreateNestedManyWithoutCreatedByInput
+  updatedAvailabilitySlots?: Prisma.AvailabilitySlotCreateNestedManyWithoutUpdatedByInput
+  availabilityEntries?: Prisma.AvailabilityEntryCreateNestedManyWithoutUserInput
+  UpdatedAvailabilityEntries?: Prisma.AvailabilityEntryCreateNestedManyWithoutUpdatedByInput
+  entryCancelRequests?: Prisma.EntryCancelRequestCreateNestedManyWithoutRequestedByInput
+  reviewedEntryCancelRequests?: Prisma.EntryCancelRequestCreateNestedManyWithoutReviewedByInput
+  assignmentCancelRequests?: Prisma.AssignmentCancelRequestCreateNestedManyWithoutRequestedByInput
+  reviewedAssignmentCancelRequests?: Prisma.AssignmentCancelRequestCreateNestedManyWithoutReviewedByInput
 }
 
 export type UserUncheckedCreateWithoutHrWarningsInput = {
@@ -2051,7 +2349,7 @@ export type UserUncheckedCreateWithoutHrWarningsInput = {
   updatedEvents?: Prisma.EventUncheckedCreateNestedManyWithoutUpdatedByInput
   providedFeedbacks?: Prisma.EventFeedbackUncheckedCreateNestedManyWithoutUserInput
   updatedEventFeedback?: Prisma.EventFeedbackUncheckedCreateNestedManyWithoutUpdatedByInput
-  scheduledEventEmails?: Prisma.ScheduledEmailsUncheckedCreateNestedManyWithoutUserInput
+  feedbackRequests?: Prisma.FeedbackRequestUncheckedCreateNestedManyWithoutUserInput
   createdHrWarning?: Prisma.HrWarningUncheckedCreateNestedManyWithoutCreatedByInput
   updatedHrWarnings?: Prisma.HrWarningUncheckedCreateNestedManyWithoutUpdatedByInput
   CreatedAllowedUser?: Prisma.AllowedUserUncheckedCreateNestedManyWithoutCreatedByInput
@@ -2060,6 +2358,14 @@ export type UserUncheckedCreateWithoutHrWarningsInput = {
   CreatedEventAssignment?: Prisma.EventAssignmentUncheckedCreateNestedManyWithoutCreatedByInput
   UpdatedEventAssignment?: Prisma.EventAssignmentUncheckedCreateNestedManyWithoutUpdatedByInput
   updatedUsers?: Prisma.UserUncheckedCreateNestedManyWithoutUpdatedByInput
+  createdAvailabilitySlots?: Prisma.AvailabilitySlotUncheckedCreateNestedManyWithoutCreatedByInput
+  updatedAvailabilitySlots?: Prisma.AvailabilitySlotUncheckedCreateNestedManyWithoutUpdatedByInput
+  availabilityEntries?: Prisma.AvailabilityEntryUncheckedCreateNestedManyWithoutUserInput
+  UpdatedAvailabilityEntries?: Prisma.AvailabilityEntryUncheckedCreateNestedManyWithoutUpdatedByInput
+  entryCancelRequests?: Prisma.EntryCancelRequestUncheckedCreateNestedManyWithoutRequestedByInput
+  reviewedEntryCancelRequests?: Prisma.EntryCancelRequestUncheckedCreateNestedManyWithoutReviewedByInput
+  assignmentCancelRequests?: Prisma.AssignmentCancelRequestUncheckedCreateNestedManyWithoutRequestedByInput
+  reviewedAssignmentCancelRequests?: Prisma.AssignmentCancelRequestUncheckedCreateNestedManyWithoutReviewedByInput
 }
 
 export type UserCreateOrConnectWithoutHrWarningsInput = {
@@ -2098,7 +2404,7 @@ export type UserCreateWithoutUpdatedHrWarningsInput = {
   updatedEvents?: Prisma.EventCreateNestedManyWithoutUpdatedByInput
   providedFeedbacks?: Prisma.EventFeedbackCreateNestedManyWithoutUserInput
   updatedEventFeedback?: Prisma.EventFeedbackCreateNestedManyWithoutUpdatedByInput
-  scheduledEventEmails?: Prisma.ScheduledEmailsCreateNestedManyWithoutUserInput
+  feedbackRequests?: Prisma.FeedbackRequestCreateNestedManyWithoutUserInput
   hrWarnings?: Prisma.HrWarningCreateNestedManyWithoutAssigneeInput
   createdHrWarning?: Prisma.HrWarningCreateNestedManyWithoutCreatedByInput
   CreatedAllowedUser?: Prisma.AllowedUserCreateNestedManyWithoutCreatedByInput
@@ -2108,6 +2414,14 @@ export type UserCreateWithoutUpdatedHrWarningsInput = {
   CreatedEventAssignment?: Prisma.EventAssignmentCreateNestedManyWithoutCreatedByInput
   UpdatedEventAssignment?: Prisma.EventAssignmentCreateNestedManyWithoutUpdatedByInput
   updatedUsers?: Prisma.UserCreateNestedManyWithoutUpdatedByInput
+  createdAvailabilitySlots?: Prisma.AvailabilitySlotCreateNestedManyWithoutCreatedByInput
+  updatedAvailabilitySlots?: Prisma.AvailabilitySlotCreateNestedManyWithoutUpdatedByInput
+  availabilityEntries?: Prisma.AvailabilityEntryCreateNestedManyWithoutUserInput
+  UpdatedAvailabilityEntries?: Prisma.AvailabilityEntryCreateNestedManyWithoutUpdatedByInput
+  entryCancelRequests?: Prisma.EntryCancelRequestCreateNestedManyWithoutRequestedByInput
+  reviewedEntryCancelRequests?: Prisma.EntryCancelRequestCreateNestedManyWithoutReviewedByInput
+  assignmentCancelRequests?: Prisma.AssignmentCancelRequestCreateNestedManyWithoutRequestedByInput
+  reviewedAssignmentCancelRequests?: Prisma.AssignmentCancelRequestCreateNestedManyWithoutReviewedByInput
 }
 
 export type UserUncheckedCreateWithoutUpdatedHrWarningsInput = {
@@ -2142,7 +2456,7 @@ export type UserUncheckedCreateWithoutUpdatedHrWarningsInput = {
   updatedEvents?: Prisma.EventUncheckedCreateNestedManyWithoutUpdatedByInput
   providedFeedbacks?: Prisma.EventFeedbackUncheckedCreateNestedManyWithoutUserInput
   updatedEventFeedback?: Prisma.EventFeedbackUncheckedCreateNestedManyWithoutUpdatedByInput
-  scheduledEventEmails?: Prisma.ScheduledEmailsUncheckedCreateNestedManyWithoutUserInput
+  feedbackRequests?: Prisma.FeedbackRequestUncheckedCreateNestedManyWithoutUserInput
   hrWarnings?: Prisma.HrWarningUncheckedCreateNestedManyWithoutAssigneeInput
   createdHrWarning?: Prisma.HrWarningUncheckedCreateNestedManyWithoutCreatedByInput
   CreatedAllowedUser?: Prisma.AllowedUserUncheckedCreateNestedManyWithoutCreatedByInput
@@ -2151,6 +2465,14 @@ export type UserUncheckedCreateWithoutUpdatedHrWarningsInput = {
   CreatedEventAssignment?: Prisma.EventAssignmentUncheckedCreateNestedManyWithoutCreatedByInput
   UpdatedEventAssignment?: Prisma.EventAssignmentUncheckedCreateNestedManyWithoutUpdatedByInput
   updatedUsers?: Prisma.UserUncheckedCreateNestedManyWithoutUpdatedByInput
+  createdAvailabilitySlots?: Prisma.AvailabilitySlotUncheckedCreateNestedManyWithoutCreatedByInput
+  updatedAvailabilitySlots?: Prisma.AvailabilitySlotUncheckedCreateNestedManyWithoutUpdatedByInput
+  availabilityEntries?: Prisma.AvailabilityEntryUncheckedCreateNestedManyWithoutUserInput
+  UpdatedAvailabilityEntries?: Prisma.AvailabilityEntryUncheckedCreateNestedManyWithoutUpdatedByInput
+  entryCancelRequests?: Prisma.EntryCancelRequestUncheckedCreateNestedManyWithoutRequestedByInput
+  reviewedEntryCancelRequests?: Prisma.EntryCancelRequestUncheckedCreateNestedManyWithoutReviewedByInput
+  assignmentCancelRequests?: Prisma.AssignmentCancelRequestUncheckedCreateNestedManyWithoutRequestedByInput
+  reviewedAssignmentCancelRequests?: Prisma.AssignmentCancelRequestUncheckedCreateNestedManyWithoutReviewedByInput
 }
 
 export type UserCreateOrConnectWithoutUpdatedHrWarningsInput = {
@@ -2189,7 +2511,7 @@ export type UserCreateWithoutCreatedHrWarningInput = {
   updatedEvents?: Prisma.EventCreateNestedManyWithoutUpdatedByInput
   providedFeedbacks?: Prisma.EventFeedbackCreateNestedManyWithoutUserInput
   updatedEventFeedback?: Prisma.EventFeedbackCreateNestedManyWithoutUpdatedByInput
-  scheduledEventEmails?: Prisma.ScheduledEmailsCreateNestedManyWithoutUserInput
+  feedbackRequests?: Prisma.FeedbackRequestCreateNestedManyWithoutUserInput
   hrWarnings?: Prisma.HrWarningCreateNestedManyWithoutAssigneeInput
   updatedHrWarnings?: Prisma.HrWarningCreateNestedManyWithoutUpdatedByInput
   CreatedAllowedUser?: Prisma.AllowedUserCreateNestedManyWithoutCreatedByInput
@@ -2199,6 +2521,14 @@ export type UserCreateWithoutCreatedHrWarningInput = {
   CreatedEventAssignment?: Prisma.EventAssignmentCreateNestedManyWithoutCreatedByInput
   UpdatedEventAssignment?: Prisma.EventAssignmentCreateNestedManyWithoutUpdatedByInput
   updatedUsers?: Prisma.UserCreateNestedManyWithoutUpdatedByInput
+  createdAvailabilitySlots?: Prisma.AvailabilitySlotCreateNestedManyWithoutCreatedByInput
+  updatedAvailabilitySlots?: Prisma.AvailabilitySlotCreateNestedManyWithoutUpdatedByInput
+  availabilityEntries?: Prisma.AvailabilityEntryCreateNestedManyWithoutUserInput
+  UpdatedAvailabilityEntries?: Prisma.AvailabilityEntryCreateNestedManyWithoutUpdatedByInput
+  entryCancelRequests?: Prisma.EntryCancelRequestCreateNestedManyWithoutRequestedByInput
+  reviewedEntryCancelRequests?: Prisma.EntryCancelRequestCreateNestedManyWithoutReviewedByInput
+  assignmentCancelRequests?: Prisma.AssignmentCancelRequestCreateNestedManyWithoutRequestedByInput
+  reviewedAssignmentCancelRequests?: Prisma.AssignmentCancelRequestCreateNestedManyWithoutReviewedByInput
 }
 
 export type UserUncheckedCreateWithoutCreatedHrWarningInput = {
@@ -2233,7 +2563,7 @@ export type UserUncheckedCreateWithoutCreatedHrWarningInput = {
   updatedEvents?: Prisma.EventUncheckedCreateNestedManyWithoutUpdatedByInput
   providedFeedbacks?: Prisma.EventFeedbackUncheckedCreateNestedManyWithoutUserInput
   updatedEventFeedback?: Prisma.EventFeedbackUncheckedCreateNestedManyWithoutUpdatedByInput
-  scheduledEventEmails?: Prisma.ScheduledEmailsUncheckedCreateNestedManyWithoutUserInput
+  feedbackRequests?: Prisma.FeedbackRequestUncheckedCreateNestedManyWithoutUserInput
   hrWarnings?: Prisma.HrWarningUncheckedCreateNestedManyWithoutAssigneeInput
   updatedHrWarnings?: Prisma.HrWarningUncheckedCreateNestedManyWithoutUpdatedByInput
   CreatedAllowedUser?: Prisma.AllowedUserUncheckedCreateNestedManyWithoutCreatedByInput
@@ -2242,6 +2572,14 @@ export type UserUncheckedCreateWithoutCreatedHrWarningInput = {
   CreatedEventAssignment?: Prisma.EventAssignmentUncheckedCreateNestedManyWithoutCreatedByInput
   UpdatedEventAssignment?: Prisma.EventAssignmentUncheckedCreateNestedManyWithoutUpdatedByInput
   updatedUsers?: Prisma.UserUncheckedCreateNestedManyWithoutUpdatedByInput
+  createdAvailabilitySlots?: Prisma.AvailabilitySlotUncheckedCreateNestedManyWithoutCreatedByInput
+  updatedAvailabilitySlots?: Prisma.AvailabilitySlotUncheckedCreateNestedManyWithoutUpdatedByInput
+  availabilityEntries?: Prisma.AvailabilityEntryUncheckedCreateNestedManyWithoutUserInput
+  UpdatedAvailabilityEntries?: Prisma.AvailabilityEntryUncheckedCreateNestedManyWithoutUpdatedByInput
+  entryCancelRequests?: Prisma.EntryCancelRequestUncheckedCreateNestedManyWithoutRequestedByInput
+  reviewedEntryCancelRequests?: Prisma.EntryCancelRequestUncheckedCreateNestedManyWithoutReviewedByInput
+  assignmentCancelRequests?: Prisma.AssignmentCancelRequestUncheckedCreateNestedManyWithoutRequestedByInput
+  reviewedAssignmentCancelRequests?: Prisma.AssignmentCancelRequestUncheckedCreateNestedManyWithoutReviewedByInput
 }
 
 export type UserCreateOrConnectWithoutCreatedHrWarningInput = {
@@ -2291,7 +2629,7 @@ export type UserUpdateWithoutHrWarningsInput = {
   updatedEvents?: Prisma.EventUpdateManyWithoutUpdatedByNestedInput
   providedFeedbacks?: Prisma.EventFeedbackUpdateManyWithoutUserNestedInput
   updatedEventFeedback?: Prisma.EventFeedbackUpdateManyWithoutUpdatedByNestedInput
-  scheduledEventEmails?: Prisma.ScheduledEmailsUpdateManyWithoutUserNestedInput
+  feedbackRequests?: Prisma.FeedbackRequestUpdateManyWithoutUserNestedInput
   createdHrWarning?: Prisma.HrWarningUpdateManyWithoutCreatedByNestedInput
   updatedHrWarnings?: Prisma.HrWarningUpdateManyWithoutUpdatedByNestedInput
   CreatedAllowedUser?: Prisma.AllowedUserUpdateManyWithoutCreatedByNestedInput
@@ -2301,6 +2639,14 @@ export type UserUpdateWithoutHrWarningsInput = {
   CreatedEventAssignment?: Prisma.EventAssignmentUpdateManyWithoutCreatedByNestedInput
   UpdatedEventAssignment?: Prisma.EventAssignmentUpdateManyWithoutUpdatedByNestedInput
   updatedUsers?: Prisma.UserUpdateManyWithoutUpdatedByNestedInput
+  createdAvailabilitySlots?: Prisma.AvailabilitySlotUpdateManyWithoutCreatedByNestedInput
+  updatedAvailabilitySlots?: Prisma.AvailabilitySlotUpdateManyWithoutUpdatedByNestedInput
+  availabilityEntries?: Prisma.AvailabilityEntryUpdateManyWithoutUserNestedInput
+  UpdatedAvailabilityEntries?: Prisma.AvailabilityEntryUpdateManyWithoutUpdatedByNestedInput
+  entryCancelRequests?: Prisma.EntryCancelRequestUpdateManyWithoutRequestedByNestedInput
+  reviewedEntryCancelRequests?: Prisma.EntryCancelRequestUpdateManyWithoutReviewedByNestedInput
+  assignmentCancelRequests?: Prisma.AssignmentCancelRequestUpdateManyWithoutRequestedByNestedInput
+  reviewedAssignmentCancelRequests?: Prisma.AssignmentCancelRequestUpdateManyWithoutReviewedByNestedInput
 }
 
 export type UserUncheckedUpdateWithoutHrWarningsInput = {
@@ -2335,7 +2681,7 @@ export type UserUncheckedUpdateWithoutHrWarningsInput = {
   updatedEvents?: Prisma.EventUncheckedUpdateManyWithoutUpdatedByNestedInput
   providedFeedbacks?: Prisma.EventFeedbackUncheckedUpdateManyWithoutUserNestedInput
   updatedEventFeedback?: Prisma.EventFeedbackUncheckedUpdateManyWithoutUpdatedByNestedInput
-  scheduledEventEmails?: Prisma.ScheduledEmailsUncheckedUpdateManyWithoutUserNestedInput
+  feedbackRequests?: Prisma.FeedbackRequestUncheckedUpdateManyWithoutUserNestedInput
   createdHrWarning?: Prisma.HrWarningUncheckedUpdateManyWithoutCreatedByNestedInput
   updatedHrWarnings?: Prisma.HrWarningUncheckedUpdateManyWithoutUpdatedByNestedInput
   CreatedAllowedUser?: Prisma.AllowedUserUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -2344,6 +2690,14 @@ export type UserUncheckedUpdateWithoutHrWarningsInput = {
   CreatedEventAssignment?: Prisma.EventAssignmentUncheckedUpdateManyWithoutCreatedByNestedInput
   UpdatedEventAssignment?: Prisma.EventAssignmentUncheckedUpdateManyWithoutUpdatedByNestedInput
   updatedUsers?: Prisma.UserUncheckedUpdateManyWithoutUpdatedByNestedInput
+  createdAvailabilitySlots?: Prisma.AvailabilitySlotUncheckedUpdateManyWithoutCreatedByNestedInput
+  updatedAvailabilitySlots?: Prisma.AvailabilitySlotUncheckedUpdateManyWithoutUpdatedByNestedInput
+  availabilityEntries?: Prisma.AvailabilityEntryUncheckedUpdateManyWithoutUserNestedInput
+  UpdatedAvailabilityEntries?: Prisma.AvailabilityEntryUncheckedUpdateManyWithoutUpdatedByNestedInput
+  entryCancelRequests?: Prisma.EntryCancelRequestUncheckedUpdateManyWithoutRequestedByNestedInput
+  reviewedEntryCancelRequests?: Prisma.EntryCancelRequestUncheckedUpdateManyWithoutReviewedByNestedInput
+  assignmentCancelRequests?: Prisma.AssignmentCancelRequestUncheckedUpdateManyWithoutRequestedByNestedInput
+  reviewedAssignmentCancelRequests?: Prisma.AssignmentCancelRequestUncheckedUpdateManyWithoutReviewedByNestedInput
 }
 
 export type UserUpsertWithoutUpdatedHrWarningsInput = {
@@ -2388,7 +2742,7 @@ export type UserUpdateWithoutUpdatedHrWarningsInput = {
   updatedEvents?: Prisma.EventUpdateManyWithoutUpdatedByNestedInput
   providedFeedbacks?: Prisma.EventFeedbackUpdateManyWithoutUserNestedInput
   updatedEventFeedback?: Prisma.EventFeedbackUpdateManyWithoutUpdatedByNestedInput
-  scheduledEventEmails?: Prisma.ScheduledEmailsUpdateManyWithoutUserNestedInput
+  feedbackRequests?: Prisma.FeedbackRequestUpdateManyWithoutUserNestedInput
   hrWarnings?: Prisma.HrWarningUpdateManyWithoutAssigneeNestedInput
   createdHrWarning?: Prisma.HrWarningUpdateManyWithoutCreatedByNestedInput
   CreatedAllowedUser?: Prisma.AllowedUserUpdateManyWithoutCreatedByNestedInput
@@ -2398,6 +2752,14 @@ export type UserUpdateWithoutUpdatedHrWarningsInput = {
   CreatedEventAssignment?: Prisma.EventAssignmentUpdateManyWithoutCreatedByNestedInput
   UpdatedEventAssignment?: Prisma.EventAssignmentUpdateManyWithoutUpdatedByNestedInput
   updatedUsers?: Prisma.UserUpdateManyWithoutUpdatedByNestedInput
+  createdAvailabilitySlots?: Prisma.AvailabilitySlotUpdateManyWithoutCreatedByNestedInput
+  updatedAvailabilitySlots?: Prisma.AvailabilitySlotUpdateManyWithoutUpdatedByNestedInput
+  availabilityEntries?: Prisma.AvailabilityEntryUpdateManyWithoutUserNestedInput
+  UpdatedAvailabilityEntries?: Prisma.AvailabilityEntryUpdateManyWithoutUpdatedByNestedInput
+  entryCancelRequests?: Prisma.EntryCancelRequestUpdateManyWithoutRequestedByNestedInput
+  reviewedEntryCancelRequests?: Prisma.EntryCancelRequestUpdateManyWithoutReviewedByNestedInput
+  assignmentCancelRequests?: Prisma.AssignmentCancelRequestUpdateManyWithoutRequestedByNestedInput
+  reviewedAssignmentCancelRequests?: Prisma.AssignmentCancelRequestUpdateManyWithoutReviewedByNestedInput
 }
 
 export type UserUncheckedUpdateWithoutUpdatedHrWarningsInput = {
@@ -2432,7 +2794,7 @@ export type UserUncheckedUpdateWithoutUpdatedHrWarningsInput = {
   updatedEvents?: Prisma.EventUncheckedUpdateManyWithoutUpdatedByNestedInput
   providedFeedbacks?: Prisma.EventFeedbackUncheckedUpdateManyWithoutUserNestedInput
   updatedEventFeedback?: Prisma.EventFeedbackUncheckedUpdateManyWithoutUpdatedByNestedInput
-  scheduledEventEmails?: Prisma.ScheduledEmailsUncheckedUpdateManyWithoutUserNestedInput
+  feedbackRequests?: Prisma.FeedbackRequestUncheckedUpdateManyWithoutUserNestedInput
   hrWarnings?: Prisma.HrWarningUncheckedUpdateManyWithoutAssigneeNestedInput
   createdHrWarning?: Prisma.HrWarningUncheckedUpdateManyWithoutCreatedByNestedInput
   CreatedAllowedUser?: Prisma.AllowedUserUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -2441,6 +2803,14 @@ export type UserUncheckedUpdateWithoutUpdatedHrWarningsInput = {
   CreatedEventAssignment?: Prisma.EventAssignmentUncheckedUpdateManyWithoutCreatedByNestedInput
   UpdatedEventAssignment?: Prisma.EventAssignmentUncheckedUpdateManyWithoutUpdatedByNestedInput
   updatedUsers?: Prisma.UserUncheckedUpdateManyWithoutUpdatedByNestedInput
+  createdAvailabilitySlots?: Prisma.AvailabilitySlotUncheckedUpdateManyWithoutCreatedByNestedInput
+  updatedAvailabilitySlots?: Prisma.AvailabilitySlotUncheckedUpdateManyWithoutUpdatedByNestedInput
+  availabilityEntries?: Prisma.AvailabilityEntryUncheckedUpdateManyWithoutUserNestedInput
+  UpdatedAvailabilityEntries?: Prisma.AvailabilityEntryUncheckedUpdateManyWithoutUpdatedByNestedInput
+  entryCancelRequests?: Prisma.EntryCancelRequestUncheckedUpdateManyWithoutRequestedByNestedInput
+  reviewedEntryCancelRequests?: Prisma.EntryCancelRequestUncheckedUpdateManyWithoutReviewedByNestedInput
+  assignmentCancelRequests?: Prisma.AssignmentCancelRequestUncheckedUpdateManyWithoutRequestedByNestedInput
+  reviewedAssignmentCancelRequests?: Prisma.AssignmentCancelRequestUncheckedUpdateManyWithoutReviewedByNestedInput
 }
 
 export type UserUpsertWithoutCreatedHrWarningInput = {
@@ -2485,7 +2855,7 @@ export type UserUpdateWithoutCreatedHrWarningInput = {
   updatedEvents?: Prisma.EventUpdateManyWithoutUpdatedByNestedInput
   providedFeedbacks?: Prisma.EventFeedbackUpdateManyWithoutUserNestedInput
   updatedEventFeedback?: Prisma.EventFeedbackUpdateManyWithoutUpdatedByNestedInput
-  scheduledEventEmails?: Prisma.ScheduledEmailsUpdateManyWithoutUserNestedInput
+  feedbackRequests?: Prisma.FeedbackRequestUpdateManyWithoutUserNestedInput
   hrWarnings?: Prisma.HrWarningUpdateManyWithoutAssigneeNestedInput
   updatedHrWarnings?: Prisma.HrWarningUpdateManyWithoutUpdatedByNestedInput
   CreatedAllowedUser?: Prisma.AllowedUserUpdateManyWithoutCreatedByNestedInput
@@ -2495,6 +2865,14 @@ export type UserUpdateWithoutCreatedHrWarningInput = {
   CreatedEventAssignment?: Prisma.EventAssignmentUpdateManyWithoutCreatedByNestedInput
   UpdatedEventAssignment?: Prisma.EventAssignmentUpdateManyWithoutUpdatedByNestedInput
   updatedUsers?: Prisma.UserUpdateManyWithoutUpdatedByNestedInput
+  createdAvailabilitySlots?: Prisma.AvailabilitySlotUpdateManyWithoutCreatedByNestedInput
+  updatedAvailabilitySlots?: Prisma.AvailabilitySlotUpdateManyWithoutUpdatedByNestedInput
+  availabilityEntries?: Prisma.AvailabilityEntryUpdateManyWithoutUserNestedInput
+  UpdatedAvailabilityEntries?: Prisma.AvailabilityEntryUpdateManyWithoutUpdatedByNestedInput
+  entryCancelRequests?: Prisma.EntryCancelRequestUpdateManyWithoutRequestedByNestedInput
+  reviewedEntryCancelRequests?: Prisma.EntryCancelRequestUpdateManyWithoutReviewedByNestedInput
+  assignmentCancelRequests?: Prisma.AssignmentCancelRequestUpdateManyWithoutRequestedByNestedInput
+  reviewedAssignmentCancelRequests?: Prisma.AssignmentCancelRequestUpdateManyWithoutReviewedByNestedInput
 }
 
 export type UserUncheckedUpdateWithoutCreatedHrWarningInput = {
@@ -2529,7 +2907,7 @@ export type UserUncheckedUpdateWithoutCreatedHrWarningInput = {
   updatedEvents?: Prisma.EventUncheckedUpdateManyWithoutUpdatedByNestedInput
   providedFeedbacks?: Prisma.EventFeedbackUncheckedUpdateManyWithoutUserNestedInput
   updatedEventFeedback?: Prisma.EventFeedbackUncheckedUpdateManyWithoutUpdatedByNestedInput
-  scheduledEventEmails?: Prisma.ScheduledEmailsUncheckedUpdateManyWithoutUserNestedInput
+  feedbackRequests?: Prisma.FeedbackRequestUncheckedUpdateManyWithoutUserNestedInput
   hrWarnings?: Prisma.HrWarningUncheckedUpdateManyWithoutAssigneeNestedInput
   updatedHrWarnings?: Prisma.HrWarningUncheckedUpdateManyWithoutUpdatedByNestedInput
   CreatedAllowedUser?: Prisma.AllowedUserUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -2538,6 +2916,14 @@ export type UserUncheckedUpdateWithoutCreatedHrWarningInput = {
   CreatedEventAssignment?: Prisma.EventAssignmentUncheckedUpdateManyWithoutCreatedByNestedInput
   UpdatedEventAssignment?: Prisma.EventAssignmentUncheckedUpdateManyWithoutUpdatedByNestedInput
   updatedUsers?: Prisma.UserUncheckedUpdateManyWithoutUpdatedByNestedInput
+  createdAvailabilitySlots?: Prisma.AvailabilitySlotUncheckedUpdateManyWithoutCreatedByNestedInput
+  updatedAvailabilitySlots?: Prisma.AvailabilitySlotUncheckedUpdateManyWithoutUpdatedByNestedInput
+  availabilityEntries?: Prisma.AvailabilityEntryUncheckedUpdateManyWithoutUserNestedInput
+  UpdatedAvailabilityEntries?: Prisma.AvailabilityEntryUncheckedUpdateManyWithoutUpdatedByNestedInput
+  entryCancelRequests?: Prisma.EntryCancelRequestUncheckedUpdateManyWithoutRequestedByNestedInput
+  reviewedEntryCancelRequests?: Prisma.EntryCancelRequestUncheckedUpdateManyWithoutReviewedByNestedInput
+  assignmentCancelRequests?: Prisma.AssignmentCancelRequestUncheckedUpdateManyWithoutRequestedByNestedInput
+  reviewedAssignmentCancelRequests?: Prisma.AssignmentCancelRequestUncheckedUpdateManyWithoutReviewedByNestedInput
 }
 
 export type UserCreateWithoutUpdatedEventFeedbackInput = {
@@ -2570,7 +2956,7 @@ export type UserCreateWithoutUpdatedEventFeedbackInput = {
   createdEvents?: Prisma.EventCreateNestedManyWithoutCreatedByInput
   updatedEvents?: Prisma.EventCreateNestedManyWithoutUpdatedByInput
   providedFeedbacks?: Prisma.EventFeedbackCreateNestedManyWithoutUserInput
-  scheduledEventEmails?: Prisma.ScheduledEmailsCreateNestedManyWithoutUserInput
+  feedbackRequests?: Prisma.FeedbackRequestCreateNestedManyWithoutUserInput
   hrWarnings?: Prisma.HrWarningCreateNestedManyWithoutAssigneeInput
   createdHrWarning?: Prisma.HrWarningCreateNestedManyWithoutCreatedByInput
   updatedHrWarnings?: Prisma.HrWarningCreateNestedManyWithoutUpdatedByInput
@@ -2581,6 +2967,14 @@ export type UserCreateWithoutUpdatedEventFeedbackInput = {
   CreatedEventAssignment?: Prisma.EventAssignmentCreateNestedManyWithoutCreatedByInput
   UpdatedEventAssignment?: Prisma.EventAssignmentCreateNestedManyWithoutUpdatedByInput
   updatedUsers?: Prisma.UserCreateNestedManyWithoutUpdatedByInput
+  createdAvailabilitySlots?: Prisma.AvailabilitySlotCreateNestedManyWithoutCreatedByInput
+  updatedAvailabilitySlots?: Prisma.AvailabilitySlotCreateNestedManyWithoutUpdatedByInput
+  availabilityEntries?: Prisma.AvailabilityEntryCreateNestedManyWithoutUserInput
+  UpdatedAvailabilityEntries?: Prisma.AvailabilityEntryCreateNestedManyWithoutUpdatedByInput
+  entryCancelRequests?: Prisma.EntryCancelRequestCreateNestedManyWithoutRequestedByInput
+  reviewedEntryCancelRequests?: Prisma.EntryCancelRequestCreateNestedManyWithoutReviewedByInput
+  assignmentCancelRequests?: Prisma.AssignmentCancelRequestCreateNestedManyWithoutRequestedByInput
+  reviewedAssignmentCancelRequests?: Prisma.AssignmentCancelRequestCreateNestedManyWithoutReviewedByInput
 }
 
 export type UserUncheckedCreateWithoutUpdatedEventFeedbackInput = {
@@ -2614,7 +3008,7 @@ export type UserUncheckedCreateWithoutUpdatedEventFeedbackInput = {
   createdEvents?: Prisma.EventUncheckedCreateNestedManyWithoutCreatedByInput
   updatedEvents?: Prisma.EventUncheckedCreateNestedManyWithoutUpdatedByInput
   providedFeedbacks?: Prisma.EventFeedbackUncheckedCreateNestedManyWithoutUserInput
-  scheduledEventEmails?: Prisma.ScheduledEmailsUncheckedCreateNestedManyWithoutUserInput
+  feedbackRequests?: Prisma.FeedbackRequestUncheckedCreateNestedManyWithoutUserInput
   hrWarnings?: Prisma.HrWarningUncheckedCreateNestedManyWithoutAssigneeInput
   createdHrWarning?: Prisma.HrWarningUncheckedCreateNestedManyWithoutCreatedByInput
   updatedHrWarnings?: Prisma.HrWarningUncheckedCreateNestedManyWithoutUpdatedByInput
@@ -2624,6 +3018,14 @@ export type UserUncheckedCreateWithoutUpdatedEventFeedbackInput = {
   CreatedEventAssignment?: Prisma.EventAssignmentUncheckedCreateNestedManyWithoutCreatedByInput
   UpdatedEventAssignment?: Prisma.EventAssignmentUncheckedCreateNestedManyWithoutUpdatedByInput
   updatedUsers?: Prisma.UserUncheckedCreateNestedManyWithoutUpdatedByInput
+  createdAvailabilitySlots?: Prisma.AvailabilitySlotUncheckedCreateNestedManyWithoutCreatedByInput
+  updatedAvailabilitySlots?: Prisma.AvailabilitySlotUncheckedCreateNestedManyWithoutUpdatedByInput
+  availabilityEntries?: Prisma.AvailabilityEntryUncheckedCreateNestedManyWithoutUserInput
+  UpdatedAvailabilityEntries?: Prisma.AvailabilityEntryUncheckedCreateNestedManyWithoutUpdatedByInput
+  entryCancelRequests?: Prisma.EntryCancelRequestUncheckedCreateNestedManyWithoutRequestedByInput
+  reviewedEntryCancelRequests?: Prisma.EntryCancelRequestUncheckedCreateNestedManyWithoutReviewedByInput
+  assignmentCancelRequests?: Prisma.AssignmentCancelRequestUncheckedCreateNestedManyWithoutRequestedByInput
+  reviewedAssignmentCancelRequests?: Prisma.AssignmentCancelRequestUncheckedCreateNestedManyWithoutReviewedByInput
 }
 
 export type UserCreateOrConnectWithoutUpdatedEventFeedbackInput = {
@@ -2661,7 +3063,7 @@ export type UserCreateWithoutProvidedFeedbacksInput = {
   createdEvents?: Prisma.EventCreateNestedManyWithoutCreatedByInput
   updatedEvents?: Prisma.EventCreateNestedManyWithoutUpdatedByInput
   updatedEventFeedback?: Prisma.EventFeedbackCreateNestedManyWithoutUpdatedByInput
-  scheduledEventEmails?: Prisma.ScheduledEmailsCreateNestedManyWithoutUserInput
+  feedbackRequests?: Prisma.FeedbackRequestCreateNestedManyWithoutUserInput
   hrWarnings?: Prisma.HrWarningCreateNestedManyWithoutAssigneeInput
   createdHrWarning?: Prisma.HrWarningCreateNestedManyWithoutCreatedByInput
   updatedHrWarnings?: Prisma.HrWarningCreateNestedManyWithoutUpdatedByInput
@@ -2672,6 +3074,14 @@ export type UserCreateWithoutProvidedFeedbacksInput = {
   CreatedEventAssignment?: Prisma.EventAssignmentCreateNestedManyWithoutCreatedByInput
   UpdatedEventAssignment?: Prisma.EventAssignmentCreateNestedManyWithoutUpdatedByInput
   updatedUsers?: Prisma.UserCreateNestedManyWithoutUpdatedByInput
+  createdAvailabilitySlots?: Prisma.AvailabilitySlotCreateNestedManyWithoutCreatedByInput
+  updatedAvailabilitySlots?: Prisma.AvailabilitySlotCreateNestedManyWithoutUpdatedByInput
+  availabilityEntries?: Prisma.AvailabilityEntryCreateNestedManyWithoutUserInput
+  UpdatedAvailabilityEntries?: Prisma.AvailabilityEntryCreateNestedManyWithoutUpdatedByInput
+  entryCancelRequests?: Prisma.EntryCancelRequestCreateNestedManyWithoutRequestedByInput
+  reviewedEntryCancelRequests?: Prisma.EntryCancelRequestCreateNestedManyWithoutReviewedByInput
+  assignmentCancelRequests?: Prisma.AssignmentCancelRequestCreateNestedManyWithoutRequestedByInput
+  reviewedAssignmentCancelRequests?: Prisma.AssignmentCancelRequestCreateNestedManyWithoutReviewedByInput
 }
 
 export type UserUncheckedCreateWithoutProvidedFeedbacksInput = {
@@ -2705,7 +3115,7 @@ export type UserUncheckedCreateWithoutProvidedFeedbacksInput = {
   createdEvents?: Prisma.EventUncheckedCreateNestedManyWithoutCreatedByInput
   updatedEvents?: Prisma.EventUncheckedCreateNestedManyWithoutUpdatedByInput
   updatedEventFeedback?: Prisma.EventFeedbackUncheckedCreateNestedManyWithoutUpdatedByInput
-  scheduledEventEmails?: Prisma.ScheduledEmailsUncheckedCreateNestedManyWithoutUserInput
+  feedbackRequests?: Prisma.FeedbackRequestUncheckedCreateNestedManyWithoutUserInput
   hrWarnings?: Prisma.HrWarningUncheckedCreateNestedManyWithoutAssigneeInput
   createdHrWarning?: Prisma.HrWarningUncheckedCreateNestedManyWithoutCreatedByInput
   updatedHrWarnings?: Prisma.HrWarningUncheckedCreateNestedManyWithoutUpdatedByInput
@@ -2715,6 +3125,14 @@ export type UserUncheckedCreateWithoutProvidedFeedbacksInput = {
   CreatedEventAssignment?: Prisma.EventAssignmentUncheckedCreateNestedManyWithoutCreatedByInput
   UpdatedEventAssignment?: Prisma.EventAssignmentUncheckedCreateNestedManyWithoutUpdatedByInput
   updatedUsers?: Prisma.UserUncheckedCreateNestedManyWithoutUpdatedByInput
+  createdAvailabilitySlots?: Prisma.AvailabilitySlotUncheckedCreateNestedManyWithoutCreatedByInput
+  updatedAvailabilitySlots?: Prisma.AvailabilitySlotUncheckedCreateNestedManyWithoutUpdatedByInput
+  availabilityEntries?: Prisma.AvailabilityEntryUncheckedCreateNestedManyWithoutUserInput
+  UpdatedAvailabilityEntries?: Prisma.AvailabilityEntryUncheckedCreateNestedManyWithoutUpdatedByInput
+  entryCancelRequests?: Prisma.EntryCancelRequestUncheckedCreateNestedManyWithoutRequestedByInput
+  reviewedEntryCancelRequests?: Prisma.EntryCancelRequestUncheckedCreateNestedManyWithoutReviewedByInput
+  assignmentCancelRequests?: Prisma.AssignmentCancelRequestUncheckedCreateNestedManyWithoutRequestedByInput
+  reviewedAssignmentCancelRequests?: Prisma.AssignmentCancelRequestUncheckedCreateNestedManyWithoutReviewedByInput
 }
 
 export type UserCreateOrConnectWithoutProvidedFeedbacksInput = {
@@ -2763,7 +3181,7 @@ export type UserUpdateWithoutUpdatedEventFeedbackInput = {
   createdEvents?: Prisma.EventUpdateManyWithoutCreatedByNestedInput
   updatedEvents?: Prisma.EventUpdateManyWithoutUpdatedByNestedInput
   providedFeedbacks?: Prisma.EventFeedbackUpdateManyWithoutUserNestedInput
-  scheduledEventEmails?: Prisma.ScheduledEmailsUpdateManyWithoutUserNestedInput
+  feedbackRequests?: Prisma.FeedbackRequestUpdateManyWithoutUserNestedInput
   hrWarnings?: Prisma.HrWarningUpdateManyWithoutAssigneeNestedInput
   createdHrWarning?: Prisma.HrWarningUpdateManyWithoutCreatedByNestedInput
   updatedHrWarnings?: Prisma.HrWarningUpdateManyWithoutUpdatedByNestedInput
@@ -2774,6 +3192,14 @@ export type UserUpdateWithoutUpdatedEventFeedbackInput = {
   CreatedEventAssignment?: Prisma.EventAssignmentUpdateManyWithoutCreatedByNestedInput
   UpdatedEventAssignment?: Prisma.EventAssignmentUpdateManyWithoutUpdatedByNestedInput
   updatedUsers?: Prisma.UserUpdateManyWithoutUpdatedByNestedInput
+  createdAvailabilitySlots?: Prisma.AvailabilitySlotUpdateManyWithoutCreatedByNestedInput
+  updatedAvailabilitySlots?: Prisma.AvailabilitySlotUpdateManyWithoutUpdatedByNestedInput
+  availabilityEntries?: Prisma.AvailabilityEntryUpdateManyWithoutUserNestedInput
+  UpdatedAvailabilityEntries?: Prisma.AvailabilityEntryUpdateManyWithoutUpdatedByNestedInput
+  entryCancelRequests?: Prisma.EntryCancelRequestUpdateManyWithoutRequestedByNestedInput
+  reviewedEntryCancelRequests?: Prisma.EntryCancelRequestUpdateManyWithoutReviewedByNestedInput
+  assignmentCancelRequests?: Prisma.AssignmentCancelRequestUpdateManyWithoutRequestedByNestedInput
+  reviewedAssignmentCancelRequests?: Prisma.AssignmentCancelRequestUpdateManyWithoutReviewedByNestedInput
 }
 
 export type UserUncheckedUpdateWithoutUpdatedEventFeedbackInput = {
@@ -2807,7 +3233,7 @@ export type UserUncheckedUpdateWithoutUpdatedEventFeedbackInput = {
   createdEvents?: Prisma.EventUncheckedUpdateManyWithoutCreatedByNestedInput
   updatedEvents?: Prisma.EventUncheckedUpdateManyWithoutUpdatedByNestedInput
   providedFeedbacks?: Prisma.EventFeedbackUncheckedUpdateManyWithoutUserNestedInput
-  scheduledEventEmails?: Prisma.ScheduledEmailsUncheckedUpdateManyWithoutUserNestedInput
+  feedbackRequests?: Prisma.FeedbackRequestUncheckedUpdateManyWithoutUserNestedInput
   hrWarnings?: Prisma.HrWarningUncheckedUpdateManyWithoutAssigneeNestedInput
   createdHrWarning?: Prisma.HrWarningUncheckedUpdateManyWithoutCreatedByNestedInput
   updatedHrWarnings?: Prisma.HrWarningUncheckedUpdateManyWithoutUpdatedByNestedInput
@@ -2817,6 +3243,14 @@ export type UserUncheckedUpdateWithoutUpdatedEventFeedbackInput = {
   CreatedEventAssignment?: Prisma.EventAssignmentUncheckedUpdateManyWithoutCreatedByNestedInput
   UpdatedEventAssignment?: Prisma.EventAssignmentUncheckedUpdateManyWithoutUpdatedByNestedInput
   updatedUsers?: Prisma.UserUncheckedUpdateManyWithoutUpdatedByNestedInput
+  createdAvailabilitySlots?: Prisma.AvailabilitySlotUncheckedUpdateManyWithoutCreatedByNestedInput
+  updatedAvailabilitySlots?: Prisma.AvailabilitySlotUncheckedUpdateManyWithoutUpdatedByNestedInput
+  availabilityEntries?: Prisma.AvailabilityEntryUncheckedUpdateManyWithoutUserNestedInput
+  UpdatedAvailabilityEntries?: Prisma.AvailabilityEntryUncheckedUpdateManyWithoutUpdatedByNestedInput
+  entryCancelRequests?: Prisma.EntryCancelRequestUncheckedUpdateManyWithoutRequestedByNestedInput
+  reviewedEntryCancelRequests?: Prisma.EntryCancelRequestUncheckedUpdateManyWithoutReviewedByNestedInput
+  assignmentCancelRequests?: Prisma.AssignmentCancelRequestUncheckedUpdateManyWithoutRequestedByNestedInput
+  reviewedAssignmentCancelRequests?: Prisma.AssignmentCancelRequestUncheckedUpdateManyWithoutReviewedByNestedInput
 }
 
 export type UserUpsertWithoutProvidedFeedbacksInput = {
@@ -2860,7 +3294,7 @@ export type UserUpdateWithoutProvidedFeedbacksInput = {
   createdEvents?: Prisma.EventUpdateManyWithoutCreatedByNestedInput
   updatedEvents?: Prisma.EventUpdateManyWithoutUpdatedByNestedInput
   updatedEventFeedback?: Prisma.EventFeedbackUpdateManyWithoutUpdatedByNestedInput
-  scheduledEventEmails?: Prisma.ScheduledEmailsUpdateManyWithoutUserNestedInput
+  feedbackRequests?: Prisma.FeedbackRequestUpdateManyWithoutUserNestedInput
   hrWarnings?: Prisma.HrWarningUpdateManyWithoutAssigneeNestedInput
   createdHrWarning?: Prisma.HrWarningUpdateManyWithoutCreatedByNestedInput
   updatedHrWarnings?: Prisma.HrWarningUpdateManyWithoutUpdatedByNestedInput
@@ -2871,6 +3305,14 @@ export type UserUpdateWithoutProvidedFeedbacksInput = {
   CreatedEventAssignment?: Prisma.EventAssignmentUpdateManyWithoutCreatedByNestedInput
   UpdatedEventAssignment?: Prisma.EventAssignmentUpdateManyWithoutUpdatedByNestedInput
   updatedUsers?: Prisma.UserUpdateManyWithoutUpdatedByNestedInput
+  createdAvailabilitySlots?: Prisma.AvailabilitySlotUpdateManyWithoutCreatedByNestedInput
+  updatedAvailabilitySlots?: Prisma.AvailabilitySlotUpdateManyWithoutUpdatedByNestedInput
+  availabilityEntries?: Prisma.AvailabilityEntryUpdateManyWithoutUserNestedInput
+  UpdatedAvailabilityEntries?: Prisma.AvailabilityEntryUpdateManyWithoutUpdatedByNestedInput
+  entryCancelRequests?: Prisma.EntryCancelRequestUpdateManyWithoutRequestedByNestedInput
+  reviewedEntryCancelRequests?: Prisma.EntryCancelRequestUpdateManyWithoutReviewedByNestedInput
+  assignmentCancelRequests?: Prisma.AssignmentCancelRequestUpdateManyWithoutRequestedByNestedInput
+  reviewedAssignmentCancelRequests?: Prisma.AssignmentCancelRequestUpdateManyWithoutReviewedByNestedInput
 }
 
 export type UserUncheckedUpdateWithoutProvidedFeedbacksInput = {
@@ -2904,7 +3346,7 @@ export type UserUncheckedUpdateWithoutProvidedFeedbacksInput = {
   createdEvents?: Prisma.EventUncheckedUpdateManyWithoutCreatedByNestedInput
   updatedEvents?: Prisma.EventUncheckedUpdateManyWithoutUpdatedByNestedInput
   updatedEventFeedback?: Prisma.EventFeedbackUncheckedUpdateManyWithoutUpdatedByNestedInput
-  scheduledEventEmails?: Prisma.ScheduledEmailsUncheckedUpdateManyWithoutUserNestedInput
+  feedbackRequests?: Prisma.FeedbackRequestUncheckedUpdateManyWithoutUserNestedInput
   hrWarnings?: Prisma.HrWarningUncheckedUpdateManyWithoutAssigneeNestedInput
   createdHrWarning?: Prisma.HrWarningUncheckedUpdateManyWithoutCreatedByNestedInput
   updatedHrWarnings?: Prisma.HrWarningUncheckedUpdateManyWithoutUpdatedByNestedInput
@@ -2914,9 +3356,17 @@ export type UserUncheckedUpdateWithoutProvidedFeedbacksInput = {
   CreatedEventAssignment?: Prisma.EventAssignmentUncheckedUpdateManyWithoutCreatedByNestedInput
   UpdatedEventAssignment?: Prisma.EventAssignmentUncheckedUpdateManyWithoutUpdatedByNestedInput
   updatedUsers?: Prisma.UserUncheckedUpdateManyWithoutUpdatedByNestedInput
+  createdAvailabilitySlots?: Prisma.AvailabilitySlotUncheckedUpdateManyWithoutCreatedByNestedInput
+  updatedAvailabilitySlots?: Prisma.AvailabilitySlotUncheckedUpdateManyWithoutUpdatedByNestedInput
+  availabilityEntries?: Prisma.AvailabilityEntryUncheckedUpdateManyWithoutUserNestedInput
+  UpdatedAvailabilityEntries?: Prisma.AvailabilityEntryUncheckedUpdateManyWithoutUpdatedByNestedInput
+  entryCancelRequests?: Prisma.EntryCancelRequestUncheckedUpdateManyWithoutRequestedByNestedInput
+  reviewedEntryCancelRequests?: Prisma.EntryCancelRequestUncheckedUpdateManyWithoutReviewedByNestedInput
+  assignmentCancelRequests?: Prisma.AssignmentCancelRequestUncheckedUpdateManyWithoutRequestedByNestedInput
+  reviewedAssignmentCancelRequests?: Prisma.AssignmentCancelRequestUncheckedUpdateManyWithoutReviewedByNestedInput
 }
 
-export type UserCreateWithoutScheduledEventEmailsInput = {
+export type UserCreateWithoutFeedbackRequestsInput = {
   id?: string
   name?: string | null
   email: string
@@ -2957,9 +3407,17 @@ export type UserCreateWithoutScheduledEventEmailsInput = {
   CreatedEventAssignment?: Prisma.EventAssignmentCreateNestedManyWithoutCreatedByInput
   UpdatedEventAssignment?: Prisma.EventAssignmentCreateNestedManyWithoutUpdatedByInput
   updatedUsers?: Prisma.UserCreateNestedManyWithoutUpdatedByInput
+  createdAvailabilitySlots?: Prisma.AvailabilitySlotCreateNestedManyWithoutCreatedByInput
+  updatedAvailabilitySlots?: Prisma.AvailabilitySlotCreateNestedManyWithoutUpdatedByInput
+  availabilityEntries?: Prisma.AvailabilityEntryCreateNestedManyWithoutUserInput
+  UpdatedAvailabilityEntries?: Prisma.AvailabilityEntryCreateNestedManyWithoutUpdatedByInput
+  entryCancelRequests?: Prisma.EntryCancelRequestCreateNestedManyWithoutRequestedByInput
+  reviewedEntryCancelRequests?: Prisma.EntryCancelRequestCreateNestedManyWithoutReviewedByInput
+  assignmentCancelRequests?: Prisma.AssignmentCancelRequestCreateNestedManyWithoutRequestedByInput
+  reviewedAssignmentCancelRequests?: Prisma.AssignmentCancelRequestCreateNestedManyWithoutReviewedByInput
 }
 
-export type UserUncheckedCreateWithoutScheduledEventEmailsInput = {
+export type UserUncheckedCreateWithoutFeedbackRequestsInput = {
   id?: string
   name?: string | null
   email: string
@@ -3000,25 +3458,33 @@ export type UserUncheckedCreateWithoutScheduledEventEmailsInput = {
   CreatedEventAssignment?: Prisma.EventAssignmentUncheckedCreateNestedManyWithoutCreatedByInput
   UpdatedEventAssignment?: Prisma.EventAssignmentUncheckedCreateNestedManyWithoutUpdatedByInput
   updatedUsers?: Prisma.UserUncheckedCreateNestedManyWithoutUpdatedByInput
+  createdAvailabilitySlots?: Prisma.AvailabilitySlotUncheckedCreateNestedManyWithoutCreatedByInput
+  updatedAvailabilitySlots?: Prisma.AvailabilitySlotUncheckedCreateNestedManyWithoutUpdatedByInput
+  availabilityEntries?: Prisma.AvailabilityEntryUncheckedCreateNestedManyWithoutUserInput
+  UpdatedAvailabilityEntries?: Prisma.AvailabilityEntryUncheckedCreateNestedManyWithoutUpdatedByInput
+  entryCancelRequests?: Prisma.EntryCancelRequestUncheckedCreateNestedManyWithoutRequestedByInput
+  reviewedEntryCancelRequests?: Prisma.EntryCancelRequestUncheckedCreateNestedManyWithoutReviewedByInput
+  assignmentCancelRequests?: Prisma.AssignmentCancelRequestUncheckedCreateNestedManyWithoutRequestedByInput
+  reviewedAssignmentCancelRequests?: Prisma.AssignmentCancelRequestUncheckedCreateNestedManyWithoutReviewedByInput
 }
 
-export type UserCreateOrConnectWithoutScheduledEventEmailsInput = {
+export type UserCreateOrConnectWithoutFeedbackRequestsInput = {
   where: Prisma.UserWhereUniqueInput
-  create: Prisma.XOR<Prisma.UserCreateWithoutScheduledEventEmailsInput, Prisma.UserUncheckedCreateWithoutScheduledEventEmailsInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutFeedbackRequestsInput, Prisma.UserUncheckedCreateWithoutFeedbackRequestsInput>
 }
 
-export type UserUpsertWithoutScheduledEventEmailsInput = {
-  update: Prisma.XOR<Prisma.UserUpdateWithoutScheduledEventEmailsInput, Prisma.UserUncheckedUpdateWithoutScheduledEventEmailsInput>
-  create: Prisma.XOR<Prisma.UserCreateWithoutScheduledEventEmailsInput, Prisma.UserUncheckedCreateWithoutScheduledEventEmailsInput>
+export type UserUpsertWithoutFeedbackRequestsInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutFeedbackRequestsInput, Prisma.UserUncheckedUpdateWithoutFeedbackRequestsInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutFeedbackRequestsInput, Prisma.UserUncheckedCreateWithoutFeedbackRequestsInput>
   where?: Prisma.UserWhereInput
 }
 
-export type UserUpdateToOneWithWhereWithoutScheduledEventEmailsInput = {
+export type UserUpdateToOneWithWhereWithoutFeedbackRequestsInput = {
   where?: Prisma.UserWhereInput
-  data: Prisma.XOR<Prisma.UserUpdateWithoutScheduledEventEmailsInput, Prisma.UserUncheckedUpdateWithoutScheduledEventEmailsInput>
+  data: Prisma.XOR<Prisma.UserUpdateWithoutFeedbackRequestsInput, Prisma.UserUncheckedUpdateWithoutFeedbackRequestsInput>
 }
 
-export type UserUpdateWithoutScheduledEventEmailsInput = {
+export type UserUpdateWithoutFeedbackRequestsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.StringFieldUpdateOperationsInput | string
@@ -3059,9 +3525,17 @@ export type UserUpdateWithoutScheduledEventEmailsInput = {
   CreatedEventAssignment?: Prisma.EventAssignmentUpdateManyWithoutCreatedByNestedInput
   UpdatedEventAssignment?: Prisma.EventAssignmentUpdateManyWithoutUpdatedByNestedInput
   updatedUsers?: Prisma.UserUpdateManyWithoutUpdatedByNestedInput
+  createdAvailabilitySlots?: Prisma.AvailabilitySlotUpdateManyWithoutCreatedByNestedInput
+  updatedAvailabilitySlots?: Prisma.AvailabilitySlotUpdateManyWithoutUpdatedByNestedInput
+  availabilityEntries?: Prisma.AvailabilityEntryUpdateManyWithoutUserNestedInput
+  UpdatedAvailabilityEntries?: Prisma.AvailabilityEntryUpdateManyWithoutUpdatedByNestedInput
+  entryCancelRequests?: Prisma.EntryCancelRequestUpdateManyWithoutRequestedByNestedInput
+  reviewedEntryCancelRequests?: Prisma.EntryCancelRequestUpdateManyWithoutReviewedByNestedInput
+  assignmentCancelRequests?: Prisma.AssignmentCancelRequestUpdateManyWithoutRequestedByNestedInput
+  reviewedAssignmentCancelRequests?: Prisma.AssignmentCancelRequestUpdateManyWithoutReviewedByNestedInput
 }
 
-export type UserUncheckedUpdateWithoutScheduledEventEmailsInput = {
+export type UserUncheckedUpdateWithoutFeedbackRequestsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.StringFieldUpdateOperationsInput | string
@@ -3102,6 +3576,1334 @@ export type UserUncheckedUpdateWithoutScheduledEventEmailsInput = {
   CreatedEventAssignment?: Prisma.EventAssignmentUncheckedUpdateManyWithoutCreatedByNestedInput
   UpdatedEventAssignment?: Prisma.EventAssignmentUncheckedUpdateManyWithoutUpdatedByNestedInput
   updatedUsers?: Prisma.UserUncheckedUpdateManyWithoutUpdatedByNestedInput
+  createdAvailabilitySlots?: Prisma.AvailabilitySlotUncheckedUpdateManyWithoutCreatedByNestedInput
+  updatedAvailabilitySlots?: Prisma.AvailabilitySlotUncheckedUpdateManyWithoutUpdatedByNestedInput
+  availabilityEntries?: Prisma.AvailabilityEntryUncheckedUpdateManyWithoutUserNestedInput
+  UpdatedAvailabilityEntries?: Prisma.AvailabilityEntryUncheckedUpdateManyWithoutUpdatedByNestedInput
+  entryCancelRequests?: Prisma.EntryCancelRequestUncheckedUpdateManyWithoutRequestedByNestedInput
+  reviewedEntryCancelRequests?: Prisma.EntryCancelRequestUncheckedUpdateManyWithoutReviewedByNestedInput
+  assignmentCancelRequests?: Prisma.AssignmentCancelRequestUncheckedUpdateManyWithoutRequestedByNestedInput
+  reviewedAssignmentCancelRequests?: Prisma.AssignmentCancelRequestUncheckedUpdateManyWithoutReviewedByNestedInput
+}
+
+export type UserCreateWithoutCreatedAvailabilitySlotsInput = {
+  id?: string
+  name?: string | null
+  email: string
+  emailVerified?: Date | string | null
+  image?: string | null
+  reqStatus?: $Enums.ReqStatus
+  rating?: number
+  deletedAt?: Date | string | null
+  deleted?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string | null
+  accounts?: Prisma.AccountCreateNestedManyWithoutUserInput
+  sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
+  Authenticator?: Prisma.AuthenticatorCreateNestedManyWithoutUserInput
+  joinRequests?: Prisma.JoinRequestCreateNestedManyWithoutCreatedByInput
+  updatedJoinRequests?: Prisma.JoinRequestCreateNestedManyWithoutUpdatedByInput
+  updatedBy?: Prisma.UserCreateNestedOneWithoutUpdatedUsersInput
+  memberStatusCreated?: Prisma.MemberStatusLogCreateNestedManyWithoutCreatedByInput
+  memberStatusLogs?: Prisma.MemberStatusLogCreateNestedManyWithoutUserInput
+  memberStatusChanges?: Prisma.MemberStatusLogCreateNestedManyWithoutUpdatedByInput
+  positionChanges?: Prisma.PositionHistoryCreateNestedManyWithoutUpdatedByInput
+  positionCreations?: Prisma.PositionHistoryCreateNestedManyWithoutCreatedByInput
+  positionHistories?: Prisma.PositionHistoryCreateNestedManyWithoutUserInput
+  ratingHistory?: Prisma.RatingHistoryCreateNestedManyWithoutUserInput
+  createdRatings?: Prisma.RatingHistoryCreateNestedManyWithoutCreatedByInput
+  updatedRatings?: Prisma.RatingHistoryCreateNestedManyWithoutUpdatedByInput
+  createdEvents?: Prisma.EventCreateNestedManyWithoutCreatedByInput
+  updatedEvents?: Prisma.EventCreateNestedManyWithoutUpdatedByInput
+  providedFeedbacks?: Prisma.EventFeedbackCreateNestedManyWithoutUserInput
+  updatedEventFeedback?: Prisma.EventFeedbackCreateNestedManyWithoutUpdatedByInput
+  feedbackRequests?: Prisma.FeedbackRequestCreateNestedManyWithoutUserInput
+  hrWarnings?: Prisma.HrWarningCreateNestedManyWithoutAssigneeInput
+  createdHrWarning?: Prisma.HrWarningCreateNestedManyWithoutCreatedByInput
+  updatedHrWarnings?: Prisma.HrWarningCreateNestedManyWithoutUpdatedByInput
+  CreatedAllowedUser?: Prisma.AllowedUserCreateNestedManyWithoutCreatedByInput
+  ownAllowance?: Prisma.AllowedUserCreateNestedOneWithoutUserInput
+  UpdatedAllowance?: Prisma.AllowedUserCreateNestedManyWithoutUpdatedByInput
+  eventAssignments?: Prisma.EventAssignmentCreateNestedManyWithoutUserInput
+  CreatedEventAssignment?: Prisma.EventAssignmentCreateNestedManyWithoutCreatedByInput
+  UpdatedEventAssignment?: Prisma.EventAssignmentCreateNestedManyWithoutUpdatedByInput
+  updatedUsers?: Prisma.UserCreateNestedManyWithoutUpdatedByInput
+  updatedAvailabilitySlots?: Prisma.AvailabilitySlotCreateNestedManyWithoutUpdatedByInput
+  availabilityEntries?: Prisma.AvailabilityEntryCreateNestedManyWithoutUserInput
+  UpdatedAvailabilityEntries?: Prisma.AvailabilityEntryCreateNestedManyWithoutUpdatedByInput
+  entryCancelRequests?: Prisma.EntryCancelRequestCreateNestedManyWithoutRequestedByInput
+  reviewedEntryCancelRequests?: Prisma.EntryCancelRequestCreateNestedManyWithoutReviewedByInput
+  assignmentCancelRequests?: Prisma.AssignmentCancelRequestCreateNestedManyWithoutRequestedByInput
+  reviewedAssignmentCancelRequests?: Prisma.AssignmentCancelRequestCreateNestedManyWithoutReviewedByInput
+}
+
+export type UserUncheckedCreateWithoutCreatedAvailabilitySlotsInput = {
+  id?: string
+  name?: string | null
+  email: string
+  emailVerified?: Date | string | null
+  image?: string | null
+  reqStatus?: $Enums.ReqStatus
+  rating?: number
+  deletedAt?: Date | string | null
+  deleted?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string | null
+  updatedById?: string | null
+  allowedUserId?: string | null
+  accounts?: Prisma.AccountUncheckedCreateNestedManyWithoutUserInput
+  sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
+  Authenticator?: Prisma.AuthenticatorUncheckedCreateNestedManyWithoutUserInput
+  joinRequests?: Prisma.JoinRequestUncheckedCreateNestedManyWithoutCreatedByInput
+  updatedJoinRequests?: Prisma.JoinRequestUncheckedCreateNestedManyWithoutUpdatedByInput
+  memberStatusCreated?: Prisma.MemberStatusLogUncheckedCreateNestedManyWithoutCreatedByInput
+  memberStatusLogs?: Prisma.MemberStatusLogUncheckedCreateNestedManyWithoutUserInput
+  memberStatusChanges?: Prisma.MemberStatusLogUncheckedCreateNestedManyWithoutUpdatedByInput
+  positionChanges?: Prisma.PositionHistoryUncheckedCreateNestedManyWithoutUpdatedByInput
+  positionCreations?: Prisma.PositionHistoryUncheckedCreateNestedManyWithoutCreatedByInput
+  positionHistories?: Prisma.PositionHistoryUncheckedCreateNestedManyWithoutUserInput
+  ratingHistory?: Prisma.RatingHistoryUncheckedCreateNestedManyWithoutUserInput
+  createdRatings?: Prisma.RatingHistoryUncheckedCreateNestedManyWithoutCreatedByInput
+  updatedRatings?: Prisma.RatingHistoryUncheckedCreateNestedManyWithoutUpdatedByInput
+  createdEvents?: Prisma.EventUncheckedCreateNestedManyWithoutCreatedByInput
+  updatedEvents?: Prisma.EventUncheckedCreateNestedManyWithoutUpdatedByInput
+  providedFeedbacks?: Prisma.EventFeedbackUncheckedCreateNestedManyWithoutUserInput
+  updatedEventFeedback?: Prisma.EventFeedbackUncheckedCreateNestedManyWithoutUpdatedByInput
+  feedbackRequests?: Prisma.FeedbackRequestUncheckedCreateNestedManyWithoutUserInput
+  hrWarnings?: Prisma.HrWarningUncheckedCreateNestedManyWithoutAssigneeInput
+  createdHrWarning?: Prisma.HrWarningUncheckedCreateNestedManyWithoutCreatedByInput
+  updatedHrWarnings?: Prisma.HrWarningUncheckedCreateNestedManyWithoutUpdatedByInput
+  CreatedAllowedUser?: Prisma.AllowedUserUncheckedCreateNestedManyWithoutCreatedByInput
+  UpdatedAllowance?: Prisma.AllowedUserUncheckedCreateNestedManyWithoutUpdatedByInput
+  eventAssignments?: Prisma.EventAssignmentUncheckedCreateNestedManyWithoutUserInput
+  CreatedEventAssignment?: Prisma.EventAssignmentUncheckedCreateNestedManyWithoutCreatedByInput
+  UpdatedEventAssignment?: Prisma.EventAssignmentUncheckedCreateNestedManyWithoutUpdatedByInput
+  updatedUsers?: Prisma.UserUncheckedCreateNestedManyWithoutUpdatedByInput
+  updatedAvailabilitySlots?: Prisma.AvailabilitySlotUncheckedCreateNestedManyWithoutUpdatedByInput
+  availabilityEntries?: Prisma.AvailabilityEntryUncheckedCreateNestedManyWithoutUserInput
+  UpdatedAvailabilityEntries?: Prisma.AvailabilityEntryUncheckedCreateNestedManyWithoutUpdatedByInput
+  entryCancelRequests?: Prisma.EntryCancelRequestUncheckedCreateNestedManyWithoutRequestedByInput
+  reviewedEntryCancelRequests?: Prisma.EntryCancelRequestUncheckedCreateNestedManyWithoutReviewedByInput
+  assignmentCancelRequests?: Prisma.AssignmentCancelRequestUncheckedCreateNestedManyWithoutRequestedByInput
+  reviewedAssignmentCancelRequests?: Prisma.AssignmentCancelRequestUncheckedCreateNestedManyWithoutReviewedByInput
+}
+
+export type UserCreateOrConnectWithoutCreatedAvailabilitySlotsInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutCreatedAvailabilitySlotsInput, Prisma.UserUncheckedCreateWithoutCreatedAvailabilitySlotsInput>
+}
+
+export type UserCreateWithoutUpdatedAvailabilitySlotsInput = {
+  id?: string
+  name?: string | null
+  email: string
+  emailVerified?: Date | string | null
+  image?: string | null
+  reqStatus?: $Enums.ReqStatus
+  rating?: number
+  deletedAt?: Date | string | null
+  deleted?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string | null
+  accounts?: Prisma.AccountCreateNestedManyWithoutUserInput
+  sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
+  Authenticator?: Prisma.AuthenticatorCreateNestedManyWithoutUserInput
+  joinRequests?: Prisma.JoinRequestCreateNestedManyWithoutCreatedByInput
+  updatedJoinRequests?: Prisma.JoinRequestCreateNestedManyWithoutUpdatedByInput
+  updatedBy?: Prisma.UserCreateNestedOneWithoutUpdatedUsersInput
+  memberStatusCreated?: Prisma.MemberStatusLogCreateNestedManyWithoutCreatedByInput
+  memberStatusLogs?: Prisma.MemberStatusLogCreateNestedManyWithoutUserInput
+  memberStatusChanges?: Prisma.MemberStatusLogCreateNestedManyWithoutUpdatedByInput
+  positionChanges?: Prisma.PositionHistoryCreateNestedManyWithoutUpdatedByInput
+  positionCreations?: Prisma.PositionHistoryCreateNestedManyWithoutCreatedByInput
+  positionHistories?: Prisma.PositionHistoryCreateNestedManyWithoutUserInput
+  ratingHistory?: Prisma.RatingHistoryCreateNestedManyWithoutUserInput
+  createdRatings?: Prisma.RatingHistoryCreateNestedManyWithoutCreatedByInput
+  updatedRatings?: Prisma.RatingHistoryCreateNestedManyWithoutUpdatedByInput
+  createdEvents?: Prisma.EventCreateNestedManyWithoutCreatedByInput
+  updatedEvents?: Prisma.EventCreateNestedManyWithoutUpdatedByInput
+  providedFeedbacks?: Prisma.EventFeedbackCreateNestedManyWithoutUserInput
+  updatedEventFeedback?: Prisma.EventFeedbackCreateNestedManyWithoutUpdatedByInput
+  feedbackRequests?: Prisma.FeedbackRequestCreateNestedManyWithoutUserInput
+  hrWarnings?: Prisma.HrWarningCreateNestedManyWithoutAssigneeInput
+  createdHrWarning?: Prisma.HrWarningCreateNestedManyWithoutCreatedByInput
+  updatedHrWarnings?: Prisma.HrWarningCreateNestedManyWithoutUpdatedByInput
+  CreatedAllowedUser?: Prisma.AllowedUserCreateNestedManyWithoutCreatedByInput
+  ownAllowance?: Prisma.AllowedUserCreateNestedOneWithoutUserInput
+  UpdatedAllowance?: Prisma.AllowedUserCreateNestedManyWithoutUpdatedByInput
+  eventAssignments?: Prisma.EventAssignmentCreateNestedManyWithoutUserInput
+  CreatedEventAssignment?: Prisma.EventAssignmentCreateNestedManyWithoutCreatedByInput
+  UpdatedEventAssignment?: Prisma.EventAssignmentCreateNestedManyWithoutUpdatedByInput
+  updatedUsers?: Prisma.UserCreateNestedManyWithoutUpdatedByInput
+  createdAvailabilitySlots?: Prisma.AvailabilitySlotCreateNestedManyWithoutCreatedByInput
+  availabilityEntries?: Prisma.AvailabilityEntryCreateNestedManyWithoutUserInput
+  UpdatedAvailabilityEntries?: Prisma.AvailabilityEntryCreateNestedManyWithoutUpdatedByInput
+  entryCancelRequests?: Prisma.EntryCancelRequestCreateNestedManyWithoutRequestedByInput
+  reviewedEntryCancelRequests?: Prisma.EntryCancelRequestCreateNestedManyWithoutReviewedByInput
+  assignmentCancelRequests?: Prisma.AssignmentCancelRequestCreateNestedManyWithoutRequestedByInput
+  reviewedAssignmentCancelRequests?: Prisma.AssignmentCancelRequestCreateNestedManyWithoutReviewedByInput
+}
+
+export type UserUncheckedCreateWithoutUpdatedAvailabilitySlotsInput = {
+  id?: string
+  name?: string | null
+  email: string
+  emailVerified?: Date | string | null
+  image?: string | null
+  reqStatus?: $Enums.ReqStatus
+  rating?: number
+  deletedAt?: Date | string | null
+  deleted?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string | null
+  updatedById?: string | null
+  allowedUserId?: string | null
+  accounts?: Prisma.AccountUncheckedCreateNestedManyWithoutUserInput
+  sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
+  Authenticator?: Prisma.AuthenticatorUncheckedCreateNestedManyWithoutUserInput
+  joinRequests?: Prisma.JoinRequestUncheckedCreateNestedManyWithoutCreatedByInput
+  updatedJoinRequests?: Prisma.JoinRequestUncheckedCreateNestedManyWithoutUpdatedByInput
+  memberStatusCreated?: Prisma.MemberStatusLogUncheckedCreateNestedManyWithoutCreatedByInput
+  memberStatusLogs?: Prisma.MemberStatusLogUncheckedCreateNestedManyWithoutUserInput
+  memberStatusChanges?: Prisma.MemberStatusLogUncheckedCreateNestedManyWithoutUpdatedByInput
+  positionChanges?: Prisma.PositionHistoryUncheckedCreateNestedManyWithoutUpdatedByInput
+  positionCreations?: Prisma.PositionHistoryUncheckedCreateNestedManyWithoutCreatedByInput
+  positionHistories?: Prisma.PositionHistoryUncheckedCreateNestedManyWithoutUserInput
+  ratingHistory?: Prisma.RatingHistoryUncheckedCreateNestedManyWithoutUserInput
+  createdRatings?: Prisma.RatingHistoryUncheckedCreateNestedManyWithoutCreatedByInput
+  updatedRatings?: Prisma.RatingHistoryUncheckedCreateNestedManyWithoutUpdatedByInput
+  createdEvents?: Prisma.EventUncheckedCreateNestedManyWithoutCreatedByInput
+  updatedEvents?: Prisma.EventUncheckedCreateNestedManyWithoutUpdatedByInput
+  providedFeedbacks?: Prisma.EventFeedbackUncheckedCreateNestedManyWithoutUserInput
+  updatedEventFeedback?: Prisma.EventFeedbackUncheckedCreateNestedManyWithoutUpdatedByInput
+  feedbackRequests?: Prisma.FeedbackRequestUncheckedCreateNestedManyWithoutUserInput
+  hrWarnings?: Prisma.HrWarningUncheckedCreateNestedManyWithoutAssigneeInput
+  createdHrWarning?: Prisma.HrWarningUncheckedCreateNestedManyWithoutCreatedByInput
+  updatedHrWarnings?: Prisma.HrWarningUncheckedCreateNestedManyWithoutUpdatedByInput
+  CreatedAllowedUser?: Prisma.AllowedUserUncheckedCreateNestedManyWithoutCreatedByInput
+  UpdatedAllowance?: Prisma.AllowedUserUncheckedCreateNestedManyWithoutUpdatedByInput
+  eventAssignments?: Prisma.EventAssignmentUncheckedCreateNestedManyWithoutUserInput
+  CreatedEventAssignment?: Prisma.EventAssignmentUncheckedCreateNestedManyWithoutCreatedByInput
+  UpdatedEventAssignment?: Prisma.EventAssignmentUncheckedCreateNestedManyWithoutUpdatedByInput
+  updatedUsers?: Prisma.UserUncheckedCreateNestedManyWithoutUpdatedByInput
+  createdAvailabilitySlots?: Prisma.AvailabilitySlotUncheckedCreateNestedManyWithoutCreatedByInput
+  availabilityEntries?: Prisma.AvailabilityEntryUncheckedCreateNestedManyWithoutUserInput
+  UpdatedAvailabilityEntries?: Prisma.AvailabilityEntryUncheckedCreateNestedManyWithoutUpdatedByInput
+  entryCancelRequests?: Prisma.EntryCancelRequestUncheckedCreateNestedManyWithoutRequestedByInput
+  reviewedEntryCancelRequests?: Prisma.EntryCancelRequestUncheckedCreateNestedManyWithoutReviewedByInput
+  assignmentCancelRequests?: Prisma.AssignmentCancelRequestUncheckedCreateNestedManyWithoutRequestedByInput
+  reviewedAssignmentCancelRequests?: Prisma.AssignmentCancelRequestUncheckedCreateNestedManyWithoutReviewedByInput
+}
+
+export type UserCreateOrConnectWithoutUpdatedAvailabilitySlotsInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutUpdatedAvailabilitySlotsInput, Prisma.UserUncheckedCreateWithoutUpdatedAvailabilitySlotsInput>
+}
+
+export type UserUpsertWithoutCreatedAvailabilitySlotsInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutCreatedAvailabilitySlotsInput, Prisma.UserUncheckedUpdateWithoutCreatedAvailabilitySlotsInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutCreatedAvailabilitySlotsInput, Prisma.UserUncheckedCreateWithoutCreatedAvailabilitySlotsInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutCreatedAvailabilitySlotsInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutCreatedAvailabilitySlotsInput, Prisma.UserUncheckedUpdateWithoutCreatedAvailabilitySlotsInput>
+}
+
+export type UserUpdateWithoutCreatedAvailabilitySlotsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  emailVerified?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  reqStatus?: Prisma.EnumReqStatusFieldUpdateOperationsInput | $Enums.ReqStatus
+  rating?: Prisma.IntFieldUpdateOperationsInput | number
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  accounts?: Prisma.AccountUpdateManyWithoutUserNestedInput
+  sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
+  Authenticator?: Prisma.AuthenticatorUpdateManyWithoutUserNestedInput
+  joinRequests?: Prisma.JoinRequestUpdateManyWithoutCreatedByNestedInput
+  updatedJoinRequests?: Prisma.JoinRequestUpdateManyWithoutUpdatedByNestedInput
+  updatedBy?: Prisma.UserUpdateOneWithoutUpdatedUsersNestedInput
+  memberStatusCreated?: Prisma.MemberStatusLogUpdateManyWithoutCreatedByNestedInput
+  memberStatusLogs?: Prisma.MemberStatusLogUpdateManyWithoutUserNestedInput
+  memberStatusChanges?: Prisma.MemberStatusLogUpdateManyWithoutUpdatedByNestedInput
+  positionChanges?: Prisma.PositionHistoryUpdateManyWithoutUpdatedByNestedInput
+  positionCreations?: Prisma.PositionHistoryUpdateManyWithoutCreatedByNestedInput
+  positionHistories?: Prisma.PositionHistoryUpdateManyWithoutUserNestedInput
+  ratingHistory?: Prisma.RatingHistoryUpdateManyWithoutUserNestedInput
+  createdRatings?: Prisma.RatingHistoryUpdateManyWithoutCreatedByNestedInput
+  updatedRatings?: Prisma.RatingHistoryUpdateManyWithoutUpdatedByNestedInput
+  createdEvents?: Prisma.EventUpdateManyWithoutCreatedByNestedInput
+  updatedEvents?: Prisma.EventUpdateManyWithoutUpdatedByNestedInput
+  providedFeedbacks?: Prisma.EventFeedbackUpdateManyWithoutUserNestedInput
+  updatedEventFeedback?: Prisma.EventFeedbackUpdateManyWithoutUpdatedByNestedInput
+  feedbackRequests?: Prisma.FeedbackRequestUpdateManyWithoutUserNestedInput
+  hrWarnings?: Prisma.HrWarningUpdateManyWithoutAssigneeNestedInput
+  createdHrWarning?: Prisma.HrWarningUpdateManyWithoutCreatedByNestedInput
+  updatedHrWarnings?: Prisma.HrWarningUpdateManyWithoutUpdatedByNestedInput
+  CreatedAllowedUser?: Prisma.AllowedUserUpdateManyWithoutCreatedByNestedInput
+  ownAllowance?: Prisma.AllowedUserUpdateOneWithoutUserNestedInput
+  UpdatedAllowance?: Prisma.AllowedUserUpdateManyWithoutUpdatedByNestedInput
+  eventAssignments?: Prisma.EventAssignmentUpdateManyWithoutUserNestedInput
+  CreatedEventAssignment?: Prisma.EventAssignmentUpdateManyWithoutCreatedByNestedInput
+  UpdatedEventAssignment?: Prisma.EventAssignmentUpdateManyWithoutUpdatedByNestedInput
+  updatedUsers?: Prisma.UserUpdateManyWithoutUpdatedByNestedInput
+  updatedAvailabilitySlots?: Prisma.AvailabilitySlotUpdateManyWithoutUpdatedByNestedInput
+  availabilityEntries?: Prisma.AvailabilityEntryUpdateManyWithoutUserNestedInput
+  UpdatedAvailabilityEntries?: Prisma.AvailabilityEntryUpdateManyWithoutUpdatedByNestedInput
+  entryCancelRequests?: Prisma.EntryCancelRequestUpdateManyWithoutRequestedByNestedInput
+  reviewedEntryCancelRequests?: Prisma.EntryCancelRequestUpdateManyWithoutReviewedByNestedInput
+  assignmentCancelRequests?: Prisma.AssignmentCancelRequestUpdateManyWithoutRequestedByNestedInput
+  reviewedAssignmentCancelRequests?: Prisma.AssignmentCancelRequestUpdateManyWithoutReviewedByNestedInput
+}
+
+export type UserUncheckedUpdateWithoutCreatedAvailabilitySlotsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  emailVerified?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  reqStatus?: Prisma.EnumReqStatusFieldUpdateOperationsInput | $Enums.ReqStatus
+  rating?: Prisma.IntFieldUpdateOperationsInput | number
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  updatedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  allowedUserId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  accounts?: Prisma.AccountUncheckedUpdateManyWithoutUserNestedInput
+  sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
+  Authenticator?: Prisma.AuthenticatorUncheckedUpdateManyWithoutUserNestedInput
+  joinRequests?: Prisma.JoinRequestUncheckedUpdateManyWithoutCreatedByNestedInput
+  updatedJoinRequests?: Prisma.JoinRequestUncheckedUpdateManyWithoutUpdatedByNestedInput
+  memberStatusCreated?: Prisma.MemberStatusLogUncheckedUpdateManyWithoutCreatedByNestedInput
+  memberStatusLogs?: Prisma.MemberStatusLogUncheckedUpdateManyWithoutUserNestedInput
+  memberStatusChanges?: Prisma.MemberStatusLogUncheckedUpdateManyWithoutUpdatedByNestedInput
+  positionChanges?: Prisma.PositionHistoryUncheckedUpdateManyWithoutUpdatedByNestedInput
+  positionCreations?: Prisma.PositionHistoryUncheckedUpdateManyWithoutCreatedByNestedInput
+  positionHistories?: Prisma.PositionHistoryUncheckedUpdateManyWithoutUserNestedInput
+  ratingHistory?: Prisma.RatingHistoryUncheckedUpdateManyWithoutUserNestedInput
+  createdRatings?: Prisma.RatingHistoryUncheckedUpdateManyWithoutCreatedByNestedInput
+  updatedRatings?: Prisma.RatingHistoryUncheckedUpdateManyWithoutUpdatedByNestedInput
+  createdEvents?: Prisma.EventUncheckedUpdateManyWithoutCreatedByNestedInput
+  updatedEvents?: Prisma.EventUncheckedUpdateManyWithoutUpdatedByNestedInput
+  providedFeedbacks?: Prisma.EventFeedbackUncheckedUpdateManyWithoutUserNestedInput
+  updatedEventFeedback?: Prisma.EventFeedbackUncheckedUpdateManyWithoutUpdatedByNestedInput
+  feedbackRequests?: Prisma.FeedbackRequestUncheckedUpdateManyWithoutUserNestedInput
+  hrWarnings?: Prisma.HrWarningUncheckedUpdateManyWithoutAssigneeNestedInput
+  createdHrWarning?: Prisma.HrWarningUncheckedUpdateManyWithoutCreatedByNestedInput
+  updatedHrWarnings?: Prisma.HrWarningUncheckedUpdateManyWithoutUpdatedByNestedInput
+  CreatedAllowedUser?: Prisma.AllowedUserUncheckedUpdateManyWithoutCreatedByNestedInput
+  UpdatedAllowance?: Prisma.AllowedUserUncheckedUpdateManyWithoutUpdatedByNestedInput
+  eventAssignments?: Prisma.EventAssignmentUncheckedUpdateManyWithoutUserNestedInput
+  CreatedEventAssignment?: Prisma.EventAssignmentUncheckedUpdateManyWithoutCreatedByNestedInput
+  UpdatedEventAssignment?: Prisma.EventAssignmentUncheckedUpdateManyWithoutUpdatedByNestedInput
+  updatedUsers?: Prisma.UserUncheckedUpdateManyWithoutUpdatedByNestedInput
+  updatedAvailabilitySlots?: Prisma.AvailabilitySlotUncheckedUpdateManyWithoutUpdatedByNestedInput
+  availabilityEntries?: Prisma.AvailabilityEntryUncheckedUpdateManyWithoutUserNestedInput
+  UpdatedAvailabilityEntries?: Prisma.AvailabilityEntryUncheckedUpdateManyWithoutUpdatedByNestedInput
+  entryCancelRequests?: Prisma.EntryCancelRequestUncheckedUpdateManyWithoutRequestedByNestedInput
+  reviewedEntryCancelRequests?: Prisma.EntryCancelRequestUncheckedUpdateManyWithoutReviewedByNestedInput
+  assignmentCancelRequests?: Prisma.AssignmentCancelRequestUncheckedUpdateManyWithoutRequestedByNestedInput
+  reviewedAssignmentCancelRequests?: Prisma.AssignmentCancelRequestUncheckedUpdateManyWithoutReviewedByNestedInput
+}
+
+export type UserUpsertWithoutUpdatedAvailabilitySlotsInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutUpdatedAvailabilitySlotsInput, Prisma.UserUncheckedUpdateWithoutUpdatedAvailabilitySlotsInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutUpdatedAvailabilitySlotsInput, Prisma.UserUncheckedCreateWithoutUpdatedAvailabilitySlotsInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutUpdatedAvailabilitySlotsInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutUpdatedAvailabilitySlotsInput, Prisma.UserUncheckedUpdateWithoutUpdatedAvailabilitySlotsInput>
+}
+
+export type UserUpdateWithoutUpdatedAvailabilitySlotsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  emailVerified?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  reqStatus?: Prisma.EnumReqStatusFieldUpdateOperationsInput | $Enums.ReqStatus
+  rating?: Prisma.IntFieldUpdateOperationsInput | number
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  accounts?: Prisma.AccountUpdateManyWithoutUserNestedInput
+  sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
+  Authenticator?: Prisma.AuthenticatorUpdateManyWithoutUserNestedInput
+  joinRequests?: Prisma.JoinRequestUpdateManyWithoutCreatedByNestedInput
+  updatedJoinRequests?: Prisma.JoinRequestUpdateManyWithoutUpdatedByNestedInput
+  updatedBy?: Prisma.UserUpdateOneWithoutUpdatedUsersNestedInput
+  memberStatusCreated?: Prisma.MemberStatusLogUpdateManyWithoutCreatedByNestedInput
+  memberStatusLogs?: Prisma.MemberStatusLogUpdateManyWithoutUserNestedInput
+  memberStatusChanges?: Prisma.MemberStatusLogUpdateManyWithoutUpdatedByNestedInput
+  positionChanges?: Prisma.PositionHistoryUpdateManyWithoutUpdatedByNestedInput
+  positionCreations?: Prisma.PositionHistoryUpdateManyWithoutCreatedByNestedInput
+  positionHistories?: Prisma.PositionHistoryUpdateManyWithoutUserNestedInput
+  ratingHistory?: Prisma.RatingHistoryUpdateManyWithoutUserNestedInput
+  createdRatings?: Prisma.RatingHistoryUpdateManyWithoutCreatedByNestedInput
+  updatedRatings?: Prisma.RatingHistoryUpdateManyWithoutUpdatedByNestedInput
+  createdEvents?: Prisma.EventUpdateManyWithoutCreatedByNestedInput
+  updatedEvents?: Prisma.EventUpdateManyWithoutUpdatedByNestedInput
+  providedFeedbacks?: Prisma.EventFeedbackUpdateManyWithoutUserNestedInput
+  updatedEventFeedback?: Prisma.EventFeedbackUpdateManyWithoutUpdatedByNestedInput
+  feedbackRequests?: Prisma.FeedbackRequestUpdateManyWithoutUserNestedInput
+  hrWarnings?: Prisma.HrWarningUpdateManyWithoutAssigneeNestedInput
+  createdHrWarning?: Prisma.HrWarningUpdateManyWithoutCreatedByNestedInput
+  updatedHrWarnings?: Prisma.HrWarningUpdateManyWithoutUpdatedByNestedInput
+  CreatedAllowedUser?: Prisma.AllowedUserUpdateManyWithoutCreatedByNestedInput
+  ownAllowance?: Prisma.AllowedUserUpdateOneWithoutUserNestedInput
+  UpdatedAllowance?: Prisma.AllowedUserUpdateManyWithoutUpdatedByNestedInput
+  eventAssignments?: Prisma.EventAssignmentUpdateManyWithoutUserNestedInput
+  CreatedEventAssignment?: Prisma.EventAssignmentUpdateManyWithoutCreatedByNestedInput
+  UpdatedEventAssignment?: Prisma.EventAssignmentUpdateManyWithoutUpdatedByNestedInput
+  updatedUsers?: Prisma.UserUpdateManyWithoutUpdatedByNestedInput
+  createdAvailabilitySlots?: Prisma.AvailabilitySlotUpdateManyWithoutCreatedByNestedInput
+  availabilityEntries?: Prisma.AvailabilityEntryUpdateManyWithoutUserNestedInput
+  UpdatedAvailabilityEntries?: Prisma.AvailabilityEntryUpdateManyWithoutUpdatedByNestedInput
+  entryCancelRequests?: Prisma.EntryCancelRequestUpdateManyWithoutRequestedByNestedInput
+  reviewedEntryCancelRequests?: Prisma.EntryCancelRequestUpdateManyWithoutReviewedByNestedInput
+  assignmentCancelRequests?: Prisma.AssignmentCancelRequestUpdateManyWithoutRequestedByNestedInput
+  reviewedAssignmentCancelRequests?: Prisma.AssignmentCancelRequestUpdateManyWithoutReviewedByNestedInput
+}
+
+export type UserUncheckedUpdateWithoutUpdatedAvailabilitySlotsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  emailVerified?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  reqStatus?: Prisma.EnumReqStatusFieldUpdateOperationsInput | $Enums.ReqStatus
+  rating?: Prisma.IntFieldUpdateOperationsInput | number
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  updatedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  allowedUserId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  accounts?: Prisma.AccountUncheckedUpdateManyWithoutUserNestedInput
+  sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
+  Authenticator?: Prisma.AuthenticatorUncheckedUpdateManyWithoutUserNestedInput
+  joinRequests?: Prisma.JoinRequestUncheckedUpdateManyWithoutCreatedByNestedInput
+  updatedJoinRequests?: Prisma.JoinRequestUncheckedUpdateManyWithoutUpdatedByNestedInput
+  memberStatusCreated?: Prisma.MemberStatusLogUncheckedUpdateManyWithoutCreatedByNestedInput
+  memberStatusLogs?: Prisma.MemberStatusLogUncheckedUpdateManyWithoutUserNestedInput
+  memberStatusChanges?: Prisma.MemberStatusLogUncheckedUpdateManyWithoutUpdatedByNestedInput
+  positionChanges?: Prisma.PositionHistoryUncheckedUpdateManyWithoutUpdatedByNestedInput
+  positionCreations?: Prisma.PositionHistoryUncheckedUpdateManyWithoutCreatedByNestedInput
+  positionHistories?: Prisma.PositionHistoryUncheckedUpdateManyWithoutUserNestedInput
+  ratingHistory?: Prisma.RatingHistoryUncheckedUpdateManyWithoutUserNestedInput
+  createdRatings?: Prisma.RatingHistoryUncheckedUpdateManyWithoutCreatedByNestedInput
+  updatedRatings?: Prisma.RatingHistoryUncheckedUpdateManyWithoutUpdatedByNestedInput
+  createdEvents?: Prisma.EventUncheckedUpdateManyWithoutCreatedByNestedInput
+  updatedEvents?: Prisma.EventUncheckedUpdateManyWithoutUpdatedByNestedInput
+  providedFeedbacks?: Prisma.EventFeedbackUncheckedUpdateManyWithoutUserNestedInput
+  updatedEventFeedback?: Prisma.EventFeedbackUncheckedUpdateManyWithoutUpdatedByNestedInput
+  feedbackRequests?: Prisma.FeedbackRequestUncheckedUpdateManyWithoutUserNestedInput
+  hrWarnings?: Prisma.HrWarningUncheckedUpdateManyWithoutAssigneeNestedInput
+  createdHrWarning?: Prisma.HrWarningUncheckedUpdateManyWithoutCreatedByNestedInput
+  updatedHrWarnings?: Prisma.HrWarningUncheckedUpdateManyWithoutUpdatedByNestedInput
+  CreatedAllowedUser?: Prisma.AllowedUserUncheckedUpdateManyWithoutCreatedByNestedInput
+  UpdatedAllowance?: Prisma.AllowedUserUncheckedUpdateManyWithoutUpdatedByNestedInput
+  eventAssignments?: Prisma.EventAssignmentUncheckedUpdateManyWithoutUserNestedInput
+  CreatedEventAssignment?: Prisma.EventAssignmentUncheckedUpdateManyWithoutCreatedByNestedInput
+  UpdatedEventAssignment?: Prisma.EventAssignmentUncheckedUpdateManyWithoutUpdatedByNestedInput
+  updatedUsers?: Prisma.UserUncheckedUpdateManyWithoutUpdatedByNestedInput
+  createdAvailabilitySlots?: Prisma.AvailabilitySlotUncheckedUpdateManyWithoutCreatedByNestedInput
+  availabilityEntries?: Prisma.AvailabilityEntryUncheckedUpdateManyWithoutUserNestedInput
+  UpdatedAvailabilityEntries?: Prisma.AvailabilityEntryUncheckedUpdateManyWithoutUpdatedByNestedInput
+  entryCancelRequests?: Prisma.EntryCancelRequestUncheckedUpdateManyWithoutRequestedByNestedInput
+  reviewedEntryCancelRequests?: Prisma.EntryCancelRequestUncheckedUpdateManyWithoutReviewedByNestedInput
+  assignmentCancelRequests?: Prisma.AssignmentCancelRequestUncheckedUpdateManyWithoutRequestedByNestedInput
+  reviewedAssignmentCancelRequests?: Prisma.AssignmentCancelRequestUncheckedUpdateManyWithoutReviewedByNestedInput
+}
+
+export type UserCreateWithoutAvailabilityEntriesInput = {
+  id?: string
+  name?: string | null
+  email: string
+  emailVerified?: Date | string | null
+  image?: string | null
+  reqStatus?: $Enums.ReqStatus
+  rating?: number
+  deletedAt?: Date | string | null
+  deleted?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string | null
+  accounts?: Prisma.AccountCreateNestedManyWithoutUserInput
+  sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
+  Authenticator?: Prisma.AuthenticatorCreateNestedManyWithoutUserInput
+  joinRequests?: Prisma.JoinRequestCreateNestedManyWithoutCreatedByInput
+  updatedJoinRequests?: Prisma.JoinRequestCreateNestedManyWithoutUpdatedByInput
+  updatedBy?: Prisma.UserCreateNestedOneWithoutUpdatedUsersInput
+  memberStatusCreated?: Prisma.MemberStatusLogCreateNestedManyWithoutCreatedByInput
+  memberStatusLogs?: Prisma.MemberStatusLogCreateNestedManyWithoutUserInput
+  memberStatusChanges?: Prisma.MemberStatusLogCreateNestedManyWithoutUpdatedByInput
+  positionChanges?: Prisma.PositionHistoryCreateNestedManyWithoutUpdatedByInput
+  positionCreations?: Prisma.PositionHistoryCreateNestedManyWithoutCreatedByInput
+  positionHistories?: Prisma.PositionHistoryCreateNestedManyWithoutUserInput
+  ratingHistory?: Prisma.RatingHistoryCreateNestedManyWithoutUserInput
+  createdRatings?: Prisma.RatingHistoryCreateNestedManyWithoutCreatedByInput
+  updatedRatings?: Prisma.RatingHistoryCreateNestedManyWithoutUpdatedByInput
+  createdEvents?: Prisma.EventCreateNestedManyWithoutCreatedByInput
+  updatedEvents?: Prisma.EventCreateNestedManyWithoutUpdatedByInput
+  providedFeedbacks?: Prisma.EventFeedbackCreateNestedManyWithoutUserInput
+  updatedEventFeedback?: Prisma.EventFeedbackCreateNestedManyWithoutUpdatedByInput
+  feedbackRequests?: Prisma.FeedbackRequestCreateNestedManyWithoutUserInput
+  hrWarnings?: Prisma.HrWarningCreateNestedManyWithoutAssigneeInput
+  createdHrWarning?: Prisma.HrWarningCreateNestedManyWithoutCreatedByInput
+  updatedHrWarnings?: Prisma.HrWarningCreateNestedManyWithoutUpdatedByInput
+  CreatedAllowedUser?: Prisma.AllowedUserCreateNestedManyWithoutCreatedByInput
+  ownAllowance?: Prisma.AllowedUserCreateNestedOneWithoutUserInput
+  UpdatedAllowance?: Prisma.AllowedUserCreateNestedManyWithoutUpdatedByInput
+  eventAssignments?: Prisma.EventAssignmentCreateNestedManyWithoutUserInput
+  CreatedEventAssignment?: Prisma.EventAssignmentCreateNestedManyWithoutCreatedByInput
+  UpdatedEventAssignment?: Prisma.EventAssignmentCreateNestedManyWithoutUpdatedByInput
+  updatedUsers?: Prisma.UserCreateNestedManyWithoutUpdatedByInput
+  createdAvailabilitySlots?: Prisma.AvailabilitySlotCreateNestedManyWithoutCreatedByInput
+  updatedAvailabilitySlots?: Prisma.AvailabilitySlotCreateNestedManyWithoutUpdatedByInput
+  UpdatedAvailabilityEntries?: Prisma.AvailabilityEntryCreateNestedManyWithoutUpdatedByInput
+  entryCancelRequests?: Prisma.EntryCancelRequestCreateNestedManyWithoutRequestedByInput
+  reviewedEntryCancelRequests?: Prisma.EntryCancelRequestCreateNestedManyWithoutReviewedByInput
+  assignmentCancelRequests?: Prisma.AssignmentCancelRequestCreateNestedManyWithoutRequestedByInput
+  reviewedAssignmentCancelRequests?: Prisma.AssignmentCancelRequestCreateNestedManyWithoutReviewedByInput
+}
+
+export type UserUncheckedCreateWithoutAvailabilityEntriesInput = {
+  id?: string
+  name?: string | null
+  email: string
+  emailVerified?: Date | string | null
+  image?: string | null
+  reqStatus?: $Enums.ReqStatus
+  rating?: number
+  deletedAt?: Date | string | null
+  deleted?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string | null
+  updatedById?: string | null
+  allowedUserId?: string | null
+  accounts?: Prisma.AccountUncheckedCreateNestedManyWithoutUserInput
+  sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
+  Authenticator?: Prisma.AuthenticatorUncheckedCreateNestedManyWithoutUserInput
+  joinRequests?: Prisma.JoinRequestUncheckedCreateNestedManyWithoutCreatedByInput
+  updatedJoinRequests?: Prisma.JoinRequestUncheckedCreateNestedManyWithoutUpdatedByInput
+  memberStatusCreated?: Prisma.MemberStatusLogUncheckedCreateNestedManyWithoutCreatedByInput
+  memberStatusLogs?: Prisma.MemberStatusLogUncheckedCreateNestedManyWithoutUserInput
+  memberStatusChanges?: Prisma.MemberStatusLogUncheckedCreateNestedManyWithoutUpdatedByInput
+  positionChanges?: Prisma.PositionHistoryUncheckedCreateNestedManyWithoutUpdatedByInput
+  positionCreations?: Prisma.PositionHistoryUncheckedCreateNestedManyWithoutCreatedByInput
+  positionHistories?: Prisma.PositionHistoryUncheckedCreateNestedManyWithoutUserInput
+  ratingHistory?: Prisma.RatingHistoryUncheckedCreateNestedManyWithoutUserInput
+  createdRatings?: Prisma.RatingHistoryUncheckedCreateNestedManyWithoutCreatedByInput
+  updatedRatings?: Prisma.RatingHistoryUncheckedCreateNestedManyWithoutUpdatedByInput
+  createdEvents?: Prisma.EventUncheckedCreateNestedManyWithoutCreatedByInput
+  updatedEvents?: Prisma.EventUncheckedCreateNestedManyWithoutUpdatedByInput
+  providedFeedbacks?: Prisma.EventFeedbackUncheckedCreateNestedManyWithoutUserInput
+  updatedEventFeedback?: Prisma.EventFeedbackUncheckedCreateNestedManyWithoutUpdatedByInput
+  feedbackRequests?: Prisma.FeedbackRequestUncheckedCreateNestedManyWithoutUserInput
+  hrWarnings?: Prisma.HrWarningUncheckedCreateNestedManyWithoutAssigneeInput
+  createdHrWarning?: Prisma.HrWarningUncheckedCreateNestedManyWithoutCreatedByInput
+  updatedHrWarnings?: Prisma.HrWarningUncheckedCreateNestedManyWithoutUpdatedByInput
+  CreatedAllowedUser?: Prisma.AllowedUserUncheckedCreateNestedManyWithoutCreatedByInput
+  UpdatedAllowance?: Prisma.AllowedUserUncheckedCreateNestedManyWithoutUpdatedByInput
+  eventAssignments?: Prisma.EventAssignmentUncheckedCreateNestedManyWithoutUserInput
+  CreatedEventAssignment?: Prisma.EventAssignmentUncheckedCreateNestedManyWithoutCreatedByInput
+  UpdatedEventAssignment?: Prisma.EventAssignmentUncheckedCreateNestedManyWithoutUpdatedByInput
+  updatedUsers?: Prisma.UserUncheckedCreateNestedManyWithoutUpdatedByInput
+  createdAvailabilitySlots?: Prisma.AvailabilitySlotUncheckedCreateNestedManyWithoutCreatedByInput
+  updatedAvailabilitySlots?: Prisma.AvailabilitySlotUncheckedCreateNestedManyWithoutUpdatedByInput
+  UpdatedAvailabilityEntries?: Prisma.AvailabilityEntryUncheckedCreateNestedManyWithoutUpdatedByInput
+  entryCancelRequests?: Prisma.EntryCancelRequestUncheckedCreateNestedManyWithoutRequestedByInput
+  reviewedEntryCancelRequests?: Prisma.EntryCancelRequestUncheckedCreateNestedManyWithoutReviewedByInput
+  assignmentCancelRequests?: Prisma.AssignmentCancelRequestUncheckedCreateNestedManyWithoutRequestedByInput
+  reviewedAssignmentCancelRequests?: Prisma.AssignmentCancelRequestUncheckedCreateNestedManyWithoutReviewedByInput
+}
+
+export type UserCreateOrConnectWithoutAvailabilityEntriesInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutAvailabilityEntriesInput, Prisma.UserUncheckedCreateWithoutAvailabilityEntriesInput>
+}
+
+export type UserCreateWithoutUpdatedAvailabilityEntriesInput = {
+  id?: string
+  name?: string | null
+  email: string
+  emailVerified?: Date | string | null
+  image?: string | null
+  reqStatus?: $Enums.ReqStatus
+  rating?: number
+  deletedAt?: Date | string | null
+  deleted?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string | null
+  accounts?: Prisma.AccountCreateNestedManyWithoutUserInput
+  sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
+  Authenticator?: Prisma.AuthenticatorCreateNestedManyWithoutUserInput
+  joinRequests?: Prisma.JoinRequestCreateNestedManyWithoutCreatedByInput
+  updatedJoinRequests?: Prisma.JoinRequestCreateNestedManyWithoutUpdatedByInput
+  updatedBy?: Prisma.UserCreateNestedOneWithoutUpdatedUsersInput
+  memberStatusCreated?: Prisma.MemberStatusLogCreateNestedManyWithoutCreatedByInput
+  memberStatusLogs?: Prisma.MemberStatusLogCreateNestedManyWithoutUserInput
+  memberStatusChanges?: Prisma.MemberStatusLogCreateNestedManyWithoutUpdatedByInput
+  positionChanges?: Prisma.PositionHistoryCreateNestedManyWithoutUpdatedByInput
+  positionCreations?: Prisma.PositionHistoryCreateNestedManyWithoutCreatedByInput
+  positionHistories?: Prisma.PositionHistoryCreateNestedManyWithoutUserInput
+  ratingHistory?: Prisma.RatingHistoryCreateNestedManyWithoutUserInput
+  createdRatings?: Prisma.RatingHistoryCreateNestedManyWithoutCreatedByInput
+  updatedRatings?: Prisma.RatingHistoryCreateNestedManyWithoutUpdatedByInput
+  createdEvents?: Prisma.EventCreateNestedManyWithoutCreatedByInput
+  updatedEvents?: Prisma.EventCreateNestedManyWithoutUpdatedByInput
+  providedFeedbacks?: Prisma.EventFeedbackCreateNestedManyWithoutUserInput
+  updatedEventFeedback?: Prisma.EventFeedbackCreateNestedManyWithoutUpdatedByInput
+  feedbackRequests?: Prisma.FeedbackRequestCreateNestedManyWithoutUserInput
+  hrWarnings?: Prisma.HrWarningCreateNestedManyWithoutAssigneeInput
+  createdHrWarning?: Prisma.HrWarningCreateNestedManyWithoutCreatedByInput
+  updatedHrWarnings?: Prisma.HrWarningCreateNestedManyWithoutUpdatedByInput
+  CreatedAllowedUser?: Prisma.AllowedUserCreateNestedManyWithoutCreatedByInput
+  ownAllowance?: Prisma.AllowedUserCreateNestedOneWithoutUserInput
+  UpdatedAllowance?: Prisma.AllowedUserCreateNestedManyWithoutUpdatedByInput
+  eventAssignments?: Prisma.EventAssignmentCreateNestedManyWithoutUserInput
+  CreatedEventAssignment?: Prisma.EventAssignmentCreateNestedManyWithoutCreatedByInput
+  UpdatedEventAssignment?: Prisma.EventAssignmentCreateNestedManyWithoutUpdatedByInput
+  updatedUsers?: Prisma.UserCreateNestedManyWithoutUpdatedByInput
+  createdAvailabilitySlots?: Prisma.AvailabilitySlotCreateNestedManyWithoutCreatedByInput
+  updatedAvailabilitySlots?: Prisma.AvailabilitySlotCreateNestedManyWithoutUpdatedByInput
+  availabilityEntries?: Prisma.AvailabilityEntryCreateNestedManyWithoutUserInput
+  entryCancelRequests?: Prisma.EntryCancelRequestCreateNestedManyWithoutRequestedByInput
+  reviewedEntryCancelRequests?: Prisma.EntryCancelRequestCreateNestedManyWithoutReviewedByInput
+  assignmentCancelRequests?: Prisma.AssignmentCancelRequestCreateNestedManyWithoutRequestedByInput
+  reviewedAssignmentCancelRequests?: Prisma.AssignmentCancelRequestCreateNestedManyWithoutReviewedByInput
+}
+
+export type UserUncheckedCreateWithoutUpdatedAvailabilityEntriesInput = {
+  id?: string
+  name?: string | null
+  email: string
+  emailVerified?: Date | string | null
+  image?: string | null
+  reqStatus?: $Enums.ReqStatus
+  rating?: number
+  deletedAt?: Date | string | null
+  deleted?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string | null
+  updatedById?: string | null
+  allowedUserId?: string | null
+  accounts?: Prisma.AccountUncheckedCreateNestedManyWithoutUserInput
+  sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
+  Authenticator?: Prisma.AuthenticatorUncheckedCreateNestedManyWithoutUserInput
+  joinRequests?: Prisma.JoinRequestUncheckedCreateNestedManyWithoutCreatedByInput
+  updatedJoinRequests?: Prisma.JoinRequestUncheckedCreateNestedManyWithoutUpdatedByInput
+  memberStatusCreated?: Prisma.MemberStatusLogUncheckedCreateNestedManyWithoutCreatedByInput
+  memberStatusLogs?: Prisma.MemberStatusLogUncheckedCreateNestedManyWithoutUserInput
+  memberStatusChanges?: Prisma.MemberStatusLogUncheckedCreateNestedManyWithoutUpdatedByInput
+  positionChanges?: Prisma.PositionHistoryUncheckedCreateNestedManyWithoutUpdatedByInput
+  positionCreations?: Prisma.PositionHistoryUncheckedCreateNestedManyWithoutCreatedByInput
+  positionHistories?: Prisma.PositionHistoryUncheckedCreateNestedManyWithoutUserInput
+  ratingHistory?: Prisma.RatingHistoryUncheckedCreateNestedManyWithoutUserInput
+  createdRatings?: Prisma.RatingHistoryUncheckedCreateNestedManyWithoutCreatedByInput
+  updatedRatings?: Prisma.RatingHistoryUncheckedCreateNestedManyWithoutUpdatedByInput
+  createdEvents?: Prisma.EventUncheckedCreateNestedManyWithoutCreatedByInput
+  updatedEvents?: Prisma.EventUncheckedCreateNestedManyWithoutUpdatedByInput
+  providedFeedbacks?: Prisma.EventFeedbackUncheckedCreateNestedManyWithoutUserInput
+  updatedEventFeedback?: Prisma.EventFeedbackUncheckedCreateNestedManyWithoutUpdatedByInput
+  feedbackRequests?: Prisma.FeedbackRequestUncheckedCreateNestedManyWithoutUserInput
+  hrWarnings?: Prisma.HrWarningUncheckedCreateNestedManyWithoutAssigneeInput
+  createdHrWarning?: Prisma.HrWarningUncheckedCreateNestedManyWithoutCreatedByInput
+  updatedHrWarnings?: Prisma.HrWarningUncheckedCreateNestedManyWithoutUpdatedByInput
+  CreatedAllowedUser?: Prisma.AllowedUserUncheckedCreateNestedManyWithoutCreatedByInput
+  UpdatedAllowance?: Prisma.AllowedUserUncheckedCreateNestedManyWithoutUpdatedByInput
+  eventAssignments?: Prisma.EventAssignmentUncheckedCreateNestedManyWithoutUserInput
+  CreatedEventAssignment?: Prisma.EventAssignmentUncheckedCreateNestedManyWithoutCreatedByInput
+  UpdatedEventAssignment?: Prisma.EventAssignmentUncheckedCreateNestedManyWithoutUpdatedByInput
+  updatedUsers?: Prisma.UserUncheckedCreateNestedManyWithoutUpdatedByInput
+  createdAvailabilitySlots?: Prisma.AvailabilitySlotUncheckedCreateNestedManyWithoutCreatedByInput
+  updatedAvailabilitySlots?: Prisma.AvailabilitySlotUncheckedCreateNestedManyWithoutUpdatedByInput
+  availabilityEntries?: Prisma.AvailabilityEntryUncheckedCreateNestedManyWithoutUserInput
+  entryCancelRequests?: Prisma.EntryCancelRequestUncheckedCreateNestedManyWithoutRequestedByInput
+  reviewedEntryCancelRequests?: Prisma.EntryCancelRequestUncheckedCreateNestedManyWithoutReviewedByInput
+  assignmentCancelRequests?: Prisma.AssignmentCancelRequestUncheckedCreateNestedManyWithoutRequestedByInput
+  reviewedAssignmentCancelRequests?: Prisma.AssignmentCancelRequestUncheckedCreateNestedManyWithoutReviewedByInput
+}
+
+export type UserCreateOrConnectWithoutUpdatedAvailabilityEntriesInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutUpdatedAvailabilityEntriesInput, Prisma.UserUncheckedCreateWithoutUpdatedAvailabilityEntriesInput>
+}
+
+export type UserUpsertWithoutAvailabilityEntriesInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutAvailabilityEntriesInput, Prisma.UserUncheckedUpdateWithoutAvailabilityEntriesInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutAvailabilityEntriesInput, Prisma.UserUncheckedCreateWithoutAvailabilityEntriesInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutAvailabilityEntriesInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutAvailabilityEntriesInput, Prisma.UserUncheckedUpdateWithoutAvailabilityEntriesInput>
+}
+
+export type UserUpdateWithoutAvailabilityEntriesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  emailVerified?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  reqStatus?: Prisma.EnumReqStatusFieldUpdateOperationsInput | $Enums.ReqStatus
+  rating?: Prisma.IntFieldUpdateOperationsInput | number
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  accounts?: Prisma.AccountUpdateManyWithoutUserNestedInput
+  sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
+  Authenticator?: Prisma.AuthenticatorUpdateManyWithoutUserNestedInput
+  joinRequests?: Prisma.JoinRequestUpdateManyWithoutCreatedByNestedInput
+  updatedJoinRequests?: Prisma.JoinRequestUpdateManyWithoutUpdatedByNestedInput
+  updatedBy?: Prisma.UserUpdateOneWithoutUpdatedUsersNestedInput
+  memberStatusCreated?: Prisma.MemberStatusLogUpdateManyWithoutCreatedByNestedInput
+  memberStatusLogs?: Prisma.MemberStatusLogUpdateManyWithoutUserNestedInput
+  memberStatusChanges?: Prisma.MemberStatusLogUpdateManyWithoutUpdatedByNestedInput
+  positionChanges?: Prisma.PositionHistoryUpdateManyWithoutUpdatedByNestedInput
+  positionCreations?: Prisma.PositionHistoryUpdateManyWithoutCreatedByNestedInput
+  positionHistories?: Prisma.PositionHistoryUpdateManyWithoutUserNestedInput
+  ratingHistory?: Prisma.RatingHistoryUpdateManyWithoutUserNestedInput
+  createdRatings?: Prisma.RatingHistoryUpdateManyWithoutCreatedByNestedInput
+  updatedRatings?: Prisma.RatingHistoryUpdateManyWithoutUpdatedByNestedInput
+  createdEvents?: Prisma.EventUpdateManyWithoutCreatedByNestedInput
+  updatedEvents?: Prisma.EventUpdateManyWithoutUpdatedByNestedInput
+  providedFeedbacks?: Prisma.EventFeedbackUpdateManyWithoutUserNestedInput
+  updatedEventFeedback?: Prisma.EventFeedbackUpdateManyWithoutUpdatedByNestedInput
+  feedbackRequests?: Prisma.FeedbackRequestUpdateManyWithoutUserNestedInput
+  hrWarnings?: Prisma.HrWarningUpdateManyWithoutAssigneeNestedInput
+  createdHrWarning?: Prisma.HrWarningUpdateManyWithoutCreatedByNestedInput
+  updatedHrWarnings?: Prisma.HrWarningUpdateManyWithoutUpdatedByNestedInput
+  CreatedAllowedUser?: Prisma.AllowedUserUpdateManyWithoutCreatedByNestedInput
+  ownAllowance?: Prisma.AllowedUserUpdateOneWithoutUserNestedInput
+  UpdatedAllowance?: Prisma.AllowedUserUpdateManyWithoutUpdatedByNestedInput
+  eventAssignments?: Prisma.EventAssignmentUpdateManyWithoutUserNestedInput
+  CreatedEventAssignment?: Prisma.EventAssignmentUpdateManyWithoutCreatedByNestedInput
+  UpdatedEventAssignment?: Prisma.EventAssignmentUpdateManyWithoutUpdatedByNestedInput
+  updatedUsers?: Prisma.UserUpdateManyWithoutUpdatedByNestedInput
+  createdAvailabilitySlots?: Prisma.AvailabilitySlotUpdateManyWithoutCreatedByNestedInput
+  updatedAvailabilitySlots?: Prisma.AvailabilitySlotUpdateManyWithoutUpdatedByNestedInput
+  UpdatedAvailabilityEntries?: Prisma.AvailabilityEntryUpdateManyWithoutUpdatedByNestedInput
+  entryCancelRequests?: Prisma.EntryCancelRequestUpdateManyWithoutRequestedByNestedInput
+  reviewedEntryCancelRequests?: Prisma.EntryCancelRequestUpdateManyWithoutReviewedByNestedInput
+  assignmentCancelRequests?: Prisma.AssignmentCancelRequestUpdateManyWithoutRequestedByNestedInput
+  reviewedAssignmentCancelRequests?: Prisma.AssignmentCancelRequestUpdateManyWithoutReviewedByNestedInput
+}
+
+export type UserUncheckedUpdateWithoutAvailabilityEntriesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  emailVerified?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  reqStatus?: Prisma.EnumReqStatusFieldUpdateOperationsInput | $Enums.ReqStatus
+  rating?: Prisma.IntFieldUpdateOperationsInput | number
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  updatedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  allowedUserId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  accounts?: Prisma.AccountUncheckedUpdateManyWithoutUserNestedInput
+  sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
+  Authenticator?: Prisma.AuthenticatorUncheckedUpdateManyWithoutUserNestedInput
+  joinRequests?: Prisma.JoinRequestUncheckedUpdateManyWithoutCreatedByNestedInput
+  updatedJoinRequests?: Prisma.JoinRequestUncheckedUpdateManyWithoutUpdatedByNestedInput
+  memberStatusCreated?: Prisma.MemberStatusLogUncheckedUpdateManyWithoutCreatedByNestedInput
+  memberStatusLogs?: Prisma.MemberStatusLogUncheckedUpdateManyWithoutUserNestedInput
+  memberStatusChanges?: Prisma.MemberStatusLogUncheckedUpdateManyWithoutUpdatedByNestedInput
+  positionChanges?: Prisma.PositionHistoryUncheckedUpdateManyWithoutUpdatedByNestedInput
+  positionCreations?: Prisma.PositionHistoryUncheckedUpdateManyWithoutCreatedByNestedInput
+  positionHistories?: Prisma.PositionHistoryUncheckedUpdateManyWithoutUserNestedInput
+  ratingHistory?: Prisma.RatingHistoryUncheckedUpdateManyWithoutUserNestedInput
+  createdRatings?: Prisma.RatingHistoryUncheckedUpdateManyWithoutCreatedByNestedInput
+  updatedRatings?: Prisma.RatingHistoryUncheckedUpdateManyWithoutUpdatedByNestedInput
+  createdEvents?: Prisma.EventUncheckedUpdateManyWithoutCreatedByNestedInput
+  updatedEvents?: Prisma.EventUncheckedUpdateManyWithoutUpdatedByNestedInput
+  providedFeedbacks?: Prisma.EventFeedbackUncheckedUpdateManyWithoutUserNestedInput
+  updatedEventFeedback?: Prisma.EventFeedbackUncheckedUpdateManyWithoutUpdatedByNestedInput
+  feedbackRequests?: Prisma.FeedbackRequestUncheckedUpdateManyWithoutUserNestedInput
+  hrWarnings?: Prisma.HrWarningUncheckedUpdateManyWithoutAssigneeNestedInput
+  createdHrWarning?: Prisma.HrWarningUncheckedUpdateManyWithoutCreatedByNestedInput
+  updatedHrWarnings?: Prisma.HrWarningUncheckedUpdateManyWithoutUpdatedByNestedInput
+  CreatedAllowedUser?: Prisma.AllowedUserUncheckedUpdateManyWithoutCreatedByNestedInput
+  UpdatedAllowance?: Prisma.AllowedUserUncheckedUpdateManyWithoutUpdatedByNestedInput
+  eventAssignments?: Prisma.EventAssignmentUncheckedUpdateManyWithoutUserNestedInput
+  CreatedEventAssignment?: Prisma.EventAssignmentUncheckedUpdateManyWithoutCreatedByNestedInput
+  UpdatedEventAssignment?: Prisma.EventAssignmentUncheckedUpdateManyWithoutUpdatedByNestedInput
+  updatedUsers?: Prisma.UserUncheckedUpdateManyWithoutUpdatedByNestedInput
+  createdAvailabilitySlots?: Prisma.AvailabilitySlotUncheckedUpdateManyWithoutCreatedByNestedInput
+  updatedAvailabilitySlots?: Prisma.AvailabilitySlotUncheckedUpdateManyWithoutUpdatedByNestedInput
+  UpdatedAvailabilityEntries?: Prisma.AvailabilityEntryUncheckedUpdateManyWithoutUpdatedByNestedInput
+  entryCancelRequests?: Prisma.EntryCancelRequestUncheckedUpdateManyWithoutRequestedByNestedInput
+  reviewedEntryCancelRequests?: Prisma.EntryCancelRequestUncheckedUpdateManyWithoutReviewedByNestedInput
+  assignmentCancelRequests?: Prisma.AssignmentCancelRequestUncheckedUpdateManyWithoutRequestedByNestedInput
+  reviewedAssignmentCancelRequests?: Prisma.AssignmentCancelRequestUncheckedUpdateManyWithoutReviewedByNestedInput
+}
+
+export type UserUpsertWithoutUpdatedAvailabilityEntriesInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutUpdatedAvailabilityEntriesInput, Prisma.UserUncheckedUpdateWithoutUpdatedAvailabilityEntriesInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutUpdatedAvailabilityEntriesInput, Prisma.UserUncheckedCreateWithoutUpdatedAvailabilityEntriesInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutUpdatedAvailabilityEntriesInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutUpdatedAvailabilityEntriesInput, Prisma.UserUncheckedUpdateWithoutUpdatedAvailabilityEntriesInput>
+}
+
+export type UserUpdateWithoutUpdatedAvailabilityEntriesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  emailVerified?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  reqStatus?: Prisma.EnumReqStatusFieldUpdateOperationsInput | $Enums.ReqStatus
+  rating?: Prisma.IntFieldUpdateOperationsInput | number
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  accounts?: Prisma.AccountUpdateManyWithoutUserNestedInput
+  sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
+  Authenticator?: Prisma.AuthenticatorUpdateManyWithoutUserNestedInput
+  joinRequests?: Prisma.JoinRequestUpdateManyWithoutCreatedByNestedInput
+  updatedJoinRequests?: Prisma.JoinRequestUpdateManyWithoutUpdatedByNestedInput
+  updatedBy?: Prisma.UserUpdateOneWithoutUpdatedUsersNestedInput
+  memberStatusCreated?: Prisma.MemberStatusLogUpdateManyWithoutCreatedByNestedInput
+  memberStatusLogs?: Prisma.MemberStatusLogUpdateManyWithoutUserNestedInput
+  memberStatusChanges?: Prisma.MemberStatusLogUpdateManyWithoutUpdatedByNestedInput
+  positionChanges?: Prisma.PositionHistoryUpdateManyWithoutUpdatedByNestedInput
+  positionCreations?: Prisma.PositionHistoryUpdateManyWithoutCreatedByNestedInput
+  positionHistories?: Prisma.PositionHistoryUpdateManyWithoutUserNestedInput
+  ratingHistory?: Prisma.RatingHistoryUpdateManyWithoutUserNestedInput
+  createdRatings?: Prisma.RatingHistoryUpdateManyWithoutCreatedByNestedInput
+  updatedRatings?: Prisma.RatingHistoryUpdateManyWithoutUpdatedByNestedInput
+  createdEvents?: Prisma.EventUpdateManyWithoutCreatedByNestedInput
+  updatedEvents?: Prisma.EventUpdateManyWithoutUpdatedByNestedInput
+  providedFeedbacks?: Prisma.EventFeedbackUpdateManyWithoutUserNestedInput
+  updatedEventFeedback?: Prisma.EventFeedbackUpdateManyWithoutUpdatedByNestedInput
+  feedbackRequests?: Prisma.FeedbackRequestUpdateManyWithoutUserNestedInput
+  hrWarnings?: Prisma.HrWarningUpdateManyWithoutAssigneeNestedInput
+  createdHrWarning?: Prisma.HrWarningUpdateManyWithoutCreatedByNestedInput
+  updatedHrWarnings?: Prisma.HrWarningUpdateManyWithoutUpdatedByNestedInput
+  CreatedAllowedUser?: Prisma.AllowedUserUpdateManyWithoutCreatedByNestedInput
+  ownAllowance?: Prisma.AllowedUserUpdateOneWithoutUserNestedInput
+  UpdatedAllowance?: Prisma.AllowedUserUpdateManyWithoutUpdatedByNestedInput
+  eventAssignments?: Prisma.EventAssignmentUpdateManyWithoutUserNestedInput
+  CreatedEventAssignment?: Prisma.EventAssignmentUpdateManyWithoutCreatedByNestedInput
+  UpdatedEventAssignment?: Prisma.EventAssignmentUpdateManyWithoutUpdatedByNestedInput
+  updatedUsers?: Prisma.UserUpdateManyWithoutUpdatedByNestedInput
+  createdAvailabilitySlots?: Prisma.AvailabilitySlotUpdateManyWithoutCreatedByNestedInput
+  updatedAvailabilitySlots?: Prisma.AvailabilitySlotUpdateManyWithoutUpdatedByNestedInput
+  availabilityEntries?: Prisma.AvailabilityEntryUpdateManyWithoutUserNestedInput
+  entryCancelRequests?: Prisma.EntryCancelRequestUpdateManyWithoutRequestedByNestedInput
+  reviewedEntryCancelRequests?: Prisma.EntryCancelRequestUpdateManyWithoutReviewedByNestedInput
+  assignmentCancelRequests?: Prisma.AssignmentCancelRequestUpdateManyWithoutRequestedByNestedInput
+  reviewedAssignmentCancelRequests?: Prisma.AssignmentCancelRequestUpdateManyWithoutReviewedByNestedInput
+}
+
+export type UserUncheckedUpdateWithoutUpdatedAvailabilityEntriesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  emailVerified?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  reqStatus?: Prisma.EnumReqStatusFieldUpdateOperationsInput | $Enums.ReqStatus
+  rating?: Prisma.IntFieldUpdateOperationsInput | number
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  updatedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  allowedUserId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  accounts?: Prisma.AccountUncheckedUpdateManyWithoutUserNestedInput
+  sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
+  Authenticator?: Prisma.AuthenticatorUncheckedUpdateManyWithoutUserNestedInput
+  joinRequests?: Prisma.JoinRequestUncheckedUpdateManyWithoutCreatedByNestedInput
+  updatedJoinRequests?: Prisma.JoinRequestUncheckedUpdateManyWithoutUpdatedByNestedInput
+  memberStatusCreated?: Prisma.MemberStatusLogUncheckedUpdateManyWithoutCreatedByNestedInput
+  memberStatusLogs?: Prisma.MemberStatusLogUncheckedUpdateManyWithoutUserNestedInput
+  memberStatusChanges?: Prisma.MemberStatusLogUncheckedUpdateManyWithoutUpdatedByNestedInput
+  positionChanges?: Prisma.PositionHistoryUncheckedUpdateManyWithoutUpdatedByNestedInput
+  positionCreations?: Prisma.PositionHistoryUncheckedUpdateManyWithoutCreatedByNestedInput
+  positionHistories?: Prisma.PositionHistoryUncheckedUpdateManyWithoutUserNestedInput
+  ratingHistory?: Prisma.RatingHistoryUncheckedUpdateManyWithoutUserNestedInput
+  createdRatings?: Prisma.RatingHistoryUncheckedUpdateManyWithoutCreatedByNestedInput
+  updatedRatings?: Prisma.RatingHistoryUncheckedUpdateManyWithoutUpdatedByNestedInput
+  createdEvents?: Prisma.EventUncheckedUpdateManyWithoutCreatedByNestedInput
+  updatedEvents?: Prisma.EventUncheckedUpdateManyWithoutUpdatedByNestedInput
+  providedFeedbacks?: Prisma.EventFeedbackUncheckedUpdateManyWithoutUserNestedInput
+  updatedEventFeedback?: Prisma.EventFeedbackUncheckedUpdateManyWithoutUpdatedByNestedInput
+  feedbackRequests?: Prisma.FeedbackRequestUncheckedUpdateManyWithoutUserNestedInput
+  hrWarnings?: Prisma.HrWarningUncheckedUpdateManyWithoutAssigneeNestedInput
+  createdHrWarning?: Prisma.HrWarningUncheckedUpdateManyWithoutCreatedByNestedInput
+  updatedHrWarnings?: Prisma.HrWarningUncheckedUpdateManyWithoutUpdatedByNestedInput
+  CreatedAllowedUser?: Prisma.AllowedUserUncheckedUpdateManyWithoutCreatedByNestedInput
+  UpdatedAllowance?: Prisma.AllowedUserUncheckedUpdateManyWithoutUpdatedByNestedInput
+  eventAssignments?: Prisma.EventAssignmentUncheckedUpdateManyWithoutUserNestedInput
+  CreatedEventAssignment?: Prisma.EventAssignmentUncheckedUpdateManyWithoutCreatedByNestedInput
+  UpdatedEventAssignment?: Prisma.EventAssignmentUncheckedUpdateManyWithoutUpdatedByNestedInput
+  updatedUsers?: Prisma.UserUncheckedUpdateManyWithoutUpdatedByNestedInput
+  createdAvailabilitySlots?: Prisma.AvailabilitySlotUncheckedUpdateManyWithoutCreatedByNestedInput
+  updatedAvailabilitySlots?: Prisma.AvailabilitySlotUncheckedUpdateManyWithoutUpdatedByNestedInput
+  availabilityEntries?: Prisma.AvailabilityEntryUncheckedUpdateManyWithoutUserNestedInput
+  entryCancelRequests?: Prisma.EntryCancelRequestUncheckedUpdateManyWithoutRequestedByNestedInput
+  reviewedEntryCancelRequests?: Prisma.EntryCancelRequestUncheckedUpdateManyWithoutReviewedByNestedInput
+  assignmentCancelRequests?: Prisma.AssignmentCancelRequestUncheckedUpdateManyWithoutRequestedByNestedInput
+  reviewedAssignmentCancelRequests?: Prisma.AssignmentCancelRequestUncheckedUpdateManyWithoutReviewedByNestedInput
+}
+
+export type UserCreateWithoutEntryCancelRequestsInput = {
+  id?: string
+  name?: string | null
+  email: string
+  emailVerified?: Date | string | null
+  image?: string | null
+  reqStatus?: $Enums.ReqStatus
+  rating?: number
+  deletedAt?: Date | string | null
+  deleted?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string | null
+  accounts?: Prisma.AccountCreateNestedManyWithoutUserInput
+  sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
+  Authenticator?: Prisma.AuthenticatorCreateNestedManyWithoutUserInput
+  joinRequests?: Prisma.JoinRequestCreateNestedManyWithoutCreatedByInput
+  updatedJoinRequests?: Prisma.JoinRequestCreateNestedManyWithoutUpdatedByInput
+  updatedBy?: Prisma.UserCreateNestedOneWithoutUpdatedUsersInput
+  memberStatusCreated?: Prisma.MemberStatusLogCreateNestedManyWithoutCreatedByInput
+  memberStatusLogs?: Prisma.MemberStatusLogCreateNestedManyWithoutUserInput
+  memberStatusChanges?: Prisma.MemberStatusLogCreateNestedManyWithoutUpdatedByInput
+  positionChanges?: Prisma.PositionHistoryCreateNestedManyWithoutUpdatedByInput
+  positionCreations?: Prisma.PositionHistoryCreateNestedManyWithoutCreatedByInput
+  positionHistories?: Prisma.PositionHistoryCreateNestedManyWithoutUserInput
+  ratingHistory?: Prisma.RatingHistoryCreateNestedManyWithoutUserInput
+  createdRatings?: Prisma.RatingHistoryCreateNestedManyWithoutCreatedByInput
+  updatedRatings?: Prisma.RatingHistoryCreateNestedManyWithoutUpdatedByInput
+  createdEvents?: Prisma.EventCreateNestedManyWithoutCreatedByInput
+  updatedEvents?: Prisma.EventCreateNestedManyWithoutUpdatedByInput
+  providedFeedbacks?: Prisma.EventFeedbackCreateNestedManyWithoutUserInput
+  updatedEventFeedback?: Prisma.EventFeedbackCreateNestedManyWithoutUpdatedByInput
+  feedbackRequests?: Prisma.FeedbackRequestCreateNestedManyWithoutUserInput
+  hrWarnings?: Prisma.HrWarningCreateNestedManyWithoutAssigneeInput
+  createdHrWarning?: Prisma.HrWarningCreateNestedManyWithoutCreatedByInput
+  updatedHrWarnings?: Prisma.HrWarningCreateNestedManyWithoutUpdatedByInput
+  CreatedAllowedUser?: Prisma.AllowedUserCreateNestedManyWithoutCreatedByInput
+  ownAllowance?: Prisma.AllowedUserCreateNestedOneWithoutUserInput
+  UpdatedAllowance?: Prisma.AllowedUserCreateNestedManyWithoutUpdatedByInput
+  eventAssignments?: Prisma.EventAssignmentCreateNestedManyWithoutUserInput
+  CreatedEventAssignment?: Prisma.EventAssignmentCreateNestedManyWithoutCreatedByInput
+  UpdatedEventAssignment?: Prisma.EventAssignmentCreateNestedManyWithoutUpdatedByInput
+  updatedUsers?: Prisma.UserCreateNestedManyWithoutUpdatedByInput
+  createdAvailabilitySlots?: Prisma.AvailabilitySlotCreateNestedManyWithoutCreatedByInput
+  updatedAvailabilitySlots?: Prisma.AvailabilitySlotCreateNestedManyWithoutUpdatedByInput
+  availabilityEntries?: Prisma.AvailabilityEntryCreateNestedManyWithoutUserInput
+  UpdatedAvailabilityEntries?: Prisma.AvailabilityEntryCreateNestedManyWithoutUpdatedByInput
+  reviewedEntryCancelRequests?: Prisma.EntryCancelRequestCreateNestedManyWithoutReviewedByInput
+  assignmentCancelRequests?: Prisma.AssignmentCancelRequestCreateNestedManyWithoutRequestedByInput
+  reviewedAssignmentCancelRequests?: Prisma.AssignmentCancelRequestCreateNestedManyWithoutReviewedByInput
+}
+
+export type UserUncheckedCreateWithoutEntryCancelRequestsInput = {
+  id?: string
+  name?: string | null
+  email: string
+  emailVerified?: Date | string | null
+  image?: string | null
+  reqStatus?: $Enums.ReqStatus
+  rating?: number
+  deletedAt?: Date | string | null
+  deleted?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string | null
+  updatedById?: string | null
+  allowedUserId?: string | null
+  accounts?: Prisma.AccountUncheckedCreateNestedManyWithoutUserInput
+  sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
+  Authenticator?: Prisma.AuthenticatorUncheckedCreateNestedManyWithoutUserInput
+  joinRequests?: Prisma.JoinRequestUncheckedCreateNestedManyWithoutCreatedByInput
+  updatedJoinRequests?: Prisma.JoinRequestUncheckedCreateNestedManyWithoutUpdatedByInput
+  memberStatusCreated?: Prisma.MemberStatusLogUncheckedCreateNestedManyWithoutCreatedByInput
+  memberStatusLogs?: Prisma.MemberStatusLogUncheckedCreateNestedManyWithoutUserInput
+  memberStatusChanges?: Prisma.MemberStatusLogUncheckedCreateNestedManyWithoutUpdatedByInput
+  positionChanges?: Prisma.PositionHistoryUncheckedCreateNestedManyWithoutUpdatedByInput
+  positionCreations?: Prisma.PositionHistoryUncheckedCreateNestedManyWithoutCreatedByInput
+  positionHistories?: Prisma.PositionHistoryUncheckedCreateNestedManyWithoutUserInput
+  ratingHistory?: Prisma.RatingHistoryUncheckedCreateNestedManyWithoutUserInput
+  createdRatings?: Prisma.RatingHistoryUncheckedCreateNestedManyWithoutCreatedByInput
+  updatedRatings?: Prisma.RatingHistoryUncheckedCreateNestedManyWithoutUpdatedByInput
+  createdEvents?: Prisma.EventUncheckedCreateNestedManyWithoutCreatedByInput
+  updatedEvents?: Prisma.EventUncheckedCreateNestedManyWithoutUpdatedByInput
+  providedFeedbacks?: Prisma.EventFeedbackUncheckedCreateNestedManyWithoutUserInput
+  updatedEventFeedback?: Prisma.EventFeedbackUncheckedCreateNestedManyWithoutUpdatedByInput
+  feedbackRequests?: Prisma.FeedbackRequestUncheckedCreateNestedManyWithoutUserInput
+  hrWarnings?: Prisma.HrWarningUncheckedCreateNestedManyWithoutAssigneeInput
+  createdHrWarning?: Prisma.HrWarningUncheckedCreateNestedManyWithoutCreatedByInput
+  updatedHrWarnings?: Prisma.HrWarningUncheckedCreateNestedManyWithoutUpdatedByInput
+  CreatedAllowedUser?: Prisma.AllowedUserUncheckedCreateNestedManyWithoutCreatedByInput
+  UpdatedAllowance?: Prisma.AllowedUserUncheckedCreateNestedManyWithoutUpdatedByInput
+  eventAssignments?: Prisma.EventAssignmentUncheckedCreateNestedManyWithoutUserInput
+  CreatedEventAssignment?: Prisma.EventAssignmentUncheckedCreateNestedManyWithoutCreatedByInput
+  UpdatedEventAssignment?: Prisma.EventAssignmentUncheckedCreateNestedManyWithoutUpdatedByInput
+  updatedUsers?: Prisma.UserUncheckedCreateNestedManyWithoutUpdatedByInput
+  createdAvailabilitySlots?: Prisma.AvailabilitySlotUncheckedCreateNestedManyWithoutCreatedByInput
+  updatedAvailabilitySlots?: Prisma.AvailabilitySlotUncheckedCreateNestedManyWithoutUpdatedByInput
+  availabilityEntries?: Prisma.AvailabilityEntryUncheckedCreateNestedManyWithoutUserInput
+  UpdatedAvailabilityEntries?: Prisma.AvailabilityEntryUncheckedCreateNestedManyWithoutUpdatedByInput
+  reviewedEntryCancelRequests?: Prisma.EntryCancelRequestUncheckedCreateNestedManyWithoutReviewedByInput
+  assignmentCancelRequests?: Prisma.AssignmentCancelRequestUncheckedCreateNestedManyWithoutRequestedByInput
+  reviewedAssignmentCancelRequests?: Prisma.AssignmentCancelRequestUncheckedCreateNestedManyWithoutReviewedByInput
+}
+
+export type UserCreateOrConnectWithoutEntryCancelRequestsInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutEntryCancelRequestsInput, Prisma.UserUncheckedCreateWithoutEntryCancelRequestsInput>
+}
+
+export type UserCreateWithoutReviewedEntryCancelRequestsInput = {
+  id?: string
+  name?: string | null
+  email: string
+  emailVerified?: Date | string | null
+  image?: string | null
+  reqStatus?: $Enums.ReqStatus
+  rating?: number
+  deletedAt?: Date | string | null
+  deleted?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string | null
+  accounts?: Prisma.AccountCreateNestedManyWithoutUserInput
+  sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
+  Authenticator?: Prisma.AuthenticatorCreateNestedManyWithoutUserInput
+  joinRequests?: Prisma.JoinRequestCreateNestedManyWithoutCreatedByInput
+  updatedJoinRequests?: Prisma.JoinRequestCreateNestedManyWithoutUpdatedByInput
+  updatedBy?: Prisma.UserCreateNestedOneWithoutUpdatedUsersInput
+  memberStatusCreated?: Prisma.MemberStatusLogCreateNestedManyWithoutCreatedByInput
+  memberStatusLogs?: Prisma.MemberStatusLogCreateNestedManyWithoutUserInput
+  memberStatusChanges?: Prisma.MemberStatusLogCreateNestedManyWithoutUpdatedByInput
+  positionChanges?: Prisma.PositionHistoryCreateNestedManyWithoutUpdatedByInput
+  positionCreations?: Prisma.PositionHistoryCreateNestedManyWithoutCreatedByInput
+  positionHistories?: Prisma.PositionHistoryCreateNestedManyWithoutUserInput
+  ratingHistory?: Prisma.RatingHistoryCreateNestedManyWithoutUserInput
+  createdRatings?: Prisma.RatingHistoryCreateNestedManyWithoutCreatedByInput
+  updatedRatings?: Prisma.RatingHistoryCreateNestedManyWithoutUpdatedByInput
+  createdEvents?: Prisma.EventCreateNestedManyWithoutCreatedByInput
+  updatedEvents?: Prisma.EventCreateNestedManyWithoutUpdatedByInput
+  providedFeedbacks?: Prisma.EventFeedbackCreateNestedManyWithoutUserInput
+  updatedEventFeedback?: Prisma.EventFeedbackCreateNestedManyWithoutUpdatedByInput
+  feedbackRequests?: Prisma.FeedbackRequestCreateNestedManyWithoutUserInput
+  hrWarnings?: Prisma.HrWarningCreateNestedManyWithoutAssigneeInput
+  createdHrWarning?: Prisma.HrWarningCreateNestedManyWithoutCreatedByInput
+  updatedHrWarnings?: Prisma.HrWarningCreateNestedManyWithoutUpdatedByInput
+  CreatedAllowedUser?: Prisma.AllowedUserCreateNestedManyWithoutCreatedByInput
+  ownAllowance?: Prisma.AllowedUserCreateNestedOneWithoutUserInput
+  UpdatedAllowance?: Prisma.AllowedUserCreateNestedManyWithoutUpdatedByInput
+  eventAssignments?: Prisma.EventAssignmentCreateNestedManyWithoutUserInput
+  CreatedEventAssignment?: Prisma.EventAssignmentCreateNestedManyWithoutCreatedByInput
+  UpdatedEventAssignment?: Prisma.EventAssignmentCreateNestedManyWithoutUpdatedByInput
+  updatedUsers?: Prisma.UserCreateNestedManyWithoutUpdatedByInput
+  createdAvailabilitySlots?: Prisma.AvailabilitySlotCreateNestedManyWithoutCreatedByInput
+  updatedAvailabilitySlots?: Prisma.AvailabilitySlotCreateNestedManyWithoutUpdatedByInput
+  availabilityEntries?: Prisma.AvailabilityEntryCreateNestedManyWithoutUserInput
+  UpdatedAvailabilityEntries?: Prisma.AvailabilityEntryCreateNestedManyWithoutUpdatedByInput
+  entryCancelRequests?: Prisma.EntryCancelRequestCreateNestedManyWithoutRequestedByInput
+  assignmentCancelRequests?: Prisma.AssignmentCancelRequestCreateNestedManyWithoutRequestedByInput
+  reviewedAssignmentCancelRequests?: Prisma.AssignmentCancelRequestCreateNestedManyWithoutReviewedByInput
+}
+
+export type UserUncheckedCreateWithoutReviewedEntryCancelRequestsInput = {
+  id?: string
+  name?: string | null
+  email: string
+  emailVerified?: Date | string | null
+  image?: string | null
+  reqStatus?: $Enums.ReqStatus
+  rating?: number
+  deletedAt?: Date | string | null
+  deleted?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string | null
+  updatedById?: string | null
+  allowedUserId?: string | null
+  accounts?: Prisma.AccountUncheckedCreateNestedManyWithoutUserInput
+  sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
+  Authenticator?: Prisma.AuthenticatorUncheckedCreateNestedManyWithoutUserInput
+  joinRequests?: Prisma.JoinRequestUncheckedCreateNestedManyWithoutCreatedByInput
+  updatedJoinRequests?: Prisma.JoinRequestUncheckedCreateNestedManyWithoutUpdatedByInput
+  memberStatusCreated?: Prisma.MemberStatusLogUncheckedCreateNestedManyWithoutCreatedByInput
+  memberStatusLogs?: Prisma.MemberStatusLogUncheckedCreateNestedManyWithoutUserInput
+  memberStatusChanges?: Prisma.MemberStatusLogUncheckedCreateNestedManyWithoutUpdatedByInput
+  positionChanges?: Prisma.PositionHistoryUncheckedCreateNestedManyWithoutUpdatedByInput
+  positionCreations?: Prisma.PositionHistoryUncheckedCreateNestedManyWithoutCreatedByInput
+  positionHistories?: Prisma.PositionHistoryUncheckedCreateNestedManyWithoutUserInput
+  ratingHistory?: Prisma.RatingHistoryUncheckedCreateNestedManyWithoutUserInput
+  createdRatings?: Prisma.RatingHistoryUncheckedCreateNestedManyWithoutCreatedByInput
+  updatedRatings?: Prisma.RatingHistoryUncheckedCreateNestedManyWithoutUpdatedByInput
+  createdEvents?: Prisma.EventUncheckedCreateNestedManyWithoutCreatedByInput
+  updatedEvents?: Prisma.EventUncheckedCreateNestedManyWithoutUpdatedByInput
+  providedFeedbacks?: Prisma.EventFeedbackUncheckedCreateNestedManyWithoutUserInput
+  updatedEventFeedback?: Prisma.EventFeedbackUncheckedCreateNestedManyWithoutUpdatedByInput
+  feedbackRequests?: Prisma.FeedbackRequestUncheckedCreateNestedManyWithoutUserInput
+  hrWarnings?: Prisma.HrWarningUncheckedCreateNestedManyWithoutAssigneeInput
+  createdHrWarning?: Prisma.HrWarningUncheckedCreateNestedManyWithoutCreatedByInput
+  updatedHrWarnings?: Prisma.HrWarningUncheckedCreateNestedManyWithoutUpdatedByInput
+  CreatedAllowedUser?: Prisma.AllowedUserUncheckedCreateNestedManyWithoutCreatedByInput
+  UpdatedAllowance?: Prisma.AllowedUserUncheckedCreateNestedManyWithoutUpdatedByInput
+  eventAssignments?: Prisma.EventAssignmentUncheckedCreateNestedManyWithoutUserInput
+  CreatedEventAssignment?: Prisma.EventAssignmentUncheckedCreateNestedManyWithoutCreatedByInput
+  UpdatedEventAssignment?: Prisma.EventAssignmentUncheckedCreateNestedManyWithoutUpdatedByInput
+  updatedUsers?: Prisma.UserUncheckedCreateNestedManyWithoutUpdatedByInput
+  createdAvailabilitySlots?: Prisma.AvailabilitySlotUncheckedCreateNestedManyWithoutCreatedByInput
+  updatedAvailabilitySlots?: Prisma.AvailabilitySlotUncheckedCreateNestedManyWithoutUpdatedByInput
+  availabilityEntries?: Prisma.AvailabilityEntryUncheckedCreateNestedManyWithoutUserInput
+  UpdatedAvailabilityEntries?: Prisma.AvailabilityEntryUncheckedCreateNestedManyWithoutUpdatedByInput
+  entryCancelRequests?: Prisma.EntryCancelRequestUncheckedCreateNestedManyWithoutRequestedByInput
+  assignmentCancelRequests?: Prisma.AssignmentCancelRequestUncheckedCreateNestedManyWithoutRequestedByInput
+  reviewedAssignmentCancelRequests?: Prisma.AssignmentCancelRequestUncheckedCreateNestedManyWithoutReviewedByInput
+}
+
+export type UserCreateOrConnectWithoutReviewedEntryCancelRequestsInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutReviewedEntryCancelRequestsInput, Prisma.UserUncheckedCreateWithoutReviewedEntryCancelRequestsInput>
+}
+
+export type UserUpsertWithoutEntryCancelRequestsInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutEntryCancelRequestsInput, Prisma.UserUncheckedUpdateWithoutEntryCancelRequestsInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutEntryCancelRequestsInput, Prisma.UserUncheckedCreateWithoutEntryCancelRequestsInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutEntryCancelRequestsInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutEntryCancelRequestsInput, Prisma.UserUncheckedUpdateWithoutEntryCancelRequestsInput>
+}
+
+export type UserUpdateWithoutEntryCancelRequestsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  emailVerified?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  reqStatus?: Prisma.EnumReqStatusFieldUpdateOperationsInput | $Enums.ReqStatus
+  rating?: Prisma.IntFieldUpdateOperationsInput | number
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  accounts?: Prisma.AccountUpdateManyWithoutUserNestedInput
+  sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
+  Authenticator?: Prisma.AuthenticatorUpdateManyWithoutUserNestedInput
+  joinRequests?: Prisma.JoinRequestUpdateManyWithoutCreatedByNestedInput
+  updatedJoinRequests?: Prisma.JoinRequestUpdateManyWithoutUpdatedByNestedInput
+  updatedBy?: Prisma.UserUpdateOneWithoutUpdatedUsersNestedInput
+  memberStatusCreated?: Prisma.MemberStatusLogUpdateManyWithoutCreatedByNestedInput
+  memberStatusLogs?: Prisma.MemberStatusLogUpdateManyWithoutUserNestedInput
+  memberStatusChanges?: Prisma.MemberStatusLogUpdateManyWithoutUpdatedByNestedInput
+  positionChanges?: Prisma.PositionHistoryUpdateManyWithoutUpdatedByNestedInput
+  positionCreations?: Prisma.PositionHistoryUpdateManyWithoutCreatedByNestedInput
+  positionHistories?: Prisma.PositionHistoryUpdateManyWithoutUserNestedInput
+  ratingHistory?: Prisma.RatingHistoryUpdateManyWithoutUserNestedInput
+  createdRatings?: Prisma.RatingHistoryUpdateManyWithoutCreatedByNestedInput
+  updatedRatings?: Prisma.RatingHistoryUpdateManyWithoutUpdatedByNestedInput
+  createdEvents?: Prisma.EventUpdateManyWithoutCreatedByNestedInput
+  updatedEvents?: Prisma.EventUpdateManyWithoutUpdatedByNestedInput
+  providedFeedbacks?: Prisma.EventFeedbackUpdateManyWithoutUserNestedInput
+  updatedEventFeedback?: Prisma.EventFeedbackUpdateManyWithoutUpdatedByNestedInput
+  feedbackRequests?: Prisma.FeedbackRequestUpdateManyWithoutUserNestedInput
+  hrWarnings?: Prisma.HrWarningUpdateManyWithoutAssigneeNestedInput
+  createdHrWarning?: Prisma.HrWarningUpdateManyWithoutCreatedByNestedInput
+  updatedHrWarnings?: Prisma.HrWarningUpdateManyWithoutUpdatedByNestedInput
+  CreatedAllowedUser?: Prisma.AllowedUserUpdateManyWithoutCreatedByNestedInput
+  ownAllowance?: Prisma.AllowedUserUpdateOneWithoutUserNestedInput
+  UpdatedAllowance?: Prisma.AllowedUserUpdateManyWithoutUpdatedByNestedInput
+  eventAssignments?: Prisma.EventAssignmentUpdateManyWithoutUserNestedInput
+  CreatedEventAssignment?: Prisma.EventAssignmentUpdateManyWithoutCreatedByNestedInput
+  UpdatedEventAssignment?: Prisma.EventAssignmentUpdateManyWithoutUpdatedByNestedInput
+  updatedUsers?: Prisma.UserUpdateManyWithoutUpdatedByNestedInput
+  createdAvailabilitySlots?: Prisma.AvailabilitySlotUpdateManyWithoutCreatedByNestedInput
+  updatedAvailabilitySlots?: Prisma.AvailabilitySlotUpdateManyWithoutUpdatedByNestedInput
+  availabilityEntries?: Prisma.AvailabilityEntryUpdateManyWithoutUserNestedInput
+  UpdatedAvailabilityEntries?: Prisma.AvailabilityEntryUpdateManyWithoutUpdatedByNestedInput
+  reviewedEntryCancelRequests?: Prisma.EntryCancelRequestUpdateManyWithoutReviewedByNestedInput
+  assignmentCancelRequests?: Prisma.AssignmentCancelRequestUpdateManyWithoutRequestedByNestedInput
+  reviewedAssignmentCancelRequests?: Prisma.AssignmentCancelRequestUpdateManyWithoutReviewedByNestedInput
+}
+
+export type UserUncheckedUpdateWithoutEntryCancelRequestsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  emailVerified?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  reqStatus?: Prisma.EnumReqStatusFieldUpdateOperationsInput | $Enums.ReqStatus
+  rating?: Prisma.IntFieldUpdateOperationsInput | number
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  updatedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  allowedUserId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  accounts?: Prisma.AccountUncheckedUpdateManyWithoutUserNestedInput
+  sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
+  Authenticator?: Prisma.AuthenticatorUncheckedUpdateManyWithoutUserNestedInput
+  joinRequests?: Prisma.JoinRequestUncheckedUpdateManyWithoutCreatedByNestedInput
+  updatedJoinRequests?: Prisma.JoinRequestUncheckedUpdateManyWithoutUpdatedByNestedInput
+  memberStatusCreated?: Prisma.MemberStatusLogUncheckedUpdateManyWithoutCreatedByNestedInput
+  memberStatusLogs?: Prisma.MemberStatusLogUncheckedUpdateManyWithoutUserNestedInput
+  memberStatusChanges?: Prisma.MemberStatusLogUncheckedUpdateManyWithoutUpdatedByNestedInput
+  positionChanges?: Prisma.PositionHistoryUncheckedUpdateManyWithoutUpdatedByNestedInput
+  positionCreations?: Prisma.PositionHistoryUncheckedUpdateManyWithoutCreatedByNestedInput
+  positionHistories?: Prisma.PositionHistoryUncheckedUpdateManyWithoutUserNestedInput
+  ratingHistory?: Prisma.RatingHistoryUncheckedUpdateManyWithoutUserNestedInput
+  createdRatings?: Prisma.RatingHistoryUncheckedUpdateManyWithoutCreatedByNestedInput
+  updatedRatings?: Prisma.RatingHistoryUncheckedUpdateManyWithoutUpdatedByNestedInput
+  createdEvents?: Prisma.EventUncheckedUpdateManyWithoutCreatedByNestedInput
+  updatedEvents?: Prisma.EventUncheckedUpdateManyWithoutUpdatedByNestedInput
+  providedFeedbacks?: Prisma.EventFeedbackUncheckedUpdateManyWithoutUserNestedInput
+  updatedEventFeedback?: Prisma.EventFeedbackUncheckedUpdateManyWithoutUpdatedByNestedInput
+  feedbackRequests?: Prisma.FeedbackRequestUncheckedUpdateManyWithoutUserNestedInput
+  hrWarnings?: Prisma.HrWarningUncheckedUpdateManyWithoutAssigneeNestedInput
+  createdHrWarning?: Prisma.HrWarningUncheckedUpdateManyWithoutCreatedByNestedInput
+  updatedHrWarnings?: Prisma.HrWarningUncheckedUpdateManyWithoutUpdatedByNestedInput
+  CreatedAllowedUser?: Prisma.AllowedUserUncheckedUpdateManyWithoutCreatedByNestedInput
+  UpdatedAllowance?: Prisma.AllowedUserUncheckedUpdateManyWithoutUpdatedByNestedInput
+  eventAssignments?: Prisma.EventAssignmentUncheckedUpdateManyWithoutUserNestedInput
+  CreatedEventAssignment?: Prisma.EventAssignmentUncheckedUpdateManyWithoutCreatedByNestedInput
+  UpdatedEventAssignment?: Prisma.EventAssignmentUncheckedUpdateManyWithoutUpdatedByNestedInput
+  updatedUsers?: Prisma.UserUncheckedUpdateManyWithoutUpdatedByNestedInput
+  createdAvailabilitySlots?: Prisma.AvailabilitySlotUncheckedUpdateManyWithoutCreatedByNestedInput
+  updatedAvailabilitySlots?: Prisma.AvailabilitySlotUncheckedUpdateManyWithoutUpdatedByNestedInput
+  availabilityEntries?: Prisma.AvailabilityEntryUncheckedUpdateManyWithoutUserNestedInput
+  UpdatedAvailabilityEntries?: Prisma.AvailabilityEntryUncheckedUpdateManyWithoutUpdatedByNestedInput
+  reviewedEntryCancelRequests?: Prisma.EntryCancelRequestUncheckedUpdateManyWithoutReviewedByNestedInput
+  assignmentCancelRequests?: Prisma.AssignmentCancelRequestUncheckedUpdateManyWithoutRequestedByNestedInput
+  reviewedAssignmentCancelRequests?: Prisma.AssignmentCancelRequestUncheckedUpdateManyWithoutReviewedByNestedInput
+}
+
+export type UserUpsertWithoutReviewedEntryCancelRequestsInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutReviewedEntryCancelRequestsInput, Prisma.UserUncheckedUpdateWithoutReviewedEntryCancelRequestsInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutReviewedEntryCancelRequestsInput, Prisma.UserUncheckedCreateWithoutReviewedEntryCancelRequestsInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutReviewedEntryCancelRequestsInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutReviewedEntryCancelRequestsInput, Prisma.UserUncheckedUpdateWithoutReviewedEntryCancelRequestsInput>
+}
+
+export type UserUpdateWithoutReviewedEntryCancelRequestsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  emailVerified?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  reqStatus?: Prisma.EnumReqStatusFieldUpdateOperationsInput | $Enums.ReqStatus
+  rating?: Prisma.IntFieldUpdateOperationsInput | number
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  accounts?: Prisma.AccountUpdateManyWithoutUserNestedInput
+  sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
+  Authenticator?: Prisma.AuthenticatorUpdateManyWithoutUserNestedInput
+  joinRequests?: Prisma.JoinRequestUpdateManyWithoutCreatedByNestedInput
+  updatedJoinRequests?: Prisma.JoinRequestUpdateManyWithoutUpdatedByNestedInput
+  updatedBy?: Prisma.UserUpdateOneWithoutUpdatedUsersNestedInput
+  memberStatusCreated?: Prisma.MemberStatusLogUpdateManyWithoutCreatedByNestedInput
+  memberStatusLogs?: Prisma.MemberStatusLogUpdateManyWithoutUserNestedInput
+  memberStatusChanges?: Prisma.MemberStatusLogUpdateManyWithoutUpdatedByNestedInput
+  positionChanges?: Prisma.PositionHistoryUpdateManyWithoutUpdatedByNestedInput
+  positionCreations?: Prisma.PositionHistoryUpdateManyWithoutCreatedByNestedInput
+  positionHistories?: Prisma.PositionHistoryUpdateManyWithoutUserNestedInput
+  ratingHistory?: Prisma.RatingHistoryUpdateManyWithoutUserNestedInput
+  createdRatings?: Prisma.RatingHistoryUpdateManyWithoutCreatedByNestedInput
+  updatedRatings?: Prisma.RatingHistoryUpdateManyWithoutUpdatedByNestedInput
+  createdEvents?: Prisma.EventUpdateManyWithoutCreatedByNestedInput
+  updatedEvents?: Prisma.EventUpdateManyWithoutUpdatedByNestedInput
+  providedFeedbacks?: Prisma.EventFeedbackUpdateManyWithoutUserNestedInput
+  updatedEventFeedback?: Prisma.EventFeedbackUpdateManyWithoutUpdatedByNestedInput
+  feedbackRequests?: Prisma.FeedbackRequestUpdateManyWithoutUserNestedInput
+  hrWarnings?: Prisma.HrWarningUpdateManyWithoutAssigneeNestedInput
+  createdHrWarning?: Prisma.HrWarningUpdateManyWithoutCreatedByNestedInput
+  updatedHrWarnings?: Prisma.HrWarningUpdateManyWithoutUpdatedByNestedInput
+  CreatedAllowedUser?: Prisma.AllowedUserUpdateManyWithoutCreatedByNestedInput
+  ownAllowance?: Prisma.AllowedUserUpdateOneWithoutUserNestedInput
+  UpdatedAllowance?: Prisma.AllowedUserUpdateManyWithoutUpdatedByNestedInput
+  eventAssignments?: Prisma.EventAssignmentUpdateManyWithoutUserNestedInput
+  CreatedEventAssignment?: Prisma.EventAssignmentUpdateManyWithoutCreatedByNestedInput
+  UpdatedEventAssignment?: Prisma.EventAssignmentUpdateManyWithoutUpdatedByNestedInput
+  updatedUsers?: Prisma.UserUpdateManyWithoutUpdatedByNestedInput
+  createdAvailabilitySlots?: Prisma.AvailabilitySlotUpdateManyWithoutCreatedByNestedInput
+  updatedAvailabilitySlots?: Prisma.AvailabilitySlotUpdateManyWithoutUpdatedByNestedInput
+  availabilityEntries?: Prisma.AvailabilityEntryUpdateManyWithoutUserNestedInput
+  UpdatedAvailabilityEntries?: Prisma.AvailabilityEntryUpdateManyWithoutUpdatedByNestedInput
+  entryCancelRequests?: Prisma.EntryCancelRequestUpdateManyWithoutRequestedByNestedInput
+  assignmentCancelRequests?: Prisma.AssignmentCancelRequestUpdateManyWithoutRequestedByNestedInput
+  reviewedAssignmentCancelRequests?: Prisma.AssignmentCancelRequestUpdateManyWithoutReviewedByNestedInput
+}
+
+export type UserUncheckedUpdateWithoutReviewedEntryCancelRequestsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  emailVerified?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  reqStatus?: Prisma.EnumReqStatusFieldUpdateOperationsInput | $Enums.ReqStatus
+  rating?: Prisma.IntFieldUpdateOperationsInput | number
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  updatedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  allowedUserId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  accounts?: Prisma.AccountUncheckedUpdateManyWithoutUserNestedInput
+  sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
+  Authenticator?: Prisma.AuthenticatorUncheckedUpdateManyWithoutUserNestedInput
+  joinRequests?: Prisma.JoinRequestUncheckedUpdateManyWithoutCreatedByNestedInput
+  updatedJoinRequests?: Prisma.JoinRequestUncheckedUpdateManyWithoutUpdatedByNestedInput
+  memberStatusCreated?: Prisma.MemberStatusLogUncheckedUpdateManyWithoutCreatedByNestedInput
+  memberStatusLogs?: Prisma.MemberStatusLogUncheckedUpdateManyWithoutUserNestedInput
+  memberStatusChanges?: Prisma.MemberStatusLogUncheckedUpdateManyWithoutUpdatedByNestedInput
+  positionChanges?: Prisma.PositionHistoryUncheckedUpdateManyWithoutUpdatedByNestedInput
+  positionCreations?: Prisma.PositionHistoryUncheckedUpdateManyWithoutCreatedByNestedInput
+  positionHistories?: Prisma.PositionHistoryUncheckedUpdateManyWithoutUserNestedInput
+  ratingHistory?: Prisma.RatingHistoryUncheckedUpdateManyWithoutUserNestedInput
+  createdRatings?: Prisma.RatingHistoryUncheckedUpdateManyWithoutCreatedByNestedInput
+  updatedRatings?: Prisma.RatingHistoryUncheckedUpdateManyWithoutUpdatedByNestedInput
+  createdEvents?: Prisma.EventUncheckedUpdateManyWithoutCreatedByNestedInput
+  updatedEvents?: Prisma.EventUncheckedUpdateManyWithoutUpdatedByNestedInput
+  providedFeedbacks?: Prisma.EventFeedbackUncheckedUpdateManyWithoutUserNestedInput
+  updatedEventFeedback?: Prisma.EventFeedbackUncheckedUpdateManyWithoutUpdatedByNestedInput
+  feedbackRequests?: Prisma.FeedbackRequestUncheckedUpdateManyWithoutUserNestedInput
+  hrWarnings?: Prisma.HrWarningUncheckedUpdateManyWithoutAssigneeNestedInput
+  createdHrWarning?: Prisma.HrWarningUncheckedUpdateManyWithoutCreatedByNestedInput
+  updatedHrWarnings?: Prisma.HrWarningUncheckedUpdateManyWithoutUpdatedByNestedInput
+  CreatedAllowedUser?: Prisma.AllowedUserUncheckedUpdateManyWithoutCreatedByNestedInput
+  UpdatedAllowance?: Prisma.AllowedUserUncheckedUpdateManyWithoutUpdatedByNestedInput
+  eventAssignments?: Prisma.EventAssignmentUncheckedUpdateManyWithoutUserNestedInput
+  CreatedEventAssignment?: Prisma.EventAssignmentUncheckedUpdateManyWithoutCreatedByNestedInput
+  UpdatedEventAssignment?: Prisma.EventAssignmentUncheckedUpdateManyWithoutUpdatedByNestedInput
+  updatedUsers?: Prisma.UserUncheckedUpdateManyWithoutUpdatedByNestedInput
+  createdAvailabilitySlots?: Prisma.AvailabilitySlotUncheckedUpdateManyWithoutCreatedByNestedInput
+  updatedAvailabilitySlots?: Prisma.AvailabilitySlotUncheckedUpdateManyWithoutUpdatedByNestedInput
+  availabilityEntries?: Prisma.AvailabilityEntryUncheckedUpdateManyWithoutUserNestedInput
+  UpdatedAvailabilityEntries?: Prisma.AvailabilityEntryUncheckedUpdateManyWithoutUpdatedByNestedInput
+  entryCancelRequests?: Prisma.EntryCancelRequestUncheckedUpdateManyWithoutRequestedByNestedInput
+  assignmentCancelRequests?: Prisma.AssignmentCancelRequestUncheckedUpdateManyWithoutRequestedByNestedInput
+  reviewedAssignmentCancelRequests?: Prisma.AssignmentCancelRequestUncheckedUpdateManyWithoutReviewedByNestedInput
 }
 
 export type UserCreateWithoutCreatedEventAssignmentInput = {
@@ -3135,7 +4937,7 @@ export type UserCreateWithoutCreatedEventAssignmentInput = {
   updatedEvents?: Prisma.EventCreateNestedManyWithoutUpdatedByInput
   providedFeedbacks?: Prisma.EventFeedbackCreateNestedManyWithoutUserInput
   updatedEventFeedback?: Prisma.EventFeedbackCreateNestedManyWithoutUpdatedByInput
-  scheduledEventEmails?: Prisma.ScheduledEmailsCreateNestedManyWithoutUserInput
+  feedbackRequests?: Prisma.FeedbackRequestCreateNestedManyWithoutUserInput
   hrWarnings?: Prisma.HrWarningCreateNestedManyWithoutAssigneeInput
   createdHrWarning?: Prisma.HrWarningCreateNestedManyWithoutCreatedByInput
   updatedHrWarnings?: Prisma.HrWarningCreateNestedManyWithoutUpdatedByInput
@@ -3145,6 +4947,14 @@ export type UserCreateWithoutCreatedEventAssignmentInput = {
   eventAssignments?: Prisma.EventAssignmentCreateNestedManyWithoutUserInput
   UpdatedEventAssignment?: Prisma.EventAssignmentCreateNestedManyWithoutUpdatedByInput
   updatedUsers?: Prisma.UserCreateNestedManyWithoutUpdatedByInput
+  createdAvailabilitySlots?: Prisma.AvailabilitySlotCreateNestedManyWithoutCreatedByInput
+  updatedAvailabilitySlots?: Prisma.AvailabilitySlotCreateNestedManyWithoutUpdatedByInput
+  availabilityEntries?: Prisma.AvailabilityEntryCreateNestedManyWithoutUserInput
+  UpdatedAvailabilityEntries?: Prisma.AvailabilityEntryCreateNestedManyWithoutUpdatedByInput
+  entryCancelRequests?: Prisma.EntryCancelRequestCreateNestedManyWithoutRequestedByInput
+  reviewedEntryCancelRequests?: Prisma.EntryCancelRequestCreateNestedManyWithoutReviewedByInput
+  assignmentCancelRequests?: Prisma.AssignmentCancelRequestCreateNestedManyWithoutRequestedByInput
+  reviewedAssignmentCancelRequests?: Prisma.AssignmentCancelRequestCreateNestedManyWithoutReviewedByInput
 }
 
 export type UserUncheckedCreateWithoutCreatedEventAssignmentInput = {
@@ -3179,7 +4989,7 @@ export type UserUncheckedCreateWithoutCreatedEventAssignmentInput = {
   updatedEvents?: Prisma.EventUncheckedCreateNestedManyWithoutUpdatedByInput
   providedFeedbacks?: Prisma.EventFeedbackUncheckedCreateNestedManyWithoutUserInput
   updatedEventFeedback?: Prisma.EventFeedbackUncheckedCreateNestedManyWithoutUpdatedByInput
-  scheduledEventEmails?: Prisma.ScheduledEmailsUncheckedCreateNestedManyWithoutUserInput
+  feedbackRequests?: Prisma.FeedbackRequestUncheckedCreateNestedManyWithoutUserInput
   hrWarnings?: Prisma.HrWarningUncheckedCreateNestedManyWithoutAssigneeInput
   createdHrWarning?: Prisma.HrWarningUncheckedCreateNestedManyWithoutCreatedByInput
   updatedHrWarnings?: Prisma.HrWarningUncheckedCreateNestedManyWithoutUpdatedByInput
@@ -3188,6 +4998,14 @@ export type UserUncheckedCreateWithoutCreatedEventAssignmentInput = {
   eventAssignments?: Prisma.EventAssignmentUncheckedCreateNestedManyWithoutUserInput
   UpdatedEventAssignment?: Prisma.EventAssignmentUncheckedCreateNestedManyWithoutUpdatedByInput
   updatedUsers?: Prisma.UserUncheckedCreateNestedManyWithoutUpdatedByInput
+  createdAvailabilitySlots?: Prisma.AvailabilitySlotUncheckedCreateNestedManyWithoutCreatedByInput
+  updatedAvailabilitySlots?: Prisma.AvailabilitySlotUncheckedCreateNestedManyWithoutUpdatedByInput
+  availabilityEntries?: Prisma.AvailabilityEntryUncheckedCreateNestedManyWithoutUserInput
+  UpdatedAvailabilityEntries?: Prisma.AvailabilityEntryUncheckedCreateNestedManyWithoutUpdatedByInput
+  entryCancelRequests?: Prisma.EntryCancelRequestUncheckedCreateNestedManyWithoutRequestedByInput
+  reviewedEntryCancelRequests?: Prisma.EntryCancelRequestUncheckedCreateNestedManyWithoutReviewedByInput
+  assignmentCancelRequests?: Prisma.AssignmentCancelRequestUncheckedCreateNestedManyWithoutRequestedByInput
+  reviewedAssignmentCancelRequests?: Prisma.AssignmentCancelRequestUncheckedCreateNestedManyWithoutReviewedByInput
 }
 
 export type UserCreateOrConnectWithoutCreatedEventAssignmentInput = {
@@ -3226,7 +5044,7 @@ export type UserCreateWithoutUpdatedEventAssignmentInput = {
   updatedEvents?: Prisma.EventCreateNestedManyWithoutUpdatedByInput
   providedFeedbacks?: Prisma.EventFeedbackCreateNestedManyWithoutUserInput
   updatedEventFeedback?: Prisma.EventFeedbackCreateNestedManyWithoutUpdatedByInput
-  scheduledEventEmails?: Prisma.ScheduledEmailsCreateNestedManyWithoutUserInput
+  feedbackRequests?: Prisma.FeedbackRequestCreateNestedManyWithoutUserInput
   hrWarnings?: Prisma.HrWarningCreateNestedManyWithoutAssigneeInput
   createdHrWarning?: Prisma.HrWarningCreateNestedManyWithoutCreatedByInput
   updatedHrWarnings?: Prisma.HrWarningCreateNestedManyWithoutUpdatedByInput
@@ -3236,6 +5054,14 @@ export type UserCreateWithoutUpdatedEventAssignmentInput = {
   eventAssignments?: Prisma.EventAssignmentCreateNestedManyWithoutUserInput
   CreatedEventAssignment?: Prisma.EventAssignmentCreateNestedManyWithoutCreatedByInput
   updatedUsers?: Prisma.UserCreateNestedManyWithoutUpdatedByInput
+  createdAvailabilitySlots?: Prisma.AvailabilitySlotCreateNestedManyWithoutCreatedByInput
+  updatedAvailabilitySlots?: Prisma.AvailabilitySlotCreateNestedManyWithoutUpdatedByInput
+  availabilityEntries?: Prisma.AvailabilityEntryCreateNestedManyWithoutUserInput
+  UpdatedAvailabilityEntries?: Prisma.AvailabilityEntryCreateNestedManyWithoutUpdatedByInput
+  entryCancelRequests?: Prisma.EntryCancelRequestCreateNestedManyWithoutRequestedByInput
+  reviewedEntryCancelRequests?: Prisma.EntryCancelRequestCreateNestedManyWithoutReviewedByInput
+  assignmentCancelRequests?: Prisma.AssignmentCancelRequestCreateNestedManyWithoutRequestedByInput
+  reviewedAssignmentCancelRequests?: Prisma.AssignmentCancelRequestCreateNestedManyWithoutReviewedByInput
 }
 
 export type UserUncheckedCreateWithoutUpdatedEventAssignmentInput = {
@@ -3270,7 +5096,7 @@ export type UserUncheckedCreateWithoutUpdatedEventAssignmentInput = {
   updatedEvents?: Prisma.EventUncheckedCreateNestedManyWithoutUpdatedByInput
   providedFeedbacks?: Prisma.EventFeedbackUncheckedCreateNestedManyWithoutUserInput
   updatedEventFeedback?: Prisma.EventFeedbackUncheckedCreateNestedManyWithoutUpdatedByInput
-  scheduledEventEmails?: Prisma.ScheduledEmailsUncheckedCreateNestedManyWithoutUserInput
+  feedbackRequests?: Prisma.FeedbackRequestUncheckedCreateNestedManyWithoutUserInput
   hrWarnings?: Prisma.HrWarningUncheckedCreateNestedManyWithoutAssigneeInput
   createdHrWarning?: Prisma.HrWarningUncheckedCreateNestedManyWithoutCreatedByInput
   updatedHrWarnings?: Prisma.HrWarningUncheckedCreateNestedManyWithoutUpdatedByInput
@@ -3279,6 +5105,14 @@ export type UserUncheckedCreateWithoutUpdatedEventAssignmentInput = {
   eventAssignments?: Prisma.EventAssignmentUncheckedCreateNestedManyWithoutUserInput
   CreatedEventAssignment?: Prisma.EventAssignmentUncheckedCreateNestedManyWithoutCreatedByInput
   updatedUsers?: Prisma.UserUncheckedCreateNestedManyWithoutUpdatedByInput
+  createdAvailabilitySlots?: Prisma.AvailabilitySlotUncheckedCreateNestedManyWithoutCreatedByInput
+  updatedAvailabilitySlots?: Prisma.AvailabilitySlotUncheckedCreateNestedManyWithoutUpdatedByInput
+  availabilityEntries?: Prisma.AvailabilityEntryUncheckedCreateNestedManyWithoutUserInput
+  UpdatedAvailabilityEntries?: Prisma.AvailabilityEntryUncheckedCreateNestedManyWithoutUpdatedByInput
+  entryCancelRequests?: Prisma.EntryCancelRequestUncheckedCreateNestedManyWithoutRequestedByInput
+  reviewedEntryCancelRequests?: Prisma.EntryCancelRequestUncheckedCreateNestedManyWithoutReviewedByInput
+  assignmentCancelRequests?: Prisma.AssignmentCancelRequestUncheckedCreateNestedManyWithoutRequestedByInput
+  reviewedAssignmentCancelRequests?: Prisma.AssignmentCancelRequestUncheckedCreateNestedManyWithoutReviewedByInput
 }
 
 export type UserCreateOrConnectWithoutUpdatedEventAssignmentInput = {
@@ -3317,7 +5151,7 @@ export type UserCreateWithoutEventAssignmentsInput = {
   updatedEvents?: Prisma.EventCreateNestedManyWithoutUpdatedByInput
   providedFeedbacks?: Prisma.EventFeedbackCreateNestedManyWithoutUserInput
   updatedEventFeedback?: Prisma.EventFeedbackCreateNestedManyWithoutUpdatedByInput
-  scheduledEventEmails?: Prisma.ScheduledEmailsCreateNestedManyWithoutUserInput
+  feedbackRequests?: Prisma.FeedbackRequestCreateNestedManyWithoutUserInput
   hrWarnings?: Prisma.HrWarningCreateNestedManyWithoutAssigneeInput
   createdHrWarning?: Prisma.HrWarningCreateNestedManyWithoutCreatedByInput
   updatedHrWarnings?: Prisma.HrWarningCreateNestedManyWithoutUpdatedByInput
@@ -3327,6 +5161,14 @@ export type UserCreateWithoutEventAssignmentsInput = {
   CreatedEventAssignment?: Prisma.EventAssignmentCreateNestedManyWithoutCreatedByInput
   UpdatedEventAssignment?: Prisma.EventAssignmentCreateNestedManyWithoutUpdatedByInput
   updatedUsers?: Prisma.UserCreateNestedManyWithoutUpdatedByInput
+  createdAvailabilitySlots?: Prisma.AvailabilitySlotCreateNestedManyWithoutCreatedByInput
+  updatedAvailabilitySlots?: Prisma.AvailabilitySlotCreateNestedManyWithoutUpdatedByInput
+  availabilityEntries?: Prisma.AvailabilityEntryCreateNestedManyWithoutUserInput
+  UpdatedAvailabilityEntries?: Prisma.AvailabilityEntryCreateNestedManyWithoutUpdatedByInput
+  entryCancelRequests?: Prisma.EntryCancelRequestCreateNestedManyWithoutRequestedByInput
+  reviewedEntryCancelRequests?: Prisma.EntryCancelRequestCreateNestedManyWithoutReviewedByInput
+  assignmentCancelRequests?: Prisma.AssignmentCancelRequestCreateNestedManyWithoutRequestedByInput
+  reviewedAssignmentCancelRequests?: Prisma.AssignmentCancelRequestCreateNestedManyWithoutReviewedByInput
 }
 
 export type UserUncheckedCreateWithoutEventAssignmentsInput = {
@@ -3361,7 +5203,7 @@ export type UserUncheckedCreateWithoutEventAssignmentsInput = {
   updatedEvents?: Prisma.EventUncheckedCreateNestedManyWithoutUpdatedByInput
   providedFeedbacks?: Prisma.EventFeedbackUncheckedCreateNestedManyWithoutUserInput
   updatedEventFeedback?: Prisma.EventFeedbackUncheckedCreateNestedManyWithoutUpdatedByInput
-  scheduledEventEmails?: Prisma.ScheduledEmailsUncheckedCreateNestedManyWithoutUserInput
+  feedbackRequests?: Prisma.FeedbackRequestUncheckedCreateNestedManyWithoutUserInput
   hrWarnings?: Prisma.HrWarningUncheckedCreateNestedManyWithoutAssigneeInput
   createdHrWarning?: Prisma.HrWarningUncheckedCreateNestedManyWithoutCreatedByInput
   updatedHrWarnings?: Prisma.HrWarningUncheckedCreateNestedManyWithoutUpdatedByInput
@@ -3370,6 +5212,14 @@ export type UserUncheckedCreateWithoutEventAssignmentsInput = {
   CreatedEventAssignment?: Prisma.EventAssignmentUncheckedCreateNestedManyWithoutCreatedByInput
   UpdatedEventAssignment?: Prisma.EventAssignmentUncheckedCreateNestedManyWithoutUpdatedByInput
   updatedUsers?: Prisma.UserUncheckedCreateNestedManyWithoutUpdatedByInput
+  createdAvailabilitySlots?: Prisma.AvailabilitySlotUncheckedCreateNestedManyWithoutCreatedByInput
+  updatedAvailabilitySlots?: Prisma.AvailabilitySlotUncheckedCreateNestedManyWithoutUpdatedByInput
+  availabilityEntries?: Prisma.AvailabilityEntryUncheckedCreateNestedManyWithoutUserInput
+  UpdatedAvailabilityEntries?: Prisma.AvailabilityEntryUncheckedCreateNestedManyWithoutUpdatedByInput
+  entryCancelRequests?: Prisma.EntryCancelRequestUncheckedCreateNestedManyWithoutRequestedByInput
+  reviewedEntryCancelRequests?: Prisma.EntryCancelRequestUncheckedCreateNestedManyWithoutReviewedByInput
+  assignmentCancelRequests?: Prisma.AssignmentCancelRequestUncheckedCreateNestedManyWithoutRequestedByInput
+  reviewedAssignmentCancelRequests?: Prisma.AssignmentCancelRequestUncheckedCreateNestedManyWithoutReviewedByInput
 }
 
 export type UserCreateOrConnectWithoutEventAssignmentsInput = {
@@ -3419,7 +5269,7 @@ export type UserUpdateWithoutCreatedEventAssignmentInput = {
   updatedEvents?: Prisma.EventUpdateManyWithoutUpdatedByNestedInput
   providedFeedbacks?: Prisma.EventFeedbackUpdateManyWithoutUserNestedInput
   updatedEventFeedback?: Prisma.EventFeedbackUpdateManyWithoutUpdatedByNestedInput
-  scheduledEventEmails?: Prisma.ScheduledEmailsUpdateManyWithoutUserNestedInput
+  feedbackRequests?: Prisma.FeedbackRequestUpdateManyWithoutUserNestedInput
   hrWarnings?: Prisma.HrWarningUpdateManyWithoutAssigneeNestedInput
   createdHrWarning?: Prisma.HrWarningUpdateManyWithoutCreatedByNestedInput
   updatedHrWarnings?: Prisma.HrWarningUpdateManyWithoutUpdatedByNestedInput
@@ -3429,6 +5279,14 @@ export type UserUpdateWithoutCreatedEventAssignmentInput = {
   eventAssignments?: Prisma.EventAssignmentUpdateManyWithoutUserNestedInput
   UpdatedEventAssignment?: Prisma.EventAssignmentUpdateManyWithoutUpdatedByNestedInput
   updatedUsers?: Prisma.UserUpdateManyWithoutUpdatedByNestedInput
+  createdAvailabilitySlots?: Prisma.AvailabilitySlotUpdateManyWithoutCreatedByNestedInput
+  updatedAvailabilitySlots?: Prisma.AvailabilitySlotUpdateManyWithoutUpdatedByNestedInput
+  availabilityEntries?: Prisma.AvailabilityEntryUpdateManyWithoutUserNestedInput
+  UpdatedAvailabilityEntries?: Prisma.AvailabilityEntryUpdateManyWithoutUpdatedByNestedInput
+  entryCancelRequests?: Prisma.EntryCancelRequestUpdateManyWithoutRequestedByNestedInput
+  reviewedEntryCancelRequests?: Prisma.EntryCancelRequestUpdateManyWithoutReviewedByNestedInput
+  assignmentCancelRequests?: Prisma.AssignmentCancelRequestUpdateManyWithoutRequestedByNestedInput
+  reviewedAssignmentCancelRequests?: Prisma.AssignmentCancelRequestUpdateManyWithoutReviewedByNestedInput
 }
 
 export type UserUncheckedUpdateWithoutCreatedEventAssignmentInput = {
@@ -3463,7 +5321,7 @@ export type UserUncheckedUpdateWithoutCreatedEventAssignmentInput = {
   updatedEvents?: Prisma.EventUncheckedUpdateManyWithoutUpdatedByNestedInput
   providedFeedbacks?: Prisma.EventFeedbackUncheckedUpdateManyWithoutUserNestedInput
   updatedEventFeedback?: Prisma.EventFeedbackUncheckedUpdateManyWithoutUpdatedByNestedInput
-  scheduledEventEmails?: Prisma.ScheduledEmailsUncheckedUpdateManyWithoutUserNestedInput
+  feedbackRequests?: Prisma.FeedbackRequestUncheckedUpdateManyWithoutUserNestedInput
   hrWarnings?: Prisma.HrWarningUncheckedUpdateManyWithoutAssigneeNestedInput
   createdHrWarning?: Prisma.HrWarningUncheckedUpdateManyWithoutCreatedByNestedInput
   updatedHrWarnings?: Prisma.HrWarningUncheckedUpdateManyWithoutUpdatedByNestedInput
@@ -3472,6 +5330,14 @@ export type UserUncheckedUpdateWithoutCreatedEventAssignmentInput = {
   eventAssignments?: Prisma.EventAssignmentUncheckedUpdateManyWithoutUserNestedInput
   UpdatedEventAssignment?: Prisma.EventAssignmentUncheckedUpdateManyWithoutUpdatedByNestedInput
   updatedUsers?: Prisma.UserUncheckedUpdateManyWithoutUpdatedByNestedInput
+  createdAvailabilitySlots?: Prisma.AvailabilitySlotUncheckedUpdateManyWithoutCreatedByNestedInput
+  updatedAvailabilitySlots?: Prisma.AvailabilitySlotUncheckedUpdateManyWithoutUpdatedByNestedInput
+  availabilityEntries?: Prisma.AvailabilityEntryUncheckedUpdateManyWithoutUserNestedInput
+  UpdatedAvailabilityEntries?: Prisma.AvailabilityEntryUncheckedUpdateManyWithoutUpdatedByNestedInput
+  entryCancelRequests?: Prisma.EntryCancelRequestUncheckedUpdateManyWithoutRequestedByNestedInput
+  reviewedEntryCancelRequests?: Prisma.EntryCancelRequestUncheckedUpdateManyWithoutReviewedByNestedInput
+  assignmentCancelRequests?: Prisma.AssignmentCancelRequestUncheckedUpdateManyWithoutRequestedByNestedInput
+  reviewedAssignmentCancelRequests?: Prisma.AssignmentCancelRequestUncheckedUpdateManyWithoutReviewedByNestedInput
 }
 
 export type UserUpsertWithoutUpdatedEventAssignmentInput = {
@@ -3516,7 +5382,7 @@ export type UserUpdateWithoutUpdatedEventAssignmentInput = {
   updatedEvents?: Prisma.EventUpdateManyWithoutUpdatedByNestedInput
   providedFeedbacks?: Prisma.EventFeedbackUpdateManyWithoutUserNestedInput
   updatedEventFeedback?: Prisma.EventFeedbackUpdateManyWithoutUpdatedByNestedInput
-  scheduledEventEmails?: Prisma.ScheduledEmailsUpdateManyWithoutUserNestedInput
+  feedbackRequests?: Prisma.FeedbackRequestUpdateManyWithoutUserNestedInput
   hrWarnings?: Prisma.HrWarningUpdateManyWithoutAssigneeNestedInput
   createdHrWarning?: Prisma.HrWarningUpdateManyWithoutCreatedByNestedInput
   updatedHrWarnings?: Prisma.HrWarningUpdateManyWithoutUpdatedByNestedInput
@@ -3526,6 +5392,14 @@ export type UserUpdateWithoutUpdatedEventAssignmentInput = {
   eventAssignments?: Prisma.EventAssignmentUpdateManyWithoutUserNestedInput
   CreatedEventAssignment?: Prisma.EventAssignmentUpdateManyWithoutCreatedByNestedInput
   updatedUsers?: Prisma.UserUpdateManyWithoutUpdatedByNestedInput
+  createdAvailabilitySlots?: Prisma.AvailabilitySlotUpdateManyWithoutCreatedByNestedInput
+  updatedAvailabilitySlots?: Prisma.AvailabilitySlotUpdateManyWithoutUpdatedByNestedInput
+  availabilityEntries?: Prisma.AvailabilityEntryUpdateManyWithoutUserNestedInput
+  UpdatedAvailabilityEntries?: Prisma.AvailabilityEntryUpdateManyWithoutUpdatedByNestedInput
+  entryCancelRequests?: Prisma.EntryCancelRequestUpdateManyWithoutRequestedByNestedInput
+  reviewedEntryCancelRequests?: Prisma.EntryCancelRequestUpdateManyWithoutReviewedByNestedInput
+  assignmentCancelRequests?: Prisma.AssignmentCancelRequestUpdateManyWithoutRequestedByNestedInput
+  reviewedAssignmentCancelRequests?: Prisma.AssignmentCancelRequestUpdateManyWithoutReviewedByNestedInput
 }
 
 export type UserUncheckedUpdateWithoutUpdatedEventAssignmentInput = {
@@ -3560,7 +5434,7 @@ export type UserUncheckedUpdateWithoutUpdatedEventAssignmentInput = {
   updatedEvents?: Prisma.EventUncheckedUpdateManyWithoutUpdatedByNestedInput
   providedFeedbacks?: Prisma.EventFeedbackUncheckedUpdateManyWithoutUserNestedInput
   updatedEventFeedback?: Prisma.EventFeedbackUncheckedUpdateManyWithoutUpdatedByNestedInput
-  scheduledEventEmails?: Prisma.ScheduledEmailsUncheckedUpdateManyWithoutUserNestedInput
+  feedbackRequests?: Prisma.FeedbackRequestUncheckedUpdateManyWithoutUserNestedInput
   hrWarnings?: Prisma.HrWarningUncheckedUpdateManyWithoutAssigneeNestedInput
   createdHrWarning?: Prisma.HrWarningUncheckedUpdateManyWithoutCreatedByNestedInput
   updatedHrWarnings?: Prisma.HrWarningUncheckedUpdateManyWithoutUpdatedByNestedInput
@@ -3569,6 +5443,14 @@ export type UserUncheckedUpdateWithoutUpdatedEventAssignmentInput = {
   eventAssignments?: Prisma.EventAssignmentUncheckedUpdateManyWithoutUserNestedInput
   CreatedEventAssignment?: Prisma.EventAssignmentUncheckedUpdateManyWithoutCreatedByNestedInput
   updatedUsers?: Prisma.UserUncheckedUpdateManyWithoutUpdatedByNestedInput
+  createdAvailabilitySlots?: Prisma.AvailabilitySlotUncheckedUpdateManyWithoutCreatedByNestedInput
+  updatedAvailabilitySlots?: Prisma.AvailabilitySlotUncheckedUpdateManyWithoutUpdatedByNestedInput
+  availabilityEntries?: Prisma.AvailabilityEntryUncheckedUpdateManyWithoutUserNestedInput
+  UpdatedAvailabilityEntries?: Prisma.AvailabilityEntryUncheckedUpdateManyWithoutUpdatedByNestedInput
+  entryCancelRequests?: Prisma.EntryCancelRequestUncheckedUpdateManyWithoutRequestedByNestedInput
+  reviewedEntryCancelRequests?: Prisma.EntryCancelRequestUncheckedUpdateManyWithoutReviewedByNestedInput
+  assignmentCancelRequests?: Prisma.AssignmentCancelRequestUncheckedUpdateManyWithoutRequestedByNestedInput
+  reviewedAssignmentCancelRequests?: Prisma.AssignmentCancelRequestUncheckedUpdateManyWithoutReviewedByNestedInput
 }
 
 export type UserUpsertWithoutEventAssignmentsInput = {
@@ -3613,7 +5495,7 @@ export type UserUpdateWithoutEventAssignmentsInput = {
   updatedEvents?: Prisma.EventUpdateManyWithoutUpdatedByNestedInput
   providedFeedbacks?: Prisma.EventFeedbackUpdateManyWithoutUserNestedInput
   updatedEventFeedback?: Prisma.EventFeedbackUpdateManyWithoutUpdatedByNestedInput
-  scheduledEventEmails?: Prisma.ScheduledEmailsUpdateManyWithoutUserNestedInput
+  feedbackRequests?: Prisma.FeedbackRequestUpdateManyWithoutUserNestedInput
   hrWarnings?: Prisma.HrWarningUpdateManyWithoutAssigneeNestedInput
   createdHrWarning?: Prisma.HrWarningUpdateManyWithoutCreatedByNestedInput
   updatedHrWarnings?: Prisma.HrWarningUpdateManyWithoutUpdatedByNestedInput
@@ -3623,6 +5505,14 @@ export type UserUpdateWithoutEventAssignmentsInput = {
   CreatedEventAssignment?: Prisma.EventAssignmentUpdateManyWithoutCreatedByNestedInput
   UpdatedEventAssignment?: Prisma.EventAssignmentUpdateManyWithoutUpdatedByNestedInput
   updatedUsers?: Prisma.UserUpdateManyWithoutUpdatedByNestedInput
+  createdAvailabilitySlots?: Prisma.AvailabilitySlotUpdateManyWithoutCreatedByNestedInput
+  updatedAvailabilitySlots?: Prisma.AvailabilitySlotUpdateManyWithoutUpdatedByNestedInput
+  availabilityEntries?: Prisma.AvailabilityEntryUpdateManyWithoutUserNestedInput
+  UpdatedAvailabilityEntries?: Prisma.AvailabilityEntryUpdateManyWithoutUpdatedByNestedInput
+  entryCancelRequests?: Prisma.EntryCancelRequestUpdateManyWithoutRequestedByNestedInput
+  reviewedEntryCancelRequests?: Prisma.EntryCancelRequestUpdateManyWithoutReviewedByNestedInput
+  assignmentCancelRequests?: Prisma.AssignmentCancelRequestUpdateManyWithoutRequestedByNestedInput
+  reviewedAssignmentCancelRequests?: Prisma.AssignmentCancelRequestUpdateManyWithoutReviewedByNestedInput
 }
 
 export type UserUncheckedUpdateWithoutEventAssignmentsInput = {
@@ -3657,7 +5547,7 @@ export type UserUncheckedUpdateWithoutEventAssignmentsInput = {
   updatedEvents?: Prisma.EventUncheckedUpdateManyWithoutUpdatedByNestedInput
   providedFeedbacks?: Prisma.EventFeedbackUncheckedUpdateManyWithoutUserNestedInput
   updatedEventFeedback?: Prisma.EventFeedbackUncheckedUpdateManyWithoutUpdatedByNestedInput
-  scheduledEventEmails?: Prisma.ScheduledEmailsUncheckedUpdateManyWithoutUserNestedInput
+  feedbackRequests?: Prisma.FeedbackRequestUncheckedUpdateManyWithoutUserNestedInput
   hrWarnings?: Prisma.HrWarningUncheckedUpdateManyWithoutAssigneeNestedInput
   createdHrWarning?: Prisma.HrWarningUncheckedUpdateManyWithoutCreatedByNestedInput
   updatedHrWarnings?: Prisma.HrWarningUncheckedUpdateManyWithoutUpdatedByNestedInput
@@ -3666,6 +5556,454 @@ export type UserUncheckedUpdateWithoutEventAssignmentsInput = {
   CreatedEventAssignment?: Prisma.EventAssignmentUncheckedUpdateManyWithoutCreatedByNestedInput
   UpdatedEventAssignment?: Prisma.EventAssignmentUncheckedUpdateManyWithoutUpdatedByNestedInput
   updatedUsers?: Prisma.UserUncheckedUpdateManyWithoutUpdatedByNestedInput
+  createdAvailabilitySlots?: Prisma.AvailabilitySlotUncheckedUpdateManyWithoutCreatedByNestedInput
+  updatedAvailabilitySlots?: Prisma.AvailabilitySlotUncheckedUpdateManyWithoutUpdatedByNestedInput
+  availabilityEntries?: Prisma.AvailabilityEntryUncheckedUpdateManyWithoutUserNestedInput
+  UpdatedAvailabilityEntries?: Prisma.AvailabilityEntryUncheckedUpdateManyWithoutUpdatedByNestedInput
+  entryCancelRequests?: Prisma.EntryCancelRequestUncheckedUpdateManyWithoutRequestedByNestedInput
+  reviewedEntryCancelRequests?: Prisma.EntryCancelRequestUncheckedUpdateManyWithoutReviewedByNestedInput
+  assignmentCancelRequests?: Prisma.AssignmentCancelRequestUncheckedUpdateManyWithoutRequestedByNestedInput
+  reviewedAssignmentCancelRequests?: Prisma.AssignmentCancelRequestUncheckedUpdateManyWithoutReviewedByNestedInput
+}
+
+export type UserCreateWithoutAssignmentCancelRequestsInput = {
+  id?: string
+  name?: string | null
+  email: string
+  emailVerified?: Date | string | null
+  image?: string | null
+  reqStatus?: $Enums.ReqStatus
+  rating?: number
+  deletedAt?: Date | string | null
+  deleted?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string | null
+  accounts?: Prisma.AccountCreateNestedManyWithoutUserInput
+  sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
+  Authenticator?: Prisma.AuthenticatorCreateNestedManyWithoutUserInput
+  joinRequests?: Prisma.JoinRequestCreateNestedManyWithoutCreatedByInput
+  updatedJoinRequests?: Prisma.JoinRequestCreateNestedManyWithoutUpdatedByInput
+  updatedBy?: Prisma.UserCreateNestedOneWithoutUpdatedUsersInput
+  memberStatusCreated?: Prisma.MemberStatusLogCreateNestedManyWithoutCreatedByInput
+  memberStatusLogs?: Prisma.MemberStatusLogCreateNestedManyWithoutUserInput
+  memberStatusChanges?: Prisma.MemberStatusLogCreateNestedManyWithoutUpdatedByInput
+  positionChanges?: Prisma.PositionHistoryCreateNestedManyWithoutUpdatedByInput
+  positionCreations?: Prisma.PositionHistoryCreateNestedManyWithoutCreatedByInput
+  positionHistories?: Prisma.PositionHistoryCreateNestedManyWithoutUserInput
+  ratingHistory?: Prisma.RatingHistoryCreateNestedManyWithoutUserInput
+  createdRatings?: Prisma.RatingHistoryCreateNestedManyWithoutCreatedByInput
+  updatedRatings?: Prisma.RatingHistoryCreateNestedManyWithoutUpdatedByInput
+  createdEvents?: Prisma.EventCreateNestedManyWithoutCreatedByInput
+  updatedEvents?: Prisma.EventCreateNestedManyWithoutUpdatedByInput
+  providedFeedbacks?: Prisma.EventFeedbackCreateNestedManyWithoutUserInput
+  updatedEventFeedback?: Prisma.EventFeedbackCreateNestedManyWithoutUpdatedByInput
+  feedbackRequests?: Prisma.FeedbackRequestCreateNestedManyWithoutUserInput
+  hrWarnings?: Prisma.HrWarningCreateNestedManyWithoutAssigneeInput
+  createdHrWarning?: Prisma.HrWarningCreateNestedManyWithoutCreatedByInput
+  updatedHrWarnings?: Prisma.HrWarningCreateNestedManyWithoutUpdatedByInput
+  CreatedAllowedUser?: Prisma.AllowedUserCreateNestedManyWithoutCreatedByInput
+  ownAllowance?: Prisma.AllowedUserCreateNestedOneWithoutUserInput
+  UpdatedAllowance?: Prisma.AllowedUserCreateNestedManyWithoutUpdatedByInput
+  eventAssignments?: Prisma.EventAssignmentCreateNestedManyWithoutUserInput
+  CreatedEventAssignment?: Prisma.EventAssignmentCreateNestedManyWithoutCreatedByInput
+  UpdatedEventAssignment?: Prisma.EventAssignmentCreateNestedManyWithoutUpdatedByInput
+  updatedUsers?: Prisma.UserCreateNestedManyWithoutUpdatedByInput
+  createdAvailabilitySlots?: Prisma.AvailabilitySlotCreateNestedManyWithoutCreatedByInput
+  updatedAvailabilitySlots?: Prisma.AvailabilitySlotCreateNestedManyWithoutUpdatedByInput
+  availabilityEntries?: Prisma.AvailabilityEntryCreateNestedManyWithoutUserInput
+  UpdatedAvailabilityEntries?: Prisma.AvailabilityEntryCreateNestedManyWithoutUpdatedByInput
+  entryCancelRequests?: Prisma.EntryCancelRequestCreateNestedManyWithoutRequestedByInput
+  reviewedEntryCancelRequests?: Prisma.EntryCancelRequestCreateNestedManyWithoutReviewedByInput
+  reviewedAssignmentCancelRequests?: Prisma.AssignmentCancelRequestCreateNestedManyWithoutReviewedByInput
+}
+
+export type UserUncheckedCreateWithoutAssignmentCancelRequestsInput = {
+  id?: string
+  name?: string | null
+  email: string
+  emailVerified?: Date | string | null
+  image?: string | null
+  reqStatus?: $Enums.ReqStatus
+  rating?: number
+  deletedAt?: Date | string | null
+  deleted?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string | null
+  updatedById?: string | null
+  allowedUserId?: string | null
+  accounts?: Prisma.AccountUncheckedCreateNestedManyWithoutUserInput
+  sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
+  Authenticator?: Prisma.AuthenticatorUncheckedCreateNestedManyWithoutUserInput
+  joinRequests?: Prisma.JoinRequestUncheckedCreateNestedManyWithoutCreatedByInput
+  updatedJoinRequests?: Prisma.JoinRequestUncheckedCreateNestedManyWithoutUpdatedByInput
+  memberStatusCreated?: Prisma.MemberStatusLogUncheckedCreateNestedManyWithoutCreatedByInput
+  memberStatusLogs?: Prisma.MemberStatusLogUncheckedCreateNestedManyWithoutUserInput
+  memberStatusChanges?: Prisma.MemberStatusLogUncheckedCreateNestedManyWithoutUpdatedByInput
+  positionChanges?: Prisma.PositionHistoryUncheckedCreateNestedManyWithoutUpdatedByInput
+  positionCreations?: Prisma.PositionHistoryUncheckedCreateNestedManyWithoutCreatedByInput
+  positionHistories?: Prisma.PositionHistoryUncheckedCreateNestedManyWithoutUserInput
+  ratingHistory?: Prisma.RatingHistoryUncheckedCreateNestedManyWithoutUserInput
+  createdRatings?: Prisma.RatingHistoryUncheckedCreateNestedManyWithoutCreatedByInput
+  updatedRatings?: Prisma.RatingHistoryUncheckedCreateNestedManyWithoutUpdatedByInput
+  createdEvents?: Prisma.EventUncheckedCreateNestedManyWithoutCreatedByInput
+  updatedEvents?: Prisma.EventUncheckedCreateNestedManyWithoutUpdatedByInput
+  providedFeedbacks?: Prisma.EventFeedbackUncheckedCreateNestedManyWithoutUserInput
+  updatedEventFeedback?: Prisma.EventFeedbackUncheckedCreateNestedManyWithoutUpdatedByInput
+  feedbackRequests?: Prisma.FeedbackRequestUncheckedCreateNestedManyWithoutUserInput
+  hrWarnings?: Prisma.HrWarningUncheckedCreateNestedManyWithoutAssigneeInput
+  createdHrWarning?: Prisma.HrWarningUncheckedCreateNestedManyWithoutCreatedByInput
+  updatedHrWarnings?: Prisma.HrWarningUncheckedCreateNestedManyWithoutUpdatedByInput
+  CreatedAllowedUser?: Prisma.AllowedUserUncheckedCreateNestedManyWithoutCreatedByInput
+  UpdatedAllowance?: Prisma.AllowedUserUncheckedCreateNestedManyWithoutUpdatedByInput
+  eventAssignments?: Prisma.EventAssignmentUncheckedCreateNestedManyWithoutUserInput
+  CreatedEventAssignment?: Prisma.EventAssignmentUncheckedCreateNestedManyWithoutCreatedByInput
+  UpdatedEventAssignment?: Prisma.EventAssignmentUncheckedCreateNestedManyWithoutUpdatedByInput
+  updatedUsers?: Prisma.UserUncheckedCreateNestedManyWithoutUpdatedByInput
+  createdAvailabilitySlots?: Prisma.AvailabilitySlotUncheckedCreateNestedManyWithoutCreatedByInput
+  updatedAvailabilitySlots?: Prisma.AvailabilitySlotUncheckedCreateNestedManyWithoutUpdatedByInput
+  availabilityEntries?: Prisma.AvailabilityEntryUncheckedCreateNestedManyWithoutUserInput
+  UpdatedAvailabilityEntries?: Prisma.AvailabilityEntryUncheckedCreateNestedManyWithoutUpdatedByInput
+  entryCancelRequests?: Prisma.EntryCancelRequestUncheckedCreateNestedManyWithoutRequestedByInput
+  reviewedEntryCancelRequests?: Prisma.EntryCancelRequestUncheckedCreateNestedManyWithoutReviewedByInput
+  reviewedAssignmentCancelRequests?: Prisma.AssignmentCancelRequestUncheckedCreateNestedManyWithoutReviewedByInput
+}
+
+export type UserCreateOrConnectWithoutAssignmentCancelRequestsInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutAssignmentCancelRequestsInput, Prisma.UserUncheckedCreateWithoutAssignmentCancelRequestsInput>
+}
+
+export type UserCreateWithoutReviewedAssignmentCancelRequestsInput = {
+  id?: string
+  name?: string | null
+  email: string
+  emailVerified?: Date | string | null
+  image?: string | null
+  reqStatus?: $Enums.ReqStatus
+  rating?: number
+  deletedAt?: Date | string | null
+  deleted?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string | null
+  accounts?: Prisma.AccountCreateNestedManyWithoutUserInput
+  sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
+  Authenticator?: Prisma.AuthenticatorCreateNestedManyWithoutUserInput
+  joinRequests?: Prisma.JoinRequestCreateNestedManyWithoutCreatedByInput
+  updatedJoinRequests?: Prisma.JoinRequestCreateNestedManyWithoutUpdatedByInput
+  updatedBy?: Prisma.UserCreateNestedOneWithoutUpdatedUsersInput
+  memberStatusCreated?: Prisma.MemberStatusLogCreateNestedManyWithoutCreatedByInput
+  memberStatusLogs?: Prisma.MemberStatusLogCreateNestedManyWithoutUserInput
+  memberStatusChanges?: Prisma.MemberStatusLogCreateNestedManyWithoutUpdatedByInput
+  positionChanges?: Prisma.PositionHistoryCreateNestedManyWithoutUpdatedByInput
+  positionCreations?: Prisma.PositionHistoryCreateNestedManyWithoutCreatedByInput
+  positionHistories?: Prisma.PositionHistoryCreateNestedManyWithoutUserInput
+  ratingHistory?: Prisma.RatingHistoryCreateNestedManyWithoutUserInput
+  createdRatings?: Prisma.RatingHistoryCreateNestedManyWithoutCreatedByInput
+  updatedRatings?: Prisma.RatingHistoryCreateNestedManyWithoutUpdatedByInput
+  createdEvents?: Prisma.EventCreateNestedManyWithoutCreatedByInput
+  updatedEvents?: Prisma.EventCreateNestedManyWithoutUpdatedByInput
+  providedFeedbacks?: Prisma.EventFeedbackCreateNestedManyWithoutUserInput
+  updatedEventFeedback?: Prisma.EventFeedbackCreateNestedManyWithoutUpdatedByInput
+  feedbackRequests?: Prisma.FeedbackRequestCreateNestedManyWithoutUserInput
+  hrWarnings?: Prisma.HrWarningCreateNestedManyWithoutAssigneeInput
+  createdHrWarning?: Prisma.HrWarningCreateNestedManyWithoutCreatedByInput
+  updatedHrWarnings?: Prisma.HrWarningCreateNestedManyWithoutUpdatedByInput
+  CreatedAllowedUser?: Prisma.AllowedUserCreateNestedManyWithoutCreatedByInput
+  ownAllowance?: Prisma.AllowedUserCreateNestedOneWithoutUserInput
+  UpdatedAllowance?: Prisma.AllowedUserCreateNestedManyWithoutUpdatedByInput
+  eventAssignments?: Prisma.EventAssignmentCreateNestedManyWithoutUserInput
+  CreatedEventAssignment?: Prisma.EventAssignmentCreateNestedManyWithoutCreatedByInput
+  UpdatedEventAssignment?: Prisma.EventAssignmentCreateNestedManyWithoutUpdatedByInput
+  updatedUsers?: Prisma.UserCreateNestedManyWithoutUpdatedByInput
+  createdAvailabilitySlots?: Prisma.AvailabilitySlotCreateNestedManyWithoutCreatedByInput
+  updatedAvailabilitySlots?: Prisma.AvailabilitySlotCreateNestedManyWithoutUpdatedByInput
+  availabilityEntries?: Prisma.AvailabilityEntryCreateNestedManyWithoutUserInput
+  UpdatedAvailabilityEntries?: Prisma.AvailabilityEntryCreateNestedManyWithoutUpdatedByInput
+  entryCancelRequests?: Prisma.EntryCancelRequestCreateNestedManyWithoutRequestedByInput
+  reviewedEntryCancelRequests?: Prisma.EntryCancelRequestCreateNestedManyWithoutReviewedByInput
+  assignmentCancelRequests?: Prisma.AssignmentCancelRequestCreateNestedManyWithoutRequestedByInput
+}
+
+export type UserUncheckedCreateWithoutReviewedAssignmentCancelRequestsInput = {
+  id?: string
+  name?: string | null
+  email: string
+  emailVerified?: Date | string | null
+  image?: string | null
+  reqStatus?: $Enums.ReqStatus
+  rating?: number
+  deletedAt?: Date | string | null
+  deleted?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string | null
+  updatedById?: string | null
+  allowedUserId?: string | null
+  accounts?: Prisma.AccountUncheckedCreateNestedManyWithoutUserInput
+  sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
+  Authenticator?: Prisma.AuthenticatorUncheckedCreateNestedManyWithoutUserInput
+  joinRequests?: Prisma.JoinRequestUncheckedCreateNestedManyWithoutCreatedByInput
+  updatedJoinRequests?: Prisma.JoinRequestUncheckedCreateNestedManyWithoutUpdatedByInput
+  memberStatusCreated?: Prisma.MemberStatusLogUncheckedCreateNestedManyWithoutCreatedByInput
+  memberStatusLogs?: Prisma.MemberStatusLogUncheckedCreateNestedManyWithoutUserInput
+  memberStatusChanges?: Prisma.MemberStatusLogUncheckedCreateNestedManyWithoutUpdatedByInput
+  positionChanges?: Prisma.PositionHistoryUncheckedCreateNestedManyWithoutUpdatedByInput
+  positionCreations?: Prisma.PositionHistoryUncheckedCreateNestedManyWithoutCreatedByInput
+  positionHistories?: Prisma.PositionHistoryUncheckedCreateNestedManyWithoutUserInput
+  ratingHistory?: Prisma.RatingHistoryUncheckedCreateNestedManyWithoutUserInput
+  createdRatings?: Prisma.RatingHistoryUncheckedCreateNestedManyWithoutCreatedByInput
+  updatedRatings?: Prisma.RatingHistoryUncheckedCreateNestedManyWithoutUpdatedByInput
+  createdEvents?: Prisma.EventUncheckedCreateNestedManyWithoutCreatedByInput
+  updatedEvents?: Prisma.EventUncheckedCreateNestedManyWithoutUpdatedByInput
+  providedFeedbacks?: Prisma.EventFeedbackUncheckedCreateNestedManyWithoutUserInput
+  updatedEventFeedback?: Prisma.EventFeedbackUncheckedCreateNestedManyWithoutUpdatedByInput
+  feedbackRequests?: Prisma.FeedbackRequestUncheckedCreateNestedManyWithoutUserInput
+  hrWarnings?: Prisma.HrWarningUncheckedCreateNestedManyWithoutAssigneeInput
+  createdHrWarning?: Prisma.HrWarningUncheckedCreateNestedManyWithoutCreatedByInput
+  updatedHrWarnings?: Prisma.HrWarningUncheckedCreateNestedManyWithoutUpdatedByInput
+  CreatedAllowedUser?: Prisma.AllowedUserUncheckedCreateNestedManyWithoutCreatedByInput
+  UpdatedAllowance?: Prisma.AllowedUserUncheckedCreateNestedManyWithoutUpdatedByInput
+  eventAssignments?: Prisma.EventAssignmentUncheckedCreateNestedManyWithoutUserInput
+  CreatedEventAssignment?: Prisma.EventAssignmentUncheckedCreateNestedManyWithoutCreatedByInput
+  UpdatedEventAssignment?: Prisma.EventAssignmentUncheckedCreateNestedManyWithoutUpdatedByInput
+  updatedUsers?: Prisma.UserUncheckedCreateNestedManyWithoutUpdatedByInput
+  createdAvailabilitySlots?: Prisma.AvailabilitySlotUncheckedCreateNestedManyWithoutCreatedByInput
+  updatedAvailabilitySlots?: Prisma.AvailabilitySlotUncheckedCreateNestedManyWithoutUpdatedByInput
+  availabilityEntries?: Prisma.AvailabilityEntryUncheckedCreateNestedManyWithoutUserInput
+  UpdatedAvailabilityEntries?: Prisma.AvailabilityEntryUncheckedCreateNestedManyWithoutUpdatedByInput
+  entryCancelRequests?: Prisma.EntryCancelRequestUncheckedCreateNestedManyWithoutRequestedByInput
+  reviewedEntryCancelRequests?: Prisma.EntryCancelRequestUncheckedCreateNestedManyWithoutReviewedByInput
+  assignmentCancelRequests?: Prisma.AssignmentCancelRequestUncheckedCreateNestedManyWithoutRequestedByInput
+}
+
+export type UserCreateOrConnectWithoutReviewedAssignmentCancelRequestsInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutReviewedAssignmentCancelRequestsInput, Prisma.UserUncheckedCreateWithoutReviewedAssignmentCancelRequestsInput>
+}
+
+export type UserUpsertWithoutAssignmentCancelRequestsInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutAssignmentCancelRequestsInput, Prisma.UserUncheckedUpdateWithoutAssignmentCancelRequestsInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutAssignmentCancelRequestsInput, Prisma.UserUncheckedCreateWithoutAssignmentCancelRequestsInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutAssignmentCancelRequestsInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutAssignmentCancelRequestsInput, Prisma.UserUncheckedUpdateWithoutAssignmentCancelRequestsInput>
+}
+
+export type UserUpdateWithoutAssignmentCancelRequestsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  emailVerified?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  reqStatus?: Prisma.EnumReqStatusFieldUpdateOperationsInput | $Enums.ReqStatus
+  rating?: Prisma.IntFieldUpdateOperationsInput | number
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  accounts?: Prisma.AccountUpdateManyWithoutUserNestedInput
+  sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
+  Authenticator?: Prisma.AuthenticatorUpdateManyWithoutUserNestedInput
+  joinRequests?: Prisma.JoinRequestUpdateManyWithoutCreatedByNestedInput
+  updatedJoinRequests?: Prisma.JoinRequestUpdateManyWithoutUpdatedByNestedInput
+  updatedBy?: Prisma.UserUpdateOneWithoutUpdatedUsersNestedInput
+  memberStatusCreated?: Prisma.MemberStatusLogUpdateManyWithoutCreatedByNestedInput
+  memberStatusLogs?: Prisma.MemberStatusLogUpdateManyWithoutUserNestedInput
+  memberStatusChanges?: Prisma.MemberStatusLogUpdateManyWithoutUpdatedByNestedInput
+  positionChanges?: Prisma.PositionHistoryUpdateManyWithoutUpdatedByNestedInput
+  positionCreations?: Prisma.PositionHistoryUpdateManyWithoutCreatedByNestedInput
+  positionHistories?: Prisma.PositionHistoryUpdateManyWithoutUserNestedInput
+  ratingHistory?: Prisma.RatingHistoryUpdateManyWithoutUserNestedInput
+  createdRatings?: Prisma.RatingHistoryUpdateManyWithoutCreatedByNestedInput
+  updatedRatings?: Prisma.RatingHistoryUpdateManyWithoutUpdatedByNestedInput
+  createdEvents?: Prisma.EventUpdateManyWithoutCreatedByNestedInput
+  updatedEvents?: Prisma.EventUpdateManyWithoutUpdatedByNestedInput
+  providedFeedbacks?: Prisma.EventFeedbackUpdateManyWithoutUserNestedInput
+  updatedEventFeedback?: Prisma.EventFeedbackUpdateManyWithoutUpdatedByNestedInput
+  feedbackRequests?: Prisma.FeedbackRequestUpdateManyWithoutUserNestedInput
+  hrWarnings?: Prisma.HrWarningUpdateManyWithoutAssigneeNestedInput
+  createdHrWarning?: Prisma.HrWarningUpdateManyWithoutCreatedByNestedInput
+  updatedHrWarnings?: Prisma.HrWarningUpdateManyWithoutUpdatedByNestedInput
+  CreatedAllowedUser?: Prisma.AllowedUserUpdateManyWithoutCreatedByNestedInput
+  ownAllowance?: Prisma.AllowedUserUpdateOneWithoutUserNestedInput
+  UpdatedAllowance?: Prisma.AllowedUserUpdateManyWithoutUpdatedByNestedInput
+  eventAssignments?: Prisma.EventAssignmentUpdateManyWithoutUserNestedInput
+  CreatedEventAssignment?: Prisma.EventAssignmentUpdateManyWithoutCreatedByNestedInput
+  UpdatedEventAssignment?: Prisma.EventAssignmentUpdateManyWithoutUpdatedByNestedInput
+  updatedUsers?: Prisma.UserUpdateManyWithoutUpdatedByNestedInput
+  createdAvailabilitySlots?: Prisma.AvailabilitySlotUpdateManyWithoutCreatedByNestedInput
+  updatedAvailabilitySlots?: Prisma.AvailabilitySlotUpdateManyWithoutUpdatedByNestedInput
+  availabilityEntries?: Prisma.AvailabilityEntryUpdateManyWithoutUserNestedInput
+  UpdatedAvailabilityEntries?: Prisma.AvailabilityEntryUpdateManyWithoutUpdatedByNestedInput
+  entryCancelRequests?: Prisma.EntryCancelRequestUpdateManyWithoutRequestedByNestedInput
+  reviewedEntryCancelRequests?: Prisma.EntryCancelRequestUpdateManyWithoutReviewedByNestedInput
+  reviewedAssignmentCancelRequests?: Prisma.AssignmentCancelRequestUpdateManyWithoutReviewedByNestedInput
+}
+
+export type UserUncheckedUpdateWithoutAssignmentCancelRequestsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  emailVerified?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  reqStatus?: Prisma.EnumReqStatusFieldUpdateOperationsInput | $Enums.ReqStatus
+  rating?: Prisma.IntFieldUpdateOperationsInput | number
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  updatedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  allowedUserId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  accounts?: Prisma.AccountUncheckedUpdateManyWithoutUserNestedInput
+  sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
+  Authenticator?: Prisma.AuthenticatorUncheckedUpdateManyWithoutUserNestedInput
+  joinRequests?: Prisma.JoinRequestUncheckedUpdateManyWithoutCreatedByNestedInput
+  updatedJoinRequests?: Prisma.JoinRequestUncheckedUpdateManyWithoutUpdatedByNestedInput
+  memberStatusCreated?: Prisma.MemberStatusLogUncheckedUpdateManyWithoutCreatedByNestedInput
+  memberStatusLogs?: Prisma.MemberStatusLogUncheckedUpdateManyWithoutUserNestedInput
+  memberStatusChanges?: Prisma.MemberStatusLogUncheckedUpdateManyWithoutUpdatedByNestedInput
+  positionChanges?: Prisma.PositionHistoryUncheckedUpdateManyWithoutUpdatedByNestedInput
+  positionCreations?: Prisma.PositionHistoryUncheckedUpdateManyWithoutCreatedByNestedInput
+  positionHistories?: Prisma.PositionHistoryUncheckedUpdateManyWithoutUserNestedInput
+  ratingHistory?: Prisma.RatingHistoryUncheckedUpdateManyWithoutUserNestedInput
+  createdRatings?: Prisma.RatingHistoryUncheckedUpdateManyWithoutCreatedByNestedInput
+  updatedRatings?: Prisma.RatingHistoryUncheckedUpdateManyWithoutUpdatedByNestedInput
+  createdEvents?: Prisma.EventUncheckedUpdateManyWithoutCreatedByNestedInput
+  updatedEvents?: Prisma.EventUncheckedUpdateManyWithoutUpdatedByNestedInput
+  providedFeedbacks?: Prisma.EventFeedbackUncheckedUpdateManyWithoutUserNestedInput
+  updatedEventFeedback?: Prisma.EventFeedbackUncheckedUpdateManyWithoutUpdatedByNestedInput
+  feedbackRequests?: Prisma.FeedbackRequestUncheckedUpdateManyWithoutUserNestedInput
+  hrWarnings?: Prisma.HrWarningUncheckedUpdateManyWithoutAssigneeNestedInput
+  createdHrWarning?: Prisma.HrWarningUncheckedUpdateManyWithoutCreatedByNestedInput
+  updatedHrWarnings?: Prisma.HrWarningUncheckedUpdateManyWithoutUpdatedByNestedInput
+  CreatedAllowedUser?: Prisma.AllowedUserUncheckedUpdateManyWithoutCreatedByNestedInput
+  UpdatedAllowance?: Prisma.AllowedUserUncheckedUpdateManyWithoutUpdatedByNestedInput
+  eventAssignments?: Prisma.EventAssignmentUncheckedUpdateManyWithoutUserNestedInput
+  CreatedEventAssignment?: Prisma.EventAssignmentUncheckedUpdateManyWithoutCreatedByNestedInput
+  UpdatedEventAssignment?: Prisma.EventAssignmentUncheckedUpdateManyWithoutUpdatedByNestedInput
+  updatedUsers?: Prisma.UserUncheckedUpdateManyWithoutUpdatedByNestedInput
+  createdAvailabilitySlots?: Prisma.AvailabilitySlotUncheckedUpdateManyWithoutCreatedByNestedInput
+  updatedAvailabilitySlots?: Prisma.AvailabilitySlotUncheckedUpdateManyWithoutUpdatedByNestedInput
+  availabilityEntries?: Prisma.AvailabilityEntryUncheckedUpdateManyWithoutUserNestedInput
+  UpdatedAvailabilityEntries?: Prisma.AvailabilityEntryUncheckedUpdateManyWithoutUpdatedByNestedInput
+  entryCancelRequests?: Prisma.EntryCancelRequestUncheckedUpdateManyWithoutRequestedByNestedInput
+  reviewedEntryCancelRequests?: Prisma.EntryCancelRequestUncheckedUpdateManyWithoutReviewedByNestedInput
+  reviewedAssignmentCancelRequests?: Prisma.AssignmentCancelRequestUncheckedUpdateManyWithoutReviewedByNestedInput
+}
+
+export type UserUpsertWithoutReviewedAssignmentCancelRequestsInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutReviewedAssignmentCancelRequestsInput, Prisma.UserUncheckedUpdateWithoutReviewedAssignmentCancelRequestsInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutReviewedAssignmentCancelRequestsInput, Prisma.UserUncheckedCreateWithoutReviewedAssignmentCancelRequestsInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutReviewedAssignmentCancelRequestsInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutReviewedAssignmentCancelRequestsInput, Prisma.UserUncheckedUpdateWithoutReviewedAssignmentCancelRequestsInput>
+}
+
+export type UserUpdateWithoutReviewedAssignmentCancelRequestsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  emailVerified?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  reqStatus?: Prisma.EnumReqStatusFieldUpdateOperationsInput | $Enums.ReqStatus
+  rating?: Prisma.IntFieldUpdateOperationsInput | number
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  accounts?: Prisma.AccountUpdateManyWithoutUserNestedInput
+  sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
+  Authenticator?: Prisma.AuthenticatorUpdateManyWithoutUserNestedInput
+  joinRequests?: Prisma.JoinRequestUpdateManyWithoutCreatedByNestedInput
+  updatedJoinRequests?: Prisma.JoinRequestUpdateManyWithoutUpdatedByNestedInput
+  updatedBy?: Prisma.UserUpdateOneWithoutUpdatedUsersNestedInput
+  memberStatusCreated?: Prisma.MemberStatusLogUpdateManyWithoutCreatedByNestedInput
+  memberStatusLogs?: Prisma.MemberStatusLogUpdateManyWithoutUserNestedInput
+  memberStatusChanges?: Prisma.MemberStatusLogUpdateManyWithoutUpdatedByNestedInput
+  positionChanges?: Prisma.PositionHistoryUpdateManyWithoutUpdatedByNestedInput
+  positionCreations?: Prisma.PositionHistoryUpdateManyWithoutCreatedByNestedInput
+  positionHistories?: Prisma.PositionHistoryUpdateManyWithoutUserNestedInput
+  ratingHistory?: Prisma.RatingHistoryUpdateManyWithoutUserNestedInput
+  createdRatings?: Prisma.RatingHistoryUpdateManyWithoutCreatedByNestedInput
+  updatedRatings?: Prisma.RatingHistoryUpdateManyWithoutUpdatedByNestedInput
+  createdEvents?: Prisma.EventUpdateManyWithoutCreatedByNestedInput
+  updatedEvents?: Prisma.EventUpdateManyWithoutUpdatedByNestedInput
+  providedFeedbacks?: Prisma.EventFeedbackUpdateManyWithoutUserNestedInput
+  updatedEventFeedback?: Prisma.EventFeedbackUpdateManyWithoutUpdatedByNestedInput
+  feedbackRequests?: Prisma.FeedbackRequestUpdateManyWithoutUserNestedInput
+  hrWarnings?: Prisma.HrWarningUpdateManyWithoutAssigneeNestedInput
+  createdHrWarning?: Prisma.HrWarningUpdateManyWithoutCreatedByNestedInput
+  updatedHrWarnings?: Prisma.HrWarningUpdateManyWithoutUpdatedByNestedInput
+  CreatedAllowedUser?: Prisma.AllowedUserUpdateManyWithoutCreatedByNestedInput
+  ownAllowance?: Prisma.AllowedUserUpdateOneWithoutUserNestedInput
+  UpdatedAllowance?: Prisma.AllowedUserUpdateManyWithoutUpdatedByNestedInput
+  eventAssignments?: Prisma.EventAssignmentUpdateManyWithoutUserNestedInput
+  CreatedEventAssignment?: Prisma.EventAssignmentUpdateManyWithoutCreatedByNestedInput
+  UpdatedEventAssignment?: Prisma.EventAssignmentUpdateManyWithoutUpdatedByNestedInput
+  updatedUsers?: Prisma.UserUpdateManyWithoutUpdatedByNestedInput
+  createdAvailabilitySlots?: Prisma.AvailabilitySlotUpdateManyWithoutCreatedByNestedInput
+  updatedAvailabilitySlots?: Prisma.AvailabilitySlotUpdateManyWithoutUpdatedByNestedInput
+  availabilityEntries?: Prisma.AvailabilityEntryUpdateManyWithoutUserNestedInput
+  UpdatedAvailabilityEntries?: Prisma.AvailabilityEntryUpdateManyWithoutUpdatedByNestedInput
+  entryCancelRequests?: Prisma.EntryCancelRequestUpdateManyWithoutRequestedByNestedInput
+  reviewedEntryCancelRequests?: Prisma.EntryCancelRequestUpdateManyWithoutReviewedByNestedInput
+  assignmentCancelRequests?: Prisma.AssignmentCancelRequestUpdateManyWithoutRequestedByNestedInput
+}
+
+export type UserUncheckedUpdateWithoutReviewedAssignmentCancelRequestsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  emailVerified?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  reqStatus?: Prisma.EnumReqStatusFieldUpdateOperationsInput | $Enums.ReqStatus
+  rating?: Prisma.IntFieldUpdateOperationsInput | number
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  updatedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  allowedUserId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  accounts?: Prisma.AccountUncheckedUpdateManyWithoutUserNestedInput
+  sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
+  Authenticator?: Prisma.AuthenticatorUncheckedUpdateManyWithoutUserNestedInput
+  joinRequests?: Prisma.JoinRequestUncheckedUpdateManyWithoutCreatedByNestedInput
+  updatedJoinRequests?: Prisma.JoinRequestUncheckedUpdateManyWithoutUpdatedByNestedInput
+  memberStatusCreated?: Prisma.MemberStatusLogUncheckedUpdateManyWithoutCreatedByNestedInput
+  memberStatusLogs?: Prisma.MemberStatusLogUncheckedUpdateManyWithoutUserNestedInput
+  memberStatusChanges?: Prisma.MemberStatusLogUncheckedUpdateManyWithoutUpdatedByNestedInput
+  positionChanges?: Prisma.PositionHistoryUncheckedUpdateManyWithoutUpdatedByNestedInput
+  positionCreations?: Prisma.PositionHistoryUncheckedUpdateManyWithoutCreatedByNestedInput
+  positionHistories?: Prisma.PositionHistoryUncheckedUpdateManyWithoutUserNestedInput
+  ratingHistory?: Prisma.RatingHistoryUncheckedUpdateManyWithoutUserNestedInput
+  createdRatings?: Prisma.RatingHistoryUncheckedUpdateManyWithoutCreatedByNestedInput
+  updatedRatings?: Prisma.RatingHistoryUncheckedUpdateManyWithoutUpdatedByNestedInput
+  createdEvents?: Prisma.EventUncheckedUpdateManyWithoutCreatedByNestedInput
+  updatedEvents?: Prisma.EventUncheckedUpdateManyWithoutUpdatedByNestedInput
+  providedFeedbacks?: Prisma.EventFeedbackUncheckedUpdateManyWithoutUserNestedInput
+  updatedEventFeedback?: Prisma.EventFeedbackUncheckedUpdateManyWithoutUpdatedByNestedInput
+  feedbackRequests?: Prisma.FeedbackRequestUncheckedUpdateManyWithoutUserNestedInput
+  hrWarnings?: Prisma.HrWarningUncheckedUpdateManyWithoutAssigneeNestedInput
+  createdHrWarning?: Prisma.HrWarningUncheckedUpdateManyWithoutCreatedByNestedInput
+  updatedHrWarnings?: Prisma.HrWarningUncheckedUpdateManyWithoutUpdatedByNestedInput
+  CreatedAllowedUser?: Prisma.AllowedUserUncheckedUpdateManyWithoutCreatedByNestedInput
+  UpdatedAllowance?: Prisma.AllowedUserUncheckedUpdateManyWithoutUpdatedByNestedInput
+  eventAssignments?: Prisma.EventAssignmentUncheckedUpdateManyWithoutUserNestedInput
+  CreatedEventAssignment?: Prisma.EventAssignmentUncheckedUpdateManyWithoutCreatedByNestedInput
+  UpdatedEventAssignment?: Prisma.EventAssignmentUncheckedUpdateManyWithoutUpdatedByNestedInput
+  updatedUsers?: Prisma.UserUncheckedUpdateManyWithoutUpdatedByNestedInput
+  createdAvailabilitySlots?: Prisma.AvailabilitySlotUncheckedUpdateManyWithoutCreatedByNestedInput
+  updatedAvailabilitySlots?: Prisma.AvailabilitySlotUncheckedUpdateManyWithoutUpdatedByNestedInput
+  availabilityEntries?: Prisma.AvailabilityEntryUncheckedUpdateManyWithoutUserNestedInput
+  UpdatedAvailabilityEntries?: Prisma.AvailabilityEntryUncheckedUpdateManyWithoutUpdatedByNestedInput
+  entryCancelRequests?: Prisma.EntryCancelRequestUncheckedUpdateManyWithoutRequestedByNestedInput
+  reviewedEntryCancelRequests?: Prisma.EntryCancelRequestUncheckedUpdateManyWithoutReviewedByNestedInput
+  assignmentCancelRequests?: Prisma.AssignmentCancelRequestUncheckedUpdateManyWithoutRequestedByNestedInput
 }
 
 export type UserCreateWithoutRatingHistoryInput = {
@@ -3698,7 +6036,7 @@ export type UserCreateWithoutRatingHistoryInput = {
   updatedEvents?: Prisma.EventCreateNestedManyWithoutUpdatedByInput
   providedFeedbacks?: Prisma.EventFeedbackCreateNestedManyWithoutUserInput
   updatedEventFeedback?: Prisma.EventFeedbackCreateNestedManyWithoutUpdatedByInput
-  scheduledEventEmails?: Prisma.ScheduledEmailsCreateNestedManyWithoutUserInput
+  feedbackRequests?: Prisma.FeedbackRequestCreateNestedManyWithoutUserInput
   hrWarnings?: Prisma.HrWarningCreateNestedManyWithoutAssigneeInput
   createdHrWarning?: Prisma.HrWarningCreateNestedManyWithoutCreatedByInput
   updatedHrWarnings?: Prisma.HrWarningCreateNestedManyWithoutUpdatedByInput
@@ -3709,6 +6047,14 @@ export type UserCreateWithoutRatingHistoryInput = {
   CreatedEventAssignment?: Prisma.EventAssignmentCreateNestedManyWithoutCreatedByInput
   UpdatedEventAssignment?: Prisma.EventAssignmentCreateNestedManyWithoutUpdatedByInput
   updatedUsers?: Prisma.UserCreateNestedManyWithoutUpdatedByInput
+  createdAvailabilitySlots?: Prisma.AvailabilitySlotCreateNestedManyWithoutCreatedByInput
+  updatedAvailabilitySlots?: Prisma.AvailabilitySlotCreateNestedManyWithoutUpdatedByInput
+  availabilityEntries?: Prisma.AvailabilityEntryCreateNestedManyWithoutUserInput
+  UpdatedAvailabilityEntries?: Prisma.AvailabilityEntryCreateNestedManyWithoutUpdatedByInput
+  entryCancelRequests?: Prisma.EntryCancelRequestCreateNestedManyWithoutRequestedByInput
+  reviewedEntryCancelRequests?: Prisma.EntryCancelRequestCreateNestedManyWithoutReviewedByInput
+  assignmentCancelRequests?: Prisma.AssignmentCancelRequestCreateNestedManyWithoutRequestedByInput
+  reviewedAssignmentCancelRequests?: Prisma.AssignmentCancelRequestCreateNestedManyWithoutReviewedByInput
 }
 
 export type UserUncheckedCreateWithoutRatingHistoryInput = {
@@ -3742,7 +6088,7 @@ export type UserUncheckedCreateWithoutRatingHistoryInput = {
   updatedEvents?: Prisma.EventUncheckedCreateNestedManyWithoutUpdatedByInput
   providedFeedbacks?: Prisma.EventFeedbackUncheckedCreateNestedManyWithoutUserInput
   updatedEventFeedback?: Prisma.EventFeedbackUncheckedCreateNestedManyWithoutUpdatedByInput
-  scheduledEventEmails?: Prisma.ScheduledEmailsUncheckedCreateNestedManyWithoutUserInput
+  feedbackRequests?: Prisma.FeedbackRequestUncheckedCreateNestedManyWithoutUserInput
   hrWarnings?: Prisma.HrWarningUncheckedCreateNestedManyWithoutAssigneeInput
   createdHrWarning?: Prisma.HrWarningUncheckedCreateNestedManyWithoutCreatedByInput
   updatedHrWarnings?: Prisma.HrWarningUncheckedCreateNestedManyWithoutUpdatedByInput
@@ -3752,6 +6098,14 @@ export type UserUncheckedCreateWithoutRatingHistoryInput = {
   CreatedEventAssignment?: Prisma.EventAssignmentUncheckedCreateNestedManyWithoutCreatedByInput
   UpdatedEventAssignment?: Prisma.EventAssignmentUncheckedCreateNestedManyWithoutUpdatedByInput
   updatedUsers?: Prisma.UserUncheckedCreateNestedManyWithoutUpdatedByInput
+  createdAvailabilitySlots?: Prisma.AvailabilitySlotUncheckedCreateNestedManyWithoutCreatedByInput
+  updatedAvailabilitySlots?: Prisma.AvailabilitySlotUncheckedCreateNestedManyWithoutUpdatedByInput
+  availabilityEntries?: Prisma.AvailabilityEntryUncheckedCreateNestedManyWithoutUserInput
+  UpdatedAvailabilityEntries?: Prisma.AvailabilityEntryUncheckedCreateNestedManyWithoutUpdatedByInput
+  entryCancelRequests?: Prisma.EntryCancelRequestUncheckedCreateNestedManyWithoutRequestedByInput
+  reviewedEntryCancelRequests?: Prisma.EntryCancelRequestUncheckedCreateNestedManyWithoutReviewedByInput
+  assignmentCancelRequests?: Prisma.AssignmentCancelRequestUncheckedCreateNestedManyWithoutRequestedByInput
+  reviewedAssignmentCancelRequests?: Prisma.AssignmentCancelRequestUncheckedCreateNestedManyWithoutReviewedByInput
 }
 
 export type UserCreateOrConnectWithoutRatingHistoryInput = {
@@ -3789,7 +6143,7 @@ export type UserCreateWithoutCreatedRatingsInput = {
   updatedEvents?: Prisma.EventCreateNestedManyWithoutUpdatedByInput
   providedFeedbacks?: Prisma.EventFeedbackCreateNestedManyWithoutUserInput
   updatedEventFeedback?: Prisma.EventFeedbackCreateNestedManyWithoutUpdatedByInput
-  scheduledEventEmails?: Prisma.ScheduledEmailsCreateNestedManyWithoutUserInput
+  feedbackRequests?: Prisma.FeedbackRequestCreateNestedManyWithoutUserInput
   hrWarnings?: Prisma.HrWarningCreateNestedManyWithoutAssigneeInput
   createdHrWarning?: Prisma.HrWarningCreateNestedManyWithoutCreatedByInput
   updatedHrWarnings?: Prisma.HrWarningCreateNestedManyWithoutUpdatedByInput
@@ -3800,6 +6154,14 @@ export type UserCreateWithoutCreatedRatingsInput = {
   CreatedEventAssignment?: Prisma.EventAssignmentCreateNestedManyWithoutCreatedByInput
   UpdatedEventAssignment?: Prisma.EventAssignmentCreateNestedManyWithoutUpdatedByInput
   updatedUsers?: Prisma.UserCreateNestedManyWithoutUpdatedByInput
+  createdAvailabilitySlots?: Prisma.AvailabilitySlotCreateNestedManyWithoutCreatedByInput
+  updatedAvailabilitySlots?: Prisma.AvailabilitySlotCreateNestedManyWithoutUpdatedByInput
+  availabilityEntries?: Prisma.AvailabilityEntryCreateNestedManyWithoutUserInput
+  UpdatedAvailabilityEntries?: Prisma.AvailabilityEntryCreateNestedManyWithoutUpdatedByInput
+  entryCancelRequests?: Prisma.EntryCancelRequestCreateNestedManyWithoutRequestedByInput
+  reviewedEntryCancelRequests?: Prisma.EntryCancelRequestCreateNestedManyWithoutReviewedByInput
+  assignmentCancelRequests?: Prisma.AssignmentCancelRequestCreateNestedManyWithoutRequestedByInput
+  reviewedAssignmentCancelRequests?: Prisma.AssignmentCancelRequestCreateNestedManyWithoutReviewedByInput
 }
 
 export type UserUncheckedCreateWithoutCreatedRatingsInput = {
@@ -3833,7 +6195,7 @@ export type UserUncheckedCreateWithoutCreatedRatingsInput = {
   updatedEvents?: Prisma.EventUncheckedCreateNestedManyWithoutUpdatedByInput
   providedFeedbacks?: Prisma.EventFeedbackUncheckedCreateNestedManyWithoutUserInput
   updatedEventFeedback?: Prisma.EventFeedbackUncheckedCreateNestedManyWithoutUpdatedByInput
-  scheduledEventEmails?: Prisma.ScheduledEmailsUncheckedCreateNestedManyWithoutUserInput
+  feedbackRequests?: Prisma.FeedbackRequestUncheckedCreateNestedManyWithoutUserInput
   hrWarnings?: Prisma.HrWarningUncheckedCreateNestedManyWithoutAssigneeInput
   createdHrWarning?: Prisma.HrWarningUncheckedCreateNestedManyWithoutCreatedByInput
   updatedHrWarnings?: Prisma.HrWarningUncheckedCreateNestedManyWithoutUpdatedByInput
@@ -3843,6 +6205,14 @@ export type UserUncheckedCreateWithoutCreatedRatingsInput = {
   CreatedEventAssignment?: Prisma.EventAssignmentUncheckedCreateNestedManyWithoutCreatedByInput
   UpdatedEventAssignment?: Prisma.EventAssignmentUncheckedCreateNestedManyWithoutUpdatedByInput
   updatedUsers?: Prisma.UserUncheckedCreateNestedManyWithoutUpdatedByInput
+  createdAvailabilitySlots?: Prisma.AvailabilitySlotUncheckedCreateNestedManyWithoutCreatedByInput
+  updatedAvailabilitySlots?: Prisma.AvailabilitySlotUncheckedCreateNestedManyWithoutUpdatedByInput
+  availabilityEntries?: Prisma.AvailabilityEntryUncheckedCreateNestedManyWithoutUserInput
+  UpdatedAvailabilityEntries?: Prisma.AvailabilityEntryUncheckedCreateNestedManyWithoutUpdatedByInput
+  entryCancelRequests?: Prisma.EntryCancelRequestUncheckedCreateNestedManyWithoutRequestedByInput
+  reviewedEntryCancelRequests?: Prisma.EntryCancelRequestUncheckedCreateNestedManyWithoutReviewedByInput
+  assignmentCancelRequests?: Prisma.AssignmentCancelRequestUncheckedCreateNestedManyWithoutRequestedByInput
+  reviewedAssignmentCancelRequests?: Prisma.AssignmentCancelRequestUncheckedCreateNestedManyWithoutReviewedByInput
 }
 
 export type UserCreateOrConnectWithoutCreatedRatingsInput = {
@@ -3880,7 +6250,7 @@ export type UserCreateWithoutUpdatedRatingsInput = {
   updatedEvents?: Prisma.EventCreateNestedManyWithoutUpdatedByInput
   providedFeedbacks?: Prisma.EventFeedbackCreateNestedManyWithoutUserInput
   updatedEventFeedback?: Prisma.EventFeedbackCreateNestedManyWithoutUpdatedByInput
-  scheduledEventEmails?: Prisma.ScheduledEmailsCreateNestedManyWithoutUserInput
+  feedbackRequests?: Prisma.FeedbackRequestCreateNestedManyWithoutUserInput
   hrWarnings?: Prisma.HrWarningCreateNestedManyWithoutAssigneeInput
   createdHrWarning?: Prisma.HrWarningCreateNestedManyWithoutCreatedByInput
   updatedHrWarnings?: Prisma.HrWarningCreateNestedManyWithoutUpdatedByInput
@@ -3891,6 +6261,14 @@ export type UserCreateWithoutUpdatedRatingsInput = {
   CreatedEventAssignment?: Prisma.EventAssignmentCreateNestedManyWithoutCreatedByInput
   UpdatedEventAssignment?: Prisma.EventAssignmentCreateNestedManyWithoutUpdatedByInput
   updatedUsers?: Prisma.UserCreateNestedManyWithoutUpdatedByInput
+  createdAvailabilitySlots?: Prisma.AvailabilitySlotCreateNestedManyWithoutCreatedByInput
+  updatedAvailabilitySlots?: Prisma.AvailabilitySlotCreateNestedManyWithoutUpdatedByInput
+  availabilityEntries?: Prisma.AvailabilityEntryCreateNestedManyWithoutUserInput
+  UpdatedAvailabilityEntries?: Prisma.AvailabilityEntryCreateNestedManyWithoutUpdatedByInput
+  entryCancelRequests?: Prisma.EntryCancelRequestCreateNestedManyWithoutRequestedByInput
+  reviewedEntryCancelRequests?: Prisma.EntryCancelRequestCreateNestedManyWithoutReviewedByInput
+  assignmentCancelRequests?: Prisma.AssignmentCancelRequestCreateNestedManyWithoutRequestedByInput
+  reviewedAssignmentCancelRequests?: Prisma.AssignmentCancelRequestCreateNestedManyWithoutReviewedByInput
 }
 
 export type UserUncheckedCreateWithoutUpdatedRatingsInput = {
@@ -3924,7 +6302,7 @@ export type UserUncheckedCreateWithoutUpdatedRatingsInput = {
   updatedEvents?: Prisma.EventUncheckedCreateNestedManyWithoutUpdatedByInput
   providedFeedbacks?: Prisma.EventFeedbackUncheckedCreateNestedManyWithoutUserInput
   updatedEventFeedback?: Prisma.EventFeedbackUncheckedCreateNestedManyWithoutUpdatedByInput
-  scheduledEventEmails?: Prisma.ScheduledEmailsUncheckedCreateNestedManyWithoutUserInput
+  feedbackRequests?: Prisma.FeedbackRequestUncheckedCreateNestedManyWithoutUserInput
   hrWarnings?: Prisma.HrWarningUncheckedCreateNestedManyWithoutAssigneeInput
   createdHrWarning?: Prisma.HrWarningUncheckedCreateNestedManyWithoutCreatedByInput
   updatedHrWarnings?: Prisma.HrWarningUncheckedCreateNestedManyWithoutUpdatedByInput
@@ -3934,6 +6312,14 @@ export type UserUncheckedCreateWithoutUpdatedRatingsInput = {
   CreatedEventAssignment?: Prisma.EventAssignmentUncheckedCreateNestedManyWithoutCreatedByInput
   UpdatedEventAssignment?: Prisma.EventAssignmentUncheckedCreateNestedManyWithoutUpdatedByInput
   updatedUsers?: Prisma.UserUncheckedCreateNestedManyWithoutUpdatedByInput
+  createdAvailabilitySlots?: Prisma.AvailabilitySlotUncheckedCreateNestedManyWithoutCreatedByInput
+  updatedAvailabilitySlots?: Prisma.AvailabilitySlotUncheckedCreateNestedManyWithoutUpdatedByInput
+  availabilityEntries?: Prisma.AvailabilityEntryUncheckedCreateNestedManyWithoutUserInput
+  UpdatedAvailabilityEntries?: Prisma.AvailabilityEntryUncheckedCreateNestedManyWithoutUpdatedByInput
+  entryCancelRequests?: Prisma.EntryCancelRequestUncheckedCreateNestedManyWithoutRequestedByInput
+  reviewedEntryCancelRequests?: Prisma.EntryCancelRequestUncheckedCreateNestedManyWithoutReviewedByInput
+  assignmentCancelRequests?: Prisma.AssignmentCancelRequestUncheckedCreateNestedManyWithoutRequestedByInput
+  reviewedAssignmentCancelRequests?: Prisma.AssignmentCancelRequestUncheckedCreateNestedManyWithoutReviewedByInput
 }
 
 export type UserCreateOrConnectWithoutUpdatedRatingsInput = {
@@ -3982,7 +6368,7 @@ export type UserUpdateWithoutRatingHistoryInput = {
   updatedEvents?: Prisma.EventUpdateManyWithoutUpdatedByNestedInput
   providedFeedbacks?: Prisma.EventFeedbackUpdateManyWithoutUserNestedInput
   updatedEventFeedback?: Prisma.EventFeedbackUpdateManyWithoutUpdatedByNestedInput
-  scheduledEventEmails?: Prisma.ScheduledEmailsUpdateManyWithoutUserNestedInput
+  feedbackRequests?: Prisma.FeedbackRequestUpdateManyWithoutUserNestedInput
   hrWarnings?: Prisma.HrWarningUpdateManyWithoutAssigneeNestedInput
   createdHrWarning?: Prisma.HrWarningUpdateManyWithoutCreatedByNestedInput
   updatedHrWarnings?: Prisma.HrWarningUpdateManyWithoutUpdatedByNestedInput
@@ -3993,6 +6379,14 @@ export type UserUpdateWithoutRatingHistoryInput = {
   CreatedEventAssignment?: Prisma.EventAssignmentUpdateManyWithoutCreatedByNestedInput
   UpdatedEventAssignment?: Prisma.EventAssignmentUpdateManyWithoutUpdatedByNestedInput
   updatedUsers?: Prisma.UserUpdateManyWithoutUpdatedByNestedInput
+  createdAvailabilitySlots?: Prisma.AvailabilitySlotUpdateManyWithoutCreatedByNestedInput
+  updatedAvailabilitySlots?: Prisma.AvailabilitySlotUpdateManyWithoutUpdatedByNestedInput
+  availabilityEntries?: Prisma.AvailabilityEntryUpdateManyWithoutUserNestedInput
+  UpdatedAvailabilityEntries?: Prisma.AvailabilityEntryUpdateManyWithoutUpdatedByNestedInput
+  entryCancelRequests?: Prisma.EntryCancelRequestUpdateManyWithoutRequestedByNestedInput
+  reviewedEntryCancelRequests?: Prisma.EntryCancelRequestUpdateManyWithoutReviewedByNestedInput
+  assignmentCancelRequests?: Prisma.AssignmentCancelRequestUpdateManyWithoutRequestedByNestedInput
+  reviewedAssignmentCancelRequests?: Prisma.AssignmentCancelRequestUpdateManyWithoutReviewedByNestedInput
 }
 
 export type UserUncheckedUpdateWithoutRatingHistoryInput = {
@@ -4026,7 +6420,7 @@ export type UserUncheckedUpdateWithoutRatingHistoryInput = {
   updatedEvents?: Prisma.EventUncheckedUpdateManyWithoutUpdatedByNestedInput
   providedFeedbacks?: Prisma.EventFeedbackUncheckedUpdateManyWithoutUserNestedInput
   updatedEventFeedback?: Prisma.EventFeedbackUncheckedUpdateManyWithoutUpdatedByNestedInput
-  scheduledEventEmails?: Prisma.ScheduledEmailsUncheckedUpdateManyWithoutUserNestedInput
+  feedbackRequests?: Prisma.FeedbackRequestUncheckedUpdateManyWithoutUserNestedInput
   hrWarnings?: Prisma.HrWarningUncheckedUpdateManyWithoutAssigneeNestedInput
   createdHrWarning?: Prisma.HrWarningUncheckedUpdateManyWithoutCreatedByNestedInput
   updatedHrWarnings?: Prisma.HrWarningUncheckedUpdateManyWithoutUpdatedByNestedInput
@@ -4036,6 +6430,14 @@ export type UserUncheckedUpdateWithoutRatingHistoryInput = {
   CreatedEventAssignment?: Prisma.EventAssignmentUncheckedUpdateManyWithoutCreatedByNestedInput
   UpdatedEventAssignment?: Prisma.EventAssignmentUncheckedUpdateManyWithoutUpdatedByNestedInput
   updatedUsers?: Prisma.UserUncheckedUpdateManyWithoutUpdatedByNestedInput
+  createdAvailabilitySlots?: Prisma.AvailabilitySlotUncheckedUpdateManyWithoutCreatedByNestedInput
+  updatedAvailabilitySlots?: Prisma.AvailabilitySlotUncheckedUpdateManyWithoutUpdatedByNestedInput
+  availabilityEntries?: Prisma.AvailabilityEntryUncheckedUpdateManyWithoutUserNestedInput
+  UpdatedAvailabilityEntries?: Prisma.AvailabilityEntryUncheckedUpdateManyWithoutUpdatedByNestedInput
+  entryCancelRequests?: Prisma.EntryCancelRequestUncheckedUpdateManyWithoutRequestedByNestedInput
+  reviewedEntryCancelRequests?: Prisma.EntryCancelRequestUncheckedUpdateManyWithoutReviewedByNestedInput
+  assignmentCancelRequests?: Prisma.AssignmentCancelRequestUncheckedUpdateManyWithoutRequestedByNestedInput
+  reviewedAssignmentCancelRequests?: Prisma.AssignmentCancelRequestUncheckedUpdateManyWithoutReviewedByNestedInput
 }
 
 export type UserUpsertWithoutCreatedRatingsInput = {
@@ -4079,7 +6481,7 @@ export type UserUpdateWithoutCreatedRatingsInput = {
   updatedEvents?: Prisma.EventUpdateManyWithoutUpdatedByNestedInput
   providedFeedbacks?: Prisma.EventFeedbackUpdateManyWithoutUserNestedInput
   updatedEventFeedback?: Prisma.EventFeedbackUpdateManyWithoutUpdatedByNestedInput
-  scheduledEventEmails?: Prisma.ScheduledEmailsUpdateManyWithoutUserNestedInput
+  feedbackRequests?: Prisma.FeedbackRequestUpdateManyWithoutUserNestedInput
   hrWarnings?: Prisma.HrWarningUpdateManyWithoutAssigneeNestedInput
   createdHrWarning?: Prisma.HrWarningUpdateManyWithoutCreatedByNestedInput
   updatedHrWarnings?: Prisma.HrWarningUpdateManyWithoutUpdatedByNestedInput
@@ -4090,6 +6492,14 @@ export type UserUpdateWithoutCreatedRatingsInput = {
   CreatedEventAssignment?: Prisma.EventAssignmentUpdateManyWithoutCreatedByNestedInput
   UpdatedEventAssignment?: Prisma.EventAssignmentUpdateManyWithoutUpdatedByNestedInput
   updatedUsers?: Prisma.UserUpdateManyWithoutUpdatedByNestedInput
+  createdAvailabilitySlots?: Prisma.AvailabilitySlotUpdateManyWithoutCreatedByNestedInput
+  updatedAvailabilitySlots?: Prisma.AvailabilitySlotUpdateManyWithoutUpdatedByNestedInput
+  availabilityEntries?: Prisma.AvailabilityEntryUpdateManyWithoutUserNestedInput
+  UpdatedAvailabilityEntries?: Prisma.AvailabilityEntryUpdateManyWithoutUpdatedByNestedInput
+  entryCancelRequests?: Prisma.EntryCancelRequestUpdateManyWithoutRequestedByNestedInput
+  reviewedEntryCancelRequests?: Prisma.EntryCancelRequestUpdateManyWithoutReviewedByNestedInput
+  assignmentCancelRequests?: Prisma.AssignmentCancelRequestUpdateManyWithoutRequestedByNestedInput
+  reviewedAssignmentCancelRequests?: Prisma.AssignmentCancelRequestUpdateManyWithoutReviewedByNestedInput
 }
 
 export type UserUncheckedUpdateWithoutCreatedRatingsInput = {
@@ -4123,7 +6533,7 @@ export type UserUncheckedUpdateWithoutCreatedRatingsInput = {
   updatedEvents?: Prisma.EventUncheckedUpdateManyWithoutUpdatedByNestedInput
   providedFeedbacks?: Prisma.EventFeedbackUncheckedUpdateManyWithoutUserNestedInput
   updatedEventFeedback?: Prisma.EventFeedbackUncheckedUpdateManyWithoutUpdatedByNestedInput
-  scheduledEventEmails?: Prisma.ScheduledEmailsUncheckedUpdateManyWithoutUserNestedInput
+  feedbackRequests?: Prisma.FeedbackRequestUncheckedUpdateManyWithoutUserNestedInput
   hrWarnings?: Prisma.HrWarningUncheckedUpdateManyWithoutAssigneeNestedInput
   createdHrWarning?: Prisma.HrWarningUncheckedUpdateManyWithoutCreatedByNestedInput
   updatedHrWarnings?: Prisma.HrWarningUncheckedUpdateManyWithoutUpdatedByNestedInput
@@ -4133,6 +6543,14 @@ export type UserUncheckedUpdateWithoutCreatedRatingsInput = {
   CreatedEventAssignment?: Prisma.EventAssignmentUncheckedUpdateManyWithoutCreatedByNestedInput
   UpdatedEventAssignment?: Prisma.EventAssignmentUncheckedUpdateManyWithoutUpdatedByNestedInput
   updatedUsers?: Prisma.UserUncheckedUpdateManyWithoutUpdatedByNestedInput
+  createdAvailabilitySlots?: Prisma.AvailabilitySlotUncheckedUpdateManyWithoutCreatedByNestedInput
+  updatedAvailabilitySlots?: Prisma.AvailabilitySlotUncheckedUpdateManyWithoutUpdatedByNestedInput
+  availabilityEntries?: Prisma.AvailabilityEntryUncheckedUpdateManyWithoutUserNestedInput
+  UpdatedAvailabilityEntries?: Prisma.AvailabilityEntryUncheckedUpdateManyWithoutUpdatedByNestedInput
+  entryCancelRequests?: Prisma.EntryCancelRequestUncheckedUpdateManyWithoutRequestedByNestedInput
+  reviewedEntryCancelRequests?: Prisma.EntryCancelRequestUncheckedUpdateManyWithoutReviewedByNestedInput
+  assignmentCancelRequests?: Prisma.AssignmentCancelRequestUncheckedUpdateManyWithoutRequestedByNestedInput
+  reviewedAssignmentCancelRequests?: Prisma.AssignmentCancelRequestUncheckedUpdateManyWithoutReviewedByNestedInput
 }
 
 export type UserUpsertWithoutUpdatedRatingsInput = {
@@ -4176,7 +6594,7 @@ export type UserUpdateWithoutUpdatedRatingsInput = {
   updatedEvents?: Prisma.EventUpdateManyWithoutUpdatedByNestedInput
   providedFeedbacks?: Prisma.EventFeedbackUpdateManyWithoutUserNestedInput
   updatedEventFeedback?: Prisma.EventFeedbackUpdateManyWithoutUpdatedByNestedInput
-  scheduledEventEmails?: Prisma.ScheduledEmailsUpdateManyWithoutUserNestedInput
+  feedbackRequests?: Prisma.FeedbackRequestUpdateManyWithoutUserNestedInput
   hrWarnings?: Prisma.HrWarningUpdateManyWithoutAssigneeNestedInput
   createdHrWarning?: Prisma.HrWarningUpdateManyWithoutCreatedByNestedInput
   updatedHrWarnings?: Prisma.HrWarningUpdateManyWithoutUpdatedByNestedInput
@@ -4187,6 +6605,14 @@ export type UserUpdateWithoutUpdatedRatingsInput = {
   CreatedEventAssignment?: Prisma.EventAssignmentUpdateManyWithoutCreatedByNestedInput
   UpdatedEventAssignment?: Prisma.EventAssignmentUpdateManyWithoutUpdatedByNestedInput
   updatedUsers?: Prisma.UserUpdateManyWithoutUpdatedByNestedInput
+  createdAvailabilitySlots?: Prisma.AvailabilitySlotUpdateManyWithoutCreatedByNestedInput
+  updatedAvailabilitySlots?: Prisma.AvailabilitySlotUpdateManyWithoutUpdatedByNestedInput
+  availabilityEntries?: Prisma.AvailabilityEntryUpdateManyWithoutUserNestedInput
+  UpdatedAvailabilityEntries?: Prisma.AvailabilityEntryUpdateManyWithoutUpdatedByNestedInput
+  entryCancelRequests?: Prisma.EntryCancelRequestUpdateManyWithoutRequestedByNestedInput
+  reviewedEntryCancelRequests?: Prisma.EntryCancelRequestUpdateManyWithoutReviewedByNestedInput
+  assignmentCancelRequests?: Prisma.AssignmentCancelRequestUpdateManyWithoutRequestedByNestedInput
+  reviewedAssignmentCancelRequests?: Prisma.AssignmentCancelRequestUpdateManyWithoutReviewedByNestedInput
 }
 
 export type UserUncheckedUpdateWithoutUpdatedRatingsInput = {
@@ -4220,7 +6646,7 @@ export type UserUncheckedUpdateWithoutUpdatedRatingsInput = {
   updatedEvents?: Prisma.EventUncheckedUpdateManyWithoutUpdatedByNestedInput
   providedFeedbacks?: Prisma.EventFeedbackUncheckedUpdateManyWithoutUserNestedInput
   updatedEventFeedback?: Prisma.EventFeedbackUncheckedUpdateManyWithoutUpdatedByNestedInput
-  scheduledEventEmails?: Prisma.ScheduledEmailsUncheckedUpdateManyWithoutUserNestedInput
+  feedbackRequests?: Prisma.FeedbackRequestUncheckedUpdateManyWithoutUserNestedInput
   hrWarnings?: Prisma.HrWarningUncheckedUpdateManyWithoutAssigneeNestedInput
   createdHrWarning?: Prisma.HrWarningUncheckedUpdateManyWithoutCreatedByNestedInput
   updatedHrWarnings?: Prisma.HrWarningUncheckedUpdateManyWithoutUpdatedByNestedInput
@@ -4230,6 +6656,14 @@ export type UserUncheckedUpdateWithoutUpdatedRatingsInput = {
   CreatedEventAssignment?: Prisma.EventAssignmentUncheckedUpdateManyWithoutCreatedByNestedInput
   UpdatedEventAssignment?: Prisma.EventAssignmentUncheckedUpdateManyWithoutUpdatedByNestedInput
   updatedUsers?: Prisma.UserUncheckedUpdateManyWithoutUpdatedByNestedInput
+  createdAvailabilitySlots?: Prisma.AvailabilitySlotUncheckedUpdateManyWithoutCreatedByNestedInput
+  updatedAvailabilitySlots?: Prisma.AvailabilitySlotUncheckedUpdateManyWithoutUpdatedByNestedInput
+  availabilityEntries?: Prisma.AvailabilityEntryUncheckedUpdateManyWithoutUserNestedInput
+  UpdatedAvailabilityEntries?: Prisma.AvailabilityEntryUncheckedUpdateManyWithoutUpdatedByNestedInput
+  entryCancelRequests?: Prisma.EntryCancelRequestUncheckedUpdateManyWithoutRequestedByNestedInput
+  reviewedEntryCancelRequests?: Prisma.EntryCancelRequestUncheckedUpdateManyWithoutReviewedByNestedInput
+  assignmentCancelRequests?: Prisma.AssignmentCancelRequestUncheckedUpdateManyWithoutRequestedByNestedInput
+  reviewedAssignmentCancelRequests?: Prisma.AssignmentCancelRequestUncheckedUpdateManyWithoutReviewedByNestedInput
 }
 
 export type UserCreateWithoutPositionChangesInput = {
@@ -4262,7 +6696,7 @@ export type UserCreateWithoutPositionChangesInput = {
   updatedEvents?: Prisma.EventCreateNestedManyWithoutUpdatedByInput
   providedFeedbacks?: Prisma.EventFeedbackCreateNestedManyWithoutUserInput
   updatedEventFeedback?: Prisma.EventFeedbackCreateNestedManyWithoutUpdatedByInput
-  scheduledEventEmails?: Prisma.ScheduledEmailsCreateNestedManyWithoutUserInput
+  feedbackRequests?: Prisma.FeedbackRequestCreateNestedManyWithoutUserInput
   hrWarnings?: Prisma.HrWarningCreateNestedManyWithoutAssigneeInput
   createdHrWarning?: Prisma.HrWarningCreateNestedManyWithoutCreatedByInput
   updatedHrWarnings?: Prisma.HrWarningCreateNestedManyWithoutUpdatedByInput
@@ -4273,6 +6707,14 @@ export type UserCreateWithoutPositionChangesInput = {
   CreatedEventAssignment?: Prisma.EventAssignmentCreateNestedManyWithoutCreatedByInput
   UpdatedEventAssignment?: Prisma.EventAssignmentCreateNestedManyWithoutUpdatedByInput
   updatedUsers?: Prisma.UserCreateNestedManyWithoutUpdatedByInput
+  createdAvailabilitySlots?: Prisma.AvailabilitySlotCreateNestedManyWithoutCreatedByInput
+  updatedAvailabilitySlots?: Prisma.AvailabilitySlotCreateNestedManyWithoutUpdatedByInput
+  availabilityEntries?: Prisma.AvailabilityEntryCreateNestedManyWithoutUserInput
+  UpdatedAvailabilityEntries?: Prisma.AvailabilityEntryCreateNestedManyWithoutUpdatedByInput
+  entryCancelRequests?: Prisma.EntryCancelRequestCreateNestedManyWithoutRequestedByInput
+  reviewedEntryCancelRequests?: Prisma.EntryCancelRequestCreateNestedManyWithoutReviewedByInput
+  assignmentCancelRequests?: Prisma.AssignmentCancelRequestCreateNestedManyWithoutRequestedByInput
+  reviewedAssignmentCancelRequests?: Prisma.AssignmentCancelRequestCreateNestedManyWithoutReviewedByInput
 }
 
 export type UserUncheckedCreateWithoutPositionChangesInput = {
@@ -4306,7 +6748,7 @@ export type UserUncheckedCreateWithoutPositionChangesInput = {
   updatedEvents?: Prisma.EventUncheckedCreateNestedManyWithoutUpdatedByInput
   providedFeedbacks?: Prisma.EventFeedbackUncheckedCreateNestedManyWithoutUserInput
   updatedEventFeedback?: Prisma.EventFeedbackUncheckedCreateNestedManyWithoutUpdatedByInput
-  scheduledEventEmails?: Prisma.ScheduledEmailsUncheckedCreateNestedManyWithoutUserInput
+  feedbackRequests?: Prisma.FeedbackRequestUncheckedCreateNestedManyWithoutUserInput
   hrWarnings?: Prisma.HrWarningUncheckedCreateNestedManyWithoutAssigneeInput
   createdHrWarning?: Prisma.HrWarningUncheckedCreateNestedManyWithoutCreatedByInput
   updatedHrWarnings?: Prisma.HrWarningUncheckedCreateNestedManyWithoutUpdatedByInput
@@ -4316,6 +6758,14 @@ export type UserUncheckedCreateWithoutPositionChangesInput = {
   CreatedEventAssignment?: Prisma.EventAssignmentUncheckedCreateNestedManyWithoutCreatedByInput
   UpdatedEventAssignment?: Prisma.EventAssignmentUncheckedCreateNestedManyWithoutUpdatedByInput
   updatedUsers?: Prisma.UserUncheckedCreateNestedManyWithoutUpdatedByInput
+  createdAvailabilitySlots?: Prisma.AvailabilitySlotUncheckedCreateNestedManyWithoutCreatedByInput
+  updatedAvailabilitySlots?: Prisma.AvailabilitySlotUncheckedCreateNestedManyWithoutUpdatedByInput
+  availabilityEntries?: Prisma.AvailabilityEntryUncheckedCreateNestedManyWithoutUserInput
+  UpdatedAvailabilityEntries?: Prisma.AvailabilityEntryUncheckedCreateNestedManyWithoutUpdatedByInput
+  entryCancelRequests?: Prisma.EntryCancelRequestUncheckedCreateNestedManyWithoutRequestedByInput
+  reviewedEntryCancelRequests?: Prisma.EntryCancelRequestUncheckedCreateNestedManyWithoutReviewedByInput
+  assignmentCancelRequests?: Prisma.AssignmentCancelRequestUncheckedCreateNestedManyWithoutRequestedByInput
+  reviewedAssignmentCancelRequests?: Prisma.AssignmentCancelRequestUncheckedCreateNestedManyWithoutReviewedByInput
 }
 
 export type UserCreateOrConnectWithoutPositionChangesInput = {
@@ -4353,7 +6803,7 @@ export type UserCreateWithoutPositionCreationsInput = {
   updatedEvents?: Prisma.EventCreateNestedManyWithoutUpdatedByInput
   providedFeedbacks?: Prisma.EventFeedbackCreateNestedManyWithoutUserInput
   updatedEventFeedback?: Prisma.EventFeedbackCreateNestedManyWithoutUpdatedByInput
-  scheduledEventEmails?: Prisma.ScheduledEmailsCreateNestedManyWithoutUserInput
+  feedbackRequests?: Prisma.FeedbackRequestCreateNestedManyWithoutUserInput
   hrWarnings?: Prisma.HrWarningCreateNestedManyWithoutAssigneeInput
   createdHrWarning?: Prisma.HrWarningCreateNestedManyWithoutCreatedByInput
   updatedHrWarnings?: Prisma.HrWarningCreateNestedManyWithoutUpdatedByInput
@@ -4364,6 +6814,14 @@ export type UserCreateWithoutPositionCreationsInput = {
   CreatedEventAssignment?: Prisma.EventAssignmentCreateNestedManyWithoutCreatedByInput
   UpdatedEventAssignment?: Prisma.EventAssignmentCreateNestedManyWithoutUpdatedByInput
   updatedUsers?: Prisma.UserCreateNestedManyWithoutUpdatedByInput
+  createdAvailabilitySlots?: Prisma.AvailabilitySlotCreateNestedManyWithoutCreatedByInput
+  updatedAvailabilitySlots?: Prisma.AvailabilitySlotCreateNestedManyWithoutUpdatedByInput
+  availabilityEntries?: Prisma.AvailabilityEntryCreateNestedManyWithoutUserInput
+  UpdatedAvailabilityEntries?: Prisma.AvailabilityEntryCreateNestedManyWithoutUpdatedByInput
+  entryCancelRequests?: Prisma.EntryCancelRequestCreateNestedManyWithoutRequestedByInput
+  reviewedEntryCancelRequests?: Prisma.EntryCancelRequestCreateNestedManyWithoutReviewedByInput
+  assignmentCancelRequests?: Prisma.AssignmentCancelRequestCreateNestedManyWithoutRequestedByInput
+  reviewedAssignmentCancelRequests?: Prisma.AssignmentCancelRequestCreateNestedManyWithoutReviewedByInput
 }
 
 export type UserUncheckedCreateWithoutPositionCreationsInput = {
@@ -4397,7 +6855,7 @@ export type UserUncheckedCreateWithoutPositionCreationsInput = {
   updatedEvents?: Prisma.EventUncheckedCreateNestedManyWithoutUpdatedByInput
   providedFeedbacks?: Prisma.EventFeedbackUncheckedCreateNestedManyWithoutUserInput
   updatedEventFeedback?: Prisma.EventFeedbackUncheckedCreateNestedManyWithoutUpdatedByInput
-  scheduledEventEmails?: Prisma.ScheduledEmailsUncheckedCreateNestedManyWithoutUserInput
+  feedbackRequests?: Prisma.FeedbackRequestUncheckedCreateNestedManyWithoutUserInput
   hrWarnings?: Prisma.HrWarningUncheckedCreateNestedManyWithoutAssigneeInput
   createdHrWarning?: Prisma.HrWarningUncheckedCreateNestedManyWithoutCreatedByInput
   updatedHrWarnings?: Prisma.HrWarningUncheckedCreateNestedManyWithoutUpdatedByInput
@@ -4407,6 +6865,14 @@ export type UserUncheckedCreateWithoutPositionCreationsInput = {
   CreatedEventAssignment?: Prisma.EventAssignmentUncheckedCreateNestedManyWithoutCreatedByInput
   UpdatedEventAssignment?: Prisma.EventAssignmentUncheckedCreateNestedManyWithoutUpdatedByInput
   updatedUsers?: Prisma.UserUncheckedCreateNestedManyWithoutUpdatedByInput
+  createdAvailabilitySlots?: Prisma.AvailabilitySlotUncheckedCreateNestedManyWithoutCreatedByInput
+  updatedAvailabilitySlots?: Prisma.AvailabilitySlotUncheckedCreateNestedManyWithoutUpdatedByInput
+  availabilityEntries?: Prisma.AvailabilityEntryUncheckedCreateNestedManyWithoutUserInput
+  UpdatedAvailabilityEntries?: Prisma.AvailabilityEntryUncheckedCreateNestedManyWithoutUpdatedByInput
+  entryCancelRequests?: Prisma.EntryCancelRequestUncheckedCreateNestedManyWithoutRequestedByInput
+  reviewedEntryCancelRequests?: Prisma.EntryCancelRequestUncheckedCreateNestedManyWithoutReviewedByInput
+  assignmentCancelRequests?: Prisma.AssignmentCancelRequestUncheckedCreateNestedManyWithoutRequestedByInput
+  reviewedAssignmentCancelRequests?: Prisma.AssignmentCancelRequestUncheckedCreateNestedManyWithoutReviewedByInput
 }
 
 export type UserCreateOrConnectWithoutPositionCreationsInput = {
@@ -4444,7 +6910,7 @@ export type UserCreateWithoutPositionHistoriesInput = {
   updatedEvents?: Prisma.EventCreateNestedManyWithoutUpdatedByInput
   providedFeedbacks?: Prisma.EventFeedbackCreateNestedManyWithoutUserInput
   updatedEventFeedback?: Prisma.EventFeedbackCreateNestedManyWithoutUpdatedByInput
-  scheduledEventEmails?: Prisma.ScheduledEmailsCreateNestedManyWithoutUserInput
+  feedbackRequests?: Prisma.FeedbackRequestCreateNestedManyWithoutUserInput
   hrWarnings?: Prisma.HrWarningCreateNestedManyWithoutAssigneeInput
   createdHrWarning?: Prisma.HrWarningCreateNestedManyWithoutCreatedByInput
   updatedHrWarnings?: Prisma.HrWarningCreateNestedManyWithoutUpdatedByInput
@@ -4455,6 +6921,14 @@ export type UserCreateWithoutPositionHistoriesInput = {
   CreatedEventAssignment?: Prisma.EventAssignmentCreateNestedManyWithoutCreatedByInput
   UpdatedEventAssignment?: Prisma.EventAssignmentCreateNestedManyWithoutUpdatedByInput
   updatedUsers?: Prisma.UserCreateNestedManyWithoutUpdatedByInput
+  createdAvailabilitySlots?: Prisma.AvailabilitySlotCreateNestedManyWithoutCreatedByInput
+  updatedAvailabilitySlots?: Prisma.AvailabilitySlotCreateNestedManyWithoutUpdatedByInput
+  availabilityEntries?: Prisma.AvailabilityEntryCreateNestedManyWithoutUserInput
+  UpdatedAvailabilityEntries?: Prisma.AvailabilityEntryCreateNestedManyWithoutUpdatedByInput
+  entryCancelRequests?: Prisma.EntryCancelRequestCreateNestedManyWithoutRequestedByInput
+  reviewedEntryCancelRequests?: Prisma.EntryCancelRequestCreateNestedManyWithoutReviewedByInput
+  assignmentCancelRequests?: Prisma.AssignmentCancelRequestCreateNestedManyWithoutRequestedByInput
+  reviewedAssignmentCancelRequests?: Prisma.AssignmentCancelRequestCreateNestedManyWithoutReviewedByInput
 }
 
 export type UserUncheckedCreateWithoutPositionHistoriesInput = {
@@ -4488,7 +6962,7 @@ export type UserUncheckedCreateWithoutPositionHistoriesInput = {
   updatedEvents?: Prisma.EventUncheckedCreateNestedManyWithoutUpdatedByInput
   providedFeedbacks?: Prisma.EventFeedbackUncheckedCreateNestedManyWithoutUserInput
   updatedEventFeedback?: Prisma.EventFeedbackUncheckedCreateNestedManyWithoutUpdatedByInput
-  scheduledEventEmails?: Prisma.ScheduledEmailsUncheckedCreateNestedManyWithoutUserInput
+  feedbackRequests?: Prisma.FeedbackRequestUncheckedCreateNestedManyWithoutUserInput
   hrWarnings?: Prisma.HrWarningUncheckedCreateNestedManyWithoutAssigneeInput
   createdHrWarning?: Prisma.HrWarningUncheckedCreateNestedManyWithoutCreatedByInput
   updatedHrWarnings?: Prisma.HrWarningUncheckedCreateNestedManyWithoutUpdatedByInput
@@ -4498,6 +6972,14 @@ export type UserUncheckedCreateWithoutPositionHistoriesInput = {
   CreatedEventAssignment?: Prisma.EventAssignmentUncheckedCreateNestedManyWithoutCreatedByInput
   UpdatedEventAssignment?: Prisma.EventAssignmentUncheckedCreateNestedManyWithoutUpdatedByInput
   updatedUsers?: Prisma.UserUncheckedCreateNestedManyWithoutUpdatedByInput
+  createdAvailabilitySlots?: Prisma.AvailabilitySlotUncheckedCreateNestedManyWithoutCreatedByInput
+  updatedAvailabilitySlots?: Prisma.AvailabilitySlotUncheckedCreateNestedManyWithoutUpdatedByInput
+  availabilityEntries?: Prisma.AvailabilityEntryUncheckedCreateNestedManyWithoutUserInput
+  UpdatedAvailabilityEntries?: Prisma.AvailabilityEntryUncheckedCreateNestedManyWithoutUpdatedByInput
+  entryCancelRequests?: Prisma.EntryCancelRequestUncheckedCreateNestedManyWithoutRequestedByInput
+  reviewedEntryCancelRequests?: Prisma.EntryCancelRequestUncheckedCreateNestedManyWithoutReviewedByInput
+  assignmentCancelRequests?: Prisma.AssignmentCancelRequestUncheckedCreateNestedManyWithoutRequestedByInput
+  reviewedAssignmentCancelRequests?: Prisma.AssignmentCancelRequestUncheckedCreateNestedManyWithoutReviewedByInput
 }
 
 export type UserCreateOrConnectWithoutPositionHistoriesInput = {
@@ -4546,7 +7028,7 @@ export type UserUpdateWithoutPositionChangesInput = {
   updatedEvents?: Prisma.EventUpdateManyWithoutUpdatedByNestedInput
   providedFeedbacks?: Prisma.EventFeedbackUpdateManyWithoutUserNestedInput
   updatedEventFeedback?: Prisma.EventFeedbackUpdateManyWithoutUpdatedByNestedInput
-  scheduledEventEmails?: Prisma.ScheduledEmailsUpdateManyWithoutUserNestedInput
+  feedbackRequests?: Prisma.FeedbackRequestUpdateManyWithoutUserNestedInput
   hrWarnings?: Prisma.HrWarningUpdateManyWithoutAssigneeNestedInput
   createdHrWarning?: Prisma.HrWarningUpdateManyWithoutCreatedByNestedInput
   updatedHrWarnings?: Prisma.HrWarningUpdateManyWithoutUpdatedByNestedInput
@@ -4557,6 +7039,14 @@ export type UserUpdateWithoutPositionChangesInput = {
   CreatedEventAssignment?: Prisma.EventAssignmentUpdateManyWithoutCreatedByNestedInput
   UpdatedEventAssignment?: Prisma.EventAssignmentUpdateManyWithoutUpdatedByNestedInput
   updatedUsers?: Prisma.UserUpdateManyWithoutUpdatedByNestedInput
+  createdAvailabilitySlots?: Prisma.AvailabilitySlotUpdateManyWithoutCreatedByNestedInput
+  updatedAvailabilitySlots?: Prisma.AvailabilitySlotUpdateManyWithoutUpdatedByNestedInput
+  availabilityEntries?: Prisma.AvailabilityEntryUpdateManyWithoutUserNestedInput
+  UpdatedAvailabilityEntries?: Prisma.AvailabilityEntryUpdateManyWithoutUpdatedByNestedInput
+  entryCancelRequests?: Prisma.EntryCancelRequestUpdateManyWithoutRequestedByNestedInput
+  reviewedEntryCancelRequests?: Prisma.EntryCancelRequestUpdateManyWithoutReviewedByNestedInput
+  assignmentCancelRequests?: Prisma.AssignmentCancelRequestUpdateManyWithoutRequestedByNestedInput
+  reviewedAssignmentCancelRequests?: Prisma.AssignmentCancelRequestUpdateManyWithoutReviewedByNestedInput
 }
 
 export type UserUncheckedUpdateWithoutPositionChangesInput = {
@@ -4590,7 +7080,7 @@ export type UserUncheckedUpdateWithoutPositionChangesInput = {
   updatedEvents?: Prisma.EventUncheckedUpdateManyWithoutUpdatedByNestedInput
   providedFeedbacks?: Prisma.EventFeedbackUncheckedUpdateManyWithoutUserNestedInput
   updatedEventFeedback?: Prisma.EventFeedbackUncheckedUpdateManyWithoutUpdatedByNestedInput
-  scheduledEventEmails?: Prisma.ScheduledEmailsUncheckedUpdateManyWithoutUserNestedInput
+  feedbackRequests?: Prisma.FeedbackRequestUncheckedUpdateManyWithoutUserNestedInput
   hrWarnings?: Prisma.HrWarningUncheckedUpdateManyWithoutAssigneeNestedInput
   createdHrWarning?: Prisma.HrWarningUncheckedUpdateManyWithoutCreatedByNestedInput
   updatedHrWarnings?: Prisma.HrWarningUncheckedUpdateManyWithoutUpdatedByNestedInput
@@ -4600,6 +7090,14 @@ export type UserUncheckedUpdateWithoutPositionChangesInput = {
   CreatedEventAssignment?: Prisma.EventAssignmentUncheckedUpdateManyWithoutCreatedByNestedInput
   UpdatedEventAssignment?: Prisma.EventAssignmentUncheckedUpdateManyWithoutUpdatedByNestedInput
   updatedUsers?: Prisma.UserUncheckedUpdateManyWithoutUpdatedByNestedInput
+  createdAvailabilitySlots?: Prisma.AvailabilitySlotUncheckedUpdateManyWithoutCreatedByNestedInput
+  updatedAvailabilitySlots?: Prisma.AvailabilitySlotUncheckedUpdateManyWithoutUpdatedByNestedInput
+  availabilityEntries?: Prisma.AvailabilityEntryUncheckedUpdateManyWithoutUserNestedInput
+  UpdatedAvailabilityEntries?: Prisma.AvailabilityEntryUncheckedUpdateManyWithoutUpdatedByNestedInput
+  entryCancelRequests?: Prisma.EntryCancelRequestUncheckedUpdateManyWithoutRequestedByNestedInput
+  reviewedEntryCancelRequests?: Prisma.EntryCancelRequestUncheckedUpdateManyWithoutReviewedByNestedInput
+  assignmentCancelRequests?: Prisma.AssignmentCancelRequestUncheckedUpdateManyWithoutRequestedByNestedInput
+  reviewedAssignmentCancelRequests?: Prisma.AssignmentCancelRequestUncheckedUpdateManyWithoutReviewedByNestedInput
 }
 
 export type UserUpsertWithoutPositionCreationsInput = {
@@ -4643,7 +7141,7 @@ export type UserUpdateWithoutPositionCreationsInput = {
   updatedEvents?: Prisma.EventUpdateManyWithoutUpdatedByNestedInput
   providedFeedbacks?: Prisma.EventFeedbackUpdateManyWithoutUserNestedInput
   updatedEventFeedback?: Prisma.EventFeedbackUpdateManyWithoutUpdatedByNestedInput
-  scheduledEventEmails?: Prisma.ScheduledEmailsUpdateManyWithoutUserNestedInput
+  feedbackRequests?: Prisma.FeedbackRequestUpdateManyWithoutUserNestedInput
   hrWarnings?: Prisma.HrWarningUpdateManyWithoutAssigneeNestedInput
   createdHrWarning?: Prisma.HrWarningUpdateManyWithoutCreatedByNestedInput
   updatedHrWarnings?: Prisma.HrWarningUpdateManyWithoutUpdatedByNestedInput
@@ -4654,6 +7152,14 @@ export type UserUpdateWithoutPositionCreationsInput = {
   CreatedEventAssignment?: Prisma.EventAssignmentUpdateManyWithoutCreatedByNestedInput
   UpdatedEventAssignment?: Prisma.EventAssignmentUpdateManyWithoutUpdatedByNestedInput
   updatedUsers?: Prisma.UserUpdateManyWithoutUpdatedByNestedInput
+  createdAvailabilitySlots?: Prisma.AvailabilitySlotUpdateManyWithoutCreatedByNestedInput
+  updatedAvailabilitySlots?: Prisma.AvailabilitySlotUpdateManyWithoutUpdatedByNestedInput
+  availabilityEntries?: Prisma.AvailabilityEntryUpdateManyWithoutUserNestedInput
+  UpdatedAvailabilityEntries?: Prisma.AvailabilityEntryUpdateManyWithoutUpdatedByNestedInput
+  entryCancelRequests?: Prisma.EntryCancelRequestUpdateManyWithoutRequestedByNestedInput
+  reviewedEntryCancelRequests?: Prisma.EntryCancelRequestUpdateManyWithoutReviewedByNestedInput
+  assignmentCancelRequests?: Prisma.AssignmentCancelRequestUpdateManyWithoutRequestedByNestedInput
+  reviewedAssignmentCancelRequests?: Prisma.AssignmentCancelRequestUpdateManyWithoutReviewedByNestedInput
 }
 
 export type UserUncheckedUpdateWithoutPositionCreationsInput = {
@@ -4687,7 +7193,7 @@ export type UserUncheckedUpdateWithoutPositionCreationsInput = {
   updatedEvents?: Prisma.EventUncheckedUpdateManyWithoutUpdatedByNestedInput
   providedFeedbacks?: Prisma.EventFeedbackUncheckedUpdateManyWithoutUserNestedInput
   updatedEventFeedback?: Prisma.EventFeedbackUncheckedUpdateManyWithoutUpdatedByNestedInput
-  scheduledEventEmails?: Prisma.ScheduledEmailsUncheckedUpdateManyWithoutUserNestedInput
+  feedbackRequests?: Prisma.FeedbackRequestUncheckedUpdateManyWithoutUserNestedInput
   hrWarnings?: Prisma.HrWarningUncheckedUpdateManyWithoutAssigneeNestedInput
   createdHrWarning?: Prisma.HrWarningUncheckedUpdateManyWithoutCreatedByNestedInput
   updatedHrWarnings?: Prisma.HrWarningUncheckedUpdateManyWithoutUpdatedByNestedInput
@@ -4697,6 +7203,14 @@ export type UserUncheckedUpdateWithoutPositionCreationsInput = {
   CreatedEventAssignment?: Prisma.EventAssignmentUncheckedUpdateManyWithoutCreatedByNestedInput
   UpdatedEventAssignment?: Prisma.EventAssignmentUncheckedUpdateManyWithoutUpdatedByNestedInput
   updatedUsers?: Prisma.UserUncheckedUpdateManyWithoutUpdatedByNestedInput
+  createdAvailabilitySlots?: Prisma.AvailabilitySlotUncheckedUpdateManyWithoutCreatedByNestedInput
+  updatedAvailabilitySlots?: Prisma.AvailabilitySlotUncheckedUpdateManyWithoutUpdatedByNestedInput
+  availabilityEntries?: Prisma.AvailabilityEntryUncheckedUpdateManyWithoutUserNestedInput
+  UpdatedAvailabilityEntries?: Prisma.AvailabilityEntryUncheckedUpdateManyWithoutUpdatedByNestedInput
+  entryCancelRequests?: Prisma.EntryCancelRequestUncheckedUpdateManyWithoutRequestedByNestedInput
+  reviewedEntryCancelRequests?: Prisma.EntryCancelRequestUncheckedUpdateManyWithoutReviewedByNestedInput
+  assignmentCancelRequests?: Prisma.AssignmentCancelRequestUncheckedUpdateManyWithoutRequestedByNestedInput
+  reviewedAssignmentCancelRequests?: Prisma.AssignmentCancelRequestUncheckedUpdateManyWithoutReviewedByNestedInput
 }
 
 export type UserUpsertWithoutPositionHistoriesInput = {
@@ -4740,7 +7254,7 @@ export type UserUpdateWithoutPositionHistoriesInput = {
   updatedEvents?: Prisma.EventUpdateManyWithoutUpdatedByNestedInput
   providedFeedbacks?: Prisma.EventFeedbackUpdateManyWithoutUserNestedInput
   updatedEventFeedback?: Prisma.EventFeedbackUpdateManyWithoutUpdatedByNestedInput
-  scheduledEventEmails?: Prisma.ScheduledEmailsUpdateManyWithoutUserNestedInput
+  feedbackRequests?: Prisma.FeedbackRequestUpdateManyWithoutUserNestedInput
   hrWarnings?: Prisma.HrWarningUpdateManyWithoutAssigneeNestedInput
   createdHrWarning?: Prisma.HrWarningUpdateManyWithoutCreatedByNestedInput
   updatedHrWarnings?: Prisma.HrWarningUpdateManyWithoutUpdatedByNestedInput
@@ -4751,6 +7265,14 @@ export type UserUpdateWithoutPositionHistoriesInput = {
   CreatedEventAssignment?: Prisma.EventAssignmentUpdateManyWithoutCreatedByNestedInput
   UpdatedEventAssignment?: Prisma.EventAssignmentUpdateManyWithoutUpdatedByNestedInput
   updatedUsers?: Prisma.UserUpdateManyWithoutUpdatedByNestedInput
+  createdAvailabilitySlots?: Prisma.AvailabilitySlotUpdateManyWithoutCreatedByNestedInput
+  updatedAvailabilitySlots?: Prisma.AvailabilitySlotUpdateManyWithoutUpdatedByNestedInput
+  availabilityEntries?: Prisma.AvailabilityEntryUpdateManyWithoutUserNestedInput
+  UpdatedAvailabilityEntries?: Prisma.AvailabilityEntryUpdateManyWithoutUpdatedByNestedInput
+  entryCancelRequests?: Prisma.EntryCancelRequestUpdateManyWithoutRequestedByNestedInput
+  reviewedEntryCancelRequests?: Prisma.EntryCancelRequestUpdateManyWithoutReviewedByNestedInput
+  assignmentCancelRequests?: Prisma.AssignmentCancelRequestUpdateManyWithoutRequestedByNestedInput
+  reviewedAssignmentCancelRequests?: Prisma.AssignmentCancelRequestUpdateManyWithoutReviewedByNestedInput
 }
 
 export type UserUncheckedUpdateWithoutPositionHistoriesInput = {
@@ -4784,7 +7306,7 @@ export type UserUncheckedUpdateWithoutPositionHistoriesInput = {
   updatedEvents?: Prisma.EventUncheckedUpdateManyWithoutUpdatedByNestedInput
   providedFeedbacks?: Prisma.EventFeedbackUncheckedUpdateManyWithoutUserNestedInput
   updatedEventFeedback?: Prisma.EventFeedbackUncheckedUpdateManyWithoutUpdatedByNestedInput
-  scheduledEventEmails?: Prisma.ScheduledEmailsUncheckedUpdateManyWithoutUserNestedInput
+  feedbackRequests?: Prisma.FeedbackRequestUncheckedUpdateManyWithoutUserNestedInput
   hrWarnings?: Prisma.HrWarningUncheckedUpdateManyWithoutAssigneeNestedInput
   createdHrWarning?: Prisma.HrWarningUncheckedUpdateManyWithoutCreatedByNestedInput
   updatedHrWarnings?: Prisma.HrWarningUncheckedUpdateManyWithoutUpdatedByNestedInput
@@ -4794,6 +7316,14 @@ export type UserUncheckedUpdateWithoutPositionHistoriesInput = {
   CreatedEventAssignment?: Prisma.EventAssignmentUncheckedUpdateManyWithoutCreatedByNestedInput
   UpdatedEventAssignment?: Prisma.EventAssignmentUncheckedUpdateManyWithoutUpdatedByNestedInput
   updatedUsers?: Prisma.UserUncheckedUpdateManyWithoutUpdatedByNestedInput
+  createdAvailabilitySlots?: Prisma.AvailabilitySlotUncheckedUpdateManyWithoutCreatedByNestedInput
+  updatedAvailabilitySlots?: Prisma.AvailabilitySlotUncheckedUpdateManyWithoutUpdatedByNestedInput
+  availabilityEntries?: Prisma.AvailabilityEntryUncheckedUpdateManyWithoutUserNestedInput
+  UpdatedAvailabilityEntries?: Prisma.AvailabilityEntryUncheckedUpdateManyWithoutUpdatedByNestedInput
+  entryCancelRequests?: Prisma.EntryCancelRequestUncheckedUpdateManyWithoutRequestedByNestedInput
+  reviewedEntryCancelRequests?: Prisma.EntryCancelRequestUncheckedUpdateManyWithoutReviewedByNestedInput
+  assignmentCancelRequests?: Prisma.AssignmentCancelRequestUncheckedUpdateManyWithoutRequestedByNestedInput
+  reviewedAssignmentCancelRequests?: Prisma.AssignmentCancelRequestUncheckedUpdateManyWithoutReviewedByNestedInput
 }
 
 export type UserCreateWithoutMemberStatusChangesInput = {
@@ -4826,7 +7356,7 @@ export type UserCreateWithoutMemberStatusChangesInput = {
   updatedEvents?: Prisma.EventCreateNestedManyWithoutUpdatedByInput
   providedFeedbacks?: Prisma.EventFeedbackCreateNestedManyWithoutUserInput
   updatedEventFeedback?: Prisma.EventFeedbackCreateNestedManyWithoutUpdatedByInput
-  scheduledEventEmails?: Prisma.ScheduledEmailsCreateNestedManyWithoutUserInput
+  feedbackRequests?: Prisma.FeedbackRequestCreateNestedManyWithoutUserInput
   hrWarnings?: Prisma.HrWarningCreateNestedManyWithoutAssigneeInput
   createdHrWarning?: Prisma.HrWarningCreateNestedManyWithoutCreatedByInput
   updatedHrWarnings?: Prisma.HrWarningCreateNestedManyWithoutUpdatedByInput
@@ -4837,6 +7367,14 @@ export type UserCreateWithoutMemberStatusChangesInput = {
   CreatedEventAssignment?: Prisma.EventAssignmentCreateNestedManyWithoutCreatedByInput
   UpdatedEventAssignment?: Prisma.EventAssignmentCreateNestedManyWithoutUpdatedByInput
   updatedUsers?: Prisma.UserCreateNestedManyWithoutUpdatedByInput
+  createdAvailabilitySlots?: Prisma.AvailabilitySlotCreateNestedManyWithoutCreatedByInput
+  updatedAvailabilitySlots?: Prisma.AvailabilitySlotCreateNestedManyWithoutUpdatedByInput
+  availabilityEntries?: Prisma.AvailabilityEntryCreateNestedManyWithoutUserInput
+  UpdatedAvailabilityEntries?: Prisma.AvailabilityEntryCreateNestedManyWithoutUpdatedByInput
+  entryCancelRequests?: Prisma.EntryCancelRequestCreateNestedManyWithoutRequestedByInput
+  reviewedEntryCancelRequests?: Prisma.EntryCancelRequestCreateNestedManyWithoutReviewedByInput
+  assignmentCancelRequests?: Prisma.AssignmentCancelRequestCreateNestedManyWithoutRequestedByInput
+  reviewedAssignmentCancelRequests?: Prisma.AssignmentCancelRequestCreateNestedManyWithoutReviewedByInput
 }
 
 export type UserUncheckedCreateWithoutMemberStatusChangesInput = {
@@ -4870,7 +7408,7 @@ export type UserUncheckedCreateWithoutMemberStatusChangesInput = {
   updatedEvents?: Prisma.EventUncheckedCreateNestedManyWithoutUpdatedByInput
   providedFeedbacks?: Prisma.EventFeedbackUncheckedCreateNestedManyWithoutUserInput
   updatedEventFeedback?: Prisma.EventFeedbackUncheckedCreateNestedManyWithoutUpdatedByInput
-  scheduledEventEmails?: Prisma.ScheduledEmailsUncheckedCreateNestedManyWithoutUserInput
+  feedbackRequests?: Prisma.FeedbackRequestUncheckedCreateNestedManyWithoutUserInput
   hrWarnings?: Prisma.HrWarningUncheckedCreateNestedManyWithoutAssigneeInput
   createdHrWarning?: Prisma.HrWarningUncheckedCreateNestedManyWithoutCreatedByInput
   updatedHrWarnings?: Prisma.HrWarningUncheckedCreateNestedManyWithoutUpdatedByInput
@@ -4880,6 +7418,14 @@ export type UserUncheckedCreateWithoutMemberStatusChangesInput = {
   CreatedEventAssignment?: Prisma.EventAssignmentUncheckedCreateNestedManyWithoutCreatedByInput
   UpdatedEventAssignment?: Prisma.EventAssignmentUncheckedCreateNestedManyWithoutUpdatedByInput
   updatedUsers?: Prisma.UserUncheckedCreateNestedManyWithoutUpdatedByInput
+  createdAvailabilitySlots?: Prisma.AvailabilitySlotUncheckedCreateNestedManyWithoutCreatedByInput
+  updatedAvailabilitySlots?: Prisma.AvailabilitySlotUncheckedCreateNestedManyWithoutUpdatedByInput
+  availabilityEntries?: Prisma.AvailabilityEntryUncheckedCreateNestedManyWithoutUserInput
+  UpdatedAvailabilityEntries?: Prisma.AvailabilityEntryUncheckedCreateNestedManyWithoutUpdatedByInput
+  entryCancelRequests?: Prisma.EntryCancelRequestUncheckedCreateNestedManyWithoutRequestedByInput
+  reviewedEntryCancelRequests?: Prisma.EntryCancelRequestUncheckedCreateNestedManyWithoutReviewedByInput
+  assignmentCancelRequests?: Prisma.AssignmentCancelRequestUncheckedCreateNestedManyWithoutRequestedByInput
+  reviewedAssignmentCancelRequests?: Prisma.AssignmentCancelRequestUncheckedCreateNestedManyWithoutReviewedByInput
 }
 
 export type UserCreateOrConnectWithoutMemberStatusChangesInput = {
@@ -4917,7 +7463,7 @@ export type UserCreateWithoutMemberStatusCreatedInput = {
   updatedEvents?: Prisma.EventCreateNestedManyWithoutUpdatedByInput
   providedFeedbacks?: Prisma.EventFeedbackCreateNestedManyWithoutUserInput
   updatedEventFeedback?: Prisma.EventFeedbackCreateNestedManyWithoutUpdatedByInput
-  scheduledEventEmails?: Prisma.ScheduledEmailsCreateNestedManyWithoutUserInput
+  feedbackRequests?: Prisma.FeedbackRequestCreateNestedManyWithoutUserInput
   hrWarnings?: Prisma.HrWarningCreateNestedManyWithoutAssigneeInput
   createdHrWarning?: Prisma.HrWarningCreateNestedManyWithoutCreatedByInput
   updatedHrWarnings?: Prisma.HrWarningCreateNestedManyWithoutUpdatedByInput
@@ -4928,6 +7474,14 @@ export type UserCreateWithoutMemberStatusCreatedInput = {
   CreatedEventAssignment?: Prisma.EventAssignmentCreateNestedManyWithoutCreatedByInput
   UpdatedEventAssignment?: Prisma.EventAssignmentCreateNestedManyWithoutUpdatedByInput
   updatedUsers?: Prisma.UserCreateNestedManyWithoutUpdatedByInput
+  createdAvailabilitySlots?: Prisma.AvailabilitySlotCreateNestedManyWithoutCreatedByInput
+  updatedAvailabilitySlots?: Prisma.AvailabilitySlotCreateNestedManyWithoutUpdatedByInput
+  availabilityEntries?: Prisma.AvailabilityEntryCreateNestedManyWithoutUserInput
+  UpdatedAvailabilityEntries?: Prisma.AvailabilityEntryCreateNestedManyWithoutUpdatedByInput
+  entryCancelRequests?: Prisma.EntryCancelRequestCreateNestedManyWithoutRequestedByInput
+  reviewedEntryCancelRequests?: Prisma.EntryCancelRequestCreateNestedManyWithoutReviewedByInput
+  assignmentCancelRequests?: Prisma.AssignmentCancelRequestCreateNestedManyWithoutRequestedByInput
+  reviewedAssignmentCancelRequests?: Prisma.AssignmentCancelRequestCreateNestedManyWithoutReviewedByInput
 }
 
 export type UserUncheckedCreateWithoutMemberStatusCreatedInput = {
@@ -4961,7 +7515,7 @@ export type UserUncheckedCreateWithoutMemberStatusCreatedInput = {
   updatedEvents?: Prisma.EventUncheckedCreateNestedManyWithoutUpdatedByInput
   providedFeedbacks?: Prisma.EventFeedbackUncheckedCreateNestedManyWithoutUserInput
   updatedEventFeedback?: Prisma.EventFeedbackUncheckedCreateNestedManyWithoutUpdatedByInput
-  scheduledEventEmails?: Prisma.ScheduledEmailsUncheckedCreateNestedManyWithoutUserInput
+  feedbackRequests?: Prisma.FeedbackRequestUncheckedCreateNestedManyWithoutUserInput
   hrWarnings?: Prisma.HrWarningUncheckedCreateNestedManyWithoutAssigneeInput
   createdHrWarning?: Prisma.HrWarningUncheckedCreateNestedManyWithoutCreatedByInput
   updatedHrWarnings?: Prisma.HrWarningUncheckedCreateNestedManyWithoutUpdatedByInput
@@ -4971,6 +7525,14 @@ export type UserUncheckedCreateWithoutMemberStatusCreatedInput = {
   CreatedEventAssignment?: Prisma.EventAssignmentUncheckedCreateNestedManyWithoutCreatedByInput
   UpdatedEventAssignment?: Prisma.EventAssignmentUncheckedCreateNestedManyWithoutUpdatedByInput
   updatedUsers?: Prisma.UserUncheckedCreateNestedManyWithoutUpdatedByInput
+  createdAvailabilitySlots?: Prisma.AvailabilitySlotUncheckedCreateNestedManyWithoutCreatedByInput
+  updatedAvailabilitySlots?: Prisma.AvailabilitySlotUncheckedCreateNestedManyWithoutUpdatedByInput
+  availabilityEntries?: Prisma.AvailabilityEntryUncheckedCreateNestedManyWithoutUserInput
+  UpdatedAvailabilityEntries?: Prisma.AvailabilityEntryUncheckedCreateNestedManyWithoutUpdatedByInput
+  entryCancelRequests?: Prisma.EntryCancelRequestUncheckedCreateNestedManyWithoutRequestedByInput
+  reviewedEntryCancelRequests?: Prisma.EntryCancelRequestUncheckedCreateNestedManyWithoutReviewedByInput
+  assignmentCancelRequests?: Prisma.AssignmentCancelRequestUncheckedCreateNestedManyWithoutRequestedByInput
+  reviewedAssignmentCancelRequests?: Prisma.AssignmentCancelRequestUncheckedCreateNestedManyWithoutReviewedByInput
 }
 
 export type UserCreateOrConnectWithoutMemberStatusCreatedInput = {
@@ -5008,7 +7570,7 @@ export type UserCreateWithoutMemberStatusLogsInput = {
   updatedEvents?: Prisma.EventCreateNestedManyWithoutUpdatedByInput
   providedFeedbacks?: Prisma.EventFeedbackCreateNestedManyWithoutUserInput
   updatedEventFeedback?: Prisma.EventFeedbackCreateNestedManyWithoutUpdatedByInput
-  scheduledEventEmails?: Prisma.ScheduledEmailsCreateNestedManyWithoutUserInput
+  feedbackRequests?: Prisma.FeedbackRequestCreateNestedManyWithoutUserInput
   hrWarnings?: Prisma.HrWarningCreateNestedManyWithoutAssigneeInput
   createdHrWarning?: Prisma.HrWarningCreateNestedManyWithoutCreatedByInput
   updatedHrWarnings?: Prisma.HrWarningCreateNestedManyWithoutUpdatedByInput
@@ -5019,6 +7581,14 @@ export type UserCreateWithoutMemberStatusLogsInput = {
   CreatedEventAssignment?: Prisma.EventAssignmentCreateNestedManyWithoutCreatedByInput
   UpdatedEventAssignment?: Prisma.EventAssignmentCreateNestedManyWithoutUpdatedByInput
   updatedUsers?: Prisma.UserCreateNestedManyWithoutUpdatedByInput
+  createdAvailabilitySlots?: Prisma.AvailabilitySlotCreateNestedManyWithoutCreatedByInput
+  updatedAvailabilitySlots?: Prisma.AvailabilitySlotCreateNestedManyWithoutUpdatedByInput
+  availabilityEntries?: Prisma.AvailabilityEntryCreateNestedManyWithoutUserInput
+  UpdatedAvailabilityEntries?: Prisma.AvailabilityEntryCreateNestedManyWithoutUpdatedByInput
+  entryCancelRequests?: Prisma.EntryCancelRequestCreateNestedManyWithoutRequestedByInput
+  reviewedEntryCancelRequests?: Prisma.EntryCancelRequestCreateNestedManyWithoutReviewedByInput
+  assignmentCancelRequests?: Prisma.AssignmentCancelRequestCreateNestedManyWithoutRequestedByInput
+  reviewedAssignmentCancelRequests?: Prisma.AssignmentCancelRequestCreateNestedManyWithoutReviewedByInput
 }
 
 export type UserUncheckedCreateWithoutMemberStatusLogsInput = {
@@ -5052,7 +7622,7 @@ export type UserUncheckedCreateWithoutMemberStatusLogsInput = {
   updatedEvents?: Prisma.EventUncheckedCreateNestedManyWithoutUpdatedByInput
   providedFeedbacks?: Prisma.EventFeedbackUncheckedCreateNestedManyWithoutUserInput
   updatedEventFeedback?: Prisma.EventFeedbackUncheckedCreateNestedManyWithoutUpdatedByInput
-  scheduledEventEmails?: Prisma.ScheduledEmailsUncheckedCreateNestedManyWithoutUserInput
+  feedbackRequests?: Prisma.FeedbackRequestUncheckedCreateNestedManyWithoutUserInput
   hrWarnings?: Prisma.HrWarningUncheckedCreateNestedManyWithoutAssigneeInput
   createdHrWarning?: Prisma.HrWarningUncheckedCreateNestedManyWithoutCreatedByInput
   updatedHrWarnings?: Prisma.HrWarningUncheckedCreateNestedManyWithoutUpdatedByInput
@@ -5062,6 +7632,14 @@ export type UserUncheckedCreateWithoutMemberStatusLogsInput = {
   CreatedEventAssignment?: Prisma.EventAssignmentUncheckedCreateNestedManyWithoutCreatedByInput
   UpdatedEventAssignment?: Prisma.EventAssignmentUncheckedCreateNestedManyWithoutUpdatedByInput
   updatedUsers?: Prisma.UserUncheckedCreateNestedManyWithoutUpdatedByInput
+  createdAvailabilitySlots?: Prisma.AvailabilitySlotUncheckedCreateNestedManyWithoutCreatedByInput
+  updatedAvailabilitySlots?: Prisma.AvailabilitySlotUncheckedCreateNestedManyWithoutUpdatedByInput
+  availabilityEntries?: Prisma.AvailabilityEntryUncheckedCreateNestedManyWithoutUserInput
+  UpdatedAvailabilityEntries?: Prisma.AvailabilityEntryUncheckedCreateNestedManyWithoutUpdatedByInput
+  entryCancelRequests?: Prisma.EntryCancelRequestUncheckedCreateNestedManyWithoutRequestedByInput
+  reviewedEntryCancelRequests?: Prisma.EntryCancelRequestUncheckedCreateNestedManyWithoutReviewedByInput
+  assignmentCancelRequests?: Prisma.AssignmentCancelRequestUncheckedCreateNestedManyWithoutRequestedByInput
+  reviewedAssignmentCancelRequests?: Prisma.AssignmentCancelRequestUncheckedCreateNestedManyWithoutReviewedByInput
 }
 
 export type UserCreateOrConnectWithoutMemberStatusLogsInput = {
@@ -5110,7 +7688,7 @@ export type UserUpdateWithoutMemberStatusChangesInput = {
   updatedEvents?: Prisma.EventUpdateManyWithoutUpdatedByNestedInput
   providedFeedbacks?: Prisma.EventFeedbackUpdateManyWithoutUserNestedInput
   updatedEventFeedback?: Prisma.EventFeedbackUpdateManyWithoutUpdatedByNestedInput
-  scheduledEventEmails?: Prisma.ScheduledEmailsUpdateManyWithoutUserNestedInput
+  feedbackRequests?: Prisma.FeedbackRequestUpdateManyWithoutUserNestedInput
   hrWarnings?: Prisma.HrWarningUpdateManyWithoutAssigneeNestedInput
   createdHrWarning?: Prisma.HrWarningUpdateManyWithoutCreatedByNestedInput
   updatedHrWarnings?: Prisma.HrWarningUpdateManyWithoutUpdatedByNestedInput
@@ -5121,6 +7699,14 @@ export type UserUpdateWithoutMemberStatusChangesInput = {
   CreatedEventAssignment?: Prisma.EventAssignmentUpdateManyWithoutCreatedByNestedInput
   UpdatedEventAssignment?: Prisma.EventAssignmentUpdateManyWithoutUpdatedByNestedInput
   updatedUsers?: Prisma.UserUpdateManyWithoutUpdatedByNestedInput
+  createdAvailabilitySlots?: Prisma.AvailabilitySlotUpdateManyWithoutCreatedByNestedInput
+  updatedAvailabilitySlots?: Prisma.AvailabilitySlotUpdateManyWithoutUpdatedByNestedInput
+  availabilityEntries?: Prisma.AvailabilityEntryUpdateManyWithoutUserNestedInput
+  UpdatedAvailabilityEntries?: Prisma.AvailabilityEntryUpdateManyWithoutUpdatedByNestedInput
+  entryCancelRequests?: Prisma.EntryCancelRequestUpdateManyWithoutRequestedByNestedInput
+  reviewedEntryCancelRequests?: Prisma.EntryCancelRequestUpdateManyWithoutReviewedByNestedInput
+  assignmentCancelRequests?: Prisma.AssignmentCancelRequestUpdateManyWithoutRequestedByNestedInput
+  reviewedAssignmentCancelRequests?: Prisma.AssignmentCancelRequestUpdateManyWithoutReviewedByNestedInput
 }
 
 export type UserUncheckedUpdateWithoutMemberStatusChangesInput = {
@@ -5154,7 +7740,7 @@ export type UserUncheckedUpdateWithoutMemberStatusChangesInput = {
   updatedEvents?: Prisma.EventUncheckedUpdateManyWithoutUpdatedByNestedInput
   providedFeedbacks?: Prisma.EventFeedbackUncheckedUpdateManyWithoutUserNestedInput
   updatedEventFeedback?: Prisma.EventFeedbackUncheckedUpdateManyWithoutUpdatedByNestedInput
-  scheduledEventEmails?: Prisma.ScheduledEmailsUncheckedUpdateManyWithoutUserNestedInput
+  feedbackRequests?: Prisma.FeedbackRequestUncheckedUpdateManyWithoutUserNestedInput
   hrWarnings?: Prisma.HrWarningUncheckedUpdateManyWithoutAssigneeNestedInput
   createdHrWarning?: Prisma.HrWarningUncheckedUpdateManyWithoutCreatedByNestedInput
   updatedHrWarnings?: Prisma.HrWarningUncheckedUpdateManyWithoutUpdatedByNestedInput
@@ -5164,6 +7750,14 @@ export type UserUncheckedUpdateWithoutMemberStatusChangesInput = {
   CreatedEventAssignment?: Prisma.EventAssignmentUncheckedUpdateManyWithoutCreatedByNestedInput
   UpdatedEventAssignment?: Prisma.EventAssignmentUncheckedUpdateManyWithoutUpdatedByNestedInput
   updatedUsers?: Prisma.UserUncheckedUpdateManyWithoutUpdatedByNestedInput
+  createdAvailabilitySlots?: Prisma.AvailabilitySlotUncheckedUpdateManyWithoutCreatedByNestedInput
+  updatedAvailabilitySlots?: Prisma.AvailabilitySlotUncheckedUpdateManyWithoutUpdatedByNestedInput
+  availabilityEntries?: Prisma.AvailabilityEntryUncheckedUpdateManyWithoutUserNestedInput
+  UpdatedAvailabilityEntries?: Prisma.AvailabilityEntryUncheckedUpdateManyWithoutUpdatedByNestedInput
+  entryCancelRequests?: Prisma.EntryCancelRequestUncheckedUpdateManyWithoutRequestedByNestedInput
+  reviewedEntryCancelRequests?: Prisma.EntryCancelRequestUncheckedUpdateManyWithoutReviewedByNestedInput
+  assignmentCancelRequests?: Prisma.AssignmentCancelRequestUncheckedUpdateManyWithoutRequestedByNestedInput
+  reviewedAssignmentCancelRequests?: Prisma.AssignmentCancelRequestUncheckedUpdateManyWithoutReviewedByNestedInput
 }
 
 export type UserUpsertWithoutMemberStatusCreatedInput = {
@@ -5207,7 +7801,7 @@ export type UserUpdateWithoutMemberStatusCreatedInput = {
   updatedEvents?: Prisma.EventUpdateManyWithoutUpdatedByNestedInput
   providedFeedbacks?: Prisma.EventFeedbackUpdateManyWithoutUserNestedInput
   updatedEventFeedback?: Prisma.EventFeedbackUpdateManyWithoutUpdatedByNestedInput
-  scheduledEventEmails?: Prisma.ScheduledEmailsUpdateManyWithoutUserNestedInput
+  feedbackRequests?: Prisma.FeedbackRequestUpdateManyWithoutUserNestedInput
   hrWarnings?: Prisma.HrWarningUpdateManyWithoutAssigneeNestedInput
   createdHrWarning?: Prisma.HrWarningUpdateManyWithoutCreatedByNestedInput
   updatedHrWarnings?: Prisma.HrWarningUpdateManyWithoutUpdatedByNestedInput
@@ -5218,6 +7812,14 @@ export type UserUpdateWithoutMemberStatusCreatedInput = {
   CreatedEventAssignment?: Prisma.EventAssignmentUpdateManyWithoutCreatedByNestedInput
   UpdatedEventAssignment?: Prisma.EventAssignmentUpdateManyWithoutUpdatedByNestedInput
   updatedUsers?: Prisma.UserUpdateManyWithoutUpdatedByNestedInput
+  createdAvailabilitySlots?: Prisma.AvailabilitySlotUpdateManyWithoutCreatedByNestedInput
+  updatedAvailabilitySlots?: Prisma.AvailabilitySlotUpdateManyWithoutUpdatedByNestedInput
+  availabilityEntries?: Prisma.AvailabilityEntryUpdateManyWithoutUserNestedInput
+  UpdatedAvailabilityEntries?: Prisma.AvailabilityEntryUpdateManyWithoutUpdatedByNestedInput
+  entryCancelRequests?: Prisma.EntryCancelRequestUpdateManyWithoutRequestedByNestedInput
+  reviewedEntryCancelRequests?: Prisma.EntryCancelRequestUpdateManyWithoutReviewedByNestedInput
+  assignmentCancelRequests?: Prisma.AssignmentCancelRequestUpdateManyWithoutRequestedByNestedInput
+  reviewedAssignmentCancelRequests?: Prisma.AssignmentCancelRequestUpdateManyWithoutReviewedByNestedInput
 }
 
 export type UserUncheckedUpdateWithoutMemberStatusCreatedInput = {
@@ -5251,7 +7853,7 @@ export type UserUncheckedUpdateWithoutMemberStatusCreatedInput = {
   updatedEvents?: Prisma.EventUncheckedUpdateManyWithoutUpdatedByNestedInput
   providedFeedbacks?: Prisma.EventFeedbackUncheckedUpdateManyWithoutUserNestedInput
   updatedEventFeedback?: Prisma.EventFeedbackUncheckedUpdateManyWithoutUpdatedByNestedInput
-  scheduledEventEmails?: Prisma.ScheduledEmailsUncheckedUpdateManyWithoutUserNestedInput
+  feedbackRequests?: Prisma.FeedbackRequestUncheckedUpdateManyWithoutUserNestedInput
   hrWarnings?: Prisma.HrWarningUncheckedUpdateManyWithoutAssigneeNestedInput
   createdHrWarning?: Prisma.HrWarningUncheckedUpdateManyWithoutCreatedByNestedInput
   updatedHrWarnings?: Prisma.HrWarningUncheckedUpdateManyWithoutUpdatedByNestedInput
@@ -5261,6 +7863,14 @@ export type UserUncheckedUpdateWithoutMemberStatusCreatedInput = {
   CreatedEventAssignment?: Prisma.EventAssignmentUncheckedUpdateManyWithoutCreatedByNestedInput
   UpdatedEventAssignment?: Prisma.EventAssignmentUncheckedUpdateManyWithoutUpdatedByNestedInput
   updatedUsers?: Prisma.UserUncheckedUpdateManyWithoutUpdatedByNestedInput
+  createdAvailabilitySlots?: Prisma.AvailabilitySlotUncheckedUpdateManyWithoutCreatedByNestedInput
+  updatedAvailabilitySlots?: Prisma.AvailabilitySlotUncheckedUpdateManyWithoutUpdatedByNestedInput
+  availabilityEntries?: Prisma.AvailabilityEntryUncheckedUpdateManyWithoutUserNestedInput
+  UpdatedAvailabilityEntries?: Prisma.AvailabilityEntryUncheckedUpdateManyWithoutUpdatedByNestedInput
+  entryCancelRequests?: Prisma.EntryCancelRequestUncheckedUpdateManyWithoutRequestedByNestedInput
+  reviewedEntryCancelRequests?: Prisma.EntryCancelRequestUncheckedUpdateManyWithoutReviewedByNestedInput
+  assignmentCancelRequests?: Prisma.AssignmentCancelRequestUncheckedUpdateManyWithoutRequestedByNestedInput
+  reviewedAssignmentCancelRequests?: Prisma.AssignmentCancelRequestUncheckedUpdateManyWithoutReviewedByNestedInput
 }
 
 export type UserUpsertWithoutMemberStatusLogsInput = {
@@ -5304,7 +7914,7 @@ export type UserUpdateWithoutMemberStatusLogsInput = {
   updatedEvents?: Prisma.EventUpdateManyWithoutUpdatedByNestedInput
   providedFeedbacks?: Prisma.EventFeedbackUpdateManyWithoutUserNestedInput
   updatedEventFeedback?: Prisma.EventFeedbackUpdateManyWithoutUpdatedByNestedInput
-  scheduledEventEmails?: Prisma.ScheduledEmailsUpdateManyWithoutUserNestedInput
+  feedbackRequests?: Prisma.FeedbackRequestUpdateManyWithoutUserNestedInput
   hrWarnings?: Prisma.HrWarningUpdateManyWithoutAssigneeNestedInput
   createdHrWarning?: Prisma.HrWarningUpdateManyWithoutCreatedByNestedInput
   updatedHrWarnings?: Prisma.HrWarningUpdateManyWithoutUpdatedByNestedInput
@@ -5315,6 +7925,14 @@ export type UserUpdateWithoutMemberStatusLogsInput = {
   CreatedEventAssignment?: Prisma.EventAssignmentUpdateManyWithoutCreatedByNestedInput
   UpdatedEventAssignment?: Prisma.EventAssignmentUpdateManyWithoutUpdatedByNestedInput
   updatedUsers?: Prisma.UserUpdateManyWithoutUpdatedByNestedInput
+  createdAvailabilitySlots?: Prisma.AvailabilitySlotUpdateManyWithoutCreatedByNestedInput
+  updatedAvailabilitySlots?: Prisma.AvailabilitySlotUpdateManyWithoutUpdatedByNestedInput
+  availabilityEntries?: Prisma.AvailabilityEntryUpdateManyWithoutUserNestedInput
+  UpdatedAvailabilityEntries?: Prisma.AvailabilityEntryUpdateManyWithoutUpdatedByNestedInput
+  entryCancelRequests?: Prisma.EntryCancelRequestUpdateManyWithoutRequestedByNestedInput
+  reviewedEntryCancelRequests?: Prisma.EntryCancelRequestUpdateManyWithoutReviewedByNestedInput
+  assignmentCancelRequests?: Prisma.AssignmentCancelRequestUpdateManyWithoutRequestedByNestedInput
+  reviewedAssignmentCancelRequests?: Prisma.AssignmentCancelRequestUpdateManyWithoutReviewedByNestedInput
 }
 
 export type UserUncheckedUpdateWithoutMemberStatusLogsInput = {
@@ -5348,7 +7966,7 @@ export type UserUncheckedUpdateWithoutMemberStatusLogsInput = {
   updatedEvents?: Prisma.EventUncheckedUpdateManyWithoutUpdatedByNestedInput
   providedFeedbacks?: Prisma.EventFeedbackUncheckedUpdateManyWithoutUserNestedInput
   updatedEventFeedback?: Prisma.EventFeedbackUncheckedUpdateManyWithoutUpdatedByNestedInput
-  scheduledEventEmails?: Prisma.ScheduledEmailsUncheckedUpdateManyWithoutUserNestedInput
+  feedbackRequests?: Prisma.FeedbackRequestUncheckedUpdateManyWithoutUserNestedInput
   hrWarnings?: Prisma.HrWarningUncheckedUpdateManyWithoutAssigneeNestedInput
   createdHrWarning?: Prisma.HrWarningUncheckedUpdateManyWithoutCreatedByNestedInput
   updatedHrWarnings?: Prisma.HrWarningUncheckedUpdateManyWithoutUpdatedByNestedInput
@@ -5358,6 +7976,14 @@ export type UserUncheckedUpdateWithoutMemberStatusLogsInput = {
   CreatedEventAssignment?: Prisma.EventAssignmentUncheckedUpdateManyWithoutCreatedByNestedInput
   UpdatedEventAssignment?: Prisma.EventAssignmentUncheckedUpdateManyWithoutUpdatedByNestedInput
   updatedUsers?: Prisma.UserUncheckedUpdateManyWithoutUpdatedByNestedInput
+  createdAvailabilitySlots?: Prisma.AvailabilitySlotUncheckedUpdateManyWithoutCreatedByNestedInput
+  updatedAvailabilitySlots?: Prisma.AvailabilitySlotUncheckedUpdateManyWithoutUpdatedByNestedInput
+  availabilityEntries?: Prisma.AvailabilityEntryUncheckedUpdateManyWithoutUserNestedInput
+  UpdatedAvailabilityEntries?: Prisma.AvailabilityEntryUncheckedUpdateManyWithoutUpdatedByNestedInput
+  entryCancelRequests?: Prisma.EntryCancelRequestUncheckedUpdateManyWithoutRequestedByNestedInput
+  reviewedEntryCancelRequests?: Prisma.EntryCancelRequestUncheckedUpdateManyWithoutReviewedByNestedInput
+  assignmentCancelRequests?: Prisma.AssignmentCancelRequestUncheckedUpdateManyWithoutRequestedByNestedInput
+  reviewedAssignmentCancelRequests?: Prisma.AssignmentCancelRequestUncheckedUpdateManyWithoutReviewedByNestedInput
 }
 
 export type UserCreateWithoutUpdatedJoinRequestsInput = {
@@ -5390,7 +8016,7 @@ export type UserCreateWithoutUpdatedJoinRequestsInput = {
   updatedEvents?: Prisma.EventCreateNestedManyWithoutUpdatedByInput
   providedFeedbacks?: Prisma.EventFeedbackCreateNestedManyWithoutUserInput
   updatedEventFeedback?: Prisma.EventFeedbackCreateNestedManyWithoutUpdatedByInput
-  scheduledEventEmails?: Prisma.ScheduledEmailsCreateNestedManyWithoutUserInput
+  feedbackRequests?: Prisma.FeedbackRequestCreateNestedManyWithoutUserInput
   hrWarnings?: Prisma.HrWarningCreateNestedManyWithoutAssigneeInput
   createdHrWarning?: Prisma.HrWarningCreateNestedManyWithoutCreatedByInput
   updatedHrWarnings?: Prisma.HrWarningCreateNestedManyWithoutUpdatedByInput
@@ -5401,6 +8027,14 @@ export type UserCreateWithoutUpdatedJoinRequestsInput = {
   CreatedEventAssignment?: Prisma.EventAssignmentCreateNestedManyWithoutCreatedByInput
   UpdatedEventAssignment?: Prisma.EventAssignmentCreateNestedManyWithoutUpdatedByInput
   updatedUsers?: Prisma.UserCreateNestedManyWithoutUpdatedByInput
+  createdAvailabilitySlots?: Prisma.AvailabilitySlotCreateNestedManyWithoutCreatedByInput
+  updatedAvailabilitySlots?: Prisma.AvailabilitySlotCreateNestedManyWithoutUpdatedByInput
+  availabilityEntries?: Prisma.AvailabilityEntryCreateNestedManyWithoutUserInput
+  UpdatedAvailabilityEntries?: Prisma.AvailabilityEntryCreateNestedManyWithoutUpdatedByInput
+  entryCancelRequests?: Prisma.EntryCancelRequestCreateNestedManyWithoutRequestedByInput
+  reviewedEntryCancelRequests?: Prisma.EntryCancelRequestCreateNestedManyWithoutReviewedByInput
+  assignmentCancelRequests?: Prisma.AssignmentCancelRequestCreateNestedManyWithoutRequestedByInput
+  reviewedAssignmentCancelRequests?: Prisma.AssignmentCancelRequestCreateNestedManyWithoutReviewedByInput
 }
 
 export type UserUncheckedCreateWithoutUpdatedJoinRequestsInput = {
@@ -5434,7 +8068,7 @@ export type UserUncheckedCreateWithoutUpdatedJoinRequestsInput = {
   updatedEvents?: Prisma.EventUncheckedCreateNestedManyWithoutUpdatedByInput
   providedFeedbacks?: Prisma.EventFeedbackUncheckedCreateNestedManyWithoutUserInput
   updatedEventFeedback?: Prisma.EventFeedbackUncheckedCreateNestedManyWithoutUpdatedByInput
-  scheduledEventEmails?: Prisma.ScheduledEmailsUncheckedCreateNestedManyWithoutUserInput
+  feedbackRequests?: Prisma.FeedbackRequestUncheckedCreateNestedManyWithoutUserInput
   hrWarnings?: Prisma.HrWarningUncheckedCreateNestedManyWithoutAssigneeInput
   createdHrWarning?: Prisma.HrWarningUncheckedCreateNestedManyWithoutCreatedByInput
   updatedHrWarnings?: Prisma.HrWarningUncheckedCreateNestedManyWithoutUpdatedByInput
@@ -5444,6 +8078,14 @@ export type UserUncheckedCreateWithoutUpdatedJoinRequestsInput = {
   CreatedEventAssignment?: Prisma.EventAssignmentUncheckedCreateNestedManyWithoutCreatedByInput
   UpdatedEventAssignment?: Prisma.EventAssignmentUncheckedCreateNestedManyWithoutUpdatedByInput
   updatedUsers?: Prisma.UserUncheckedCreateNestedManyWithoutUpdatedByInput
+  createdAvailabilitySlots?: Prisma.AvailabilitySlotUncheckedCreateNestedManyWithoutCreatedByInput
+  updatedAvailabilitySlots?: Prisma.AvailabilitySlotUncheckedCreateNestedManyWithoutUpdatedByInput
+  availabilityEntries?: Prisma.AvailabilityEntryUncheckedCreateNestedManyWithoutUserInput
+  UpdatedAvailabilityEntries?: Prisma.AvailabilityEntryUncheckedCreateNestedManyWithoutUpdatedByInput
+  entryCancelRequests?: Prisma.EntryCancelRequestUncheckedCreateNestedManyWithoutRequestedByInput
+  reviewedEntryCancelRequests?: Prisma.EntryCancelRequestUncheckedCreateNestedManyWithoutReviewedByInput
+  assignmentCancelRequests?: Prisma.AssignmentCancelRequestUncheckedCreateNestedManyWithoutRequestedByInput
+  reviewedAssignmentCancelRequests?: Prisma.AssignmentCancelRequestUncheckedCreateNestedManyWithoutReviewedByInput
 }
 
 export type UserCreateOrConnectWithoutUpdatedJoinRequestsInput = {
@@ -5481,7 +8123,7 @@ export type UserCreateWithoutJoinRequestsInput = {
   updatedEvents?: Prisma.EventCreateNestedManyWithoutUpdatedByInput
   providedFeedbacks?: Prisma.EventFeedbackCreateNestedManyWithoutUserInput
   updatedEventFeedback?: Prisma.EventFeedbackCreateNestedManyWithoutUpdatedByInput
-  scheduledEventEmails?: Prisma.ScheduledEmailsCreateNestedManyWithoutUserInput
+  feedbackRequests?: Prisma.FeedbackRequestCreateNestedManyWithoutUserInput
   hrWarnings?: Prisma.HrWarningCreateNestedManyWithoutAssigneeInput
   createdHrWarning?: Prisma.HrWarningCreateNestedManyWithoutCreatedByInput
   updatedHrWarnings?: Prisma.HrWarningCreateNestedManyWithoutUpdatedByInput
@@ -5492,6 +8134,14 @@ export type UserCreateWithoutJoinRequestsInput = {
   CreatedEventAssignment?: Prisma.EventAssignmentCreateNestedManyWithoutCreatedByInput
   UpdatedEventAssignment?: Prisma.EventAssignmentCreateNestedManyWithoutUpdatedByInput
   updatedUsers?: Prisma.UserCreateNestedManyWithoutUpdatedByInput
+  createdAvailabilitySlots?: Prisma.AvailabilitySlotCreateNestedManyWithoutCreatedByInput
+  updatedAvailabilitySlots?: Prisma.AvailabilitySlotCreateNestedManyWithoutUpdatedByInput
+  availabilityEntries?: Prisma.AvailabilityEntryCreateNestedManyWithoutUserInput
+  UpdatedAvailabilityEntries?: Prisma.AvailabilityEntryCreateNestedManyWithoutUpdatedByInput
+  entryCancelRequests?: Prisma.EntryCancelRequestCreateNestedManyWithoutRequestedByInput
+  reviewedEntryCancelRequests?: Prisma.EntryCancelRequestCreateNestedManyWithoutReviewedByInput
+  assignmentCancelRequests?: Prisma.AssignmentCancelRequestCreateNestedManyWithoutRequestedByInput
+  reviewedAssignmentCancelRequests?: Prisma.AssignmentCancelRequestCreateNestedManyWithoutReviewedByInput
 }
 
 export type UserUncheckedCreateWithoutJoinRequestsInput = {
@@ -5525,7 +8175,7 @@ export type UserUncheckedCreateWithoutJoinRequestsInput = {
   updatedEvents?: Prisma.EventUncheckedCreateNestedManyWithoutUpdatedByInput
   providedFeedbacks?: Prisma.EventFeedbackUncheckedCreateNestedManyWithoutUserInput
   updatedEventFeedback?: Prisma.EventFeedbackUncheckedCreateNestedManyWithoutUpdatedByInput
-  scheduledEventEmails?: Prisma.ScheduledEmailsUncheckedCreateNestedManyWithoutUserInput
+  feedbackRequests?: Prisma.FeedbackRequestUncheckedCreateNestedManyWithoutUserInput
   hrWarnings?: Prisma.HrWarningUncheckedCreateNestedManyWithoutAssigneeInput
   createdHrWarning?: Prisma.HrWarningUncheckedCreateNestedManyWithoutCreatedByInput
   updatedHrWarnings?: Prisma.HrWarningUncheckedCreateNestedManyWithoutUpdatedByInput
@@ -5535,6 +8185,14 @@ export type UserUncheckedCreateWithoutJoinRequestsInput = {
   CreatedEventAssignment?: Prisma.EventAssignmentUncheckedCreateNestedManyWithoutCreatedByInput
   UpdatedEventAssignment?: Prisma.EventAssignmentUncheckedCreateNestedManyWithoutUpdatedByInput
   updatedUsers?: Prisma.UserUncheckedCreateNestedManyWithoutUpdatedByInput
+  createdAvailabilitySlots?: Prisma.AvailabilitySlotUncheckedCreateNestedManyWithoutCreatedByInput
+  updatedAvailabilitySlots?: Prisma.AvailabilitySlotUncheckedCreateNestedManyWithoutUpdatedByInput
+  availabilityEntries?: Prisma.AvailabilityEntryUncheckedCreateNestedManyWithoutUserInput
+  UpdatedAvailabilityEntries?: Prisma.AvailabilityEntryUncheckedCreateNestedManyWithoutUpdatedByInput
+  entryCancelRequests?: Prisma.EntryCancelRequestUncheckedCreateNestedManyWithoutRequestedByInput
+  reviewedEntryCancelRequests?: Prisma.EntryCancelRequestUncheckedCreateNestedManyWithoutReviewedByInput
+  assignmentCancelRequests?: Prisma.AssignmentCancelRequestUncheckedCreateNestedManyWithoutRequestedByInput
+  reviewedAssignmentCancelRequests?: Prisma.AssignmentCancelRequestUncheckedCreateNestedManyWithoutReviewedByInput
 }
 
 export type UserCreateOrConnectWithoutJoinRequestsInput = {
@@ -5583,7 +8241,7 @@ export type UserUpdateWithoutUpdatedJoinRequestsInput = {
   updatedEvents?: Prisma.EventUpdateManyWithoutUpdatedByNestedInput
   providedFeedbacks?: Prisma.EventFeedbackUpdateManyWithoutUserNestedInput
   updatedEventFeedback?: Prisma.EventFeedbackUpdateManyWithoutUpdatedByNestedInput
-  scheduledEventEmails?: Prisma.ScheduledEmailsUpdateManyWithoutUserNestedInput
+  feedbackRequests?: Prisma.FeedbackRequestUpdateManyWithoutUserNestedInput
   hrWarnings?: Prisma.HrWarningUpdateManyWithoutAssigneeNestedInput
   createdHrWarning?: Prisma.HrWarningUpdateManyWithoutCreatedByNestedInput
   updatedHrWarnings?: Prisma.HrWarningUpdateManyWithoutUpdatedByNestedInput
@@ -5594,6 +8252,14 @@ export type UserUpdateWithoutUpdatedJoinRequestsInput = {
   CreatedEventAssignment?: Prisma.EventAssignmentUpdateManyWithoutCreatedByNestedInput
   UpdatedEventAssignment?: Prisma.EventAssignmentUpdateManyWithoutUpdatedByNestedInput
   updatedUsers?: Prisma.UserUpdateManyWithoutUpdatedByNestedInput
+  createdAvailabilitySlots?: Prisma.AvailabilitySlotUpdateManyWithoutCreatedByNestedInput
+  updatedAvailabilitySlots?: Prisma.AvailabilitySlotUpdateManyWithoutUpdatedByNestedInput
+  availabilityEntries?: Prisma.AvailabilityEntryUpdateManyWithoutUserNestedInput
+  UpdatedAvailabilityEntries?: Prisma.AvailabilityEntryUpdateManyWithoutUpdatedByNestedInput
+  entryCancelRequests?: Prisma.EntryCancelRequestUpdateManyWithoutRequestedByNestedInput
+  reviewedEntryCancelRequests?: Prisma.EntryCancelRequestUpdateManyWithoutReviewedByNestedInput
+  assignmentCancelRequests?: Prisma.AssignmentCancelRequestUpdateManyWithoutRequestedByNestedInput
+  reviewedAssignmentCancelRequests?: Prisma.AssignmentCancelRequestUpdateManyWithoutReviewedByNestedInput
 }
 
 export type UserUncheckedUpdateWithoutUpdatedJoinRequestsInput = {
@@ -5627,7 +8293,7 @@ export type UserUncheckedUpdateWithoutUpdatedJoinRequestsInput = {
   updatedEvents?: Prisma.EventUncheckedUpdateManyWithoutUpdatedByNestedInput
   providedFeedbacks?: Prisma.EventFeedbackUncheckedUpdateManyWithoutUserNestedInput
   updatedEventFeedback?: Prisma.EventFeedbackUncheckedUpdateManyWithoutUpdatedByNestedInput
-  scheduledEventEmails?: Prisma.ScheduledEmailsUncheckedUpdateManyWithoutUserNestedInput
+  feedbackRequests?: Prisma.FeedbackRequestUncheckedUpdateManyWithoutUserNestedInput
   hrWarnings?: Prisma.HrWarningUncheckedUpdateManyWithoutAssigneeNestedInput
   createdHrWarning?: Prisma.HrWarningUncheckedUpdateManyWithoutCreatedByNestedInput
   updatedHrWarnings?: Prisma.HrWarningUncheckedUpdateManyWithoutUpdatedByNestedInput
@@ -5637,6 +8303,14 @@ export type UserUncheckedUpdateWithoutUpdatedJoinRequestsInput = {
   CreatedEventAssignment?: Prisma.EventAssignmentUncheckedUpdateManyWithoutCreatedByNestedInput
   UpdatedEventAssignment?: Prisma.EventAssignmentUncheckedUpdateManyWithoutUpdatedByNestedInput
   updatedUsers?: Prisma.UserUncheckedUpdateManyWithoutUpdatedByNestedInput
+  createdAvailabilitySlots?: Prisma.AvailabilitySlotUncheckedUpdateManyWithoutCreatedByNestedInput
+  updatedAvailabilitySlots?: Prisma.AvailabilitySlotUncheckedUpdateManyWithoutUpdatedByNestedInput
+  availabilityEntries?: Prisma.AvailabilityEntryUncheckedUpdateManyWithoutUserNestedInput
+  UpdatedAvailabilityEntries?: Prisma.AvailabilityEntryUncheckedUpdateManyWithoutUpdatedByNestedInput
+  entryCancelRequests?: Prisma.EntryCancelRequestUncheckedUpdateManyWithoutRequestedByNestedInput
+  reviewedEntryCancelRequests?: Prisma.EntryCancelRequestUncheckedUpdateManyWithoutReviewedByNestedInput
+  assignmentCancelRequests?: Prisma.AssignmentCancelRequestUncheckedUpdateManyWithoutRequestedByNestedInput
+  reviewedAssignmentCancelRequests?: Prisma.AssignmentCancelRequestUncheckedUpdateManyWithoutReviewedByNestedInput
 }
 
 export type UserUpsertWithoutJoinRequestsInput = {
@@ -5680,7 +8354,7 @@ export type UserUpdateWithoutJoinRequestsInput = {
   updatedEvents?: Prisma.EventUpdateManyWithoutUpdatedByNestedInput
   providedFeedbacks?: Prisma.EventFeedbackUpdateManyWithoutUserNestedInput
   updatedEventFeedback?: Prisma.EventFeedbackUpdateManyWithoutUpdatedByNestedInput
-  scheduledEventEmails?: Prisma.ScheduledEmailsUpdateManyWithoutUserNestedInput
+  feedbackRequests?: Prisma.FeedbackRequestUpdateManyWithoutUserNestedInput
   hrWarnings?: Prisma.HrWarningUpdateManyWithoutAssigneeNestedInput
   createdHrWarning?: Prisma.HrWarningUpdateManyWithoutCreatedByNestedInput
   updatedHrWarnings?: Prisma.HrWarningUpdateManyWithoutUpdatedByNestedInput
@@ -5691,6 +8365,14 @@ export type UserUpdateWithoutJoinRequestsInput = {
   CreatedEventAssignment?: Prisma.EventAssignmentUpdateManyWithoutCreatedByNestedInput
   UpdatedEventAssignment?: Prisma.EventAssignmentUpdateManyWithoutUpdatedByNestedInput
   updatedUsers?: Prisma.UserUpdateManyWithoutUpdatedByNestedInput
+  createdAvailabilitySlots?: Prisma.AvailabilitySlotUpdateManyWithoutCreatedByNestedInput
+  updatedAvailabilitySlots?: Prisma.AvailabilitySlotUpdateManyWithoutUpdatedByNestedInput
+  availabilityEntries?: Prisma.AvailabilityEntryUpdateManyWithoutUserNestedInput
+  UpdatedAvailabilityEntries?: Prisma.AvailabilityEntryUpdateManyWithoutUpdatedByNestedInput
+  entryCancelRequests?: Prisma.EntryCancelRequestUpdateManyWithoutRequestedByNestedInput
+  reviewedEntryCancelRequests?: Prisma.EntryCancelRequestUpdateManyWithoutReviewedByNestedInput
+  assignmentCancelRequests?: Prisma.AssignmentCancelRequestUpdateManyWithoutRequestedByNestedInput
+  reviewedAssignmentCancelRequests?: Prisma.AssignmentCancelRequestUpdateManyWithoutReviewedByNestedInput
 }
 
 export type UserUncheckedUpdateWithoutJoinRequestsInput = {
@@ -5724,7 +8406,7 @@ export type UserUncheckedUpdateWithoutJoinRequestsInput = {
   updatedEvents?: Prisma.EventUncheckedUpdateManyWithoutUpdatedByNestedInput
   providedFeedbacks?: Prisma.EventFeedbackUncheckedUpdateManyWithoutUserNestedInput
   updatedEventFeedback?: Prisma.EventFeedbackUncheckedUpdateManyWithoutUpdatedByNestedInput
-  scheduledEventEmails?: Prisma.ScheduledEmailsUncheckedUpdateManyWithoutUserNestedInput
+  feedbackRequests?: Prisma.FeedbackRequestUncheckedUpdateManyWithoutUserNestedInput
   hrWarnings?: Prisma.HrWarningUncheckedUpdateManyWithoutAssigneeNestedInput
   createdHrWarning?: Prisma.HrWarningUncheckedUpdateManyWithoutCreatedByNestedInput
   updatedHrWarnings?: Prisma.HrWarningUncheckedUpdateManyWithoutUpdatedByNestedInput
@@ -5734,6 +8416,14 @@ export type UserUncheckedUpdateWithoutJoinRequestsInput = {
   CreatedEventAssignment?: Prisma.EventAssignmentUncheckedUpdateManyWithoutCreatedByNestedInput
   UpdatedEventAssignment?: Prisma.EventAssignmentUncheckedUpdateManyWithoutUpdatedByNestedInput
   updatedUsers?: Prisma.UserUncheckedUpdateManyWithoutUpdatedByNestedInput
+  createdAvailabilitySlots?: Prisma.AvailabilitySlotUncheckedUpdateManyWithoutCreatedByNestedInput
+  updatedAvailabilitySlots?: Prisma.AvailabilitySlotUncheckedUpdateManyWithoutUpdatedByNestedInput
+  availabilityEntries?: Prisma.AvailabilityEntryUncheckedUpdateManyWithoutUserNestedInput
+  UpdatedAvailabilityEntries?: Prisma.AvailabilityEntryUncheckedUpdateManyWithoutUpdatedByNestedInput
+  entryCancelRequests?: Prisma.EntryCancelRequestUncheckedUpdateManyWithoutRequestedByNestedInput
+  reviewedEntryCancelRequests?: Prisma.EntryCancelRequestUncheckedUpdateManyWithoutReviewedByNestedInput
+  assignmentCancelRequests?: Prisma.AssignmentCancelRequestUncheckedUpdateManyWithoutRequestedByNestedInput
+  reviewedAssignmentCancelRequests?: Prisma.AssignmentCancelRequestUncheckedUpdateManyWithoutReviewedByNestedInput
 }
 
 export type UserCreateWithoutCreatedAllowedUserInput = {
@@ -5767,7 +8457,7 @@ export type UserCreateWithoutCreatedAllowedUserInput = {
   updatedEvents?: Prisma.EventCreateNestedManyWithoutUpdatedByInput
   providedFeedbacks?: Prisma.EventFeedbackCreateNestedManyWithoutUserInput
   updatedEventFeedback?: Prisma.EventFeedbackCreateNestedManyWithoutUpdatedByInput
-  scheduledEventEmails?: Prisma.ScheduledEmailsCreateNestedManyWithoutUserInput
+  feedbackRequests?: Prisma.FeedbackRequestCreateNestedManyWithoutUserInput
   hrWarnings?: Prisma.HrWarningCreateNestedManyWithoutAssigneeInput
   createdHrWarning?: Prisma.HrWarningCreateNestedManyWithoutCreatedByInput
   updatedHrWarnings?: Prisma.HrWarningCreateNestedManyWithoutUpdatedByInput
@@ -5777,6 +8467,14 @@ export type UserCreateWithoutCreatedAllowedUserInput = {
   CreatedEventAssignment?: Prisma.EventAssignmentCreateNestedManyWithoutCreatedByInput
   UpdatedEventAssignment?: Prisma.EventAssignmentCreateNestedManyWithoutUpdatedByInput
   updatedUsers?: Prisma.UserCreateNestedManyWithoutUpdatedByInput
+  createdAvailabilitySlots?: Prisma.AvailabilitySlotCreateNestedManyWithoutCreatedByInput
+  updatedAvailabilitySlots?: Prisma.AvailabilitySlotCreateNestedManyWithoutUpdatedByInput
+  availabilityEntries?: Prisma.AvailabilityEntryCreateNestedManyWithoutUserInput
+  UpdatedAvailabilityEntries?: Prisma.AvailabilityEntryCreateNestedManyWithoutUpdatedByInput
+  entryCancelRequests?: Prisma.EntryCancelRequestCreateNestedManyWithoutRequestedByInput
+  reviewedEntryCancelRequests?: Prisma.EntryCancelRequestCreateNestedManyWithoutReviewedByInput
+  assignmentCancelRequests?: Prisma.AssignmentCancelRequestCreateNestedManyWithoutRequestedByInput
+  reviewedAssignmentCancelRequests?: Prisma.AssignmentCancelRequestCreateNestedManyWithoutReviewedByInput
 }
 
 export type UserUncheckedCreateWithoutCreatedAllowedUserInput = {
@@ -5811,7 +8509,7 @@ export type UserUncheckedCreateWithoutCreatedAllowedUserInput = {
   updatedEvents?: Prisma.EventUncheckedCreateNestedManyWithoutUpdatedByInput
   providedFeedbacks?: Prisma.EventFeedbackUncheckedCreateNestedManyWithoutUserInput
   updatedEventFeedback?: Prisma.EventFeedbackUncheckedCreateNestedManyWithoutUpdatedByInput
-  scheduledEventEmails?: Prisma.ScheduledEmailsUncheckedCreateNestedManyWithoutUserInput
+  feedbackRequests?: Prisma.FeedbackRequestUncheckedCreateNestedManyWithoutUserInput
   hrWarnings?: Prisma.HrWarningUncheckedCreateNestedManyWithoutAssigneeInput
   createdHrWarning?: Prisma.HrWarningUncheckedCreateNestedManyWithoutCreatedByInput
   updatedHrWarnings?: Prisma.HrWarningUncheckedCreateNestedManyWithoutUpdatedByInput
@@ -5820,6 +8518,14 @@ export type UserUncheckedCreateWithoutCreatedAllowedUserInput = {
   CreatedEventAssignment?: Prisma.EventAssignmentUncheckedCreateNestedManyWithoutCreatedByInput
   UpdatedEventAssignment?: Prisma.EventAssignmentUncheckedCreateNestedManyWithoutUpdatedByInput
   updatedUsers?: Prisma.UserUncheckedCreateNestedManyWithoutUpdatedByInput
+  createdAvailabilitySlots?: Prisma.AvailabilitySlotUncheckedCreateNestedManyWithoutCreatedByInput
+  updatedAvailabilitySlots?: Prisma.AvailabilitySlotUncheckedCreateNestedManyWithoutUpdatedByInput
+  availabilityEntries?: Prisma.AvailabilityEntryUncheckedCreateNestedManyWithoutUserInput
+  UpdatedAvailabilityEntries?: Prisma.AvailabilityEntryUncheckedCreateNestedManyWithoutUpdatedByInput
+  entryCancelRequests?: Prisma.EntryCancelRequestUncheckedCreateNestedManyWithoutRequestedByInput
+  reviewedEntryCancelRequests?: Prisma.EntryCancelRequestUncheckedCreateNestedManyWithoutReviewedByInput
+  assignmentCancelRequests?: Prisma.AssignmentCancelRequestUncheckedCreateNestedManyWithoutRequestedByInput
+  reviewedAssignmentCancelRequests?: Prisma.AssignmentCancelRequestUncheckedCreateNestedManyWithoutReviewedByInput
 }
 
 export type UserCreateOrConnectWithoutCreatedAllowedUserInput = {
@@ -5858,7 +8564,7 @@ export type UserCreateWithoutUpdatedAllowanceInput = {
   updatedEvents?: Prisma.EventCreateNestedManyWithoutUpdatedByInput
   providedFeedbacks?: Prisma.EventFeedbackCreateNestedManyWithoutUserInput
   updatedEventFeedback?: Prisma.EventFeedbackCreateNestedManyWithoutUpdatedByInput
-  scheduledEventEmails?: Prisma.ScheduledEmailsCreateNestedManyWithoutUserInput
+  feedbackRequests?: Prisma.FeedbackRequestCreateNestedManyWithoutUserInput
   hrWarnings?: Prisma.HrWarningCreateNestedManyWithoutAssigneeInput
   createdHrWarning?: Prisma.HrWarningCreateNestedManyWithoutCreatedByInput
   updatedHrWarnings?: Prisma.HrWarningCreateNestedManyWithoutUpdatedByInput
@@ -5868,6 +8574,14 @@ export type UserCreateWithoutUpdatedAllowanceInput = {
   CreatedEventAssignment?: Prisma.EventAssignmentCreateNestedManyWithoutCreatedByInput
   UpdatedEventAssignment?: Prisma.EventAssignmentCreateNestedManyWithoutUpdatedByInput
   updatedUsers?: Prisma.UserCreateNestedManyWithoutUpdatedByInput
+  createdAvailabilitySlots?: Prisma.AvailabilitySlotCreateNestedManyWithoutCreatedByInput
+  updatedAvailabilitySlots?: Prisma.AvailabilitySlotCreateNestedManyWithoutUpdatedByInput
+  availabilityEntries?: Prisma.AvailabilityEntryCreateNestedManyWithoutUserInput
+  UpdatedAvailabilityEntries?: Prisma.AvailabilityEntryCreateNestedManyWithoutUpdatedByInput
+  entryCancelRequests?: Prisma.EntryCancelRequestCreateNestedManyWithoutRequestedByInput
+  reviewedEntryCancelRequests?: Prisma.EntryCancelRequestCreateNestedManyWithoutReviewedByInput
+  assignmentCancelRequests?: Prisma.AssignmentCancelRequestCreateNestedManyWithoutRequestedByInput
+  reviewedAssignmentCancelRequests?: Prisma.AssignmentCancelRequestCreateNestedManyWithoutReviewedByInput
 }
 
 export type UserUncheckedCreateWithoutUpdatedAllowanceInput = {
@@ -5902,7 +8616,7 @@ export type UserUncheckedCreateWithoutUpdatedAllowanceInput = {
   updatedEvents?: Prisma.EventUncheckedCreateNestedManyWithoutUpdatedByInput
   providedFeedbacks?: Prisma.EventFeedbackUncheckedCreateNestedManyWithoutUserInput
   updatedEventFeedback?: Prisma.EventFeedbackUncheckedCreateNestedManyWithoutUpdatedByInput
-  scheduledEventEmails?: Prisma.ScheduledEmailsUncheckedCreateNestedManyWithoutUserInput
+  feedbackRequests?: Prisma.FeedbackRequestUncheckedCreateNestedManyWithoutUserInput
   hrWarnings?: Prisma.HrWarningUncheckedCreateNestedManyWithoutAssigneeInput
   createdHrWarning?: Prisma.HrWarningUncheckedCreateNestedManyWithoutCreatedByInput
   updatedHrWarnings?: Prisma.HrWarningUncheckedCreateNestedManyWithoutUpdatedByInput
@@ -5911,6 +8625,14 @@ export type UserUncheckedCreateWithoutUpdatedAllowanceInput = {
   CreatedEventAssignment?: Prisma.EventAssignmentUncheckedCreateNestedManyWithoutCreatedByInput
   UpdatedEventAssignment?: Prisma.EventAssignmentUncheckedCreateNestedManyWithoutUpdatedByInput
   updatedUsers?: Prisma.UserUncheckedCreateNestedManyWithoutUpdatedByInput
+  createdAvailabilitySlots?: Prisma.AvailabilitySlotUncheckedCreateNestedManyWithoutCreatedByInput
+  updatedAvailabilitySlots?: Prisma.AvailabilitySlotUncheckedCreateNestedManyWithoutUpdatedByInput
+  availabilityEntries?: Prisma.AvailabilityEntryUncheckedCreateNestedManyWithoutUserInput
+  UpdatedAvailabilityEntries?: Prisma.AvailabilityEntryUncheckedCreateNestedManyWithoutUpdatedByInput
+  entryCancelRequests?: Prisma.EntryCancelRequestUncheckedCreateNestedManyWithoutRequestedByInput
+  reviewedEntryCancelRequests?: Prisma.EntryCancelRequestUncheckedCreateNestedManyWithoutReviewedByInput
+  assignmentCancelRequests?: Prisma.AssignmentCancelRequestUncheckedCreateNestedManyWithoutRequestedByInput
+  reviewedAssignmentCancelRequests?: Prisma.AssignmentCancelRequestUncheckedCreateNestedManyWithoutReviewedByInput
 }
 
 export type UserCreateOrConnectWithoutUpdatedAllowanceInput = {
@@ -5949,7 +8671,7 @@ export type UserCreateWithoutOwnAllowanceInput = {
   updatedEvents?: Prisma.EventCreateNestedManyWithoutUpdatedByInput
   providedFeedbacks?: Prisma.EventFeedbackCreateNestedManyWithoutUserInput
   updatedEventFeedback?: Prisma.EventFeedbackCreateNestedManyWithoutUpdatedByInput
-  scheduledEventEmails?: Prisma.ScheduledEmailsCreateNestedManyWithoutUserInput
+  feedbackRequests?: Prisma.FeedbackRequestCreateNestedManyWithoutUserInput
   hrWarnings?: Prisma.HrWarningCreateNestedManyWithoutAssigneeInput
   createdHrWarning?: Prisma.HrWarningCreateNestedManyWithoutCreatedByInput
   updatedHrWarnings?: Prisma.HrWarningCreateNestedManyWithoutUpdatedByInput
@@ -5959,6 +8681,14 @@ export type UserCreateWithoutOwnAllowanceInput = {
   CreatedEventAssignment?: Prisma.EventAssignmentCreateNestedManyWithoutCreatedByInput
   UpdatedEventAssignment?: Prisma.EventAssignmentCreateNestedManyWithoutUpdatedByInput
   updatedUsers?: Prisma.UserCreateNestedManyWithoutUpdatedByInput
+  createdAvailabilitySlots?: Prisma.AvailabilitySlotCreateNestedManyWithoutCreatedByInput
+  updatedAvailabilitySlots?: Prisma.AvailabilitySlotCreateNestedManyWithoutUpdatedByInput
+  availabilityEntries?: Prisma.AvailabilityEntryCreateNestedManyWithoutUserInput
+  UpdatedAvailabilityEntries?: Prisma.AvailabilityEntryCreateNestedManyWithoutUpdatedByInput
+  entryCancelRequests?: Prisma.EntryCancelRequestCreateNestedManyWithoutRequestedByInput
+  reviewedEntryCancelRequests?: Prisma.EntryCancelRequestCreateNestedManyWithoutReviewedByInput
+  assignmentCancelRequests?: Prisma.AssignmentCancelRequestCreateNestedManyWithoutRequestedByInput
+  reviewedAssignmentCancelRequests?: Prisma.AssignmentCancelRequestCreateNestedManyWithoutReviewedByInput
 }
 
 export type UserUncheckedCreateWithoutOwnAllowanceInput = {
@@ -5992,7 +8722,7 @@ export type UserUncheckedCreateWithoutOwnAllowanceInput = {
   updatedEvents?: Prisma.EventUncheckedCreateNestedManyWithoutUpdatedByInput
   providedFeedbacks?: Prisma.EventFeedbackUncheckedCreateNestedManyWithoutUserInput
   updatedEventFeedback?: Prisma.EventFeedbackUncheckedCreateNestedManyWithoutUpdatedByInput
-  scheduledEventEmails?: Prisma.ScheduledEmailsUncheckedCreateNestedManyWithoutUserInput
+  feedbackRequests?: Prisma.FeedbackRequestUncheckedCreateNestedManyWithoutUserInput
   hrWarnings?: Prisma.HrWarningUncheckedCreateNestedManyWithoutAssigneeInput
   createdHrWarning?: Prisma.HrWarningUncheckedCreateNestedManyWithoutCreatedByInput
   updatedHrWarnings?: Prisma.HrWarningUncheckedCreateNestedManyWithoutUpdatedByInput
@@ -6002,6 +8732,14 @@ export type UserUncheckedCreateWithoutOwnAllowanceInput = {
   CreatedEventAssignment?: Prisma.EventAssignmentUncheckedCreateNestedManyWithoutCreatedByInput
   UpdatedEventAssignment?: Prisma.EventAssignmentUncheckedCreateNestedManyWithoutUpdatedByInput
   updatedUsers?: Prisma.UserUncheckedCreateNestedManyWithoutUpdatedByInput
+  createdAvailabilitySlots?: Prisma.AvailabilitySlotUncheckedCreateNestedManyWithoutCreatedByInput
+  updatedAvailabilitySlots?: Prisma.AvailabilitySlotUncheckedCreateNestedManyWithoutUpdatedByInput
+  availabilityEntries?: Prisma.AvailabilityEntryUncheckedCreateNestedManyWithoutUserInput
+  UpdatedAvailabilityEntries?: Prisma.AvailabilityEntryUncheckedCreateNestedManyWithoutUpdatedByInput
+  entryCancelRequests?: Prisma.EntryCancelRequestUncheckedCreateNestedManyWithoutRequestedByInput
+  reviewedEntryCancelRequests?: Prisma.EntryCancelRequestUncheckedCreateNestedManyWithoutReviewedByInput
+  assignmentCancelRequests?: Prisma.AssignmentCancelRequestUncheckedCreateNestedManyWithoutRequestedByInput
+  reviewedAssignmentCancelRequests?: Prisma.AssignmentCancelRequestUncheckedCreateNestedManyWithoutReviewedByInput
 }
 
 export type UserCreateOrConnectWithoutOwnAllowanceInput = {
@@ -6051,7 +8789,7 @@ export type UserUpdateWithoutCreatedAllowedUserInput = {
   updatedEvents?: Prisma.EventUpdateManyWithoutUpdatedByNestedInput
   providedFeedbacks?: Prisma.EventFeedbackUpdateManyWithoutUserNestedInput
   updatedEventFeedback?: Prisma.EventFeedbackUpdateManyWithoutUpdatedByNestedInput
-  scheduledEventEmails?: Prisma.ScheduledEmailsUpdateManyWithoutUserNestedInput
+  feedbackRequests?: Prisma.FeedbackRequestUpdateManyWithoutUserNestedInput
   hrWarnings?: Prisma.HrWarningUpdateManyWithoutAssigneeNestedInput
   createdHrWarning?: Prisma.HrWarningUpdateManyWithoutCreatedByNestedInput
   updatedHrWarnings?: Prisma.HrWarningUpdateManyWithoutUpdatedByNestedInput
@@ -6061,6 +8799,14 @@ export type UserUpdateWithoutCreatedAllowedUserInput = {
   CreatedEventAssignment?: Prisma.EventAssignmentUpdateManyWithoutCreatedByNestedInput
   UpdatedEventAssignment?: Prisma.EventAssignmentUpdateManyWithoutUpdatedByNestedInput
   updatedUsers?: Prisma.UserUpdateManyWithoutUpdatedByNestedInput
+  createdAvailabilitySlots?: Prisma.AvailabilitySlotUpdateManyWithoutCreatedByNestedInput
+  updatedAvailabilitySlots?: Prisma.AvailabilitySlotUpdateManyWithoutUpdatedByNestedInput
+  availabilityEntries?: Prisma.AvailabilityEntryUpdateManyWithoutUserNestedInput
+  UpdatedAvailabilityEntries?: Prisma.AvailabilityEntryUpdateManyWithoutUpdatedByNestedInput
+  entryCancelRequests?: Prisma.EntryCancelRequestUpdateManyWithoutRequestedByNestedInput
+  reviewedEntryCancelRequests?: Prisma.EntryCancelRequestUpdateManyWithoutReviewedByNestedInput
+  assignmentCancelRequests?: Prisma.AssignmentCancelRequestUpdateManyWithoutRequestedByNestedInput
+  reviewedAssignmentCancelRequests?: Prisma.AssignmentCancelRequestUpdateManyWithoutReviewedByNestedInput
 }
 
 export type UserUncheckedUpdateWithoutCreatedAllowedUserInput = {
@@ -6095,7 +8841,7 @@ export type UserUncheckedUpdateWithoutCreatedAllowedUserInput = {
   updatedEvents?: Prisma.EventUncheckedUpdateManyWithoutUpdatedByNestedInput
   providedFeedbacks?: Prisma.EventFeedbackUncheckedUpdateManyWithoutUserNestedInput
   updatedEventFeedback?: Prisma.EventFeedbackUncheckedUpdateManyWithoutUpdatedByNestedInput
-  scheduledEventEmails?: Prisma.ScheduledEmailsUncheckedUpdateManyWithoutUserNestedInput
+  feedbackRequests?: Prisma.FeedbackRequestUncheckedUpdateManyWithoutUserNestedInput
   hrWarnings?: Prisma.HrWarningUncheckedUpdateManyWithoutAssigneeNestedInput
   createdHrWarning?: Prisma.HrWarningUncheckedUpdateManyWithoutCreatedByNestedInput
   updatedHrWarnings?: Prisma.HrWarningUncheckedUpdateManyWithoutUpdatedByNestedInput
@@ -6104,6 +8850,14 @@ export type UserUncheckedUpdateWithoutCreatedAllowedUserInput = {
   CreatedEventAssignment?: Prisma.EventAssignmentUncheckedUpdateManyWithoutCreatedByNestedInput
   UpdatedEventAssignment?: Prisma.EventAssignmentUncheckedUpdateManyWithoutUpdatedByNestedInput
   updatedUsers?: Prisma.UserUncheckedUpdateManyWithoutUpdatedByNestedInput
+  createdAvailabilitySlots?: Prisma.AvailabilitySlotUncheckedUpdateManyWithoutCreatedByNestedInput
+  updatedAvailabilitySlots?: Prisma.AvailabilitySlotUncheckedUpdateManyWithoutUpdatedByNestedInput
+  availabilityEntries?: Prisma.AvailabilityEntryUncheckedUpdateManyWithoutUserNestedInput
+  UpdatedAvailabilityEntries?: Prisma.AvailabilityEntryUncheckedUpdateManyWithoutUpdatedByNestedInput
+  entryCancelRequests?: Prisma.EntryCancelRequestUncheckedUpdateManyWithoutRequestedByNestedInput
+  reviewedEntryCancelRequests?: Prisma.EntryCancelRequestUncheckedUpdateManyWithoutReviewedByNestedInput
+  assignmentCancelRequests?: Prisma.AssignmentCancelRequestUncheckedUpdateManyWithoutRequestedByNestedInput
+  reviewedAssignmentCancelRequests?: Prisma.AssignmentCancelRequestUncheckedUpdateManyWithoutReviewedByNestedInput
 }
 
 export type UserUpsertWithoutUpdatedAllowanceInput = {
@@ -6148,7 +8902,7 @@ export type UserUpdateWithoutUpdatedAllowanceInput = {
   updatedEvents?: Prisma.EventUpdateManyWithoutUpdatedByNestedInput
   providedFeedbacks?: Prisma.EventFeedbackUpdateManyWithoutUserNestedInput
   updatedEventFeedback?: Prisma.EventFeedbackUpdateManyWithoutUpdatedByNestedInput
-  scheduledEventEmails?: Prisma.ScheduledEmailsUpdateManyWithoutUserNestedInput
+  feedbackRequests?: Prisma.FeedbackRequestUpdateManyWithoutUserNestedInput
   hrWarnings?: Prisma.HrWarningUpdateManyWithoutAssigneeNestedInput
   createdHrWarning?: Prisma.HrWarningUpdateManyWithoutCreatedByNestedInput
   updatedHrWarnings?: Prisma.HrWarningUpdateManyWithoutUpdatedByNestedInput
@@ -6158,6 +8912,14 @@ export type UserUpdateWithoutUpdatedAllowanceInput = {
   CreatedEventAssignment?: Prisma.EventAssignmentUpdateManyWithoutCreatedByNestedInput
   UpdatedEventAssignment?: Prisma.EventAssignmentUpdateManyWithoutUpdatedByNestedInput
   updatedUsers?: Prisma.UserUpdateManyWithoutUpdatedByNestedInput
+  createdAvailabilitySlots?: Prisma.AvailabilitySlotUpdateManyWithoutCreatedByNestedInput
+  updatedAvailabilitySlots?: Prisma.AvailabilitySlotUpdateManyWithoutUpdatedByNestedInput
+  availabilityEntries?: Prisma.AvailabilityEntryUpdateManyWithoutUserNestedInput
+  UpdatedAvailabilityEntries?: Prisma.AvailabilityEntryUpdateManyWithoutUpdatedByNestedInput
+  entryCancelRequests?: Prisma.EntryCancelRequestUpdateManyWithoutRequestedByNestedInput
+  reviewedEntryCancelRequests?: Prisma.EntryCancelRequestUpdateManyWithoutReviewedByNestedInput
+  assignmentCancelRequests?: Prisma.AssignmentCancelRequestUpdateManyWithoutRequestedByNestedInput
+  reviewedAssignmentCancelRequests?: Prisma.AssignmentCancelRequestUpdateManyWithoutReviewedByNestedInput
 }
 
 export type UserUncheckedUpdateWithoutUpdatedAllowanceInput = {
@@ -6192,7 +8954,7 @@ export type UserUncheckedUpdateWithoutUpdatedAllowanceInput = {
   updatedEvents?: Prisma.EventUncheckedUpdateManyWithoutUpdatedByNestedInput
   providedFeedbacks?: Prisma.EventFeedbackUncheckedUpdateManyWithoutUserNestedInput
   updatedEventFeedback?: Prisma.EventFeedbackUncheckedUpdateManyWithoutUpdatedByNestedInput
-  scheduledEventEmails?: Prisma.ScheduledEmailsUncheckedUpdateManyWithoutUserNestedInput
+  feedbackRequests?: Prisma.FeedbackRequestUncheckedUpdateManyWithoutUserNestedInput
   hrWarnings?: Prisma.HrWarningUncheckedUpdateManyWithoutAssigneeNestedInput
   createdHrWarning?: Prisma.HrWarningUncheckedUpdateManyWithoutCreatedByNestedInput
   updatedHrWarnings?: Prisma.HrWarningUncheckedUpdateManyWithoutUpdatedByNestedInput
@@ -6201,6 +8963,14 @@ export type UserUncheckedUpdateWithoutUpdatedAllowanceInput = {
   CreatedEventAssignment?: Prisma.EventAssignmentUncheckedUpdateManyWithoutCreatedByNestedInput
   UpdatedEventAssignment?: Prisma.EventAssignmentUncheckedUpdateManyWithoutUpdatedByNestedInput
   updatedUsers?: Prisma.UserUncheckedUpdateManyWithoutUpdatedByNestedInput
+  createdAvailabilitySlots?: Prisma.AvailabilitySlotUncheckedUpdateManyWithoutCreatedByNestedInput
+  updatedAvailabilitySlots?: Prisma.AvailabilitySlotUncheckedUpdateManyWithoutUpdatedByNestedInput
+  availabilityEntries?: Prisma.AvailabilityEntryUncheckedUpdateManyWithoutUserNestedInput
+  UpdatedAvailabilityEntries?: Prisma.AvailabilityEntryUncheckedUpdateManyWithoutUpdatedByNestedInput
+  entryCancelRequests?: Prisma.EntryCancelRequestUncheckedUpdateManyWithoutRequestedByNestedInput
+  reviewedEntryCancelRequests?: Prisma.EntryCancelRequestUncheckedUpdateManyWithoutReviewedByNestedInput
+  assignmentCancelRequests?: Prisma.AssignmentCancelRequestUncheckedUpdateManyWithoutRequestedByNestedInput
+  reviewedAssignmentCancelRequests?: Prisma.AssignmentCancelRequestUncheckedUpdateManyWithoutReviewedByNestedInput
 }
 
 export type UserUpsertWithoutOwnAllowanceInput = {
@@ -6245,7 +9015,7 @@ export type UserUpdateWithoutOwnAllowanceInput = {
   updatedEvents?: Prisma.EventUpdateManyWithoutUpdatedByNestedInput
   providedFeedbacks?: Prisma.EventFeedbackUpdateManyWithoutUserNestedInput
   updatedEventFeedback?: Prisma.EventFeedbackUpdateManyWithoutUpdatedByNestedInput
-  scheduledEventEmails?: Prisma.ScheduledEmailsUpdateManyWithoutUserNestedInput
+  feedbackRequests?: Prisma.FeedbackRequestUpdateManyWithoutUserNestedInput
   hrWarnings?: Prisma.HrWarningUpdateManyWithoutAssigneeNestedInput
   createdHrWarning?: Prisma.HrWarningUpdateManyWithoutCreatedByNestedInput
   updatedHrWarnings?: Prisma.HrWarningUpdateManyWithoutUpdatedByNestedInput
@@ -6255,6 +9025,14 @@ export type UserUpdateWithoutOwnAllowanceInput = {
   CreatedEventAssignment?: Prisma.EventAssignmentUpdateManyWithoutCreatedByNestedInput
   UpdatedEventAssignment?: Prisma.EventAssignmentUpdateManyWithoutUpdatedByNestedInput
   updatedUsers?: Prisma.UserUpdateManyWithoutUpdatedByNestedInput
+  createdAvailabilitySlots?: Prisma.AvailabilitySlotUpdateManyWithoutCreatedByNestedInput
+  updatedAvailabilitySlots?: Prisma.AvailabilitySlotUpdateManyWithoutUpdatedByNestedInput
+  availabilityEntries?: Prisma.AvailabilityEntryUpdateManyWithoutUserNestedInput
+  UpdatedAvailabilityEntries?: Prisma.AvailabilityEntryUpdateManyWithoutUpdatedByNestedInput
+  entryCancelRequests?: Prisma.EntryCancelRequestUpdateManyWithoutRequestedByNestedInput
+  reviewedEntryCancelRequests?: Prisma.EntryCancelRequestUpdateManyWithoutReviewedByNestedInput
+  assignmentCancelRequests?: Prisma.AssignmentCancelRequestUpdateManyWithoutRequestedByNestedInput
+  reviewedAssignmentCancelRequests?: Prisma.AssignmentCancelRequestUpdateManyWithoutReviewedByNestedInput
 }
 
 export type UserUncheckedUpdateWithoutOwnAllowanceInput = {
@@ -6288,7 +9066,7 @@ export type UserUncheckedUpdateWithoutOwnAllowanceInput = {
   updatedEvents?: Prisma.EventUncheckedUpdateManyWithoutUpdatedByNestedInput
   providedFeedbacks?: Prisma.EventFeedbackUncheckedUpdateManyWithoutUserNestedInput
   updatedEventFeedback?: Prisma.EventFeedbackUncheckedUpdateManyWithoutUpdatedByNestedInput
-  scheduledEventEmails?: Prisma.ScheduledEmailsUncheckedUpdateManyWithoutUserNestedInput
+  feedbackRequests?: Prisma.FeedbackRequestUncheckedUpdateManyWithoutUserNestedInput
   hrWarnings?: Prisma.HrWarningUncheckedUpdateManyWithoutAssigneeNestedInput
   createdHrWarning?: Prisma.HrWarningUncheckedUpdateManyWithoutCreatedByNestedInput
   updatedHrWarnings?: Prisma.HrWarningUncheckedUpdateManyWithoutUpdatedByNestedInput
@@ -6298,6 +9076,14 @@ export type UserUncheckedUpdateWithoutOwnAllowanceInput = {
   CreatedEventAssignment?: Prisma.EventAssignmentUncheckedUpdateManyWithoutCreatedByNestedInput
   UpdatedEventAssignment?: Prisma.EventAssignmentUncheckedUpdateManyWithoutUpdatedByNestedInput
   updatedUsers?: Prisma.UserUncheckedUpdateManyWithoutUpdatedByNestedInput
+  createdAvailabilitySlots?: Prisma.AvailabilitySlotUncheckedUpdateManyWithoutCreatedByNestedInput
+  updatedAvailabilitySlots?: Prisma.AvailabilitySlotUncheckedUpdateManyWithoutUpdatedByNestedInput
+  availabilityEntries?: Prisma.AvailabilityEntryUncheckedUpdateManyWithoutUserNestedInput
+  UpdatedAvailabilityEntries?: Prisma.AvailabilityEntryUncheckedUpdateManyWithoutUpdatedByNestedInput
+  entryCancelRequests?: Prisma.EntryCancelRequestUncheckedUpdateManyWithoutRequestedByNestedInput
+  reviewedEntryCancelRequests?: Prisma.EntryCancelRequestUncheckedUpdateManyWithoutReviewedByNestedInput
+  assignmentCancelRequests?: Prisma.AssignmentCancelRequestUncheckedUpdateManyWithoutRequestedByNestedInput
+  reviewedAssignmentCancelRequests?: Prisma.AssignmentCancelRequestUncheckedUpdateManyWithoutReviewedByNestedInput
 }
 
 export type UserCreateWithoutAccountsInput = {
@@ -6330,7 +9116,7 @@ export type UserCreateWithoutAccountsInput = {
   updatedEvents?: Prisma.EventCreateNestedManyWithoutUpdatedByInput
   providedFeedbacks?: Prisma.EventFeedbackCreateNestedManyWithoutUserInput
   updatedEventFeedback?: Prisma.EventFeedbackCreateNestedManyWithoutUpdatedByInput
-  scheduledEventEmails?: Prisma.ScheduledEmailsCreateNestedManyWithoutUserInput
+  feedbackRequests?: Prisma.FeedbackRequestCreateNestedManyWithoutUserInput
   hrWarnings?: Prisma.HrWarningCreateNestedManyWithoutAssigneeInput
   createdHrWarning?: Prisma.HrWarningCreateNestedManyWithoutCreatedByInput
   updatedHrWarnings?: Prisma.HrWarningCreateNestedManyWithoutUpdatedByInput
@@ -6341,6 +9127,14 @@ export type UserCreateWithoutAccountsInput = {
   CreatedEventAssignment?: Prisma.EventAssignmentCreateNestedManyWithoutCreatedByInput
   UpdatedEventAssignment?: Prisma.EventAssignmentCreateNestedManyWithoutUpdatedByInput
   updatedUsers?: Prisma.UserCreateNestedManyWithoutUpdatedByInput
+  createdAvailabilitySlots?: Prisma.AvailabilitySlotCreateNestedManyWithoutCreatedByInput
+  updatedAvailabilitySlots?: Prisma.AvailabilitySlotCreateNestedManyWithoutUpdatedByInput
+  availabilityEntries?: Prisma.AvailabilityEntryCreateNestedManyWithoutUserInput
+  UpdatedAvailabilityEntries?: Prisma.AvailabilityEntryCreateNestedManyWithoutUpdatedByInput
+  entryCancelRequests?: Prisma.EntryCancelRequestCreateNestedManyWithoutRequestedByInput
+  reviewedEntryCancelRequests?: Prisma.EntryCancelRequestCreateNestedManyWithoutReviewedByInput
+  assignmentCancelRequests?: Prisma.AssignmentCancelRequestCreateNestedManyWithoutRequestedByInput
+  reviewedAssignmentCancelRequests?: Prisma.AssignmentCancelRequestCreateNestedManyWithoutReviewedByInput
 }
 
 export type UserUncheckedCreateWithoutAccountsInput = {
@@ -6374,7 +9168,7 @@ export type UserUncheckedCreateWithoutAccountsInput = {
   updatedEvents?: Prisma.EventUncheckedCreateNestedManyWithoutUpdatedByInput
   providedFeedbacks?: Prisma.EventFeedbackUncheckedCreateNestedManyWithoutUserInput
   updatedEventFeedback?: Prisma.EventFeedbackUncheckedCreateNestedManyWithoutUpdatedByInput
-  scheduledEventEmails?: Prisma.ScheduledEmailsUncheckedCreateNestedManyWithoutUserInput
+  feedbackRequests?: Prisma.FeedbackRequestUncheckedCreateNestedManyWithoutUserInput
   hrWarnings?: Prisma.HrWarningUncheckedCreateNestedManyWithoutAssigneeInput
   createdHrWarning?: Prisma.HrWarningUncheckedCreateNestedManyWithoutCreatedByInput
   updatedHrWarnings?: Prisma.HrWarningUncheckedCreateNestedManyWithoutUpdatedByInput
@@ -6384,6 +9178,14 @@ export type UserUncheckedCreateWithoutAccountsInput = {
   CreatedEventAssignment?: Prisma.EventAssignmentUncheckedCreateNestedManyWithoutCreatedByInput
   UpdatedEventAssignment?: Prisma.EventAssignmentUncheckedCreateNestedManyWithoutUpdatedByInput
   updatedUsers?: Prisma.UserUncheckedCreateNestedManyWithoutUpdatedByInput
+  createdAvailabilitySlots?: Prisma.AvailabilitySlotUncheckedCreateNestedManyWithoutCreatedByInput
+  updatedAvailabilitySlots?: Prisma.AvailabilitySlotUncheckedCreateNestedManyWithoutUpdatedByInput
+  availabilityEntries?: Prisma.AvailabilityEntryUncheckedCreateNestedManyWithoutUserInput
+  UpdatedAvailabilityEntries?: Prisma.AvailabilityEntryUncheckedCreateNestedManyWithoutUpdatedByInput
+  entryCancelRequests?: Prisma.EntryCancelRequestUncheckedCreateNestedManyWithoutRequestedByInput
+  reviewedEntryCancelRequests?: Prisma.EntryCancelRequestUncheckedCreateNestedManyWithoutReviewedByInput
+  assignmentCancelRequests?: Prisma.AssignmentCancelRequestUncheckedCreateNestedManyWithoutRequestedByInput
+  reviewedAssignmentCancelRequests?: Prisma.AssignmentCancelRequestUncheckedCreateNestedManyWithoutReviewedByInput
 }
 
 export type UserCreateOrConnectWithoutAccountsInput = {
@@ -6432,7 +9234,7 @@ export type UserUpdateWithoutAccountsInput = {
   updatedEvents?: Prisma.EventUpdateManyWithoutUpdatedByNestedInput
   providedFeedbacks?: Prisma.EventFeedbackUpdateManyWithoutUserNestedInput
   updatedEventFeedback?: Prisma.EventFeedbackUpdateManyWithoutUpdatedByNestedInput
-  scheduledEventEmails?: Prisma.ScheduledEmailsUpdateManyWithoutUserNestedInput
+  feedbackRequests?: Prisma.FeedbackRequestUpdateManyWithoutUserNestedInput
   hrWarnings?: Prisma.HrWarningUpdateManyWithoutAssigneeNestedInput
   createdHrWarning?: Prisma.HrWarningUpdateManyWithoutCreatedByNestedInput
   updatedHrWarnings?: Prisma.HrWarningUpdateManyWithoutUpdatedByNestedInput
@@ -6443,6 +9245,14 @@ export type UserUpdateWithoutAccountsInput = {
   CreatedEventAssignment?: Prisma.EventAssignmentUpdateManyWithoutCreatedByNestedInput
   UpdatedEventAssignment?: Prisma.EventAssignmentUpdateManyWithoutUpdatedByNestedInput
   updatedUsers?: Prisma.UserUpdateManyWithoutUpdatedByNestedInput
+  createdAvailabilitySlots?: Prisma.AvailabilitySlotUpdateManyWithoutCreatedByNestedInput
+  updatedAvailabilitySlots?: Prisma.AvailabilitySlotUpdateManyWithoutUpdatedByNestedInput
+  availabilityEntries?: Prisma.AvailabilityEntryUpdateManyWithoutUserNestedInput
+  UpdatedAvailabilityEntries?: Prisma.AvailabilityEntryUpdateManyWithoutUpdatedByNestedInput
+  entryCancelRequests?: Prisma.EntryCancelRequestUpdateManyWithoutRequestedByNestedInput
+  reviewedEntryCancelRequests?: Prisma.EntryCancelRequestUpdateManyWithoutReviewedByNestedInput
+  assignmentCancelRequests?: Prisma.AssignmentCancelRequestUpdateManyWithoutRequestedByNestedInput
+  reviewedAssignmentCancelRequests?: Prisma.AssignmentCancelRequestUpdateManyWithoutReviewedByNestedInput
 }
 
 export type UserUncheckedUpdateWithoutAccountsInput = {
@@ -6476,7 +9286,7 @@ export type UserUncheckedUpdateWithoutAccountsInput = {
   updatedEvents?: Prisma.EventUncheckedUpdateManyWithoutUpdatedByNestedInput
   providedFeedbacks?: Prisma.EventFeedbackUncheckedUpdateManyWithoutUserNestedInput
   updatedEventFeedback?: Prisma.EventFeedbackUncheckedUpdateManyWithoutUpdatedByNestedInput
-  scheduledEventEmails?: Prisma.ScheduledEmailsUncheckedUpdateManyWithoutUserNestedInput
+  feedbackRequests?: Prisma.FeedbackRequestUncheckedUpdateManyWithoutUserNestedInput
   hrWarnings?: Prisma.HrWarningUncheckedUpdateManyWithoutAssigneeNestedInput
   createdHrWarning?: Prisma.HrWarningUncheckedUpdateManyWithoutCreatedByNestedInput
   updatedHrWarnings?: Prisma.HrWarningUncheckedUpdateManyWithoutUpdatedByNestedInput
@@ -6486,6 +9296,14 @@ export type UserUncheckedUpdateWithoutAccountsInput = {
   CreatedEventAssignment?: Prisma.EventAssignmentUncheckedUpdateManyWithoutCreatedByNestedInput
   UpdatedEventAssignment?: Prisma.EventAssignmentUncheckedUpdateManyWithoutUpdatedByNestedInput
   updatedUsers?: Prisma.UserUncheckedUpdateManyWithoutUpdatedByNestedInput
+  createdAvailabilitySlots?: Prisma.AvailabilitySlotUncheckedUpdateManyWithoutCreatedByNestedInput
+  updatedAvailabilitySlots?: Prisma.AvailabilitySlotUncheckedUpdateManyWithoutUpdatedByNestedInput
+  availabilityEntries?: Prisma.AvailabilityEntryUncheckedUpdateManyWithoutUserNestedInput
+  UpdatedAvailabilityEntries?: Prisma.AvailabilityEntryUncheckedUpdateManyWithoutUpdatedByNestedInput
+  entryCancelRequests?: Prisma.EntryCancelRequestUncheckedUpdateManyWithoutRequestedByNestedInput
+  reviewedEntryCancelRequests?: Prisma.EntryCancelRequestUncheckedUpdateManyWithoutReviewedByNestedInput
+  assignmentCancelRequests?: Prisma.AssignmentCancelRequestUncheckedUpdateManyWithoutRequestedByNestedInput
+  reviewedAssignmentCancelRequests?: Prisma.AssignmentCancelRequestUncheckedUpdateManyWithoutReviewedByNestedInput
 }
 
 export type UserCreateWithoutSessionsInput = {
@@ -6518,7 +9336,7 @@ export type UserCreateWithoutSessionsInput = {
   updatedEvents?: Prisma.EventCreateNestedManyWithoutUpdatedByInput
   providedFeedbacks?: Prisma.EventFeedbackCreateNestedManyWithoutUserInput
   updatedEventFeedback?: Prisma.EventFeedbackCreateNestedManyWithoutUpdatedByInput
-  scheduledEventEmails?: Prisma.ScheduledEmailsCreateNestedManyWithoutUserInput
+  feedbackRequests?: Prisma.FeedbackRequestCreateNestedManyWithoutUserInput
   hrWarnings?: Prisma.HrWarningCreateNestedManyWithoutAssigneeInput
   createdHrWarning?: Prisma.HrWarningCreateNestedManyWithoutCreatedByInput
   updatedHrWarnings?: Prisma.HrWarningCreateNestedManyWithoutUpdatedByInput
@@ -6529,6 +9347,14 @@ export type UserCreateWithoutSessionsInput = {
   CreatedEventAssignment?: Prisma.EventAssignmentCreateNestedManyWithoutCreatedByInput
   UpdatedEventAssignment?: Prisma.EventAssignmentCreateNestedManyWithoutUpdatedByInput
   updatedUsers?: Prisma.UserCreateNestedManyWithoutUpdatedByInput
+  createdAvailabilitySlots?: Prisma.AvailabilitySlotCreateNestedManyWithoutCreatedByInput
+  updatedAvailabilitySlots?: Prisma.AvailabilitySlotCreateNestedManyWithoutUpdatedByInput
+  availabilityEntries?: Prisma.AvailabilityEntryCreateNestedManyWithoutUserInput
+  UpdatedAvailabilityEntries?: Prisma.AvailabilityEntryCreateNestedManyWithoutUpdatedByInput
+  entryCancelRequests?: Prisma.EntryCancelRequestCreateNestedManyWithoutRequestedByInput
+  reviewedEntryCancelRequests?: Prisma.EntryCancelRequestCreateNestedManyWithoutReviewedByInput
+  assignmentCancelRequests?: Prisma.AssignmentCancelRequestCreateNestedManyWithoutRequestedByInput
+  reviewedAssignmentCancelRequests?: Prisma.AssignmentCancelRequestCreateNestedManyWithoutReviewedByInput
 }
 
 export type UserUncheckedCreateWithoutSessionsInput = {
@@ -6562,7 +9388,7 @@ export type UserUncheckedCreateWithoutSessionsInput = {
   updatedEvents?: Prisma.EventUncheckedCreateNestedManyWithoutUpdatedByInput
   providedFeedbacks?: Prisma.EventFeedbackUncheckedCreateNestedManyWithoutUserInput
   updatedEventFeedback?: Prisma.EventFeedbackUncheckedCreateNestedManyWithoutUpdatedByInput
-  scheduledEventEmails?: Prisma.ScheduledEmailsUncheckedCreateNestedManyWithoutUserInput
+  feedbackRequests?: Prisma.FeedbackRequestUncheckedCreateNestedManyWithoutUserInput
   hrWarnings?: Prisma.HrWarningUncheckedCreateNestedManyWithoutAssigneeInput
   createdHrWarning?: Prisma.HrWarningUncheckedCreateNestedManyWithoutCreatedByInput
   updatedHrWarnings?: Prisma.HrWarningUncheckedCreateNestedManyWithoutUpdatedByInput
@@ -6572,6 +9398,14 @@ export type UserUncheckedCreateWithoutSessionsInput = {
   CreatedEventAssignment?: Prisma.EventAssignmentUncheckedCreateNestedManyWithoutCreatedByInput
   UpdatedEventAssignment?: Prisma.EventAssignmentUncheckedCreateNestedManyWithoutUpdatedByInput
   updatedUsers?: Prisma.UserUncheckedCreateNestedManyWithoutUpdatedByInput
+  createdAvailabilitySlots?: Prisma.AvailabilitySlotUncheckedCreateNestedManyWithoutCreatedByInput
+  updatedAvailabilitySlots?: Prisma.AvailabilitySlotUncheckedCreateNestedManyWithoutUpdatedByInput
+  availabilityEntries?: Prisma.AvailabilityEntryUncheckedCreateNestedManyWithoutUserInput
+  UpdatedAvailabilityEntries?: Prisma.AvailabilityEntryUncheckedCreateNestedManyWithoutUpdatedByInput
+  entryCancelRequests?: Prisma.EntryCancelRequestUncheckedCreateNestedManyWithoutRequestedByInput
+  reviewedEntryCancelRequests?: Prisma.EntryCancelRequestUncheckedCreateNestedManyWithoutReviewedByInput
+  assignmentCancelRequests?: Prisma.AssignmentCancelRequestUncheckedCreateNestedManyWithoutRequestedByInput
+  reviewedAssignmentCancelRequests?: Prisma.AssignmentCancelRequestUncheckedCreateNestedManyWithoutReviewedByInput
 }
 
 export type UserCreateOrConnectWithoutSessionsInput = {
@@ -6620,7 +9454,7 @@ export type UserUpdateWithoutSessionsInput = {
   updatedEvents?: Prisma.EventUpdateManyWithoutUpdatedByNestedInput
   providedFeedbacks?: Prisma.EventFeedbackUpdateManyWithoutUserNestedInput
   updatedEventFeedback?: Prisma.EventFeedbackUpdateManyWithoutUpdatedByNestedInput
-  scheduledEventEmails?: Prisma.ScheduledEmailsUpdateManyWithoutUserNestedInput
+  feedbackRequests?: Prisma.FeedbackRequestUpdateManyWithoutUserNestedInput
   hrWarnings?: Prisma.HrWarningUpdateManyWithoutAssigneeNestedInput
   createdHrWarning?: Prisma.HrWarningUpdateManyWithoutCreatedByNestedInput
   updatedHrWarnings?: Prisma.HrWarningUpdateManyWithoutUpdatedByNestedInput
@@ -6631,6 +9465,14 @@ export type UserUpdateWithoutSessionsInput = {
   CreatedEventAssignment?: Prisma.EventAssignmentUpdateManyWithoutCreatedByNestedInput
   UpdatedEventAssignment?: Prisma.EventAssignmentUpdateManyWithoutUpdatedByNestedInput
   updatedUsers?: Prisma.UserUpdateManyWithoutUpdatedByNestedInput
+  createdAvailabilitySlots?: Prisma.AvailabilitySlotUpdateManyWithoutCreatedByNestedInput
+  updatedAvailabilitySlots?: Prisma.AvailabilitySlotUpdateManyWithoutUpdatedByNestedInput
+  availabilityEntries?: Prisma.AvailabilityEntryUpdateManyWithoutUserNestedInput
+  UpdatedAvailabilityEntries?: Prisma.AvailabilityEntryUpdateManyWithoutUpdatedByNestedInput
+  entryCancelRequests?: Prisma.EntryCancelRequestUpdateManyWithoutRequestedByNestedInput
+  reviewedEntryCancelRequests?: Prisma.EntryCancelRequestUpdateManyWithoutReviewedByNestedInput
+  assignmentCancelRequests?: Prisma.AssignmentCancelRequestUpdateManyWithoutRequestedByNestedInput
+  reviewedAssignmentCancelRequests?: Prisma.AssignmentCancelRequestUpdateManyWithoutReviewedByNestedInput
 }
 
 export type UserUncheckedUpdateWithoutSessionsInput = {
@@ -6664,7 +9506,7 @@ export type UserUncheckedUpdateWithoutSessionsInput = {
   updatedEvents?: Prisma.EventUncheckedUpdateManyWithoutUpdatedByNestedInput
   providedFeedbacks?: Prisma.EventFeedbackUncheckedUpdateManyWithoutUserNestedInput
   updatedEventFeedback?: Prisma.EventFeedbackUncheckedUpdateManyWithoutUpdatedByNestedInput
-  scheduledEventEmails?: Prisma.ScheduledEmailsUncheckedUpdateManyWithoutUserNestedInput
+  feedbackRequests?: Prisma.FeedbackRequestUncheckedUpdateManyWithoutUserNestedInput
   hrWarnings?: Prisma.HrWarningUncheckedUpdateManyWithoutAssigneeNestedInput
   createdHrWarning?: Prisma.HrWarningUncheckedUpdateManyWithoutCreatedByNestedInput
   updatedHrWarnings?: Prisma.HrWarningUncheckedUpdateManyWithoutUpdatedByNestedInput
@@ -6674,6 +9516,14 @@ export type UserUncheckedUpdateWithoutSessionsInput = {
   CreatedEventAssignment?: Prisma.EventAssignmentUncheckedUpdateManyWithoutCreatedByNestedInput
   UpdatedEventAssignment?: Prisma.EventAssignmentUncheckedUpdateManyWithoutUpdatedByNestedInput
   updatedUsers?: Prisma.UserUncheckedUpdateManyWithoutUpdatedByNestedInput
+  createdAvailabilitySlots?: Prisma.AvailabilitySlotUncheckedUpdateManyWithoutCreatedByNestedInput
+  updatedAvailabilitySlots?: Prisma.AvailabilitySlotUncheckedUpdateManyWithoutUpdatedByNestedInput
+  availabilityEntries?: Prisma.AvailabilityEntryUncheckedUpdateManyWithoutUserNestedInput
+  UpdatedAvailabilityEntries?: Prisma.AvailabilityEntryUncheckedUpdateManyWithoutUpdatedByNestedInput
+  entryCancelRequests?: Prisma.EntryCancelRequestUncheckedUpdateManyWithoutRequestedByNestedInput
+  reviewedEntryCancelRequests?: Prisma.EntryCancelRequestUncheckedUpdateManyWithoutReviewedByNestedInput
+  assignmentCancelRequests?: Prisma.AssignmentCancelRequestUncheckedUpdateManyWithoutRequestedByNestedInput
+  reviewedAssignmentCancelRequests?: Prisma.AssignmentCancelRequestUncheckedUpdateManyWithoutReviewedByNestedInput
 }
 
 export type UserCreateWithoutAuthenticatorInput = {
@@ -6706,7 +9556,7 @@ export type UserCreateWithoutAuthenticatorInput = {
   updatedEvents?: Prisma.EventCreateNestedManyWithoutUpdatedByInput
   providedFeedbacks?: Prisma.EventFeedbackCreateNestedManyWithoutUserInput
   updatedEventFeedback?: Prisma.EventFeedbackCreateNestedManyWithoutUpdatedByInput
-  scheduledEventEmails?: Prisma.ScheduledEmailsCreateNestedManyWithoutUserInput
+  feedbackRequests?: Prisma.FeedbackRequestCreateNestedManyWithoutUserInput
   hrWarnings?: Prisma.HrWarningCreateNestedManyWithoutAssigneeInput
   createdHrWarning?: Prisma.HrWarningCreateNestedManyWithoutCreatedByInput
   updatedHrWarnings?: Prisma.HrWarningCreateNestedManyWithoutUpdatedByInput
@@ -6717,6 +9567,14 @@ export type UserCreateWithoutAuthenticatorInput = {
   CreatedEventAssignment?: Prisma.EventAssignmentCreateNestedManyWithoutCreatedByInput
   UpdatedEventAssignment?: Prisma.EventAssignmentCreateNestedManyWithoutUpdatedByInput
   updatedUsers?: Prisma.UserCreateNestedManyWithoutUpdatedByInput
+  createdAvailabilitySlots?: Prisma.AvailabilitySlotCreateNestedManyWithoutCreatedByInput
+  updatedAvailabilitySlots?: Prisma.AvailabilitySlotCreateNestedManyWithoutUpdatedByInput
+  availabilityEntries?: Prisma.AvailabilityEntryCreateNestedManyWithoutUserInput
+  UpdatedAvailabilityEntries?: Prisma.AvailabilityEntryCreateNestedManyWithoutUpdatedByInput
+  entryCancelRequests?: Prisma.EntryCancelRequestCreateNestedManyWithoutRequestedByInput
+  reviewedEntryCancelRequests?: Prisma.EntryCancelRequestCreateNestedManyWithoutReviewedByInput
+  assignmentCancelRequests?: Prisma.AssignmentCancelRequestCreateNestedManyWithoutRequestedByInput
+  reviewedAssignmentCancelRequests?: Prisma.AssignmentCancelRequestCreateNestedManyWithoutReviewedByInput
 }
 
 export type UserUncheckedCreateWithoutAuthenticatorInput = {
@@ -6750,7 +9608,7 @@ export type UserUncheckedCreateWithoutAuthenticatorInput = {
   updatedEvents?: Prisma.EventUncheckedCreateNestedManyWithoutUpdatedByInput
   providedFeedbacks?: Prisma.EventFeedbackUncheckedCreateNestedManyWithoutUserInput
   updatedEventFeedback?: Prisma.EventFeedbackUncheckedCreateNestedManyWithoutUpdatedByInput
-  scheduledEventEmails?: Prisma.ScheduledEmailsUncheckedCreateNestedManyWithoutUserInput
+  feedbackRequests?: Prisma.FeedbackRequestUncheckedCreateNestedManyWithoutUserInput
   hrWarnings?: Prisma.HrWarningUncheckedCreateNestedManyWithoutAssigneeInput
   createdHrWarning?: Prisma.HrWarningUncheckedCreateNestedManyWithoutCreatedByInput
   updatedHrWarnings?: Prisma.HrWarningUncheckedCreateNestedManyWithoutUpdatedByInput
@@ -6760,6 +9618,14 @@ export type UserUncheckedCreateWithoutAuthenticatorInput = {
   CreatedEventAssignment?: Prisma.EventAssignmentUncheckedCreateNestedManyWithoutCreatedByInput
   UpdatedEventAssignment?: Prisma.EventAssignmentUncheckedCreateNestedManyWithoutUpdatedByInput
   updatedUsers?: Prisma.UserUncheckedCreateNestedManyWithoutUpdatedByInput
+  createdAvailabilitySlots?: Prisma.AvailabilitySlotUncheckedCreateNestedManyWithoutCreatedByInput
+  updatedAvailabilitySlots?: Prisma.AvailabilitySlotUncheckedCreateNestedManyWithoutUpdatedByInput
+  availabilityEntries?: Prisma.AvailabilityEntryUncheckedCreateNestedManyWithoutUserInput
+  UpdatedAvailabilityEntries?: Prisma.AvailabilityEntryUncheckedCreateNestedManyWithoutUpdatedByInput
+  entryCancelRequests?: Prisma.EntryCancelRequestUncheckedCreateNestedManyWithoutRequestedByInput
+  reviewedEntryCancelRequests?: Prisma.EntryCancelRequestUncheckedCreateNestedManyWithoutReviewedByInput
+  assignmentCancelRequests?: Prisma.AssignmentCancelRequestUncheckedCreateNestedManyWithoutRequestedByInput
+  reviewedAssignmentCancelRequests?: Prisma.AssignmentCancelRequestUncheckedCreateNestedManyWithoutReviewedByInput
 }
 
 export type UserCreateOrConnectWithoutAuthenticatorInput = {
@@ -6808,7 +9674,7 @@ export type UserUpdateWithoutAuthenticatorInput = {
   updatedEvents?: Prisma.EventUpdateManyWithoutUpdatedByNestedInput
   providedFeedbacks?: Prisma.EventFeedbackUpdateManyWithoutUserNestedInput
   updatedEventFeedback?: Prisma.EventFeedbackUpdateManyWithoutUpdatedByNestedInput
-  scheduledEventEmails?: Prisma.ScheduledEmailsUpdateManyWithoutUserNestedInput
+  feedbackRequests?: Prisma.FeedbackRequestUpdateManyWithoutUserNestedInput
   hrWarnings?: Prisma.HrWarningUpdateManyWithoutAssigneeNestedInput
   createdHrWarning?: Prisma.HrWarningUpdateManyWithoutCreatedByNestedInput
   updatedHrWarnings?: Prisma.HrWarningUpdateManyWithoutUpdatedByNestedInput
@@ -6819,6 +9685,14 @@ export type UserUpdateWithoutAuthenticatorInput = {
   CreatedEventAssignment?: Prisma.EventAssignmentUpdateManyWithoutCreatedByNestedInput
   UpdatedEventAssignment?: Prisma.EventAssignmentUpdateManyWithoutUpdatedByNestedInput
   updatedUsers?: Prisma.UserUpdateManyWithoutUpdatedByNestedInput
+  createdAvailabilitySlots?: Prisma.AvailabilitySlotUpdateManyWithoutCreatedByNestedInput
+  updatedAvailabilitySlots?: Prisma.AvailabilitySlotUpdateManyWithoutUpdatedByNestedInput
+  availabilityEntries?: Prisma.AvailabilityEntryUpdateManyWithoutUserNestedInput
+  UpdatedAvailabilityEntries?: Prisma.AvailabilityEntryUpdateManyWithoutUpdatedByNestedInput
+  entryCancelRequests?: Prisma.EntryCancelRequestUpdateManyWithoutRequestedByNestedInput
+  reviewedEntryCancelRequests?: Prisma.EntryCancelRequestUpdateManyWithoutReviewedByNestedInput
+  assignmentCancelRequests?: Prisma.AssignmentCancelRequestUpdateManyWithoutRequestedByNestedInput
+  reviewedAssignmentCancelRequests?: Prisma.AssignmentCancelRequestUpdateManyWithoutReviewedByNestedInput
 }
 
 export type UserUncheckedUpdateWithoutAuthenticatorInput = {
@@ -6852,7 +9726,7 @@ export type UserUncheckedUpdateWithoutAuthenticatorInput = {
   updatedEvents?: Prisma.EventUncheckedUpdateManyWithoutUpdatedByNestedInput
   providedFeedbacks?: Prisma.EventFeedbackUncheckedUpdateManyWithoutUserNestedInput
   updatedEventFeedback?: Prisma.EventFeedbackUncheckedUpdateManyWithoutUpdatedByNestedInput
-  scheduledEventEmails?: Prisma.ScheduledEmailsUncheckedUpdateManyWithoutUserNestedInput
+  feedbackRequests?: Prisma.FeedbackRequestUncheckedUpdateManyWithoutUserNestedInput
   hrWarnings?: Prisma.HrWarningUncheckedUpdateManyWithoutAssigneeNestedInput
   createdHrWarning?: Prisma.HrWarningUncheckedUpdateManyWithoutCreatedByNestedInput
   updatedHrWarnings?: Prisma.HrWarningUncheckedUpdateManyWithoutUpdatedByNestedInput
@@ -6862,6 +9736,14 @@ export type UserUncheckedUpdateWithoutAuthenticatorInput = {
   CreatedEventAssignment?: Prisma.EventAssignmentUncheckedUpdateManyWithoutCreatedByNestedInput
   UpdatedEventAssignment?: Prisma.EventAssignmentUncheckedUpdateManyWithoutUpdatedByNestedInput
   updatedUsers?: Prisma.UserUncheckedUpdateManyWithoutUpdatedByNestedInput
+  createdAvailabilitySlots?: Prisma.AvailabilitySlotUncheckedUpdateManyWithoutCreatedByNestedInput
+  updatedAvailabilitySlots?: Prisma.AvailabilitySlotUncheckedUpdateManyWithoutUpdatedByNestedInput
+  availabilityEntries?: Prisma.AvailabilityEntryUncheckedUpdateManyWithoutUserNestedInput
+  UpdatedAvailabilityEntries?: Prisma.AvailabilityEntryUncheckedUpdateManyWithoutUpdatedByNestedInput
+  entryCancelRequests?: Prisma.EntryCancelRequestUncheckedUpdateManyWithoutRequestedByNestedInput
+  reviewedEntryCancelRequests?: Prisma.EntryCancelRequestUncheckedUpdateManyWithoutReviewedByNestedInput
+  assignmentCancelRequests?: Prisma.AssignmentCancelRequestUncheckedUpdateManyWithoutRequestedByNestedInput
+  reviewedAssignmentCancelRequests?: Prisma.AssignmentCancelRequestUncheckedUpdateManyWithoutReviewedByNestedInput
 }
 
 export type UserCreateManyUpdatedByInput = {
@@ -6909,7 +9791,7 @@ export type UserUpdateWithoutUpdatedByInput = {
   updatedEvents?: Prisma.EventUpdateManyWithoutUpdatedByNestedInput
   providedFeedbacks?: Prisma.EventFeedbackUpdateManyWithoutUserNestedInput
   updatedEventFeedback?: Prisma.EventFeedbackUpdateManyWithoutUpdatedByNestedInput
-  scheduledEventEmails?: Prisma.ScheduledEmailsUpdateManyWithoutUserNestedInput
+  feedbackRequests?: Prisma.FeedbackRequestUpdateManyWithoutUserNestedInput
   hrWarnings?: Prisma.HrWarningUpdateManyWithoutAssigneeNestedInput
   createdHrWarning?: Prisma.HrWarningUpdateManyWithoutCreatedByNestedInput
   updatedHrWarnings?: Prisma.HrWarningUpdateManyWithoutUpdatedByNestedInput
@@ -6920,6 +9802,14 @@ export type UserUpdateWithoutUpdatedByInput = {
   CreatedEventAssignment?: Prisma.EventAssignmentUpdateManyWithoutCreatedByNestedInput
   UpdatedEventAssignment?: Prisma.EventAssignmentUpdateManyWithoutUpdatedByNestedInput
   updatedUsers?: Prisma.UserUpdateManyWithoutUpdatedByNestedInput
+  createdAvailabilitySlots?: Prisma.AvailabilitySlotUpdateManyWithoutCreatedByNestedInput
+  updatedAvailabilitySlots?: Prisma.AvailabilitySlotUpdateManyWithoutUpdatedByNestedInput
+  availabilityEntries?: Prisma.AvailabilityEntryUpdateManyWithoutUserNestedInput
+  UpdatedAvailabilityEntries?: Prisma.AvailabilityEntryUpdateManyWithoutUpdatedByNestedInput
+  entryCancelRequests?: Prisma.EntryCancelRequestUpdateManyWithoutRequestedByNestedInput
+  reviewedEntryCancelRequests?: Prisma.EntryCancelRequestUpdateManyWithoutReviewedByNestedInput
+  assignmentCancelRequests?: Prisma.AssignmentCancelRequestUpdateManyWithoutRequestedByNestedInput
+  reviewedAssignmentCancelRequests?: Prisma.AssignmentCancelRequestUpdateManyWithoutReviewedByNestedInput
 }
 
 export type UserUncheckedUpdateWithoutUpdatedByInput = {
@@ -6953,7 +9843,7 @@ export type UserUncheckedUpdateWithoutUpdatedByInput = {
   updatedEvents?: Prisma.EventUncheckedUpdateManyWithoutUpdatedByNestedInput
   providedFeedbacks?: Prisma.EventFeedbackUncheckedUpdateManyWithoutUserNestedInput
   updatedEventFeedback?: Prisma.EventFeedbackUncheckedUpdateManyWithoutUpdatedByNestedInput
-  scheduledEventEmails?: Prisma.ScheduledEmailsUncheckedUpdateManyWithoutUserNestedInput
+  feedbackRequests?: Prisma.FeedbackRequestUncheckedUpdateManyWithoutUserNestedInput
   hrWarnings?: Prisma.HrWarningUncheckedUpdateManyWithoutAssigneeNestedInput
   createdHrWarning?: Prisma.HrWarningUncheckedUpdateManyWithoutCreatedByNestedInput
   updatedHrWarnings?: Prisma.HrWarningUncheckedUpdateManyWithoutUpdatedByNestedInput
@@ -6963,6 +9853,14 @@ export type UserUncheckedUpdateWithoutUpdatedByInput = {
   CreatedEventAssignment?: Prisma.EventAssignmentUncheckedUpdateManyWithoutCreatedByNestedInput
   UpdatedEventAssignment?: Prisma.EventAssignmentUncheckedUpdateManyWithoutUpdatedByNestedInput
   updatedUsers?: Prisma.UserUncheckedUpdateManyWithoutUpdatedByNestedInput
+  createdAvailabilitySlots?: Prisma.AvailabilitySlotUncheckedUpdateManyWithoutCreatedByNestedInput
+  updatedAvailabilitySlots?: Prisma.AvailabilitySlotUncheckedUpdateManyWithoutUpdatedByNestedInput
+  availabilityEntries?: Prisma.AvailabilityEntryUncheckedUpdateManyWithoutUserNestedInput
+  UpdatedAvailabilityEntries?: Prisma.AvailabilityEntryUncheckedUpdateManyWithoutUpdatedByNestedInput
+  entryCancelRequests?: Prisma.EntryCancelRequestUncheckedUpdateManyWithoutRequestedByNestedInput
+  reviewedEntryCancelRequests?: Prisma.EntryCancelRequestUncheckedUpdateManyWithoutReviewedByNestedInput
+  assignmentCancelRequests?: Prisma.AssignmentCancelRequestUncheckedUpdateManyWithoutRequestedByNestedInput
+  reviewedAssignmentCancelRequests?: Prisma.AssignmentCancelRequestUncheckedUpdateManyWithoutReviewedByNestedInput
 }
 
 export type UserUncheckedUpdateManyWithoutUpdatedByInput = {
@@ -7004,7 +9902,7 @@ export type UserCountOutputType = {
   updatedEvents: number
   providedFeedbacks: number
   updatedEventFeedback: number
-  scheduledEventEmails: number
+  feedbackRequests: number
   hrWarnings: number
   createdHrWarning: number
   updatedHrWarnings: number
@@ -7014,6 +9912,14 @@ export type UserCountOutputType = {
   CreatedEventAssignment: number
   UpdatedEventAssignment: number
   updatedUsers: number
+  createdAvailabilitySlots: number
+  updatedAvailabilitySlots: number
+  availabilityEntries: number
+  UpdatedAvailabilityEntries: number
+  entryCancelRequests: number
+  reviewedEntryCancelRequests: number
+  assignmentCancelRequests: number
+  reviewedAssignmentCancelRequests: number
 }
 
 export type UserCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -7035,7 +9941,7 @@ export type UserCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.I
   updatedEvents?: boolean | UserCountOutputTypeCountUpdatedEventsArgs
   providedFeedbacks?: boolean | UserCountOutputTypeCountProvidedFeedbacksArgs
   updatedEventFeedback?: boolean | UserCountOutputTypeCountUpdatedEventFeedbackArgs
-  scheduledEventEmails?: boolean | UserCountOutputTypeCountScheduledEventEmailsArgs
+  feedbackRequests?: boolean | UserCountOutputTypeCountFeedbackRequestsArgs
   hrWarnings?: boolean | UserCountOutputTypeCountHrWarningsArgs
   createdHrWarning?: boolean | UserCountOutputTypeCountCreatedHrWarningArgs
   updatedHrWarnings?: boolean | UserCountOutputTypeCountUpdatedHrWarningsArgs
@@ -7045,6 +9951,14 @@ export type UserCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.I
   CreatedEventAssignment?: boolean | UserCountOutputTypeCountCreatedEventAssignmentArgs
   UpdatedEventAssignment?: boolean | UserCountOutputTypeCountUpdatedEventAssignmentArgs
   updatedUsers?: boolean | UserCountOutputTypeCountUpdatedUsersArgs
+  createdAvailabilitySlots?: boolean | UserCountOutputTypeCountCreatedAvailabilitySlotsArgs
+  updatedAvailabilitySlots?: boolean | UserCountOutputTypeCountUpdatedAvailabilitySlotsArgs
+  availabilityEntries?: boolean | UserCountOutputTypeCountAvailabilityEntriesArgs
+  UpdatedAvailabilityEntries?: boolean | UserCountOutputTypeCountUpdatedAvailabilityEntriesArgs
+  entryCancelRequests?: boolean | UserCountOutputTypeCountEntryCancelRequestsArgs
+  reviewedEntryCancelRequests?: boolean | UserCountOutputTypeCountReviewedEntryCancelRequestsArgs
+  assignmentCancelRequests?: boolean | UserCountOutputTypeCountAssignmentCancelRequestsArgs
+  reviewedAssignmentCancelRequests?: boolean | UserCountOutputTypeCountReviewedAssignmentCancelRequestsArgs
 }
 
 /**
@@ -7186,8 +10100,8 @@ export type UserCountOutputTypeCountUpdatedEventFeedbackArgs<ExtArgs extends run
 /**
  * UserCountOutputType without action
  */
-export type UserCountOutputTypeCountScheduledEventEmailsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  where?: Prisma.ScheduledEmailsWhereInput
+export type UserCountOutputTypeCountFeedbackRequestsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.FeedbackRequestWhereInput
 }
 
 /**
@@ -7253,6 +10167,62 @@ export type UserCountOutputTypeCountUpdatedUsersArgs<ExtArgs extends runtime.Typ
   where?: Prisma.UserWhereInput
 }
 
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountCreatedAvailabilitySlotsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.AvailabilitySlotWhereInput
+}
+
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountUpdatedAvailabilitySlotsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.AvailabilitySlotWhereInput
+}
+
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountAvailabilityEntriesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.AvailabilityEntryWhereInput
+}
+
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountUpdatedAvailabilityEntriesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.AvailabilityEntryWhereInput
+}
+
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountEntryCancelRequestsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.EntryCancelRequestWhereInput
+}
+
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountReviewedEntryCancelRequestsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.EntryCancelRequestWhereInput
+}
+
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountAssignmentCancelRequestsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.AssignmentCancelRequestWhereInput
+}
+
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountReviewedAssignmentCancelRequestsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.AssignmentCancelRequestWhereInput
+}
+
 
 export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -7287,7 +10257,7 @@ export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   updatedEvents?: boolean | Prisma.User$updatedEventsArgs<ExtArgs>
   providedFeedbacks?: boolean | Prisma.User$providedFeedbacksArgs<ExtArgs>
   updatedEventFeedback?: boolean | Prisma.User$updatedEventFeedbackArgs<ExtArgs>
-  scheduledEventEmails?: boolean | Prisma.User$scheduledEventEmailsArgs<ExtArgs>
+  feedbackRequests?: boolean | Prisma.User$feedbackRequestsArgs<ExtArgs>
   hrWarnings?: boolean | Prisma.User$hrWarningsArgs<ExtArgs>
   createdHrWarning?: boolean | Prisma.User$createdHrWarningArgs<ExtArgs>
   updatedHrWarnings?: boolean | Prisma.User$updatedHrWarningsArgs<ExtArgs>
@@ -7298,6 +10268,14 @@ export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   CreatedEventAssignment?: boolean | Prisma.User$CreatedEventAssignmentArgs<ExtArgs>
   UpdatedEventAssignment?: boolean | Prisma.User$UpdatedEventAssignmentArgs<ExtArgs>
   updatedUsers?: boolean | Prisma.User$updatedUsersArgs<ExtArgs>
+  createdAvailabilitySlots?: boolean | Prisma.User$createdAvailabilitySlotsArgs<ExtArgs>
+  updatedAvailabilitySlots?: boolean | Prisma.User$updatedAvailabilitySlotsArgs<ExtArgs>
+  availabilityEntries?: boolean | Prisma.User$availabilityEntriesArgs<ExtArgs>
+  UpdatedAvailabilityEntries?: boolean | Prisma.User$UpdatedAvailabilityEntriesArgs<ExtArgs>
+  entryCancelRequests?: boolean | Prisma.User$entryCancelRequestsArgs<ExtArgs>
+  reviewedEntryCancelRequests?: boolean | Prisma.User$reviewedEntryCancelRequestsArgs<ExtArgs>
+  assignmentCancelRequests?: boolean | Prisma.User$assignmentCancelRequestsArgs<ExtArgs>
+  reviewedAssignmentCancelRequests?: boolean | Prisma.User$reviewedAssignmentCancelRequestsArgs<ExtArgs>
   _count?: boolean | Prisma.UserCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["user"]>
 
@@ -7374,7 +10352,7 @@ export type UserInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = 
   updatedEvents?: boolean | Prisma.User$updatedEventsArgs<ExtArgs>
   providedFeedbacks?: boolean | Prisma.User$providedFeedbacksArgs<ExtArgs>
   updatedEventFeedback?: boolean | Prisma.User$updatedEventFeedbackArgs<ExtArgs>
-  scheduledEventEmails?: boolean | Prisma.User$scheduledEventEmailsArgs<ExtArgs>
+  feedbackRequests?: boolean | Prisma.User$feedbackRequestsArgs<ExtArgs>
   hrWarnings?: boolean | Prisma.User$hrWarningsArgs<ExtArgs>
   createdHrWarning?: boolean | Prisma.User$createdHrWarningArgs<ExtArgs>
   updatedHrWarnings?: boolean | Prisma.User$updatedHrWarningsArgs<ExtArgs>
@@ -7385,6 +10363,14 @@ export type UserInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = 
   CreatedEventAssignment?: boolean | Prisma.User$CreatedEventAssignmentArgs<ExtArgs>
   UpdatedEventAssignment?: boolean | Prisma.User$UpdatedEventAssignmentArgs<ExtArgs>
   updatedUsers?: boolean | Prisma.User$updatedUsersArgs<ExtArgs>
+  createdAvailabilitySlots?: boolean | Prisma.User$createdAvailabilitySlotsArgs<ExtArgs>
+  updatedAvailabilitySlots?: boolean | Prisma.User$updatedAvailabilitySlotsArgs<ExtArgs>
+  availabilityEntries?: boolean | Prisma.User$availabilityEntriesArgs<ExtArgs>
+  UpdatedAvailabilityEntries?: boolean | Prisma.User$UpdatedAvailabilityEntriesArgs<ExtArgs>
+  entryCancelRequests?: boolean | Prisma.User$entryCancelRequestsArgs<ExtArgs>
+  reviewedEntryCancelRequests?: boolean | Prisma.User$reviewedEntryCancelRequestsArgs<ExtArgs>
+  assignmentCancelRequests?: boolean | Prisma.User$assignmentCancelRequestsArgs<ExtArgs>
+  reviewedAssignmentCancelRequests?: boolean | Prisma.User$reviewedAssignmentCancelRequestsArgs<ExtArgs>
   _count?: boolean | Prisma.UserCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type UserIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -7418,7 +10404,7 @@ export type $UserPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
     updatedEvents: Prisma.$EventPayload<ExtArgs>[]
     providedFeedbacks: Prisma.$EventFeedbackPayload<ExtArgs>[]
     updatedEventFeedback: Prisma.$EventFeedbackPayload<ExtArgs>[]
-    scheduledEventEmails: Prisma.$ScheduledEmailsPayload<ExtArgs>[]
+    feedbackRequests: Prisma.$FeedbackRequestPayload<ExtArgs>[]
     hrWarnings: Prisma.$HrWarningPayload<ExtArgs>[]
     createdHrWarning: Prisma.$HrWarningPayload<ExtArgs>[]
     updatedHrWarnings: Prisma.$HrWarningPayload<ExtArgs>[]
@@ -7429,6 +10415,14 @@ export type $UserPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
     CreatedEventAssignment: Prisma.$EventAssignmentPayload<ExtArgs>[]
     UpdatedEventAssignment: Prisma.$EventAssignmentPayload<ExtArgs>[]
     updatedUsers: Prisma.$UserPayload<ExtArgs>[]
+    createdAvailabilitySlots: Prisma.$AvailabilitySlotPayload<ExtArgs>[]
+    updatedAvailabilitySlots: Prisma.$AvailabilitySlotPayload<ExtArgs>[]
+    availabilityEntries: Prisma.$AvailabilityEntryPayload<ExtArgs>[]
+    UpdatedAvailabilityEntries: Prisma.$AvailabilityEntryPayload<ExtArgs>[]
+    entryCancelRequests: Prisma.$EntryCancelRequestPayload<ExtArgs>[]
+    reviewedEntryCancelRequests: Prisma.$EntryCancelRequestPayload<ExtArgs>[]
+    assignmentCancelRequests: Prisma.$AssignmentCancelRequestPayload<ExtArgs>[]
+    reviewedAssignmentCancelRequests: Prisma.$AssignmentCancelRequestPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -7857,7 +10851,7 @@ export interface Prisma__UserClient<T, Null = never, ExtArgs extends runtime.Typ
   updatedEvents<T extends Prisma.User$updatedEventsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$updatedEventsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$EventPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   providedFeedbacks<T extends Prisma.User$providedFeedbacksArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$providedFeedbacksArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$EventFeedbackPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   updatedEventFeedback<T extends Prisma.User$updatedEventFeedbackArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$updatedEventFeedbackArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$EventFeedbackPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-  scheduledEventEmails<T extends Prisma.User$scheduledEventEmailsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$scheduledEventEmailsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ScheduledEmailsPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  feedbackRequests<T extends Prisma.User$feedbackRequestsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$feedbackRequestsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$FeedbackRequestPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   hrWarnings<T extends Prisma.User$hrWarningsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$hrWarningsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$HrWarningPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   createdHrWarning<T extends Prisma.User$createdHrWarningArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$createdHrWarningArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$HrWarningPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   updatedHrWarnings<T extends Prisma.User$updatedHrWarningsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$updatedHrWarningsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$HrWarningPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
@@ -7868,6 +10862,14 @@ export interface Prisma__UserClient<T, Null = never, ExtArgs extends runtime.Typ
   CreatedEventAssignment<T extends Prisma.User$CreatedEventAssignmentArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$CreatedEventAssignmentArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$EventAssignmentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   UpdatedEventAssignment<T extends Prisma.User$UpdatedEventAssignmentArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$UpdatedEventAssignmentArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$EventAssignmentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   updatedUsers<T extends Prisma.User$updatedUsersArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$updatedUsersArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  createdAvailabilitySlots<T extends Prisma.User$createdAvailabilitySlotsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$createdAvailabilitySlotsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$AvailabilitySlotPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  updatedAvailabilitySlots<T extends Prisma.User$updatedAvailabilitySlotsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$updatedAvailabilitySlotsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$AvailabilitySlotPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  availabilityEntries<T extends Prisma.User$availabilityEntriesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$availabilityEntriesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$AvailabilityEntryPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  UpdatedAvailabilityEntries<T extends Prisma.User$UpdatedAvailabilityEntriesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$UpdatedAvailabilityEntriesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$AvailabilityEntryPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  entryCancelRequests<T extends Prisma.User$entryCancelRequestsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$entryCancelRequestsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$EntryCancelRequestPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  reviewedEntryCancelRequests<T extends Prisma.User$reviewedEntryCancelRequestsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$reviewedEntryCancelRequestsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$EntryCancelRequestPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  assignmentCancelRequests<T extends Prisma.User$assignmentCancelRequestsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$assignmentCancelRequestsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$AssignmentCancelRequestPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  reviewedAssignmentCancelRequests<T extends Prisma.User$reviewedAssignmentCancelRequestsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$reviewedAssignmentCancelRequestsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$AssignmentCancelRequestPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -8757,27 +11759,27 @@ export type User$updatedEventFeedbackArgs<ExtArgs extends runtime.Types.Extensio
 }
 
 /**
- * User.scheduledEventEmails
+ * User.feedbackRequests
  */
-export type User$scheduledEventEmailsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+export type User$feedbackRequestsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   /**
-   * Select specific fields to fetch from the ScheduledEmails
+   * Select specific fields to fetch from the FeedbackRequest
    */
-  select?: Prisma.ScheduledEmailsSelect<ExtArgs> | null
+  select?: Prisma.FeedbackRequestSelect<ExtArgs> | null
   /**
-   * Omit specific fields from the ScheduledEmails
+   * Omit specific fields from the FeedbackRequest
    */
-  omit?: Prisma.ScheduledEmailsOmit<ExtArgs> | null
+  omit?: Prisma.FeedbackRequestOmit<ExtArgs> | null
   /**
    * Choose, which related nodes to fetch as well
    */
-  include?: Prisma.ScheduledEmailsInclude<ExtArgs> | null
-  where?: Prisma.ScheduledEmailsWhereInput
-  orderBy?: Prisma.ScheduledEmailsOrderByWithRelationInput | Prisma.ScheduledEmailsOrderByWithRelationInput[]
-  cursor?: Prisma.ScheduledEmailsWhereUniqueInput
+  include?: Prisma.FeedbackRequestInclude<ExtArgs> | null
+  where?: Prisma.FeedbackRequestWhereInput
+  orderBy?: Prisma.FeedbackRequestOrderByWithRelationInput | Prisma.FeedbackRequestOrderByWithRelationInput[]
+  cursor?: Prisma.FeedbackRequestWhereUniqueInput
   take?: number
   skip?: number
-  distinct?: Prisma.ScheduledEmailsScalarFieldEnum | Prisma.ScheduledEmailsScalarFieldEnum[]
+  distinct?: Prisma.FeedbackRequestScalarFieldEnum | Prisma.FeedbackRequestScalarFieldEnum[]
 }
 
 /**
@@ -9013,6 +12015,198 @@ export type User$updatedUsersArgs<ExtArgs extends runtime.Types.Extensions.Inter
   take?: number
   skip?: number
   distinct?: Prisma.UserScalarFieldEnum | Prisma.UserScalarFieldEnum[]
+}
+
+/**
+ * User.createdAvailabilitySlots
+ */
+export type User$createdAvailabilitySlotsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the AvailabilitySlot
+   */
+  select?: Prisma.AvailabilitySlotSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the AvailabilitySlot
+   */
+  omit?: Prisma.AvailabilitySlotOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.AvailabilitySlotInclude<ExtArgs> | null
+  where?: Prisma.AvailabilitySlotWhereInput
+  orderBy?: Prisma.AvailabilitySlotOrderByWithRelationInput | Prisma.AvailabilitySlotOrderByWithRelationInput[]
+  cursor?: Prisma.AvailabilitySlotWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.AvailabilitySlotScalarFieldEnum | Prisma.AvailabilitySlotScalarFieldEnum[]
+}
+
+/**
+ * User.updatedAvailabilitySlots
+ */
+export type User$updatedAvailabilitySlotsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the AvailabilitySlot
+   */
+  select?: Prisma.AvailabilitySlotSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the AvailabilitySlot
+   */
+  omit?: Prisma.AvailabilitySlotOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.AvailabilitySlotInclude<ExtArgs> | null
+  where?: Prisma.AvailabilitySlotWhereInput
+  orderBy?: Prisma.AvailabilitySlotOrderByWithRelationInput | Prisma.AvailabilitySlotOrderByWithRelationInput[]
+  cursor?: Prisma.AvailabilitySlotWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.AvailabilitySlotScalarFieldEnum | Prisma.AvailabilitySlotScalarFieldEnum[]
+}
+
+/**
+ * User.availabilityEntries
+ */
+export type User$availabilityEntriesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the AvailabilityEntry
+   */
+  select?: Prisma.AvailabilityEntrySelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the AvailabilityEntry
+   */
+  omit?: Prisma.AvailabilityEntryOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.AvailabilityEntryInclude<ExtArgs> | null
+  where?: Prisma.AvailabilityEntryWhereInput
+  orderBy?: Prisma.AvailabilityEntryOrderByWithRelationInput | Prisma.AvailabilityEntryOrderByWithRelationInput[]
+  cursor?: Prisma.AvailabilityEntryWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.AvailabilityEntryScalarFieldEnum | Prisma.AvailabilityEntryScalarFieldEnum[]
+}
+
+/**
+ * User.UpdatedAvailabilityEntries
+ */
+export type User$UpdatedAvailabilityEntriesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the AvailabilityEntry
+   */
+  select?: Prisma.AvailabilityEntrySelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the AvailabilityEntry
+   */
+  omit?: Prisma.AvailabilityEntryOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.AvailabilityEntryInclude<ExtArgs> | null
+  where?: Prisma.AvailabilityEntryWhereInput
+  orderBy?: Prisma.AvailabilityEntryOrderByWithRelationInput | Prisma.AvailabilityEntryOrderByWithRelationInput[]
+  cursor?: Prisma.AvailabilityEntryWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.AvailabilityEntryScalarFieldEnum | Prisma.AvailabilityEntryScalarFieldEnum[]
+}
+
+/**
+ * User.entryCancelRequests
+ */
+export type User$entryCancelRequestsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the EntryCancelRequest
+   */
+  select?: Prisma.EntryCancelRequestSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the EntryCancelRequest
+   */
+  omit?: Prisma.EntryCancelRequestOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.EntryCancelRequestInclude<ExtArgs> | null
+  where?: Prisma.EntryCancelRequestWhereInput
+  orderBy?: Prisma.EntryCancelRequestOrderByWithRelationInput | Prisma.EntryCancelRequestOrderByWithRelationInput[]
+  cursor?: Prisma.EntryCancelRequestWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.EntryCancelRequestScalarFieldEnum | Prisma.EntryCancelRequestScalarFieldEnum[]
+}
+
+/**
+ * User.reviewedEntryCancelRequests
+ */
+export type User$reviewedEntryCancelRequestsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the EntryCancelRequest
+   */
+  select?: Prisma.EntryCancelRequestSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the EntryCancelRequest
+   */
+  omit?: Prisma.EntryCancelRequestOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.EntryCancelRequestInclude<ExtArgs> | null
+  where?: Prisma.EntryCancelRequestWhereInput
+  orderBy?: Prisma.EntryCancelRequestOrderByWithRelationInput | Prisma.EntryCancelRequestOrderByWithRelationInput[]
+  cursor?: Prisma.EntryCancelRequestWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.EntryCancelRequestScalarFieldEnum | Prisma.EntryCancelRequestScalarFieldEnum[]
+}
+
+/**
+ * User.assignmentCancelRequests
+ */
+export type User$assignmentCancelRequestsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the AssignmentCancelRequest
+   */
+  select?: Prisma.AssignmentCancelRequestSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the AssignmentCancelRequest
+   */
+  omit?: Prisma.AssignmentCancelRequestOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.AssignmentCancelRequestInclude<ExtArgs> | null
+  where?: Prisma.AssignmentCancelRequestWhereInput
+  orderBy?: Prisma.AssignmentCancelRequestOrderByWithRelationInput | Prisma.AssignmentCancelRequestOrderByWithRelationInput[]
+  cursor?: Prisma.AssignmentCancelRequestWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.AssignmentCancelRequestScalarFieldEnum | Prisma.AssignmentCancelRequestScalarFieldEnum[]
+}
+
+/**
+ * User.reviewedAssignmentCancelRequests
+ */
+export type User$reviewedAssignmentCancelRequestsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the AssignmentCancelRequest
+   */
+  select?: Prisma.AssignmentCancelRequestSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the AssignmentCancelRequest
+   */
+  omit?: Prisma.AssignmentCancelRequestOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.AssignmentCancelRequestInclude<ExtArgs> | null
+  where?: Prisma.AssignmentCancelRequestWhereInput
+  orderBy?: Prisma.AssignmentCancelRequestOrderByWithRelationInput | Prisma.AssignmentCancelRequestOrderByWithRelationInput[]
+  cursor?: Prisma.AssignmentCancelRequestWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.AssignmentCancelRequestScalarFieldEnum | Prisma.AssignmentCancelRequestScalarFieldEnum[]
 }
 
 /**

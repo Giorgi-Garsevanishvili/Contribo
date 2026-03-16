@@ -183,6 +183,7 @@ export type EventsRoleWhereInput = {
   updatedAt?: Prisma.DateTimeNullableFilter<"EventsRole"> | Date | string | null
   type?: Prisma.EnumGTypesFilter<"EventsRole"> | $Enums.GTypes
   eventAssignment?: Prisma.EventAssignmentListRelationFilter
+  availabilities?: Prisma.AvailabilitySlotListRelationFilter
 }
 
 export type EventsRoleOrderByWithRelationInput = {
@@ -192,6 +193,7 @@ export type EventsRoleOrderByWithRelationInput = {
   updatedAt?: Prisma.SortOrderInput | Prisma.SortOrder
   type?: Prisma.SortOrder
   eventAssignment?: Prisma.EventAssignmentOrderByRelationAggregateInput
+  availabilities?: Prisma.AvailabilitySlotOrderByRelationAggregateInput
 }
 
 export type EventsRoleWhereUniqueInput = Prisma.AtLeast<{
@@ -204,6 +206,7 @@ export type EventsRoleWhereUniqueInput = Prisma.AtLeast<{
   updatedAt?: Prisma.DateTimeNullableFilter<"EventsRole"> | Date | string | null
   type?: Prisma.EnumGTypesFilter<"EventsRole"> | $Enums.GTypes
   eventAssignment?: Prisma.EventAssignmentListRelationFilter
+  availabilities?: Prisma.AvailabilitySlotListRelationFilter
 }, "id" | "name">
 
 export type EventsRoleOrderByWithAggregationInput = {
@@ -235,6 +238,7 @@ export type EventsRoleCreateInput = {
   updatedAt?: Date | string | null
   type?: $Enums.GTypes
   eventAssignment?: Prisma.EventAssignmentCreateNestedManyWithoutRoleInput
+  availabilities?: Prisma.AvailabilitySlotCreateNestedManyWithoutRoleInput
 }
 
 export type EventsRoleUncheckedCreateInput = {
@@ -244,6 +248,7 @@ export type EventsRoleUncheckedCreateInput = {
   updatedAt?: Date | string | null
   type?: $Enums.GTypes
   eventAssignment?: Prisma.EventAssignmentUncheckedCreateNestedManyWithoutRoleInput
+  availabilities?: Prisma.AvailabilitySlotUncheckedCreateNestedManyWithoutRoleInput
 }
 
 export type EventsRoleUpdateInput = {
@@ -253,6 +258,7 @@ export type EventsRoleUpdateInput = {
   updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   type?: Prisma.EnumGTypesFieldUpdateOperationsInput | $Enums.GTypes
   eventAssignment?: Prisma.EventAssignmentUpdateManyWithoutRoleNestedInput
+  availabilities?: Prisma.AvailabilitySlotUpdateManyWithoutRoleNestedInput
 }
 
 export type EventsRoleUncheckedUpdateInput = {
@@ -262,6 +268,7 @@ export type EventsRoleUncheckedUpdateInput = {
   updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   type?: Prisma.EnumGTypesFieldUpdateOperationsInput | $Enums.GTypes
   eventAssignment?: Prisma.EventAssignmentUncheckedUpdateManyWithoutRoleNestedInput
+  availabilities?: Prisma.AvailabilitySlotUncheckedUpdateManyWithoutRoleNestedInput
 }
 
 export type EventsRoleCreateManyInput = {
@@ -312,6 +319,11 @@ export type EventsRoleMinOrderByAggregateInput = {
   type?: Prisma.SortOrder
 }
 
+export type EventsRoleScalarRelationFilter = {
+  is?: Prisma.EventsRoleWhereInput
+  isNot?: Prisma.EventsRoleWhereInput
+}
+
 export type EventsRoleNullableScalarRelationFilter = {
   is?: Prisma.EventsRoleWhereInput | null
   isNot?: Prisma.EventsRoleWhereInput | null
@@ -319,6 +331,20 @@ export type EventsRoleNullableScalarRelationFilter = {
 
 export type EnumGTypesFieldUpdateOperationsInput = {
   set?: $Enums.GTypes
+}
+
+export type EventsRoleCreateNestedOneWithoutAvailabilitiesInput = {
+  create?: Prisma.XOR<Prisma.EventsRoleCreateWithoutAvailabilitiesInput, Prisma.EventsRoleUncheckedCreateWithoutAvailabilitiesInput>
+  connectOrCreate?: Prisma.EventsRoleCreateOrConnectWithoutAvailabilitiesInput
+  connect?: Prisma.EventsRoleWhereUniqueInput
+}
+
+export type EventsRoleUpdateOneRequiredWithoutAvailabilitiesNestedInput = {
+  create?: Prisma.XOR<Prisma.EventsRoleCreateWithoutAvailabilitiesInput, Prisma.EventsRoleUncheckedCreateWithoutAvailabilitiesInput>
+  connectOrCreate?: Prisma.EventsRoleCreateOrConnectWithoutAvailabilitiesInput
+  upsert?: Prisma.EventsRoleUpsertWithoutAvailabilitiesInput
+  connect?: Prisma.EventsRoleWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.EventsRoleUpdateToOneWithWhereWithoutAvailabilitiesInput, Prisma.EventsRoleUpdateWithoutAvailabilitiesInput>, Prisma.EventsRoleUncheckedUpdateWithoutAvailabilitiesInput>
 }
 
 export type EventsRoleCreateNestedOneWithoutEventAssignmentInput = {
@@ -337,12 +363,65 @@ export type EventsRoleUpdateOneWithoutEventAssignmentNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.EventsRoleUpdateToOneWithWhereWithoutEventAssignmentInput, Prisma.EventsRoleUpdateWithoutEventAssignmentInput>, Prisma.EventsRoleUncheckedUpdateWithoutEventAssignmentInput>
 }
 
+export type EventsRoleCreateWithoutAvailabilitiesInput = {
+  id?: string
+  name: string
+  createdAt?: Date | string
+  updatedAt?: Date | string | null
+  type?: $Enums.GTypes
+  eventAssignment?: Prisma.EventAssignmentCreateNestedManyWithoutRoleInput
+}
+
+export type EventsRoleUncheckedCreateWithoutAvailabilitiesInput = {
+  id?: string
+  name: string
+  createdAt?: Date | string
+  updatedAt?: Date | string | null
+  type?: $Enums.GTypes
+  eventAssignment?: Prisma.EventAssignmentUncheckedCreateNestedManyWithoutRoleInput
+}
+
+export type EventsRoleCreateOrConnectWithoutAvailabilitiesInput = {
+  where: Prisma.EventsRoleWhereUniqueInput
+  create: Prisma.XOR<Prisma.EventsRoleCreateWithoutAvailabilitiesInput, Prisma.EventsRoleUncheckedCreateWithoutAvailabilitiesInput>
+}
+
+export type EventsRoleUpsertWithoutAvailabilitiesInput = {
+  update: Prisma.XOR<Prisma.EventsRoleUpdateWithoutAvailabilitiesInput, Prisma.EventsRoleUncheckedUpdateWithoutAvailabilitiesInput>
+  create: Prisma.XOR<Prisma.EventsRoleCreateWithoutAvailabilitiesInput, Prisma.EventsRoleUncheckedCreateWithoutAvailabilitiesInput>
+  where?: Prisma.EventsRoleWhereInput
+}
+
+export type EventsRoleUpdateToOneWithWhereWithoutAvailabilitiesInput = {
+  where?: Prisma.EventsRoleWhereInput
+  data: Prisma.XOR<Prisma.EventsRoleUpdateWithoutAvailabilitiesInput, Prisma.EventsRoleUncheckedUpdateWithoutAvailabilitiesInput>
+}
+
+export type EventsRoleUpdateWithoutAvailabilitiesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  type?: Prisma.EnumGTypesFieldUpdateOperationsInput | $Enums.GTypes
+  eventAssignment?: Prisma.EventAssignmentUpdateManyWithoutRoleNestedInput
+}
+
+export type EventsRoleUncheckedUpdateWithoutAvailabilitiesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  type?: Prisma.EnumGTypesFieldUpdateOperationsInput | $Enums.GTypes
+  eventAssignment?: Prisma.EventAssignmentUncheckedUpdateManyWithoutRoleNestedInput
+}
+
 export type EventsRoleCreateWithoutEventAssignmentInput = {
   id?: string
   name: string
   createdAt?: Date | string
   updatedAt?: Date | string | null
   type?: $Enums.GTypes
+  availabilities?: Prisma.AvailabilitySlotCreateNestedManyWithoutRoleInput
 }
 
 export type EventsRoleUncheckedCreateWithoutEventAssignmentInput = {
@@ -351,6 +430,7 @@ export type EventsRoleUncheckedCreateWithoutEventAssignmentInput = {
   createdAt?: Date | string
   updatedAt?: Date | string | null
   type?: $Enums.GTypes
+  availabilities?: Prisma.AvailabilitySlotUncheckedCreateNestedManyWithoutRoleInput
 }
 
 export type EventsRoleCreateOrConnectWithoutEventAssignmentInput = {
@@ -375,6 +455,7 @@ export type EventsRoleUpdateWithoutEventAssignmentInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   type?: Prisma.EnumGTypesFieldUpdateOperationsInput | $Enums.GTypes
+  availabilities?: Prisma.AvailabilitySlotUpdateManyWithoutRoleNestedInput
 }
 
 export type EventsRoleUncheckedUpdateWithoutEventAssignmentInput = {
@@ -383,6 +464,7 @@ export type EventsRoleUncheckedUpdateWithoutEventAssignmentInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   type?: Prisma.EnumGTypesFieldUpdateOperationsInput | $Enums.GTypes
+  availabilities?: Prisma.AvailabilitySlotUncheckedUpdateManyWithoutRoleNestedInput
 }
 
 
@@ -392,10 +474,12 @@ export type EventsRoleUncheckedUpdateWithoutEventAssignmentInput = {
 
 export type EventsRoleCountOutputType = {
   eventAssignment: number
+  availabilities: number
 }
 
 export type EventsRoleCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   eventAssignment?: boolean | EventsRoleCountOutputTypeCountEventAssignmentArgs
+  availabilities?: boolean | EventsRoleCountOutputTypeCountAvailabilitiesArgs
 }
 
 /**
@@ -415,6 +499,13 @@ export type EventsRoleCountOutputTypeCountEventAssignmentArgs<ExtArgs extends ru
   where?: Prisma.EventAssignmentWhereInput
 }
 
+/**
+ * EventsRoleCountOutputType without action
+ */
+export type EventsRoleCountOutputTypeCountAvailabilitiesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.AvailabilitySlotWhereInput
+}
+
 
 export type EventsRoleSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -423,6 +514,7 @@ export type EventsRoleSelect<ExtArgs extends runtime.Types.Extensions.InternalAr
   updatedAt?: boolean
   type?: boolean
   eventAssignment?: boolean | Prisma.EventsRole$eventAssignmentArgs<ExtArgs>
+  availabilities?: boolean | Prisma.EventsRole$availabilitiesArgs<ExtArgs>
   _count?: boolean | Prisma.EventsRoleCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["eventsRole"]>
 
@@ -453,6 +545,7 @@ export type EventsRoleSelectScalar = {
 export type EventsRoleOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "createdAt" | "updatedAt" | "type", ExtArgs["result"]["eventsRole"]>
 export type EventsRoleInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   eventAssignment?: boolean | Prisma.EventsRole$eventAssignmentArgs<ExtArgs>
+  availabilities?: boolean | Prisma.EventsRole$availabilitiesArgs<ExtArgs>
   _count?: boolean | Prisma.EventsRoleCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type EventsRoleIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {}
@@ -462,6 +555,7 @@ export type $EventsRolePayload<ExtArgs extends runtime.Types.Extensions.Internal
   name: "EventsRole"
   objects: {
     eventAssignment: Prisma.$EventAssignmentPayload<ExtArgs>[]
+    availabilities: Prisma.$AvailabilitySlotPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -864,6 +958,7 @@ readonly fields: EventsRoleFieldRefs;
 export interface Prisma__EventsRoleClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
   eventAssignment<T extends Prisma.EventsRole$eventAssignmentArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.EventsRole$eventAssignmentArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$EventAssignmentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  availabilities<T extends Prisma.EventsRole$availabilitiesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.EventsRole$availabilitiesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$AvailabilitySlotPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1307,6 +1402,30 @@ export type EventsRole$eventAssignmentArgs<ExtArgs extends runtime.Types.Extensi
   take?: number
   skip?: number
   distinct?: Prisma.EventAssignmentScalarFieldEnum | Prisma.EventAssignmentScalarFieldEnum[]
+}
+
+/**
+ * EventsRole.availabilities
+ */
+export type EventsRole$availabilitiesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the AvailabilitySlot
+   */
+  select?: Prisma.AvailabilitySlotSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the AvailabilitySlot
+   */
+  omit?: Prisma.AvailabilitySlotOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.AvailabilitySlotInclude<ExtArgs> | null
+  where?: Prisma.AvailabilitySlotWhereInput
+  orderBy?: Prisma.AvailabilitySlotOrderByWithRelationInput | Prisma.AvailabilitySlotOrderByWithRelationInput[]
+  cursor?: Prisma.AvailabilitySlotWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.AvailabilitySlotScalarFieldEnum | Prisma.AvailabilitySlotScalarFieldEnum[]
 }
 
 /**

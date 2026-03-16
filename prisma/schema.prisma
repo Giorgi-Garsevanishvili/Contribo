@@ -4,65 +4,77 @@ datasource db {
 
 generator client {
   provider = "prisma-client"
-  output = "../src/generated/"
+  output   = "../src/generated/"
 }
 
 model User {
-  id                     String            @id @default(cuid())
-  name                   String?
-  email                  String            @unique
-  emailVerified          DateTime?
-  image                  String?
-  reqStatus              ReqStatus         @default(PENDING)
-  rating                 Int               @default(0)
-  deletedAt              DateTime?
-  deleted                Boolean           @default(false)
-  accounts               Account[]
-  sessions               Session[]
+  id                               String                    @id @default(cuid())
+  name                             String?
+  email                            String                    @unique
+  emailVerified                    DateTime?
+  image                            String?
+  reqStatus                        ReqStatus                 @default(PENDING)
+  rating                           Int                       @default(0)
+  deletedAt                        DateTime?
+  deleted                          Boolean                   @default(false)
+  accounts                         Account[]
+  sessions                         Session[]
   // Optional for WebAuthn support
-  Authenticator          Authenticator[]
+  Authenticator                    Authenticator[]
   //-----------------------------------------
-  joinRequests           JoinRequest[]
-  updatedJoinRequests    JoinRequest[]     @relation("UpdatedJoinRequest")
+  joinRequests                     JoinRequest[]
+  updatedJoinRequests              JoinRequest[]             @relation("UpdatedJoinRequest")
   //-----------------------------------------
-  createdAt              DateTime          @default(now())
-  updatedAt              DateTime?         @updatedAt
-  updatedById            String?
-  updatedBy              User?             @relation("UpdatedByUser",fields: [updatedById], references: [id], onDelete: SetNull)
+  createdAt                        DateTime                  @default(now())
+  updatedAt                        DateTime?                 @updatedAt
+  updatedById                      String?
+  updatedBy                        User?                     @relation("UpdatedByUser", fields: [updatedById], references: [id], onDelete: SetNull)
   //-----------------------------------------
-  memberStatusCreated    MemberStatusLog[] @relation("CreatedMemberStatusLog")
-  memberStatusLogs       MemberStatusLog[]
-  memberStatusChanges    MemberStatusLog[] @relation("MembershipChangedBy")
+  memberStatusCreated              MemberStatusLog[]         @relation("CreatedMemberStatusLog")
+  memberStatusLogs                 MemberStatusLog[]
+  memberStatusChanges              MemberStatusLog[]         @relation("MembershipChangedBy")
   //-----------------------------------------
-  positionChanges        PositionHistory[] @relation("PositionChangedBy")
-  positionCreations      PositionHistory[] @relation("PositionCreatedBy")
-  positionHistories      PositionHistory[]
+  positionChanges                  PositionHistory[]         @relation("PositionChangedBy")
+  positionCreations                PositionHistory[]         @relation("PositionCreatedBy")
+  positionHistories                PositionHistory[]
   //-----------------------------------------
-  ratingHistory          RatingHistory[]   @relation("UserRating")
-  createdRatings         RatingHistory[]   @relation("CreatedRatingBy")
-  updatedRatings         RatingHistory[]   @relation("UpdatedRatingBy")
+  ratingHistory                    RatingHistory[]           @relation("UserRating")
+  createdRatings                   RatingHistory[]           @relation("CreatedRatingBy")
+  updatedRatings                   RatingHistory[]           @relation("UpdatedRatingBy")
   //-----------------------------------------
-  createdEvents          Event[]           @relation("createdEvent")
-  updatedEvents          Event[]           @relation("UpdatedEvents")
+  createdEvents                    Event[]                   @relation("createdEvent")
+  updatedEvents                    Event[]                   @relation("UpdatedEvents")
   //-----------------------------------------
-  providedFeedbacks      EventFeedback[]
-  updatedEventFeedback   EventFeedback[]   @relation("updatedFeedback")
+  providedFeedbacks                EventFeedback[]
+  updatedEventFeedback             EventFeedback[]           @relation("updatedFeedback")
   //-----------------------------------------
-  scheduledEventEmails   ScheduledEmails[]
+  feedbackRequests                 FeedbackRequest[]
   //-----------------------------------------
-  hrWarnings             HrWarning[]       @relation("HrWarnings")
-  createdHrWarning       HrWarning[]       @relation("CreatedHrWarnings")
-  updatedHrWarnings      HrWarning[]       @relation("UpdatedHrWarnings")
+  hrWarnings                       HrWarning[]               @relation("HrWarnings")
+  createdHrWarning                 HrWarning[]               @relation("CreatedHrWarnings")
+  updatedHrWarnings                HrWarning[]               @relation("UpdatedHrWarnings")
   //-----------------------------------------
-  CreatedAllowedUser     AllowedUser[]     @relation("createdAllowanceBy")
-  allowedUserId          String?           @unique
-  ownAllowance           AllowedUser?      @relation(fields: [allowedUserId], references: [id], onDelete: Cascade)
-  UpdatedAllowance       AllowedUser[]     @relation("UpdatedAllowanceBy")
+  CreatedAllowedUser               AllowedUser[]             @relation("createdAllowanceBy")
+  allowedUserId                    String?                   @unique
+  ownAllowance                     AllowedUser?              @relation(fields: [allowedUserId], references: [id], onDelete: Cascade)
+  UpdatedAllowance                 AllowedUser[]             @relation("UpdatedAllowanceBy")
   //-----------------------------------------
-  eventAssignments       EventAssignment[]
-  CreatedEventAssignment EventAssignment[] @relation("CreatedEventAssignment")
-  UpdatedEventAssignment EventAssignment[] @relation("UpdatedEventAssignment")
-  updatedUsers           User[]            @relation("UpdatedByUser")
+  eventAssignments                 EventAssignment[]
+  CreatedEventAssignment           EventAssignment[]         @relation("CreatedEventAssignment")
+  UpdatedEventAssignment           EventAssignment[]         @relation("UpdatedEventAssignment")
+  updatedUsers                     User[]                    @relation("UpdatedByUser")
+  //-----------------------------------------
+  createdAvailabilitySlots         AvailabilitySlot[]
+  updatedAvailabilitySlots         AvailabilitySlot[]        @relation("UpdatedAvailabilities")
+  //-----------------------------------------
+  availabilityEntries              AvailabilityEntry[]
+  UpdatedAvailabilityEntries       AvailabilityEntry[]       @relation("UpdatedAvailabilityEntry")
+  //-----------------------------------------
+  entryCancelRequests              EntryCancelRequest[]
+  reviewedEntryCancelRequests      EntryCancelRequest[]      @relation("EntryCancelReviews")
+  //-----------------------------------------
+  assignmentCancelRequests         AssignmentCancelRequest[]
+  reviewedAssignmentCancelRequests AssignmentCancelRequest[] @relation("AssignmentCancelReviews")
 }
 
 enum RatingAction {
@@ -91,9 +103,12 @@ model Event {
   createdAt DateTime  @default(now())
   updatedAt DateTime? @updatedAt
 
-  feedback             EventFeedback[]
-  assignments          EventAssignment[]
-  scheduledEventEmails ScheduledEmails[]
+  finalizedAt DateTime?
+
+  feedback         EventFeedback[]
+  assignments      EventAssignment[]
+  availabilities   AvailabilitySlot[]
+  feedbackRequests FeedbackRequest[]
 }
 
 model EventsRole {
@@ -104,6 +119,7 @@ model EventsRole {
   type      GTypes    @default(REGION)
 
   eventAssignment EventAssignment[]
+  availabilities  AvailabilitySlot[]
 }
 
 enum GTypes {
@@ -162,21 +178,106 @@ model EventFeedback {
   createdAt DateTime  @default(now())
   updatedAt DateTime? @updatedAt
 
-  event Event @relation(fields: [eventId], references: [id], onDelete: Cascade)
-  user  User? @relation(fields: [userId], references: [id], onDelete: SetNull)
+  event            Event             @relation(fields: [eventId], references: [id], onDelete: Cascade)
+  user             User?             @relation(fields: [userId], references: [id], onDelete: SetNull)
+  feedbackRequests FeedbackRequest[]
 }
 
-model ScheduledEmails {
-  id        String    @id @default(cuid())
-  userId    String
-  eventId   String
-  sent      Boolean   @default(false)
-  sendAt    DateTime
+model FeedbackRequest {
+  id      String @id @default(cuid())
+  eventId String
+  userId  String
+
+  status FeedbackRequestStatus @default(PENDING)
+
+  requestedAt DateTime  @default(now())
+  respondedAt DateTime?
+
+  event           Event          @relation(fields: [eventId], references: [id], onDelete: Cascade)
+  user            User           @relation(fields: [userId], references: [id], onDelete: Cascade)
+  feedback        EventFeedback? @relation(fields: [eventFeedbackId], references: [id])
+  eventFeedbackId String?
+
+  @@index([eventId])
+  @@index([userId])
+}
+
+enum FeedbackRequestStatus {
+  PENDING // sent, not responded
+  SUBMITTED // user submitted feedback
+  IGNORED // expired without response
+}
+
+enum AssignmentStatus {
+  ACTIVE
+  CANCEL_REQUESTED
+  CANCELLED
+}
+
+model AvailabilitySlot {
+  id      String @id @default(cuid())
+  eventId String
+  roleId  String
+
+  totalSlots Int
+
+  published Boolean @default(false)
+
+  validFrom DateTime?
+  validTo   DateTime?
+
+  createdById String?
+  CreatedBy   User?   @relation(fields: [createdById], references: [id], onDelete: SetNull)
+  updatedById String?
+  updatedBy   User?   @relation("UpdatedAvailabilities", fields: [updatedById], references: [id], onDelete: SetNull)
+
   createdAt DateTime  @default(now())
   updatedAt DateTime? @updatedAt
 
-  user  User  @relation(fields: [userId], references: [id], onDelete: Cascade)
-  event Event @relation(fields: [eventId], references: [id], onDelete: Cascade)
+  role                EventsRole          @relation(fields: [roleId], references: [id], onDelete: Cascade)
+  event               Event               @relation(fields: [eventId], references: [id], onDelete: Cascade)
+  availabilityEntries AvailabilityEntry[]
+
+  @@index([eventId])
+}
+
+model AvailabilityEntry {
+  id      String           @id @default(cuid())
+  slotId  String
+  slot    AvailabilitySlot @relation(fields: [slotId], references: [id], onDelete: Cascade)
+  userId  String
+  user    User             @relation(fields: [userId], references: [id], onDelete: Cascade)
+  status  AssignmentStatus @default(ACTIVE)
+  comment String?
+
+  ratingScore Int?
+  ratedAt     DateTime?
+
+  appliedAt           DateTime             @default(now())
+  updatedById         String?
+  updatedBy           User?                @relation("UpdatedAvailabilityEntry", fields: [updatedById], references: [id], onDelete: SetNull)
+  updatedAt           DateTime             @updatedAt
+  entryCancelRequests EntryCancelRequest[]
+
+  @@index([slotId])
+  @@index([userId])
+}
+
+model EntryCancelRequest {
+  id            String            @id @default(cuid())
+  entryId       String
+  entry         AvailabilityEntry @relation(fields: [entryId], references: [id], onDelete: Cascade)
+  requestedById String
+  requestedBy   User              @relation(fields: [requestedById], references: [id], onDelete: Cascade)
+  reason        String?
+  status        ReqStatus         @default(PENDING)
+  reviewedById  String?
+  reviewedBy    User?             @relation("EntryCancelReviews", fields: [reviewedById], references: [id], onDelete: SetNull)
+  reviewedAt    DateTime?
+  createdAt     DateTime          @default(now())
+  updatedAt     DateTime          @updatedAt
+
+  @@index([entryId])
 }
 
 model EventAssignment {
@@ -190,6 +291,11 @@ model EventAssignment {
   validFrom  DateTime?
   validTo    DateTime?
 
+  ratingScore Int?
+  ratedAt     DateTime?
+
+  status AssignmentStatus @default(ACTIVE)
+
   createdAt DateTime  @default(now())
   updatedAt DateTime? @updatedAt
 
@@ -198,9 +304,27 @@ model EventAssignment {
   updatedById String?
   updatedBy   User?   @relation("UpdatedEventAssignment", fields: [updatedById], references: [id], onDelete: SetNull)
 
-  role  EventsRole? @relation(fields: [roleId], references: [id], onDelete: SetNull)
-  event Event       @relation(fields: [eventId], references: [id], onDelete: Cascade)
-  user  User?       @relation(fields: [userId], references: [id], onDelete: SetNull)
+  role                     EventsRole?               @relation(fields: [roleId], references: [id], onDelete: SetNull)
+  event                    Event                     @relation(fields: [eventId], references: [id], onDelete: Cascade)
+  user                     User?                     @relation(fields: [userId], references: [id], onDelete: SetNull)
+  assignmentCancelRequests AssignmentCancelRequest[]
+}
+
+model AssignmentCancelRequest {
+  id            String          @id @default(cuid())
+  assignmentId  String
+  assignment    EventAssignment @relation(fields: [assignmentId], references: [id], onDelete: Cascade)
+  requestedById String
+  requestedBy   User            @relation(fields: [requestedById], references: [id], onDelete: Cascade)
+  reason        String?
+  status        ReqStatus       @default(PENDING)
+  reviewedById  String?
+  reviewedBy    User?           @relation("AssignmentCancelReviews", fields: [reviewedById], references: [id], onDelete: SetNull)
+  reviewedAt    DateTime?
+  createdAt     DateTime        @default(now())
+  updatedAt     DateTime        @updatedAt
+
+  @@index([assignmentId])
 }
 
 model RatingHistory {

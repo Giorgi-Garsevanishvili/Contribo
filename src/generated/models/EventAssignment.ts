@@ -20,8 +20,18 @@ export type EventAssignmentModel = runtime.Types.Result.DefaultSelection<Prisma.
 
 export type AggregateEventAssignment = {
   _count: EventAssignmentCountAggregateOutputType | null
+  _avg: EventAssignmentAvgAggregateOutputType | null
+  _sum: EventAssignmentSumAggregateOutputType | null
   _min: EventAssignmentMinAggregateOutputType | null
   _max: EventAssignmentMaxAggregateOutputType | null
+}
+
+export type EventAssignmentAvgAggregateOutputType = {
+  ratingScore: number | null
+}
+
+export type EventAssignmentSumAggregateOutputType = {
+  ratingScore: number | null
 }
 
 export type EventAssignmentMinAggregateOutputType = {
@@ -33,6 +43,9 @@ export type EventAssignmentMinAggregateOutputType = {
   assignedAt: Date | null
   validFrom: Date | null
   validTo: Date | null
+  ratingScore: number | null
+  ratedAt: Date | null
+  status: $Enums.AssignmentStatus | null
   createdAt: Date | null
   updatedAt: Date | null
   createdById: string | null
@@ -48,6 +61,9 @@ export type EventAssignmentMaxAggregateOutputType = {
   assignedAt: Date | null
   validFrom: Date | null
   validTo: Date | null
+  ratingScore: number | null
+  ratedAt: Date | null
+  status: $Enums.AssignmentStatus | null
   createdAt: Date | null
   updatedAt: Date | null
   createdById: string | null
@@ -63,6 +79,9 @@ export type EventAssignmentCountAggregateOutputType = {
   assignedAt: number
   validFrom: number
   validTo: number
+  ratingScore: number
+  ratedAt: number
+  status: number
   createdAt: number
   updatedAt: number
   createdById: number
@@ -70,6 +89,14 @@ export type EventAssignmentCountAggregateOutputType = {
   _all: number
 }
 
+
+export type EventAssignmentAvgAggregateInputType = {
+  ratingScore?: true
+}
+
+export type EventAssignmentSumAggregateInputType = {
+  ratingScore?: true
+}
 
 export type EventAssignmentMinAggregateInputType = {
   id?: true
@@ -80,6 +107,9 @@ export type EventAssignmentMinAggregateInputType = {
   assignedAt?: true
   validFrom?: true
   validTo?: true
+  ratingScore?: true
+  ratedAt?: true
+  status?: true
   createdAt?: true
   updatedAt?: true
   createdById?: true
@@ -95,6 +125,9 @@ export type EventAssignmentMaxAggregateInputType = {
   assignedAt?: true
   validFrom?: true
   validTo?: true
+  ratingScore?: true
+  ratedAt?: true
+  status?: true
   createdAt?: true
   updatedAt?: true
   createdById?: true
@@ -110,6 +143,9 @@ export type EventAssignmentCountAggregateInputType = {
   assignedAt?: true
   validFrom?: true
   validTo?: true
+  ratingScore?: true
+  ratedAt?: true
+  status?: true
   createdAt?: true
   updatedAt?: true
   createdById?: true
@@ -155,6 +191,18 @@ export type EventAssignmentAggregateArgs<ExtArgs extends runtime.Types.Extension
   /**
    * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
    * 
+   * Select which fields to average
+  **/
+  _avg?: EventAssignmentAvgAggregateInputType
+  /**
+   * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+   * 
+   * Select which fields to sum
+  **/
+  _sum?: EventAssignmentSumAggregateInputType
+  /**
+   * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+   * 
    * Select which fields to find the minimum value
   **/
   _min?: EventAssignmentMinAggregateInputType
@@ -185,6 +233,8 @@ export type EventAssignmentGroupByArgs<ExtArgs extends runtime.Types.Extensions.
   take?: number
   skip?: number
   _count?: EventAssignmentCountAggregateInputType | true
+  _avg?: EventAssignmentAvgAggregateInputType
+  _sum?: EventAssignmentSumAggregateInputType
   _min?: EventAssignmentMinAggregateInputType
   _max?: EventAssignmentMaxAggregateInputType
 }
@@ -198,11 +248,16 @@ export type EventAssignmentGroupByOutputType = {
   assignedAt: Date
   validFrom: Date | null
   validTo: Date | null
+  ratingScore: number | null
+  ratedAt: Date | null
+  status: $Enums.AssignmentStatus
   createdAt: Date
   updatedAt: Date | null
   createdById: string | null
   updatedById: string | null
   _count: EventAssignmentCountAggregateOutputType | null
+  _avg: EventAssignmentAvgAggregateOutputType | null
+  _sum: EventAssignmentSumAggregateOutputType | null
   _min: EventAssignmentMinAggregateOutputType | null
   _max: EventAssignmentMaxAggregateOutputType | null
 }
@@ -234,6 +289,9 @@ export type EventAssignmentWhereInput = {
   assignedAt?: Prisma.DateTimeFilter<"EventAssignment"> | Date | string
   validFrom?: Prisma.DateTimeNullableFilter<"EventAssignment"> | Date | string | null
   validTo?: Prisma.DateTimeNullableFilter<"EventAssignment"> | Date | string | null
+  ratingScore?: Prisma.IntNullableFilter<"EventAssignment"> | number | null
+  ratedAt?: Prisma.DateTimeNullableFilter<"EventAssignment"> | Date | string | null
+  status?: Prisma.EnumAssignmentStatusFilter<"EventAssignment"> | $Enums.AssignmentStatus
   createdAt?: Prisma.DateTimeFilter<"EventAssignment"> | Date | string
   updatedAt?: Prisma.DateTimeNullableFilter<"EventAssignment"> | Date | string | null
   createdById?: Prisma.StringNullableFilter<"EventAssignment"> | string | null
@@ -243,6 +301,7 @@ export type EventAssignmentWhereInput = {
   role?: Prisma.XOR<Prisma.EventsRoleNullableScalarRelationFilter, Prisma.EventsRoleWhereInput> | null
   event?: Prisma.XOR<Prisma.EventScalarRelationFilter, Prisma.EventWhereInput>
   user?: Prisma.XOR<Prisma.UserNullableScalarRelationFilter, Prisma.UserWhereInput> | null
+  assignmentCancelRequests?: Prisma.AssignmentCancelRequestListRelationFilter
 }
 
 export type EventAssignmentOrderByWithRelationInput = {
@@ -254,6 +313,9 @@ export type EventAssignmentOrderByWithRelationInput = {
   assignedAt?: Prisma.SortOrder
   validFrom?: Prisma.SortOrderInput | Prisma.SortOrder
   validTo?: Prisma.SortOrderInput | Prisma.SortOrder
+  ratingScore?: Prisma.SortOrderInput | Prisma.SortOrder
+  ratedAt?: Prisma.SortOrderInput | Prisma.SortOrder
+  status?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrderInput | Prisma.SortOrder
   createdById?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -263,6 +325,7 @@ export type EventAssignmentOrderByWithRelationInput = {
   role?: Prisma.EventsRoleOrderByWithRelationInput
   event?: Prisma.EventOrderByWithRelationInput
   user?: Prisma.UserOrderByWithRelationInput
+  assignmentCancelRequests?: Prisma.AssignmentCancelRequestOrderByRelationAggregateInput
 }
 
 export type EventAssignmentWhereUniqueInput = Prisma.AtLeast<{
@@ -277,6 +340,9 @@ export type EventAssignmentWhereUniqueInput = Prisma.AtLeast<{
   assignedAt?: Prisma.DateTimeFilter<"EventAssignment"> | Date | string
   validFrom?: Prisma.DateTimeNullableFilter<"EventAssignment"> | Date | string | null
   validTo?: Prisma.DateTimeNullableFilter<"EventAssignment"> | Date | string | null
+  ratingScore?: Prisma.IntNullableFilter<"EventAssignment"> | number | null
+  ratedAt?: Prisma.DateTimeNullableFilter<"EventAssignment"> | Date | string | null
+  status?: Prisma.EnumAssignmentStatusFilter<"EventAssignment"> | $Enums.AssignmentStatus
   createdAt?: Prisma.DateTimeFilter<"EventAssignment"> | Date | string
   updatedAt?: Prisma.DateTimeNullableFilter<"EventAssignment"> | Date | string | null
   createdById?: Prisma.StringNullableFilter<"EventAssignment"> | string | null
@@ -286,6 +352,7 @@ export type EventAssignmentWhereUniqueInput = Prisma.AtLeast<{
   role?: Prisma.XOR<Prisma.EventsRoleNullableScalarRelationFilter, Prisma.EventsRoleWhereInput> | null
   event?: Prisma.XOR<Prisma.EventScalarRelationFilter, Prisma.EventWhereInput>
   user?: Prisma.XOR<Prisma.UserNullableScalarRelationFilter, Prisma.UserWhereInput> | null
+  assignmentCancelRequests?: Prisma.AssignmentCancelRequestListRelationFilter
 }, "id">
 
 export type EventAssignmentOrderByWithAggregationInput = {
@@ -297,13 +364,18 @@ export type EventAssignmentOrderByWithAggregationInput = {
   assignedAt?: Prisma.SortOrder
   validFrom?: Prisma.SortOrderInput | Prisma.SortOrder
   validTo?: Prisma.SortOrderInput | Prisma.SortOrder
+  ratingScore?: Prisma.SortOrderInput | Prisma.SortOrder
+  ratedAt?: Prisma.SortOrderInput | Prisma.SortOrder
+  status?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrderInput | Prisma.SortOrder
   createdById?: Prisma.SortOrderInput | Prisma.SortOrder
   updatedById?: Prisma.SortOrderInput | Prisma.SortOrder
   _count?: Prisma.EventAssignmentCountOrderByAggregateInput
+  _avg?: Prisma.EventAssignmentAvgOrderByAggregateInput
   _max?: Prisma.EventAssignmentMaxOrderByAggregateInput
   _min?: Prisma.EventAssignmentMinOrderByAggregateInput
+  _sum?: Prisma.EventAssignmentSumOrderByAggregateInput
 }
 
 export type EventAssignmentScalarWhereWithAggregatesInput = {
@@ -318,6 +390,9 @@ export type EventAssignmentScalarWhereWithAggregatesInput = {
   assignedAt?: Prisma.DateTimeWithAggregatesFilter<"EventAssignment"> | Date | string
   validFrom?: Prisma.DateTimeNullableWithAggregatesFilter<"EventAssignment"> | Date | string | null
   validTo?: Prisma.DateTimeNullableWithAggregatesFilter<"EventAssignment"> | Date | string | null
+  ratingScore?: Prisma.IntNullableWithAggregatesFilter<"EventAssignment"> | number | null
+  ratedAt?: Prisma.DateTimeNullableWithAggregatesFilter<"EventAssignment"> | Date | string | null
+  status?: Prisma.EnumAssignmentStatusWithAggregatesFilter<"EventAssignment"> | $Enums.AssignmentStatus
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"EventAssignment"> | Date | string
   updatedAt?: Prisma.DateTimeNullableWithAggregatesFilter<"EventAssignment"> | Date | string | null
   createdById?: Prisma.StringNullableWithAggregatesFilter<"EventAssignment"> | string | null
@@ -330,6 +405,9 @@ export type EventAssignmentCreateInput = {
   assignedAt?: Date | string
   validFrom?: Date | string | null
   validTo?: Date | string | null
+  ratingScore?: number | null
+  ratedAt?: Date | string | null
+  status?: $Enums.AssignmentStatus
   createdAt?: Date | string
   updatedAt?: Date | string | null
   createdBy?: Prisma.UserCreateNestedOneWithoutCreatedEventAssignmentInput
@@ -337,6 +415,7 @@ export type EventAssignmentCreateInput = {
   role?: Prisma.EventsRoleCreateNestedOneWithoutEventAssignmentInput
   event: Prisma.EventCreateNestedOneWithoutAssignmentsInput
   user?: Prisma.UserCreateNestedOneWithoutEventAssignmentsInput
+  assignmentCancelRequests?: Prisma.AssignmentCancelRequestCreateNestedManyWithoutAssignmentInput
 }
 
 export type EventAssignmentUncheckedCreateInput = {
@@ -348,10 +427,14 @@ export type EventAssignmentUncheckedCreateInput = {
   assignedAt?: Date | string
   validFrom?: Date | string | null
   validTo?: Date | string | null
+  ratingScore?: number | null
+  ratedAt?: Date | string | null
+  status?: $Enums.AssignmentStatus
   createdAt?: Date | string
   updatedAt?: Date | string | null
   createdById?: string | null
   updatedById?: string | null
+  assignmentCancelRequests?: Prisma.AssignmentCancelRequestUncheckedCreateNestedManyWithoutAssignmentInput
 }
 
 export type EventAssignmentUpdateInput = {
@@ -360,6 +443,9 @@ export type EventAssignmentUpdateInput = {
   assignedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   validFrom?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   validTo?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  ratingScore?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  ratedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  status?: Prisma.EnumAssignmentStatusFieldUpdateOperationsInput | $Enums.AssignmentStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdBy?: Prisma.UserUpdateOneWithoutCreatedEventAssignmentNestedInput
@@ -367,6 +453,7 @@ export type EventAssignmentUpdateInput = {
   role?: Prisma.EventsRoleUpdateOneWithoutEventAssignmentNestedInput
   event?: Prisma.EventUpdateOneRequiredWithoutAssignmentsNestedInput
   user?: Prisma.UserUpdateOneWithoutEventAssignmentsNestedInput
+  assignmentCancelRequests?: Prisma.AssignmentCancelRequestUpdateManyWithoutAssignmentNestedInput
 }
 
 export type EventAssignmentUncheckedUpdateInput = {
@@ -378,10 +465,14 @@ export type EventAssignmentUncheckedUpdateInput = {
   assignedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   validFrom?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   validTo?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  ratingScore?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  ratedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  status?: Prisma.EnumAssignmentStatusFieldUpdateOperationsInput | $Enums.AssignmentStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   updatedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  assignmentCancelRequests?: Prisma.AssignmentCancelRequestUncheckedUpdateManyWithoutAssignmentNestedInput
 }
 
 export type EventAssignmentCreateManyInput = {
@@ -393,6 +484,9 @@ export type EventAssignmentCreateManyInput = {
   assignedAt?: Date | string
   validFrom?: Date | string | null
   validTo?: Date | string | null
+  ratingScore?: number | null
+  ratedAt?: Date | string | null
+  status?: $Enums.AssignmentStatus
   createdAt?: Date | string
   updatedAt?: Date | string | null
   createdById?: string | null
@@ -405,6 +499,9 @@ export type EventAssignmentUpdateManyMutationInput = {
   assignedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   validFrom?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   validTo?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  ratingScore?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  ratedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  status?: Prisma.EnumAssignmentStatusFieldUpdateOperationsInput | $Enums.AssignmentStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
 }
@@ -418,6 +515,9 @@ export type EventAssignmentUncheckedUpdateManyInput = {
   assignedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   validFrom?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   validTo?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  ratingScore?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  ratedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  status?: Prisma.EnumAssignmentStatusFieldUpdateOperationsInput | $Enums.AssignmentStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -443,10 +543,17 @@ export type EventAssignmentCountOrderByAggregateInput = {
   assignedAt?: Prisma.SortOrder
   validFrom?: Prisma.SortOrder
   validTo?: Prisma.SortOrder
+  ratingScore?: Prisma.SortOrder
+  ratedAt?: Prisma.SortOrder
+  status?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   createdById?: Prisma.SortOrder
   updatedById?: Prisma.SortOrder
+}
+
+export type EventAssignmentAvgOrderByAggregateInput = {
+  ratingScore?: Prisma.SortOrder
 }
 
 export type EventAssignmentMaxOrderByAggregateInput = {
@@ -458,6 +565,9 @@ export type EventAssignmentMaxOrderByAggregateInput = {
   assignedAt?: Prisma.SortOrder
   validFrom?: Prisma.SortOrder
   validTo?: Prisma.SortOrder
+  ratingScore?: Prisma.SortOrder
+  ratedAt?: Prisma.SortOrder
+  status?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   createdById?: Prisma.SortOrder
@@ -473,10 +583,22 @@ export type EventAssignmentMinOrderByAggregateInput = {
   assignedAt?: Prisma.SortOrder
   validFrom?: Prisma.SortOrder
   validTo?: Prisma.SortOrder
+  ratingScore?: Prisma.SortOrder
+  ratedAt?: Prisma.SortOrder
+  status?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   createdById?: Prisma.SortOrder
   updatedById?: Prisma.SortOrder
+}
+
+export type EventAssignmentSumOrderByAggregateInput = {
+  ratingScore?: Prisma.SortOrder
+}
+
+export type EventAssignmentScalarRelationFilter = {
+  is?: Prisma.EventAssignmentWhereInput
+  isNot?: Prisma.EventAssignmentWhereInput
 }
 
 export type EventAssignmentCreateNestedManyWithoutUserInput = {
@@ -689,18 +811,36 @@ export type EventAssignmentUncheckedUpdateManyWithoutRoleNestedInput = {
   deleteMany?: Prisma.EventAssignmentScalarWhereInput | Prisma.EventAssignmentScalarWhereInput[]
 }
 
+export type EventAssignmentCreateNestedOneWithoutAssignmentCancelRequestsInput = {
+  create?: Prisma.XOR<Prisma.EventAssignmentCreateWithoutAssignmentCancelRequestsInput, Prisma.EventAssignmentUncheckedCreateWithoutAssignmentCancelRequestsInput>
+  connectOrCreate?: Prisma.EventAssignmentCreateOrConnectWithoutAssignmentCancelRequestsInput
+  connect?: Prisma.EventAssignmentWhereUniqueInput
+}
+
+export type EventAssignmentUpdateOneRequiredWithoutAssignmentCancelRequestsNestedInput = {
+  create?: Prisma.XOR<Prisma.EventAssignmentCreateWithoutAssignmentCancelRequestsInput, Prisma.EventAssignmentUncheckedCreateWithoutAssignmentCancelRequestsInput>
+  connectOrCreate?: Prisma.EventAssignmentCreateOrConnectWithoutAssignmentCancelRequestsInput
+  upsert?: Prisma.EventAssignmentUpsertWithoutAssignmentCancelRequestsInput
+  connect?: Prisma.EventAssignmentWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.EventAssignmentUpdateToOneWithWhereWithoutAssignmentCancelRequestsInput, Prisma.EventAssignmentUpdateWithoutAssignmentCancelRequestsInput>, Prisma.EventAssignmentUncheckedUpdateWithoutAssignmentCancelRequestsInput>
+}
+
 export type EventAssignmentCreateWithoutUserInput = {
   id?: string
   comment?: string | null
   assignedAt?: Date | string
   validFrom?: Date | string | null
   validTo?: Date | string | null
+  ratingScore?: number | null
+  ratedAt?: Date | string | null
+  status?: $Enums.AssignmentStatus
   createdAt?: Date | string
   updatedAt?: Date | string | null
   createdBy?: Prisma.UserCreateNestedOneWithoutCreatedEventAssignmentInput
   updatedBy?: Prisma.UserCreateNestedOneWithoutUpdatedEventAssignmentInput
   role?: Prisma.EventsRoleCreateNestedOneWithoutEventAssignmentInput
   event: Prisma.EventCreateNestedOneWithoutAssignmentsInput
+  assignmentCancelRequests?: Prisma.AssignmentCancelRequestCreateNestedManyWithoutAssignmentInput
 }
 
 export type EventAssignmentUncheckedCreateWithoutUserInput = {
@@ -711,10 +851,14 @@ export type EventAssignmentUncheckedCreateWithoutUserInput = {
   assignedAt?: Date | string
   validFrom?: Date | string | null
   validTo?: Date | string | null
+  ratingScore?: number | null
+  ratedAt?: Date | string | null
+  status?: $Enums.AssignmentStatus
   createdAt?: Date | string
   updatedAt?: Date | string | null
   createdById?: string | null
   updatedById?: string | null
+  assignmentCancelRequests?: Prisma.AssignmentCancelRequestUncheckedCreateNestedManyWithoutAssignmentInput
 }
 
 export type EventAssignmentCreateOrConnectWithoutUserInput = {
@@ -733,12 +877,16 @@ export type EventAssignmentCreateWithoutCreatedByInput = {
   assignedAt?: Date | string
   validFrom?: Date | string | null
   validTo?: Date | string | null
+  ratingScore?: number | null
+  ratedAt?: Date | string | null
+  status?: $Enums.AssignmentStatus
   createdAt?: Date | string
   updatedAt?: Date | string | null
   updatedBy?: Prisma.UserCreateNestedOneWithoutUpdatedEventAssignmentInput
   role?: Prisma.EventsRoleCreateNestedOneWithoutEventAssignmentInput
   event: Prisma.EventCreateNestedOneWithoutAssignmentsInput
   user?: Prisma.UserCreateNestedOneWithoutEventAssignmentsInput
+  assignmentCancelRequests?: Prisma.AssignmentCancelRequestCreateNestedManyWithoutAssignmentInput
 }
 
 export type EventAssignmentUncheckedCreateWithoutCreatedByInput = {
@@ -750,9 +898,13 @@ export type EventAssignmentUncheckedCreateWithoutCreatedByInput = {
   assignedAt?: Date | string
   validFrom?: Date | string | null
   validTo?: Date | string | null
+  ratingScore?: number | null
+  ratedAt?: Date | string | null
+  status?: $Enums.AssignmentStatus
   createdAt?: Date | string
   updatedAt?: Date | string | null
   updatedById?: string | null
+  assignmentCancelRequests?: Prisma.AssignmentCancelRequestUncheckedCreateNestedManyWithoutAssignmentInput
 }
 
 export type EventAssignmentCreateOrConnectWithoutCreatedByInput = {
@@ -771,12 +923,16 @@ export type EventAssignmentCreateWithoutUpdatedByInput = {
   assignedAt?: Date | string
   validFrom?: Date | string | null
   validTo?: Date | string | null
+  ratingScore?: number | null
+  ratedAt?: Date | string | null
+  status?: $Enums.AssignmentStatus
   createdAt?: Date | string
   updatedAt?: Date | string | null
   createdBy?: Prisma.UserCreateNestedOneWithoutCreatedEventAssignmentInput
   role?: Prisma.EventsRoleCreateNestedOneWithoutEventAssignmentInput
   event: Prisma.EventCreateNestedOneWithoutAssignmentsInput
   user?: Prisma.UserCreateNestedOneWithoutEventAssignmentsInput
+  assignmentCancelRequests?: Prisma.AssignmentCancelRequestCreateNestedManyWithoutAssignmentInput
 }
 
 export type EventAssignmentUncheckedCreateWithoutUpdatedByInput = {
@@ -788,9 +944,13 @@ export type EventAssignmentUncheckedCreateWithoutUpdatedByInput = {
   assignedAt?: Date | string
   validFrom?: Date | string | null
   validTo?: Date | string | null
+  ratingScore?: number | null
+  ratedAt?: Date | string | null
+  status?: $Enums.AssignmentStatus
   createdAt?: Date | string
   updatedAt?: Date | string | null
   createdById?: string | null
+  assignmentCancelRequests?: Prisma.AssignmentCancelRequestUncheckedCreateNestedManyWithoutAssignmentInput
 }
 
 export type EventAssignmentCreateOrConnectWithoutUpdatedByInput = {
@@ -831,6 +991,9 @@ export type EventAssignmentScalarWhereInput = {
   assignedAt?: Prisma.DateTimeFilter<"EventAssignment"> | Date | string
   validFrom?: Prisma.DateTimeNullableFilter<"EventAssignment"> | Date | string | null
   validTo?: Prisma.DateTimeNullableFilter<"EventAssignment"> | Date | string | null
+  ratingScore?: Prisma.IntNullableFilter<"EventAssignment"> | number | null
+  ratedAt?: Prisma.DateTimeNullableFilter<"EventAssignment"> | Date | string | null
+  status?: Prisma.EnumAssignmentStatusFilter<"EventAssignment"> | $Enums.AssignmentStatus
   createdAt?: Prisma.DateTimeFilter<"EventAssignment"> | Date | string
   updatedAt?: Prisma.DateTimeNullableFilter<"EventAssignment"> | Date | string | null
   createdById?: Prisma.StringNullableFilter<"EventAssignment"> | string | null
@@ -875,12 +1038,16 @@ export type EventAssignmentCreateWithoutEventInput = {
   assignedAt?: Date | string
   validFrom?: Date | string | null
   validTo?: Date | string | null
+  ratingScore?: number | null
+  ratedAt?: Date | string | null
+  status?: $Enums.AssignmentStatus
   createdAt?: Date | string
   updatedAt?: Date | string | null
   createdBy?: Prisma.UserCreateNestedOneWithoutCreatedEventAssignmentInput
   updatedBy?: Prisma.UserCreateNestedOneWithoutUpdatedEventAssignmentInput
   role?: Prisma.EventsRoleCreateNestedOneWithoutEventAssignmentInput
   user?: Prisma.UserCreateNestedOneWithoutEventAssignmentsInput
+  assignmentCancelRequests?: Prisma.AssignmentCancelRequestCreateNestedManyWithoutAssignmentInput
 }
 
 export type EventAssignmentUncheckedCreateWithoutEventInput = {
@@ -891,10 +1058,14 @@ export type EventAssignmentUncheckedCreateWithoutEventInput = {
   assignedAt?: Date | string
   validFrom?: Date | string | null
   validTo?: Date | string | null
+  ratingScore?: number | null
+  ratedAt?: Date | string | null
+  status?: $Enums.AssignmentStatus
   createdAt?: Date | string
   updatedAt?: Date | string | null
   createdById?: string | null
   updatedById?: string | null
+  assignmentCancelRequests?: Prisma.AssignmentCancelRequestUncheckedCreateNestedManyWithoutAssignmentInput
 }
 
 export type EventAssignmentCreateOrConnectWithoutEventInput = {
@@ -929,12 +1100,16 @@ export type EventAssignmentCreateWithoutRoleInput = {
   assignedAt?: Date | string
   validFrom?: Date | string | null
   validTo?: Date | string | null
+  ratingScore?: number | null
+  ratedAt?: Date | string | null
+  status?: $Enums.AssignmentStatus
   createdAt?: Date | string
   updatedAt?: Date | string | null
   createdBy?: Prisma.UserCreateNestedOneWithoutCreatedEventAssignmentInput
   updatedBy?: Prisma.UserCreateNestedOneWithoutUpdatedEventAssignmentInput
   event: Prisma.EventCreateNestedOneWithoutAssignmentsInput
   user?: Prisma.UserCreateNestedOneWithoutEventAssignmentsInput
+  assignmentCancelRequests?: Prisma.AssignmentCancelRequestCreateNestedManyWithoutAssignmentInput
 }
 
 export type EventAssignmentUncheckedCreateWithoutRoleInput = {
@@ -945,10 +1120,14 @@ export type EventAssignmentUncheckedCreateWithoutRoleInput = {
   assignedAt?: Date | string
   validFrom?: Date | string | null
   validTo?: Date | string | null
+  ratingScore?: number | null
+  ratedAt?: Date | string | null
+  status?: $Enums.AssignmentStatus
   createdAt?: Date | string
   updatedAt?: Date | string | null
   createdById?: string | null
   updatedById?: string | null
+  assignmentCancelRequests?: Prisma.AssignmentCancelRequestUncheckedCreateNestedManyWithoutAssignmentInput
 }
 
 export type EventAssignmentCreateOrConnectWithoutRoleInput = {
@@ -977,6 +1156,94 @@ export type EventAssignmentUpdateManyWithWhereWithoutRoleInput = {
   data: Prisma.XOR<Prisma.EventAssignmentUpdateManyMutationInput, Prisma.EventAssignmentUncheckedUpdateManyWithoutRoleInput>
 }
 
+export type EventAssignmentCreateWithoutAssignmentCancelRequestsInput = {
+  id?: string
+  comment?: string | null
+  assignedAt?: Date | string
+  validFrom?: Date | string | null
+  validTo?: Date | string | null
+  ratingScore?: number | null
+  ratedAt?: Date | string | null
+  status?: $Enums.AssignmentStatus
+  createdAt?: Date | string
+  updatedAt?: Date | string | null
+  createdBy?: Prisma.UserCreateNestedOneWithoutCreatedEventAssignmentInput
+  updatedBy?: Prisma.UserCreateNestedOneWithoutUpdatedEventAssignmentInput
+  role?: Prisma.EventsRoleCreateNestedOneWithoutEventAssignmentInput
+  event: Prisma.EventCreateNestedOneWithoutAssignmentsInput
+  user?: Prisma.UserCreateNestedOneWithoutEventAssignmentsInput
+}
+
+export type EventAssignmentUncheckedCreateWithoutAssignmentCancelRequestsInput = {
+  id?: string
+  eventId: string
+  userId?: string | null
+  roleId?: string | null
+  comment?: string | null
+  assignedAt?: Date | string
+  validFrom?: Date | string | null
+  validTo?: Date | string | null
+  ratingScore?: number | null
+  ratedAt?: Date | string | null
+  status?: $Enums.AssignmentStatus
+  createdAt?: Date | string
+  updatedAt?: Date | string | null
+  createdById?: string | null
+  updatedById?: string | null
+}
+
+export type EventAssignmentCreateOrConnectWithoutAssignmentCancelRequestsInput = {
+  where: Prisma.EventAssignmentWhereUniqueInput
+  create: Prisma.XOR<Prisma.EventAssignmentCreateWithoutAssignmentCancelRequestsInput, Prisma.EventAssignmentUncheckedCreateWithoutAssignmentCancelRequestsInput>
+}
+
+export type EventAssignmentUpsertWithoutAssignmentCancelRequestsInput = {
+  update: Prisma.XOR<Prisma.EventAssignmentUpdateWithoutAssignmentCancelRequestsInput, Prisma.EventAssignmentUncheckedUpdateWithoutAssignmentCancelRequestsInput>
+  create: Prisma.XOR<Prisma.EventAssignmentCreateWithoutAssignmentCancelRequestsInput, Prisma.EventAssignmentUncheckedCreateWithoutAssignmentCancelRequestsInput>
+  where?: Prisma.EventAssignmentWhereInput
+}
+
+export type EventAssignmentUpdateToOneWithWhereWithoutAssignmentCancelRequestsInput = {
+  where?: Prisma.EventAssignmentWhereInput
+  data: Prisma.XOR<Prisma.EventAssignmentUpdateWithoutAssignmentCancelRequestsInput, Prisma.EventAssignmentUncheckedUpdateWithoutAssignmentCancelRequestsInput>
+}
+
+export type EventAssignmentUpdateWithoutAssignmentCancelRequestsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  comment?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  assignedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  validFrom?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  validTo?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  ratingScore?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  ratedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  status?: Prisma.EnumAssignmentStatusFieldUpdateOperationsInput | $Enums.AssignmentStatus
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdBy?: Prisma.UserUpdateOneWithoutCreatedEventAssignmentNestedInput
+  updatedBy?: Prisma.UserUpdateOneWithoutUpdatedEventAssignmentNestedInput
+  role?: Prisma.EventsRoleUpdateOneWithoutEventAssignmentNestedInput
+  event?: Prisma.EventUpdateOneRequiredWithoutAssignmentsNestedInput
+  user?: Prisma.UserUpdateOneWithoutEventAssignmentsNestedInput
+}
+
+export type EventAssignmentUncheckedUpdateWithoutAssignmentCancelRequestsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  eventId?: Prisma.StringFieldUpdateOperationsInput | string
+  userId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  roleId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  comment?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  assignedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  validFrom?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  validTo?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  ratingScore?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  ratedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  status?: Prisma.EnumAssignmentStatusFieldUpdateOperationsInput | $Enums.AssignmentStatus
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  updatedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+}
+
 export type EventAssignmentCreateManyUserInput = {
   id?: string
   eventId: string
@@ -985,6 +1252,9 @@ export type EventAssignmentCreateManyUserInput = {
   assignedAt?: Date | string
   validFrom?: Date | string | null
   validTo?: Date | string | null
+  ratingScore?: number | null
+  ratedAt?: Date | string | null
+  status?: $Enums.AssignmentStatus
   createdAt?: Date | string
   updatedAt?: Date | string | null
   createdById?: string | null
@@ -1000,6 +1270,9 @@ export type EventAssignmentCreateManyCreatedByInput = {
   assignedAt?: Date | string
   validFrom?: Date | string | null
   validTo?: Date | string | null
+  ratingScore?: number | null
+  ratedAt?: Date | string | null
+  status?: $Enums.AssignmentStatus
   createdAt?: Date | string
   updatedAt?: Date | string | null
   updatedById?: string | null
@@ -1014,6 +1287,9 @@ export type EventAssignmentCreateManyUpdatedByInput = {
   assignedAt?: Date | string
   validFrom?: Date | string | null
   validTo?: Date | string | null
+  ratingScore?: number | null
+  ratedAt?: Date | string | null
+  status?: $Enums.AssignmentStatus
   createdAt?: Date | string
   updatedAt?: Date | string | null
   createdById?: string | null
@@ -1025,12 +1301,16 @@ export type EventAssignmentUpdateWithoutUserInput = {
   assignedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   validFrom?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   validTo?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  ratingScore?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  ratedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  status?: Prisma.EnumAssignmentStatusFieldUpdateOperationsInput | $Enums.AssignmentStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdBy?: Prisma.UserUpdateOneWithoutCreatedEventAssignmentNestedInput
   updatedBy?: Prisma.UserUpdateOneWithoutUpdatedEventAssignmentNestedInput
   role?: Prisma.EventsRoleUpdateOneWithoutEventAssignmentNestedInput
   event?: Prisma.EventUpdateOneRequiredWithoutAssignmentsNestedInput
+  assignmentCancelRequests?: Prisma.AssignmentCancelRequestUpdateManyWithoutAssignmentNestedInput
 }
 
 export type EventAssignmentUncheckedUpdateWithoutUserInput = {
@@ -1041,10 +1321,14 @@ export type EventAssignmentUncheckedUpdateWithoutUserInput = {
   assignedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   validFrom?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   validTo?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  ratingScore?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  ratedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  status?: Prisma.EnumAssignmentStatusFieldUpdateOperationsInput | $Enums.AssignmentStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   updatedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  assignmentCancelRequests?: Prisma.AssignmentCancelRequestUncheckedUpdateManyWithoutAssignmentNestedInput
 }
 
 export type EventAssignmentUncheckedUpdateManyWithoutUserInput = {
@@ -1055,6 +1339,9 @@ export type EventAssignmentUncheckedUpdateManyWithoutUserInput = {
   assignedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   validFrom?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   validTo?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  ratingScore?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  ratedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  status?: Prisma.EnumAssignmentStatusFieldUpdateOperationsInput | $Enums.AssignmentStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1067,12 +1354,16 @@ export type EventAssignmentUpdateWithoutCreatedByInput = {
   assignedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   validFrom?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   validTo?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  ratingScore?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  ratedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  status?: Prisma.EnumAssignmentStatusFieldUpdateOperationsInput | $Enums.AssignmentStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   updatedBy?: Prisma.UserUpdateOneWithoutUpdatedEventAssignmentNestedInput
   role?: Prisma.EventsRoleUpdateOneWithoutEventAssignmentNestedInput
   event?: Prisma.EventUpdateOneRequiredWithoutAssignmentsNestedInput
   user?: Prisma.UserUpdateOneWithoutEventAssignmentsNestedInput
+  assignmentCancelRequests?: Prisma.AssignmentCancelRequestUpdateManyWithoutAssignmentNestedInput
 }
 
 export type EventAssignmentUncheckedUpdateWithoutCreatedByInput = {
@@ -1084,9 +1375,13 @@ export type EventAssignmentUncheckedUpdateWithoutCreatedByInput = {
   assignedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   validFrom?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   validTo?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  ratingScore?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  ratedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  status?: Prisma.EnumAssignmentStatusFieldUpdateOperationsInput | $Enums.AssignmentStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   updatedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  assignmentCancelRequests?: Prisma.AssignmentCancelRequestUncheckedUpdateManyWithoutAssignmentNestedInput
 }
 
 export type EventAssignmentUncheckedUpdateManyWithoutCreatedByInput = {
@@ -1098,6 +1393,9 @@ export type EventAssignmentUncheckedUpdateManyWithoutCreatedByInput = {
   assignedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   validFrom?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   validTo?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  ratingScore?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  ratedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  status?: Prisma.EnumAssignmentStatusFieldUpdateOperationsInput | $Enums.AssignmentStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   updatedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1109,12 +1407,16 @@ export type EventAssignmentUpdateWithoutUpdatedByInput = {
   assignedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   validFrom?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   validTo?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  ratingScore?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  ratedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  status?: Prisma.EnumAssignmentStatusFieldUpdateOperationsInput | $Enums.AssignmentStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdBy?: Prisma.UserUpdateOneWithoutCreatedEventAssignmentNestedInput
   role?: Prisma.EventsRoleUpdateOneWithoutEventAssignmentNestedInput
   event?: Prisma.EventUpdateOneRequiredWithoutAssignmentsNestedInput
   user?: Prisma.UserUpdateOneWithoutEventAssignmentsNestedInput
+  assignmentCancelRequests?: Prisma.AssignmentCancelRequestUpdateManyWithoutAssignmentNestedInput
 }
 
 export type EventAssignmentUncheckedUpdateWithoutUpdatedByInput = {
@@ -1126,9 +1428,13 @@ export type EventAssignmentUncheckedUpdateWithoutUpdatedByInput = {
   assignedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   validFrom?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   validTo?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  ratingScore?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  ratedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  status?: Prisma.EnumAssignmentStatusFieldUpdateOperationsInput | $Enums.AssignmentStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  assignmentCancelRequests?: Prisma.AssignmentCancelRequestUncheckedUpdateManyWithoutAssignmentNestedInput
 }
 
 export type EventAssignmentUncheckedUpdateManyWithoutUpdatedByInput = {
@@ -1140,6 +1446,9 @@ export type EventAssignmentUncheckedUpdateManyWithoutUpdatedByInput = {
   assignedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   validFrom?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   validTo?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  ratingScore?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  ratedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  status?: Prisma.EnumAssignmentStatusFieldUpdateOperationsInput | $Enums.AssignmentStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1153,6 +1462,9 @@ export type EventAssignmentCreateManyEventInput = {
   assignedAt?: Date | string
   validFrom?: Date | string | null
   validTo?: Date | string | null
+  ratingScore?: number | null
+  ratedAt?: Date | string | null
+  status?: $Enums.AssignmentStatus
   createdAt?: Date | string
   updatedAt?: Date | string | null
   createdById?: string | null
@@ -1165,12 +1477,16 @@ export type EventAssignmentUpdateWithoutEventInput = {
   assignedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   validFrom?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   validTo?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  ratingScore?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  ratedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  status?: Prisma.EnumAssignmentStatusFieldUpdateOperationsInput | $Enums.AssignmentStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdBy?: Prisma.UserUpdateOneWithoutCreatedEventAssignmentNestedInput
   updatedBy?: Prisma.UserUpdateOneWithoutUpdatedEventAssignmentNestedInput
   role?: Prisma.EventsRoleUpdateOneWithoutEventAssignmentNestedInput
   user?: Prisma.UserUpdateOneWithoutEventAssignmentsNestedInput
+  assignmentCancelRequests?: Prisma.AssignmentCancelRequestUpdateManyWithoutAssignmentNestedInput
 }
 
 export type EventAssignmentUncheckedUpdateWithoutEventInput = {
@@ -1181,10 +1497,14 @@ export type EventAssignmentUncheckedUpdateWithoutEventInput = {
   assignedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   validFrom?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   validTo?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  ratingScore?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  ratedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  status?: Prisma.EnumAssignmentStatusFieldUpdateOperationsInput | $Enums.AssignmentStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   updatedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  assignmentCancelRequests?: Prisma.AssignmentCancelRequestUncheckedUpdateManyWithoutAssignmentNestedInput
 }
 
 export type EventAssignmentUncheckedUpdateManyWithoutEventInput = {
@@ -1195,6 +1515,9 @@ export type EventAssignmentUncheckedUpdateManyWithoutEventInput = {
   assignedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   validFrom?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   validTo?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  ratingScore?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  ratedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  status?: Prisma.EnumAssignmentStatusFieldUpdateOperationsInput | $Enums.AssignmentStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1209,6 +1532,9 @@ export type EventAssignmentCreateManyRoleInput = {
   assignedAt?: Date | string
   validFrom?: Date | string | null
   validTo?: Date | string | null
+  ratingScore?: number | null
+  ratedAt?: Date | string | null
+  status?: $Enums.AssignmentStatus
   createdAt?: Date | string
   updatedAt?: Date | string | null
   createdById?: string | null
@@ -1221,12 +1547,16 @@ export type EventAssignmentUpdateWithoutRoleInput = {
   assignedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   validFrom?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   validTo?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  ratingScore?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  ratedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  status?: Prisma.EnumAssignmentStatusFieldUpdateOperationsInput | $Enums.AssignmentStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdBy?: Prisma.UserUpdateOneWithoutCreatedEventAssignmentNestedInput
   updatedBy?: Prisma.UserUpdateOneWithoutUpdatedEventAssignmentNestedInput
   event?: Prisma.EventUpdateOneRequiredWithoutAssignmentsNestedInput
   user?: Prisma.UserUpdateOneWithoutEventAssignmentsNestedInput
+  assignmentCancelRequests?: Prisma.AssignmentCancelRequestUpdateManyWithoutAssignmentNestedInput
 }
 
 export type EventAssignmentUncheckedUpdateWithoutRoleInput = {
@@ -1237,10 +1567,14 @@ export type EventAssignmentUncheckedUpdateWithoutRoleInput = {
   assignedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   validFrom?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   validTo?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  ratingScore?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  ratedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  status?: Prisma.EnumAssignmentStatusFieldUpdateOperationsInput | $Enums.AssignmentStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   updatedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  assignmentCancelRequests?: Prisma.AssignmentCancelRequestUncheckedUpdateManyWithoutAssignmentNestedInput
 }
 
 export type EventAssignmentUncheckedUpdateManyWithoutRoleInput = {
@@ -1251,12 +1585,44 @@ export type EventAssignmentUncheckedUpdateManyWithoutRoleInput = {
   assignedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   validFrom?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   validTo?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  ratingScore?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  ratedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  status?: Prisma.EnumAssignmentStatusFieldUpdateOperationsInput | $Enums.AssignmentStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   updatedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
+
+/**
+ * Count Type EventAssignmentCountOutputType
+ */
+
+export type EventAssignmentCountOutputType = {
+  assignmentCancelRequests: number
+}
+
+export type EventAssignmentCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  assignmentCancelRequests?: boolean | EventAssignmentCountOutputTypeCountAssignmentCancelRequestsArgs
+}
+
+/**
+ * EventAssignmentCountOutputType without action
+ */
+export type EventAssignmentCountOutputTypeDefaultArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the EventAssignmentCountOutputType
+   */
+  select?: Prisma.EventAssignmentCountOutputTypeSelect<ExtArgs> | null
+}
+
+/**
+ * EventAssignmentCountOutputType without action
+ */
+export type EventAssignmentCountOutputTypeCountAssignmentCancelRequestsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.AssignmentCancelRequestWhereInput
+}
 
 
 export type EventAssignmentSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -1268,6 +1634,9 @@ export type EventAssignmentSelect<ExtArgs extends runtime.Types.Extensions.Inter
   assignedAt?: boolean
   validFrom?: boolean
   validTo?: boolean
+  ratingScore?: boolean
+  ratedAt?: boolean
+  status?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   createdById?: boolean
@@ -1277,6 +1646,8 @@ export type EventAssignmentSelect<ExtArgs extends runtime.Types.Extensions.Inter
   role?: boolean | Prisma.EventAssignment$roleArgs<ExtArgs>
   event?: boolean | Prisma.EventDefaultArgs<ExtArgs>
   user?: boolean | Prisma.EventAssignment$userArgs<ExtArgs>
+  assignmentCancelRequests?: boolean | Prisma.EventAssignment$assignmentCancelRequestsArgs<ExtArgs>
+  _count?: boolean | Prisma.EventAssignmentCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["eventAssignment"]>
 
 export type EventAssignmentSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -1288,6 +1659,9 @@ export type EventAssignmentSelectCreateManyAndReturn<ExtArgs extends runtime.Typ
   assignedAt?: boolean
   validFrom?: boolean
   validTo?: boolean
+  ratingScore?: boolean
+  ratedAt?: boolean
+  status?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   createdById?: boolean
@@ -1308,6 +1682,9 @@ export type EventAssignmentSelectUpdateManyAndReturn<ExtArgs extends runtime.Typ
   assignedAt?: boolean
   validFrom?: boolean
   validTo?: boolean
+  ratingScore?: boolean
+  ratedAt?: boolean
+  status?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   createdById?: boolean
@@ -1328,19 +1705,24 @@ export type EventAssignmentSelectScalar = {
   assignedAt?: boolean
   validFrom?: boolean
   validTo?: boolean
+  ratingScore?: boolean
+  ratedAt?: boolean
+  status?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   createdById?: boolean
   updatedById?: boolean
 }
 
-export type EventAssignmentOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "eventId" | "userId" | "roleId" | "comment" | "assignedAt" | "validFrom" | "validTo" | "createdAt" | "updatedAt" | "createdById" | "updatedById", ExtArgs["result"]["eventAssignment"]>
+export type EventAssignmentOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "eventId" | "userId" | "roleId" | "comment" | "assignedAt" | "validFrom" | "validTo" | "ratingScore" | "ratedAt" | "status" | "createdAt" | "updatedAt" | "createdById" | "updatedById", ExtArgs["result"]["eventAssignment"]>
 export type EventAssignmentInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   createdBy?: boolean | Prisma.EventAssignment$createdByArgs<ExtArgs>
   updatedBy?: boolean | Prisma.EventAssignment$updatedByArgs<ExtArgs>
   role?: boolean | Prisma.EventAssignment$roleArgs<ExtArgs>
   event?: boolean | Prisma.EventDefaultArgs<ExtArgs>
   user?: boolean | Prisma.EventAssignment$userArgs<ExtArgs>
+  assignmentCancelRequests?: boolean | Prisma.EventAssignment$assignmentCancelRequestsArgs<ExtArgs>
+  _count?: boolean | Prisma.EventAssignmentCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type EventAssignmentIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   createdBy?: boolean | Prisma.EventAssignment$createdByArgs<ExtArgs>
@@ -1365,6 +1747,7 @@ export type $EventAssignmentPayload<ExtArgs extends runtime.Types.Extensions.Int
     role: Prisma.$EventsRolePayload<ExtArgs> | null
     event: Prisma.$EventPayload<ExtArgs>
     user: Prisma.$UserPayload<ExtArgs> | null
+    assignmentCancelRequests: Prisma.$AssignmentCancelRequestPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -1375,6 +1758,9 @@ export type $EventAssignmentPayload<ExtArgs extends runtime.Types.Extensions.Int
     assignedAt: Date
     validFrom: Date | null
     validTo: Date | null
+    ratingScore: number | null
+    ratedAt: Date | null
+    status: $Enums.AssignmentStatus
     createdAt: Date
     updatedAt: Date | null
     createdById: string | null
@@ -1778,6 +2164,7 @@ export interface Prisma__EventAssignmentClient<T, Null = never, ExtArgs extends 
   role<T extends Prisma.EventAssignment$roleArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.EventAssignment$roleArgs<ExtArgs>>): Prisma.Prisma__EventsRoleClient<runtime.Types.Result.GetResult<Prisma.$EventsRolePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   event<T extends Prisma.EventDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.EventDefaultArgs<ExtArgs>>): Prisma.Prisma__EventClient<runtime.Types.Result.GetResult<Prisma.$EventPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   user<T extends Prisma.EventAssignment$userArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.EventAssignment$userArgs<ExtArgs>>): Prisma.Prisma__UserClient<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+  assignmentCancelRequests<T extends Prisma.EventAssignment$assignmentCancelRequestsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.EventAssignment$assignmentCancelRequestsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$AssignmentCancelRequestPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1815,6 +2202,9 @@ export interface EventAssignmentFieldRefs {
   readonly assignedAt: Prisma.FieldRef<"EventAssignment", 'DateTime'>
   readonly validFrom: Prisma.FieldRef<"EventAssignment", 'DateTime'>
   readonly validTo: Prisma.FieldRef<"EventAssignment", 'DateTime'>
+  readonly ratingScore: Prisma.FieldRef<"EventAssignment", 'Int'>
+  readonly ratedAt: Prisma.FieldRef<"EventAssignment", 'DateTime'>
+  readonly status: Prisma.FieldRef<"EventAssignment", 'AssignmentStatus'>
   readonly createdAt: Prisma.FieldRef<"EventAssignment", 'DateTime'>
   readonly updatedAt: Prisma.FieldRef<"EventAssignment", 'DateTime'>
   readonly createdById: Prisma.FieldRef<"EventAssignment", 'String'>
@@ -2288,6 +2678,30 @@ export type EventAssignment$userArgs<ExtArgs extends runtime.Types.Extensions.In
    */
   include?: Prisma.UserInclude<ExtArgs> | null
   where?: Prisma.UserWhereInput
+}
+
+/**
+ * EventAssignment.assignmentCancelRequests
+ */
+export type EventAssignment$assignmentCancelRequestsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the AssignmentCancelRequest
+   */
+  select?: Prisma.AssignmentCancelRequestSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the AssignmentCancelRequest
+   */
+  omit?: Prisma.AssignmentCancelRequestOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.AssignmentCancelRequestInclude<ExtArgs> | null
+  where?: Prisma.AssignmentCancelRequestWhereInput
+  orderBy?: Prisma.AssignmentCancelRequestOrderByWithRelationInput | Prisma.AssignmentCancelRequestOrderByWithRelationInput[]
+  cursor?: Prisma.AssignmentCancelRequestWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.AssignmentCancelRequestScalarFieldEnum | Prisma.AssignmentCancelRequestScalarFieldEnum[]
 }
 
 /**

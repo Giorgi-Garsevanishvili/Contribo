@@ -57,8 +57,12 @@ export const ModelName = {
   HrWarning: 'HrWarning',
   HrWarningType: 'HrWarningType',
   EventFeedback: 'EventFeedback',
-  ScheduledEmails: 'ScheduledEmails',
+  FeedbackRequest: 'FeedbackRequest',
+  AvailabilitySlot: 'AvailabilitySlot',
+  AvailabilityEntry: 'AvailabilityEntry',
+  EntryCancelRequest: 'EntryCancelRequest',
   EventAssignment: 'EventAssignment',
+  AssignmentCancelRequest: 'AssignmentCancelRequest',
   RatingHistory: 'RatingHistory',
   Position: 'Position',
   PositionHistory: 'PositionHistory',
@@ -122,7 +126,8 @@ export const EventScalarFieldEnum = {
   createdById: 'createdById',
   updatedById: 'updatedById',
   createdAt: 'createdAt',
-  updatedAt: 'updatedAt'
+  updatedAt: 'updatedAt',
+  finalizedAt: 'finalizedAt'
 } as const
 
 export type EventScalarFieldEnum = (typeof EventScalarFieldEnum)[keyof typeof EventScalarFieldEnum]
@@ -180,17 +185,65 @@ export const EventFeedbackScalarFieldEnum = {
 export type EventFeedbackScalarFieldEnum = (typeof EventFeedbackScalarFieldEnum)[keyof typeof EventFeedbackScalarFieldEnum]
 
 
-export const ScheduledEmailsScalarFieldEnum = {
+export const FeedbackRequestScalarFieldEnum = {
   id: 'id',
-  userId: 'userId',
   eventId: 'eventId',
-  sent: 'sent',
-  sendAt: 'sendAt',
+  userId: 'userId',
+  status: 'status',
+  requestedAt: 'requestedAt',
+  respondedAt: 'respondedAt',
+  eventFeedbackId: 'eventFeedbackId'
+} as const
+
+export type FeedbackRequestScalarFieldEnum = (typeof FeedbackRequestScalarFieldEnum)[keyof typeof FeedbackRequestScalarFieldEnum]
+
+
+export const AvailabilitySlotScalarFieldEnum = {
+  id: 'id',
+  eventId: 'eventId',
+  roleId: 'roleId',
+  totalSlots: 'totalSlots',
+  published: 'published',
+  validFrom: 'validFrom',
+  validTo: 'validTo',
+  createdById: 'createdById',
+  updatedById: 'updatedById',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 } as const
 
-export type ScheduledEmailsScalarFieldEnum = (typeof ScheduledEmailsScalarFieldEnum)[keyof typeof ScheduledEmailsScalarFieldEnum]
+export type AvailabilitySlotScalarFieldEnum = (typeof AvailabilitySlotScalarFieldEnum)[keyof typeof AvailabilitySlotScalarFieldEnum]
+
+
+export const AvailabilityEntryScalarFieldEnum = {
+  id: 'id',
+  slotId: 'slotId',
+  userId: 'userId',
+  status: 'status',
+  comment: 'comment',
+  ratingScore: 'ratingScore',
+  ratedAt: 'ratedAt',
+  appliedAt: 'appliedAt',
+  updatedById: 'updatedById',
+  updatedAt: 'updatedAt'
+} as const
+
+export type AvailabilityEntryScalarFieldEnum = (typeof AvailabilityEntryScalarFieldEnum)[keyof typeof AvailabilityEntryScalarFieldEnum]
+
+
+export const EntryCancelRequestScalarFieldEnum = {
+  id: 'id',
+  entryId: 'entryId',
+  requestedById: 'requestedById',
+  reason: 'reason',
+  status: 'status',
+  reviewedById: 'reviewedById',
+  reviewedAt: 'reviewedAt',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type EntryCancelRequestScalarFieldEnum = (typeof EntryCancelRequestScalarFieldEnum)[keyof typeof EntryCancelRequestScalarFieldEnum]
 
 
 export const EventAssignmentScalarFieldEnum = {
@@ -202,6 +255,9 @@ export const EventAssignmentScalarFieldEnum = {
   assignedAt: 'assignedAt',
   validFrom: 'validFrom',
   validTo: 'validTo',
+  ratingScore: 'ratingScore',
+  ratedAt: 'ratedAt',
+  status: 'status',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt',
   createdById: 'createdById',
@@ -209,6 +265,21 @@ export const EventAssignmentScalarFieldEnum = {
 } as const
 
 export type EventAssignmentScalarFieldEnum = (typeof EventAssignmentScalarFieldEnum)[keyof typeof EventAssignmentScalarFieldEnum]
+
+
+export const AssignmentCancelRequestScalarFieldEnum = {
+  id: 'id',
+  assignmentId: 'assignmentId',
+  requestedById: 'requestedById',
+  reason: 'reason',
+  status: 'status',
+  reviewedById: 'reviewedById',
+  reviewedAt: 'reviewedAt',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type AssignmentCancelRequestScalarFieldEnum = (typeof AssignmentCancelRequestScalarFieldEnum)[keyof typeof AssignmentCancelRequestScalarFieldEnum]
 
 
 export const RatingHistoryScalarFieldEnum = {

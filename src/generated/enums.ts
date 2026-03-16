@@ -39,6 +39,24 @@ export const HrWarningStatus = {
 export type HrWarningStatus = (typeof HrWarningStatus)[keyof typeof HrWarningStatus]
 
 
+export const FeedbackRequestStatus = {
+  PENDING: 'PENDING',
+  SUBMITTED: 'SUBMITTED',
+  IGNORED: 'IGNORED'
+} as const
+
+export type FeedbackRequestStatus = (typeof FeedbackRequestStatus)[keyof typeof FeedbackRequestStatus]
+
+
+export const AssignmentStatus = {
+  ACTIVE: 'ACTIVE',
+  CANCEL_REQUESTED: 'CANCEL_REQUESTED',
+  CANCELLED: 'CANCELLED'
+} as const
+
+export type AssignmentStatus = (typeof AssignmentStatus)[keyof typeof AssignmentStatus]
+
+
 export const ReqStatus = {
   PENDING: 'PENDING',
   REQUESTED: 'REQUESTED',

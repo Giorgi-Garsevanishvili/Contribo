@@ -47,6 +47,7 @@ export type EventMinAggregateOutputType = {
   updatedById: string | null
   createdAt: Date | null
   updatedAt: Date | null
+  finalizedAt: Date | null
 }
 
 export type EventMaxAggregateOutputType = {
@@ -62,6 +63,7 @@ export type EventMaxAggregateOutputType = {
   updatedById: string | null
   createdAt: Date | null
   updatedAt: Date | null
+  finalizedAt: Date | null
 }
 
 export type EventCountAggregateOutputType = {
@@ -77,6 +79,7 @@ export type EventCountAggregateOutputType = {
   updatedById: number
   createdAt: number
   updatedAt: number
+  finalizedAt: number
   _all: number
 }
 
@@ -102,6 +105,7 @@ export type EventMinAggregateInputType = {
   updatedById?: true
   createdAt?: true
   updatedAt?: true
+  finalizedAt?: true
 }
 
 export type EventMaxAggregateInputType = {
@@ -117,6 +121,7 @@ export type EventMaxAggregateInputType = {
   updatedById?: true
   createdAt?: true
   updatedAt?: true
+  finalizedAt?: true
 }
 
 export type EventCountAggregateInputType = {
@@ -132,6 +137,7 @@ export type EventCountAggregateInputType = {
   updatedById?: true
   createdAt?: true
   updatedAt?: true
+  finalizedAt?: true
   _all?: true
 }
 
@@ -234,6 +240,7 @@ export type EventGroupByOutputType = {
   updatedById: string | null
   createdAt: Date
   updatedAt: Date | null
+  finalizedAt: Date | null
   _count: EventCountAggregateOutputType | null
   _avg: EventAvgAggregateOutputType | null
   _sum: EventSumAggregateOutputType | null
@@ -272,12 +279,14 @@ export type EventWhereInput = {
   updatedById?: Prisma.StringNullableFilter<"Event"> | string | null
   createdAt?: Prisma.DateTimeFilter<"Event"> | Date | string
   updatedAt?: Prisma.DateTimeNullableFilter<"Event"> | Date | string | null
+  finalizedAt?: Prisma.DateTimeNullableFilter<"Event"> | Date | string | null
   region?: Prisma.XOR<Prisma.RegionNullableScalarRelationFilter, Prisma.RegionWhereInput> | null
   createdBy?: Prisma.XOR<Prisma.UserNullableScalarRelationFilter, Prisma.UserWhereInput> | null
   updatedBy?: Prisma.XOR<Prisma.UserNullableScalarRelationFilter, Prisma.UserWhereInput> | null
   feedback?: Prisma.EventFeedbackListRelationFilter
   assignments?: Prisma.EventAssignmentListRelationFilter
-  scheduledEventEmails?: Prisma.ScheduledEmailsListRelationFilter
+  availabilities?: Prisma.AvailabilitySlotListRelationFilter
+  feedbackRequests?: Prisma.FeedbackRequestListRelationFilter
 }
 
 export type EventOrderByWithRelationInput = {
@@ -293,12 +302,14 @@ export type EventOrderByWithRelationInput = {
   updatedById?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrderInput | Prisma.SortOrder
+  finalizedAt?: Prisma.SortOrderInput | Prisma.SortOrder
   region?: Prisma.RegionOrderByWithRelationInput
   createdBy?: Prisma.UserOrderByWithRelationInput
   updatedBy?: Prisma.UserOrderByWithRelationInput
   feedback?: Prisma.EventFeedbackOrderByRelationAggregateInput
   assignments?: Prisma.EventAssignmentOrderByRelationAggregateInput
-  scheduledEventEmails?: Prisma.ScheduledEmailsOrderByRelationAggregateInput
+  availabilities?: Prisma.AvailabilitySlotOrderByRelationAggregateInput
+  feedbackRequests?: Prisma.FeedbackRequestOrderByRelationAggregateInput
 }
 
 export type EventWhereUniqueInput = Prisma.AtLeast<{
@@ -317,12 +328,14 @@ export type EventWhereUniqueInput = Prisma.AtLeast<{
   updatedById?: Prisma.StringNullableFilter<"Event"> | string | null
   createdAt?: Prisma.DateTimeFilter<"Event"> | Date | string
   updatedAt?: Prisma.DateTimeNullableFilter<"Event"> | Date | string | null
+  finalizedAt?: Prisma.DateTimeNullableFilter<"Event"> | Date | string | null
   region?: Prisma.XOR<Prisma.RegionNullableScalarRelationFilter, Prisma.RegionWhereInput> | null
   createdBy?: Prisma.XOR<Prisma.UserNullableScalarRelationFilter, Prisma.UserWhereInput> | null
   updatedBy?: Prisma.XOR<Prisma.UserNullableScalarRelationFilter, Prisma.UserWhereInput> | null
   feedback?: Prisma.EventFeedbackListRelationFilter
   assignments?: Prisma.EventAssignmentListRelationFilter
-  scheduledEventEmails?: Prisma.ScheduledEmailsListRelationFilter
+  availabilities?: Prisma.AvailabilitySlotListRelationFilter
+  feedbackRequests?: Prisma.FeedbackRequestListRelationFilter
 }, "id">
 
 export type EventOrderByWithAggregationInput = {
@@ -338,6 +351,7 @@ export type EventOrderByWithAggregationInput = {
   updatedById?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrderInput | Prisma.SortOrder
+  finalizedAt?: Prisma.SortOrderInput | Prisma.SortOrder
   _count?: Prisma.EventCountOrderByAggregateInput
   _avg?: Prisma.EventAvgOrderByAggregateInput
   _max?: Prisma.EventMaxOrderByAggregateInput
@@ -361,6 +375,7 @@ export type EventScalarWhereWithAggregatesInput = {
   updatedById?: Prisma.StringNullableWithAggregatesFilter<"Event"> | string | null
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"Event"> | Date | string
   updatedAt?: Prisma.DateTimeNullableWithAggregatesFilter<"Event"> | Date | string | null
+  finalizedAt?: Prisma.DateTimeNullableWithAggregatesFilter<"Event"> | Date | string | null
 }
 
 export type EventCreateInput = {
@@ -373,12 +388,14 @@ export type EventCreateInput = {
   rating?: number | null
   createdAt?: Date | string
   updatedAt?: Date | string | null
+  finalizedAt?: Date | string | null
   region?: Prisma.RegionCreateNestedOneWithoutEventInput
   createdBy?: Prisma.UserCreateNestedOneWithoutCreatedEventsInput
   updatedBy?: Prisma.UserCreateNestedOneWithoutUpdatedEventsInput
   feedback?: Prisma.EventFeedbackCreateNestedManyWithoutEventInput
   assignments?: Prisma.EventAssignmentCreateNestedManyWithoutEventInput
-  scheduledEventEmails?: Prisma.ScheduledEmailsCreateNestedManyWithoutEventInput
+  availabilities?: Prisma.AvailabilitySlotCreateNestedManyWithoutEventInput
+  feedbackRequests?: Prisma.FeedbackRequestCreateNestedManyWithoutEventInput
 }
 
 export type EventUncheckedCreateInput = {
@@ -394,9 +411,11 @@ export type EventUncheckedCreateInput = {
   updatedById?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string | null
+  finalizedAt?: Date | string | null
   feedback?: Prisma.EventFeedbackUncheckedCreateNestedManyWithoutEventInput
   assignments?: Prisma.EventAssignmentUncheckedCreateNestedManyWithoutEventInput
-  scheduledEventEmails?: Prisma.ScheduledEmailsUncheckedCreateNestedManyWithoutEventInput
+  availabilities?: Prisma.AvailabilitySlotUncheckedCreateNestedManyWithoutEventInput
+  feedbackRequests?: Prisma.FeedbackRequestUncheckedCreateNestedManyWithoutEventInput
 }
 
 export type EventUpdateInput = {
@@ -409,12 +428,14 @@ export type EventUpdateInput = {
   rating?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  finalizedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   region?: Prisma.RegionUpdateOneWithoutEventNestedInput
   createdBy?: Prisma.UserUpdateOneWithoutCreatedEventsNestedInput
   updatedBy?: Prisma.UserUpdateOneWithoutUpdatedEventsNestedInput
   feedback?: Prisma.EventFeedbackUpdateManyWithoutEventNestedInput
   assignments?: Prisma.EventAssignmentUpdateManyWithoutEventNestedInput
-  scheduledEventEmails?: Prisma.ScheduledEmailsUpdateManyWithoutEventNestedInput
+  availabilities?: Prisma.AvailabilitySlotUpdateManyWithoutEventNestedInput
+  feedbackRequests?: Prisma.FeedbackRequestUpdateManyWithoutEventNestedInput
 }
 
 export type EventUncheckedUpdateInput = {
@@ -430,9 +451,11 @@ export type EventUncheckedUpdateInput = {
   updatedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  finalizedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   feedback?: Prisma.EventFeedbackUncheckedUpdateManyWithoutEventNestedInput
   assignments?: Prisma.EventAssignmentUncheckedUpdateManyWithoutEventNestedInput
-  scheduledEventEmails?: Prisma.ScheduledEmailsUncheckedUpdateManyWithoutEventNestedInput
+  availabilities?: Prisma.AvailabilitySlotUncheckedUpdateManyWithoutEventNestedInput
+  feedbackRequests?: Prisma.FeedbackRequestUncheckedUpdateManyWithoutEventNestedInput
 }
 
 export type EventCreateManyInput = {
@@ -448,6 +471,7 @@ export type EventCreateManyInput = {
   updatedById?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string | null
+  finalizedAt?: Date | string | null
 }
 
 export type EventUpdateManyMutationInput = {
@@ -460,6 +484,7 @@ export type EventUpdateManyMutationInput = {
   rating?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  finalizedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
 }
 
 export type EventUncheckedUpdateManyInput = {
@@ -475,6 +500,7 @@ export type EventUncheckedUpdateManyInput = {
   updatedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  finalizedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
 }
 
 export type EventListRelationFilter = {
@@ -500,6 +526,7 @@ export type EventCountOrderByAggregateInput = {
   updatedById?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
+  finalizedAt?: Prisma.SortOrder
 }
 
 export type EventAvgOrderByAggregateInput = {
@@ -519,6 +546,7 @@ export type EventMaxOrderByAggregateInput = {
   updatedById?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
+  finalizedAt?: Prisma.SortOrder
 }
 
 export type EventMinOrderByAggregateInput = {
@@ -534,6 +562,7 @@ export type EventMinOrderByAggregateInput = {
   updatedById?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
+  finalizedAt?: Prisma.SortOrder
 }
 
 export type EventSumOrderByAggregateInput = {
@@ -651,18 +680,32 @@ export type EventUpdateOneRequiredWithoutFeedbackNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.EventUpdateToOneWithWhereWithoutFeedbackInput, Prisma.EventUpdateWithoutFeedbackInput>, Prisma.EventUncheckedUpdateWithoutFeedbackInput>
 }
 
-export type EventCreateNestedOneWithoutScheduledEventEmailsInput = {
-  create?: Prisma.XOR<Prisma.EventCreateWithoutScheduledEventEmailsInput, Prisma.EventUncheckedCreateWithoutScheduledEventEmailsInput>
-  connectOrCreate?: Prisma.EventCreateOrConnectWithoutScheduledEventEmailsInput
+export type EventCreateNestedOneWithoutFeedbackRequestsInput = {
+  create?: Prisma.XOR<Prisma.EventCreateWithoutFeedbackRequestsInput, Prisma.EventUncheckedCreateWithoutFeedbackRequestsInput>
+  connectOrCreate?: Prisma.EventCreateOrConnectWithoutFeedbackRequestsInput
   connect?: Prisma.EventWhereUniqueInput
 }
 
-export type EventUpdateOneRequiredWithoutScheduledEventEmailsNestedInput = {
-  create?: Prisma.XOR<Prisma.EventCreateWithoutScheduledEventEmailsInput, Prisma.EventUncheckedCreateWithoutScheduledEventEmailsInput>
-  connectOrCreate?: Prisma.EventCreateOrConnectWithoutScheduledEventEmailsInput
-  upsert?: Prisma.EventUpsertWithoutScheduledEventEmailsInput
+export type EventUpdateOneRequiredWithoutFeedbackRequestsNestedInput = {
+  create?: Prisma.XOR<Prisma.EventCreateWithoutFeedbackRequestsInput, Prisma.EventUncheckedCreateWithoutFeedbackRequestsInput>
+  connectOrCreate?: Prisma.EventCreateOrConnectWithoutFeedbackRequestsInput
+  upsert?: Prisma.EventUpsertWithoutFeedbackRequestsInput
   connect?: Prisma.EventWhereUniqueInput
-  update?: Prisma.XOR<Prisma.XOR<Prisma.EventUpdateToOneWithWhereWithoutScheduledEventEmailsInput, Prisma.EventUpdateWithoutScheduledEventEmailsInput>, Prisma.EventUncheckedUpdateWithoutScheduledEventEmailsInput>
+  update?: Prisma.XOR<Prisma.XOR<Prisma.EventUpdateToOneWithWhereWithoutFeedbackRequestsInput, Prisma.EventUpdateWithoutFeedbackRequestsInput>, Prisma.EventUncheckedUpdateWithoutFeedbackRequestsInput>
+}
+
+export type EventCreateNestedOneWithoutAvailabilitiesInput = {
+  create?: Prisma.XOR<Prisma.EventCreateWithoutAvailabilitiesInput, Prisma.EventUncheckedCreateWithoutAvailabilitiesInput>
+  connectOrCreate?: Prisma.EventCreateOrConnectWithoutAvailabilitiesInput
+  connect?: Prisma.EventWhereUniqueInput
+}
+
+export type EventUpdateOneRequiredWithoutAvailabilitiesNestedInput = {
+  create?: Prisma.XOR<Prisma.EventCreateWithoutAvailabilitiesInput, Prisma.EventUncheckedCreateWithoutAvailabilitiesInput>
+  connectOrCreate?: Prisma.EventCreateOrConnectWithoutAvailabilitiesInput
+  upsert?: Prisma.EventUpsertWithoutAvailabilitiesInput
+  connect?: Prisma.EventWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.EventUpdateToOneWithWhereWithoutAvailabilitiesInput, Prisma.EventUpdateWithoutAvailabilitiesInput>, Prisma.EventUncheckedUpdateWithoutAvailabilitiesInput>
 }
 
 export type EventCreateNestedOneWithoutAssignmentsInput = {
@@ -731,11 +774,13 @@ export type EventCreateWithoutCreatedByInput = {
   rating?: number | null
   createdAt?: Date | string
   updatedAt?: Date | string | null
+  finalizedAt?: Date | string | null
   region?: Prisma.RegionCreateNestedOneWithoutEventInput
   updatedBy?: Prisma.UserCreateNestedOneWithoutUpdatedEventsInput
   feedback?: Prisma.EventFeedbackCreateNestedManyWithoutEventInput
   assignments?: Prisma.EventAssignmentCreateNestedManyWithoutEventInput
-  scheduledEventEmails?: Prisma.ScheduledEmailsCreateNestedManyWithoutEventInput
+  availabilities?: Prisma.AvailabilitySlotCreateNestedManyWithoutEventInput
+  feedbackRequests?: Prisma.FeedbackRequestCreateNestedManyWithoutEventInput
 }
 
 export type EventUncheckedCreateWithoutCreatedByInput = {
@@ -750,9 +795,11 @@ export type EventUncheckedCreateWithoutCreatedByInput = {
   updatedById?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string | null
+  finalizedAt?: Date | string | null
   feedback?: Prisma.EventFeedbackUncheckedCreateNestedManyWithoutEventInput
   assignments?: Prisma.EventAssignmentUncheckedCreateNestedManyWithoutEventInput
-  scheduledEventEmails?: Prisma.ScheduledEmailsUncheckedCreateNestedManyWithoutEventInput
+  availabilities?: Prisma.AvailabilitySlotUncheckedCreateNestedManyWithoutEventInput
+  feedbackRequests?: Prisma.FeedbackRequestUncheckedCreateNestedManyWithoutEventInput
 }
 
 export type EventCreateOrConnectWithoutCreatedByInput = {
@@ -775,11 +822,13 @@ export type EventCreateWithoutUpdatedByInput = {
   rating?: number | null
   createdAt?: Date | string
   updatedAt?: Date | string | null
+  finalizedAt?: Date | string | null
   region?: Prisma.RegionCreateNestedOneWithoutEventInput
   createdBy?: Prisma.UserCreateNestedOneWithoutCreatedEventsInput
   feedback?: Prisma.EventFeedbackCreateNestedManyWithoutEventInput
   assignments?: Prisma.EventAssignmentCreateNestedManyWithoutEventInput
-  scheduledEventEmails?: Prisma.ScheduledEmailsCreateNestedManyWithoutEventInput
+  availabilities?: Prisma.AvailabilitySlotCreateNestedManyWithoutEventInput
+  feedbackRequests?: Prisma.FeedbackRequestCreateNestedManyWithoutEventInput
 }
 
 export type EventUncheckedCreateWithoutUpdatedByInput = {
@@ -794,9 +843,11 @@ export type EventUncheckedCreateWithoutUpdatedByInput = {
   createdById?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string | null
+  finalizedAt?: Date | string | null
   feedback?: Prisma.EventFeedbackUncheckedCreateNestedManyWithoutEventInput
   assignments?: Prisma.EventAssignmentUncheckedCreateNestedManyWithoutEventInput
-  scheduledEventEmails?: Prisma.ScheduledEmailsUncheckedCreateNestedManyWithoutEventInput
+  availabilities?: Prisma.AvailabilitySlotUncheckedCreateNestedManyWithoutEventInput
+  feedbackRequests?: Prisma.FeedbackRequestUncheckedCreateNestedManyWithoutEventInput
 }
 
 export type EventCreateOrConnectWithoutUpdatedByInput = {
@@ -841,6 +892,7 @@ export type EventScalarWhereInput = {
   updatedById?: Prisma.StringNullableFilter<"Event"> | string | null
   createdAt?: Prisma.DateTimeFilter<"Event"> | Date | string
   updatedAt?: Prisma.DateTimeNullableFilter<"Event"> | Date | string | null
+  finalizedAt?: Prisma.DateTimeNullableFilter<"Event"> | Date | string | null
 }
 
 export type EventUpsertWithWhereUniqueWithoutUpdatedByInput = {
@@ -869,11 +921,13 @@ export type EventCreateWithoutFeedbackInput = {
   rating?: number | null
   createdAt?: Date | string
   updatedAt?: Date | string | null
+  finalizedAt?: Date | string | null
   region?: Prisma.RegionCreateNestedOneWithoutEventInput
   createdBy?: Prisma.UserCreateNestedOneWithoutCreatedEventsInput
   updatedBy?: Prisma.UserCreateNestedOneWithoutUpdatedEventsInput
   assignments?: Prisma.EventAssignmentCreateNestedManyWithoutEventInput
-  scheduledEventEmails?: Prisma.ScheduledEmailsCreateNestedManyWithoutEventInput
+  availabilities?: Prisma.AvailabilitySlotCreateNestedManyWithoutEventInput
+  feedbackRequests?: Prisma.FeedbackRequestCreateNestedManyWithoutEventInput
 }
 
 export type EventUncheckedCreateWithoutFeedbackInput = {
@@ -889,8 +943,10 @@ export type EventUncheckedCreateWithoutFeedbackInput = {
   updatedById?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string | null
+  finalizedAt?: Date | string | null
   assignments?: Prisma.EventAssignmentUncheckedCreateNestedManyWithoutEventInput
-  scheduledEventEmails?: Prisma.ScheduledEmailsUncheckedCreateNestedManyWithoutEventInput
+  availabilities?: Prisma.AvailabilitySlotUncheckedCreateNestedManyWithoutEventInput
+  feedbackRequests?: Prisma.FeedbackRequestUncheckedCreateNestedManyWithoutEventInput
 }
 
 export type EventCreateOrConnectWithoutFeedbackInput = {
@@ -919,11 +975,13 @@ export type EventUpdateWithoutFeedbackInput = {
   rating?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  finalizedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   region?: Prisma.RegionUpdateOneWithoutEventNestedInput
   createdBy?: Prisma.UserUpdateOneWithoutCreatedEventsNestedInput
   updatedBy?: Prisma.UserUpdateOneWithoutUpdatedEventsNestedInput
   assignments?: Prisma.EventAssignmentUpdateManyWithoutEventNestedInput
-  scheduledEventEmails?: Prisma.ScheduledEmailsUpdateManyWithoutEventNestedInput
+  availabilities?: Prisma.AvailabilitySlotUpdateManyWithoutEventNestedInput
+  feedbackRequests?: Prisma.FeedbackRequestUpdateManyWithoutEventNestedInput
 }
 
 export type EventUncheckedUpdateWithoutFeedbackInput = {
@@ -939,11 +997,13 @@ export type EventUncheckedUpdateWithoutFeedbackInput = {
   updatedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  finalizedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   assignments?: Prisma.EventAssignmentUncheckedUpdateManyWithoutEventNestedInput
-  scheduledEventEmails?: Prisma.ScheduledEmailsUncheckedUpdateManyWithoutEventNestedInput
+  availabilities?: Prisma.AvailabilitySlotUncheckedUpdateManyWithoutEventNestedInput
+  feedbackRequests?: Prisma.FeedbackRequestUncheckedUpdateManyWithoutEventNestedInput
 }
 
-export type EventCreateWithoutScheduledEventEmailsInput = {
+export type EventCreateWithoutFeedbackRequestsInput = {
   id?: string
   name: string
   location: string
@@ -953,14 +1013,16 @@ export type EventCreateWithoutScheduledEventEmailsInput = {
   rating?: number | null
   createdAt?: Date | string
   updatedAt?: Date | string | null
+  finalizedAt?: Date | string | null
   region?: Prisma.RegionCreateNestedOneWithoutEventInput
   createdBy?: Prisma.UserCreateNestedOneWithoutCreatedEventsInput
   updatedBy?: Prisma.UserCreateNestedOneWithoutUpdatedEventsInput
   feedback?: Prisma.EventFeedbackCreateNestedManyWithoutEventInput
   assignments?: Prisma.EventAssignmentCreateNestedManyWithoutEventInput
+  availabilities?: Prisma.AvailabilitySlotCreateNestedManyWithoutEventInput
 }
 
-export type EventUncheckedCreateWithoutScheduledEventEmailsInput = {
+export type EventUncheckedCreateWithoutFeedbackRequestsInput = {
   id?: string
   name: string
   location: string
@@ -973,27 +1035,29 @@ export type EventUncheckedCreateWithoutScheduledEventEmailsInput = {
   updatedById?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string | null
+  finalizedAt?: Date | string | null
   feedback?: Prisma.EventFeedbackUncheckedCreateNestedManyWithoutEventInput
   assignments?: Prisma.EventAssignmentUncheckedCreateNestedManyWithoutEventInput
+  availabilities?: Prisma.AvailabilitySlotUncheckedCreateNestedManyWithoutEventInput
 }
 
-export type EventCreateOrConnectWithoutScheduledEventEmailsInput = {
+export type EventCreateOrConnectWithoutFeedbackRequestsInput = {
   where: Prisma.EventWhereUniqueInput
-  create: Prisma.XOR<Prisma.EventCreateWithoutScheduledEventEmailsInput, Prisma.EventUncheckedCreateWithoutScheduledEventEmailsInput>
+  create: Prisma.XOR<Prisma.EventCreateWithoutFeedbackRequestsInput, Prisma.EventUncheckedCreateWithoutFeedbackRequestsInput>
 }
 
-export type EventUpsertWithoutScheduledEventEmailsInput = {
-  update: Prisma.XOR<Prisma.EventUpdateWithoutScheduledEventEmailsInput, Prisma.EventUncheckedUpdateWithoutScheduledEventEmailsInput>
-  create: Prisma.XOR<Prisma.EventCreateWithoutScheduledEventEmailsInput, Prisma.EventUncheckedCreateWithoutScheduledEventEmailsInput>
+export type EventUpsertWithoutFeedbackRequestsInput = {
+  update: Prisma.XOR<Prisma.EventUpdateWithoutFeedbackRequestsInput, Prisma.EventUncheckedUpdateWithoutFeedbackRequestsInput>
+  create: Prisma.XOR<Prisma.EventCreateWithoutFeedbackRequestsInput, Prisma.EventUncheckedCreateWithoutFeedbackRequestsInput>
   where?: Prisma.EventWhereInput
 }
 
-export type EventUpdateToOneWithWhereWithoutScheduledEventEmailsInput = {
+export type EventUpdateToOneWithWhereWithoutFeedbackRequestsInput = {
   where?: Prisma.EventWhereInput
-  data: Prisma.XOR<Prisma.EventUpdateWithoutScheduledEventEmailsInput, Prisma.EventUncheckedUpdateWithoutScheduledEventEmailsInput>
+  data: Prisma.XOR<Prisma.EventUpdateWithoutFeedbackRequestsInput, Prisma.EventUncheckedUpdateWithoutFeedbackRequestsInput>
 }
 
-export type EventUpdateWithoutScheduledEventEmailsInput = {
+export type EventUpdateWithoutFeedbackRequestsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   location?: Prisma.StringFieldUpdateOperationsInput | string
@@ -1003,14 +1067,16 @@ export type EventUpdateWithoutScheduledEventEmailsInput = {
   rating?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  finalizedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   region?: Prisma.RegionUpdateOneWithoutEventNestedInput
   createdBy?: Prisma.UserUpdateOneWithoutCreatedEventsNestedInput
   updatedBy?: Prisma.UserUpdateOneWithoutUpdatedEventsNestedInput
   feedback?: Prisma.EventFeedbackUpdateManyWithoutEventNestedInput
   assignments?: Prisma.EventAssignmentUpdateManyWithoutEventNestedInput
+  availabilities?: Prisma.AvailabilitySlotUpdateManyWithoutEventNestedInput
 }
 
-export type EventUncheckedUpdateWithoutScheduledEventEmailsInput = {
+export type EventUncheckedUpdateWithoutFeedbackRequestsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   location?: Prisma.StringFieldUpdateOperationsInput | string
@@ -1023,8 +1089,102 @@ export type EventUncheckedUpdateWithoutScheduledEventEmailsInput = {
   updatedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  finalizedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   feedback?: Prisma.EventFeedbackUncheckedUpdateManyWithoutEventNestedInput
   assignments?: Prisma.EventAssignmentUncheckedUpdateManyWithoutEventNestedInput
+  availabilities?: Prisma.AvailabilitySlotUncheckedUpdateManyWithoutEventNestedInput
+}
+
+export type EventCreateWithoutAvailabilitiesInput = {
+  id?: string
+  name: string
+  location: string
+  startTime: Date | string
+  endTime: Date | string
+  description: string
+  rating?: number | null
+  createdAt?: Date | string
+  updatedAt?: Date | string | null
+  finalizedAt?: Date | string | null
+  region?: Prisma.RegionCreateNestedOneWithoutEventInput
+  createdBy?: Prisma.UserCreateNestedOneWithoutCreatedEventsInput
+  updatedBy?: Prisma.UserCreateNestedOneWithoutUpdatedEventsInput
+  feedback?: Prisma.EventFeedbackCreateNestedManyWithoutEventInput
+  assignments?: Prisma.EventAssignmentCreateNestedManyWithoutEventInput
+  feedbackRequests?: Prisma.FeedbackRequestCreateNestedManyWithoutEventInput
+}
+
+export type EventUncheckedCreateWithoutAvailabilitiesInput = {
+  id?: string
+  name: string
+  location: string
+  startTime: Date | string
+  endTime: Date | string
+  description: string
+  rating?: number | null
+  regionId?: string | null
+  createdById?: string | null
+  updatedById?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string | null
+  finalizedAt?: Date | string | null
+  feedback?: Prisma.EventFeedbackUncheckedCreateNestedManyWithoutEventInput
+  assignments?: Prisma.EventAssignmentUncheckedCreateNestedManyWithoutEventInput
+  feedbackRequests?: Prisma.FeedbackRequestUncheckedCreateNestedManyWithoutEventInput
+}
+
+export type EventCreateOrConnectWithoutAvailabilitiesInput = {
+  where: Prisma.EventWhereUniqueInput
+  create: Prisma.XOR<Prisma.EventCreateWithoutAvailabilitiesInput, Prisma.EventUncheckedCreateWithoutAvailabilitiesInput>
+}
+
+export type EventUpsertWithoutAvailabilitiesInput = {
+  update: Prisma.XOR<Prisma.EventUpdateWithoutAvailabilitiesInput, Prisma.EventUncheckedUpdateWithoutAvailabilitiesInput>
+  create: Prisma.XOR<Prisma.EventCreateWithoutAvailabilitiesInput, Prisma.EventUncheckedCreateWithoutAvailabilitiesInput>
+  where?: Prisma.EventWhereInput
+}
+
+export type EventUpdateToOneWithWhereWithoutAvailabilitiesInput = {
+  where?: Prisma.EventWhereInput
+  data: Prisma.XOR<Prisma.EventUpdateWithoutAvailabilitiesInput, Prisma.EventUncheckedUpdateWithoutAvailabilitiesInput>
+}
+
+export type EventUpdateWithoutAvailabilitiesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  location?: Prisma.StringFieldUpdateOperationsInput | string
+  startTime?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  endTime?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  description?: Prisma.StringFieldUpdateOperationsInput | string
+  rating?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  finalizedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  region?: Prisma.RegionUpdateOneWithoutEventNestedInput
+  createdBy?: Prisma.UserUpdateOneWithoutCreatedEventsNestedInput
+  updatedBy?: Prisma.UserUpdateOneWithoutUpdatedEventsNestedInput
+  feedback?: Prisma.EventFeedbackUpdateManyWithoutEventNestedInput
+  assignments?: Prisma.EventAssignmentUpdateManyWithoutEventNestedInput
+  feedbackRequests?: Prisma.FeedbackRequestUpdateManyWithoutEventNestedInput
+}
+
+export type EventUncheckedUpdateWithoutAvailabilitiesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  location?: Prisma.StringFieldUpdateOperationsInput | string
+  startTime?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  endTime?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  description?: Prisma.StringFieldUpdateOperationsInput | string
+  rating?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  regionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  updatedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  finalizedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  feedback?: Prisma.EventFeedbackUncheckedUpdateManyWithoutEventNestedInput
+  assignments?: Prisma.EventAssignmentUncheckedUpdateManyWithoutEventNestedInput
+  feedbackRequests?: Prisma.FeedbackRequestUncheckedUpdateManyWithoutEventNestedInput
 }
 
 export type EventCreateWithoutAssignmentsInput = {
@@ -1037,11 +1197,13 @@ export type EventCreateWithoutAssignmentsInput = {
   rating?: number | null
   createdAt?: Date | string
   updatedAt?: Date | string | null
+  finalizedAt?: Date | string | null
   region?: Prisma.RegionCreateNestedOneWithoutEventInput
   createdBy?: Prisma.UserCreateNestedOneWithoutCreatedEventsInput
   updatedBy?: Prisma.UserCreateNestedOneWithoutUpdatedEventsInput
   feedback?: Prisma.EventFeedbackCreateNestedManyWithoutEventInput
-  scheduledEventEmails?: Prisma.ScheduledEmailsCreateNestedManyWithoutEventInput
+  availabilities?: Prisma.AvailabilitySlotCreateNestedManyWithoutEventInput
+  feedbackRequests?: Prisma.FeedbackRequestCreateNestedManyWithoutEventInput
 }
 
 export type EventUncheckedCreateWithoutAssignmentsInput = {
@@ -1057,8 +1219,10 @@ export type EventUncheckedCreateWithoutAssignmentsInput = {
   updatedById?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string | null
+  finalizedAt?: Date | string | null
   feedback?: Prisma.EventFeedbackUncheckedCreateNestedManyWithoutEventInput
-  scheduledEventEmails?: Prisma.ScheduledEmailsUncheckedCreateNestedManyWithoutEventInput
+  availabilities?: Prisma.AvailabilitySlotUncheckedCreateNestedManyWithoutEventInput
+  feedbackRequests?: Prisma.FeedbackRequestUncheckedCreateNestedManyWithoutEventInput
 }
 
 export type EventCreateOrConnectWithoutAssignmentsInput = {
@@ -1087,11 +1251,13 @@ export type EventUpdateWithoutAssignmentsInput = {
   rating?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  finalizedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   region?: Prisma.RegionUpdateOneWithoutEventNestedInput
   createdBy?: Prisma.UserUpdateOneWithoutCreatedEventsNestedInput
   updatedBy?: Prisma.UserUpdateOneWithoutUpdatedEventsNestedInput
   feedback?: Prisma.EventFeedbackUpdateManyWithoutEventNestedInput
-  scheduledEventEmails?: Prisma.ScheduledEmailsUpdateManyWithoutEventNestedInput
+  availabilities?: Prisma.AvailabilitySlotUpdateManyWithoutEventNestedInput
+  feedbackRequests?: Prisma.FeedbackRequestUpdateManyWithoutEventNestedInput
 }
 
 export type EventUncheckedUpdateWithoutAssignmentsInput = {
@@ -1107,8 +1273,10 @@ export type EventUncheckedUpdateWithoutAssignmentsInput = {
   updatedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  finalizedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   feedback?: Prisma.EventFeedbackUncheckedUpdateManyWithoutEventNestedInput
-  scheduledEventEmails?: Prisma.ScheduledEmailsUncheckedUpdateManyWithoutEventNestedInput
+  availabilities?: Prisma.AvailabilitySlotUncheckedUpdateManyWithoutEventNestedInput
+  feedbackRequests?: Prisma.FeedbackRequestUncheckedUpdateManyWithoutEventNestedInput
 }
 
 export type EventCreateWithoutRegionInput = {
@@ -1121,11 +1289,13 @@ export type EventCreateWithoutRegionInput = {
   rating?: number | null
   createdAt?: Date | string
   updatedAt?: Date | string | null
+  finalizedAt?: Date | string | null
   createdBy?: Prisma.UserCreateNestedOneWithoutCreatedEventsInput
   updatedBy?: Prisma.UserCreateNestedOneWithoutUpdatedEventsInput
   feedback?: Prisma.EventFeedbackCreateNestedManyWithoutEventInput
   assignments?: Prisma.EventAssignmentCreateNestedManyWithoutEventInput
-  scheduledEventEmails?: Prisma.ScheduledEmailsCreateNestedManyWithoutEventInput
+  availabilities?: Prisma.AvailabilitySlotCreateNestedManyWithoutEventInput
+  feedbackRequests?: Prisma.FeedbackRequestCreateNestedManyWithoutEventInput
 }
 
 export type EventUncheckedCreateWithoutRegionInput = {
@@ -1140,9 +1310,11 @@ export type EventUncheckedCreateWithoutRegionInput = {
   updatedById?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string | null
+  finalizedAt?: Date | string | null
   feedback?: Prisma.EventFeedbackUncheckedCreateNestedManyWithoutEventInput
   assignments?: Prisma.EventAssignmentUncheckedCreateNestedManyWithoutEventInput
-  scheduledEventEmails?: Prisma.ScheduledEmailsUncheckedCreateNestedManyWithoutEventInput
+  availabilities?: Prisma.AvailabilitySlotUncheckedCreateNestedManyWithoutEventInput
+  feedbackRequests?: Prisma.FeedbackRequestUncheckedCreateNestedManyWithoutEventInput
 }
 
 export type EventCreateOrConnectWithoutRegionInput = {
@@ -1183,6 +1355,7 @@ export type EventCreateManyCreatedByInput = {
   updatedById?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string | null
+  finalizedAt?: Date | string | null
 }
 
 export type EventCreateManyUpdatedByInput = {
@@ -1197,6 +1370,7 @@ export type EventCreateManyUpdatedByInput = {
   createdById?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string | null
+  finalizedAt?: Date | string | null
 }
 
 export type EventUpdateWithoutCreatedByInput = {
@@ -1209,11 +1383,13 @@ export type EventUpdateWithoutCreatedByInput = {
   rating?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  finalizedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   region?: Prisma.RegionUpdateOneWithoutEventNestedInput
   updatedBy?: Prisma.UserUpdateOneWithoutUpdatedEventsNestedInput
   feedback?: Prisma.EventFeedbackUpdateManyWithoutEventNestedInput
   assignments?: Prisma.EventAssignmentUpdateManyWithoutEventNestedInput
-  scheduledEventEmails?: Prisma.ScheduledEmailsUpdateManyWithoutEventNestedInput
+  availabilities?: Prisma.AvailabilitySlotUpdateManyWithoutEventNestedInput
+  feedbackRequests?: Prisma.FeedbackRequestUpdateManyWithoutEventNestedInput
 }
 
 export type EventUncheckedUpdateWithoutCreatedByInput = {
@@ -1228,9 +1404,11 @@ export type EventUncheckedUpdateWithoutCreatedByInput = {
   updatedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  finalizedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   feedback?: Prisma.EventFeedbackUncheckedUpdateManyWithoutEventNestedInput
   assignments?: Prisma.EventAssignmentUncheckedUpdateManyWithoutEventNestedInput
-  scheduledEventEmails?: Prisma.ScheduledEmailsUncheckedUpdateManyWithoutEventNestedInput
+  availabilities?: Prisma.AvailabilitySlotUncheckedUpdateManyWithoutEventNestedInput
+  feedbackRequests?: Prisma.FeedbackRequestUncheckedUpdateManyWithoutEventNestedInput
 }
 
 export type EventUncheckedUpdateManyWithoutCreatedByInput = {
@@ -1245,6 +1423,7 @@ export type EventUncheckedUpdateManyWithoutCreatedByInput = {
   updatedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  finalizedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
 }
 
 export type EventUpdateWithoutUpdatedByInput = {
@@ -1257,11 +1436,13 @@ export type EventUpdateWithoutUpdatedByInput = {
   rating?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  finalizedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   region?: Prisma.RegionUpdateOneWithoutEventNestedInput
   createdBy?: Prisma.UserUpdateOneWithoutCreatedEventsNestedInput
   feedback?: Prisma.EventFeedbackUpdateManyWithoutEventNestedInput
   assignments?: Prisma.EventAssignmentUpdateManyWithoutEventNestedInput
-  scheduledEventEmails?: Prisma.ScheduledEmailsUpdateManyWithoutEventNestedInput
+  availabilities?: Prisma.AvailabilitySlotUpdateManyWithoutEventNestedInput
+  feedbackRequests?: Prisma.FeedbackRequestUpdateManyWithoutEventNestedInput
 }
 
 export type EventUncheckedUpdateWithoutUpdatedByInput = {
@@ -1276,9 +1457,11 @@ export type EventUncheckedUpdateWithoutUpdatedByInput = {
   createdById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  finalizedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   feedback?: Prisma.EventFeedbackUncheckedUpdateManyWithoutEventNestedInput
   assignments?: Prisma.EventAssignmentUncheckedUpdateManyWithoutEventNestedInput
-  scheduledEventEmails?: Prisma.ScheduledEmailsUncheckedUpdateManyWithoutEventNestedInput
+  availabilities?: Prisma.AvailabilitySlotUncheckedUpdateManyWithoutEventNestedInput
+  feedbackRequests?: Prisma.FeedbackRequestUncheckedUpdateManyWithoutEventNestedInput
 }
 
 export type EventUncheckedUpdateManyWithoutUpdatedByInput = {
@@ -1293,6 +1476,7 @@ export type EventUncheckedUpdateManyWithoutUpdatedByInput = {
   createdById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  finalizedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
 }
 
 export type EventCreateManyRegionInput = {
@@ -1307,6 +1491,7 @@ export type EventCreateManyRegionInput = {
   updatedById?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string | null
+  finalizedAt?: Date | string | null
 }
 
 export type EventUpdateWithoutRegionInput = {
@@ -1319,11 +1504,13 @@ export type EventUpdateWithoutRegionInput = {
   rating?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  finalizedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdBy?: Prisma.UserUpdateOneWithoutCreatedEventsNestedInput
   updatedBy?: Prisma.UserUpdateOneWithoutUpdatedEventsNestedInput
   feedback?: Prisma.EventFeedbackUpdateManyWithoutEventNestedInput
   assignments?: Prisma.EventAssignmentUpdateManyWithoutEventNestedInput
-  scheduledEventEmails?: Prisma.ScheduledEmailsUpdateManyWithoutEventNestedInput
+  availabilities?: Prisma.AvailabilitySlotUpdateManyWithoutEventNestedInput
+  feedbackRequests?: Prisma.FeedbackRequestUpdateManyWithoutEventNestedInput
 }
 
 export type EventUncheckedUpdateWithoutRegionInput = {
@@ -1338,9 +1525,11 @@ export type EventUncheckedUpdateWithoutRegionInput = {
   updatedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  finalizedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   feedback?: Prisma.EventFeedbackUncheckedUpdateManyWithoutEventNestedInput
   assignments?: Prisma.EventAssignmentUncheckedUpdateManyWithoutEventNestedInput
-  scheduledEventEmails?: Prisma.ScheduledEmailsUncheckedUpdateManyWithoutEventNestedInput
+  availabilities?: Prisma.AvailabilitySlotUncheckedUpdateManyWithoutEventNestedInput
+  feedbackRequests?: Prisma.FeedbackRequestUncheckedUpdateManyWithoutEventNestedInput
 }
 
 export type EventUncheckedUpdateManyWithoutRegionInput = {
@@ -1355,6 +1544,7 @@ export type EventUncheckedUpdateManyWithoutRegionInput = {
   updatedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  finalizedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
 }
 
 
@@ -1365,13 +1555,15 @@ export type EventUncheckedUpdateManyWithoutRegionInput = {
 export type EventCountOutputType = {
   feedback: number
   assignments: number
-  scheduledEventEmails: number
+  availabilities: number
+  feedbackRequests: number
 }
 
 export type EventCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   feedback?: boolean | EventCountOutputTypeCountFeedbackArgs
   assignments?: boolean | EventCountOutputTypeCountAssignmentsArgs
-  scheduledEventEmails?: boolean | EventCountOutputTypeCountScheduledEventEmailsArgs
+  availabilities?: boolean | EventCountOutputTypeCountAvailabilitiesArgs
+  feedbackRequests?: boolean | EventCountOutputTypeCountFeedbackRequestsArgs
 }
 
 /**
@@ -1401,8 +1593,15 @@ export type EventCountOutputTypeCountAssignmentsArgs<ExtArgs extends runtime.Typ
 /**
  * EventCountOutputType without action
  */
-export type EventCountOutputTypeCountScheduledEventEmailsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  where?: Prisma.ScheduledEmailsWhereInput
+export type EventCountOutputTypeCountAvailabilitiesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.AvailabilitySlotWhereInput
+}
+
+/**
+ * EventCountOutputType without action
+ */
+export type EventCountOutputTypeCountFeedbackRequestsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.FeedbackRequestWhereInput
 }
 
 
@@ -1419,12 +1618,14 @@ export type EventSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = 
   updatedById?: boolean
   createdAt?: boolean
   updatedAt?: boolean
+  finalizedAt?: boolean
   region?: boolean | Prisma.Event$regionArgs<ExtArgs>
   createdBy?: boolean | Prisma.Event$createdByArgs<ExtArgs>
   updatedBy?: boolean | Prisma.Event$updatedByArgs<ExtArgs>
   feedback?: boolean | Prisma.Event$feedbackArgs<ExtArgs>
   assignments?: boolean | Prisma.Event$assignmentsArgs<ExtArgs>
-  scheduledEventEmails?: boolean | Prisma.Event$scheduledEventEmailsArgs<ExtArgs>
+  availabilities?: boolean | Prisma.Event$availabilitiesArgs<ExtArgs>
+  feedbackRequests?: boolean | Prisma.Event$feedbackRequestsArgs<ExtArgs>
   _count?: boolean | Prisma.EventCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["event"]>
 
@@ -1441,6 +1642,7 @@ export type EventSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensi
   updatedById?: boolean
   createdAt?: boolean
   updatedAt?: boolean
+  finalizedAt?: boolean
   region?: boolean | Prisma.Event$regionArgs<ExtArgs>
   createdBy?: boolean | Prisma.Event$createdByArgs<ExtArgs>
   updatedBy?: boolean | Prisma.Event$updatedByArgs<ExtArgs>
@@ -1459,6 +1661,7 @@ export type EventSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensi
   updatedById?: boolean
   createdAt?: boolean
   updatedAt?: boolean
+  finalizedAt?: boolean
   region?: boolean | Prisma.Event$regionArgs<ExtArgs>
   createdBy?: boolean | Prisma.Event$createdByArgs<ExtArgs>
   updatedBy?: boolean | Prisma.Event$updatedByArgs<ExtArgs>
@@ -1477,16 +1680,18 @@ export type EventSelectScalar = {
   updatedById?: boolean
   createdAt?: boolean
   updatedAt?: boolean
+  finalizedAt?: boolean
 }
 
-export type EventOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "location" | "startTime" | "endTime" | "description" | "rating" | "regionId" | "createdById" | "updatedById" | "createdAt" | "updatedAt", ExtArgs["result"]["event"]>
+export type EventOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "location" | "startTime" | "endTime" | "description" | "rating" | "regionId" | "createdById" | "updatedById" | "createdAt" | "updatedAt" | "finalizedAt", ExtArgs["result"]["event"]>
 export type EventInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   region?: boolean | Prisma.Event$regionArgs<ExtArgs>
   createdBy?: boolean | Prisma.Event$createdByArgs<ExtArgs>
   updatedBy?: boolean | Prisma.Event$updatedByArgs<ExtArgs>
   feedback?: boolean | Prisma.Event$feedbackArgs<ExtArgs>
   assignments?: boolean | Prisma.Event$assignmentsArgs<ExtArgs>
-  scheduledEventEmails?: boolean | Prisma.Event$scheduledEventEmailsArgs<ExtArgs>
+  availabilities?: boolean | Prisma.Event$availabilitiesArgs<ExtArgs>
+  feedbackRequests?: boolean | Prisma.Event$feedbackRequestsArgs<ExtArgs>
   _count?: boolean | Prisma.EventCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type EventIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -1508,7 +1713,8 @@ export type $EventPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs 
     updatedBy: Prisma.$UserPayload<ExtArgs> | null
     feedback: Prisma.$EventFeedbackPayload<ExtArgs>[]
     assignments: Prisma.$EventAssignmentPayload<ExtArgs>[]
-    scheduledEventEmails: Prisma.$ScheduledEmailsPayload<ExtArgs>[]
+    availabilities: Prisma.$AvailabilitySlotPayload<ExtArgs>[]
+    feedbackRequests: Prisma.$FeedbackRequestPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -1523,6 +1729,7 @@ export type $EventPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs 
     updatedById: string | null
     createdAt: Date
     updatedAt: Date | null
+    finalizedAt: Date | null
   }, ExtArgs["result"]["event"]>
   composites: {}
 }
@@ -1922,7 +2129,8 @@ export interface Prisma__EventClient<T, Null = never, ExtArgs extends runtime.Ty
   updatedBy<T extends Prisma.Event$updatedByArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Event$updatedByArgs<ExtArgs>>): Prisma.Prisma__UserClient<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   feedback<T extends Prisma.Event$feedbackArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Event$feedbackArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$EventFeedbackPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   assignments<T extends Prisma.Event$assignmentsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Event$assignmentsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$EventAssignmentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-  scheduledEventEmails<T extends Prisma.Event$scheduledEventEmailsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Event$scheduledEventEmailsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ScheduledEmailsPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  availabilities<T extends Prisma.Event$availabilitiesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Event$availabilitiesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$AvailabilitySlotPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  feedbackRequests<T extends Prisma.Event$feedbackRequestsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Event$feedbackRequestsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$FeedbackRequestPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1964,6 +2172,7 @@ export interface EventFieldRefs {
   readonly updatedById: Prisma.FieldRef<"Event", 'String'>
   readonly createdAt: Prisma.FieldRef<"Event", 'DateTime'>
   readonly updatedAt: Prisma.FieldRef<"Event", 'DateTime'>
+  readonly finalizedAt: Prisma.FieldRef<"Event", 'DateTime'>
 }
     
 
@@ -2465,27 +2674,51 @@ export type Event$assignmentsArgs<ExtArgs extends runtime.Types.Extensions.Inter
 }
 
 /**
- * Event.scheduledEventEmails
+ * Event.availabilities
  */
-export type Event$scheduledEventEmailsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+export type Event$availabilitiesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   /**
-   * Select specific fields to fetch from the ScheduledEmails
+   * Select specific fields to fetch from the AvailabilitySlot
    */
-  select?: Prisma.ScheduledEmailsSelect<ExtArgs> | null
+  select?: Prisma.AvailabilitySlotSelect<ExtArgs> | null
   /**
-   * Omit specific fields from the ScheduledEmails
+   * Omit specific fields from the AvailabilitySlot
    */
-  omit?: Prisma.ScheduledEmailsOmit<ExtArgs> | null
+  omit?: Prisma.AvailabilitySlotOmit<ExtArgs> | null
   /**
    * Choose, which related nodes to fetch as well
    */
-  include?: Prisma.ScheduledEmailsInclude<ExtArgs> | null
-  where?: Prisma.ScheduledEmailsWhereInput
-  orderBy?: Prisma.ScheduledEmailsOrderByWithRelationInput | Prisma.ScheduledEmailsOrderByWithRelationInput[]
-  cursor?: Prisma.ScheduledEmailsWhereUniqueInput
+  include?: Prisma.AvailabilitySlotInclude<ExtArgs> | null
+  where?: Prisma.AvailabilitySlotWhereInput
+  orderBy?: Prisma.AvailabilitySlotOrderByWithRelationInput | Prisma.AvailabilitySlotOrderByWithRelationInput[]
+  cursor?: Prisma.AvailabilitySlotWhereUniqueInput
   take?: number
   skip?: number
-  distinct?: Prisma.ScheduledEmailsScalarFieldEnum | Prisma.ScheduledEmailsScalarFieldEnum[]
+  distinct?: Prisma.AvailabilitySlotScalarFieldEnum | Prisma.AvailabilitySlotScalarFieldEnum[]
+}
+
+/**
+ * Event.feedbackRequests
+ */
+export type Event$feedbackRequestsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the FeedbackRequest
+   */
+  select?: Prisma.FeedbackRequestSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the FeedbackRequest
+   */
+  omit?: Prisma.FeedbackRequestOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.FeedbackRequestInclude<ExtArgs> | null
+  where?: Prisma.FeedbackRequestWhereInput
+  orderBy?: Prisma.FeedbackRequestOrderByWithRelationInput | Prisma.FeedbackRequestOrderByWithRelationInput[]
+  cursor?: Prisma.FeedbackRequestWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.FeedbackRequestScalarFieldEnum | Prisma.FeedbackRequestScalarFieldEnum[]
 }
 
 /**

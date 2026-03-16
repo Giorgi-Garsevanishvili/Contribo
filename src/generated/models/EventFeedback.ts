@@ -243,6 +243,7 @@ export type EventFeedbackWhereInput = {
   updatedBy?: Prisma.XOR<Prisma.UserNullableScalarRelationFilter, Prisma.UserWhereInput> | null
   event?: Prisma.XOR<Prisma.EventScalarRelationFilter, Prisma.EventWhereInput>
   user?: Prisma.XOR<Prisma.UserNullableScalarRelationFilter, Prisma.UserWhereInput> | null
+  feedbackRequests?: Prisma.FeedbackRequestListRelationFilter
 }
 
 export type EventFeedbackOrderByWithRelationInput = {
@@ -257,6 +258,7 @@ export type EventFeedbackOrderByWithRelationInput = {
   updatedBy?: Prisma.UserOrderByWithRelationInput
   event?: Prisma.EventOrderByWithRelationInput
   user?: Prisma.UserOrderByWithRelationInput
+  feedbackRequests?: Prisma.FeedbackRequestOrderByRelationAggregateInput
 }
 
 export type EventFeedbackWhereUniqueInput = Prisma.AtLeast<{
@@ -274,6 +276,7 @@ export type EventFeedbackWhereUniqueInput = Prisma.AtLeast<{
   updatedBy?: Prisma.XOR<Prisma.UserNullableScalarRelationFilter, Prisma.UserWhereInput> | null
   event?: Prisma.XOR<Prisma.EventScalarRelationFilter, Prisma.EventWhereInput>
   user?: Prisma.XOR<Prisma.UserNullableScalarRelationFilter, Prisma.UserWhereInput> | null
+  feedbackRequests?: Prisma.FeedbackRequestListRelationFilter
 }, "id">
 
 export type EventFeedbackOrderByWithAggregationInput = {
@@ -315,6 +318,7 @@ export type EventFeedbackCreateInput = {
   updatedBy?: Prisma.UserCreateNestedOneWithoutUpdatedEventFeedbackInput
   event: Prisma.EventCreateNestedOneWithoutFeedbackInput
   user?: Prisma.UserCreateNestedOneWithoutProvidedFeedbacksInput
+  feedbackRequests?: Prisma.FeedbackRequestCreateNestedManyWithoutFeedbackInput
 }
 
 export type EventFeedbackUncheckedCreateInput = {
@@ -326,6 +330,7 @@ export type EventFeedbackUncheckedCreateInput = {
   updatedById?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string | null
+  feedbackRequests?: Prisma.FeedbackRequestUncheckedCreateNestedManyWithoutFeedbackInput
 }
 
 export type EventFeedbackUpdateInput = {
@@ -337,6 +342,7 @@ export type EventFeedbackUpdateInput = {
   updatedBy?: Prisma.UserUpdateOneWithoutUpdatedEventFeedbackNestedInput
   event?: Prisma.EventUpdateOneRequiredWithoutFeedbackNestedInput
   user?: Prisma.UserUpdateOneWithoutProvidedFeedbacksNestedInput
+  feedbackRequests?: Prisma.FeedbackRequestUpdateManyWithoutFeedbackNestedInput
 }
 
 export type EventFeedbackUncheckedUpdateInput = {
@@ -348,6 +354,7 @@ export type EventFeedbackUncheckedUpdateInput = {
   updatedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  feedbackRequests?: Prisma.FeedbackRequestUncheckedUpdateManyWithoutFeedbackNestedInput
 }
 
 export type EventFeedbackCreateManyInput = {
@@ -429,6 +436,11 @@ export type EventFeedbackMinOrderByAggregateInput = {
 
 export type EventFeedbackSumOrderByAggregateInput = {
   rating?: Prisma.SortOrder
+}
+
+export type EventFeedbackNullableScalarRelationFilter = {
+  is?: Prisma.EventFeedbackWhereInput | null
+  isNot?: Prisma.EventFeedbackWhereInput | null
 }
 
 export type EventFeedbackCreateNestedManyWithoutUserInput = {
@@ -557,6 +569,22 @@ export type EventFeedbackUncheckedUpdateManyWithoutEventNestedInput = {
   deleteMany?: Prisma.EventFeedbackScalarWhereInput | Prisma.EventFeedbackScalarWhereInput[]
 }
 
+export type EventFeedbackCreateNestedOneWithoutFeedbackRequestsInput = {
+  create?: Prisma.XOR<Prisma.EventFeedbackCreateWithoutFeedbackRequestsInput, Prisma.EventFeedbackUncheckedCreateWithoutFeedbackRequestsInput>
+  connectOrCreate?: Prisma.EventFeedbackCreateOrConnectWithoutFeedbackRequestsInput
+  connect?: Prisma.EventFeedbackWhereUniqueInput
+}
+
+export type EventFeedbackUpdateOneWithoutFeedbackRequestsNestedInput = {
+  create?: Prisma.XOR<Prisma.EventFeedbackCreateWithoutFeedbackRequestsInput, Prisma.EventFeedbackUncheckedCreateWithoutFeedbackRequestsInput>
+  connectOrCreate?: Prisma.EventFeedbackCreateOrConnectWithoutFeedbackRequestsInput
+  upsert?: Prisma.EventFeedbackUpsertWithoutFeedbackRequestsInput
+  disconnect?: Prisma.EventFeedbackWhereInput | boolean
+  delete?: Prisma.EventFeedbackWhereInput | boolean
+  connect?: Prisma.EventFeedbackWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.EventFeedbackUpdateToOneWithWhereWithoutFeedbackRequestsInput, Prisma.EventFeedbackUpdateWithoutFeedbackRequestsInput>, Prisma.EventFeedbackUncheckedUpdateWithoutFeedbackRequestsInput>
+}
+
 export type EventFeedbackCreateWithoutUserInput = {
   id?: string
   feedback: string
@@ -565,6 +593,7 @@ export type EventFeedbackCreateWithoutUserInput = {
   updatedAt?: Date | string | null
   updatedBy?: Prisma.UserCreateNestedOneWithoutUpdatedEventFeedbackInput
   event: Prisma.EventCreateNestedOneWithoutFeedbackInput
+  feedbackRequests?: Prisma.FeedbackRequestCreateNestedManyWithoutFeedbackInput
 }
 
 export type EventFeedbackUncheckedCreateWithoutUserInput = {
@@ -575,6 +604,7 @@ export type EventFeedbackUncheckedCreateWithoutUserInput = {
   updatedById?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string | null
+  feedbackRequests?: Prisma.FeedbackRequestUncheckedCreateNestedManyWithoutFeedbackInput
 }
 
 export type EventFeedbackCreateOrConnectWithoutUserInput = {
@@ -595,6 +625,7 @@ export type EventFeedbackCreateWithoutUpdatedByInput = {
   updatedAt?: Date | string | null
   event: Prisma.EventCreateNestedOneWithoutFeedbackInput
   user?: Prisma.UserCreateNestedOneWithoutProvidedFeedbacksInput
+  feedbackRequests?: Prisma.FeedbackRequestCreateNestedManyWithoutFeedbackInput
 }
 
 export type EventFeedbackUncheckedCreateWithoutUpdatedByInput = {
@@ -605,6 +636,7 @@ export type EventFeedbackUncheckedCreateWithoutUpdatedByInput = {
   rating?: number | null
   createdAt?: Date | string
   updatedAt?: Date | string | null
+  feedbackRequests?: Prisma.FeedbackRequestUncheckedCreateNestedManyWithoutFeedbackInput
 }
 
 export type EventFeedbackCreateOrConnectWithoutUpdatedByInput = {
@@ -671,6 +703,7 @@ export type EventFeedbackCreateWithoutEventInput = {
   updatedAt?: Date | string | null
   updatedBy?: Prisma.UserCreateNestedOneWithoutUpdatedEventFeedbackInput
   user?: Prisma.UserCreateNestedOneWithoutProvidedFeedbacksInput
+  feedbackRequests?: Prisma.FeedbackRequestCreateNestedManyWithoutFeedbackInput
 }
 
 export type EventFeedbackUncheckedCreateWithoutEventInput = {
@@ -681,6 +714,7 @@ export type EventFeedbackUncheckedCreateWithoutEventInput = {
   updatedById?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string | null
+  feedbackRequests?: Prisma.FeedbackRequestUncheckedCreateNestedManyWithoutFeedbackInput
 }
 
 export type EventFeedbackCreateOrConnectWithoutEventInput = {
@@ -707,6 +741,66 @@ export type EventFeedbackUpdateWithWhereUniqueWithoutEventInput = {
 export type EventFeedbackUpdateManyWithWhereWithoutEventInput = {
   where: Prisma.EventFeedbackScalarWhereInput
   data: Prisma.XOR<Prisma.EventFeedbackUpdateManyMutationInput, Prisma.EventFeedbackUncheckedUpdateManyWithoutEventInput>
+}
+
+export type EventFeedbackCreateWithoutFeedbackRequestsInput = {
+  id?: string
+  feedback: string
+  rating?: number | null
+  createdAt?: Date | string
+  updatedAt?: Date | string | null
+  updatedBy?: Prisma.UserCreateNestedOneWithoutUpdatedEventFeedbackInput
+  event: Prisma.EventCreateNestedOneWithoutFeedbackInput
+  user?: Prisma.UserCreateNestedOneWithoutProvidedFeedbacksInput
+}
+
+export type EventFeedbackUncheckedCreateWithoutFeedbackRequestsInput = {
+  id?: string
+  eventId: string
+  userId?: string | null
+  feedback: string
+  rating?: number | null
+  updatedById?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string | null
+}
+
+export type EventFeedbackCreateOrConnectWithoutFeedbackRequestsInput = {
+  where: Prisma.EventFeedbackWhereUniqueInput
+  create: Prisma.XOR<Prisma.EventFeedbackCreateWithoutFeedbackRequestsInput, Prisma.EventFeedbackUncheckedCreateWithoutFeedbackRequestsInput>
+}
+
+export type EventFeedbackUpsertWithoutFeedbackRequestsInput = {
+  update: Prisma.XOR<Prisma.EventFeedbackUpdateWithoutFeedbackRequestsInput, Prisma.EventFeedbackUncheckedUpdateWithoutFeedbackRequestsInput>
+  create: Prisma.XOR<Prisma.EventFeedbackCreateWithoutFeedbackRequestsInput, Prisma.EventFeedbackUncheckedCreateWithoutFeedbackRequestsInput>
+  where?: Prisma.EventFeedbackWhereInput
+}
+
+export type EventFeedbackUpdateToOneWithWhereWithoutFeedbackRequestsInput = {
+  where?: Prisma.EventFeedbackWhereInput
+  data: Prisma.XOR<Prisma.EventFeedbackUpdateWithoutFeedbackRequestsInput, Prisma.EventFeedbackUncheckedUpdateWithoutFeedbackRequestsInput>
+}
+
+export type EventFeedbackUpdateWithoutFeedbackRequestsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  feedback?: Prisma.StringFieldUpdateOperationsInput | string
+  rating?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  updatedBy?: Prisma.UserUpdateOneWithoutUpdatedEventFeedbackNestedInput
+  event?: Prisma.EventUpdateOneRequiredWithoutFeedbackNestedInput
+  user?: Prisma.UserUpdateOneWithoutProvidedFeedbacksNestedInput
+}
+
+export type EventFeedbackUncheckedUpdateWithoutFeedbackRequestsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  eventId?: Prisma.StringFieldUpdateOperationsInput | string
+  userId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  feedback?: Prisma.StringFieldUpdateOperationsInput | string
+  rating?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  updatedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
 }
 
 export type EventFeedbackCreateManyUserInput = {
@@ -737,6 +831,7 @@ export type EventFeedbackUpdateWithoutUserInput = {
   updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   updatedBy?: Prisma.UserUpdateOneWithoutUpdatedEventFeedbackNestedInput
   event?: Prisma.EventUpdateOneRequiredWithoutFeedbackNestedInput
+  feedbackRequests?: Prisma.FeedbackRequestUpdateManyWithoutFeedbackNestedInput
 }
 
 export type EventFeedbackUncheckedUpdateWithoutUserInput = {
@@ -747,6 +842,7 @@ export type EventFeedbackUncheckedUpdateWithoutUserInput = {
   updatedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  feedbackRequests?: Prisma.FeedbackRequestUncheckedUpdateManyWithoutFeedbackNestedInput
 }
 
 export type EventFeedbackUncheckedUpdateManyWithoutUserInput = {
@@ -767,6 +863,7 @@ export type EventFeedbackUpdateWithoutUpdatedByInput = {
   updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   event?: Prisma.EventUpdateOneRequiredWithoutFeedbackNestedInput
   user?: Prisma.UserUpdateOneWithoutProvidedFeedbacksNestedInput
+  feedbackRequests?: Prisma.FeedbackRequestUpdateManyWithoutFeedbackNestedInput
 }
 
 export type EventFeedbackUncheckedUpdateWithoutUpdatedByInput = {
@@ -777,6 +874,7 @@ export type EventFeedbackUncheckedUpdateWithoutUpdatedByInput = {
   rating?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  feedbackRequests?: Prisma.FeedbackRequestUncheckedUpdateManyWithoutFeedbackNestedInput
 }
 
 export type EventFeedbackUncheckedUpdateManyWithoutUpdatedByInput = {
@@ -807,6 +905,7 @@ export type EventFeedbackUpdateWithoutEventInput = {
   updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   updatedBy?: Prisma.UserUpdateOneWithoutUpdatedEventFeedbackNestedInput
   user?: Prisma.UserUpdateOneWithoutProvidedFeedbacksNestedInput
+  feedbackRequests?: Prisma.FeedbackRequestUpdateManyWithoutFeedbackNestedInput
 }
 
 export type EventFeedbackUncheckedUpdateWithoutEventInput = {
@@ -817,6 +916,7 @@ export type EventFeedbackUncheckedUpdateWithoutEventInput = {
   updatedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  feedbackRequests?: Prisma.FeedbackRequestUncheckedUpdateManyWithoutFeedbackNestedInput
 }
 
 export type EventFeedbackUncheckedUpdateManyWithoutEventInput = {
@@ -829,6 +929,35 @@ export type EventFeedbackUncheckedUpdateManyWithoutEventInput = {
   updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
 }
 
+
+/**
+ * Count Type EventFeedbackCountOutputType
+ */
+
+export type EventFeedbackCountOutputType = {
+  feedbackRequests: number
+}
+
+export type EventFeedbackCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  feedbackRequests?: boolean | EventFeedbackCountOutputTypeCountFeedbackRequestsArgs
+}
+
+/**
+ * EventFeedbackCountOutputType without action
+ */
+export type EventFeedbackCountOutputTypeDefaultArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the EventFeedbackCountOutputType
+   */
+  select?: Prisma.EventFeedbackCountOutputTypeSelect<ExtArgs> | null
+}
+
+/**
+ * EventFeedbackCountOutputType without action
+ */
+export type EventFeedbackCountOutputTypeCountFeedbackRequestsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.FeedbackRequestWhereInput
+}
 
 
 export type EventFeedbackSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -843,6 +972,8 @@ export type EventFeedbackSelect<ExtArgs extends runtime.Types.Extensions.Interna
   updatedBy?: boolean | Prisma.EventFeedback$updatedByArgs<ExtArgs>
   event?: boolean | Prisma.EventDefaultArgs<ExtArgs>
   user?: boolean | Prisma.EventFeedback$userArgs<ExtArgs>
+  feedbackRequests?: boolean | Prisma.EventFeedback$feedbackRequestsArgs<ExtArgs>
+  _count?: boolean | Prisma.EventFeedbackCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["eventFeedback"]>
 
 export type EventFeedbackSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -889,6 +1020,8 @@ export type EventFeedbackInclude<ExtArgs extends runtime.Types.Extensions.Intern
   updatedBy?: boolean | Prisma.EventFeedback$updatedByArgs<ExtArgs>
   event?: boolean | Prisma.EventDefaultArgs<ExtArgs>
   user?: boolean | Prisma.EventFeedback$userArgs<ExtArgs>
+  feedbackRequests?: boolean | Prisma.EventFeedback$feedbackRequestsArgs<ExtArgs>
+  _count?: boolean | Prisma.EventFeedbackCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type EventFeedbackIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   updatedBy?: boolean | Prisma.EventFeedback$updatedByArgs<ExtArgs>
@@ -907,6 +1040,7 @@ export type $EventFeedbackPayload<ExtArgs extends runtime.Types.Extensions.Inter
     updatedBy: Prisma.$UserPayload<ExtArgs> | null
     event: Prisma.$EventPayload<ExtArgs>
     user: Prisma.$UserPayload<ExtArgs> | null
+    feedbackRequests: Prisma.$FeedbackRequestPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -1314,6 +1448,7 @@ export interface Prisma__EventFeedbackClient<T, Null = never, ExtArgs extends ru
   updatedBy<T extends Prisma.EventFeedback$updatedByArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.EventFeedback$updatedByArgs<ExtArgs>>): Prisma.Prisma__UserClient<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   event<T extends Prisma.EventDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.EventDefaultArgs<ExtArgs>>): Prisma.Prisma__EventClient<runtime.Types.Result.GetResult<Prisma.$EventPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   user<T extends Prisma.EventFeedback$userArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.EventFeedback$userArgs<ExtArgs>>): Prisma.Prisma__UserClient<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+  feedbackRequests<T extends Prisma.EventFeedback$feedbackRequestsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.EventFeedback$feedbackRequestsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$FeedbackRequestPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1782,6 +1917,30 @@ export type EventFeedback$userArgs<ExtArgs extends runtime.Types.Extensions.Inte
    */
   include?: Prisma.UserInclude<ExtArgs> | null
   where?: Prisma.UserWhereInput
+}
+
+/**
+ * EventFeedback.feedbackRequests
+ */
+export type EventFeedback$feedbackRequestsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the FeedbackRequest
+   */
+  select?: Prisma.FeedbackRequestSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the FeedbackRequest
+   */
+  omit?: Prisma.FeedbackRequestOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.FeedbackRequestInclude<ExtArgs> | null
+  where?: Prisma.FeedbackRequestWhereInput
+  orderBy?: Prisma.FeedbackRequestOrderByWithRelationInput | Prisma.FeedbackRequestOrderByWithRelationInput[]
+  cursor?: Prisma.FeedbackRequestWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.FeedbackRequestScalarFieldEnum | Prisma.FeedbackRequestScalarFieldEnum[]
 }
 
 /**
