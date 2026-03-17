@@ -10,7 +10,7 @@ async function NavBar({ page }: { page: string }) {
     <nav className="flex w-svw z-200 md:hidden flex-col mb-2 items-center justify-center p-2">
       <div className="flex items-center justify-between p-4 flex-row shadow-md bg-gray-700/70 w-auto h-15 rounded-lg">
         <div className="flex flex-row items-center justify-between p-3 min-w-30 text-white">
-          {session ? (
+          {session?.user.image ? (
             <Image
               priority
               className="rounded-2xl"
@@ -20,10 +20,10 @@ async function NavBar({ page }: { page: string }) {
               alt="user-photo"
             />
           ) : null}
-          <div className="flex flex-col truncate items-center justify-between p-3 min-w-30 select-none text-white">
-            <h2>{session?.user.name}</h2>
+          <div className="grid truncate content-center items-center p-3 min-w-30 select-none text-white">
+            <h2 className="flex truncate min-w-0">{session?.user.name}</h2>
             {
-              <h2 className="text-xs mt-1 italic text-gray-200 flex">
+              <h2 className="text-xs items-center justify-center w-full mt-1 italic text-gray-200 flex">
                 Region:{" "}
                 {session?.user.region ? session?.user.region : "No Region"}
               </h2>

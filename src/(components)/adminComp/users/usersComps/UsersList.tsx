@@ -193,7 +193,7 @@ function UsersList() {
                   className={`${updateSession.data?.user.email === user.email ? "border-2 border-green-900 bg-green-100/50" : "bg-white/80"} grid grid-cols-[2fr_auto] md:grid-cols-5 gap-1 md:gap-4 grid-rows-1 btn select-none text-sm justify-start items-center  text-black p-2 m-1 rounded-lg`}
                   key={user.id}
                 >
-                  <div className="flex justify-start items-center">
+                  <div className="flex justify-start items-center min-w-0">
                     {user.image ? (
                       <Image
                         priority
@@ -206,7 +206,7 @@ function UsersList() {
                     ) : (
                       <FcDeleteDatabase className="mr-2" size={25} />
                     )}
-                    <div className="flex grow justify-start flex-col truncate px-2 py-1.5">
+                    <div className="flex grow w-full justify-start flex-col truncate px-2 py-1.5">
                       <h3 className="text-sm font-bold flex overflow-hidden truncate">
                         {user.name}
                       </h3>

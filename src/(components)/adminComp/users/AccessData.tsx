@@ -50,22 +50,14 @@ function AccessData({ id, refetchKey }: { id: string; refetchKey: boolean }) {
                 </button>
               )}
 
-              <div className="flex flex-col mt-1 text-sm">
+              <div className="grid  mt-1 text-sm">
                 <h2 className="truncate">
                   <strong>User:</strong>{" "}
-                  {data?.user.name && data.user.name.length > 30
-                    ? ` ${data.user.name.slice(0,30)}...`
-                    : data
-                      ? ` ${data.user.name}`
-                      : "No Data"}
+                  {data?.user.name ? `${data.user.name}` : "No Data"}
                 </h2>
                 <h2 className="truncate">
-                  <strong>Access Email:</strong>
-                  {data?.email && data.email.length > 30
-                    ? ` ${data.email.slice(0, 30)}...`
-                    : data
-                      ? ` ${data.email}`
-                      : "No Data"}
+                  <strong>Access Email:</strong>{" "}
+                  {data?.email ? `${data.email}` : "No Data"}
                 </h2>
                 <h2>
                   <strong>Roles:</strong>{" "}

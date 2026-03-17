@@ -162,29 +162,21 @@ function UserInfo({
                   )}
                 </div>
                 <div
-                  className={`flex flex-col p-4 m-1 justify-start bg-gray-200/60 rounded-lg shadow-sm`}
+                  className={`grid flex-col p-4 m-1 justify-start bg-gray-200/60 rounded-lg shadow-sm`}
                 >
                   <div
                     className={`${openUserUpdate ? "flex flex-col justify-center items-center" : "hidden"}`}
                   >
                     <UserUpdate id={id} refetch={refetch} />
                   </div>
-                  <div className={`${openUserUpdate ? "hidden" : ""}`}>
+                  <div className={`${openUserUpdate ? "hidden" : ""} min-w-0`}>
                     <h2 className="flex items-center">
                       <FaUser className="mr-2" size={22} />{" "}
-                      <span className="truncate">
-                        {data.name.length > 30
-                          ? `${data.name.slice(0, 30)}...`
-                          : data.name}
-                      </span>
+                      <span className="truncate">{data.name}</span>
                     </h2>
                     <h2 className="flex items-center">
                       <MdEmail className="mr-2" size={22} />{" "}
-                      <span className="truncate">
-                        {data.email.length > 30
-                          ? `${data.email.slice(0, 30)}...`
-                          : data.email}
-                      </span>
+                      <span className="truncate">{data.email}</span>
                     </h2>
                     <h2 className="flex items-center">
                       <IoTime className="mr-2" size={22} />
