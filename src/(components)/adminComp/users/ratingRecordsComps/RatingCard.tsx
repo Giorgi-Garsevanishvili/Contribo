@@ -88,7 +88,7 @@ function RatingCard({
       <div
         className={`${isOpenId === item.id ? "flex" : "hidden"} lg:flex-row flex-col w-full  items-center justify-center`}
       >
-        <div className="flex  lg:flex-row flex-col w-full items-center justify-start p-3">
+        <div className="flex flex-col w-full items-center justify-start p-3">
           <div
             className={`flex flex-col grow ${actionColors ? `${actionColors.border} ${actionColors.bg}` : ""} border rounded-lg  md:flex-row flex-col items-center justify-center lg:py-10 w-full lg:px-10 p-4 m-2 gap-2`}
           >
@@ -110,7 +110,7 @@ function RatingCard({
                   : "No Data"}
               </h3>
             </div>
-            <div className="flex-col w-full flex">
+            <div className="flex-col truncate w-full flex">
               <h3>
                 <strong>Reason: </strong>
                 {item.reason}
@@ -139,7 +139,7 @@ function RatingCard({
               </h3>
             </div>
           </div>
-          <div className={`${onEdit === item.id ? "flex" : "hidden"}`}>
+          <div className={`${onEdit === item.id ? "flex w-full" : "hidden"}`}>
             <RatingUpdate refetch={refetch} id={item.id} />
           </div>
         </div>

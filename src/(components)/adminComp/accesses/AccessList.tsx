@@ -159,7 +159,7 @@ function AccessList() {
                   className={`md:grid ${updateSession.data?.user.id === access.id ? "border-2 border-green-900 bg-green-100/50" : "bg-white/80"} relative pb-5 flex flex-col  w-full  md:grid-cols-[0.7fr_0.5fr_0.8fr_0.3fr_0.3fr_0.1fr_0.15fr] gap-1 md:gap-4 md:grid-rows-1 select-none text-sm justify-start items-center  text-black p-1 px-3 m-1 rounded-lg`}
                   key={access.id}
                 >
-                  <div className="md:flex grid grid-cols-[1fr_2fr_0.2fr] border-b border-gray-600/30 rounded-md mb-2 md:border-0 p-1 justify-start truncate items-center">
+                  <div className="md:flex grid grid-cols-[1fr_2fr_0.2fr] border-b border-gray-600/30 rounded-md my-2 md:border-0 p-1 justify-start truncate items-center">
                     {access.user?.image ? (
                       <Image
                         priority
@@ -174,7 +174,7 @@ function AccessList() {
                         <FcDeleteDatabase className="mr-2" size={40} />
                       </div>
                     )}
-                    <div className="flex grow justify-start flex-col truncate px-2 py-1.5">
+                    <div className="flex grow justify-start flex-col truncate px-2 py-2">
                       <h3 className="text-sm font-bold flex overflow-hidden truncate">
                         {access.user?.name}
                       </h3>
@@ -182,7 +182,7 @@ function AccessList() {
                         {access.email}
                       </h3>
                       {updateSession.data?.user.id === access.id ? (
-                        <div className="flex gap-2 items-center justify-center absolute bottom-1.5 left-1.5 truncate text-xs text-green-900">
+                        <div className="flex gap-2 items-center justify-center absolute top-0.5 left-4 truncate text-xs text-green-900">
                           My Account <FaRegCircleDot size={10} />
                         </div>
                       ) : null}

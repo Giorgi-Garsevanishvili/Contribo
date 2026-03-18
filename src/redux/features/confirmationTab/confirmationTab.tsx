@@ -22,12 +22,13 @@ function ConfirmTab() {
           : "pointer-events-none opacity-0"
       }  z-210`}
     >
-      <div className="flex bg-gray-300 p-15 mt-20 rounded-2xl shadow-2xl">
-        <div className="flex flex-col">
-          <div>
-            <h4 className="font-bold p-1">
+      <div className="flex w-full justify-center items-center flex-wrap bg-gray-300 p-5 md:p-15 mt-20 rounded-2xl shadow-2xl">
+        <div className="flex w-full flex-col">
+          <div className="p-2 flex flex-col w-full">
+            <h4 className="flex w-full grow gap-0.5 flex-col md:flex-row font-bold p-1">
               {confirmState.title}
-              {<span className="text-red-800 ml-1">{confirmState.value}</span>}
+              {<span className="flex md:flex-row text-red-800 truncate">{confirmState.value}?</span>}
+              
             </h4>
             <p className="font-light italic p-1">{confirmState.message}</p>
           </div>

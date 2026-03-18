@@ -138,11 +138,11 @@ function HrCaseCard({
       <div
         className={`${isOpenId === item.id ? "flex" : "hidden"} lg:flex-row flex-col w-full  items-center justify-center`}
       >
-        <div className="flex  lg:flex-row flex-col w-full items-center justify-start py-3 p-1">
+        <div className="flex flex-col w-full items-center justify-start p-3">
           <div
             className={`flex grow ${statusColors ? `${statusColors.border} ${statusColors.bg}` : WARNING_STATUS_COLORS.ARCHIVED} border rounded-lg  md:flex-row flex-col items-center justify-center lg:py-10 w-full lg:px-10 mx-2 my-1 p-4 gap-2`}
           >
-            <div className="flex-col w-full flex">
+            <div className="flex-col truncate w-full flex">
               <h3>
                 <strong>Name: </strong>
                 {item.name}
@@ -164,7 +164,7 @@ function HrCaseCard({
                   : "No Data"}
               </h3>
             </div>
-            <div className="flex-col w-full flex">
+            <div className="flex-col truncate w-full flex">
               <h3>
                 <strong>Status: </strong>
                 {item.status}
@@ -183,7 +183,7 @@ function HrCaseCard({
               </h3>
             </div>
           </div>
-          <div className={`${onEdit === item.id ? "flex" : "hidden"}`}>
+          <div className={`${onEdit === item.id ? "flex w-full" : "hidden"}`}>
             <HrCaseUpdate refetch={refetch} id={item.id} extraData1={types} />
           </div>
         </div>

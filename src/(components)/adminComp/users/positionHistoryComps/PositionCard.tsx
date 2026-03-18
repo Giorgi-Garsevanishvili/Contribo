@@ -3,6 +3,7 @@ import { TbPencil, TbPencilCancel } from "react-icons/tb";
 import PositionUpdate from "./PositionHistoryUpdate";
 import { VscDebugBreakpointLogUnverified } from "react-icons/vsc";
 import { FaLandmarkDome } from "react-icons/fa6";
+import DetailsInfo from "../../accesses/DetailsInfo";
 
 type Data = {
   user: { name: true };
@@ -17,6 +18,18 @@ type Data = {
   endedAt: string;
 };
 
+type DetailData = {
+  id: string;
+  createdBy: {
+    name: string | null;
+  } | null;
+  createdAt: string;
+  updatedBy: {
+    name: string | null;
+  } | null;
+  updatedAt: string | null;
+};
+
 function PositionCard({
   item,
   onEdit,
@@ -28,6 +41,14 @@ function PositionCard({
   setOnEdit: (id: string) => void;
   refetch: () => void;
 }) {
+  const DetailInfoData = {
+    id: item.id,
+    updatedAt: item.updatedAt,
+    createdAt: item.createdAt,
+    updatedBy: item.updatedBy,
+    createdBy: item.createdBy,
+  } as DetailData;
+
   return (
     <div
       className={`flex  border flex-col transition-all duration-300 shadow-sm rounded-2xl m-1 p-0 justify-between w-full bg-gray-100/85`}
@@ -36,7 +57,7 @@ function PositionCard({
       <div
         className={`flex relative lg:flex-row flex-col w-full  items-center justify-center`}
       >
-        <div className="flex m-3 flex-col w-full items-center justify-start">
+        <div className="flex m-3 flex-col w-full items-center md:mb-5 justify-start">
           <div
             className={`text-gray-800 text-sm italic gap-2 flex absolute top-0 left-2 items-center justify-center rounded-md m-0 p-1.5`}
           >
@@ -46,12 +67,12 @@ function PositionCard({
           <div
             className={`flex flex-col grow border-gray-400/30  bg-gray-200/70  border rounded-lg  md:flex-row  items-center justify-center m-6  w-full p-2 `}
           >
-            <div className="flex gap-6 items-center justify-center">
-              <div className="flex flex-col">
+            <div className="grid grid-cols-[1fr_auto_1fr] grid-rows-1 gap-4 items-center justify-center">
+              <div className="grid">
                 <h2>
                   <strong>Position: </strong> {item.position.name}
                 </h2>
-                <h5 className="text-xs text-gray-600 italic">
+                <h5 className="text-xs truncate text-gray-600 italic">
                   {item.user.name}
                 </h5>
               </div>
@@ -104,28 +125,7 @@ function PositionCard({
             <PositionUpdate ended={item.ended} refetch={refetch} id={item.id} />
           </div>
         </div>
-        <div className="md:absolute left-5 items-start m-2 md:m-0 text-xs gap-3 text-gray-600 italic bottom-1 flex">
-          <h2 className="text-xm italic ">
-            <strong>Created By: </strong>{" "}
-            {item.createdBy?.name ? item.createdBy?.name : "No Creator Data"}
-          </h2>
-          <h2 className="text-xm italic ">
-            <strong>Created At: </strong>{" "}
-            {item.createdAt
-              ? new Date(item.createdAt).toLocaleString()
-              : "No Data"}
-          </h2>
-          <h2 className="text-xm italic ">
-            <strong>Updated By: </strong>{" "}
-            {item.updatedBy?.name ? item.updatedBy?.name : "No Creator Data"}
-          </h2>
-          <h2 className="text-xm italic ">
-            <strong>Updated At: </strong>{" "}
-            {item.updatedAt
-              ? new Date(item.updatedAt).toLocaleString()
-              : "No Data"}
-          </h2>
-        </div>
+        <DetailsInfo details={DetailInfoData} />
       </div>
     </div>
   );

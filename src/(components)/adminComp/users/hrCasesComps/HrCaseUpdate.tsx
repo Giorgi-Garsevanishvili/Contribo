@@ -67,11 +67,11 @@ function HrCaseUpdate({
 
   return (
     <div
-      className={`flex bg-gray-100/70 p-4 rounded-lg mx-2 flex-col  lg:flex-row grow items-start justify-between`}
+      className={`flex bg-gray-100/70 p-4 rounded-lg mx-2 flex-row grow items-start justify-between`}
     >
       {isLoadingUpdate ? (
         <div className="flex bg-gray-100/60 items-center rounded-lg shadow-lg p-10 justify-center">
-          <ImSpinner9   className="animate-spin" size={40} />
+          <ImSpinner9 className="animate-spin" size={40} />
         </div>
       ) : (
         <form
