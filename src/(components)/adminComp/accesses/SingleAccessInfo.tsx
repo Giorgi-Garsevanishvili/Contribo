@@ -19,8 +19,8 @@ import { useRouter } from "next/navigation";
 type Data = {
   id: string;
   email: string;
-  createdAt: Date;
-  updatedAt: Date | null;
+  createdAt: string;
+  updatedAt: string | null;
   updatedBy: {
     name: string | null;
   } | null;
@@ -60,16 +60,18 @@ function SingleAccessInfo({ id }: { id: ParamValue }) {
   const updateSession = useSession();
   const { data: roles, isLoadingFetch } =
     useFetchData<RoleData[]>("/api/admin/roles");
-  const { data, isLoading, refetch, error: fetchError } = usePaginatedData<Data>(
-    `/api/admin/allowedUsers/${id}`,
-    null,
-  );
+  const {
+    data,
+    isLoading,
+    refetch,
+    error: fetchError,
+  } = usePaginatedData<Data>(`/api/admin/allowedUsers/${id}`, null);
   const router = useRouter();
 
   useEffect(() => {
     if (fetchError === true) {
       router.push("/admin/accesses");
-    } 
+    }
   }, [fetchError]);
 
   return (

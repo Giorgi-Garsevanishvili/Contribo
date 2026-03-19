@@ -21,11 +21,11 @@ type Data = {
     createdBy: {
         name: string | null;
     } | null;
-    createdAt: Date;
+    createdAt: string;
     updatedBy: {
         name: string | null;
     } | null;
-    updatedAt: Date | null;
+    updatedAt: string | null;
     email: string;
     roles: {
         role: {

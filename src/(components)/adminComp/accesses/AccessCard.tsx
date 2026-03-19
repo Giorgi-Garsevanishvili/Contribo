@@ -21,11 +21,11 @@ type Data = {
   createdBy: {
     name: string | null;
   } | null;
-  createdAt: Date;
+  createdAt: string;
   updatedBy: {
     name: string | null;
   } | null;
-  updatedAt: Date | null;
+  updatedAt: string | null;
   email: string;
   roles: {
     role: {
@@ -37,6 +37,18 @@ type Data = {
   region: {
     name: string;
   } | null;
+};
+
+type DetailData = {
+  id: string;
+  createdBy: {
+    name: string | null;
+  } | null;
+  createdAt: string;
+  updatedBy: {
+    name: string | null;
+  } | null;
+  updatedAt: string | null;
 };
 
 type RoleData = {
@@ -59,6 +71,14 @@ function AccessCard({
   roles: RoleData;
   refetch: () => void;
 }) {
+  const DetailInfoData = {
+    id: access.id,
+    updatedAt: access.updatedAt,
+    createdAt: access.createdAt,
+    updatedBy: access.updatedBy,
+    createdBy: access.createdBy,
+  } as DetailData;
+
   return (
     <>
       <div className="md:flex hidden justify-center items-center gap-1.5">
