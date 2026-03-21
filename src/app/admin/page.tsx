@@ -6,13 +6,13 @@ import UserStats from "@/(components)/adminComp/UserStats";
 
 function Admin() {
   return (
-    <>
+    <div className="mt-3 flex flex-wrap items-center justify-center gap-1">
       <UserStats />
       <JoinStats />
       <EventStats />
       <HrWarningStats />
       <AllowedStats/>
-    </>
+    </div>
   );
 }
 export default Admin;

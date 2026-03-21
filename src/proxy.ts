@@ -1,18 +1,32 @@
 import { NextResponse } from "next/server";
 import { NextRequest } from "next/server";
 import { RestrictionCheck } from "./lib/restrictionCheck";
+import { auth } from "./lib/auth";
 
 export async function proxy(req: NextRequest) {
   const { pathname } = req.nextUrl;
 
-  const session =
-    req.cookies.get("next-auth.session-token")?.value ||
-    req.cookies.get("__Secure-next-auth.session-token")?.value;
+  const session = await auth();
 
   // Home page redirect
   if (pathname === "/") {
     if (session) {
-      return NextResponse.redirect(new URL("/redirect", req.url));
+      const roles = session?.user.roles as string[];
+
+      const priority = [
+        { name: "RESTRICT", path: "/restricted" },
+        { name: "REGULAR", path: "/volunteer" },
+        { name: "ADMIN", path: "/admin" },
+        { name: "QIRVEX", path: "/console" },
+      ];
+
+      for (const role of priority) {
+        if (roles.includes(role.name)) {
+          return NextResponse.redirect(new URL(role.path, req.url));
+        }
+      }
+
+      return NextResponse.redirect(new URL("/unauthorized"));
     }
     return NextResponse.next();
   }
@@ -26,6 +40,7 @@ export async function proxy(req: NextRequest) {
     // Checks User Restriction Status
     const { restricted: GlobalRestriction } =
       await RestrictionCheck("RESTRICT");
+
     if (!session) {
       return NextResponse.redirect(new URL("/signin", req.url));
     }

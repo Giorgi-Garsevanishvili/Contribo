@@ -22,8 +22,6 @@ function EventStats() {
     [],
   );
 
-  console.log(data?.map((R) => R.rating ));
-
   useEffect(() => {
     if (data) {
       calculateRating(data);

@@ -13,7 +13,7 @@ export default function SignIn({ prov, icon }: SignInProps) {
       className="flex justify-center items-center"
       action={async () => {
         "use server";
-        await signIn(`${prov}`, { redirectTo: "/redirect" });
+        await signIn(`${prov}`, { redirectTo: "/" });
       }}
     >
       <button className="btn-log w-full" type="submit">
