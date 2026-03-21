@@ -1,7 +1,7 @@
 import { handleError } from "@/lib/errors/handleErrors";
 import { prisma } from "@/lib/prisma";
 import { requireRole } from "@/lib/serverAuth";
-import { updateEventFeedback } from "@/lib/zod";
+import { updateEventFeedbackUser } from "@/lib/zod";
 import { Context } from "@/types/general-types";
 import { NextRequest, NextResponse } from "next/server";
 import z from "zod";
@@ -20,15 +20,19 @@ export const GET = async (_req: NextRequest, context: Context) => {
       select: {
         id: true,
         event: { select: { name: true } },
-        user: { select: { name: true } },
+        user: { select: { name: true, image: true } },
         updatedBy: { select: { name: true } },
         feedback: true,
         rating: true,
+        responded: true,
+        respondedAt: true,
+        requestStatus: true,
       },
     });
 
     if (!data) {
-      return NextResponse.json({data,
+      return NextResponse.json({
+        data,
         message: `Event feedback with ${id} not found!`,
       });
     }
@@ -49,13 +53,41 @@ export const PUT = async (req: NextRequest, context: Context) => {
       return NextResponse.json({ message: "id is missing!" });
     }
 
-    const json = (await req.json()) as z.infer<typeof updateEventFeedback>;
+    const json = (await req.json()) as z.infer<typeof updateEventFeedbackUser>;
     const jsonWithCreator = {
       ...json,
       updatedById: thisUser.user.id,
+      respondedAt: new Date(),
     };
 
-    const body = updateEventFeedback.parse(jsonWithCreator);
+    const body = updateEventFeedbackUser.parse(jsonWithCreator);
+
+    const returnData = await prisma.$transaction(async (tx) => {
+      const eventId = await tx.eventFeedback.findUnique({
+        where: { id },
+        select: { eventId: true },
+      });
+      const eventFeedbackCount = await tx.eventFeedback.findMany({
+        where: { eventId: eventId?.eventId, requestStatus: "SUBMITTED" },
+      });
+
+      const totalEventRating = eventFeedbackCount.reduce((a, b) => {
+        const A = a;
+        const B = b.rating || 0;
+
+        return A + B;
+      }, 0);
+
+      const avgEventScore =
+        (totalEventRating + body.rating) / (eventFeedbackCount.length + 1);
+
+      const updatedEventRating = await tx.event.update({
+        where: { id: eventId?.eventId },
+        data: { rating: Math.round(avgEventScore) },
+      });
+
+      return { avgEventScore };
+    });
 
     const response = await prisma.eventFeedback.update({
       where: { id },
@@ -64,8 +96,10 @@ export const PUT = async (req: NextRequest, context: Context) => {
     });
 
     return NextResponse.json(
-      { message: `Feedback Updated for Event: ${response.event?.name}` },
-      { status: 200 }
+      {
+        message: `Feedback Updated for Event: ${response.event?.name}. Updated Rating: ${returnData.avgEventScore}`,
+      },
+      { status: 200 },
     );
   } catch (error) {
     const { message, status } = handleError(error);

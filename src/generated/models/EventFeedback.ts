@@ -38,6 +38,10 @@ export type EventFeedbackMinAggregateOutputType = {
   id: string | null
   eventId: string | null
   userId: string | null
+  requestStatus: $Enums.FeedbackRequestStatus | null
+  requestedAt: Date | null
+  respondedAt: Date | null
+  responded: boolean | null
   feedback: string | null
   rating: number | null
   updatedById: string | null
@@ -49,6 +53,10 @@ export type EventFeedbackMaxAggregateOutputType = {
   id: string | null
   eventId: string | null
   userId: string | null
+  requestStatus: $Enums.FeedbackRequestStatus | null
+  requestedAt: Date | null
+  respondedAt: Date | null
+  responded: boolean | null
   feedback: string | null
   rating: number | null
   updatedById: string | null
@@ -60,6 +68,10 @@ export type EventFeedbackCountAggregateOutputType = {
   id: number
   eventId: number
   userId: number
+  requestStatus: number
+  requestedAt: number
+  respondedAt: number
+  responded: number
   feedback: number
   rating: number
   updatedById: number
@@ -81,6 +93,10 @@ export type EventFeedbackMinAggregateInputType = {
   id?: true
   eventId?: true
   userId?: true
+  requestStatus?: true
+  requestedAt?: true
+  respondedAt?: true
+  responded?: true
   feedback?: true
   rating?: true
   updatedById?: true
@@ -92,6 +108,10 @@ export type EventFeedbackMaxAggregateInputType = {
   id?: true
   eventId?: true
   userId?: true
+  requestStatus?: true
+  requestedAt?: true
+  respondedAt?: true
+  responded?: true
   feedback?: true
   rating?: true
   updatedById?: true
@@ -103,6 +123,10 @@ export type EventFeedbackCountAggregateInputType = {
   id?: true
   eventId?: true
   userId?: true
+  requestStatus?: true
+  requestedAt?: true
+  respondedAt?: true
+  responded?: true
   feedback?: true
   rating?: true
   updatedById?: true
@@ -201,7 +225,11 @@ export type EventFeedbackGroupByOutputType = {
   id: string
   eventId: string
   userId: string | null
-  feedback: string
+  requestStatus: $Enums.FeedbackRequestStatus
+  requestedAt: Date
+  respondedAt: Date | null
+  responded: boolean
+  feedback: string | null
   rating: number | null
   updatedById: string | null
   createdAt: Date
@@ -235,7 +263,11 @@ export type EventFeedbackWhereInput = {
   id?: Prisma.StringFilter<"EventFeedback"> | string
   eventId?: Prisma.StringFilter<"EventFeedback"> | string
   userId?: Prisma.StringNullableFilter<"EventFeedback"> | string | null
-  feedback?: Prisma.StringFilter<"EventFeedback"> | string
+  requestStatus?: Prisma.EnumFeedbackRequestStatusFilter<"EventFeedback"> | $Enums.FeedbackRequestStatus
+  requestedAt?: Prisma.DateTimeFilter<"EventFeedback"> | Date | string
+  respondedAt?: Prisma.DateTimeNullableFilter<"EventFeedback"> | Date | string | null
+  responded?: Prisma.BoolFilter<"EventFeedback"> | boolean
+  feedback?: Prisma.StringNullableFilter<"EventFeedback"> | string | null
   rating?: Prisma.IntNullableFilter<"EventFeedback"> | number | null
   updatedById?: Prisma.StringNullableFilter<"EventFeedback"> | string | null
   createdAt?: Prisma.DateTimeFilter<"EventFeedback"> | Date | string
@@ -243,14 +275,17 @@ export type EventFeedbackWhereInput = {
   updatedBy?: Prisma.XOR<Prisma.UserNullableScalarRelationFilter, Prisma.UserWhereInput> | null
   event?: Prisma.XOR<Prisma.EventScalarRelationFilter, Prisma.EventWhereInput>
   user?: Prisma.XOR<Prisma.UserNullableScalarRelationFilter, Prisma.UserWhereInput> | null
-  feedbackRequests?: Prisma.FeedbackRequestListRelationFilter
 }
 
 export type EventFeedbackOrderByWithRelationInput = {
   id?: Prisma.SortOrder
   eventId?: Prisma.SortOrder
   userId?: Prisma.SortOrderInput | Prisma.SortOrder
-  feedback?: Prisma.SortOrder
+  requestStatus?: Prisma.SortOrder
+  requestedAt?: Prisma.SortOrder
+  respondedAt?: Prisma.SortOrderInput | Prisma.SortOrder
+  responded?: Prisma.SortOrder
+  feedback?: Prisma.SortOrderInput | Prisma.SortOrder
   rating?: Prisma.SortOrderInput | Prisma.SortOrder
   updatedById?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
@@ -258,17 +293,21 @@ export type EventFeedbackOrderByWithRelationInput = {
   updatedBy?: Prisma.UserOrderByWithRelationInput
   event?: Prisma.EventOrderByWithRelationInput
   user?: Prisma.UserOrderByWithRelationInput
-  feedbackRequests?: Prisma.FeedbackRequestOrderByRelationAggregateInput
 }
 
 export type EventFeedbackWhereUniqueInput = Prisma.AtLeast<{
   id?: string
+  eventId_userId?: Prisma.EventFeedbackEventIdUserIdCompoundUniqueInput
   AND?: Prisma.EventFeedbackWhereInput | Prisma.EventFeedbackWhereInput[]
   OR?: Prisma.EventFeedbackWhereInput[]
   NOT?: Prisma.EventFeedbackWhereInput | Prisma.EventFeedbackWhereInput[]
   eventId?: Prisma.StringFilter<"EventFeedback"> | string
   userId?: Prisma.StringNullableFilter<"EventFeedback"> | string | null
-  feedback?: Prisma.StringFilter<"EventFeedback"> | string
+  requestStatus?: Prisma.EnumFeedbackRequestStatusFilter<"EventFeedback"> | $Enums.FeedbackRequestStatus
+  requestedAt?: Prisma.DateTimeFilter<"EventFeedback"> | Date | string
+  respondedAt?: Prisma.DateTimeNullableFilter<"EventFeedback"> | Date | string | null
+  responded?: Prisma.BoolFilter<"EventFeedback"> | boolean
+  feedback?: Prisma.StringNullableFilter<"EventFeedback"> | string | null
   rating?: Prisma.IntNullableFilter<"EventFeedback"> | number | null
   updatedById?: Prisma.StringNullableFilter<"EventFeedback"> | string | null
   createdAt?: Prisma.DateTimeFilter<"EventFeedback"> | Date | string
@@ -276,14 +315,17 @@ export type EventFeedbackWhereUniqueInput = Prisma.AtLeast<{
   updatedBy?: Prisma.XOR<Prisma.UserNullableScalarRelationFilter, Prisma.UserWhereInput> | null
   event?: Prisma.XOR<Prisma.EventScalarRelationFilter, Prisma.EventWhereInput>
   user?: Prisma.XOR<Prisma.UserNullableScalarRelationFilter, Prisma.UserWhereInput> | null
-  feedbackRequests?: Prisma.FeedbackRequestListRelationFilter
-}, "id">
+}, "id" | "eventId_userId">
 
 export type EventFeedbackOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
   eventId?: Prisma.SortOrder
   userId?: Prisma.SortOrderInput | Prisma.SortOrder
-  feedback?: Prisma.SortOrder
+  requestStatus?: Prisma.SortOrder
+  requestedAt?: Prisma.SortOrder
+  respondedAt?: Prisma.SortOrderInput | Prisma.SortOrder
+  responded?: Prisma.SortOrder
+  feedback?: Prisma.SortOrderInput | Prisma.SortOrder
   rating?: Prisma.SortOrderInput | Prisma.SortOrder
   updatedById?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
@@ -302,7 +344,11 @@ export type EventFeedbackScalarWhereWithAggregatesInput = {
   id?: Prisma.StringWithAggregatesFilter<"EventFeedback"> | string
   eventId?: Prisma.StringWithAggregatesFilter<"EventFeedback"> | string
   userId?: Prisma.StringNullableWithAggregatesFilter<"EventFeedback"> | string | null
-  feedback?: Prisma.StringWithAggregatesFilter<"EventFeedback"> | string
+  requestStatus?: Prisma.EnumFeedbackRequestStatusWithAggregatesFilter<"EventFeedback"> | $Enums.FeedbackRequestStatus
+  requestedAt?: Prisma.DateTimeWithAggregatesFilter<"EventFeedback"> | Date | string
+  respondedAt?: Prisma.DateTimeNullableWithAggregatesFilter<"EventFeedback"> | Date | string | null
+  responded?: Prisma.BoolWithAggregatesFilter<"EventFeedback"> | boolean
+  feedback?: Prisma.StringNullableWithAggregatesFilter<"EventFeedback"> | string | null
   rating?: Prisma.IntNullableWithAggregatesFilter<"EventFeedback"> | number | null
   updatedById?: Prisma.StringNullableWithAggregatesFilter<"EventFeedback"> | string | null
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"EventFeedback"> | Date | string
@@ -311,57 +357,73 @@ export type EventFeedbackScalarWhereWithAggregatesInput = {
 
 export type EventFeedbackCreateInput = {
   id?: string
-  feedback: string
+  requestStatus?: $Enums.FeedbackRequestStatus
+  requestedAt?: Date | string
+  respondedAt?: Date | string | null
+  responded?: boolean
+  feedback?: string | null
   rating?: number | null
   createdAt?: Date | string
   updatedAt?: Date | string | null
   updatedBy?: Prisma.UserCreateNestedOneWithoutUpdatedEventFeedbackInput
   event: Prisma.EventCreateNestedOneWithoutFeedbackInput
   user?: Prisma.UserCreateNestedOneWithoutProvidedFeedbacksInput
-  feedbackRequests?: Prisma.FeedbackRequestCreateNestedManyWithoutFeedbackInput
 }
 
 export type EventFeedbackUncheckedCreateInput = {
   id?: string
   eventId: string
   userId?: string | null
-  feedback: string
+  requestStatus?: $Enums.FeedbackRequestStatus
+  requestedAt?: Date | string
+  respondedAt?: Date | string | null
+  responded?: boolean
+  feedback?: string | null
   rating?: number | null
   updatedById?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string | null
-  feedbackRequests?: Prisma.FeedbackRequestUncheckedCreateNestedManyWithoutFeedbackInput
 }
 
 export type EventFeedbackUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  feedback?: Prisma.StringFieldUpdateOperationsInput | string
+  requestStatus?: Prisma.EnumFeedbackRequestStatusFieldUpdateOperationsInput | $Enums.FeedbackRequestStatus
+  requestedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  respondedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  responded?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  feedback?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   rating?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   updatedBy?: Prisma.UserUpdateOneWithoutUpdatedEventFeedbackNestedInput
   event?: Prisma.EventUpdateOneRequiredWithoutFeedbackNestedInput
   user?: Prisma.UserUpdateOneWithoutProvidedFeedbacksNestedInput
-  feedbackRequests?: Prisma.FeedbackRequestUpdateManyWithoutFeedbackNestedInput
 }
 
 export type EventFeedbackUncheckedUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   eventId?: Prisma.StringFieldUpdateOperationsInput | string
   userId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  feedback?: Prisma.StringFieldUpdateOperationsInput | string
+  requestStatus?: Prisma.EnumFeedbackRequestStatusFieldUpdateOperationsInput | $Enums.FeedbackRequestStatus
+  requestedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  respondedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  responded?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  feedback?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   rating?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   updatedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  feedbackRequests?: Prisma.FeedbackRequestUncheckedUpdateManyWithoutFeedbackNestedInput
 }
 
 export type EventFeedbackCreateManyInput = {
   id?: string
   eventId: string
   userId?: string | null
-  feedback: string
+  requestStatus?: $Enums.FeedbackRequestStatus
+  requestedAt?: Date | string
+  respondedAt?: Date | string | null
+  responded?: boolean
+  feedback?: string | null
   rating?: number | null
   updatedById?: string | null
   createdAt?: Date | string
@@ -370,7 +432,11 @@ export type EventFeedbackCreateManyInput = {
 
 export type EventFeedbackUpdateManyMutationInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  feedback?: Prisma.StringFieldUpdateOperationsInput | string
+  requestStatus?: Prisma.EnumFeedbackRequestStatusFieldUpdateOperationsInput | $Enums.FeedbackRequestStatus
+  requestedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  respondedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  responded?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  feedback?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   rating?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -380,7 +446,11 @@ export type EventFeedbackUncheckedUpdateManyInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   eventId?: Prisma.StringFieldUpdateOperationsInput | string
   userId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  feedback?: Prisma.StringFieldUpdateOperationsInput | string
+  requestStatus?: Prisma.EnumFeedbackRequestStatusFieldUpdateOperationsInput | $Enums.FeedbackRequestStatus
+  requestedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  respondedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  responded?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  feedback?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   rating?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   updatedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -397,10 +467,19 @@ export type EventFeedbackOrderByRelationAggregateInput = {
   _count?: Prisma.SortOrder
 }
 
+export type EventFeedbackEventIdUserIdCompoundUniqueInput = {
+  eventId: string
+  userId: string
+}
+
 export type EventFeedbackCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
   eventId?: Prisma.SortOrder
   userId?: Prisma.SortOrder
+  requestStatus?: Prisma.SortOrder
+  requestedAt?: Prisma.SortOrder
+  respondedAt?: Prisma.SortOrder
+  responded?: Prisma.SortOrder
   feedback?: Prisma.SortOrder
   rating?: Prisma.SortOrder
   updatedById?: Prisma.SortOrder
@@ -416,6 +495,10 @@ export type EventFeedbackMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
   eventId?: Prisma.SortOrder
   userId?: Prisma.SortOrder
+  requestStatus?: Prisma.SortOrder
+  requestedAt?: Prisma.SortOrder
+  respondedAt?: Prisma.SortOrder
+  responded?: Prisma.SortOrder
   feedback?: Prisma.SortOrder
   rating?: Prisma.SortOrder
   updatedById?: Prisma.SortOrder
@@ -427,6 +510,10 @@ export type EventFeedbackMinOrderByAggregateInput = {
   id?: Prisma.SortOrder
   eventId?: Prisma.SortOrder
   userId?: Prisma.SortOrder
+  requestStatus?: Prisma.SortOrder
+  requestedAt?: Prisma.SortOrder
+  respondedAt?: Prisma.SortOrder
+  responded?: Prisma.SortOrder
   feedback?: Prisma.SortOrder
   rating?: Prisma.SortOrder
   updatedById?: Prisma.SortOrder
@@ -436,11 +523,6 @@ export type EventFeedbackMinOrderByAggregateInput = {
 
 export type EventFeedbackSumOrderByAggregateInput = {
   rating?: Prisma.SortOrder
-}
-
-export type EventFeedbackNullableScalarRelationFilter = {
-  is?: Prisma.EventFeedbackWhereInput | null
-  isNot?: Prisma.EventFeedbackWhereInput | null
 }
 
 export type EventFeedbackCreateNestedManyWithoutUserInput = {
@@ -569,42 +651,36 @@ export type EventFeedbackUncheckedUpdateManyWithoutEventNestedInput = {
   deleteMany?: Prisma.EventFeedbackScalarWhereInput | Prisma.EventFeedbackScalarWhereInput[]
 }
 
-export type EventFeedbackCreateNestedOneWithoutFeedbackRequestsInput = {
-  create?: Prisma.XOR<Prisma.EventFeedbackCreateWithoutFeedbackRequestsInput, Prisma.EventFeedbackUncheckedCreateWithoutFeedbackRequestsInput>
-  connectOrCreate?: Prisma.EventFeedbackCreateOrConnectWithoutFeedbackRequestsInput
-  connect?: Prisma.EventFeedbackWhereUniqueInput
-}
-
-export type EventFeedbackUpdateOneWithoutFeedbackRequestsNestedInput = {
-  create?: Prisma.XOR<Prisma.EventFeedbackCreateWithoutFeedbackRequestsInput, Prisma.EventFeedbackUncheckedCreateWithoutFeedbackRequestsInput>
-  connectOrCreate?: Prisma.EventFeedbackCreateOrConnectWithoutFeedbackRequestsInput
-  upsert?: Prisma.EventFeedbackUpsertWithoutFeedbackRequestsInput
-  disconnect?: Prisma.EventFeedbackWhereInput | boolean
-  delete?: Prisma.EventFeedbackWhereInput | boolean
-  connect?: Prisma.EventFeedbackWhereUniqueInput
-  update?: Prisma.XOR<Prisma.XOR<Prisma.EventFeedbackUpdateToOneWithWhereWithoutFeedbackRequestsInput, Prisma.EventFeedbackUpdateWithoutFeedbackRequestsInput>, Prisma.EventFeedbackUncheckedUpdateWithoutFeedbackRequestsInput>
+export type EnumFeedbackRequestStatusFieldUpdateOperationsInput = {
+  set?: $Enums.FeedbackRequestStatus
 }
 
 export type EventFeedbackCreateWithoutUserInput = {
   id?: string
-  feedback: string
+  requestStatus?: $Enums.FeedbackRequestStatus
+  requestedAt?: Date | string
+  respondedAt?: Date | string | null
+  responded?: boolean
+  feedback?: string | null
   rating?: number | null
   createdAt?: Date | string
   updatedAt?: Date | string | null
   updatedBy?: Prisma.UserCreateNestedOneWithoutUpdatedEventFeedbackInput
   event: Prisma.EventCreateNestedOneWithoutFeedbackInput
-  feedbackRequests?: Prisma.FeedbackRequestCreateNestedManyWithoutFeedbackInput
 }
 
 export type EventFeedbackUncheckedCreateWithoutUserInput = {
   id?: string
   eventId: string
-  feedback: string
+  requestStatus?: $Enums.FeedbackRequestStatus
+  requestedAt?: Date | string
+  respondedAt?: Date | string | null
+  responded?: boolean
+  feedback?: string | null
   rating?: number | null
   updatedById?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string | null
-  feedbackRequests?: Prisma.FeedbackRequestUncheckedCreateNestedManyWithoutFeedbackInput
 }
 
 export type EventFeedbackCreateOrConnectWithoutUserInput = {
@@ -619,24 +695,30 @@ export type EventFeedbackCreateManyUserInputEnvelope = {
 
 export type EventFeedbackCreateWithoutUpdatedByInput = {
   id?: string
-  feedback: string
+  requestStatus?: $Enums.FeedbackRequestStatus
+  requestedAt?: Date | string
+  respondedAt?: Date | string | null
+  responded?: boolean
+  feedback?: string | null
   rating?: number | null
   createdAt?: Date | string
   updatedAt?: Date | string | null
   event: Prisma.EventCreateNestedOneWithoutFeedbackInput
   user?: Prisma.UserCreateNestedOneWithoutProvidedFeedbacksInput
-  feedbackRequests?: Prisma.FeedbackRequestCreateNestedManyWithoutFeedbackInput
 }
 
 export type EventFeedbackUncheckedCreateWithoutUpdatedByInput = {
   id?: string
   eventId: string
   userId?: string | null
-  feedback: string
+  requestStatus?: $Enums.FeedbackRequestStatus
+  requestedAt?: Date | string
+  respondedAt?: Date | string | null
+  responded?: boolean
+  feedback?: string | null
   rating?: number | null
   createdAt?: Date | string
   updatedAt?: Date | string | null
-  feedbackRequests?: Prisma.FeedbackRequestUncheckedCreateNestedManyWithoutFeedbackInput
 }
 
 export type EventFeedbackCreateOrConnectWithoutUpdatedByInput = {
@@ -672,7 +754,11 @@ export type EventFeedbackScalarWhereInput = {
   id?: Prisma.StringFilter<"EventFeedback"> | string
   eventId?: Prisma.StringFilter<"EventFeedback"> | string
   userId?: Prisma.StringNullableFilter<"EventFeedback"> | string | null
-  feedback?: Prisma.StringFilter<"EventFeedback"> | string
+  requestStatus?: Prisma.EnumFeedbackRequestStatusFilter<"EventFeedback"> | $Enums.FeedbackRequestStatus
+  requestedAt?: Prisma.DateTimeFilter<"EventFeedback"> | Date | string
+  respondedAt?: Prisma.DateTimeNullableFilter<"EventFeedback"> | Date | string | null
+  responded?: Prisma.BoolFilter<"EventFeedback"> | boolean
+  feedback?: Prisma.StringNullableFilter<"EventFeedback"> | string | null
   rating?: Prisma.IntNullableFilter<"EventFeedback"> | number | null
   updatedById?: Prisma.StringNullableFilter<"EventFeedback"> | string | null
   createdAt?: Prisma.DateTimeFilter<"EventFeedback"> | Date | string
@@ -697,24 +783,30 @@ export type EventFeedbackUpdateManyWithWhereWithoutUpdatedByInput = {
 
 export type EventFeedbackCreateWithoutEventInput = {
   id?: string
-  feedback: string
+  requestStatus?: $Enums.FeedbackRequestStatus
+  requestedAt?: Date | string
+  respondedAt?: Date | string | null
+  responded?: boolean
+  feedback?: string | null
   rating?: number | null
   createdAt?: Date | string
   updatedAt?: Date | string | null
   updatedBy?: Prisma.UserCreateNestedOneWithoutUpdatedEventFeedbackInput
   user?: Prisma.UserCreateNestedOneWithoutProvidedFeedbacksInput
-  feedbackRequests?: Prisma.FeedbackRequestCreateNestedManyWithoutFeedbackInput
 }
 
 export type EventFeedbackUncheckedCreateWithoutEventInput = {
   id?: string
   userId?: string | null
-  feedback: string
+  requestStatus?: $Enums.FeedbackRequestStatus
+  requestedAt?: Date | string
+  respondedAt?: Date | string | null
+  responded?: boolean
+  feedback?: string | null
   rating?: number | null
   updatedById?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string | null
-  feedbackRequests?: Prisma.FeedbackRequestUncheckedCreateNestedManyWithoutFeedbackInput
 }
 
 export type EventFeedbackCreateOrConnectWithoutEventInput = {
@@ -743,70 +835,14 @@ export type EventFeedbackUpdateManyWithWhereWithoutEventInput = {
   data: Prisma.XOR<Prisma.EventFeedbackUpdateManyMutationInput, Prisma.EventFeedbackUncheckedUpdateManyWithoutEventInput>
 }
 
-export type EventFeedbackCreateWithoutFeedbackRequestsInput = {
-  id?: string
-  feedback: string
-  rating?: number | null
-  createdAt?: Date | string
-  updatedAt?: Date | string | null
-  updatedBy?: Prisma.UserCreateNestedOneWithoutUpdatedEventFeedbackInput
-  event: Prisma.EventCreateNestedOneWithoutFeedbackInput
-  user?: Prisma.UserCreateNestedOneWithoutProvidedFeedbacksInput
-}
-
-export type EventFeedbackUncheckedCreateWithoutFeedbackRequestsInput = {
-  id?: string
-  eventId: string
-  userId?: string | null
-  feedback: string
-  rating?: number | null
-  updatedById?: string | null
-  createdAt?: Date | string
-  updatedAt?: Date | string | null
-}
-
-export type EventFeedbackCreateOrConnectWithoutFeedbackRequestsInput = {
-  where: Prisma.EventFeedbackWhereUniqueInput
-  create: Prisma.XOR<Prisma.EventFeedbackCreateWithoutFeedbackRequestsInput, Prisma.EventFeedbackUncheckedCreateWithoutFeedbackRequestsInput>
-}
-
-export type EventFeedbackUpsertWithoutFeedbackRequestsInput = {
-  update: Prisma.XOR<Prisma.EventFeedbackUpdateWithoutFeedbackRequestsInput, Prisma.EventFeedbackUncheckedUpdateWithoutFeedbackRequestsInput>
-  create: Prisma.XOR<Prisma.EventFeedbackCreateWithoutFeedbackRequestsInput, Prisma.EventFeedbackUncheckedCreateWithoutFeedbackRequestsInput>
-  where?: Prisma.EventFeedbackWhereInput
-}
-
-export type EventFeedbackUpdateToOneWithWhereWithoutFeedbackRequestsInput = {
-  where?: Prisma.EventFeedbackWhereInput
-  data: Prisma.XOR<Prisma.EventFeedbackUpdateWithoutFeedbackRequestsInput, Prisma.EventFeedbackUncheckedUpdateWithoutFeedbackRequestsInput>
-}
-
-export type EventFeedbackUpdateWithoutFeedbackRequestsInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  feedback?: Prisma.StringFieldUpdateOperationsInput | string
-  rating?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  updatedBy?: Prisma.UserUpdateOneWithoutUpdatedEventFeedbackNestedInput
-  event?: Prisma.EventUpdateOneRequiredWithoutFeedbackNestedInput
-  user?: Prisma.UserUpdateOneWithoutProvidedFeedbacksNestedInput
-}
-
-export type EventFeedbackUncheckedUpdateWithoutFeedbackRequestsInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  eventId?: Prisma.StringFieldUpdateOperationsInput | string
-  userId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  feedback?: Prisma.StringFieldUpdateOperationsInput | string
-  rating?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  updatedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-}
-
 export type EventFeedbackCreateManyUserInput = {
   id?: string
   eventId: string
-  feedback: string
+  requestStatus?: $Enums.FeedbackRequestStatus
+  requestedAt?: Date | string
+  respondedAt?: Date | string | null
+  responded?: boolean
+  feedback?: string | null
   rating?: number | null
   updatedById?: string | null
   createdAt?: Date | string
@@ -817,7 +853,11 @@ export type EventFeedbackCreateManyUpdatedByInput = {
   id?: string
   eventId: string
   userId?: string | null
-  feedback: string
+  requestStatus?: $Enums.FeedbackRequestStatus
+  requestedAt?: Date | string
+  respondedAt?: Date | string | null
+  responded?: boolean
+  feedback?: string | null
   rating?: number | null
   createdAt?: Date | string
   updatedAt?: Date | string | null
@@ -825,30 +865,40 @@ export type EventFeedbackCreateManyUpdatedByInput = {
 
 export type EventFeedbackUpdateWithoutUserInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  feedback?: Prisma.StringFieldUpdateOperationsInput | string
+  requestStatus?: Prisma.EnumFeedbackRequestStatusFieldUpdateOperationsInput | $Enums.FeedbackRequestStatus
+  requestedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  respondedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  responded?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  feedback?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   rating?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   updatedBy?: Prisma.UserUpdateOneWithoutUpdatedEventFeedbackNestedInput
   event?: Prisma.EventUpdateOneRequiredWithoutFeedbackNestedInput
-  feedbackRequests?: Prisma.FeedbackRequestUpdateManyWithoutFeedbackNestedInput
 }
 
 export type EventFeedbackUncheckedUpdateWithoutUserInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   eventId?: Prisma.StringFieldUpdateOperationsInput | string
-  feedback?: Prisma.StringFieldUpdateOperationsInput | string
+  requestStatus?: Prisma.EnumFeedbackRequestStatusFieldUpdateOperationsInput | $Enums.FeedbackRequestStatus
+  requestedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  respondedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  responded?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  feedback?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   rating?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   updatedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  feedbackRequests?: Prisma.FeedbackRequestUncheckedUpdateManyWithoutFeedbackNestedInput
 }
 
 export type EventFeedbackUncheckedUpdateManyWithoutUserInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   eventId?: Prisma.StringFieldUpdateOperationsInput | string
-  feedback?: Prisma.StringFieldUpdateOperationsInput | string
+  requestStatus?: Prisma.EnumFeedbackRequestStatusFieldUpdateOperationsInput | $Enums.FeedbackRequestStatus
+  requestedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  respondedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  responded?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  feedback?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   rating?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   updatedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -857,31 +907,41 @@ export type EventFeedbackUncheckedUpdateManyWithoutUserInput = {
 
 export type EventFeedbackUpdateWithoutUpdatedByInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  feedback?: Prisma.StringFieldUpdateOperationsInput | string
+  requestStatus?: Prisma.EnumFeedbackRequestStatusFieldUpdateOperationsInput | $Enums.FeedbackRequestStatus
+  requestedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  respondedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  responded?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  feedback?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   rating?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   event?: Prisma.EventUpdateOneRequiredWithoutFeedbackNestedInput
   user?: Prisma.UserUpdateOneWithoutProvidedFeedbacksNestedInput
-  feedbackRequests?: Prisma.FeedbackRequestUpdateManyWithoutFeedbackNestedInput
 }
 
 export type EventFeedbackUncheckedUpdateWithoutUpdatedByInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   eventId?: Prisma.StringFieldUpdateOperationsInput | string
   userId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  feedback?: Prisma.StringFieldUpdateOperationsInput | string
+  requestStatus?: Prisma.EnumFeedbackRequestStatusFieldUpdateOperationsInput | $Enums.FeedbackRequestStatus
+  requestedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  respondedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  responded?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  feedback?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   rating?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  feedbackRequests?: Prisma.FeedbackRequestUncheckedUpdateManyWithoutFeedbackNestedInput
 }
 
 export type EventFeedbackUncheckedUpdateManyWithoutUpdatedByInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   eventId?: Prisma.StringFieldUpdateOperationsInput | string
   userId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  feedback?: Prisma.StringFieldUpdateOperationsInput | string
+  requestStatus?: Prisma.EnumFeedbackRequestStatusFieldUpdateOperationsInput | $Enums.FeedbackRequestStatus
+  requestedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  respondedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  responded?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  feedback?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   rating?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -890,7 +950,11 @@ export type EventFeedbackUncheckedUpdateManyWithoutUpdatedByInput = {
 export type EventFeedbackCreateManyEventInput = {
   id?: string
   userId?: string | null
-  feedback: string
+  requestStatus?: $Enums.FeedbackRequestStatus
+  requestedAt?: Date | string
+  respondedAt?: Date | string | null
+  responded?: boolean
+  feedback?: string | null
   rating?: number | null
   updatedById?: string | null
   createdAt?: Date | string
@@ -899,71 +963,56 @@ export type EventFeedbackCreateManyEventInput = {
 
 export type EventFeedbackUpdateWithoutEventInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  feedback?: Prisma.StringFieldUpdateOperationsInput | string
+  requestStatus?: Prisma.EnumFeedbackRequestStatusFieldUpdateOperationsInput | $Enums.FeedbackRequestStatus
+  requestedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  respondedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  responded?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  feedback?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   rating?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   updatedBy?: Prisma.UserUpdateOneWithoutUpdatedEventFeedbackNestedInput
   user?: Prisma.UserUpdateOneWithoutProvidedFeedbacksNestedInput
-  feedbackRequests?: Prisma.FeedbackRequestUpdateManyWithoutFeedbackNestedInput
 }
 
 export type EventFeedbackUncheckedUpdateWithoutEventInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   userId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  feedback?: Prisma.StringFieldUpdateOperationsInput | string
+  requestStatus?: Prisma.EnumFeedbackRequestStatusFieldUpdateOperationsInput | $Enums.FeedbackRequestStatus
+  requestedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  respondedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  responded?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  feedback?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   rating?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   updatedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  feedbackRequests?: Prisma.FeedbackRequestUncheckedUpdateManyWithoutFeedbackNestedInput
 }
 
 export type EventFeedbackUncheckedUpdateManyWithoutEventInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   userId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  feedback?: Prisma.StringFieldUpdateOperationsInput | string
+  requestStatus?: Prisma.EnumFeedbackRequestStatusFieldUpdateOperationsInput | $Enums.FeedbackRequestStatus
+  requestedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  respondedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  responded?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  feedback?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   rating?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   updatedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
 }
 
-
-/**
- * Count Type EventFeedbackCountOutputType
- */
-
-export type EventFeedbackCountOutputType = {
-  feedbackRequests: number
-}
-
-export type EventFeedbackCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  feedbackRequests?: boolean | EventFeedbackCountOutputTypeCountFeedbackRequestsArgs
-}
-
-/**
- * EventFeedbackCountOutputType without action
- */
-export type EventFeedbackCountOutputTypeDefaultArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  /**
-   * Select specific fields to fetch from the EventFeedbackCountOutputType
-   */
-  select?: Prisma.EventFeedbackCountOutputTypeSelect<ExtArgs> | null
-}
-
-/**
- * EventFeedbackCountOutputType without action
- */
-export type EventFeedbackCountOutputTypeCountFeedbackRequestsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  where?: Prisma.FeedbackRequestWhereInput
-}
 
 
 export type EventFeedbackSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   eventId?: boolean
   userId?: boolean
+  requestStatus?: boolean
+  requestedAt?: boolean
+  respondedAt?: boolean
+  responded?: boolean
   feedback?: boolean
   rating?: boolean
   updatedById?: boolean
@@ -972,14 +1021,16 @@ export type EventFeedbackSelect<ExtArgs extends runtime.Types.Extensions.Interna
   updatedBy?: boolean | Prisma.EventFeedback$updatedByArgs<ExtArgs>
   event?: boolean | Prisma.EventDefaultArgs<ExtArgs>
   user?: boolean | Prisma.EventFeedback$userArgs<ExtArgs>
-  feedbackRequests?: boolean | Prisma.EventFeedback$feedbackRequestsArgs<ExtArgs>
-  _count?: boolean | Prisma.EventFeedbackCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["eventFeedback"]>
 
 export type EventFeedbackSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   eventId?: boolean
   userId?: boolean
+  requestStatus?: boolean
+  requestedAt?: boolean
+  respondedAt?: boolean
+  responded?: boolean
   feedback?: boolean
   rating?: boolean
   updatedById?: boolean
@@ -994,6 +1045,10 @@ export type EventFeedbackSelectUpdateManyAndReturn<ExtArgs extends runtime.Types
   id?: boolean
   eventId?: boolean
   userId?: boolean
+  requestStatus?: boolean
+  requestedAt?: boolean
+  respondedAt?: boolean
+  responded?: boolean
   feedback?: boolean
   rating?: boolean
   updatedById?: boolean
@@ -1008,6 +1063,10 @@ export type EventFeedbackSelectScalar = {
   id?: boolean
   eventId?: boolean
   userId?: boolean
+  requestStatus?: boolean
+  requestedAt?: boolean
+  respondedAt?: boolean
+  responded?: boolean
   feedback?: boolean
   rating?: boolean
   updatedById?: boolean
@@ -1015,13 +1074,11 @@ export type EventFeedbackSelectScalar = {
   updatedAt?: boolean
 }
 
-export type EventFeedbackOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "eventId" | "userId" | "feedback" | "rating" | "updatedById" | "createdAt" | "updatedAt", ExtArgs["result"]["eventFeedback"]>
+export type EventFeedbackOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "eventId" | "userId" | "requestStatus" | "requestedAt" | "respondedAt" | "responded" | "feedback" | "rating" | "updatedById" | "createdAt" | "updatedAt", ExtArgs["result"]["eventFeedback"]>
 export type EventFeedbackInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   updatedBy?: boolean | Prisma.EventFeedback$updatedByArgs<ExtArgs>
   event?: boolean | Prisma.EventDefaultArgs<ExtArgs>
   user?: boolean | Prisma.EventFeedback$userArgs<ExtArgs>
-  feedbackRequests?: boolean | Prisma.EventFeedback$feedbackRequestsArgs<ExtArgs>
-  _count?: boolean | Prisma.EventFeedbackCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type EventFeedbackIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   updatedBy?: boolean | Prisma.EventFeedback$updatedByArgs<ExtArgs>
@@ -1040,13 +1097,16 @@ export type $EventFeedbackPayload<ExtArgs extends runtime.Types.Extensions.Inter
     updatedBy: Prisma.$UserPayload<ExtArgs> | null
     event: Prisma.$EventPayload<ExtArgs>
     user: Prisma.$UserPayload<ExtArgs> | null
-    feedbackRequests: Prisma.$FeedbackRequestPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
     eventId: string
     userId: string | null
-    feedback: string
+    requestStatus: $Enums.FeedbackRequestStatus
+    requestedAt: Date
+    respondedAt: Date | null
+    responded: boolean
+    feedback: string | null
     rating: number | null
     updatedById: string | null
     createdAt: Date
@@ -1448,7 +1508,6 @@ export interface Prisma__EventFeedbackClient<T, Null = never, ExtArgs extends ru
   updatedBy<T extends Prisma.EventFeedback$updatedByArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.EventFeedback$updatedByArgs<ExtArgs>>): Prisma.Prisma__UserClient<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   event<T extends Prisma.EventDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.EventDefaultArgs<ExtArgs>>): Prisma.Prisma__EventClient<runtime.Types.Result.GetResult<Prisma.$EventPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   user<T extends Prisma.EventFeedback$userArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.EventFeedback$userArgs<ExtArgs>>): Prisma.Prisma__UserClient<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
-  feedbackRequests<T extends Prisma.EventFeedback$feedbackRequestsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.EventFeedback$feedbackRequestsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$FeedbackRequestPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1481,6 +1540,10 @@ export interface EventFeedbackFieldRefs {
   readonly id: Prisma.FieldRef<"EventFeedback", 'String'>
   readonly eventId: Prisma.FieldRef<"EventFeedback", 'String'>
   readonly userId: Prisma.FieldRef<"EventFeedback", 'String'>
+  readonly requestStatus: Prisma.FieldRef<"EventFeedback", 'FeedbackRequestStatus'>
+  readonly requestedAt: Prisma.FieldRef<"EventFeedback", 'DateTime'>
+  readonly respondedAt: Prisma.FieldRef<"EventFeedback", 'DateTime'>
+  readonly responded: Prisma.FieldRef<"EventFeedback", 'Boolean'>
   readonly feedback: Prisma.FieldRef<"EventFeedback", 'String'>
   readonly rating: Prisma.FieldRef<"EventFeedback", 'Int'>
   readonly updatedById: Prisma.FieldRef<"EventFeedback", 'String'>
@@ -1917,30 +1980,6 @@ export type EventFeedback$userArgs<ExtArgs extends runtime.Types.Extensions.Inte
    */
   include?: Prisma.UserInclude<ExtArgs> | null
   where?: Prisma.UserWhereInput
-}
-
-/**
- * EventFeedback.feedbackRequests
- */
-export type EventFeedback$feedbackRequestsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  /**
-   * Select specific fields to fetch from the FeedbackRequest
-   */
-  select?: Prisma.FeedbackRequestSelect<ExtArgs> | null
-  /**
-   * Omit specific fields from the FeedbackRequest
-   */
-  omit?: Prisma.FeedbackRequestOmit<ExtArgs> | null
-  /**
-   * Choose, which related nodes to fetch as well
-   */
-  include?: Prisma.FeedbackRequestInclude<ExtArgs> | null
-  where?: Prisma.FeedbackRequestWhereInput
-  orderBy?: Prisma.FeedbackRequestOrderByWithRelationInput | Prisma.FeedbackRequestOrderByWithRelationInput[]
-  cursor?: Prisma.FeedbackRequestWhereUniqueInput
-  take?: number
-  skip?: number
-  distinct?: Prisma.FeedbackRequestScalarFieldEnum | Prisma.FeedbackRequestScalarFieldEnum[]
 }
 
 /**

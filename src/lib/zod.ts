@@ -1,6 +1,12 @@
-import { GTypes, HrWarningStatus, RatingAction, RegionStatus, ReqStatus } from "@/generated/enums";
+import {
+  FeedbackRequestStatus,
+  GTypes,
+  HrWarningStatus,
+  RatingAction,
+  RegionStatus,
+  ReqStatus,
+} from "@/generated/enums";
 import z from "zod";
-
 
 export const SoftDelete = z
   .object({
@@ -24,7 +30,7 @@ export const UserUpdateInput = z
   .object({
     name: z.string().optional(),
     email: z.email().optional(),
-    updatedById: z.string()
+    updatedById: z.string(),
   })
   .strict();
 
@@ -288,6 +294,7 @@ export const CreateEvent = z
     description: z.string(),
     createdById: z.string(),
     regionId: z.string(),
+    finalizedAt: z.string().optional(),
   })
   .strict()
   .superRefine((data, ctx) => {
@@ -308,6 +315,7 @@ export const updateEvent = z
     endTime: z.coerce.date().optional(),
     description: z.string().optional(),
     updatedById: z.string(),
+    finalizedAt: z.string().optional(),
   })
   .strict()
   .superRefine((data, ctx) => {
@@ -373,16 +381,25 @@ export const CreateEventFeedback = z
   .object({
     eventId: z.string(),
     userId: z.string(),
-    feedback: z.string(),
-    rating: z.int(),
   })
   .strict();
 
-export const updateEventFeedback = z
+export const updateEventFeedbackAdmin = z
   .object({
-    feedback: z.string().optional(),
-    rating: z.int().optional(),
     updatedById: z.string(),
+    requestStatus: z.enum(FeedbackRequestStatus).optional(),
+    responded: z.boolean().optional(),
+  })
+  .strict();
+
+export const updateEventFeedbackUser = z
+  .object({
+    feedback: z.string(),
+    rating: z.int(),
+    updatedById: z.string(),
+    respondedAt: z.coerce.date(),
+    requestStatus: z.enum(FeedbackRequestStatus).default("SUBMITTED"),
+    responded: z.boolean().default(true),
   })
   .strict();
 //------------------------------------------------------

@@ -299,7 +299,6 @@ export type UserWhereInput = {
   updatedEvents?: Prisma.EventListRelationFilter
   providedFeedbacks?: Prisma.EventFeedbackListRelationFilter
   updatedEventFeedback?: Prisma.EventFeedbackListRelationFilter
-  feedbackRequests?: Prisma.FeedbackRequestListRelationFilter
   hrWarnings?: Prisma.HrWarningListRelationFilter
   createdHrWarning?: Prisma.HrWarningListRelationFilter
   updatedHrWarnings?: Prisma.HrWarningListRelationFilter
@@ -353,7 +352,6 @@ export type UserOrderByWithRelationInput = {
   updatedEvents?: Prisma.EventOrderByRelationAggregateInput
   providedFeedbacks?: Prisma.EventFeedbackOrderByRelationAggregateInput
   updatedEventFeedback?: Prisma.EventFeedbackOrderByRelationAggregateInput
-  feedbackRequests?: Prisma.FeedbackRequestOrderByRelationAggregateInput
   hrWarnings?: Prisma.HrWarningOrderByRelationAggregateInput
   createdHrWarning?: Prisma.HrWarningOrderByRelationAggregateInput
   updatedHrWarnings?: Prisma.HrWarningOrderByRelationAggregateInput
@@ -410,7 +408,6 @@ export type UserWhereUniqueInput = Prisma.AtLeast<{
   updatedEvents?: Prisma.EventListRelationFilter
   providedFeedbacks?: Prisma.EventFeedbackListRelationFilter
   updatedEventFeedback?: Prisma.EventFeedbackListRelationFilter
-  feedbackRequests?: Prisma.FeedbackRequestListRelationFilter
   hrWarnings?: Prisma.HrWarningListRelationFilter
   createdHrWarning?: Prisma.HrWarningListRelationFilter
   updatedHrWarnings?: Prisma.HrWarningListRelationFilter
@@ -502,7 +499,6 @@ export type UserCreateInput = {
   updatedEvents?: Prisma.EventCreateNestedManyWithoutUpdatedByInput
   providedFeedbacks?: Prisma.EventFeedbackCreateNestedManyWithoutUserInput
   updatedEventFeedback?: Prisma.EventFeedbackCreateNestedManyWithoutUpdatedByInput
-  feedbackRequests?: Prisma.FeedbackRequestCreateNestedManyWithoutUserInput
   hrWarnings?: Prisma.HrWarningCreateNestedManyWithoutAssigneeInput
   createdHrWarning?: Prisma.HrWarningCreateNestedManyWithoutCreatedByInput
   updatedHrWarnings?: Prisma.HrWarningCreateNestedManyWithoutUpdatedByInput
@@ -555,7 +551,6 @@ export type UserUncheckedCreateInput = {
   updatedEvents?: Prisma.EventUncheckedCreateNestedManyWithoutUpdatedByInput
   providedFeedbacks?: Prisma.EventFeedbackUncheckedCreateNestedManyWithoutUserInput
   updatedEventFeedback?: Prisma.EventFeedbackUncheckedCreateNestedManyWithoutUpdatedByInput
-  feedbackRequests?: Prisma.FeedbackRequestUncheckedCreateNestedManyWithoutUserInput
   hrWarnings?: Prisma.HrWarningUncheckedCreateNestedManyWithoutAssigneeInput
   createdHrWarning?: Prisma.HrWarningUncheckedCreateNestedManyWithoutCreatedByInput
   updatedHrWarnings?: Prisma.HrWarningUncheckedCreateNestedManyWithoutUpdatedByInput
@@ -606,7 +601,6 @@ export type UserUpdateInput = {
   updatedEvents?: Prisma.EventUpdateManyWithoutUpdatedByNestedInput
   providedFeedbacks?: Prisma.EventFeedbackUpdateManyWithoutUserNestedInput
   updatedEventFeedback?: Prisma.EventFeedbackUpdateManyWithoutUpdatedByNestedInput
-  feedbackRequests?: Prisma.FeedbackRequestUpdateManyWithoutUserNestedInput
   hrWarnings?: Prisma.HrWarningUpdateManyWithoutAssigneeNestedInput
   createdHrWarning?: Prisma.HrWarningUpdateManyWithoutCreatedByNestedInput
   updatedHrWarnings?: Prisma.HrWarningUpdateManyWithoutUpdatedByNestedInput
@@ -659,7 +653,6 @@ export type UserUncheckedUpdateInput = {
   updatedEvents?: Prisma.EventUncheckedUpdateManyWithoutUpdatedByNestedInput
   providedFeedbacks?: Prisma.EventFeedbackUncheckedUpdateManyWithoutUserNestedInput
   updatedEventFeedback?: Prisma.EventFeedbackUncheckedUpdateManyWithoutUpdatedByNestedInput
-  feedbackRequests?: Prisma.FeedbackRequestUncheckedUpdateManyWithoutUserNestedInput
   hrWarnings?: Prisma.HrWarningUncheckedUpdateManyWithoutAssigneeNestedInput
   createdHrWarning?: Prisma.HrWarningUncheckedUpdateManyWithoutCreatedByNestedInput
   updatedHrWarnings?: Prisma.HrWarningUncheckedUpdateManyWithoutUpdatedByNestedInput
@@ -999,20 +992,6 @@ export type UserUpdateOneWithoutProvidedFeedbacksNestedInput = {
   delete?: Prisma.UserWhereInput | boolean
   connect?: Prisma.UserWhereUniqueInput
   update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutProvidedFeedbacksInput, Prisma.UserUpdateWithoutProvidedFeedbacksInput>, Prisma.UserUncheckedUpdateWithoutProvidedFeedbacksInput>
-}
-
-export type UserCreateNestedOneWithoutFeedbackRequestsInput = {
-  create?: Prisma.XOR<Prisma.UserCreateWithoutFeedbackRequestsInput, Prisma.UserUncheckedCreateWithoutFeedbackRequestsInput>
-  connectOrCreate?: Prisma.UserCreateOrConnectWithoutFeedbackRequestsInput
-  connect?: Prisma.UserWhereUniqueInput
-}
-
-export type UserUpdateOneRequiredWithoutFeedbackRequestsNestedInput = {
-  create?: Prisma.XOR<Prisma.UserCreateWithoutFeedbackRequestsInput, Prisma.UserUncheckedCreateWithoutFeedbackRequestsInput>
-  connectOrCreate?: Prisma.UserCreateOrConnectWithoutFeedbackRequestsInput
-  upsert?: Prisma.UserUpsertWithoutFeedbackRequestsInput
-  connect?: Prisma.UserWhereUniqueInput
-  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutFeedbackRequestsInput, Prisma.UserUpdateWithoutFeedbackRequestsInput>, Prisma.UserUncheckedUpdateWithoutFeedbackRequestsInput>
 }
 
 export type UserCreateNestedOneWithoutCreatedAvailabilitySlotsInput = {
@@ -1490,7 +1469,6 @@ export type UserCreateWithoutUpdatedUsersInput = {
   updatedEvents?: Prisma.EventCreateNestedManyWithoutUpdatedByInput
   providedFeedbacks?: Prisma.EventFeedbackCreateNestedManyWithoutUserInput
   updatedEventFeedback?: Prisma.EventFeedbackCreateNestedManyWithoutUpdatedByInput
-  feedbackRequests?: Prisma.FeedbackRequestCreateNestedManyWithoutUserInput
   hrWarnings?: Prisma.HrWarningCreateNestedManyWithoutAssigneeInput
   createdHrWarning?: Prisma.HrWarningCreateNestedManyWithoutCreatedByInput
   updatedHrWarnings?: Prisma.HrWarningCreateNestedManyWithoutUpdatedByInput
@@ -1542,7 +1520,6 @@ export type UserUncheckedCreateWithoutUpdatedUsersInput = {
   updatedEvents?: Prisma.EventUncheckedCreateNestedManyWithoutUpdatedByInput
   providedFeedbacks?: Prisma.EventFeedbackUncheckedCreateNestedManyWithoutUserInput
   updatedEventFeedback?: Prisma.EventFeedbackUncheckedCreateNestedManyWithoutUpdatedByInput
-  feedbackRequests?: Prisma.FeedbackRequestUncheckedCreateNestedManyWithoutUserInput
   hrWarnings?: Prisma.HrWarningUncheckedCreateNestedManyWithoutAssigneeInput
   createdHrWarning?: Prisma.HrWarningUncheckedCreateNestedManyWithoutCreatedByInput
   updatedHrWarnings?: Prisma.HrWarningUncheckedCreateNestedManyWithoutUpdatedByInput
@@ -1596,7 +1573,6 @@ export type UserCreateWithoutUpdatedByInput = {
   updatedEvents?: Prisma.EventCreateNestedManyWithoutUpdatedByInput
   providedFeedbacks?: Prisma.EventFeedbackCreateNestedManyWithoutUserInput
   updatedEventFeedback?: Prisma.EventFeedbackCreateNestedManyWithoutUpdatedByInput
-  feedbackRequests?: Prisma.FeedbackRequestCreateNestedManyWithoutUserInput
   hrWarnings?: Prisma.HrWarningCreateNestedManyWithoutAssigneeInput
   createdHrWarning?: Prisma.HrWarningCreateNestedManyWithoutCreatedByInput
   updatedHrWarnings?: Prisma.HrWarningCreateNestedManyWithoutUpdatedByInput
@@ -1648,7 +1624,6 @@ export type UserUncheckedCreateWithoutUpdatedByInput = {
   updatedEvents?: Prisma.EventUncheckedCreateNestedManyWithoutUpdatedByInput
   providedFeedbacks?: Prisma.EventFeedbackUncheckedCreateNestedManyWithoutUserInput
   updatedEventFeedback?: Prisma.EventFeedbackUncheckedCreateNestedManyWithoutUpdatedByInput
-  feedbackRequests?: Prisma.FeedbackRequestUncheckedCreateNestedManyWithoutUserInput
   hrWarnings?: Prisma.HrWarningUncheckedCreateNestedManyWithoutAssigneeInput
   createdHrWarning?: Prisma.HrWarningUncheckedCreateNestedManyWithoutCreatedByInput
   updatedHrWarnings?: Prisma.HrWarningUncheckedCreateNestedManyWithoutUpdatedByInput
@@ -1720,7 +1695,6 @@ export type UserUpdateWithoutUpdatedUsersInput = {
   updatedEvents?: Prisma.EventUpdateManyWithoutUpdatedByNestedInput
   providedFeedbacks?: Prisma.EventFeedbackUpdateManyWithoutUserNestedInput
   updatedEventFeedback?: Prisma.EventFeedbackUpdateManyWithoutUpdatedByNestedInput
-  feedbackRequests?: Prisma.FeedbackRequestUpdateManyWithoutUserNestedInput
   hrWarnings?: Prisma.HrWarningUpdateManyWithoutAssigneeNestedInput
   createdHrWarning?: Prisma.HrWarningUpdateManyWithoutCreatedByNestedInput
   updatedHrWarnings?: Prisma.HrWarningUpdateManyWithoutUpdatedByNestedInput
@@ -1772,7 +1746,6 @@ export type UserUncheckedUpdateWithoutUpdatedUsersInput = {
   updatedEvents?: Prisma.EventUncheckedUpdateManyWithoutUpdatedByNestedInput
   providedFeedbacks?: Prisma.EventFeedbackUncheckedUpdateManyWithoutUserNestedInput
   updatedEventFeedback?: Prisma.EventFeedbackUncheckedUpdateManyWithoutUpdatedByNestedInput
-  feedbackRequests?: Prisma.FeedbackRequestUncheckedUpdateManyWithoutUserNestedInput
   hrWarnings?: Prisma.HrWarningUncheckedUpdateManyWithoutAssigneeNestedInput
   createdHrWarning?: Prisma.HrWarningUncheckedUpdateManyWithoutCreatedByNestedInput
   updatedHrWarnings?: Prisma.HrWarningUncheckedUpdateManyWithoutUpdatedByNestedInput
@@ -1856,7 +1829,6 @@ export type UserCreateWithoutCreatedEventsInput = {
   updatedEvents?: Prisma.EventCreateNestedManyWithoutUpdatedByInput
   providedFeedbacks?: Prisma.EventFeedbackCreateNestedManyWithoutUserInput
   updatedEventFeedback?: Prisma.EventFeedbackCreateNestedManyWithoutUpdatedByInput
-  feedbackRequests?: Prisma.FeedbackRequestCreateNestedManyWithoutUserInput
   hrWarnings?: Prisma.HrWarningCreateNestedManyWithoutAssigneeInput
   createdHrWarning?: Prisma.HrWarningCreateNestedManyWithoutCreatedByInput
   updatedHrWarnings?: Prisma.HrWarningCreateNestedManyWithoutUpdatedByInput
@@ -1908,7 +1880,6 @@ export type UserUncheckedCreateWithoutCreatedEventsInput = {
   updatedEvents?: Prisma.EventUncheckedCreateNestedManyWithoutUpdatedByInput
   providedFeedbacks?: Prisma.EventFeedbackUncheckedCreateNestedManyWithoutUserInput
   updatedEventFeedback?: Prisma.EventFeedbackUncheckedCreateNestedManyWithoutUpdatedByInput
-  feedbackRequests?: Prisma.FeedbackRequestUncheckedCreateNestedManyWithoutUserInput
   hrWarnings?: Prisma.HrWarningUncheckedCreateNestedManyWithoutAssigneeInput
   createdHrWarning?: Prisma.HrWarningUncheckedCreateNestedManyWithoutCreatedByInput
   updatedHrWarnings?: Prisma.HrWarningUncheckedCreateNestedManyWithoutUpdatedByInput
@@ -1963,7 +1934,6 @@ export type UserCreateWithoutUpdatedEventsInput = {
   createdEvents?: Prisma.EventCreateNestedManyWithoutCreatedByInput
   providedFeedbacks?: Prisma.EventFeedbackCreateNestedManyWithoutUserInput
   updatedEventFeedback?: Prisma.EventFeedbackCreateNestedManyWithoutUpdatedByInput
-  feedbackRequests?: Prisma.FeedbackRequestCreateNestedManyWithoutUserInput
   hrWarnings?: Prisma.HrWarningCreateNestedManyWithoutAssigneeInput
   createdHrWarning?: Prisma.HrWarningCreateNestedManyWithoutCreatedByInput
   updatedHrWarnings?: Prisma.HrWarningCreateNestedManyWithoutUpdatedByInput
@@ -2015,7 +1985,6 @@ export type UserUncheckedCreateWithoutUpdatedEventsInput = {
   createdEvents?: Prisma.EventUncheckedCreateNestedManyWithoutCreatedByInput
   providedFeedbacks?: Prisma.EventFeedbackUncheckedCreateNestedManyWithoutUserInput
   updatedEventFeedback?: Prisma.EventFeedbackUncheckedCreateNestedManyWithoutUpdatedByInput
-  feedbackRequests?: Prisma.FeedbackRequestUncheckedCreateNestedManyWithoutUserInput
   hrWarnings?: Prisma.HrWarningUncheckedCreateNestedManyWithoutAssigneeInput
   createdHrWarning?: Prisma.HrWarningUncheckedCreateNestedManyWithoutCreatedByInput
   updatedHrWarnings?: Prisma.HrWarningUncheckedCreateNestedManyWithoutUpdatedByInput
@@ -2081,7 +2050,6 @@ export type UserUpdateWithoutCreatedEventsInput = {
   updatedEvents?: Prisma.EventUpdateManyWithoutUpdatedByNestedInput
   providedFeedbacks?: Prisma.EventFeedbackUpdateManyWithoutUserNestedInput
   updatedEventFeedback?: Prisma.EventFeedbackUpdateManyWithoutUpdatedByNestedInput
-  feedbackRequests?: Prisma.FeedbackRequestUpdateManyWithoutUserNestedInput
   hrWarnings?: Prisma.HrWarningUpdateManyWithoutAssigneeNestedInput
   createdHrWarning?: Prisma.HrWarningUpdateManyWithoutCreatedByNestedInput
   updatedHrWarnings?: Prisma.HrWarningUpdateManyWithoutUpdatedByNestedInput
@@ -2133,7 +2101,6 @@ export type UserUncheckedUpdateWithoutCreatedEventsInput = {
   updatedEvents?: Prisma.EventUncheckedUpdateManyWithoutUpdatedByNestedInput
   providedFeedbacks?: Prisma.EventFeedbackUncheckedUpdateManyWithoutUserNestedInput
   updatedEventFeedback?: Prisma.EventFeedbackUncheckedUpdateManyWithoutUpdatedByNestedInput
-  feedbackRequests?: Prisma.FeedbackRequestUncheckedUpdateManyWithoutUserNestedInput
   hrWarnings?: Prisma.HrWarningUncheckedUpdateManyWithoutAssigneeNestedInput
   createdHrWarning?: Prisma.HrWarningUncheckedUpdateManyWithoutCreatedByNestedInput
   updatedHrWarnings?: Prisma.HrWarningUncheckedUpdateManyWithoutUpdatedByNestedInput
@@ -2194,7 +2161,6 @@ export type UserUpdateWithoutUpdatedEventsInput = {
   createdEvents?: Prisma.EventUpdateManyWithoutCreatedByNestedInput
   providedFeedbacks?: Prisma.EventFeedbackUpdateManyWithoutUserNestedInput
   updatedEventFeedback?: Prisma.EventFeedbackUpdateManyWithoutUpdatedByNestedInput
-  feedbackRequests?: Prisma.FeedbackRequestUpdateManyWithoutUserNestedInput
   hrWarnings?: Prisma.HrWarningUpdateManyWithoutAssigneeNestedInput
   createdHrWarning?: Prisma.HrWarningUpdateManyWithoutCreatedByNestedInput
   updatedHrWarnings?: Prisma.HrWarningUpdateManyWithoutUpdatedByNestedInput
@@ -2246,7 +2212,6 @@ export type UserUncheckedUpdateWithoutUpdatedEventsInput = {
   createdEvents?: Prisma.EventUncheckedUpdateManyWithoutCreatedByNestedInput
   providedFeedbacks?: Prisma.EventFeedbackUncheckedUpdateManyWithoutUserNestedInput
   updatedEventFeedback?: Prisma.EventFeedbackUncheckedUpdateManyWithoutUpdatedByNestedInput
-  feedbackRequests?: Prisma.FeedbackRequestUncheckedUpdateManyWithoutUserNestedInput
   hrWarnings?: Prisma.HrWarningUncheckedUpdateManyWithoutAssigneeNestedInput
   createdHrWarning?: Prisma.HrWarningUncheckedUpdateManyWithoutCreatedByNestedInput
   updatedHrWarnings?: Prisma.HrWarningUncheckedUpdateManyWithoutUpdatedByNestedInput
@@ -2297,7 +2262,6 @@ export type UserCreateWithoutHrWarningsInput = {
   updatedEvents?: Prisma.EventCreateNestedManyWithoutUpdatedByInput
   providedFeedbacks?: Prisma.EventFeedbackCreateNestedManyWithoutUserInput
   updatedEventFeedback?: Prisma.EventFeedbackCreateNestedManyWithoutUpdatedByInput
-  feedbackRequests?: Prisma.FeedbackRequestCreateNestedManyWithoutUserInput
   createdHrWarning?: Prisma.HrWarningCreateNestedManyWithoutCreatedByInput
   updatedHrWarnings?: Prisma.HrWarningCreateNestedManyWithoutUpdatedByInput
   CreatedAllowedUser?: Prisma.AllowedUserCreateNestedManyWithoutCreatedByInput
@@ -2349,7 +2313,6 @@ export type UserUncheckedCreateWithoutHrWarningsInput = {
   updatedEvents?: Prisma.EventUncheckedCreateNestedManyWithoutUpdatedByInput
   providedFeedbacks?: Prisma.EventFeedbackUncheckedCreateNestedManyWithoutUserInput
   updatedEventFeedback?: Prisma.EventFeedbackUncheckedCreateNestedManyWithoutUpdatedByInput
-  feedbackRequests?: Prisma.FeedbackRequestUncheckedCreateNestedManyWithoutUserInput
   createdHrWarning?: Prisma.HrWarningUncheckedCreateNestedManyWithoutCreatedByInput
   updatedHrWarnings?: Prisma.HrWarningUncheckedCreateNestedManyWithoutUpdatedByInput
   CreatedAllowedUser?: Prisma.AllowedUserUncheckedCreateNestedManyWithoutCreatedByInput
@@ -2404,7 +2367,6 @@ export type UserCreateWithoutUpdatedHrWarningsInput = {
   updatedEvents?: Prisma.EventCreateNestedManyWithoutUpdatedByInput
   providedFeedbacks?: Prisma.EventFeedbackCreateNestedManyWithoutUserInput
   updatedEventFeedback?: Prisma.EventFeedbackCreateNestedManyWithoutUpdatedByInput
-  feedbackRequests?: Prisma.FeedbackRequestCreateNestedManyWithoutUserInput
   hrWarnings?: Prisma.HrWarningCreateNestedManyWithoutAssigneeInput
   createdHrWarning?: Prisma.HrWarningCreateNestedManyWithoutCreatedByInput
   CreatedAllowedUser?: Prisma.AllowedUserCreateNestedManyWithoutCreatedByInput
@@ -2456,7 +2418,6 @@ export type UserUncheckedCreateWithoutUpdatedHrWarningsInput = {
   updatedEvents?: Prisma.EventUncheckedCreateNestedManyWithoutUpdatedByInput
   providedFeedbacks?: Prisma.EventFeedbackUncheckedCreateNestedManyWithoutUserInput
   updatedEventFeedback?: Prisma.EventFeedbackUncheckedCreateNestedManyWithoutUpdatedByInput
-  feedbackRequests?: Prisma.FeedbackRequestUncheckedCreateNestedManyWithoutUserInput
   hrWarnings?: Prisma.HrWarningUncheckedCreateNestedManyWithoutAssigneeInput
   createdHrWarning?: Prisma.HrWarningUncheckedCreateNestedManyWithoutCreatedByInput
   CreatedAllowedUser?: Prisma.AllowedUserUncheckedCreateNestedManyWithoutCreatedByInput
@@ -2511,7 +2472,6 @@ export type UserCreateWithoutCreatedHrWarningInput = {
   updatedEvents?: Prisma.EventCreateNestedManyWithoutUpdatedByInput
   providedFeedbacks?: Prisma.EventFeedbackCreateNestedManyWithoutUserInput
   updatedEventFeedback?: Prisma.EventFeedbackCreateNestedManyWithoutUpdatedByInput
-  feedbackRequests?: Prisma.FeedbackRequestCreateNestedManyWithoutUserInput
   hrWarnings?: Prisma.HrWarningCreateNestedManyWithoutAssigneeInput
   updatedHrWarnings?: Prisma.HrWarningCreateNestedManyWithoutUpdatedByInput
   CreatedAllowedUser?: Prisma.AllowedUserCreateNestedManyWithoutCreatedByInput
@@ -2563,7 +2523,6 @@ export type UserUncheckedCreateWithoutCreatedHrWarningInput = {
   updatedEvents?: Prisma.EventUncheckedCreateNestedManyWithoutUpdatedByInput
   providedFeedbacks?: Prisma.EventFeedbackUncheckedCreateNestedManyWithoutUserInput
   updatedEventFeedback?: Prisma.EventFeedbackUncheckedCreateNestedManyWithoutUpdatedByInput
-  feedbackRequests?: Prisma.FeedbackRequestUncheckedCreateNestedManyWithoutUserInput
   hrWarnings?: Prisma.HrWarningUncheckedCreateNestedManyWithoutAssigneeInput
   updatedHrWarnings?: Prisma.HrWarningUncheckedCreateNestedManyWithoutUpdatedByInput
   CreatedAllowedUser?: Prisma.AllowedUserUncheckedCreateNestedManyWithoutCreatedByInput
@@ -2629,7 +2588,6 @@ export type UserUpdateWithoutHrWarningsInput = {
   updatedEvents?: Prisma.EventUpdateManyWithoutUpdatedByNestedInput
   providedFeedbacks?: Prisma.EventFeedbackUpdateManyWithoutUserNestedInput
   updatedEventFeedback?: Prisma.EventFeedbackUpdateManyWithoutUpdatedByNestedInput
-  feedbackRequests?: Prisma.FeedbackRequestUpdateManyWithoutUserNestedInput
   createdHrWarning?: Prisma.HrWarningUpdateManyWithoutCreatedByNestedInput
   updatedHrWarnings?: Prisma.HrWarningUpdateManyWithoutUpdatedByNestedInput
   CreatedAllowedUser?: Prisma.AllowedUserUpdateManyWithoutCreatedByNestedInput
@@ -2681,7 +2639,6 @@ export type UserUncheckedUpdateWithoutHrWarningsInput = {
   updatedEvents?: Prisma.EventUncheckedUpdateManyWithoutUpdatedByNestedInput
   providedFeedbacks?: Prisma.EventFeedbackUncheckedUpdateManyWithoutUserNestedInput
   updatedEventFeedback?: Prisma.EventFeedbackUncheckedUpdateManyWithoutUpdatedByNestedInput
-  feedbackRequests?: Prisma.FeedbackRequestUncheckedUpdateManyWithoutUserNestedInput
   createdHrWarning?: Prisma.HrWarningUncheckedUpdateManyWithoutCreatedByNestedInput
   updatedHrWarnings?: Prisma.HrWarningUncheckedUpdateManyWithoutUpdatedByNestedInput
   CreatedAllowedUser?: Prisma.AllowedUserUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -2742,7 +2699,6 @@ export type UserUpdateWithoutUpdatedHrWarningsInput = {
   updatedEvents?: Prisma.EventUpdateManyWithoutUpdatedByNestedInput
   providedFeedbacks?: Prisma.EventFeedbackUpdateManyWithoutUserNestedInput
   updatedEventFeedback?: Prisma.EventFeedbackUpdateManyWithoutUpdatedByNestedInput
-  feedbackRequests?: Prisma.FeedbackRequestUpdateManyWithoutUserNestedInput
   hrWarnings?: Prisma.HrWarningUpdateManyWithoutAssigneeNestedInput
   createdHrWarning?: Prisma.HrWarningUpdateManyWithoutCreatedByNestedInput
   CreatedAllowedUser?: Prisma.AllowedUserUpdateManyWithoutCreatedByNestedInput
@@ -2794,7 +2750,6 @@ export type UserUncheckedUpdateWithoutUpdatedHrWarningsInput = {
   updatedEvents?: Prisma.EventUncheckedUpdateManyWithoutUpdatedByNestedInput
   providedFeedbacks?: Prisma.EventFeedbackUncheckedUpdateManyWithoutUserNestedInput
   updatedEventFeedback?: Prisma.EventFeedbackUncheckedUpdateManyWithoutUpdatedByNestedInput
-  feedbackRequests?: Prisma.FeedbackRequestUncheckedUpdateManyWithoutUserNestedInput
   hrWarnings?: Prisma.HrWarningUncheckedUpdateManyWithoutAssigneeNestedInput
   createdHrWarning?: Prisma.HrWarningUncheckedUpdateManyWithoutCreatedByNestedInput
   CreatedAllowedUser?: Prisma.AllowedUserUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -2855,7 +2810,6 @@ export type UserUpdateWithoutCreatedHrWarningInput = {
   updatedEvents?: Prisma.EventUpdateManyWithoutUpdatedByNestedInput
   providedFeedbacks?: Prisma.EventFeedbackUpdateManyWithoutUserNestedInput
   updatedEventFeedback?: Prisma.EventFeedbackUpdateManyWithoutUpdatedByNestedInput
-  feedbackRequests?: Prisma.FeedbackRequestUpdateManyWithoutUserNestedInput
   hrWarnings?: Prisma.HrWarningUpdateManyWithoutAssigneeNestedInput
   updatedHrWarnings?: Prisma.HrWarningUpdateManyWithoutUpdatedByNestedInput
   CreatedAllowedUser?: Prisma.AllowedUserUpdateManyWithoutCreatedByNestedInput
@@ -2907,7 +2861,6 @@ export type UserUncheckedUpdateWithoutCreatedHrWarningInput = {
   updatedEvents?: Prisma.EventUncheckedUpdateManyWithoutUpdatedByNestedInput
   providedFeedbacks?: Prisma.EventFeedbackUncheckedUpdateManyWithoutUserNestedInput
   updatedEventFeedback?: Prisma.EventFeedbackUncheckedUpdateManyWithoutUpdatedByNestedInput
-  feedbackRequests?: Prisma.FeedbackRequestUncheckedUpdateManyWithoutUserNestedInput
   hrWarnings?: Prisma.HrWarningUncheckedUpdateManyWithoutAssigneeNestedInput
   updatedHrWarnings?: Prisma.HrWarningUncheckedUpdateManyWithoutUpdatedByNestedInput
   CreatedAllowedUser?: Prisma.AllowedUserUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -2956,7 +2909,6 @@ export type UserCreateWithoutUpdatedEventFeedbackInput = {
   createdEvents?: Prisma.EventCreateNestedManyWithoutCreatedByInput
   updatedEvents?: Prisma.EventCreateNestedManyWithoutUpdatedByInput
   providedFeedbacks?: Prisma.EventFeedbackCreateNestedManyWithoutUserInput
-  feedbackRequests?: Prisma.FeedbackRequestCreateNestedManyWithoutUserInput
   hrWarnings?: Prisma.HrWarningCreateNestedManyWithoutAssigneeInput
   createdHrWarning?: Prisma.HrWarningCreateNestedManyWithoutCreatedByInput
   updatedHrWarnings?: Prisma.HrWarningCreateNestedManyWithoutUpdatedByInput
@@ -3008,7 +2960,6 @@ export type UserUncheckedCreateWithoutUpdatedEventFeedbackInput = {
   createdEvents?: Prisma.EventUncheckedCreateNestedManyWithoutCreatedByInput
   updatedEvents?: Prisma.EventUncheckedCreateNestedManyWithoutUpdatedByInput
   providedFeedbacks?: Prisma.EventFeedbackUncheckedCreateNestedManyWithoutUserInput
-  feedbackRequests?: Prisma.FeedbackRequestUncheckedCreateNestedManyWithoutUserInput
   hrWarnings?: Prisma.HrWarningUncheckedCreateNestedManyWithoutAssigneeInput
   createdHrWarning?: Prisma.HrWarningUncheckedCreateNestedManyWithoutCreatedByInput
   updatedHrWarnings?: Prisma.HrWarningUncheckedCreateNestedManyWithoutUpdatedByInput
@@ -3063,7 +3014,6 @@ export type UserCreateWithoutProvidedFeedbacksInput = {
   createdEvents?: Prisma.EventCreateNestedManyWithoutCreatedByInput
   updatedEvents?: Prisma.EventCreateNestedManyWithoutUpdatedByInput
   updatedEventFeedback?: Prisma.EventFeedbackCreateNestedManyWithoutUpdatedByInput
-  feedbackRequests?: Prisma.FeedbackRequestCreateNestedManyWithoutUserInput
   hrWarnings?: Prisma.HrWarningCreateNestedManyWithoutAssigneeInput
   createdHrWarning?: Prisma.HrWarningCreateNestedManyWithoutCreatedByInput
   updatedHrWarnings?: Prisma.HrWarningCreateNestedManyWithoutUpdatedByInput
@@ -3115,7 +3065,6 @@ export type UserUncheckedCreateWithoutProvidedFeedbacksInput = {
   createdEvents?: Prisma.EventUncheckedCreateNestedManyWithoutCreatedByInput
   updatedEvents?: Prisma.EventUncheckedCreateNestedManyWithoutUpdatedByInput
   updatedEventFeedback?: Prisma.EventFeedbackUncheckedCreateNestedManyWithoutUpdatedByInput
-  feedbackRequests?: Prisma.FeedbackRequestUncheckedCreateNestedManyWithoutUserInput
   hrWarnings?: Prisma.HrWarningUncheckedCreateNestedManyWithoutAssigneeInput
   createdHrWarning?: Prisma.HrWarningUncheckedCreateNestedManyWithoutCreatedByInput
   updatedHrWarnings?: Prisma.HrWarningUncheckedCreateNestedManyWithoutUpdatedByInput
@@ -3181,7 +3130,6 @@ export type UserUpdateWithoutUpdatedEventFeedbackInput = {
   createdEvents?: Prisma.EventUpdateManyWithoutCreatedByNestedInput
   updatedEvents?: Prisma.EventUpdateManyWithoutUpdatedByNestedInput
   providedFeedbacks?: Prisma.EventFeedbackUpdateManyWithoutUserNestedInput
-  feedbackRequests?: Prisma.FeedbackRequestUpdateManyWithoutUserNestedInput
   hrWarnings?: Prisma.HrWarningUpdateManyWithoutAssigneeNestedInput
   createdHrWarning?: Prisma.HrWarningUpdateManyWithoutCreatedByNestedInput
   updatedHrWarnings?: Prisma.HrWarningUpdateManyWithoutUpdatedByNestedInput
@@ -3233,7 +3181,6 @@ export type UserUncheckedUpdateWithoutUpdatedEventFeedbackInput = {
   createdEvents?: Prisma.EventUncheckedUpdateManyWithoutCreatedByNestedInput
   updatedEvents?: Prisma.EventUncheckedUpdateManyWithoutUpdatedByNestedInput
   providedFeedbacks?: Prisma.EventFeedbackUncheckedUpdateManyWithoutUserNestedInput
-  feedbackRequests?: Prisma.FeedbackRequestUncheckedUpdateManyWithoutUserNestedInput
   hrWarnings?: Prisma.HrWarningUncheckedUpdateManyWithoutAssigneeNestedInput
   createdHrWarning?: Prisma.HrWarningUncheckedUpdateManyWithoutCreatedByNestedInput
   updatedHrWarnings?: Prisma.HrWarningUncheckedUpdateManyWithoutUpdatedByNestedInput
@@ -3294,7 +3241,6 @@ export type UserUpdateWithoutProvidedFeedbacksInput = {
   createdEvents?: Prisma.EventUpdateManyWithoutCreatedByNestedInput
   updatedEvents?: Prisma.EventUpdateManyWithoutUpdatedByNestedInput
   updatedEventFeedback?: Prisma.EventFeedbackUpdateManyWithoutUpdatedByNestedInput
-  feedbackRequests?: Prisma.FeedbackRequestUpdateManyWithoutUserNestedInput
   hrWarnings?: Prisma.HrWarningUpdateManyWithoutAssigneeNestedInput
   createdHrWarning?: Prisma.HrWarningUpdateManyWithoutCreatedByNestedInput
   updatedHrWarnings?: Prisma.HrWarningUpdateManyWithoutUpdatedByNestedInput
@@ -3346,227 +3292,6 @@ export type UserUncheckedUpdateWithoutProvidedFeedbacksInput = {
   createdEvents?: Prisma.EventUncheckedUpdateManyWithoutCreatedByNestedInput
   updatedEvents?: Prisma.EventUncheckedUpdateManyWithoutUpdatedByNestedInput
   updatedEventFeedback?: Prisma.EventFeedbackUncheckedUpdateManyWithoutUpdatedByNestedInput
-  feedbackRequests?: Prisma.FeedbackRequestUncheckedUpdateManyWithoutUserNestedInput
-  hrWarnings?: Prisma.HrWarningUncheckedUpdateManyWithoutAssigneeNestedInput
-  createdHrWarning?: Prisma.HrWarningUncheckedUpdateManyWithoutCreatedByNestedInput
-  updatedHrWarnings?: Prisma.HrWarningUncheckedUpdateManyWithoutUpdatedByNestedInput
-  CreatedAllowedUser?: Prisma.AllowedUserUncheckedUpdateManyWithoutCreatedByNestedInput
-  UpdatedAllowance?: Prisma.AllowedUserUncheckedUpdateManyWithoutUpdatedByNestedInput
-  eventAssignments?: Prisma.EventAssignmentUncheckedUpdateManyWithoutUserNestedInput
-  CreatedEventAssignment?: Prisma.EventAssignmentUncheckedUpdateManyWithoutCreatedByNestedInput
-  UpdatedEventAssignment?: Prisma.EventAssignmentUncheckedUpdateManyWithoutUpdatedByNestedInput
-  updatedUsers?: Prisma.UserUncheckedUpdateManyWithoutUpdatedByNestedInput
-  createdAvailabilitySlots?: Prisma.AvailabilitySlotUncheckedUpdateManyWithoutCreatedByNestedInput
-  updatedAvailabilitySlots?: Prisma.AvailabilitySlotUncheckedUpdateManyWithoutUpdatedByNestedInput
-  availabilityEntries?: Prisma.AvailabilityEntryUncheckedUpdateManyWithoutUserNestedInput
-  UpdatedAvailabilityEntries?: Prisma.AvailabilityEntryUncheckedUpdateManyWithoutUpdatedByNestedInput
-  entryCancelRequests?: Prisma.EntryCancelRequestUncheckedUpdateManyWithoutRequestedByNestedInput
-  reviewedEntryCancelRequests?: Prisma.EntryCancelRequestUncheckedUpdateManyWithoutReviewedByNestedInput
-  assignmentCancelRequests?: Prisma.AssignmentCancelRequestUncheckedUpdateManyWithoutRequestedByNestedInput
-  reviewedAssignmentCancelRequests?: Prisma.AssignmentCancelRequestUncheckedUpdateManyWithoutReviewedByNestedInput
-}
-
-export type UserCreateWithoutFeedbackRequestsInput = {
-  id?: string
-  name?: string | null
-  email: string
-  emailVerified?: Date | string | null
-  image?: string | null
-  reqStatus?: $Enums.ReqStatus
-  rating?: number
-  deletedAt?: Date | string | null
-  deleted?: boolean
-  createdAt?: Date | string
-  updatedAt?: Date | string | null
-  accounts?: Prisma.AccountCreateNestedManyWithoutUserInput
-  sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
-  Authenticator?: Prisma.AuthenticatorCreateNestedManyWithoutUserInput
-  joinRequests?: Prisma.JoinRequestCreateNestedManyWithoutCreatedByInput
-  updatedJoinRequests?: Prisma.JoinRequestCreateNestedManyWithoutUpdatedByInput
-  updatedBy?: Prisma.UserCreateNestedOneWithoutUpdatedUsersInput
-  memberStatusCreated?: Prisma.MemberStatusLogCreateNestedManyWithoutCreatedByInput
-  memberStatusLogs?: Prisma.MemberStatusLogCreateNestedManyWithoutUserInput
-  memberStatusChanges?: Prisma.MemberStatusLogCreateNestedManyWithoutUpdatedByInput
-  positionChanges?: Prisma.PositionHistoryCreateNestedManyWithoutUpdatedByInput
-  positionCreations?: Prisma.PositionHistoryCreateNestedManyWithoutCreatedByInput
-  positionHistories?: Prisma.PositionHistoryCreateNestedManyWithoutUserInput
-  ratingHistory?: Prisma.RatingHistoryCreateNestedManyWithoutUserInput
-  createdRatings?: Prisma.RatingHistoryCreateNestedManyWithoutCreatedByInput
-  updatedRatings?: Prisma.RatingHistoryCreateNestedManyWithoutUpdatedByInput
-  createdEvents?: Prisma.EventCreateNestedManyWithoutCreatedByInput
-  updatedEvents?: Prisma.EventCreateNestedManyWithoutUpdatedByInput
-  providedFeedbacks?: Prisma.EventFeedbackCreateNestedManyWithoutUserInput
-  updatedEventFeedback?: Prisma.EventFeedbackCreateNestedManyWithoutUpdatedByInput
-  hrWarnings?: Prisma.HrWarningCreateNestedManyWithoutAssigneeInput
-  createdHrWarning?: Prisma.HrWarningCreateNestedManyWithoutCreatedByInput
-  updatedHrWarnings?: Prisma.HrWarningCreateNestedManyWithoutUpdatedByInput
-  CreatedAllowedUser?: Prisma.AllowedUserCreateNestedManyWithoutCreatedByInput
-  ownAllowance?: Prisma.AllowedUserCreateNestedOneWithoutUserInput
-  UpdatedAllowance?: Prisma.AllowedUserCreateNestedManyWithoutUpdatedByInput
-  eventAssignments?: Prisma.EventAssignmentCreateNestedManyWithoutUserInput
-  CreatedEventAssignment?: Prisma.EventAssignmentCreateNestedManyWithoutCreatedByInput
-  UpdatedEventAssignment?: Prisma.EventAssignmentCreateNestedManyWithoutUpdatedByInput
-  updatedUsers?: Prisma.UserCreateNestedManyWithoutUpdatedByInput
-  createdAvailabilitySlots?: Prisma.AvailabilitySlotCreateNestedManyWithoutCreatedByInput
-  updatedAvailabilitySlots?: Prisma.AvailabilitySlotCreateNestedManyWithoutUpdatedByInput
-  availabilityEntries?: Prisma.AvailabilityEntryCreateNestedManyWithoutUserInput
-  UpdatedAvailabilityEntries?: Prisma.AvailabilityEntryCreateNestedManyWithoutUpdatedByInput
-  entryCancelRequests?: Prisma.EntryCancelRequestCreateNestedManyWithoutRequestedByInput
-  reviewedEntryCancelRequests?: Prisma.EntryCancelRequestCreateNestedManyWithoutReviewedByInput
-  assignmentCancelRequests?: Prisma.AssignmentCancelRequestCreateNestedManyWithoutRequestedByInput
-  reviewedAssignmentCancelRequests?: Prisma.AssignmentCancelRequestCreateNestedManyWithoutReviewedByInput
-}
-
-export type UserUncheckedCreateWithoutFeedbackRequestsInput = {
-  id?: string
-  name?: string | null
-  email: string
-  emailVerified?: Date | string | null
-  image?: string | null
-  reqStatus?: $Enums.ReqStatus
-  rating?: number
-  deletedAt?: Date | string | null
-  deleted?: boolean
-  createdAt?: Date | string
-  updatedAt?: Date | string | null
-  updatedById?: string | null
-  allowedUserId?: string | null
-  accounts?: Prisma.AccountUncheckedCreateNestedManyWithoutUserInput
-  sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
-  Authenticator?: Prisma.AuthenticatorUncheckedCreateNestedManyWithoutUserInput
-  joinRequests?: Prisma.JoinRequestUncheckedCreateNestedManyWithoutCreatedByInput
-  updatedJoinRequests?: Prisma.JoinRequestUncheckedCreateNestedManyWithoutUpdatedByInput
-  memberStatusCreated?: Prisma.MemberStatusLogUncheckedCreateNestedManyWithoutCreatedByInput
-  memberStatusLogs?: Prisma.MemberStatusLogUncheckedCreateNestedManyWithoutUserInput
-  memberStatusChanges?: Prisma.MemberStatusLogUncheckedCreateNestedManyWithoutUpdatedByInput
-  positionChanges?: Prisma.PositionHistoryUncheckedCreateNestedManyWithoutUpdatedByInput
-  positionCreations?: Prisma.PositionHistoryUncheckedCreateNestedManyWithoutCreatedByInput
-  positionHistories?: Prisma.PositionHistoryUncheckedCreateNestedManyWithoutUserInput
-  ratingHistory?: Prisma.RatingHistoryUncheckedCreateNestedManyWithoutUserInput
-  createdRatings?: Prisma.RatingHistoryUncheckedCreateNestedManyWithoutCreatedByInput
-  updatedRatings?: Prisma.RatingHistoryUncheckedCreateNestedManyWithoutUpdatedByInput
-  createdEvents?: Prisma.EventUncheckedCreateNestedManyWithoutCreatedByInput
-  updatedEvents?: Prisma.EventUncheckedCreateNestedManyWithoutUpdatedByInput
-  providedFeedbacks?: Prisma.EventFeedbackUncheckedCreateNestedManyWithoutUserInput
-  updatedEventFeedback?: Prisma.EventFeedbackUncheckedCreateNestedManyWithoutUpdatedByInput
-  hrWarnings?: Prisma.HrWarningUncheckedCreateNestedManyWithoutAssigneeInput
-  createdHrWarning?: Prisma.HrWarningUncheckedCreateNestedManyWithoutCreatedByInput
-  updatedHrWarnings?: Prisma.HrWarningUncheckedCreateNestedManyWithoutUpdatedByInput
-  CreatedAllowedUser?: Prisma.AllowedUserUncheckedCreateNestedManyWithoutCreatedByInput
-  UpdatedAllowance?: Prisma.AllowedUserUncheckedCreateNestedManyWithoutUpdatedByInput
-  eventAssignments?: Prisma.EventAssignmentUncheckedCreateNestedManyWithoutUserInput
-  CreatedEventAssignment?: Prisma.EventAssignmentUncheckedCreateNestedManyWithoutCreatedByInput
-  UpdatedEventAssignment?: Prisma.EventAssignmentUncheckedCreateNestedManyWithoutUpdatedByInput
-  updatedUsers?: Prisma.UserUncheckedCreateNestedManyWithoutUpdatedByInput
-  createdAvailabilitySlots?: Prisma.AvailabilitySlotUncheckedCreateNestedManyWithoutCreatedByInput
-  updatedAvailabilitySlots?: Prisma.AvailabilitySlotUncheckedCreateNestedManyWithoutUpdatedByInput
-  availabilityEntries?: Prisma.AvailabilityEntryUncheckedCreateNestedManyWithoutUserInput
-  UpdatedAvailabilityEntries?: Prisma.AvailabilityEntryUncheckedCreateNestedManyWithoutUpdatedByInput
-  entryCancelRequests?: Prisma.EntryCancelRequestUncheckedCreateNestedManyWithoutRequestedByInput
-  reviewedEntryCancelRequests?: Prisma.EntryCancelRequestUncheckedCreateNestedManyWithoutReviewedByInput
-  assignmentCancelRequests?: Prisma.AssignmentCancelRequestUncheckedCreateNestedManyWithoutRequestedByInput
-  reviewedAssignmentCancelRequests?: Prisma.AssignmentCancelRequestUncheckedCreateNestedManyWithoutReviewedByInput
-}
-
-export type UserCreateOrConnectWithoutFeedbackRequestsInput = {
-  where: Prisma.UserWhereUniqueInput
-  create: Prisma.XOR<Prisma.UserCreateWithoutFeedbackRequestsInput, Prisma.UserUncheckedCreateWithoutFeedbackRequestsInput>
-}
-
-export type UserUpsertWithoutFeedbackRequestsInput = {
-  update: Prisma.XOR<Prisma.UserUpdateWithoutFeedbackRequestsInput, Prisma.UserUncheckedUpdateWithoutFeedbackRequestsInput>
-  create: Prisma.XOR<Prisma.UserCreateWithoutFeedbackRequestsInput, Prisma.UserUncheckedCreateWithoutFeedbackRequestsInput>
-  where?: Prisma.UserWhereInput
-}
-
-export type UserUpdateToOneWithWhereWithoutFeedbackRequestsInput = {
-  where?: Prisma.UserWhereInput
-  data: Prisma.XOR<Prisma.UserUpdateWithoutFeedbackRequestsInput, Prisma.UserUncheckedUpdateWithoutFeedbackRequestsInput>
-}
-
-export type UserUpdateWithoutFeedbackRequestsInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  email?: Prisma.StringFieldUpdateOperationsInput | string
-  emailVerified?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  reqStatus?: Prisma.EnumReqStatusFieldUpdateOperationsInput | $Enums.ReqStatus
-  rating?: Prisma.IntFieldUpdateOperationsInput | number
-  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  accounts?: Prisma.AccountUpdateManyWithoutUserNestedInput
-  sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
-  Authenticator?: Prisma.AuthenticatorUpdateManyWithoutUserNestedInput
-  joinRequests?: Prisma.JoinRequestUpdateManyWithoutCreatedByNestedInput
-  updatedJoinRequests?: Prisma.JoinRequestUpdateManyWithoutUpdatedByNestedInput
-  updatedBy?: Prisma.UserUpdateOneWithoutUpdatedUsersNestedInput
-  memberStatusCreated?: Prisma.MemberStatusLogUpdateManyWithoutCreatedByNestedInput
-  memberStatusLogs?: Prisma.MemberStatusLogUpdateManyWithoutUserNestedInput
-  memberStatusChanges?: Prisma.MemberStatusLogUpdateManyWithoutUpdatedByNestedInput
-  positionChanges?: Prisma.PositionHistoryUpdateManyWithoutUpdatedByNestedInput
-  positionCreations?: Prisma.PositionHistoryUpdateManyWithoutCreatedByNestedInput
-  positionHistories?: Prisma.PositionHistoryUpdateManyWithoutUserNestedInput
-  ratingHistory?: Prisma.RatingHistoryUpdateManyWithoutUserNestedInput
-  createdRatings?: Prisma.RatingHistoryUpdateManyWithoutCreatedByNestedInput
-  updatedRatings?: Prisma.RatingHistoryUpdateManyWithoutUpdatedByNestedInput
-  createdEvents?: Prisma.EventUpdateManyWithoutCreatedByNestedInput
-  updatedEvents?: Prisma.EventUpdateManyWithoutUpdatedByNestedInput
-  providedFeedbacks?: Prisma.EventFeedbackUpdateManyWithoutUserNestedInput
-  updatedEventFeedback?: Prisma.EventFeedbackUpdateManyWithoutUpdatedByNestedInput
-  hrWarnings?: Prisma.HrWarningUpdateManyWithoutAssigneeNestedInput
-  createdHrWarning?: Prisma.HrWarningUpdateManyWithoutCreatedByNestedInput
-  updatedHrWarnings?: Prisma.HrWarningUpdateManyWithoutUpdatedByNestedInput
-  CreatedAllowedUser?: Prisma.AllowedUserUpdateManyWithoutCreatedByNestedInput
-  ownAllowance?: Prisma.AllowedUserUpdateOneWithoutUserNestedInput
-  UpdatedAllowance?: Prisma.AllowedUserUpdateManyWithoutUpdatedByNestedInput
-  eventAssignments?: Prisma.EventAssignmentUpdateManyWithoutUserNestedInput
-  CreatedEventAssignment?: Prisma.EventAssignmentUpdateManyWithoutCreatedByNestedInput
-  UpdatedEventAssignment?: Prisma.EventAssignmentUpdateManyWithoutUpdatedByNestedInput
-  updatedUsers?: Prisma.UserUpdateManyWithoutUpdatedByNestedInput
-  createdAvailabilitySlots?: Prisma.AvailabilitySlotUpdateManyWithoutCreatedByNestedInput
-  updatedAvailabilitySlots?: Prisma.AvailabilitySlotUpdateManyWithoutUpdatedByNestedInput
-  availabilityEntries?: Prisma.AvailabilityEntryUpdateManyWithoutUserNestedInput
-  UpdatedAvailabilityEntries?: Prisma.AvailabilityEntryUpdateManyWithoutUpdatedByNestedInput
-  entryCancelRequests?: Prisma.EntryCancelRequestUpdateManyWithoutRequestedByNestedInput
-  reviewedEntryCancelRequests?: Prisma.EntryCancelRequestUpdateManyWithoutReviewedByNestedInput
-  assignmentCancelRequests?: Prisma.AssignmentCancelRequestUpdateManyWithoutRequestedByNestedInput
-  reviewedAssignmentCancelRequests?: Prisma.AssignmentCancelRequestUpdateManyWithoutReviewedByNestedInput
-}
-
-export type UserUncheckedUpdateWithoutFeedbackRequestsInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  email?: Prisma.StringFieldUpdateOperationsInput | string
-  emailVerified?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  reqStatus?: Prisma.EnumReqStatusFieldUpdateOperationsInput | $Enums.ReqStatus
-  rating?: Prisma.IntFieldUpdateOperationsInput | number
-  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  updatedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  allowedUserId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  accounts?: Prisma.AccountUncheckedUpdateManyWithoutUserNestedInput
-  sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
-  Authenticator?: Prisma.AuthenticatorUncheckedUpdateManyWithoutUserNestedInput
-  joinRequests?: Prisma.JoinRequestUncheckedUpdateManyWithoutCreatedByNestedInput
-  updatedJoinRequests?: Prisma.JoinRequestUncheckedUpdateManyWithoutUpdatedByNestedInput
-  memberStatusCreated?: Prisma.MemberStatusLogUncheckedUpdateManyWithoutCreatedByNestedInput
-  memberStatusLogs?: Prisma.MemberStatusLogUncheckedUpdateManyWithoutUserNestedInput
-  memberStatusChanges?: Prisma.MemberStatusLogUncheckedUpdateManyWithoutUpdatedByNestedInput
-  positionChanges?: Prisma.PositionHistoryUncheckedUpdateManyWithoutUpdatedByNestedInput
-  positionCreations?: Prisma.PositionHistoryUncheckedUpdateManyWithoutCreatedByNestedInput
-  positionHistories?: Prisma.PositionHistoryUncheckedUpdateManyWithoutUserNestedInput
-  ratingHistory?: Prisma.RatingHistoryUncheckedUpdateManyWithoutUserNestedInput
-  createdRatings?: Prisma.RatingHistoryUncheckedUpdateManyWithoutCreatedByNestedInput
-  updatedRatings?: Prisma.RatingHistoryUncheckedUpdateManyWithoutUpdatedByNestedInput
-  createdEvents?: Prisma.EventUncheckedUpdateManyWithoutCreatedByNestedInput
-  updatedEvents?: Prisma.EventUncheckedUpdateManyWithoutUpdatedByNestedInput
-  providedFeedbacks?: Prisma.EventFeedbackUncheckedUpdateManyWithoutUserNestedInput
-  updatedEventFeedback?: Prisma.EventFeedbackUncheckedUpdateManyWithoutUpdatedByNestedInput
   hrWarnings?: Prisma.HrWarningUncheckedUpdateManyWithoutAssigneeNestedInput
   createdHrWarning?: Prisma.HrWarningUncheckedUpdateManyWithoutCreatedByNestedInput
   updatedHrWarnings?: Prisma.HrWarningUncheckedUpdateManyWithoutUpdatedByNestedInput
@@ -3617,7 +3342,6 @@ export type UserCreateWithoutCreatedAvailabilitySlotsInput = {
   updatedEvents?: Prisma.EventCreateNestedManyWithoutUpdatedByInput
   providedFeedbacks?: Prisma.EventFeedbackCreateNestedManyWithoutUserInput
   updatedEventFeedback?: Prisma.EventFeedbackCreateNestedManyWithoutUpdatedByInput
-  feedbackRequests?: Prisma.FeedbackRequestCreateNestedManyWithoutUserInput
   hrWarnings?: Prisma.HrWarningCreateNestedManyWithoutAssigneeInput
   createdHrWarning?: Prisma.HrWarningCreateNestedManyWithoutCreatedByInput
   updatedHrWarnings?: Prisma.HrWarningCreateNestedManyWithoutUpdatedByInput
@@ -3669,7 +3393,6 @@ export type UserUncheckedCreateWithoutCreatedAvailabilitySlotsInput = {
   updatedEvents?: Prisma.EventUncheckedCreateNestedManyWithoutUpdatedByInput
   providedFeedbacks?: Prisma.EventFeedbackUncheckedCreateNestedManyWithoutUserInput
   updatedEventFeedback?: Prisma.EventFeedbackUncheckedCreateNestedManyWithoutUpdatedByInput
-  feedbackRequests?: Prisma.FeedbackRequestUncheckedCreateNestedManyWithoutUserInput
   hrWarnings?: Prisma.HrWarningUncheckedCreateNestedManyWithoutAssigneeInput
   createdHrWarning?: Prisma.HrWarningUncheckedCreateNestedManyWithoutCreatedByInput
   updatedHrWarnings?: Prisma.HrWarningUncheckedCreateNestedManyWithoutUpdatedByInput
@@ -3724,7 +3447,6 @@ export type UserCreateWithoutUpdatedAvailabilitySlotsInput = {
   updatedEvents?: Prisma.EventCreateNestedManyWithoutUpdatedByInput
   providedFeedbacks?: Prisma.EventFeedbackCreateNestedManyWithoutUserInput
   updatedEventFeedback?: Prisma.EventFeedbackCreateNestedManyWithoutUpdatedByInput
-  feedbackRequests?: Prisma.FeedbackRequestCreateNestedManyWithoutUserInput
   hrWarnings?: Prisma.HrWarningCreateNestedManyWithoutAssigneeInput
   createdHrWarning?: Prisma.HrWarningCreateNestedManyWithoutCreatedByInput
   updatedHrWarnings?: Prisma.HrWarningCreateNestedManyWithoutUpdatedByInput
@@ -3776,7 +3498,6 @@ export type UserUncheckedCreateWithoutUpdatedAvailabilitySlotsInput = {
   updatedEvents?: Prisma.EventUncheckedCreateNestedManyWithoutUpdatedByInput
   providedFeedbacks?: Prisma.EventFeedbackUncheckedCreateNestedManyWithoutUserInput
   updatedEventFeedback?: Prisma.EventFeedbackUncheckedCreateNestedManyWithoutUpdatedByInput
-  feedbackRequests?: Prisma.FeedbackRequestUncheckedCreateNestedManyWithoutUserInput
   hrWarnings?: Prisma.HrWarningUncheckedCreateNestedManyWithoutAssigneeInput
   createdHrWarning?: Prisma.HrWarningUncheckedCreateNestedManyWithoutCreatedByInput
   updatedHrWarnings?: Prisma.HrWarningUncheckedCreateNestedManyWithoutUpdatedByInput
@@ -3842,7 +3563,6 @@ export type UserUpdateWithoutCreatedAvailabilitySlotsInput = {
   updatedEvents?: Prisma.EventUpdateManyWithoutUpdatedByNestedInput
   providedFeedbacks?: Prisma.EventFeedbackUpdateManyWithoutUserNestedInput
   updatedEventFeedback?: Prisma.EventFeedbackUpdateManyWithoutUpdatedByNestedInput
-  feedbackRequests?: Prisma.FeedbackRequestUpdateManyWithoutUserNestedInput
   hrWarnings?: Prisma.HrWarningUpdateManyWithoutAssigneeNestedInput
   createdHrWarning?: Prisma.HrWarningUpdateManyWithoutCreatedByNestedInput
   updatedHrWarnings?: Prisma.HrWarningUpdateManyWithoutUpdatedByNestedInput
@@ -3894,7 +3614,6 @@ export type UserUncheckedUpdateWithoutCreatedAvailabilitySlotsInput = {
   updatedEvents?: Prisma.EventUncheckedUpdateManyWithoutUpdatedByNestedInput
   providedFeedbacks?: Prisma.EventFeedbackUncheckedUpdateManyWithoutUserNestedInput
   updatedEventFeedback?: Prisma.EventFeedbackUncheckedUpdateManyWithoutUpdatedByNestedInput
-  feedbackRequests?: Prisma.FeedbackRequestUncheckedUpdateManyWithoutUserNestedInput
   hrWarnings?: Prisma.HrWarningUncheckedUpdateManyWithoutAssigneeNestedInput
   createdHrWarning?: Prisma.HrWarningUncheckedUpdateManyWithoutCreatedByNestedInput
   updatedHrWarnings?: Prisma.HrWarningUncheckedUpdateManyWithoutUpdatedByNestedInput
@@ -3955,7 +3674,6 @@ export type UserUpdateWithoutUpdatedAvailabilitySlotsInput = {
   updatedEvents?: Prisma.EventUpdateManyWithoutUpdatedByNestedInput
   providedFeedbacks?: Prisma.EventFeedbackUpdateManyWithoutUserNestedInput
   updatedEventFeedback?: Prisma.EventFeedbackUpdateManyWithoutUpdatedByNestedInput
-  feedbackRequests?: Prisma.FeedbackRequestUpdateManyWithoutUserNestedInput
   hrWarnings?: Prisma.HrWarningUpdateManyWithoutAssigneeNestedInput
   createdHrWarning?: Prisma.HrWarningUpdateManyWithoutCreatedByNestedInput
   updatedHrWarnings?: Prisma.HrWarningUpdateManyWithoutUpdatedByNestedInput
@@ -4007,7 +3725,6 @@ export type UserUncheckedUpdateWithoutUpdatedAvailabilitySlotsInput = {
   updatedEvents?: Prisma.EventUncheckedUpdateManyWithoutUpdatedByNestedInput
   providedFeedbacks?: Prisma.EventFeedbackUncheckedUpdateManyWithoutUserNestedInput
   updatedEventFeedback?: Prisma.EventFeedbackUncheckedUpdateManyWithoutUpdatedByNestedInput
-  feedbackRequests?: Prisma.FeedbackRequestUncheckedUpdateManyWithoutUserNestedInput
   hrWarnings?: Prisma.HrWarningUncheckedUpdateManyWithoutAssigneeNestedInput
   createdHrWarning?: Prisma.HrWarningUncheckedUpdateManyWithoutCreatedByNestedInput
   updatedHrWarnings?: Prisma.HrWarningUncheckedUpdateManyWithoutUpdatedByNestedInput
@@ -4057,7 +3774,6 @@ export type UserCreateWithoutAvailabilityEntriesInput = {
   updatedEvents?: Prisma.EventCreateNestedManyWithoutUpdatedByInput
   providedFeedbacks?: Prisma.EventFeedbackCreateNestedManyWithoutUserInput
   updatedEventFeedback?: Prisma.EventFeedbackCreateNestedManyWithoutUpdatedByInput
-  feedbackRequests?: Prisma.FeedbackRequestCreateNestedManyWithoutUserInput
   hrWarnings?: Prisma.HrWarningCreateNestedManyWithoutAssigneeInput
   createdHrWarning?: Prisma.HrWarningCreateNestedManyWithoutCreatedByInput
   updatedHrWarnings?: Prisma.HrWarningCreateNestedManyWithoutUpdatedByInput
@@ -4109,7 +3825,6 @@ export type UserUncheckedCreateWithoutAvailabilityEntriesInput = {
   updatedEvents?: Prisma.EventUncheckedCreateNestedManyWithoutUpdatedByInput
   providedFeedbacks?: Prisma.EventFeedbackUncheckedCreateNestedManyWithoutUserInput
   updatedEventFeedback?: Prisma.EventFeedbackUncheckedCreateNestedManyWithoutUpdatedByInput
-  feedbackRequests?: Prisma.FeedbackRequestUncheckedCreateNestedManyWithoutUserInput
   hrWarnings?: Prisma.HrWarningUncheckedCreateNestedManyWithoutAssigneeInput
   createdHrWarning?: Prisma.HrWarningUncheckedCreateNestedManyWithoutCreatedByInput
   updatedHrWarnings?: Prisma.HrWarningUncheckedCreateNestedManyWithoutUpdatedByInput
@@ -4164,7 +3879,6 @@ export type UserCreateWithoutUpdatedAvailabilityEntriesInput = {
   updatedEvents?: Prisma.EventCreateNestedManyWithoutUpdatedByInput
   providedFeedbacks?: Prisma.EventFeedbackCreateNestedManyWithoutUserInput
   updatedEventFeedback?: Prisma.EventFeedbackCreateNestedManyWithoutUpdatedByInput
-  feedbackRequests?: Prisma.FeedbackRequestCreateNestedManyWithoutUserInput
   hrWarnings?: Prisma.HrWarningCreateNestedManyWithoutAssigneeInput
   createdHrWarning?: Prisma.HrWarningCreateNestedManyWithoutCreatedByInput
   updatedHrWarnings?: Prisma.HrWarningCreateNestedManyWithoutUpdatedByInput
@@ -4216,7 +3930,6 @@ export type UserUncheckedCreateWithoutUpdatedAvailabilityEntriesInput = {
   updatedEvents?: Prisma.EventUncheckedCreateNestedManyWithoutUpdatedByInput
   providedFeedbacks?: Prisma.EventFeedbackUncheckedCreateNestedManyWithoutUserInput
   updatedEventFeedback?: Prisma.EventFeedbackUncheckedCreateNestedManyWithoutUpdatedByInput
-  feedbackRequests?: Prisma.FeedbackRequestUncheckedCreateNestedManyWithoutUserInput
   hrWarnings?: Prisma.HrWarningUncheckedCreateNestedManyWithoutAssigneeInput
   createdHrWarning?: Prisma.HrWarningUncheckedCreateNestedManyWithoutCreatedByInput
   updatedHrWarnings?: Prisma.HrWarningUncheckedCreateNestedManyWithoutUpdatedByInput
@@ -4282,7 +3995,6 @@ export type UserUpdateWithoutAvailabilityEntriesInput = {
   updatedEvents?: Prisma.EventUpdateManyWithoutUpdatedByNestedInput
   providedFeedbacks?: Prisma.EventFeedbackUpdateManyWithoutUserNestedInput
   updatedEventFeedback?: Prisma.EventFeedbackUpdateManyWithoutUpdatedByNestedInput
-  feedbackRequests?: Prisma.FeedbackRequestUpdateManyWithoutUserNestedInput
   hrWarnings?: Prisma.HrWarningUpdateManyWithoutAssigneeNestedInput
   createdHrWarning?: Prisma.HrWarningUpdateManyWithoutCreatedByNestedInput
   updatedHrWarnings?: Prisma.HrWarningUpdateManyWithoutUpdatedByNestedInput
@@ -4334,7 +4046,6 @@ export type UserUncheckedUpdateWithoutAvailabilityEntriesInput = {
   updatedEvents?: Prisma.EventUncheckedUpdateManyWithoutUpdatedByNestedInput
   providedFeedbacks?: Prisma.EventFeedbackUncheckedUpdateManyWithoutUserNestedInput
   updatedEventFeedback?: Prisma.EventFeedbackUncheckedUpdateManyWithoutUpdatedByNestedInput
-  feedbackRequests?: Prisma.FeedbackRequestUncheckedUpdateManyWithoutUserNestedInput
   hrWarnings?: Prisma.HrWarningUncheckedUpdateManyWithoutAssigneeNestedInput
   createdHrWarning?: Prisma.HrWarningUncheckedUpdateManyWithoutCreatedByNestedInput
   updatedHrWarnings?: Prisma.HrWarningUncheckedUpdateManyWithoutUpdatedByNestedInput
@@ -4395,7 +4106,6 @@ export type UserUpdateWithoutUpdatedAvailabilityEntriesInput = {
   updatedEvents?: Prisma.EventUpdateManyWithoutUpdatedByNestedInput
   providedFeedbacks?: Prisma.EventFeedbackUpdateManyWithoutUserNestedInput
   updatedEventFeedback?: Prisma.EventFeedbackUpdateManyWithoutUpdatedByNestedInput
-  feedbackRequests?: Prisma.FeedbackRequestUpdateManyWithoutUserNestedInput
   hrWarnings?: Prisma.HrWarningUpdateManyWithoutAssigneeNestedInput
   createdHrWarning?: Prisma.HrWarningUpdateManyWithoutCreatedByNestedInput
   updatedHrWarnings?: Prisma.HrWarningUpdateManyWithoutUpdatedByNestedInput
@@ -4447,7 +4157,6 @@ export type UserUncheckedUpdateWithoutUpdatedAvailabilityEntriesInput = {
   updatedEvents?: Prisma.EventUncheckedUpdateManyWithoutUpdatedByNestedInput
   providedFeedbacks?: Prisma.EventFeedbackUncheckedUpdateManyWithoutUserNestedInput
   updatedEventFeedback?: Prisma.EventFeedbackUncheckedUpdateManyWithoutUpdatedByNestedInput
-  feedbackRequests?: Prisma.FeedbackRequestUncheckedUpdateManyWithoutUserNestedInput
   hrWarnings?: Prisma.HrWarningUncheckedUpdateManyWithoutAssigneeNestedInput
   createdHrWarning?: Prisma.HrWarningUncheckedUpdateManyWithoutCreatedByNestedInput
   updatedHrWarnings?: Prisma.HrWarningUncheckedUpdateManyWithoutUpdatedByNestedInput
@@ -4497,7 +4206,6 @@ export type UserCreateWithoutEntryCancelRequestsInput = {
   updatedEvents?: Prisma.EventCreateNestedManyWithoutUpdatedByInput
   providedFeedbacks?: Prisma.EventFeedbackCreateNestedManyWithoutUserInput
   updatedEventFeedback?: Prisma.EventFeedbackCreateNestedManyWithoutUpdatedByInput
-  feedbackRequests?: Prisma.FeedbackRequestCreateNestedManyWithoutUserInput
   hrWarnings?: Prisma.HrWarningCreateNestedManyWithoutAssigneeInput
   createdHrWarning?: Prisma.HrWarningCreateNestedManyWithoutCreatedByInput
   updatedHrWarnings?: Prisma.HrWarningCreateNestedManyWithoutUpdatedByInput
@@ -4549,7 +4257,6 @@ export type UserUncheckedCreateWithoutEntryCancelRequestsInput = {
   updatedEvents?: Prisma.EventUncheckedCreateNestedManyWithoutUpdatedByInput
   providedFeedbacks?: Prisma.EventFeedbackUncheckedCreateNestedManyWithoutUserInput
   updatedEventFeedback?: Prisma.EventFeedbackUncheckedCreateNestedManyWithoutUpdatedByInput
-  feedbackRequests?: Prisma.FeedbackRequestUncheckedCreateNestedManyWithoutUserInput
   hrWarnings?: Prisma.HrWarningUncheckedCreateNestedManyWithoutAssigneeInput
   createdHrWarning?: Prisma.HrWarningUncheckedCreateNestedManyWithoutCreatedByInput
   updatedHrWarnings?: Prisma.HrWarningUncheckedCreateNestedManyWithoutUpdatedByInput
@@ -4604,7 +4311,6 @@ export type UserCreateWithoutReviewedEntryCancelRequestsInput = {
   updatedEvents?: Prisma.EventCreateNestedManyWithoutUpdatedByInput
   providedFeedbacks?: Prisma.EventFeedbackCreateNestedManyWithoutUserInput
   updatedEventFeedback?: Prisma.EventFeedbackCreateNestedManyWithoutUpdatedByInput
-  feedbackRequests?: Prisma.FeedbackRequestCreateNestedManyWithoutUserInput
   hrWarnings?: Prisma.HrWarningCreateNestedManyWithoutAssigneeInput
   createdHrWarning?: Prisma.HrWarningCreateNestedManyWithoutCreatedByInput
   updatedHrWarnings?: Prisma.HrWarningCreateNestedManyWithoutUpdatedByInput
@@ -4656,7 +4362,6 @@ export type UserUncheckedCreateWithoutReviewedEntryCancelRequestsInput = {
   updatedEvents?: Prisma.EventUncheckedCreateNestedManyWithoutUpdatedByInput
   providedFeedbacks?: Prisma.EventFeedbackUncheckedCreateNestedManyWithoutUserInput
   updatedEventFeedback?: Prisma.EventFeedbackUncheckedCreateNestedManyWithoutUpdatedByInput
-  feedbackRequests?: Prisma.FeedbackRequestUncheckedCreateNestedManyWithoutUserInput
   hrWarnings?: Prisma.HrWarningUncheckedCreateNestedManyWithoutAssigneeInput
   createdHrWarning?: Prisma.HrWarningUncheckedCreateNestedManyWithoutCreatedByInput
   updatedHrWarnings?: Prisma.HrWarningUncheckedCreateNestedManyWithoutUpdatedByInput
@@ -4722,7 +4427,6 @@ export type UserUpdateWithoutEntryCancelRequestsInput = {
   updatedEvents?: Prisma.EventUpdateManyWithoutUpdatedByNestedInput
   providedFeedbacks?: Prisma.EventFeedbackUpdateManyWithoutUserNestedInput
   updatedEventFeedback?: Prisma.EventFeedbackUpdateManyWithoutUpdatedByNestedInput
-  feedbackRequests?: Prisma.FeedbackRequestUpdateManyWithoutUserNestedInput
   hrWarnings?: Prisma.HrWarningUpdateManyWithoutAssigneeNestedInput
   createdHrWarning?: Prisma.HrWarningUpdateManyWithoutCreatedByNestedInput
   updatedHrWarnings?: Prisma.HrWarningUpdateManyWithoutUpdatedByNestedInput
@@ -4774,7 +4478,6 @@ export type UserUncheckedUpdateWithoutEntryCancelRequestsInput = {
   updatedEvents?: Prisma.EventUncheckedUpdateManyWithoutUpdatedByNestedInput
   providedFeedbacks?: Prisma.EventFeedbackUncheckedUpdateManyWithoutUserNestedInput
   updatedEventFeedback?: Prisma.EventFeedbackUncheckedUpdateManyWithoutUpdatedByNestedInput
-  feedbackRequests?: Prisma.FeedbackRequestUncheckedUpdateManyWithoutUserNestedInput
   hrWarnings?: Prisma.HrWarningUncheckedUpdateManyWithoutAssigneeNestedInput
   createdHrWarning?: Prisma.HrWarningUncheckedUpdateManyWithoutCreatedByNestedInput
   updatedHrWarnings?: Prisma.HrWarningUncheckedUpdateManyWithoutUpdatedByNestedInput
@@ -4835,7 +4538,6 @@ export type UserUpdateWithoutReviewedEntryCancelRequestsInput = {
   updatedEvents?: Prisma.EventUpdateManyWithoutUpdatedByNestedInput
   providedFeedbacks?: Prisma.EventFeedbackUpdateManyWithoutUserNestedInput
   updatedEventFeedback?: Prisma.EventFeedbackUpdateManyWithoutUpdatedByNestedInput
-  feedbackRequests?: Prisma.FeedbackRequestUpdateManyWithoutUserNestedInput
   hrWarnings?: Prisma.HrWarningUpdateManyWithoutAssigneeNestedInput
   createdHrWarning?: Prisma.HrWarningUpdateManyWithoutCreatedByNestedInput
   updatedHrWarnings?: Prisma.HrWarningUpdateManyWithoutUpdatedByNestedInput
@@ -4887,7 +4589,6 @@ export type UserUncheckedUpdateWithoutReviewedEntryCancelRequestsInput = {
   updatedEvents?: Prisma.EventUncheckedUpdateManyWithoutUpdatedByNestedInput
   providedFeedbacks?: Prisma.EventFeedbackUncheckedUpdateManyWithoutUserNestedInput
   updatedEventFeedback?: Prisma.EventFeedbackUncheckedUpdateManyWithoutUpdatedByNestedInput
-  feedbackRequests?: Prisma.FeedbackRequestUncheckedUpdateManyWithoutUserNestedInput
   hrWarnings?: Prisma.HrWarningUncheckedUpdateManyWithoutAssigneeNestedInput
   createdHrWarning?: Prisma.HrWarningUncheckedUpdateManyWithoutCreatedByNestedInput
   updatedHrWarnings?: Prisma.HrWarningUncheckedUpdateManyWithoutUpdatedByNestedInput
@@ -4937,7 +4638,6 @@ export type UserCreateWithoutCreatedEventAssignmentInput = {
   updatedEvents?: Prisma.EventCreateNestedManyWithoutUpdatedByInput
   providedFeedbacks?: Prisma.EventFeedbackCreateNestedManyWithoutUserInput
   updatedEventFeedback?: Prisma.EventFeedbackCreateNestedManyWithoutUpdatedByInput
-  feedbackRequests?: Prisma.FeedbackRequestCreateNestedManyWithoutUserInput
   hrWarnings?: Prisma.HrWarningCreateNestedManyWithoutAssigneeInput
   createdHrWarning?: Prisma.HrWarningCreateNestedManyWithoutCreatedByInput
   updatedHrWarnings?: Prisma.HrWarningCreateNestedManyWithoutUpdatedByInput
@@ -4989,7 +4689,6 @@ export type UserUncheckedCreateWithoutCreatedEventAssignmentInput = {
   updatedEvents?: Prisma.EventUncheckedCreateNestedManyWithoutUpdatedByInput
   providedFeedbacks?: Prisma.EventFeedbackUncheckedCreateNestedManyWithoutUserInput
   updatedEventFeedback?: Prisma.EventFeedbackUncheckedCreateNestedManyWithoutUpdatedByInput
-  feedbackRequests?: Prisma.FeedbackRequestUncheckedCreateNestedManyWithoutUserInput
   hrWarnings?: Prisma.HrWarningUncheckedCreateNestedManyWithoutAssigneeInput
   createdHrWarning?: Prisma.HrWarningUncheckedCreateNestedManyWithoutCreatedByInput
   updatedHrWarnings?: Prisma.HrWarningUncheckedCreateNestedManyWithoutUpdatedByInput
@@ -5044,7 +4743,6 @@ export type UserCreateWithoutUpdatedEventAssignmentInput = {
   updatedEvents?: Prisma.EventCreateNestedManyWithoutUpdatedByInput
   providedFeedbacks?: Prisma.EventFeedbackCreateNestedManyWithoutUserInput
   updatedEventFeedback?: Prisma.EventFeedbackCreateNestedManyWithoutUpdatedByInput
-  feedbackRequests?: Prisma.FeedbackRequestCreateNestedManyWithoutUserInput
   hrWarnings?: Prisma.HrWarningCreateNestedManyWithoutAssigneeInput
   createdHrWarning?: Prisma.HrWarningCreateNestedManyWithoutCreatedByInput
   updatedHrWarnings?: Prisma.HrWarningCreateNestedManyWithoutUpdatedByInput
@@ -5096,7 +4794,6 @@ export type UserUncheckedCreateWithoutUpdatedEventAssignmentInput = {
   updatedEvents?: Prisma.EventUncheckedCreateNestedManyWithoutUpdatedByInput
   providedFeedbacks?: Prisma.EventFeedbackUncheckedCreateNestedManyWithoutUserInput
   updatedEventFeedback?: Prisma.EventFeedbackUncheckedCreateNestedManyWithoutUpdatedByInput
-  feedbackRequests?: Prisma.FeedbackRequestUncheckedCreateNestedManyWithoutUserInput
   hrWarnings?: Prisma.HrWarningUncheckedCreateNestedManyWithoutAssigneeInput
   createdHrWarning?: Prisma.HrWarningUncheckedCreateNestedManyWithoutCreatedByInput
   updatedHrWarnings?: Prisma.HrWarningUncheckedCreateNestedManyWithoutUpdatedByInput
@@ -5151,7 +4848,6 @@ export type UserCreateWithoutEventAssignmentsInput = {
   updatedEvents?: Prisma.EventCreateNestedManyWithoutUpdatedByInput
   providedFeedbacks?: Prisma.EventFeedbackCreateNestedManyWithoutUserInput
   updatedEventFeedback?: Prisma.EventFeedbackCreateNestedManyWithoutUpdatedByInput
-  feedbackRequests?: Prisma.FeedbackRequestCreateNestedManyWithoutUserInput
   hrWarnings?: Prisma.HrWarningCreateNestedManyWithoutAssigneeInput
   createdHrWarning?: Prisma.HrWarningCreateNestedManyWithoutCreatedByInput
   updatedHrWarnings?: Prisma.HrWarningCreateNestedManyWithoutUpdatedByInput
@@ -5203,7 +4899,6 @@ export type UserUncheckedCreateWithoutEventAssignmentsInput = {
   updatedEvents?: Prisma.EventUncheckedCreateNestedManyWithoutUpdatedByInput
   providedFeedbacks?: Prisma.EventFeedbackUncheckedCreateNestedManyWithoutUserInput
   updatedEventFeedback?: Prisma.EventFeedbackUncheckedCreateNestedManyWithoutUpdatedByInput
-  feedbackRequests?: Prisma.FeedbackRequestUncheckedCreateNestedManyWithoutUserInput
   hrWarnings?: Prisma.HrWarningUncheckedCreateNestedManyWithoutAssigneeInput
   createdHrWarning?: Prisma.HrWarningUncheckedCreateNestedManyWithoutCreatedByInput
   updatedHrWarnings?: Prisma.HrWarningUncheckedCreateNestedManyWithoutUpdatedByInput
@@ -5269,7 +4964,6 @@ export type UserUpdateWithoutCreatedEventAssignmentInput = {
   updatedEvents?: Prisma.EventUpdateManyWithoutUpdatedByNestedInput
   providedFeedbacks?: Prisma.EventFeedbackUpdateManyWithoutUserNestedInput
   updatedEventFeedback?: Prisma.EventFeedbackUpdateManyWithoutUpdatedByNestedInput
-  feedbackRequests?: Prisma.FeedbackRequestUpdateManyWithoutUserNestedInput
   hrWarnings?: Prisma.HrWarningUpdateManyWithoutAssigneeNestedInput
   createdHrWarning?: Prisma.HrWarningUpdateManyWithoutCreatedByNestedInput
   updatedHrWarnings?: Prisma.HrWarningUpdateManyWithoutUpdatedByNestedInput
@@ -5321,7 +5015,6 @@ export type UserUncheckedUpdateWithoutCreatedEventAssignmentInput = {
   updatedEvents?: Prisma.EventUncheckedUpdateManyWithoutUpdatedByNestedInput
   providedFeedbacks?: Prisma.EventFeedbackUncheckedUpdateManyWithoutUserNestedInput
   updatedEventFeedback?: Prisma.EventFeedbackUncheckedUpdateManyWithoutUpdatedByNestedInput
-  feedbackRequests?: Prisma.FeedbackRequestUncheckedUpdateManyWithoutUserNestedInput
   hrWarnings?: Prisma.HrWarningUncheckedUpdateManyWithoutAssigneeNestedInput
   createdHrWarning?: Prisma.HrWarningUncheckedUpdateManyWithoutCreatedByNestedInput
   updatedHrWarnings?: Prisma.HrWarningUncheckedUpdateManyWithoutUpdatedByNestedInput
@@ -5382,7 +5075,6 @@ export type UserUpdateWithoutUpdatedEventAssignmentInput = {
   updatedEvents?: Prisma.EventUpdateManyWithoutUpdatedByNestedInput
   providedFeedbacks?: Prisma.EventFeedbackUpdateManyWithoutUserNestedInput
   updatedEventFeedback?: Prisma.EventFeedbackUpdateManyWithoutUpdatedByNestedInput
-  feedbackRequests?: Prisma.FeedbackRequestUpdateManyWithoutUserNestedInput
   hrWarnings?: Prisma.HrWarningUpdateManyWithoutAssigneeNestedInput
   createdHrWarning?: Prisma.HrWarningUpdateManyWithoutCreatedByNestedInput
   updatedHrWarnings?: Prisma.HrWarningUpdateManyWithoutUpdatedByNestedInput
@@ -5434,7 +5126,6 @@ export type UserUncheckedUpdateWithoutUpdatedEventAssignmentInput = {
   updatedEvents?: Prisma.EventUncheckedUpdateManyWithoutUpdatedByNestedInput
   providedFeedbacks?: Prisma.EventFeedbackUncheckedUpdateManyWithoutUserNestedInput
   updatedEventFeedback?: Prisma.EventFeedbackUncheckedUpdateManyWithoutUpdatedByNestedInput
-  feedbackRequests?: Prisma.FeedbackRequestUncheckedUpdateManyWithoutUserNestedInput
   hrWarnings?: Prisma.HrWarningUncheckedUpdateManyWithoutAssigneeNestedInput
   createdHrWarning?: Prisma.HrWarningUncheckedUpdateManyWithoutCreatedByNestedInput
   updatedHrWarnings?: Prisma.HrWarningUncheckedUpdateManyWithoutUpdatedByNestedInput
@@ -5495,7 +5186,6 @@ export type UserUpdateWithoutEventAssignmentsInput = {
   updatedEvents?: Prisma.EventUpdateManyWithoutUpdatedByNestedInput
   providedFeedbacks?: Prisma.EventFeedbackUpdateManyWithoutUserNestedInput
   updatedEventFeedback?: Prisma.EventFeedbackUpdateManyWithoutUpdatedByNestedInput
-  feedbackRequests?: Prisma.FeedbackRequestUpdateManyWithoutUserNestedInput
   hrWarnings?: Prisma.HrWarningUpdateManyWithoutAssigneeNestedInput
   createdHrWarning?: Prisma.HrWarningUpdateManyWithoutCreatedByNestedInput
   updatedHrWarnings?: Prisma.HrWarningUpdateManyWithoutUpdatedByNestedInput
@@ -5547,7 +5237,6 @@ export type UserUncheckedUpdateWithoutEventAssignmentsInput = {
   updatedEvents?: Prisma.EventUncheckedUpdateManyWithoutUpdatedByNestedInput
   providedFeedbacks?: Prisma.EventFeedbackUncheckedUpdateManyWithoutUserNestedInput
   updatedEventFeedback?: Prisma.EventFeedbackUncheckedUpdateManyWithoutUpdatedByNestedInput
-  feedbackRequests?: Prisma.FeedbackRequestUncheckedUpdateManyWithoutUserNestedInput
   hrWarnings?: Prisma.HrWarningUncheckedUpdateManyWithoutAssigneeNestedInput
   createdHrWarning?: Prisma.HrWarningUncheckedUpdateManyWithoutCreatedByNestedInput
   updatedHrWarnings?: Prisma.HrWarningUncheckedUpdateManyWithoutUpdatedByNestedInput
@@ -5597,7 +5286,6 @@ export type UserCreateWithoutAssignmentCancelRequestsInput = {
   updatedEvents?: Prisma.EventCreateNestedManyWithoutUpdatedByInput
   providedFeedbacks?: Prisma.EventFeedbackCreateNestedManyWithoutUserInput
   updatedEventFeedback?: Prisma.EventFeedbackCreateNestedManyWithoutUpdatedByInput
-  feedbackRequests?: Prisma.FeedbackRequestCreateNestedManyWithoutUserInput
   hrWarnings?: Prisma.HrWarningCreateNestedManyWithoutAssigneeInput
   createdHrWarning?: Prisma.HrWarningCreateNestedManyWithoutCreatedByInput
   updatedHrWarnings?: Prisma.HrWarningCreateNestedManyWithoutUpdatedByInput
@@ -5649,7 +5337,6 @@ export type UserUncheckedCreateWithoutAssignmentCancelRequestsInput = {
   updatedEvents?: Prisma.EventUncheckedCreateNestedManyWithoutUpdatedByInput
   providedFeedbacks?: Prisma.EventFeedbackUncheckedCreateNestedManyWithoutUserInput
   updatedEventFeedback?: Prisma.EventFeedbackUncheckedCreateNestedManyWithoutUpdatedByInput
-  feedbackRequests?: Prisma.FeedbackRequestUncheckedCreateNestedManyWithoutUserInput
   hrWarnings?: Prisma.HrWarningUncheckedCreateNestedManyWithoutAssigneeInput
   createdHrWarning?: Prisma.HrWarningUncheckedCreateNestedManyWithoutCreatedByInput
   updatedHrWarnings?: Prisma.HrWarningUncheckedCreateNestedManyWithoutUpdatedByInput
@@ -5704,7 +5391,6 @@ export type UserCreateWithoutReviewedAssignmentCancelRequestsInput = {
   updatedEvents?: Prisma.EventCreateNestedManyWithoutUpdatedByInput
   providedFeedbacks?: Prisma.EventFeedbackCreateNestedManyWithoutUserInput
   updatedEventFeedback?: Prisma.EventFeedbackCreateNestedManyWithoutUpdatedByInput
-  feedbackRequests?: Prisma.FeedbackRequestCreateNestedManyWithoutUserInput
   hrWarnings?: Prisma.HrWarningCreateNestedManyWithoutAssigneeInput
   createdHrWarning?: Prisma.HrWarningCreateNestedManyWithoutCreatedByInput
   updatedHrWarnings?: Prisma.HrWarningCreateNestedManyWithoutUpdatedByInput
@@ -5756,7 +5442,6 @@ export type UserUncheckedCreateWithoutReviewedAssignmentCancelRequestsInput = {
   updatedEvents?: Prisma.EventUncheckedCreateNestedManyWithoutUpdatedByInput
   providedFeedbacks?: Prisma.EventFeedbackUncheckedCreateNestedManyWithoutUserInput
   updatedEventFeedback?: Prisma.EventFeedbackUncheckedCreateNestedManyWithoutUpdatedByInput
-  feedbackRequests?: Prisma.FeedbackRequestUncheckedCreateNestedManyWithoutUserInput
   hrWarnings?: Prisma.HrWarningUncheckedCreateNestedManyWithoutAssigneeInput
   createdHrWarning?: Prisma.HrWarningUncheckedCreateNestedManyWithoutCreatedByInput
   updatedHrWarnings?: Prisma.HrWarningUncheckedCreateNestedManyWithoutUpdatedByInput
@@ -5822,7 +5507,6 @@ export type UserUpdateWithoutAssignmentCancelRequestsInput = {
   updatedEvents?: Prisma.EventUpdateManyWithoutUpdatedByNestedInput
   providedFeedbacks?: Prisma.EventFeedbackUpdateManyWithoutUserNestedInput
   updatedEventFeedback?: Prisma.EventFeedbackUpdateManyWithoutUpdatedByNestedInput
-  feedbackRequests?: Prisma.FeedbackRequestUpdateManyWithoutUserNestedInput
   hrWarnings?: Prisma.HrWarningUpdateManyWithoutAssigneeNestedInput
   createdHrWarning?: Prisma.HrWarningUpdateManyWithoutCreatedByNestedInput
   updatedHrWarnings?: Prisma.HrWarningUpdateManyWithoutUpdatedByNestedInput
@@ -5874,7 +5558,6 @@ export type UserUncheckedUpdateWithoutAssignmentCancelRequestsInput = {
   updatedEvents?: Prisma.EventUncheckedUpdateManyWithoutUpdatedByNestedInput
   providedFeedbacks?: Prisma.EventFeedbackUncheckedUpdateManyWithoutUserNestedInput
   updatedEventFeedback?: Prisma.EventFeedbackUncheckedUpdateManyWithoutUpdatedByNestedInput
-  feedbackRequests?: Prisma.FeedbackRequestUncheckedUpdateManyWithoutUserNestedInput
   hrWarnings?: Prisma.HrWarningUncheckedUpdateManyWithoutAssigneeNestedInput
   createdHrWarning?: Prisma.HrWarningUncheckedUpdateManyWithoutCreatedByNestedInput
   updatedHrWarnings?: Prisma.HrWarningUncheckedUpdateManyWithoutUpdatedByNestedInput
@@ -5935,7 +5618,6 @@ export type UserUpdateWithoutReviewedAssignmentCancelRequestsInput = {
   updatedEvents?: Prisma.EventUpdateManyWithoutUpdatedByNestedInput
   providedFeedbacks?: Prisma.EventFeedbackUpdateManyWithoutUserNestedInput
   updatedEventFeedback?: Prisma.EventFeedbackUpdateManyWithoutUpdatedByNestedInput
-  feedbackRequests?: Prisma.FeedbackRequestUpdateManyWithoutUserNestedInput
   hrWarnings?: Prisma.HrWarningUpdateManyWithoutAssigneeNestedInput
   createdHrWarning?: Prisma.HrWarningUpdateManyWithoutCreatedByNestedInput
   updatedHrWarnings?: Prisma.HrWarningUpdateManyWithoutUpdatedByNestedInput
@@ -5987,7 +5669,6 @@ export type UserUncheckedUpdateWithoutReviewedAssignmentCancelRequestsInput = {
   updatedEvents?: Prisma.EventUncheckedUpdateManyWithoutUpdatedByNestedInput
   providedFeedbacks?: Prisma.EventFeedbackUncheckedUpdateManyWithoutUserNestedInput
   updatedEventFeedback?: Prisma.EventFeedbackUncheckedUpdateManyWithoutUpdatedByNestedInput
-  feedbackRequests?: Prisma.FeedbackRequestUncheckedUpdateManyWithoutUserNestedInput
   hrWarnings?: Prisma.HrWarningUncheckedUpdateManyWithoutAssigneeNestedInput
   createdHrWarning?: Prisma.HrWarningUncheckedUpdateManyWithoutCreatedByNestedInput
   updatedHrWarnings?: Prisma.HrWarningUncheckedUpdateManyWithoutUpdatedByNestedInput
@@ -6036,7 +5717,6 @@ export type UserCreateWithoutRatingHistoryInput = {
   updatedEvents?: Prisma.EventCreateNestedManyWithoutUpdatedByInput
   providedFeedbacks?: Prisma.EventFeedbackCreateNestedManyWithoutUserInput
   updatedEventFeedback?: Prisma.EventFeedbackCreateNestedManyWithoutUpdatedByInput
-  feedbackRequests?: Prisma.FeedbackRequestCreateNestedManyWithoutUserInput
   hrWarnings?: Prisma.HrWarningCreateNestedManyWithoutAssigneeInput
   createdHrWarning?: Prisma.HrWarningCreateNestedManyWithoutCreatedByInput
   updatedHrWarnings?: Prisma.HrWarningCreateNestedManyWithoutUpdatedByInput
@@ -6088,7 +5768,6 @@ export type UserUncheckedCreateWithoutRatingHistoryInput = {
   updatedEvents?: Prisma.EventUncheckedCreateNestedManyWithoutUpdatedByInput
   providedFeedbacks?: Prisma.EventFeedbackUncheckedCreateNestedManyWithoutUserInput
   updatedEventFeedback?: Prisma.EventFeedbackUncheckedCreateNestedManyWithoutUpdatedByInput
-  feedbackRequests?: Prisma.FeedbackRequestUncheckedCreateNestedManyWithoutUserInput
   hrWarnings?: Prisma.HrWarningUncheckedCreateNestedManyWithoutAssigneeInput
   createdHrWarning?: Prisma.HrWarningUncheckedCreateNestedManyWithoutCreatedByInput
   updatedHrWarnings?: Prisma.HrWarningUncheckedCreateNestedManyWithoutUpdatedByInput
@@ -6143,7 +5822,6 @@ export type UserCreateWithoutCreatedRatingsInput = {
   updatedEvents?: Prisma.EventCreateNestedManyWithoutUpdatedByInput
   providedFeedbacks?: Prisma.EventFeedbackCreateNestedManyWithoutUserInput
   updatedEventFeedback?: Prisma.EventFeedbackCreateNestedManyWithoutUpdatedByInput
-  feedbackRequests?: Prisma.FeedbackRequestCreateNestedManyWithoutUserInput
   hrWarnings?: Prisma.HrWarningCreateNestedManyWithoutAssigneeInput
   createdHrWarning?: Prisma.HrWarningCreateNestedManyWithoutCreatedByInput
   updatedHrWarnings?: Prisma.HrWarningCreateNestedManyWithoutUpdatedByInput
@@ -6195,7 +5873,6 @@ export type UserUncheckedCreateWithoutCreatedRatingsInput = {
   updatedEvents?: Prisma.EventUncheckedCreateNestedManyWithoutUpdatedByInput
   providedFeedbacks?: Prisma.EventFeedbackUncheckedCreateNestedManyWithoutUserInput
   updatedEventFeedback?: Prisma.EventFeedbackUncheckedCreateNestedManyWithoutUpdatedByInput
-  feedbackRequests?: Prisma.FeedbackRequestUncheckedCreateNestedManyWithoutUserInput
   hrWarnings?: Prisma.HrWarningUncheckedCreateNestedManyWithoutAssigneeInput
   createdHrWarning?: Prisma.HrWarningUncheckedCreateNestedManyWithoutCreatedByInput
   updatedHrWarnings?: Prisma.HrWarningUncheckedCreateNestedManyWithoutUpdatedByInput
@@ -6250,7 +5927,6 @@ export type UserCreateWithoutUpdatedRatingsInput = {
   updatedEvents?: Prisma.EventCreateNestedManyWithoutUpdatedByInput
   providedFeedbacks?: Prisma.EventFeedbackCreateNestedManyWithoutUserInput
   updatedEventFeedback?: Prisma.EventFeedbackCreateNestedManyWithoutUpdatedByInput
-  feedbackRequests?: Prisma.FeedbackRequestCreateNestedManyWithoutUserInput
   hrWarnings?: Prisma.HrWarningCreateNestedManyWithoutAssigneeInput
   createdHrWarning?: Prisma.HrWarningCreateNestedManyWithoutCreatedByInput
   updatedHrWarnings?: Prisma.HrWarningCreateNestedManyWithoutUpdatedByInput
@@ -6302,7 +5978,6 @@ export type UserUncheckedCreateWithoutUpdatedRatingsInput = {
   updatedEvents?: Prisma.EventUncheckedCreateNestedManyWithoutUpdatedByInput
   providedFeedbacks?: Prisma.EventFeedbackUncheckedCreateNestedManyWithoutUserInput
   updatedEventFeedback?: Prisma.EventFeedbackUncheckedCreateNestedManyWithoutUpdatedByInput
-  feedbackRequests?: Prisma.FeedbackRequestUncheckedCreateNestedManyWithoutUserInput
   hrWarnings?: Prisma.HrWarningUncheckedCreateNestedManyWithoutAssigneeInput
   createdHrWarning?: Prisma.HrWarningUncheckedCreateNestedManyWithoutCreatedByInput
   updatedHrWarnings?: Prisma.HrWarningUncheckedCreateNestedManyWithoutUpdatedByInput
@@ -6368,7 +6043,6 @@ export type UserUpdateWithoutRatingHistoryInput = {
   updatedEvents?: Prisma.EventUpdateManyWithoutUpdatedByNestedInput
   providedFeedbacks?: Prisma.EventFeedbackUpdateManyWithoutUserNestedInput
   updatedEventFeedback?: Prisma.EventFeedbackUpdateManyWithoutUpdatedByNestedInput
-  feedbackRequests?: Prisma.FeedbackRequestUpdateManyWithoutUserNestedInput
   hrWarnings?: Prisma.HrWarningUpdateManyWithoutAssigneeNestedInput
   createdHrWarning?: Prisma.HrWarningUpdateManyWithoutCreatedByNestedInput
   updatedHrWarnings?: Prisma.HrWarningUpdateManyWithoutUpdatedByNestedInput
@@ -6420,7 +6094,6 @@ export type UserUncheckedUpdateWithoutRatingHistoryInput = {
   updatedEvents?: Prisma.EventUncheckedUpdateManyWithoutUpdatedByNestedInput
   providedFeedbacks?: Prisma.EventFeedbackUncheckedUpdateManyWithoutUserNestedInput
   updatedEventFeedback?: Prisma.EventFeedbackUncheckedUpdateManyWithoutUpdatedByNestedInput
-  feedbackRequests?: Prisma.FeedbackRequestUncheckedUpdateManyWithoutUserNestedInput
   hrWarnings?: Prisma.HrWarningUncheckedUpdateManyWithoutAssigneeNestedInput
   createdHrWarning?: Prisma.HrWarningUncheckedUpdateManyWithoutCreatedByNestedInput
   updatedHrWarnings?: Prisma.HrWarningUncheckedUpdateManyWithoutUpdatedByNestedInput
@@ -6481,7 +6154,6 @@ export type UserUpdateWithoutCreatedRatingsInput = {
   updatedEvents?: Prisma.EventUpdateManyWithoutUpdatedByNestedInput
   providedFeedbacks?: Prisma.EventFeedbackUpdateManyWithoutUserNestedInput
   updatedEventFeedback?: Prisma.EventFeedbackUpdateManyWithoutUpdatedByNestedInput
-  feedbackRequests?: Prisma.FeedbackRequestUpdateManyWithoutUserNestedInput
   hrWarnings?: Prisma.HrWarningUpdateManyWithoutAssigneeNestedInput
   createdHrWarning?: Prisma.HrWarningUpdateManyWithoutCreatedByNestedInput
   updatedHrWarnings?: Prisma.HrWarningUpdateManyWithoutUpdatedByNestedInput
@@ -6533,7 +6205,6 @@ export type UserUncheckedUpdateWithoutCreatedRatingsInput = {
   updatedEvents?: Prisma.EventUncheckedUpdateManyWithoutUpdatedByNestedInput
   providedFeedbacks?: Prisma.EventFeedbackUncheckedUpdateManyWithoutUserNestedInput
   updatedEventFeedback?: Prisma.EventFeedbackUncheckedUpdateManyWithoutUpdatedByNestedInput
-  feedbackRequests?: Prisma.FeedbackRequestUncheckedUpdateManyWithoutUserNestedInput
   hrWarnings?: Prisma.HrWarningUncheckedUpdateManyWithoutAssigneeNestedInput
   createdHrWarning?: Prisma.HrWarningUncheckedUpdateManyWithoutCreatedByNestedInput
   updatedHrWarnings?: Prisma.HrWarningUncheckedUpdateManyWithoutUpdatedByNestedInput
@@ -6594,7 +6265,6 @@ export type UserUpdateWithoutUpdatedRatingsInput = {
   updatedEvents?: Prisma.EventUpdateManyWithoutUpdatedByNestedInput
   providedFeedbacks?: Prisma.EventFeedbackUpdateManyWithoutUserNestedInput
   updatedEventFeedback?: Prisma.EventFeedbackUpdateManyWithoutUpdatedByNestedInput
-  feedbackRequests?: Prisma.FeedbackRequestUpdateManyWithoutUserNestedInput
   hrWarnings?: Prisma.HrWarningUpdateManyWithoutAssigneeNestedInput
   createdHrWarning?: Prisma.HrWarningUpdateManyWithoutCreatedByNestedInput
   updatedHrWarnings?: Prisma.HrWarningUpdateManyWithoutUpdatedByNestedInput
@@ -6646,7 +6316,6 @@ export type UserUncheckedUpdateWithoutUpdatedRatingsInput = {
   updatedEvents?: Prisma.EventUncheckedUpdateManyWithoutUpdatedByNestedInput
   providedFeedbacks?: Prisma.EventFeedbackUncheckedUpdateManyWithoutUserNestedInput
   updatedEventFeedback?: Prisma.EventFeedbackUncheckedUpdateManyWithoutUpdatedByNestedInput
-  feedbackRequests?: Prisma.FeedbackRequestUncheckedUpdateManyWithoutUserNestedInput
   hrWarnings?: Prisma.HrWarningUncheckedUpdateManyWithoutAssigneeNestedInput
   createdHrWarning?: Prisma.HrWarningUncheckedUpdateManyWithoutCreatedByNestedInput
   updatedHrWarnings?: Prisma.HrWarningUncheckedUpdateManyWithoutUpdatedByNestedInput
@@ -6696,7 +6365,6 @@ export type UserCreateWithoutPositionChangesInput = {
   updatedEvents?: Prisma.EventCreateNestedManyWithoutUpdatedByInput
   providedFeedbacks?: Prisma.EventFeedbackCreateNestedManyWithoutUserInput
   updatedEventFeedback?: Prisma.EventFeedbackCreateNestedManyWithoutUpdatedByInput
-  feedbackRequests?: Prisma.FeedbackRequestCreateNestedManyWithoutUserInput
   hrWarnings?: Prisma.HrWarningCreateNestedManyWithoutAssigneeInput
   createdHrWarning?: Prisma.HrWarningCreateNestedManyWithoutCreatedByInput
   updatedHrWarnings?: Prisma.HrWarningCreateNestedManyWithoutUpdatedByInput
@@ -6748,7 +6416,6 @@ export type UserUncheckedCreateWithoutPositionChangesInput = {
   updatedEvents?: Prisma.EventUncheckedCreateNestedManyWithoutUpdatedByInput
   providedFeedbacks?: Prisma.EventFeedbackUncheckedCreateNestedManyWithoutUserInput
   updatedEventFeedback?: Prisma.EventFeedbackUncheckedCreateNestedManyWithoutUpdatedByInput
-  feedbackRequests?: Prisma.FeedbackRequestUncheckedCreateNestedManyWithoutUserInput
   hrWarnings?: Prisma.HrWarningUncheckedCreateNestedManyWithoutAssigneeInput
   createdHrWarning?: Prisma.HrWarningUncheckedCreateNestedManyWithoutCreatedByInput
   updatedHrWarnings?: Prisma.HrWarningUncheckedCreateNestedManyWithoutUpdatedByInput
@@ -6803,7 +6470,6 @@ export type UserCreateWithoutPositionCreationsInput = {
   updatedEvents?: Prisma.EventCreateNestedManyWithoutUpdatedByInput
   providedFeedbacks?: Prisma.EventFeedbackCreateNestedManyWithoutUserInput
   updatedEventFeedback?: Prisma.EventFeedbackCreateNestedManyWithoutUpdatedByInput
-  feedbackRequests?: Prisma.FeedbackRequestCreateNestedManyWithoutUserInput
   hrWarnings?: Prisma.HrWarningCreateNestedManyWithoutAssigneeInput
   createdHrWarning?: Prisma.HrWarningCreateNestedManyWithoutCreatedByInput
   updatedHrWarnings?: Prisma.HrWarningCreateNestedManyWithoutUpdatedByInput
@@ -6855,7 +6521,6 @@ export type UserUncheckedCreateWithoutPositionCreationsInput = {
   updatedEvents?: Prisma.EventUncheckedCreateNestedManyWithoutUpdatedByInput
   providedFeedbacks?: Prisma.EventFeedbackUncheckedCreateNestedManyWithoutUserInput
   updatedEventFeedback?: Prisma.EventFeedbackUncheckedCreateNestedManyWithoutUpdatedByInput
-  feedbackRequests?: Prisma.FeedbackRequestUncheckedCreateNestedManyWithoutUserInput
   hrWarnings?: Prisma.HrWarningUncheckedCreateNestedManyWithoutAssigneeInput
   createdHrWarning?: Prisma.HrWarningUncheckedCreateNestedManyWithoutCreatedByInput
   updatedHrWarnings?: Prisma.HrWarningUncheckedCreateNestedManyWithoutUpdatedByInput
@@ -6910,7 +6575,6 @@ export type UserCreateWithoutPositionHistoriesInput = {
   updatedEvents?: Prisma.EventCreateNestedManyWithoutUpdatedByInput
   providedFeedbacks?: Prisma.EventFeedbackCreateNestedManyWithoutUserInput
   updatedEventFeedback?: Prisma.EventFeedbackCreateNestedManyWithoutUpdatedByInput
-  feedbackRequests?: Prisma.FeedbackRequestCreateNestedManyWithoutUserInput
   hrWarnings?: Prisma.HrWarningCreateNestedManyWithoutAssigneeInput
   createdHrWarning?: Prisma.HrWarningCreateNestedManyWithoutCreatedByInput
   updatedHrWarnings?: Prisma.HrWarningCreateNestedManyWithoutUpdatedByInput
@@ -6962,7 +6626,6 @@ export type UserUncheckedCreateWithoutPositionHistoriesInput = {
   updatedEvents?: Prisma.EventUncheckedCreateNestedManyWithoutUpdatedByInput
   providedFeedbacks?: Prisma.EventFeedbackUncheckedCreateNestedManyWithoutUserInput
   updatedEventFeedback?: Prisma.EventFeedbackUncheckedCreateNestedManyWithoutUpdatedByInput
-  feedbackRequests?: Prisma.FeedbackRequestUncheckedCreateNestedManyWithoutUserInput
   hrWarnings?: Prisma.HrWarningUncheckedCreateNestedManyWithoutAssigneeInput
   createdHrWarning?: Prisma.HrWarningUncheckedCreateNestedManyWithoutCreatedByInput
   updatedHrWarnings?: Prisma.HrWarningUncheckedCreateNestedManyWithoutUpdatedByInput
@@ -7028,7 +6691,6 @@ export type UserUpdateWithoutPositionChangesInput = {
   updatedEvents?: Prisma.EventUpdateManyWithoutUpdatedByNestedInput
   providedFeedbacks?: Prisma.EventFeedbackUpdateManyWithoutUserNestedInput
   updatedEventFeedback?: Prisma.EventFeedbackUpdateManyWithoutUpdatedByNestedInput
-  feedbackRequests?: Prisma.FeedbackRequestUpdateManyWithoutUserNestedInput
   hrWarnings?: Prisma.HrWarningUpdateManyWithoutAssigneeNestedInput
   createdHrWarning?: Prisma.HrWarningUpdateManyWithoutCreatedByNestedInput
   updatedHrWarnings?: Prisma.HrWarningUpdateManyWithoutUpdatedByNestedInput
@@ -7080,7 +6742,6 @@ export type UserUncheckedUpdateWithoutPositionChangesInput = {
   updatedEvents?: Prisma.EventUncheckedUpdateManyWithoutUpdatedByNestedInput
   providedFeedbacks?: Prisma.EventFeedbackUncheckedUpdateManyWithoutUserNestedInput
   updatedEventFeedback?: Prisma.EventFeedbackUncheckedUpdateManyWithoutUpdatedByNestedInput
-  feedbackRequests?: Prisma.FeedbackRequestUncheckedUpdateManyWithoutUserNestedInput
   hrWarnings?: Prisma.HrWarningUncheckedUpdateManyWithoutAssigneeNestedInput
   createdHrWarning?: Prisma.HrWarningUncheckedUpdateManyWithoutCreatedByNestedInput
   updatedHrWarnings?: Prisma.HrWarningUncheckedUpdateManyWithoutUpdatedByNestedInput
@@ -7141,7 +6802,6 @@ export type UserUpdateWithoutPositionCreationsInput = {
   updatedEvents?: Prisma.EventUpdateManyWithoutUpdatedByNestedInput
   providedFeedbacks?: Prisma.EventFeedbackUpdateManyWithoutUserNestedInput
   updatedEventFeedback?: Prisma.EventFeedbackUpdateManyWithoutUpdatedByNestedInput
-  feedbackRequests?: Prisma.FeedbackRequestUpdateManyWithoutUserNestedInput
   hrWarnings?: Prisma.HrWarningUpdateManyWithoutAssigneeNestedInput
   createdHrWarning?: Prisma.HrWarningUpdateManyWithoutCreatedByNestedInput
   updatedHrWarnings?: Prisma.HrWarningUpdateManyWithoutUpdatedByNestedInput
@@ -7193,7 +6853,6 @@ export type UserUncheckedUpdateWithoutPositionCreationsInput = {
   updatedEvents?: Prisma.EventUncheckedUpdateManyWithoutUpdatedByNestedInput
   providedFeedbacks?: Prisma.EventFeedbackUncheckedUpdateManyWithoutUserNestedInput
   updatedEventFeedback?: Prisma.EventFeedbackUncheckedUpdateManyWithoutUpdatedByNestedInput
-  feedbackRequests?: Prisma.FeedbackRequestUncheckedUpdateManyWithoutUserNestedInput
   hrWarnings?: Prisma.HrWarningUncheckedUpdateManyWithoutAssigneeNestedInput
   createdHrWarning?: Prisma.HrWarningUncheckedUpdateManyWithoutCreatedByNestedInput
   updatedHrWarnings?: Prisma.HrWarningUncheckedUpdateManyWithoutUpdatedByNestedInput
@@ -7254,7 +6913,6 @@ export type UserUpdateWithoutPositionHistoriesInput = {
   updatedEvents?: Prisma.EventUpdateManyWithoutUpdatedByNestedInput
   providedFeedbacks?: Prisma.EventFeedbackUpdateManyWithoutUserNestedInput
   updatedEventFeedback?: Prisma.EventFeedbackUpdateManyWithoutUpdatedByNestedInput
-  feedbackRequests?: Prisma.FeedbackRequestUpdateManyWithoutUserNestedInput
   hrWarnings?: Prisma.HrWarningUpdateManyWithoutAssigneeNestedInput
   createdHrWarning?: Prisma.HrWarningUpdateManyWithoutCreatedByNestedInput
   updatedHrWarnings?: Prisma.HrWarningUpdateManyWithoutUpdatedByNestedInput
@@ -7306,7 +6964,6 @@ export type UserUncheckedUpdateWithoutPositionHistoriesInput = {
   updatedEvents?: Prisma.EventUncheckedUpdateManyWithoutUpdatedByNestedInput
   providedFeedbacks?: Prisma.EventFeedbackUncheckedUpdateManyWithoutUserNestedInput
   updatedEventFeedback?: Prisma.EventFeedbackUncheckedUpdateManyWithoutUpdatedByNestedInput
-  feedbackRequests?: Prisma.FeedbackRequestUncheckedUpdateManyWithoutUserNestedInput
   hrWarnings?: Prisma.HrWarningUncheckedUpdateManyWithoutAssigneeNestedInput
   createdHrWarning?: Prisma.HrWarningUncheckedUpdateManyWithoutCreatedByNestedInput
   updatedHrWarnings?: Prisma.HrWarningUncheckedUpdateManyWithoutUpdatedByNestedInput
@@ -7356,7 +7013,6 @@ export type UserCreateWithoutMemberStatusChangesInput = {
   updatedEvents?: Prisma.EventCreateNestedManyWithoutUpdatedByInput
   providedFeedbacks?: Prisma.EventFeedbackCreateNestedManyWithoutUserInput
   updatedEventFeedback?: Prisma.EventFeedbackCreateNestedManyWithoutUpdatedByInput
-  feedbackRequests?: Prisma.FeedbackRequestCreateNestedManyWithoutUserInput
   hrWarnings?: Prisma.HrWarningCreateNestedManyWithoutAssigneeInput
   createdHrWarning?: Prisma.HrWarningCreateNestedManyWithoutCreatedByInput
   updatedHrWarnings?: Prisma.HrWarningCreateNestedManyWithoutUpdatedByInput
@@ -7408,7 +7064,6 @@ export type UserUncheckedCreateWithoutMemberStatusChangesInput = {
   updatedEvents?: Prisma.EventUncheckedCreateNestedManyWithoutUpdatedByInput
   providedFeedbacks?: Prisma.EventFeedbackUncheckedCreateNestedManyWithoutUserInput
   updatedEventFeedback?: Prisma.EventFeedbackUncheckedCreateNestedManyWithoutUpdatedByInput
-  feedbackRequests?: Prisma.FeedbackRequestUncheckedCreateNestedManyWithoutUserInput
   hrWarnings?: Prisma.HrWarningUncheckedCreateNestedManyWithoutAssigneeInput
   createdHrWarning?: Prisma.HrWarningUncheckedCreateNestedManyWithoutCreatedByInput
   updatedHrWarnings?: Prisma.HrWarningUncheckedCreateNestedManyWithoutUpdatedByInput
@@ -7463,7 +7118,6 @@ export type UserCreateWithoutMemberStatusCreatedInput = {
   updatedEvents?: Prisma.EventCreateNestedManyWithoutUpdatedByInput
   providedFeedbacks?: Prisma.EventFeedbackCreateNestedManyWithoutUserInput
   updatedEventFeedback?: Prisma.EventFeedbackCreateNestedManyWithoutUpdatedByInput
-  feedbackRequests?: Prisma.FeedbackRequestCreateNestedManyWithoutUserInput
   hrWarnings?: Prisma.HrWarningCreateNestedManyWithoutAssigneeInput
   createdHrWarning?: Prisma.HrWarningCreateNestedManyWithoutCreatedByInput
   updatedHrWarnings?: Prisma.HrWarningCreateNestedManyWithoutUpdatedByInput
@@ -7515,7 +7169,6 @@ export type UserUncheckedCreateWithoutMemberStatusCreatedInput = {
   updatedEvents?: Prisma.EventUncheckedCreateNestedManyWithoutUpdatedByInput
   providedFeedbacks?: Prisma.EventFeedbackUncheckedCreateNestedManyWithoutUserInput
   updatedEventFeedback?: Prisma.EventFeedbackUncheckedCreateNestedManyWithoutUpdatedByInput
-  feedbackRequests?: Prisma.FeedbackRequestUncheckedCreateNestedManyWithoutUserInput
   hrWarnings?: Prisma.HrWarningUncheckedCreateNestedManyWithoutAssigneeInput
   createdHrWarning?: Prisma.HrWarningUncheckedCreateNestedManyWithoutCreatedByInput
   updatedHrWarnings?: Prisma.HrWarningUncheckedCreateNestedManyWithoutUpdatedByInput
@@ -7570,7 +7223,6 @@ export type UserCreateWithoutMemberStatusLogsInput = {
   updatedEvents?: Prisma.EventCreateNestedManyWithoutUpdatedByInput
   providedFeedbacks?: Prisma.EventFeedbackCreateNestedManyWithoutUserInput
   updatedEventFeedback?: Prisma.EventFeedbackCreateNestedManyWithoutUpdatedByInput
-  feedbackRequests?: Prisma.FeedbackRequestCreateNestedManyWithoutUserInput
   hrWarnings?: Prisma.HrWarningCreateNestedManyWithoutAssigneeInput
   createdHrWarning?: Prisma.HrWarningCreateNestedManyWithoutCreatedByInput
   updatedHrWarnings?: Prisma.HrWarningCreateNestedManyWithoutUpdatedByInput
@@ -7622,7 +7274,6 @@ export type UserUncheckedCreateWithoutMemberStatusLogsInput = {
   updatedEvents?: Prisma.EventUncheckedCreateNestedManyWithoutUpdatedByInput
   providedFeedbacks?: Prisma.EventFeedbackUncheckedCreateNestedManyWithoutUserInput
   updatedEventFeedback?: Prisma.EventFeedbackUncheckedCreateNestedManyWithoutUpdatedByInput
-  feedbackRequests?: Prisma.FeedbackRequestUncheckedCreateNestedManyWithoutUserInput
   hrWarnings?: Prisma.HrWarningUncheckedCreateNestedManyWithoutAssigneeInput
   createdHrWarning?: Prisma.HrWarningUncheckedCreateNestedManyWithoutCreatedByInput
   updatedHrWarnings?: Prisma.HrWarningUncheckedCreateNestedManyWithoutUpdatedByInput
@@ -7688,7 +7339,6 @@ export type UserUpdateWithoutMemberStatusChangesInput = {
   updatedEvents?: Prisma.EventUpdateManyWithoutUpdatedByNestedInput
   providedFeedbacks?: Prisma.EventFeedbackUpdateManyWithoutUserNestedInput
   updatedEventFeedback?: Prisma.EventFeedbackUpdateManyWithoutUpdatedByNestedInput
-  feedbackRequests?: Prisma.FeedbackRequestUpdateManyWithoutUserNestedInput
   hrWarnings?: Prisma.HrWarningUpdateManyWithoutAssigneeNestedInput
   createdHrWarning?: Prisma.HrWarningUpdateManyWithoutCreatedByNestedInput
   updatedHrWarnings?: Prisma.HrWarningUpdateManyWithoutUpdatedByNestedInput
@@ -7740,7 +7390,6 @@ export type UserUncheckedUpdateWithoutMemberStatusChangesInput = {
   updatedEvents?: Prisma.EventUncheckedUpdateManyWithoutUpdatedByNestedInput
   providedFeedbacks?: Prisma.EventFeedbackUncheckedUpdateManyWithoutUserNestedInput
   updatedEventFeedback?: Prisma.EventFeedbackUncheckedUpdateManyWithoutUpdatedByNestedInput
-  feedbackRequests?: Prisma.FeedbackRequestUncheckedUpdateManyWithoutUserNestedInput
   hrWarnings?: Prisma.HrWarningUncheckedUpdateManyWithoutAssigneeNestedInput
   createdHrWarning?: Prisma.HrWarningUncheckedUpdateManyWithoutCreatedByNestedInput
   updatedHrWarnings?: Prisma.HrWarningUncheckedUpdateManyWithoutUpdatedByNestedInput
@@ -7801,7 +7450,6 @@ export type UserUpdateWithoutMemberStatusCreatedInput = {
   updatedEvents?: Prisma.EventUpdateManyWithoutUpdatedByNestedInput
   providedFeedbacks?: Prisma.EventFeedbackUpdateManyWithoutUserNestedInput
   updatedEventFeedback?: Prisma.EventFeedbackUpdateManyWithoutUpdatedByNestedInput
-  feedbackRequests?: Prisma.FeedbackRequestUpdateManyWithoutUserNestedInput
   hrWarnings?: Prisma.HrWarningUpdateManyWithoutAssigneeNestedInput
   createdHrWarning?: Prisma.HrWarningUpdateManyWithoutCreatedByNestedInput
   updatedHrWarnings?: Prisma.HrWarningUpdateManyWithoutUpdatedByNestedInput
@@ -7853,7 +7501,6 @@ export type UserUncheckedUpdateWithoutMemberStatusCreatedInput = {
   updatedEvents?: Prisma.EventUncheckedUpdateManyWithoutUpdatedByNestedInput
   providedFeedbacks?: Prisma.EventFeedbackUncheckedUpdateManyWithoutUserNestedInput
   updatedEventFeedback?: Prisma.EventFeedbackUncheckedUpdateManyWithoutUpdatedByNestedInput
-  feedbackRequests?: Prisma.FeedbackRequestUncheckedUpdateManyWithoutUserNestedInput
   hrWarnings?: Prisma.HrWarningUncheckedUpdateManyWithoutAssigneeNestedInput
   createdHrWarning?: Prisma.HrWarningUncheckedUpdateManyWithoutCreatedByNestedInput
   updatedHrWarnings?: Prisma.HrWarningUncheckedUpdateManyWithoutUpdatedByNestedInput
@@ -7914,7 +7561,6 @@ export type UserUpdateWithoutMemberStatusLogsInput = {
   updatedEvents?: Prisma.EventUpdateManyWithoutUpdatedByNestedInput
   providedFeedbacks?: Prisma.EventFeedbackUpdateManyWithoutUserNestedInput
   updatedEventFeedback?: Prisma.EventFeedbackUpdateManyWithoutUpdatedByNestedInput
-  feedbackRequests?: Prisma.FeedbackRequestUpdateManyWithoutUserNestedInput
   hrWarnings?: Prisma.HrWarningUpdateManyWithoutAssigneeNestedInput
   createdHrWarning?: Prisma.HrWarningUpdateManyWithoutCreatedByNestedInput
   updatedHrWarnings?: Prisma.HrWarningUpdateManyWithoutUpdatedByNestedInput
@@ -7966,7 +7612,6 @@ export type UserUncheckedUpdateWithoutMemberStatusLogsInput = {
   updatedEvents?: Prisma.EventUncheckedUpdateManyWithoutUpdatedByNestedInput
   providedFeedbacks?: Prisma.EventFeedbackUncheckedUpdateManyWithoutUserNestedInput
   updatedEventFeedback?: Prisma.EventFeedbackUncheckedUpdateManyWithoutUpdatedByNestedInput
-  feedbackRequests?: Prisma.FeedbackRequestUncheckedUpdateManyWithoutUserNestedInput
   hrWarnings?: Prisma.HrWarningUncheckedUpdateManyWithoutAssigneeNestedInput
   createdHrWarning?: Prisma.HrWarningUncheckedUpdateManyWithoutCreatedByNestedInput
   updatedHrWarnings?: Prisma.HrWarningUncheckedUpdateManyWithoutUpdatedByNestedInput
@@ -8016,7 +7661,6 @@ export type UserCreateWithoutUpdatedJoinRequestsInput = {
   updatedEvents?: Prisma.EventCreateNestedManyWithoutUpdatedByInput
   providedFeedbacks?: Prisma.EventFeedbackCreateNestedManyWithoutUserInput
   updatedEventFeedback?: Prisma.EventFeedbackCreateNestedManyWithoutUpdatedByInput
-  feedbackRequests?: Prisma.FeedbackRequestCreateNestedManyWithoutUserInput
   hrWarnings?: Prisma.HrWarningCreateNestedManyWithoutAssigneeInput
   createdHrWarning?: Prisma.HrWarningCreateNestedManyWithoutCreatedByInput
   updatedHrWarnings?: Prisma.HrWarningCreateNestedManyWithoutUpdatedByInput
@@ -8068,7 +7712,6 @@ export type UserUncheckedCreateWithoutUpdatedJoinRequestsInput = {
   updatedEvents?: Prisma.EventUncheckedCreateNestedManyWithoutUpdatedByInput
   providedFeedbacks?: Prisma.EventFeedbackUncheckedCreateNestedManyWithoutUserInput
   updatedEventFeedback?: Prisma.EventFeedbackUncheckedCreateNestedManyWithoutUpdatedByInput
-  feedbackRequests?: Prisma.FeedbackRequestUncheckedCreateNestedManyWithoutUserInput
   hrWarnings?: Prisma.HrWarningUncheckedCreateNestedManyWithoutAssigneeInput
   createdHrWarning?: Prisma.HrWarningUncheckedCreateNestedManyWithoutCreatedByInput
   updatedHrWarnings?: Prisma.HrWarningUncheckedCreateNestedManyWithoutUpdatedByInput
@@ -8123,7 +7766,6 @@ export type UserCreateWithoutJoinRequestsInput = {
   updatedEvents?: Prisma.EventCreateNestedManyWithoutUpdatedByInput
   providedFeedbacks?: Prisma.EventFeedbackCreateNestedManyWithoutUserInput
   updatedEventFeedback?: Prisma.EventFeedbackCreateNestedManyWithoutUpdatedByInput
-  feedbackRequests?: Prisma.FeedbackRequestCreateNestedManyWithoutUserInput
   hrWarnings?: Prisma.HrWarningCreateNestedManyWithoutAssigneeInput
   createdHrWarning?: Prisma.HrWarningCreateNestedManyWithoutCreatedByInput
   updatedHrWarnings?: Prisma.HrWarningCreateNestedManyWithoutUpdatedByInput
@@ -8175,7 +7817,6 @@ export type UserUncheckedCreateWithoutJoinRequestsInput = {
   updatedEvents?: Prisma.EventUncheckedCreateNestedManyWithoutUpdatedByInput
   providedFeedbacks?: Prisma.EventFeedbackUncheckedCreateNestedManyWithoutUserInput
   updatedEventFeedback?: Prisma.EventFeedbackUncheckedCreateNestedManyWithoutUpdatedByInput
-  feedbackRequests?: Prisma.FeedbackRequestUncheckedCreateNestedManyWithoutUserInput
   hrWarnings?: Prisma.HrWarningUncheckedCreateNestedManyWithoutAssigneeInput
   createdHrWarning?: Prisma.HrWarningUncheckedCreateNestedManyWithoutCreatedByInput
   updatedHrWarnings?: Prisma.HrWarningUncheckedCreateNestedManyWithoutUpdatedByInput
@@ -8241,7 +7882,6 @@ export type UserUpdateWithoutUpdatedJoinRequestsInput = {
   updatedEvents?: Prisma.EventUpdateManyWithoutUpdatedByNestedInput
   providedFeedbacks?: Prisma.EventFeedbackUpdateManyWithoutUserNestedInput
   updatedEventFeedback?: Prisma.EventFeedbackUpdateManyWithoutUpdatedByNestedInput
-  feedbackRequests?: Prisma.FeedbackRequestUpdateManyWithoutUserNestedInput
   hrWarnings?: Prisma.HrWarningUpdateManyWithoutAssigneeNestedInput
   createdHrWarning?: Prisma.HrWarningUpdateManyWithoutCreatedByNestedInput
   updatedHrWarnings?: Prisma.HrWarningUpdateManyWithoutUpdatedByNestedInput
@@ -8293,7 +7933,6 @@ export type UserUncheckedUpdateWithoutUpdatedJoinRequestsInput = {
   updatedEvents?: Prisma.EventUncheckedUpdateManyWithoutUpdatedByNestedInput
   providedFeedbacks?: Prisma.EventFeedbackUncheckedUpdateManyWithoutUserNestedInput
   updatedEventFeedback?: Prisma.EventFeedbackUncheckedUpdateManyWithoutUpdatedByNestedInput
-  feedbackRequests?: Prisma.FeedbackRequestUncheckedUpdateManyWithoutUserNestedInput
   hrWarnings?: Prisma.HrWarningUncheckedUpdateManyWithoutAssigneeNestedInput
   createdHrWarning?: Prisma.HrWarningUncheckedUpdateManyWithoutCreatedByNestedInput
   updatedHrWarnings?: Prisma.HrWarningUncheckedUpdateManyWithoutUpdatedByNestedInput
@@ -8354,7 +7993,6 @@ export type UserUpdateWithoutJoinRequestsInput = {
   updatedEvents?: Prisma.EventUpdateManyWithoutUpdatedByNestedInput
   providedFeedbacks?: Prisma.EventFeedbackUpdateManyWithoutUserNestedInput
   updatedEventFeedback?: Prisma.EventFeedbackUpdateManyWithoutUpdatedByNestedInput
-  feedbackRequests?: Prisma.FeedbackRequestUpdateManyWithoutUserNestedInput
   hrWarnings?: Prisma.HrWarningUpdateManyWithoutAssigneeNestedInput
   createdHrWarning?: Prisma.HrWarningUpdateManyWithoutCreatedByNestedInput
   updatedHrWarnings?: Prisma.HrWarningUpdateManyWithoutUpdatedByNestedInput
@@ -8406,7 +8044,6 @@ export type UserUncheckedUpdateWithoutJoinRequestsInput = {
   updatedEvents?: Prisma.EventUncheckedUpdateManyWithoutUpdatedByNestedInput
   providedFeedbacks?: Prisma.EventFeedbackUncheckedUpdateManyWithoutUserNestedInput
   updatedEventFeedback?: Prisma.EventFeedbackUncheckedUpdateManyWithoutUpdatedByNestedInput
-  feedbackRequests?: Prisma.FeedbackRequestUncheckedUpdateManyWithoutUserNestedInput
   hrWarnings?: Prisma.HrWarningUncheckedUpdateManyWithoutAssigneeNestedInput
   createdHrWarning?: Prisma.HrWarningUncheckedUpdateManyWithoutCreatedByNestedInput
   updatedHrWarnings?: Prisma.HrWarningUncheckedUpdateManyWithoutUpdatedByNestedInput
@@ -8457,7 +8094,6 @@ export type UserCreateWithoutCreatedAllowedUserInput = {
   updatedEvents?: Prisma.EventCreateNestedManyWithoutUpdatedByInput
   providedFeedbacks?: Prisma.EventFeedbackCreateNestedManyWithoutUserInput
   updatedEventFeedback?: Prisma.EventFeedbackCreateNestedManyWithoutUpdatedByInput
-  feedbackRequests?: Prisma.FeedbackRequestCreateNestedManyWithoutUserInput
   hrWarnings?: Prisma.HrWarningCreateNestedManyWithoutAssigneeInput
   createdHrWarning?: Prisma.HrWarningCreateNestedManyWithoutCreatedByInput
   updatedHrWarnings?: Prisma.HrWarningCreateNestedManyWithoutUpdatedByInput
@@ -8509,7 +8145,6 @@ export type UserUncheckedCreateWithoutCreatedAllowedUserInput = {
   updatedEvents?: Prisma.EventUncheckedCreateNestedManyWithoutUpdatedByInput
   providedFeedbacks?: Prisma.EventFeedbackUncheckedCreateNestedManyWithoutUserInput
   updatedEventFeedback?: Prisma.EventFeedbackUncheckedCreateNestedManyWithoutUpdatedByInput
-  feedbackRequests?: Prisma.FeedbackRequestUncheckedCreateNestedManyWithoutUserInput
   hrWarnings?: Prisma.HrWarningUncheckedCreateNestedManyWithoutAssigneeInput
   createdHrWarning?: Prisma.HrWarningUncheckedCreateNestedManyWithoutCreatedByInput
   updatedHrWarnings?: Prisma.HrWarningUncheckedCreateNestedManyWithoutUpdatedByInput
@@ -8564,7 +8199,6 @@ export type UserCreateWithoutUpdatedAllowanceInput = {
   updatedEvents?: Prisma.EventCreateNestedManyWithoutUpdatedByInput
   providedFeedbacks?: Prisma.EventFeedbackCreateNestedManyWithoutUserInput
   updatedEventFeedback?: Prisma.EventFeedbackCreateNestedManyWithoutUpdatedByInput
-  feedbackRequests?: Prisma.FeedbackRequestCreateNestedManyWithoutUserInput
   hrWarnings?: Prisma.HrWarningCreateNestedManyWithoutAssigneeInput
   createdHrWarning?: Prisma.HrWarningCreateNestedManyWithoutCreatedByInput
   updatedHrWarnings?: Prisma.HrWarningCreateNestedManyWithoutUpdatedByInput
@@ -8616,7 +8250,6 @@ export type UserUncheckedCreateWithoutUpdatedAllowanceInput = {
   updatedEvents?: Prisma.EventUncheckedCreateNestedManyWithoutUpdatedByInput
   providedFeedbacks?: Prisma.EventFeedbackUncheckedCreateNestedManyWithoutUserInput
   updatedEventFeedback?: Prisma.EventFeedbackUncheckedCreateNestedManyWithoutUpdatedByInput
-  feedbackRequests?: Prisma.FeedbackRequestUncheckedCreateNestedManyWithoutUserInput
   hrWarnings?: Prisma.HrWarningUncheckedCreateNestedManyWithoutAssigneeInput
   createdHrWarning?: Prisma.HrWarningUncheckedCreateNestedManyWithoutCreatedByInput
   updatedHrWarnings?: Prisma.HrWarningUncheckedCreateNestedManyWithoutUpdatedByInput
@@ -8671,7 +8304,6 @@ export type UserCreateWithoutOwnAllowanceInput = {
   updatedEvents?: Prisma.EventCreateNestedManyWithoutUpdatedByInput
   providedFeedbacks?: Prisma.EventFeedbackCreateNestedManyWithoutUserInput
   updatedEventFeedback?: Prisma.EventFeedbackCreateNestedManyWithoutUpdatedByInput
-  feedbackRequests?: Prisma.FeedbackRequestCreateNestedManyWithoutUserInput
   hrWarnings?: Prisma.HrWarningCreateNestedManyWithoutAssigneeInput
   createdHrWarning?: Prisma.HrWarningCreateNestedManyWithoutCreatedByInput
   updatedHrWarnings?: Prisma.HrWarningCreateNestedManyWithoutUpdatedByInput
@@ -8722,7 +8354,6 @@ export type UserUncheckedCreateWithoutOwnAllowanceInput = {
   updatedEvents?: Prisma.EventUncheckedCreateNestedManyWithoutUpdatedByInput
   providedFeedbacks?: Prisma.EventFeedbackUncheckedCreateNestedManyWithoutUserInput
   updatedEventFeedback?: Prisma.EventFeedbackUncheckedCreateNestedManyWithoutUpdatedByInput
-  feedbackRequests?: Prisma.FeedbackRequestUncheckedCreateNestedManyWithoutUserInput
   hrWarnings?: Prisma.HrWarningUncheckedCreateNestedManyWithoutAssigneeInput
   createdHrWarning?: Prisma.HrWarningUncheckedCreateNestedManyWithoutCreatedByInput
   updatedHrWarnings?: Prisma.HrWarningUncheckedCreateNestedManyWithoutUpdatedByInput
@@ -8789,7 +8420,6 @@ export type UserUpdateWithoutCreatedAllowedUserInput = {
   updatedEvents?: Prisma.EventUpdateManyWithoutUpdatedByNestedInput
   providedFeedbacks?: Prisma.EventFeedbackUpdateManyWithoutUserNestedInput
   updatedEventFeedback?: Prisma.EventFeedbackUpdateManyWithoutUpdatedByNestedInput
-  feedbackRequests?: Prisma.FeedbackRequestUpdateManyWithoutUserNestedInput
   hrWarnings?: Prisma.HrWarningUpdateManyWithoutAssigneeNestedInput
   createdHrWarning?: Prisma.HrWarningUpdateManyWithoutCreatedByNestedInput
   updatedHrWarnings?: Prisma.HrWarningUpdateManyWithoutUpdatedByNestedInput
@@ -8841,7 +8471,6 @@ export type UserUncheckedUpdateWithoutCreatedAllowedUserInput = {
   updatedEvents?: Prisma.EventUncheckedUpdateManyWithoutUpdatedByNestedInput
   providedFeedbacks?: Prisma.EventFeedbackUncheckedUpdateManyWithoutUserNestedInput
   updatedEventFeedback?: Prisma.EventFeedbackUncheckedUpdateManyWithoutUpdatedByNestedInput
-  feedbackRequests?: Prisma.FeedbackRequestUncheckedUpdateManyWithoutUserNestedInput
   hrWarnings?: Prisma.HrWarningUncheckedUpdateManyWithoutAssigneeNestedInput
   createdHrWarning?: Prisma.HrWarningUncheckedUpdateManyWithoutCreatedByNestedInput
   updatedHrWarnings?: Prisma.HrWarningUncheckedUpdateManyWithoutUpdatedByNestedInput
@@ -8902,7 +8531,6 @@ export type UserUpdateWithoutUpdatedAllowanceInput = {
   updatedEvents?: Prisma.EventUpdateManyWithoutUpdatedByNestedInput
   providedFeedbacks?: Prisma.EventFeedbackUpdateManyWithoutUserNestedInput
   updatedEventFeedback?: Prisma.EventFeedbackUpdateManyWithoutUpdatedByNestedInput
-  feedbackRequests?: Prisma.FeedbackRequestUpdateManyWithoutUserNestedInput
   hrWarnings?: Prisma.HrWarningUpdateManyWithoutAssigneeNestedInput
   createdHrWarning?: Prisma.HrWarningUpdateManyWithoutCreatedByNestedInput
   updatedHrWarnings?: Prisma.HrWarningUpdateManyWithoutUpdatedByNestedInput
@@ -8954,7 +8582,6 @@ export type UserUncheckedUpdateWithoutUpdatedAllowanceInput = {
   updatedEvents?: Prisma.EventUncheckedUpdateManyWithoutUpdatedByNestedInput
   providedFeedbacks?: Prisma.EventFeedbackUncheckedUpdateManyWithoutUserNestedInput
   updatedEventFeedback?: Prisma.EventFeedbackUncheckedUpdateManyWithoutUpdatedByNestedInput
-  feedbackRequests?: Prisma.FeedbackRequestUncheckedUpdateManyWithoutUserNestedInput
   hrWarnings?: Prisma.HrWarningUncheckedUpdateManyWithoutAssigneeNestedInput
   createdHrWarning?: Prisma.HrWarningUncheckedUpdateManyWithoutCreatedByNestedInput
   updatedHrWarnings?: Prisma.HrWarningUncheckedUpdateManyWithoutUpdatedByNestedInput
@@ -9015,7 +8642,6 @@ export type UserUpdateWithoutOwnAllowanceInput = {
   updatedEvents?: Prisma.EventUpdateManyWithoutUpdatedByNestedInput
   providedFeedbacks?: Prisma.EventFeedbackUpdateManyWithoutUserNestedInput
   updatedEventFeedback?: Prisma.EventFeedbackUpdateManyWithoutUpdatedByNestedInput
-  feedbackRequests?: Prisma.FeedbackRequestUpdateManyWithoutUserNestedInput
   hrWarnings?: Prisma.HrWarningUpdateManyWithoutAssigneeNestedInput
   createdHrWarning?: Prisma.HrWarningUpdateManyWithoutCreatedByNestedInput
   updatedHrWarnings?: Prisma.HrWarningUpdateManyWithoutUpdatedByNestedInput
@@ -9066,7 +8692,6 @@ export type UserUncheckedUpdateWithoutOwnAllowanceInput = {
   updatedEvents?: Prisma.EventUncheckedUpdateManyWithoutUpdatedByNestedInput
   providedFeedbacks?: Prisma.EventFeedbackUncheckedUpdateManyWithoutUserNestedInput
   updatedEventFeedback?: Prisma.EventFeedbackUncheckedUpdateManyWithoutUpdatedByNestedInput
-  feedbackRequests?: Prisma.FeedbackRequestUncheckedUpdateManyWithoutUserNestedInput
   hrWarnings?: Prisma.HrWarningUncheckedUpdateManyWithoutAssigneeNestedInput
   createdHrWarning?: Prisma.HrWarningUncheckedUpdateManyWithoutCreatedByNestedInput
   updatedHrWarnings?: Prisma.HrWarningUncheckedUpdateManyWithoutUpdatedByNestedInput
@@ -9116,7 +8741,6 @@ export type UserCreateWithoutAccountsInput = {
   updatedEvents?: Prisma.EventCreateNestedManyWithoutUpdatedByInput
   providedFeedbacks?: Prisma.EventFeedbackCreateNestedManyWithoutUserInput
   updatedEventFeedback?: Prisma.EventFeedbackCreateNestedManyWithoutUpdatedByInput
-  feedbackRequests?: Prisma.FeedbackRequestCreateNestedManyWithoutUserInput
   hrWarnings?: Prisma.HrWarningCreateNestedManyWithoutAssigneeInput
   createdHrWarning?: Prisma.HrWarningCreateNestedManyWithoutCreatedByInput
   updatedHrWarnings?: Prisma.HrWarningCreateNestedManyWithoutUpdatedByInput
@@ -9168,7 +8792,6 @@ export type UserUncheckedCreateWithoutAccountsInput = {
   updatedEvents?: Prisma.EventUncheckedCreateNestedManyWithoutUpdatedByInput
   providedFeedbacks?: Prisma.EventFeedbackUncheckedCreateNestedManyWithoutUserInput
   updatedEventFeedback?: Prisma.EventFeedbackUncheckedCreateNestedManyWithoutUpdatedByInput
-  feedbackRequests?: Prisma.FeedbackRequestUncheckedCreateNestedManyWithoutUserInput
   hrWarnings?: Prisma.HrWarningUncheckedCreateNestedManyWithoutAssigneeInput
   createdHrWarning?: Prisma.HrWarningUncheckedCreateNestedManyWithoutCreatedByInput
   updatedHrWarnings?: Prisma.HrWarningUncheckedCreateNestedManyWithoutUpdatedByInput
@@ -9234,7 +8857,6 @@ export type UserUpdateWithoutAccountsInput = {
   updatedEvents?: Prisma.EventUpdateManyWithoutUpdatedByNestedInput
   providedFeedbacks?: Prisma.EventFeedbackUpdateManyWithoutUserNestedInput
   updatedEventFeedback?: Prisma.EventFeedbackUpdateManyWithoutUpdatedByNestedInput
-  feedbackRequests?: Prisma.FeedbackRequestUpdateManyWithoutUserNestedInput
   hrWarnings?: Prisma.HrWarningUpdateManyWithoutAssigneeNestedInput
   createdHrWarning?: Prisma.HrWarningUpdateManyWithoutCreatedByNestedInput
   updatedHrWarnings?: Prisma.HrWarningUpdateManyWithoutUpdatedByNestedInput
@@ -9286,7 +8908,6 @@ export type UserUncheckedUpdateWithoutAccountsInput = {
   updatedEvents?: Prisma.EventUncheckedUpdateManyWithoutUpdatedByNestedInput
   providedFeedbacks?: Prisma.EventFeedbackUncheckedUpdateManyWithoutUserNestedInput
   updatedEventFeedback?: Prisma.EventFeedbackUncheckedUpdateManyWithoutUpdatedByNestedInput
-  feedbackRequests?: Prisma.FeedbackRequestUncheckedUpdateManyWithoutUserNestedInput
   hrWarnings?: Prisma.HrWarningUncheckedUpdateManyWithoutAssigneeNestedInput
   createdHrWarning?: Prisma.HrWarningUncheckedUpdateManyWithoutCreatedByNestedInput
   updatedHrWarnings?: Prisma.HrWarningUncheckedUpdateManyWithoutUpdatedByNestedInput
@@ -9336,7 +8957,6 @@ export type UserCreateWithoutSessionsInput = {
   updatedEvents?: Prisma.EventCreateNestedManyWithoutUpdatedByInput
   providedFeedbacks?: Prisma.EventFeedbackCreateNestedManyWithoutUserInput
   updatedEventFeedback?: Prisma.EventFeedbackCreateNestedManyWithoutUpdatedByInput
-  feedbackRequests?: Prisma.FeedbackRequestCreateNestedManyWithoutUserInput
   hrWarnings?: Prisma.HrWarningCreateNestedManyWithoutAssigneeInput
   createdHrWarning?: Prisma.HrWarningCreateNestedManyWithoutCreatedByInput
   updatedHrWarnings?: Prisma.HrWarningCreateNestedManyWithoutUpdatedByInput
@@ -9388,7 +9008,6 @@ export type UserUncheckedCreateWithoutSessionsInput = {
   updatedEvents?: Prisma.EventUncheckedCreateNestedManyWithoutUpdatedByInput
   providedFeedbacks?: Prisma.EventFeedbackUncheckedCreateNestedManyWithoutUserInput
   updatedEventFeedback?: Prisma.EventFeedbackUncheckedCreateNestedManyWithoutUpdatedByInput
-  feedbackRequests?: Prisma.FeedbackRequestUncheckedCreateNestedManyWithoutUserInput
   hrWarnings?: Prisma.HrWarningUncheckedCreateNestedManyWithoutAssigneeInput
   createdHrWarning?: Prisma.HrWarningUncheckedCreateNestedManyWithoutCreatedByInput
   updatedHrWarnings?: Prisma.HrWarningUncheckedCreateNestedManyWithoutUpdatedByInput
@@ -9454,7 +9073,6 @@ export type UserUpdateWithoutSessionsInput = {
   updatedEvents?: Prisma.EventUpdateManyWithoutUpdatedByNestedInput
   providedFeedbacks?: Prisma.EventFeedbackUpdateManyWithoutUserNestedInput
   updatedEventFeedback?: Prisma.EventFeedbackUpdateManyWithoutUpdatedByNestedInput
-  feedbackRequests?: Prisma.FeedbackRequestUpdateManyWithoutUserNestedInput
   hrWarnings?: Prisma.HrWarningUpdateManyWithoutAssigneeNestedInput
   createdHrWarning?: Prisma.HrWarningUpdateManyWithoutCreatedByNestedInput
   updatedHrWarnings?: Prisma.HrWarningUpdateManyWithoutUpdatedByNestedInput
@@ -9506,7 +9124,6 @@ export type UserUncheckedUpdateWithoutSessionsInput = {
   updatedEvents?: Prisma.EventUncheckedUpdateManyWithoutUpdatedByNestedInput
   providedFeedbacks?: Prisma.EventFeedbackUncheckedUpdateManyWithoutUserNestedInput
   updatedEventFeedback?: Prisma.EventFeedbackUncheckedUpdateManyWithoutUpdatedByNestedInput
-  feedbackRequests?: Prisma.FeedbackRequestUncheckedUpdateManyWithoutUserNestedInput
   hrWarnings?: Prisma.HrWarningUncheckedUpdateManyWithoutAssigneeNestedInput
   createdHrWarning?: Prisma.HrWarningUncheckedUpdateManyWithoutCreatedByNestedInput
   updatedHrWarnings?: Prisma.HrWarningUncheckedUpdateManyWithoutUpdatedByNestedInput
@@ -9556,7 +9173,6 @@ export type UserCreateWithoutAuthenticatorInput = {
   updatedEvents?: Prisma.EventCreateNestedManyWithoutUpdatedByInput
   providedFeedbacks?: Prisma.EventFeedbackCreateNestedManyWithoutUserInput
   updatedEventFeedback?: Prisma.EventFeedbackCreateNestedManyWithoutUpdatedByInput
-  feedbackRequests?: Prisma.FeedbackRequestCreateNestedManyWithoutUserInput
   hrWarnings?: Prisma.HrWarningCreateNestedManyWithoutAssigneeInput
   createdHrWarning?: Prisma.HrWarningCreateNestedManyWithoutCreatedByInput
   updatedHrWarnings?: Prisma.HrWarningCreateNestedManyWithoutUpdatedByInput
@@ -9608,7 +9224,6 @@ export type UserUncheckedCreateWithoutAuthenticatorInput = {
   updatedEvents?: Prisma.EventUncheckedCreateNestedManyWithoutUpdatedByInput
   providedFeedbacks?: Prisma.EventFeedbackUncheckedCreateNestedManyWithoutUserInput
   updatedEventFeedback?: Prisma.EventFeedbackUncheckedCreateNestedManyWithoutUpdatedByInput
-  feedbackRequests?: Prisma.FeedbackRequestUncheckedCreateNestedManyWithoutUserInput
   hrWarnings?: Prisma.HrWarningUncheckedCreateNestedManyWithoutAssigneeInput
   createdHrWarning?: Prisma.HrWarningUncheckedCreateNestedManyWithoutCreatedByInput
   updatedHrWarnings?: Prisma.HrWarningUncheckedCreateNestedManyWithoutUpdatedByInput
@@ -9674,7 +9289,6 @@ export type UserUpdateWithoutAuthenticatorInput = {
   updatedEvents?: Prisma.EventUpdateManyWithoutUpdatedByNestedInput
   providedFeedbacks?: Prisma.EventFeedbackUpdateManyWithoutUserNestedInput
   updatedEventFeedback?: Prisma.EventFeedbackUpdateManyWithoutUpdatedByNestedInput
-  feedbackRequests?: Prisma.FeedbackRequestUpdateManyWithoutUserNestedInput
   hrWarnings?: Prisma.HrWarningUpdateManyWithoutAssigneeNestedInput
   createdHrWarning?: Prisma.HrWarningUpdateManyWithoutCreatedByNestedInput
   updatedHrWarnings?: Prisma.HrWarningUpdateManyWithoutUpdatedByNestedInput
@@ -9726,7 +9340,6 @@ export type UserUncheckedUpdateWithoutAuthenticatorInput = {
   updatedEvents?: Prisma.EventUncheckedUpdateManyWithoutUpdatedByNestedInput
   providedFeedbacks?: Prisma.EventFeedbackUncheckedUpdateManyWithoutUserNestedInput
   updatedEventFeedback?: Prisma.EventFeedbackUncheckedUpdateManyWithoutUpdatedByNestedInput
-  feedbackRequests?: Prisma.FeedbackRequestUncheckedUpdateManyWithoutUserNestedInput
   hrWarnings?: Prisma.HrWarningUncheckedUpdateManyWithoutAssigneeNestedInput
   createdHrWarning?: Prisma.HrWarningUncheckedUpdateManyWithoutCreatedByNestedInput
   updatedHrWarnings?: Prisma.HrWarningUncheckedUpdateManyWithoutUpdatedByNestedInput
@@ -9791,7 +9404,6 @@ export type UserUpdateWithoutUpdatedByInput = {
   updatedEvents?: Prisma.EventUpdateManyWithoutUpdatedByNestedInput
   providedFeedbacks?: Prisma.EventFeedbackUpdateManyWithoutUserNestedInput
   updatedEventFeedback?: Prisma.EventFeedbackUpdateManyWithoutUpdatedByNestedInput
-  feedbackRequests?: Prisma.FeedbackRequestUpdateManyWithoutUserNestedInput
   hrWarnings?: Prisma.HrWarningUpdateManyWithoutAssigneeNestedInput
   createdHrWarning?: Prisma.HrWarningUpdateManyWithoutCreatedByNestedInput
   updatedHrWarnings?: Prisma.HrWarningUpdateManyWithoutUpdatedByNestedInput
@@ -9843,7 +9455,6 @@ export type UserUncheckedUpdateWithoutUpdatedByInput = {
   updatedEvents?: Prisma.EventUncheckedUpdateManyWithoutUpdatedByNestedInput
   providedFeedbacks?: Prisma.EventFeedbackUncheckedUpdateManyWithoutUserNestedInput
   updatedEventFeedback?: Prisma.EventFeedbackUncheckedUpdateManyWithoutUpdatedByNestedInput
-  feedbackRequests?: Prisma.FeedbackRequestUncheckedUpdateManyWithoutUserNestedInput
   hrWarnings?: Prisma.HrWarningUncheckedUpdateManyWithoutAssigneeNestedInput
   createdHrWarning?: Prisma.HrWarningUncheckedUpdateManyWithoutCreatedByNestedInput
   updatedHrWarnings?: Prisma.HrWarningUncheckedUpdateManyWithoutUpdatedByNestedInput
@@ -9902,7 +9513,6 @@ export type UserCountOutputType = {
   updatedEvents: number
   providedFeedbacks: number
   updatedEventFeedback: number
-  feedbackRequests: number
   hrWarnings: number
   createdHrWarning: number
   updatedHrWarnings: number
@@ -9941,7 +9551,6 @@ export type UserCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.I
   updatedEvents?: boolean | UserCountOutputTypeCountUpdatedEventsArgs
   providedFeedbacks?: boolean | UserCountOutputTypeCountProvidedFeedbacksArgs
   updatedEventFeedback?: boolean | UserCountOutputTypeCountUpdatedEventFeedbackArgs
-  feedbackRequests?: boolean | UserCountOutputTypeCountFeedbackRequestsArgs
   hrWarnings?: boolean | UserCountOutputTypeCountHrWarningsArgs
   createdHrWarning?: boolean | UserCountOutputTypeCountCreatedHrWarningArgs
   updatedHrWarnings?: boolean | UserCountOutputTypeCountUpdatedHrWarningsArgs
@@ -10100,13 +9709,6 @@ export type UserCountOutputTypeCountUpdatedEventFeedbackArgs<ExtArgs extends run
 /**
  * UserCountOutputType without action
  */
-export type UserCountOutputTypeCountFeedbackRequestsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  where?: Prisma.FeedbackRequestWhereInput
-}
-
-/**
- * UserCountOutputType without action
- */
 export type UserCountOutputTypeCountHrWarningsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   where?: Prisma.HrWarningWhereInput
 }
@@ -10257,7 +9859,6 @@ export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   updatedEvents?: boolean | Prisma.User$updatedEventsArgs<ExtArgs>
   providedFeedbacks?: boolean | Prisma.User$providedFeedbacksArgs<ExtArgs>
   updatedEventFeedback?: boolean | Prisma.User$updatedEventFeedbackArgs<ExtArgs>
-  feedbackRequests?: boolean | Prisma.User$feedbackRequestsArgs<ExtArgs>
   hrWarnings?: boolean | Prisma.User$hrWarningsArgs<ExtArgs>
   createdHrWarning?: boolean | Prisma.User$createdHrWarningArgs<ExtArgs>
   updatedHrWarnings?: boolean | Prisma.User$updatedHrWarningsArgs<ExtArgs>
@@ -10352,7 +9953,6 @@ export type UserInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = 
   updatedEvents?: boolean | Prisma.User$updatedEventsArgs<ExtArgs>
   providedFeedbacks?: boolean | Prisma.User$providedFeedbacksArgs<ExtArgs>
   updatedEventFeedback?: boolean | Prisma.User$updatedEventFeedbackArgs<ExtArgs>
-  feedbackRequests?: boolean | Prisma.User$feedbackRequestsArgs<ExtArgs>
   hrWarnings?: boolean | Prisma.User$hrWarningsArgs<ExtArgs>
   createdHrWarning?: boolean | Prisma.User$createdHrWarningArgs<ExtArgs>
   updatedHrWarnings?: boolean | Prisma.User$updatedHrWarningsArgs<ExtArgs>
@@ -10404,7 +10004,6 @@ export type $UserPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
     updatedEvents: Prisma.$EventPayload<ExtArgs>[]
     providedFeedbacks: Prisma.$EventFeedbackPayload<ExtArgs>[]
     updatedEventFeedback: Prisma.$EventFeedbackPayload<ExtArgs>[]
-    feedbackRequests: Prisma.$FeedbackRequestPayload<ExtArgs>[]
     hrWarnings: Prisma.$HrWarningPayload<ExtArgs>[]
     createdHrWarning: Prisma.$HrWarningPayload<ExtArgs>[]
     updatedHrWarnings: Prisma.$HrWarningPayload<ExtArgs>[]
@@ -10851,7 +10450,6 @@ export interface Prisma__UserClient<T, Null = never, ExtArgs extends runtime.Typ
   updatedEvents<T extends Prisma.User$updatedEventsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$updatedEventsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$EventPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   providedFeedbacks<T extends Prisma.User$providedFeedbacksArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$providedFeedbacksArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$EventFeedbackPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   updatedEventFeedback<T extends Prisma.User$updatedEventFeedbackArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$updatedEventFeedbackArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$EventFeedbackPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-  feedbackRequests<T extends Prisma.User$feedbackRequestsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$feedbackRequestsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$FeedbackRequestPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   hrWarnings<T extends Prisma.User$hrWarningsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$hrWarningsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$HrWarningPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   createdHrWarning<T extends Prisma.User$createdHrWarningArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$createdHrWarningArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$HrWarningPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   updatedHrWarnings<T extends Prisma.User$updatedHrWarningsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$updatedHrWarningsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$HrWarningPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
@@ -11756,30 +11354,6 @@ export type User$updatedEventFeedbackArgs<ExtArgs extends runtime.Types.Extensio
   take?: number
   skip?: number
   distinct?: Prisma.EventFeedbackScalarFieldEnum | Prisma.EventFeedbackScalarFieldEnum[]
-}
-
-/**
- * User.feedbackRequests
- */
-export type User$feedbackRequestsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  /**
-   * Select specific fields to fetch from the FeedbackRequest
-   */
-  select?: Prisma.FeedbackRequestSelect<ExtArgs> | null
-  /**
-   * Omit specific fields from the FeedbackRequest
-   */
-  omit?: Prisma.FeedbackRequestOmit<ExtArgs> | null
-  /**
-   * Choose, which related nodes to fetch as well
-   */
-  include?: Prisma.FeedbackRequestInclude<ExtArgs> | null
-  where?: Prisma.FeedbackRequestWhereInput
-  orderBy?: Prisma.FeedbackRequestOrderByWithRelationInput | Prisma.FeedbackRequestOrderByWithRelationInput[]
-  cursor?: Prisma.FeedbackRequestWhereUniqueInput
-  take?: number
-  skip?: number
-  distinct?: Prisma.FeedbackRequestScalarFieldEnum | Prisma.FeedbackRequestScalarFieldEnum[]
 }
 
 /**

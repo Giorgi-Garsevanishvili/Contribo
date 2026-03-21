@@ -286,7 +286,6 @@ export type EventWhereInput = {
   feedback?: Prisma.EventFeedbackListRelationFilter
   assignments?: Prisma.EventAssignmentListRelationFilter
   availabilities?: Prisma.AvailabilitySlotListRelationFilter
-  feedbackRequests?: Prisma.FeedbackRequestListRelationFilter
 }
 
 export type EventOrderByWithRelationInput = {
@@ -309,7 +308,6 @@ export type EventOrderByWithRelationInput = {
   feedback?: Prisma.EventFeedbackOrderByRelationAggregateInput
   assignments?: Prisma.EventAssignmentOrderByRelationAggregateInput
   availabilities?: Prisma.AvailabilitySlotOrderByRelationAggregateInput
-  feedbackRequests?: Prisma.FeedbackRequestOrderByRelationAggregateInput
 }
 
 export type EventWhereUniqueInput = Prisma.AtLeast<{
@@ -335,7 +333,6 @@ export type EventWhereUniqueInput = Prisma.AtLeast<{
   feedback?: Prisma.EventFeedbackListRelationFilter
   assignments?: Prisma.EventAssignmentListRelationFilter
   availabilities?: Prisma.AvailabilitySlotListRelationFilter
-  feedbackRequests?: Prisma.FeedbackRequestListRelationFilter
 }, "id">
 
 export type EventOrderByWithAggregationInput = {
@@ -395,7 +392,6 @@ export type EventCreateInput = {
   feedback?: Prisma.EventFeedbackCreateNestedManyWithoutEventInput
   assignments?: Prisma.EventAssignmentCreateNestedManyWithoutEventInput
   availabilities?: Prisma.AvailabilitySlotCreateNestedManyWithoutEventInput
-  feedbackRequests?: Prisma.FeedbackRequestCreateNestedManyWithoutEventInput
 }
 
 export type EventUncheckedCreateInput = {
@@ -415,7 +411,6 @@ export type EventUncheckedCreateInput = {
   feedback?: Prisma.EventFeedbackUncheckedCreateNestedManyWithoutEventInput
   assignments?: Prisma.EventAssignmentUncheckedCreateNestedManyWithoutEventInput
   availabilities?: Prisma.AvailabilitySlotUncheckedCreateNestedManyWithoutEventInput
-  feedbackRequests?: Prisma.FeedbackRequestUncheckedCreateNestedManyWithoutEventInput
 }
 
 export type EventUpdateInput = {
@@ -435,7 +430,6 @@ export type EventUpdateInput = {
   feedback?: Prisma.EventFeedbackUpdateManyWithoutEventNestedInput
   assignments?: Prisma.EventAssignmentUpdateManyWithoutEventNestedInput
   availabilities?: Prisma.AvailabilitySlotUpdateManyWithoutEventNestedInput
-  feedbackRequests?: Prisma.FeedbackRequestUpdateManyWithoutEventNestedInput
 }
 
 export type EventUncheckedUpdateInput = {
@@ -455,7 +449,6 @@ export type EventUncheckedUpdateInput = {
   feedback?: Prisma.EventFeedbackUncheckedUpdateManyWithoutEventNestedInput
   assignments?: Prisma.EventAssignmentUncheckedUpdateManyWithoutEventNestedInput
   availabilities?: Prisma.AvailabilitySlotUncheckedUpdateManyWithoutEventNestedInput
-  feedbackRequests?: Prisma.FeedbackRequestUncheckedUpdateManyWithoutEventNestedInput
 }
 
 export type EventCreateManyInput = {
@@ -680,20 +673,6 @@ export type EventUpdateOneRequiredWithoutFeedbackNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.EventUpdateToOneWithWhereWithoutFeedbackInput, Prisma.EventUpdateWithoutFeedbackInput>, Prisma.EventUncheckedUpdateWithoutFeedbackInput>
 }
 
-export type EventCreateNestedOneWithoutFeedbackRequestsInput = {
-  create?: Prisma.XOR<Prisma.EventCreateWithoutFeedbackRequestsInput, Prisma.EventUncheckedCreateWithoutFeedbackRequestsInput>
-  connectOrCreate?: Prisma.EventCreateOrConnectWithoutFeedbackRequestsInput
-  connect?: Prisma.EventWhereUniqueInput
-}
-
-export type EventUpdateOneRequiredWithoutFeedbackRequestsNestedInput = {
-  create?: Prisma.XOR<Prisma.EventCreateWithoutFeedbackRequestsInput, Prisma.EventUncheckedCreateWithoutFeedbackRequestsInput>
-  connectOrCreate?: Prisma.EventCreateOrConnectWithoutFeedbackRequestsInput
-  upsert?: Prisma.EventUpsertWithoutFeedbackRequestsInput
-  connect?: Prisma.EventWhereUniqueInput
-  update?: Prisma.XOR<Prisma.XOR<Prisma.EventUpdateToOneWithWhereWithoutFeedbackRequestsInput, Prisma.EventUpdateWithoutFeedbackRequestsInput>, Prisma.EventUncheckedUpdateWithoutFeedbackRequestsInput>
-}
-
 export type EventCreateNestedOneWithoutAvailabilitiesInput = {
   create?: Prisma.XOR<Prisma.EventCreateWithoutAvailabilitiesInput, Prisma.EventUncheckedCreateWithoutAvailabilitiesInput>
   connectOrCreate?: Prisma.EventCreateOrConnectWithoutAvailabilitiesInput
@@ -780,7 +759,6 @@ export type EventCreateWithoutCreatedByInput = {
   feedback?: Prisma.EventFeedbackCreateNestedManyWithoutEventInput
   assignments?: Prisma.EventAssignmentCreateNestedManyWithoutEventInput
   availabilities?: Prisma.AvailabilitySlotCreateNestedManyWithoutEventInput
-  feedbackRequests?: Prisma.FeedbackRequestCreateNestedManyWithoutEventInput
 }
 
 export type EventUncheckedCreateWithoutCreatedByInput = {
@@ -799,7 +777,6 @@ export type EventUncheckedCreateWithoutCreatedByInput = {
   feedback?: Prisma.EventFeedbackUncheckedCreateNestedManyWithoutEventInput
   assignments?: Prisma.EventAssignmentUncheckedCreateNestedManyWithoutEventInput
   availabilities?: Prisma.AvailabilitySlotUncheckedCreateNestedManyWithoutEventInput
-  feedbackRequests?: Prisma.FeedbackRequestUncheckedCreateNestedManyWithoutEventInput
 }
 
 export type EventCreateOrConnectWithoutCreatedByInput = {
@@ -828,7 +805,6 @@ export type EventCreateWithoutUpdatedByInput = {
   feedback?: Prisma.EventFeedbackCreateNestedManyWithoutEventInput
   assignments?: Prisma.EventAssignmentCreateNestedManyWithoutEventInput
   availabilities?: Prisma.AvailabilitySlotCreateNestedManyWithoutEventInput
-  feedbackRequests?: Prisma.FeedbackRequestCreateNestedManyWithoutEventInput
 }
 
 export type EventUncheckedCreateWithoutUpdatedByInput = {
@@ -847,7 +823,6 @@ export type EventUncheckedCreateWithoutUpdatedByInput = {
   feedback?: Prisma.EventFeedbackUncheckedCreateNestedManyWithoutEventInput
   assignments?: Prisma.EventAssignmentUncheckedCreateNestedManyWithoutEventInput
   availabilities?: Prisma.AvailabilitySlotUncheckedCreateNestedManyWithoutEventInput
-  feedbackRequests?: Prisma.FeedbackRequestUncheckedCreateNestedManyWithoutEventInput
 }
 
 export type EventCreateOrConnectWithoutUpdatedByInput = {
@@ -927,7 +902,6 @@ export type EventCreateWithoutFeedbackInput = {
   updatedBy?: Prisma.UserCreateNestedOneWithoutUpdatedEventsInput
   assignments?: Prisma.EventAssignmentCreateNestedManyWithoutEventInput
   availabilities?: Prisma.AvailabilitySlotCreateNestedManyWithoutEventInput
-  feedbackRequests?: Prisma.FeedbackRequestCreateNestedManyWithoutEventInput
 }
 
 export type EventUncheckedCreateWithoutFeedbackInput = {
@@ -946,7 +920,6 @@ export type EventUncheckedCreateWithoutFeedbackInput = {
   finalizedAt?: Date | string | null
   assignments?: Prisma.EventAssignmentUncheckedCreateNestedManyWithoutEventInput
   availabilities?: Prisma.AvailabilitySlotUncheckedCreateNestedManyWithoutEventInput
-  feedbackRequests?: Prisma.FeedbackRequestUncheckedCreateNestedManyWithoutEventInput
 }
 
 export type EventCreateOrConnectWithoutFeedbackInput = {
@@ -981,7 +954,6 @@ export type EventUpdateWithoutFeedbackInput = {
   updatedBy?: Prisma.UserUpdateOneWithoutUpdatedEventsNestedInput
   assignments?: Prisma.EventAssignmentUpdateManyWithoutEventNestedInput
   availabilities?: Prisma.AvailabilitySlotUpdateManyWithoutEventNestedInput
-  feedbackRequests?: Prisma.FeedbackRequestUpdateManyWithoutEventNestedInput
 }
 
 export type EventUncheckedUpdateWithoutFeedbackInput = {
@@ -998,99 +970,6 @@ export type EventUncheckedUpdateWithoutFeedbackInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   finalizedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  assignments?: Prisma.EventAssignmentUncheckedUpdateManyWithoutEventNestedInput
-  availabilities?: Prisma.AvailabilitySlotUncheckedUpdateManyWithoutEventNestedInput
-  feedbackRequests?: Prisma.FeedbackRequestUncheckedUpdateManyWithoutEventNestedInput
-}
-
-export type EventCreateWithoutFeedbackRequestsInput = {
-  id?: string
-  name: string
-  location: string
-  startTime: Date | string
-  endTime: Date | string
-  description: string
-  rating?: number | null
-  createdAt?: Date | string
-  updatedAt?: Date | string | null
-  finalizedAt?: Date | string | null
-  region?: Prisma.RegionCreateNestedOneWithoutEventInput
-  createdBy?: Prisma.UserCreateNestedOneWithoutCreatedEventsInput
-  updatedBy?: Prisma.UserCreateNestedOneWithoutUpdatedEventsInput
-  feedback?: Prisma.EventFeedbackCreateNestedManyWithoutEventInput
-  assignments?: Prisma.EventAssignmentCreateNestedManyWithoutEventInput
-  availabilities?: Prisma.AvailabilitySlotCreateNestedManyWithoutEventInput
-}
-
-export type EventUncheckedCreateWithoutFeedbackRequestsInput = {
-  id?: string
-  name: string
-  location: string
-  startTime: Date | string
-  endTime: Date | string
-  description: string
-  rating?: number | null
-  regionId?: string | null
-  createdById?: string | null
-  updatedById?: string | null
-  createdAt?: Date | string
-  updatedAt?: Date | string | null
-  finalizedAt?: Date | string | null
-  feedback?: Prisma.EventFeedbackUncheckedCreateNestedManyWithoutEventInput
-  assignments?: Prisma.EventAssignmentUncheckedCreateNestedManyWithoutEventInput
-  availabilities?: Prisma.AvailabilitySlotUncheckedCreateNestedManyWithoutEventInput
-}
-
-export type EventCreateOrConnectWithoutFeedbackRequestsInput = {
-  where: Prisma.EventWhereUniqueInput
-  create: Prisma.XOR<Prisma.EventCreateWithoutFeedbackRequestsInput, Prisma.EventUncheckedCreateWithoutFeedbackRequestsInput>
-}
-
-export type EventUpsertWithoutFeedbackRequestsInput = {
-  update: Prisma.XOR<Prisma.EventUpdateWithoutFeedbackRequestsInput, Prisma.EventUncheckedUpdateWithoutFeedbackRequestsInput>
-  create: Prisma.XOR<Prisma.EventCreateWithoutFeedbackRequestsInput, Prisma.EventUncheckedCreateWithoutFeedbackRequestsInput>
-  where?: Prisma.EventWhereInput
-}
-
-export type EventUpdateToOneWithWhereWithoutFeedbackRequestsInput = {
-  where?: Prisma.EventWhereInput
-  data: Prisma.XOR<Prisma.EventUpdateWithoutFeedbackRequestsInput, Prisma.EventUncheckedUpdateWithoutFeedbackRequestsInput>
-}
-
-export type EventUpdateWithoutFeedbackRequestsInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  name?: Prisma.StringFieldUpdateOperationsInput | string
-  location?: Prisma.StringFieldUpdateOperationsInput | string
-  startTime?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  endTime?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  description?: Prisma.StringFieldUpdateOperationsInput | string
-  rating?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  finalizedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  region?: Prisma.RegionUpdateOneWithoutEventNestedInput
-  createdBy?: Prisma.UserUpdateOneWithoutCreatedEventsNestedInput
-  updatedBy?: Prisma.UserUpdateOneWithoutUpdatedEventsNestedInput
-  feedback?: Prisma.EventFeedbackUpdateManyWithoutEventNestedInput
-  assignments?: Prisma.EventAssignmentUpdateManyWithoutEventNestedInput
-  availabilities?: Prisma.AvailabilitySlotUpdateManyWithoutEventNestedInput
-}
-
-export type EventUncheckedUpdateWithoutFeedbackRequestsInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  name?: Prisma.StringFieldUpdateOperationsInput | string
-  location?: Prisma.StringFieldUpdateOperationsInput | string
-  startTime?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  endTime?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  description?: Prisma.StringFieldUpdateOperationsInput | string
-  rating?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  regionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  createdById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  updatedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  finalizedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  feedback?: Prisma.EventFeedbackUncheckedUpdateManyWithoutEventNestedInput
   assignments?: Prisma.EventAssignmentUncheckedUpdateManyWithoutEventNestedInput
   availabilities?: Prisma.AvailabilitySlotUncheckedUpdateManyWithoutEventNestedInput
 }
@@ -1111,7 +990,6 @@ export type EventCreateWithoutAvailabilitiesInput = {
   updatedBy?: Prisma.UserCreateNestedOneWithoutUpdatedEventsInput
   feedback?: Prisma.EventFeedbackCreateNestedManyWithoutEventInput
   assignments?: Prisma.EventAssignmentCreateNestedManyWithoutEventInput
-  feedbackRequests?: Prisma.FeedbackRequestCreateNestedManyWithoutEventInput
 }
 
 export type EventUncheckedCreateWithoutAvailabilitiesInput = {
@@ -1130,7 +1008,6 @@ export type EventUncheckedCreateWithoutAvailabilitiesInput = {
   finalizedAt?: Date | string | null
   feedback?: Prisma.EventFeedbackUncheckedCreateNestedManyWithoutEventInput
   assignments?: Prisma.EventAssignmentUncheckedCreateNestedManyWithoutEventInput
-  feedbackRequests?: Prisma.FeedbackRequestUncheckedCreateNestedManyWithoutEventInput
 }
 
 export type EventCreateOrConnectWithoutAvailabilitiesInput = {
@@ -1165,7 +1042,6 @@ export type EventUpdateWithoutAvailabilitiesInput = {
   updatedBy?: Prisma.UserUpdateOneWithoutUpdatedEventsNestedInput
   feedback?: Prisma.EventFeedbackUpdateManyWithoutEventNestedInput
   assignments?: Prisma.EventAssignmentUpdateManyWithoutEventNestedInput
-  feedbackRequests?: Prisma.FeedbackRequestUpdateManyWithoutEventNestedInput
 }
 
 export type EventUncheckedUpdateWithoutAvailabilitiesInput = {
@@ -1184,7 +1060,6 @@ export type EventUncheckedUpdateWithoutAvailabilitiesInput = {
   finalizedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   feedback?: Prisma.EventFeedbackUncheckedUpdateManyWithoutEventNestedInput
   assignments?: Prisma.EventAssignmentUncheckedUpdateManyWithoutEventNestedInput
-  feedbackRequests?: Prisma.FeedbackRequestUncheckedUpdateManyWithoutEventNestedInput
 }
 
 export type EventCreateWithoutAssignmentsInput = {
@@ -1203,7 +1078,6 @@ export type EventCreateWithoutAssignmentsInput = {
   updatedBy?: Prisma.UserCreateNestedOneWithoutUpdatedEventsInput
   feedback?: Prisma.EventFeedbackCreateNestedManyWithoutEventInput
   availabilities?: Prisma.AvailabilitySlotCreateNestedManyWithoutEventInput
-  feedbackRequests?: Prisma.FeedbackRequestCreateNestedManyWithoutEventInput
 }
 
 export type EventUncheckedCreateWithoutAssignmentsInput = {
@@ -1222,7 +1096,6 @@ export type EventUncheckedCreateWithoutAssignmentsInput = {
   finalizedAt?: Date | string | null
   feedback?: Prisma.EventFeedbackUncheckedCreateNestedManyWithoutEventInput
   availabilities?: Prisma.AvailabilitySlotUncheckedCreateNestedManyWithoutEventInput
-  feedbackRequests?: Prisma.FeedbackRequestUncheckedCreateNestedManyWithoutEventInput
 }
 
 export type EventCreateOrConnectWithoutAssignmentsInput = {
@@ -1257,7 +1130,6 @@ export type EventUpdateWithoutAssignmentsInput = {
   updatedBy?: Prisma.UserUpdateOneWithoutUpdatedEventsNestedInput
   feedback?: Prisma.EventFeedbackUpdateManyWithoutEventNestedInput
   availabilities?: Prisma.AvailabilitySlotUpdateManyWithoutEventNestedInput
-  feedbackRequests?: Prisma.FeedbackRequestUpdateManyWithoutEventNestedInput
 }
 
 export type EventUncheckedUpdateWithoutAssignmentsInput = {
@@ -1276,7 +1148,6 @@ export type EventUncheckedUpdateWithoutAssignmentsInput = {
   finalizedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   feedback?: Prisma.EventFeedbackUncheckedUpdateManyWithoutEventNestedInput
   availabilities?: Prisma.AvailabilitySlotUncheckedUpdateManyWithoutEventNestedInput
-  feedbackRequests?: Prisma.FeedbackRequestUncheckedUpdateManyWithoutEventNestedInput
 }
 
 export type EventCreateWithoutRegionInput = {
@@ -1295,7 +1166,6 @@ export type EventCreateWithoutRegionInput = {
   feedback?: Prisma.EventFeedbackCreateNestedManyWithoutEventInput
   assignments?: Prisma.EventAssignmentCreateNestedManyWithoutEventInput
   availabilities?: Prisma.AvailabilitySlotCreateNestedManyWithoutEventInput
-  feedbackRequests?: Prisma.FeedbackRequestCreateNestedManyWithoutEventInput
 }
 
 export type EventUncheckedCreateWithoutRegionInput = {
@@ -1314,7 +1184,6 @@ export type EventUncheckedCreateWithoutRegionInput = {
   feedback?: Prisma.EventFeedbackUncheckedCreateNestedManyWithoutEventInput
   assignments?: Prisma.EventAssignmentUncheckedCreateNestedManyWithoutEventInput
   availabilities?: Prisma.AvailabilitySlotUncheckedCreateNestedManyWithoutEventInput
-  feedbackRequests?: Prisma.FeedbackRequestUncheckedCreateNestedManyWithoutEventInput
 }
 
 export type EventCreateOrConnectWithoutRegionInput = {
@@ -1389,7 +1258,6 @@ export type EventUpdateWithoutCreatedByInput = {
   feedback?: Prisma.EventFeedbackUpdateManyWithoutEventNestedInput
   assignments?: Prisma.EventAssignmentUpdateManyWithoutEventNestedInput
   availabilities?: Prisma.AvailabilitySlotUpdateManyWithoutEventNestedInput
-  feedbackRequests?: Prisma.FeedbackRequestUpdateManyWithoutEventNestedInput
 }
 
 export type EventUncheckedUpdateWithoutCreatedByInput = {
@@ -1408,7 +1276,6 @@ export type EventUncheckedUpdateWithoutCreatedByInput = {
   feedback?: Prisma.EventFeedbackUncheckedUpdateManyWithoutEventNestedInput
   assignments?: Prisma.EventAssignmentUncheckedUpdateManyWithoutEventNestedInput
   availabilities?: Prisma.AvailabilitySlotUncheckedUpdateManyWithoutEventNestedInput
-  feedbackRequests?: Prisma.FeedbackRequestUncheckedUpdateManyWithoutEventNestedInput
 }
 
 export type EventUncheckedUpdateManyWithoutCreatedByInput = {
@@ -1442,7 +1309,6 @@ export type EventUpdateWithoutUpdatedByInput = {
   feedback?: Prisma.EventFeedbackUpdateManyWithoutEventNestedInput
   assignments?: Prisma.EventAssignmentUpdateManyWithoutEventNestedInput
   availabilities?: Prisma.AvailabilitySlotUpdateManyWithoutEventNestedInput
-  feedbackRequests?: Prisma.FeedbackRequestUpdateManyWithoutEventNestedInput
 }
 
 export type EventUncheckedUpdateWithoutUpdatedByInput = {
@@ -1461,7 +1327,6 @@ export type EventUncheckedUpdateWithoutUpdatedByInput = {
   feedback?: Prisma.EventFeedbackUncheckedUpdateManyWithoutEventNestedInput
   assignments?: Prisma.EventAssignmentUncheckedUpdateManyWithoutEventNestedInput
   availabilities?: Prisma.AvailabilitySlotUncheckedUpdateManyWithoutEventNestedInput
-  feedbackRequests?: Prisma.FeedbackRequestUncheckedUpdateManyWithoutEventNestedInput
 }
 
 export type EventUncheckedUpdateManyWithoutUpdatedByInput = {
@@ -1510,7 +1375,6 @@ export type EventUpdateWithoutRegionInput = {
   feedback?: Prisma.EventFeedbackUpdateManyWithoutEventNestedInput
   assignments?: Prisma.EventAssignmentUpdateManyWithoutEventNestedInput
   availabilities?: Prisma.AvailabilitySlotUpdateManyWithoutEventNestedInput
-  feedbackRequests?: Prisma.FeedbackRequestUpdateManyWithoutEventNestedInput
 }
 
 export type EventUncheckedUpdateWithoutRegionInput = {
@@ -1529,7 +1393,6 @@ export type EventUncheckedUpdateWithoutRegionInput = {
   feedback?: Prisma.EventFeedbackUncheckedUpdateManyWithoutEventNestedInput
   assignments?: Prisma.EventAssignmentUncheckedUpdateManyWithoutEventNestedInput
   availabilities?: Prisma.AvailabilitySlotUncheckedUpdateManyWithoutEventNestedInput
-  feedbackRequests?: Prisma.FeedbackRequestUncheckedUpdateManyWithoutEventNestedInput
 }
 
 export type EventUncheckedUpdateManyWithoutRegionInput = {
@@ -1556,14 +1419,12 @@ export type EventCountOutputType = {
   feedback: number
   assignments: number
   availabilities: number
-  feedbackRequests: number
 }
 
 export type EventCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   feedback?: boolean | EventCountOutputTypeCountFeedbackArgs
   assignments?: boolean | EventCountOutputTypeCountAssignmentsArgs
   availabilities?: boolean | EventCountOutputTypeCountAvailabilitiesArgs
-  feedbackRequests?: boolean | EventCountOutputTypeCountFeedbackRequestsArgs
 }
 
 /**
@@ -1597,13 +1458,6 @@ export type EventCountOutputTypeCountAvailabilitiesArgs<ExtArgs extends runtime.
   where?: Prisma.AvailabilitySlotWhereInput
 }
 
-/**
- * EventCountOutputType without action
- */
-export type EventCountOutputTypeCountFeedbackRequestsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  where?: Prisma.FeedbackRequestWhereInput
-}
-
 
 export type EventSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -1625,7 +1479,6 @@ export type EventSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = 
   feedback?: boolean | Prisma.Event$feedbackArgs<ExtArgs>
   assignments?: boolean | Prisma.Event$assignmentsArgs<ExtArgs>
   availabilities?: boolean | Prisma.Event$availabilitiesArgs<ExtArgs>
-  feedbackRequests?: boolean | Prisma.Event$feedbackRequestsArgs<ExtArgs>
   _count?: boolean | Prisma.EventCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["event"]>
 
@@ -1691,7 +1544,6 @@ export type EventInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs =
   feedback?: boolean | Prisma.Event$feedbackArgs<ExtArgs>
   assignments?: boolean | Prisma.Event$assignmentsArgs<ExtArgs>
   availabilities?: boolean | Prisma.Event$availabilitiesArgs<ExtArgs>
-  feedbackRequests?: boolean | Prisma.Event$feedbackRequestsArgs<ExtArgs>
   _count?: boolean | Prisma.EventCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type EventIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -1714,7 +1566,6 @@ export type $EventPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs 
     feedback: Prisma.$EventFeedbackPayload<ExtArgs>[]
     assignments: Prisma.$EventAssignmentPayload<ExtArgs>[]
     availabilities: Prisma.$AvailabilitySlotPayload<ExtArgs>[]
-    feedbackRequests: Prisma.$FeedbackRequestPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -2130,7 +1981,6 @@ export interface Prisma__EventClient<T, Null = never, ExtArgs extends runtime.Ty
   feedback<T extends Prisma.Event$feedbackArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Event$feedbackArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$EventFeedbackPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   assignments<T extends Prisma.Event$assignmentsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Event$assignmentsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$EventAssignmentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   availabilities<T extends Prisma.Event$availabilitiesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Event$availabilitiesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$AvailabilitySlotPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-  feedbackRequests<T extends Prisma.Event$feedbackRequestsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Event$feedbackRequestsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$FeedbackRequestPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -2695,30 +2545,6 @@ export type Event$availabilitiesArgs<ExtArgs extends runtime.Types.Extensions.In
   take?: number
   skip?: number
   distinct?: Prisma.AvailabilitySlotScalarFieldEnum | Prisma.AvailabilitySlotScalarFieldEnum[]
-}
-
-/**
- * Event.feedbackRequests
- */
-export type Event$feedbackRequestsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  /**
-   * Select specific fields to fetch from the FeedbackRequest
-   */
-  select?: Prisma.FeedbackRequestSelect<ExtArgs> | null
-  /**
-   * Omit specific fields from the FeedbackRequest
-   */
-  omit?: Prisma.FeedbackRequestOmit<ExtArgs> | null
-  /**
-   * Choose, which related nodes to fetch as well
-   */
-  include?: Prisma.FeedbackRequestInclude<ExtArgs> | null
-  where?: Prisma.FeedbackRequestWhereInput
-  orderBy?: Prisma.FeedbackRequestOrderByWithRelationInput | Prisma.FeedbackRequestOrderByWithRelationInput[]
-  cursor?: Prisma.FeedbackRequestWhereUniqueInput
-  take?: number
-  skip?: number
-  distinct?: Prisma.FeedbackRequestScalarFieldEnum | Prisma.FeedbackRequestScalarFieldEnum[]
 }
 
 /**

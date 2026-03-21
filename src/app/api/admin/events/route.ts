@@ -1,3 +1,4 @@
+import { EventWhereInput } from "@/generated/models";
 import { handleError } from "@/lib/errors/handleErrors";
 import { prisma } from "@/lib/prisma";
 import { requireRole } from "@/lib/serverAuth";
@@ -5,32 +6,157 @@ import { CreateEvent } from "@/lib/zod";
 import { NextRequest, NextResponse } from "next/server";
 import z from "zod";
 
-export const GET = async (_req: NextRequest) => {
+type EventResponse = {
+  id: string;
+  name: string;
+  updatedBy: {
+    name: string | null;
+  } | null;
+  region: {
+    name: string;
+  } | null;
+  createdBy: {
+    name: string | null;
+  } | null;
+  startTime: Date;
+  assignments: {
+    user: {
+      name: string | null;
+    } | null;
+  }[];
+};
+
+type PaginationMeta = {
+  currentPage: number;
+  totalPages: number;
+  totalCount: number;
+  limit: number;
+  hasNextPage: boolean;
+  hasPrevPage: boolean;
+};
+
+type ApiResponse = {
+  data: EventResponse[];
+  pagination: PaginationMeta;
+};
+
+export const GET = async (req: NextRequest) => {
   try {
     const thisUser = await requireRole("ADMIN");
+    const { searchParams } = new URL(req.url);
+
+    //pagination params with validation
+    const page = Math.max(1, parseInt(searchParams.get("page") || "1"));
+    const limit = Math.max(1, parseInt(searchParams.get("limit") || "10"));
+
+    const skip = (page - 1) * limit;
+
+    // Search Params
+
+    const assigneeFilter = searchParams.get("assignee");
+    const searchQuery = searchParams.get("search");
+    const fromDateFilter = searchParams.get("fromDate");
+    const tillDateFilter = searchParams.get("tillDate");
+
+    const whereClause: EventWhereInput = {
+      regionId: thisUser.user.ownAllowance?.regionId,
+    };
+
+    if (assigneeFilter) {
+      whereClause.OR = [
+        { assignments: { some: { userId: assigneeFilter } } },
+        {
+          availabilities: {
+            some: { availabilityEntries: { some: { userId: assigneeFilter } } },
+          },
+        },
+      ];
+    }
+
+    if (searchQuery && searchQuery.trim()) {
+      whereClause.OR = [
+        {
+          name: { contains: searchQuery.trim(), mode: "insensitive" },
+        },
+        { description: { contains: searchQuery.trim(), mode: "insensitive" } },
+      ];
+    }
+
+    if (fromDateFilter) {
+      whereClause.startTime = {
+        gte: new Date(fromDateFilter),
+      };
+    }
+
+    if (tillDateFilter) {
+      whereClause.endTime = {
+        lte: new Date(tillDateFilter),
+      };
+    }
+
+    const totalCount = await prisma.event.count({
+      where: whereClause,
+    });
 
     const data = await prisma.event.findMany({
-      where: {
-        regionId: thisUser.user.ownAllowance?.regionId,
-      },
+      where: whereClause,
       select: {
         id: true,
         region: { select: { name: true } },
         createdBy: { select: { name: true } },
         updatedBy: { select: { name: true } },
-        rating:true,
         name: true,
         startTime: true,
+        endTime:true,
+        rating: true,
+        assignments: {
+          select: {
+            role: { select: { name: true } },
+            user: { select: { name: true, image: true } },
+          },
+        },
+        availabilities: {
+          select: {
+            role: { select: { name: true } },
+            availabilityEntries: {
+              select: { user: { select: { name: true, image: true } } },
+            },
+          },
+        },
       },
+      orderBy: {
+        createdAt: "desc",
+      },
+      skip,
+      take: limit,
     });
 
+    //Calculate Pagination metaData
+
+    const totalPages = Math.ceil(totalCount / limit);
+    const hasNextPage = page < totalPages;
+    const hasPrevPage = page > 1;
+
     if (!data || data.length === 0) {
-      return NextResponse.json({data,
-        message: "Events in your region not found!",
+      return NextResponse.json({
+        data,
+        message: "Events not found!",
       });
     }
 
-    return NextResponse.json({data}, { status: 200 });
+    const response: ApiResponse = {
+      data,
+      pagination: {
+        currentPage: page,
+        totalPages,
+        totalCount,
+        limit,
+        hasNextPage,
+        hasPrevPage,
+      },
+    };
+
+    return NextResponse.json({ records: response }, { status: 200 });
   } catch (error) {
     const { message, status } = handleError(error);
     return NextResponse.json({ message }, { status });
@@ -60,7 +186,7 @@ export const POST = async (req: NextRequest) => {
       {
         message: `Event: ${response.name}, Created By: ${response.createdBy?.name}`,
       },
-      { status: 201 }
+      { status: 201 },
     );
   } catch (error) {
     const { message, status } = handleError(error);

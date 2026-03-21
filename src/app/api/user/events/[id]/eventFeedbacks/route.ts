@@ -50,7 +50,7 @@ export const POST = async (req: NextRequest, context: Context) => {
       {
         message: `Feedback Created for Event: ${result.feedback.event?.name}, Average Rating: ${result.avg}`,
       },
-      { status: 201 }
+      { status: 201 },
     );
   } catch (error) {
     const { message, status } = handleError(error);

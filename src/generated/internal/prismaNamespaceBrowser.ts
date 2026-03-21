@@ -57,7 +57,6 @@ export const ModelName = {
   HrWarning: 'HrWarning',
   HrWarningType: 'HrWarningType',
   EventFeedback: 'EventFeedback',
-  FeedbackRequest: 'FeedbackRequest',
   AvailabilitySlot: 'AvailabilitySlot',
   AvailabilityEntry: 'AvailabilityEntry',
   EntryCancelRequest: 'EntryCancelRequest',
@@ -175,6 +174,10 @@ export const EventFeedbackScalarFieldEnum = {
   id: 'id',
   eventId: 'eventId',
   userId: 'userId',
+  requestStatus: 'requestStatus',
+  requestedAt: 'requestedAt',
+  respondedAt: 'respondedAt',
+  responded: 'responded',
   feedback: 'feedback',
   rating: 'rating',
   updatedById: 'updatedById',
@@ -183,19 +186,6 @@ export const EventFeedbackScalarFieldEnum = {
 } as const
 
 export type EventFeedbackScalarFieldEnum = (typeof EventFeedbackScalarFieldEnum)[keyof typeof EventFeedbackScalarFieldEnum]
-
-
-export const FeedbackRequestScalarFieldEnum = {
-  id: 'id',
-  eventId: 'eventId',
-  userId: 'userId',
-  status: 'status',
-  requestedAt: 'requestedAt',
-  respondedAt: 'respondedAt',
-  eventFeedbackId: 'eventFeedbackId'
-} as const
-
-export type FeedbackRequestScalarFieldEnum = (typeof FeedbackRequestScalarFieldEnum)[keyof typeof FeedbackRequestScalarFieldEnum]
 
 
 export const AvailabilitySlotScalarFieldEnum = {

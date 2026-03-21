@@ -72,11 +72,6 @@ export type HrWarningType = Prisma.HrWarningTypeModel
  */
 export type EventFeedback = Prisma.EventFeedbackModel
 /**
- * Model FeedbackRequest
- * 
- */
-export type FeedbackRequest = Prisma.FeedbackRequestModel
-/**
  * Model AvailabilitySlot
  * 
  */

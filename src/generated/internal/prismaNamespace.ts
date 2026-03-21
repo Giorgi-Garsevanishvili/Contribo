@@ -390,7 +390,6 @@ export const ModelName = {
   HrWarning: 'HrWarning',
   HrWarningType: 'HrWarningType',
   EventFeedback: 'EventFeedback',
-  FeedbackRequest: 'FeedbackRequest',
   AvailabilitySlot: 'AvailabilitySlot',
   AvailabilityEntry: 'AvailabilityEntry',
   EntryCancelRequest: 'EntryCancelRequest',
@@ -425,7 +424,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "user" | "event" | "eventsRole" | "hrWarning" | "hrWarningType" | "eventFeedback" | "feedbackRequest" | "availabilitySlot" | "availabilityEntry" | "entryCancelRequest" | "eventAssignment" | "assignmentCancelRequest" | "ratingHistory" | "position" | "positionHistory" | "memberStatus" | "memberStatusLog" | "joinRequest" | "region" | "userRole" | "allowedUser" | "role" | "account" | "session" | "verificationToken" | "authenticator"
+    modelProps: "user" | "event" | "eventsRole" | "hrWarning" | "hrWarningType" | "eventFeedback" | "availabilitySlot" | "availabilityEntry" | "entryCancelRequest" | "eventAssignment" | "assignmentCancelRequest" | "ratingHistory" | "position" | "positionHistory" | "memberStatus" | "memberStatusLog" | "joinRequest" | "region" | "userRole" | "allowedUser" | "role" | "account" | "session" | "verificationToken" | "authenticator"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -870,80 +869,6 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         count: {
           args: Prisma.EventFeedbackCountArgs<ExtArgs>
           result: runtime.Types.Utils.Optional<Prisma.EventFeedbackCountAggregateOutputType> | number
-        }
-      }
-    }
-    FeedbackRequest: {
-      payload: Prisma.$FeedbackRequestPayload<ExtArgs>
-      fields: Prisma.FeedbackRequestFieldRefs
-      operations: {
-        findUnique: {
-          args: Prisma.FeedbackRequestFindUniqueArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$FeedbackRequestPayload> | null
-        }
-        findUniqueOrThrow: {
-          args: Prisma.FeedbackRequestFindUniqueOrThrowArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$FeedbackRequestPayload>
-        }
-        findFirst: {
-          args: Prisma.FeedbackRequestFindFirstArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$FeedbackRequestPayload> | null
-        }
-        findFirstOrThrow: {
-          args: Prisma.FeedbackRequestFindFirstOrThrowArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$FeedbackRequestPayload>
-        }
-        findMany: {
-          args: Prisma.FeedbackRequestFindManyArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$FeedbackRequestPayload>[]
-        }
-        create: {
-          args: Prisma.FeedbackRequestCreateArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$FeedbackRequestPayload>
-        }
-        createMany: {
-          args: Prisma.FeedbackRequestCreateManyArgs<ExtArgs>
-          result: BatchPayload
-        }
-        createManyAndReturn: {
-          args: Prisma.FeedbackRequestCreateManyAndReturnArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$FeedbackRequestPayload>[]
-        }
-        delete: {
-          args: Prisma.FeedbackRequestDeleteArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$FeedbackRequestPayload>
-        }
-        update: {
-          args: Prisma.FeedbackRequestUpdateArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$FeedbackRequestPayload>
-        }
-        deleteMany: {
-          args: Prisma.FeedbackRequestDeleteManyArgs<ExtArgs>
-          result: BatchPayload
-        }
-        updateMany: {
-          args: Prisma.FeedbackRequestUpdateManyArgs<ExtArgs>
-          result: BatchPayload
-        }
-        updateManyAndReturn: {
-          args: Prisma.FeedbackRequestUpdateManyAndReturnArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$FeedbackRequestPayload>[]
-        }
-        upsert: {
-          args: Prisma.FeedbackRequestUpsertArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$FeedbackRequestPayload>
-        }
-        aggregate: {
-          args: Prisma.FeedbackRequestAggregateArgs<ExtArgs>
-          result: runtime.Types.Utils.Optional<Prisma.AggregateFeedbackRequest>
-        }
-        groupBy: {
-          args: Prisma.FeedbackRequestGroupByArgs<ExtArgs>
-          result: runtime.Types.Utils.Optional<Prisma.FeedbackRequestGroupByOutputType>[]
-        }
-        count: {
-          args: Prisma.FeedbackRequestCountArgs<ExtArgs>
-          result: runtime.Types.Utils.Optional<Prisma.FeedbackRequestCountAggregateOutputType> | number
         }
       }
     }
@@ -2472,6 +2397,10 @@ export const EventFeedbackScalarFieldEnum = {
   id: 'id',
   eventId: 'eventId',
   userId: 'userId',
+  requestStatus: 'requestStatus',
+  requestedAt: 'requestedAt',
+  respondedAt: 'respondedAt',
+  responded: 'responded',
   feedback: 'feedback',
   rating: 'rating',
   updatedById: 'updatedById',
@@ -2480,19 +2409,6 @@ export const EventFeedbackScalarFieldEnum = {
 } as const
 
 export type EventFeedbackScalarFieldEnum = (typeof EventFeedbackScalarFieldEnum)[keyof typeof EventFeedbackScalarFieldEnum]
-
-
-export const FeedbackRequestScalarFieldEnum = {
-  id: 'id',
-  eventId: 'eventId',
-  userId: 'userId',
-  status: 'status',
-  requestedAt: 'requestedAt',
-  respondedAt: 'respondedAt',
-  eventFeedbackId: 'eventFeedbackId'
-} as const
-
-export type FeedbackRequestScalarFieldEnum = (typeof FeedbackRequestScalarFieldEnum)[keyof typeof FeedbackRequestScalarFieldEnum]
 
 
 export const AvailabilitySlotScalarFieldEnum = {
@@ -3058,7 +2974,6 @@ export type GlobalOmitConfig = {
   hrWarning?: Prisma.HrWarningOmit
   hrWarningType?: Prisma.HrWarningTypeOmit
   eventFeedback?: Prisma.EventFeedbackOmit
-  feedbackRequest?: Prisma.FeedbackRequestOmit
   availabilitySlot?: Prisma.AvailabilitySlotOmit
   availabilityEntry?: Prisma.AvailabilityEntryOmit
   entryCancelRequest?: Prisma.EntryCancelRequestOmit

@@ -48,8 +48,6 @@ model User {
   providedFeedbacks                EventFeedback[]
   updatedEventFeedback             EventFeedback[]           @relation("updatedFeedback")
   //-----------------------------------------
-  feedbackRequests                 FeedbackRequest[]
-  //-----------------------------------------
   hrWarnings                       HrWarning[]               @relation("HrWarnings")
   createdHrWarning                 HrWarning[]               @relation("CreatedHrWarnings")
   updatedHrWarnings                HrWarning[]               @relation("UpdatedHrWarnings")
@@ -105,10 +103,9 @@ model Event {
 
   finalizedAt DateTime?
 
-  feedback         EventFeedback[]
-  assignments      EventAssignment[]
-  availabilities   AvailabilitySlot[]
-  feedbackRequests FeedbackRequest[]
+  feedback       EventFeedback[]
+  assignments    EventAssignment[]
+  availabilities AvailabilitySlot[]
 }
 
 model EventsRole {
@@ -166,10 +163,17 @@ enum HrWarningStatus {
 }
 
 model EventFeedback {
-  id       String  @id @default(cuid())
-  eventId  String
-  userId   String?
-  feedback String
+  id String @id @default(cuid())
+
+  eventId String
+  userId  String?
+
+  requestStatus FeedbackRequestStatus @default(PENDING)
+  requestedAt   DateTime              @default(now())
+  respondedAt   DateTime?
+  responded     Boolean               @default(false)
+
+  feedback String?
   rating   Int?
 
   updatedById String?
@@ -178,28 +182,10 @@ model EventFeedback {
   createdAt DateTime  @default(now())
   updatedAt DateTime? @updatedAt
 
-  event            Event             @relation(fields: [eventId], references: [id], onDelete: Cascade)
-  user             User?             @relation(fields: [userId], references: [id], onDelete: SetNull)
-  feedbackRequests FeedbackRequest[]
-}
+  event Event @relation(fields: [eventId], references: [id], onDelete: Cascade)
+  user  User? @relation(fields: [userId], references: [id], onDelete: SetNull)
 
-model FeedbackRequest {
-  id      String @id @default(cuid())
-  eventId String
-  userId  String
-
-  status FeedbackRequestStatus @default(PENDING)
-
-  requestedAt DateTime  @default(now())
-  respondedAt DateTime?
-
-  event           Event          @relation(fields: [eventId], references: [id], onDelete: Cascade)
-  user            User           @relation(fields: [userId], references: [id], onDelete: Cascade)
-  feedback        EventFeedback? @relation(fields: [eventFeedbackId], references: [id])
-  eventFeedbackId String?
-
-  @@index([eventId])
-  @@index([userId])
+  @@unique([eventId, userId])
 }
 
 enum FeedbackRequestStatus {

@@ -18,9 +18,11 @@ function EventStats() {
   const router = useRouter();
 
   const { data, isLoadingFetch } = useFetchData<Data[]>(
-    "/api/admin/events",
+    "/api/admin/events?limit=1000",
     [],
   );
+
+  console.log(data?.map((R) => R.rating ));
 
   useEffect(() => {
     if (data) {
@@ -61,6 +63,8 @@ function EventStats() {
               >
                 <ImSpinner9 className="animate-spin" size={25} />
               </div>
+            ) : data && data?.length > 1000 ? (
+              `${data?.length} +`
             ) : (
               data?.length
             )}
