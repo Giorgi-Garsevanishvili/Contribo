@@ -1,4 +1,5 @@
 import {
+  AssignmentStatus,
   FeedbackRequestStatus,
   GTypes,
   HrWarningStatus,
@@ -341,6 +342,9 @@ export const CreateEventAssignment = z
     comment: z.string().optional(),
     validFrom: z.coerce.date().optional(),
     validTo: z.coerce.date().optional(),
+    ratingScore: z.int(),
+    ratedAt: z.coerce.date().optional(),
+    status: z.enum(AssignmentStatus).default("ACTIVE"),
     createdById: z.string(),
   })
   .strict()
@@ -361,6 +365,9 @@ export const updateEventAssignment = z
     validFrom: z.coerce.date().optional(),
     validTo: z.coerce.date().optional(),
     updatedById: z.string(),
+    status: z.enum(AssignmentStatus).optional(),
+    ratingScore: z.int().optional(),
+    ratedAt: z.coerce.date().optional(),
   })
   .strict()
   .superRefine((data, ctx) => {

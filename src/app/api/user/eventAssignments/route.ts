@@ -1,40 +1,32 @@
-import { FeedbackRequestStatus } from "@/generated/enums";
-import { EventFeedbackWhereInput } from "@/generated/models";
+import { AssignmentStatus } from "@/generated/enums";
+import { EventAssignmentWhereInput } from "@/generated/models";
 import { handleError } from "@/lib/errors/handleErrors";
 import { prisma } from "@/lib/prisma";
 import { requireRole } from "@/lib/serverAuth";
-import { Context } from "@/types/general-types";
 import { NextRequest, NextResponse } from "next/server";
 
 export const GET = async (req: NextRequest) => {
   try {
-    const thisUser = await requireRole("ADMIN");
+    const thisUser = await requireRole("REGULAR");
 
     const { searchParams } = new URL(req.url);
 
-    const requestStatus = searchParams.get("status");
+    const statusFilter = searchParams.get("status");
     const searchQuery = searchParams.get("search");
 
-    const whereClause: EventFeedbackWhereInput = {
+    const whereClause: EventAssignmentWhereInput = {
       event: { regionId: thisUser.user.ownAllowance?.regionId },
+      userId: thisUser.user.id,
     };
 
     // search params
 
-    if (requestStatus) {
-      whereClause.requestStatus = requestStatus as FeedbackRequestStatus;
+    if (statusFilter) {
+      whereClause.status = statusFilter as AssignmentStatus;
     }
 
     if (searchQuery && searchQuery.trim()) {
       whereClause.OR = [
-        {
-          user: {
-            email: { contains: searchQuery.trim(), mode: "insensitive" },
-          },
-        },
-        {
-          user: { name: { contains: searchQuery.trim(), mode: "insensitive" } },
-        },
         {
           event: {
             name: { contains: searchQuery.trim(), mode: "insensitive" },
@@ -51,7 +43,7 @@ export const GET = async (req: NextRequest) => {
     );
     const skip = (page - 1) * limit;
 
-    const totalCount = await prisma.eventFeedback.count({
+    const totalCount = await prisma.eventAssignment.count({
       where: whereClause,
     });
 
@@ -68,22 +60,19 @@ export const GET = async (req: NextRequest) => {
       limit,
     };
 
-    const data = await prisma.eventFeedback.findMany({
+    const data = await prisma.eventAssignment.findMany({
       where: whereClause,
       select: {
         id: true,
-        user: { select: { name: true } },
-        requestStatus: true,
+        user: { select: { name: true, image: true } },
+        createdBy: { select: { name: true, image: true } },
+        updatedBy: { select: { name: true, image: true } },
         event: { select: { name: true } },
-        eventId: true,
-        userId: true,
-        requestedAt: true,
-        respondedAt: true,
-        responded: true,
-        feedback: true,
-        rating: true,
+        role: { select: { name: true } },
+        status: true,
+        comment: true,
       },
-      orderBy: { requestedAt: "desc" },
+      orderBy: { createdAt: "desc" },
       skip,
       take: limit,
     });
@@ -92,7 +81,7 @@ export const GET = async (req: NextRequest) => {
       return NextResponse.json(
         {
           data,
-          message: `Feedbacks Not Found for Your Region`,
+          message: `Event Assignments Not Found for You`,
         },
         { status: 404 },
       );
@@ -105,7 +94,7 @@ export const GET = async (req: NextRequest) => {
 
     return NextResponse.json({ records: response }, { status: 200 });
   } catch (error) {
-    const { status, message } = handleError(error);
-    return NextResponse.json({ message }, { status: status });
+    const { message, status } = handleError(error);
+    return NextResponse.json({ message }, { status });
   }
 };

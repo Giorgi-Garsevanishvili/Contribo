@@ -17,18 +17,16 @@ export const GET = async (_req: NextRequest, context: Context) => {
         event: { regionId: thisUser.user.ownAllowance?.regionId },
       },
       include: {
-        user: { select: { name: true } },
-        createdBy: { select: { name: true } },
-        updatedBy: { select: { name: true } },
+        user: { select: { name: true, image: true } },
+        createdBy: { select: { name: true, image: true } },
+        updatedBy: { select: { name: true, image: true } },
         event: { select: { name: true } },
         role: { select: { name: true } },
       },
     });
 
     if (!data) {
-      return NextResponse.json({data,
-        message: "Assignments not found!",
-      });
+      return NextResponse.json({ data, message: "Assignments not found!" });
     }
 
     return NextResponse.json(data, { status: 200 });
@@ -62,7 +60,7 @@ export const PUT = async (req: NextRequest, context: Context) => {
 
     return NextResponse.json(
       { message: "Event Assignment Updated" },
-      { status: 200 }
+      { status: 200 },
     );
   } catch (error) {
     const { message, status } = handleError(error);

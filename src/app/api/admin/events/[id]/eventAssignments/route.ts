@@ -16,18 +16,18 @@ export const GET = async (_req: NextRequest, context: Context) => {
         eventId: id,
         event: { regionId: thisUser.user.ownAllowance?.regionId },
       },
-      select: {
-        id: true,
-        user: { select: { name: true } },
-        createdBy: { select: { name: true } },
-        updatedBy: { select: { name: true } },
+      include: {
+        user: { select: { name: true, image: true } },
+        createdBy: { select: { name: true, image: true } },
+        updatedBy: { select: { name: true, image: true } },
         event: { select: { name: true } },
         role: { select: { name: true } },
       },
     });
 
     if (!data || data.length === 0) {
-      return NextResponse.json({data,
+      return NextResponse.json({
+        data,
         message: "Assignments For This Event not found!",
       });
     }
@@ -64,7 +64,7 @@ export const POST = async (req: NextRequest, context: Context) => {
       {
         message: `Event Assignment for Event: ${response.event?.name}, Created For: ${response.user?.name}`,
       },
-      { status: 201 }
+      { status: 201 },
     );
   } catch (error) {
     const { message, status } = handleError(error);

@@ -9,33 +9,25 @@ export const GET = async (_req: NextRequest, context: Context) => {
     const thisUser = await requireRole("REGULAR");
     const { id } = await context.params;
 
-    const data = await prisma.event.findUnique({
+    const data = await prisma.eventAssignment.findMany({
       where: {
-        id,
-        regionId: thisUser.user.ownAllowance?.regionId,
-        assignments: { some: { userId: thisUser.user.id } },
+        eventId: id,
+        event: { regionId: thisUser.user.ownAllowance?.regionId },
+        userId: thisUser.user.id,
       },
-      select: {
-        id: true,
-        region: { select: { name: true } },
-        createdBy: { select: { name: true } },
-        updatedBy: { select: { name: true } },
-        name: true,
-        startTime: true,
-        description: true,
-        rating: true,
-        endTime: true,
-        location: true,
-        assignments: {
-          select: { user: { select: { name: true, image: true } } },
-        },
+      include: {
+        user: { select: { name: true, image: true } },
+        createdBy: { select: { name: true, image: true } },
+        updatedBy: { select: { name: true, image: true } },
+        event: { select: { name: true } },
+        role: { select: { name: true } },
       },
     });
 
-    if (!data) {
+    if (!data || data.length === 0) {
       return NextResponse.json({
         data,
-        message: `Event with ${id} not found!`,
+        message: "Your Assignments For This Event not found!",
       });
     }
 
