@@ -303,7 +303,7 @@ model AssignmentCancelRequest {
   requestedById String
   requestedBy   User            @relation(fields: [requestedById], references: [id], onDelete: Cascade)
   reason        String?
-  status        ReqStatus       @default(PENDING)
+  status        ReqStatus       @default(REQUESTED)
   reviewedById  String?
   reviewedBy    User?           @relation("AssignmentCancelReviews", fields: [reviewedById], references: [id], onDelete: SetNull)
   reviewedAt    DateTime?

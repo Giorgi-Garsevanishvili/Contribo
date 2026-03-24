@@ -1,14 +1,12 @@
 import { handleError } from "@/lib/errors/handleErrors";
 import prisma from "@/lib/prisma";
 import { requireRole } from "@/lib/serverAuth";
-import { UpdateAssignmentCancelReq } from "@/lib/zod";
 import { Context } from "@/types/general-types";
 import { NextRequest, NextResponse } from "next/server";
-import z from "zod";
 
 export const GET = async (_req: NextRequest, context: Context) => {
   try {
-    const thisUser = await requireRole("ADMIN");
+    const thisUser = await requireRole("REGULAR");
     const { id } = await context.params;
 
     if (!id) {
@@ -52,70 +50,19 @@ export const GET = async (_req: NextRequest, context: Context) => {
   }
 };
 
-export const PUT = async (req: NextRequest, context: Context) => {
-  try {
-    const thisUser = await requireRole("ADMIN");
-    const { id } = await context.params;
-
-    if (!id) {
-      return NextResponse.json({ message: "id is missing!" });
-    }
-
-    const reviewTime = new Date();
-
-    const json = (await req.json()) as z.infer<
-      typeof UpdateAssignmentCancelReq
-    >;
-    const jsonWithCreator = {
-      ...json,
-      reviewedById: thisUser.user.id,
-      reviewedAt: reviewTime,
-    };
-
-    const body = UpdateAssignmentCancelReq.parse(jsonWithCreator);
-
-    if (body.status === "APPROVED") {
-      await prisma.$transaction(async (tx) => {
-        const updateAssignment = await tx.eventAssignment.update({
-          where: { id: body.assignmentId },
-          data: { updatedById: thisUser.user.id, status: "CANCELLED" },
-        });
-
-        await tx.assignmentCancelRequest.update({
-          where: { id },
-          data: { ...body, status: "APPROVED" },
-        });
-        return updateAssignment;
-      });
-
-      return NextResponse.json(
-        { message: "Assignment Cancel Request Approved" },
-        { status: 200 },
-      );
-    } else {
-      await prisma.assignmentCancelRequest.update({
-        where: { id },
-        data: body,
-      });
-
-      return NextResponse.json(
-        { message: `Assignment Cancel Request Updated to: ${body.status}` },
-        { status: 200 },
-      );
-    }
-  } catch (error) {
-    const { message, status } = handleError(error);
-    return NextResponse.json({ message }, { status });
-  }
-};
-
 export const DELETE = async (_req: NextRequest, context: Context) => {
   try {
-    const thisUser = await requireRole("ADMIN");
+    const thisUser = await requireRole("REGULAR");
     const { id } = await context.params;
 
-    if (!id) {
-      return NextResponse.json({ message: "Id is missing" });
+    const data = await prisma.assignmentCancelRequest.findUnique({
+      where: { id },
+    });
+
+    if (data?.status === "APPROVED" || data?.status === "REJECTED") {
+      return NextResponse.json({
+        message: `Delete Request Aborted because of Status: ${data.status}`,
+      });
     }
 
     const deleted = await prisma.assignmentCancelRequest.delete({

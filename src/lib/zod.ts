@@ -411,6 +411,25 @@ export const updateEventFeedbackUser = z
   .strict();
 //------------------------------------------------------
 
+//
+// Schemas for EventFeedback
+//------------------------------------------------------
+
+export const CreateAssignmentCancelReq = z.object({
+  assignmentId: z.string(),
+  requestedById: z.string(),
+  reason: z.string(),
+  status: z.enum(ReqStatus).default("PENDING"),
+});
+
+export const UpdateAssignmentCancelReq = z.object({
+  assignmentId: z.string(),
+  status: z.enum(ReqStatus),
+  reviewedById: z.string(),
+  reviewedAt: z.coerce.date(),
+});
+
+//------------------------------------------------------
 export type UserUpdateInput = z.infer<typeof UserUpdateInput>;
 export type SoftDeleteType = z.infer<typeof SoftDelete>;
 export type SoftDeleteInputType = z.infer<typeof SoftDeleteInput>;

@@ -7,7 +7,7 @@ import { NextRequest, NextResponse } from "next/server";
 
 export const GET = async (req: NextRequest) => {
   try {
-    const thisUser = await requireRole("ADMIN");
+    const thisUser = await requireRole("REGULAR");
     const { searchParams } = new URL(req.url);
 
     //pagination params with validation
@@ -17,20 +17,13 @@ export const GET = async (req: NextRequest) => {
     const skip = (page - 1) * limit;
 
     // Search Params
-
-    const assigneeFilter = searchParams.get("assignee");
     const searchQuery = searchParams.get("search");
     const statusFilter = searchParams.get("status");
 
     const whereClause: AssignmentCancelRequestWhereInput = {
-      requestedBy: {
-        ownAllowance: { regionId: thisUser.user.ownAllowance?.regionId },
-      },
+      assignment: { event: { regionId: thisUser.user.ownAllowance?.regionId } },
+      requestedById: thisUser.user.id,
     };
-
-    if (assigneeFilter) {
-      whereClause.OR = [{ assignmentId: assigneeFilter }];
-    }
 
     if (statusFilter) {
       whereClause.status = statusFilter as ReqStatus;
@@ -84,7 +77,7 @@ export const GET = async (req: NextRequest) => {
     if (!data || data.length === 0) {
       return NextResponse.json({
         data,
-        message: "Cancel Request not found!",
+        message: "Your Cancel Requests not found!",
       });
     }
 
@@ -101,31 +94,6 @@ export const GET = async (req: NextRequest) => {
     };
 
     return NextResponse.json({ records: response }, { status: 200 });
-  } catch (error) {
-    const { message, status } = handleError(error);
-    return NextResponse.json({ message }, { status });
-  }
-};
-
-export const DELETE = async (_req: NextRequest) => {
-  try {
-    const thisUser = await requireRole("ADMIN");
-
-    const deleted = await prisma.assignmentCancelRequest.deleteMany({
-      where: {
-        requestedBy: {
-          ownAllowance: { regionId: thisUser.user.ownAllowance?.regionId },
-        },
-      },
-    });
-
-    if (deleted.count === 0) {
-      return NextResponse.json({ message: "Nothing Deleted!" });
-    }
-
-    return NextResponse.json({
-      message: `All assignment Cancel Request deleted for region: ${thisUser.user.ownAllowance?.region?.name}!`,
-    });
   } catch (error) {
     const { message, status } = handleError(error);
     return NextResponse.json({ message }, { status });
