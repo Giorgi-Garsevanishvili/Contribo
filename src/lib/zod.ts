@@ -430,6 +430,35 @@ export const UpdateAssignmentCancelReq = z.object({
 });
 
 //------------------------------------------------------
+
+//
+// Schemas for EventFeedback
+//------------------------------------------------------
+
+export const CreateAvailabilitySlot = z
+  .object({
+    eventId: z.string(),
+    roleId: z.string(),
+    totalSlots: z.int(),
+    published: z.boolean().default(false),
+    validFrom: z.coerce.date(),
+    validTo: z.coerce.date(),
+    createdById: z.string(),
+  })
+  .strict();
+
+export const UpdateAvailabilitySlot = z
+  .object({
+    roleId: z.string().optional(),
+    totalSlots: z.int().optional(),
+    published: z.boolean().optional(),
+    validFrom: z.coerce.date().optional(),
+    validTo: z.coerce.date().optional(),
+    updatedById: z.string(),
+  })
+  .strict();
+//------------------------------------------------------
+
 export type UserUpdateInput = z.infer<typeof UserUpdateInput>;
 export type SoftDeleteType = z.infer<typeof SoftDelete>;
 export type SoftDeleteInputType = z.infer<typeof SoftDeleteInput>;
