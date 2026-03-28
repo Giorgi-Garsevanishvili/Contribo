@@ -215,7 +215,7 @@ export type AvailabilityEntryGroupByOutputType = {
   userId: string
   status: $Enums.AssignmentStatus
   comment: string | null
-  ratingScore: number | null
+  ratingScore: number
   ratedAt: Date | null
   appliedAt: Date
   updatedById: string | null
@@ -251,7 +251,7 @@ export type AvailabilityEntryWhereInput = {
   userId?: Prisma.StringFilter<"AvailabilityEntry"> | string
   status?: Prisma.EnumAssignmentStatusFilter<"AvailabilityEntry"> | $Enums.AssignmentStatus
   comment?: Prisma.StringNullableFilter<"AvailabilityEntry"> | string | null
-  ratingScore?: Prisma.IntNullableFilter<"AvailabilityEntry"> | number | null
+  ratingScore?: Prisma.IntFilter<"AvailabilityEntry"> | number
   ratedAt?: Prisma.DateTimeNullableFilter<"AvailabilityEntry"> | Date | string | null
   appliedAt?: Prisma.DateTimeFilter<"AvailabilityEntry"> | Date | string
   updatedById?: Prisma.StringNullableFilter<"AvailabilityEntry"> | string | null
@@ -268,7 +268,7 @@ export type AvailabilityEntryOrderByWithRelationInput = {
   userId?: Prisma.SortOrder
   status?: Prisma.SortOrder
   comment?: Prisma.SortOrderInput | Prisma.SortOrder
-  ratingScore?: Prisma.SortOrderInput | Prisma.SortOrder
+  ratingScore?: Prisma.SortOrder
   ratedAt?: Prisma.SortOrderInput | Prisma.SortOrder
   appliedAt?: Prisma.SortOrder
   updatedById?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -288,7 +288,7 @@ export type AvailabilityEntryWhereUniqueInput = Prisma.AtLeast<{
   userId?: Prisma.StringFilter<"AvailabilityEntry"> | string
   status?: Prisma.EnumAssignmentStatusFilter<"AvailabilityEntry"> | $Enums.AssignmentStatus
   comment?: Prisma.StringNullableFilter<"AvailabilityEntry"> | string | null
-  ratingScore?: Prisma.IntNullableFilter<"AvailabilityEntry"> | number | null
+  ratingScore?: Prisma.IntFilter<"AvailabilityEntry"> | number
   ratedAt?: Prisma.DateTimeNullableFilter<"AvailabilityEntry"> | Date | string | null
   appliedAt?: Prisma.DateTimeFilter<"AvailabilityEntry"> | Date | string
   updatedById?: Prisma.StringNullableFilter<"AvailabilityEntry"> | string | null
@@ -305,7 +305,7 @@ export type AvailabilityEntryOrderByWithAggregationInput = {
   userId?: Prisma.SortOrder
   status?: Prisma.SortOrder
   comment?: Prisma.SortOrderInput | Prisma.SortOrder
-  ratingScore?: Prisma.SortOrderInput | Prisma.SortOrder
+  ratingScore?: Prisma.SortOrder
   ratedAt?: Prisma.SortOrderInput | Prisma.SortOrder
   appliedAt?: Prisma.SortOrder
   updatedById?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -326,7 +326,7 @@ export type AvailabilityEntryScalarWhereWithAggregatesInput = {
   userId?: Prisma.StringWithAggregatesFilter<"AvailabilityEntry"> | string
   status?: Prisma.EnumAssignmentStatusWithAggregatesFilter<"AvailabilityEntry"> | $Enums.AssignmentStatus
   comment?: Prisma.StringNullableWithAggregatesFilter<"AvailabilityEntry"> | string | null
-  ratingScore?: Prisma.IntNullableWithAggregatesFilter<"AvailabilityEntry"> | number | null
+  ratingScore?: Prisma.IntWithAggregatesFilter<"AvailabilityEntry"> | number
   ratedAt?: Prisma.DateTimeNullableWithAggregatesFilter<"AvailabilityEntry"> | Date | string | null
   appliedAt?: Prisma.DateTimeWithAggregatesFilter<"AvailabilityEntry"> | Date | string
   updatedById?: Prisma.StringNullableWithAggregatesFilter<"AvailabilityEntry"> | string | null
@@ -337,7 +337,7 @@ export type AvailabilityEntryCreateInput = {
   id?: string
   status?: $Enums.AssignmentStatus
   comment?: string | null
-  ratingScore?: number | null
+  ratingScore: number
   ratedAt?: Date | string | null
   appliedAt?: Date | string
   updatedAt?: Date | string
@@ -353,7 +353,7 @@ export type AvailabilityEntryUncheckedCreateInput = {
   userId: string
   status?: $Enums.AssignmentStatus
   comment?: string | null
-  ratingScore?: number | null
+  ratingScore: number
   ratedAt?: Date | string | null
   appliedAt?: Date | string
   updatedById?: string | null
@@ -365,7 +365,7 @@ export type AvailabilityEntryUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.EnumAssignmentStatusFieldUpdateOperationsInput | $Enums.AssignmentStatus
   comment?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  ratingScore?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  ratingScore?: Prisma.IntFieldUpdateOperationsInput | number
   ratedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   appliedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -381,7 +381,7 @@ export type AvailabilityEntryUncheckedUpdateInput = {
   userId?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.EnumAssignmentStatusFieldUpdateOperationsInput | $Enums.AssignmentStatus
   comment?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  ratingScore?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  ratingScore?: Prisma.IntFieldUpdateOperationsInput | number
   ratedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   appliedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -395,7 +395,7 @@ export type AvailabilityEntryCreateManyInput = {
   userId: string
   status?: $Enums.AssignmentStatus
   comment?: string | null
-  ratingScore?: number | null
+  ratingScore: number
   ratedAt?: Date | string | null
   appliedAt?: Date | string
   updatedById?: string | null
@@ -406,7 +406,7 @@ export type AvailabilityEntryUpdateManyMutationInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.EnumAssignmentStatusFieldUpdateOperationsInput | $Enums.AssignmentStatus
   comment?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  ratingScore?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  ratingScore?: Prisma.IntFieldUpdateOperationsInput | number
   ratedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   appliedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -418,7 +418,7 @@ export type AvailabilityEntryUncheckedUpdateManyInput = {
   userId?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.EnumAssignmentStatusFieldUpdateOperationsInput | $Enums.AssignmentStatus
   comment?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  ratingScore?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  ratingScore?: Prisma.IntFieldUpdateOperationsInput | number
   ratedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   appliedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -635,7 +635,7 @@ export type AvailabilityEntryCreateWithoutUserInput = {
   id?: string
   status?: $Enums.AssignmentStatus
   comment?: string | null
-  ratingScore?: number | null
+  ratingScore: number
   ratedAt?: Date | string | null
   appliedAt?: Date | string
   updatedAt?: Date | string
@@ -649,7 +649,7 @@ export type AvailabilityEntryUncheckedCreateWithoutUserInput = {
   slotId: string
   status?: $Enums.AssignmentStatus
   comment?: string | null
-  ratingScore?: number | null
+  ratingScore: number
   ratedAt?: Date | string | null
   appliedAt?: Date | string
   updatedById?: string | null
@@ -671,7 +671,7 @@ export type AvailabilityEntryCreateWithoutUpdatedByInput = {
   id?: string
   status?: $Enums.AssignmentStatus
   comment?: string | null
-  ratingScore?: number | null
+  ratingScore: number
   ratedAt?: Date | string | null
   appliedAt?: Date | string
   updatedAt?: Date | string
@@ -686,7 +686,7 @@ export type AvailabilityEntryUncheckedCreateWithoutUpdatedByInput = {
   userId: string
   status?: $Enums.AssignmentStatus
   comment?: string | null
-  ratingScore?: number | null
+  ratingScore: number
   ratedAt?: Date | string | null
   appliedAt?: Date | string
   updatedAt?: Date | string
@@ -728,7 +728,7 @@ export type AvailabilityEntryScalarWhereInput = {
   userId?: Prisma.StringFilter<"AvailabilityEntry"> | string
   status?: Prisma.EnumAssignmentStatusFilter<"AvailabilityEntry"> | $Enums.AssignmentStatus
   comment?: Prisma.StringNullableFilter<"AvailabilityEntry"> | string | null
-  ratingScore?: Prisma.IntNullableFilter<"AvailabilityEntry"> | number | null
+  ratingScore?: Prisma.IntFilter<"AvailabilityEntry"> | number
   ratedAt?: Prisma.DateTimeNullableFilter<"AvailabilityEntry"> | Date | string | null
   appliedAt?: Prisma.DateTimeFilter<"AvailabilityEntry"> | Date | string
   updatedById?: Prisma.StringNullableFilter<"AvailabilityEntry"> | string | null
@@ -755,7 +755,7 @@ export type AvailabilityEntryCreateWithoutSlotInput = {
   id?: string
   status?: $Enums.AssignmentStatus
   comment?: string | null
-  ratingScore?: number | null
+  ratingScore: number
   ratedAt?: Date | string | null
   appliedAt?: Date | string
   updatedAt?: Date | string
@@ -769,7 +769,7 @@ export type AvailabilityEntryUncheckedCreateWithoutSlotInput = {
   userId: string
   status?: $Enums.AssignmentStatus
   comment?: string | null
-  ratingScore?: number | null
+  ratingScore: number
   ratedAt?: Date | string | null
   appliedAt?: Date | string
   updatedById?: string | null
@@ -807,7 +807,7 @@ export type AvailabilityEntryCreateWithoutEntryCancelRequestsInput = {
   id?: string
   status?: $Enums.AssignmentStatus
   comment?: string | null
-  ratingScore?: number | null
+  ratingScore: number
   ratedAt?: Date | string | null
   appliedAt?: Date | string
   updatedAt?: Date | string
@@ -822,7 +822,7 @@ export type AvailabilityEntryUncheckedCreateWithoutEntryCancelRequestsInput = {
   userId: string
   status?: $Enums.AssignmentStatus
   comment?: string | null
-  ratingScore?: number | null
+  ratingScore: number
   ratedAt?: Date | string | null
   appliedAt?: Date | string
   updatedById?: string | null
@@ -849,7 +849,7 @@ export type AvailabilityEntryUpdateWithoutEntryCancelRequestsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.EnumAssignmentStatusFieldUpdateOperationsInput | $Enums.AssignmentStatus
   comment?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  ratingScore?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  ratingScore?: Prisma.IntFieldUpdateOperationsInput | number
   ratedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   appliedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -864,7 +864,7 @@ export type AvailabilityEntryUncheckedUpdateWithoutEntryCancelRequestsInput = {
   userId?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.EnumAssignmentStatusFieldUpdateOperationsInput | $Enums.AssignmentStatus
   comment?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  ratingScore?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  ratingScore?: Prisma.IntFieldUpdateOperationsInput | number
   ratedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   appliedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -876,7 +876,7 @@ export type AvailabilityEntryCreateManyUserInput = {
   slotId: string
   status?: $Enums.AssignmentStatus
   comment?: string | null
-  ratingScore?: number | null
+  ratingScore: number
   ratedAt?: Date | string | null
   appliedAt?: Date | string
   updatedById?: string | null
@@ -889,7 +889,7 @@ export type AvailabilityEntryCreateManyUpdatedByInput = {
   userId: string
   status?: $Enums.AssignmentStatus
   comment?: string | null
-  ratingScore?: number | null
+  ratingScore: number
   ratedAt?: Date | string | null
   appliedAt?: Date | string
   updatedAt?: Date | string
@@ -899,7 +899,7 @@ export type AvailabilityEntryUpdateWithoutUserInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.EnumAssignmentStatusFieldUpdateOperationsInput | $Enums.AssignmentStatus
   comment?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  ratingScore?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  ratingScore?: Prisma.IntFieldUpdateOperationsInput | number
   ratedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   appliedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -913,7 +913,7 @@ export type AvailabilityEntryUncheckedUpdateWithoutUserInput = {
   slotId?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.EnumAssignmentStatusFieldUpdateOperationsInput | $Enums.AssignmentStatus
   comment?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  ratingScore?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  ratingScore?: Prisma.IntFieldUpdateOperationsInput | number
   ratedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   appliedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -926,7 +926,7 @@ export type AvailabilityEntryUncheckedUpdateManyWithoutUserInput = {
   slotId?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.EnumAssignmentStatusFieldUpdateOperationsInput | $Enums.AssignmentStatus
   comment?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  ratingScore?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  ratingScore?: Prisma.IntFieldUpdateOperationsInput | number
   ratedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   appliedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -937,7 +937,7 @@ export type AvailabilityEntryUpdateWithoutUpdatedByInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.EnumAssignmentStatusFieldUpdateOperationsInput | $Enums.AssignmentStatus
   comment?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  ratingScore?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  ratingScore?: Prisma.IntFieldUpdateOperationsInput | number
   ratedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   appliedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -952,7 +952,7 @@ export type AvailabilityEntryUncheckedUpdateWithoutUpdatedByInput = {
   userId?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.EnumAssignmentStatusFieldUpdateOperationsInput | $Enums.AssignmentStatus
   comment?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  ratingScore?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  ratingScore?: Prisma.IntFieldUpdateOperationsInput | number
   ratedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   appliedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -965,7 +965,7 @@ export type AvailabilityEntryUncheckedUpdateManyWithoutUpdatedByInput = {
   userId?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.EnumAssignmentStatusFieldUpdateOperationsInput | $Enums.AssignmentStatus
   comment?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  ratingScore?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  ratingScore?: Prisma.IntFieldUpdateOperationsInput | number
   ratedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   appliedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -976,7 +976,7 @@ export type AvailabilityEntryCreateManySlotInput = {
   userId: string
   status?: $Enums.AssignmentStatus
   comment?: string | null
-  ratingScore?: number | null
+  ratingScore: number
   ratedAt?: Date | string | null
   appliedAt?: Date | string
   updatedById?: string | null
@@ -987,7 +987,7 @@ export type AvailabilityEntryUpdateWithoutSlotInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.EnumAssignmentStatusFieldUpdateOperationsInput | $Enums.AssignmentStatus
   comment?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  ratingScore?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  ratingScore?: Prisma.IntFieldUpdateOperationsInput | number
   ratedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   appliedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1001,7 +1001,7 @@ export type AvailabilityEntryUncheckedUpdateWithoutSlotInput = {
   userId?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.EnumAssignmentStatusFieldUpdateOperationsInput | $Enums.AssignmentStatus
   comment?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  ratingScore?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  ratingScore?: Prisma.IntFieldUpdateOperationsInput | number
   ratedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   appliedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1014,7 +1014,7 @@ export type AvailabilityEntryUncheckedUpdateManyWithoutSlotInput = {
   userId?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.EnumAssignmentStatusFieldUpdateOperationsInput | $Enums.AssignmentStatus
   comment?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  ratingScore?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  ratingScore?: Prisma.IntFieldUpdateOperationsInput | number
   ratedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   appliedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1148,7 +1148,7 @@ export type $AvailabilityEntryPayload<ExtArgs extends runtime.Types.Extensions.I
     userId: string
     status: $Enums.AssignmentStatus
     comment: string | null
-    ratingScore: number | null
+    ratingScore: number
     ratedAt: Date | null
     appliedAt: Date
     updatedById: string | null

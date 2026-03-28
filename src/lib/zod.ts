@@ -432,11 +432,12 @@ export const UpdateAssignmentCancelReq = z.object({
 //------------------------------------------------------
 
 //
-// Schemas for EventFeedback
+// Schemas for AvailabilitySlots
 //------------------------------------------------------
 
 export const CreateAvailabilitySlot = z
   .object({
+    ratingScore: z.int(),
     eventId: z.string(),
     roleId: z.string(),
     totalSlots: z.int(),
@@ -452,9 +453,56 @@ export const UpdateAvailabilitySlot = z
     roleId: z.string().optional(),
     totalSlots: z.int().optional(),
     published: z.boolean().optional(),
+    ratingScore: z.int().optional(),
     validFrom: z.coerce.date().optional(),
     validTo: z.coerce.date().optional(),
     updatedById: z.string(),
+  })
+  .strict();
+//------------------------------------------------------
+
+//
+// Schemas for AvailabilityEntry
+//------------------------------------------------------
+
+export const CreateAvailabilityEntry = z
+  .object({
+    ratingScore: z.int(),
+    slotId: z.string(),
+    userId: z.string(),
+    status: z.enum(AssignmentStatus).default("ACTIVE"),
+    comment: z.string().optional(),
+  })
+  .strict();
+
+export const UpdateAvailabilityEntryAdmin = z
+  .object({
+    status: z.enum(AssignmentStatus).optional(),
+    ratingScore: z.int().optional(),
+    ratedAt: z.coerce.date().optional(),
+    updatedById: z.string(),
+  })
+  .strict();
+//------------------------------------------------------
+
+//
+// Schemas for EntryCancelRequest
+//------------------------------------------------------
+
+export const CreateEntryCancelRequest = z
+  .object({
+    entryId: z.string(),
+    requestedById: z.string(),
+    reason: z.string().optional(),
+    status: z.enum(ReqStatus).default("PENDING"),
+  })
+  .strict();
+
+export const UpdateEntryCancelRequestAdmin = z
+  .object({
+    status: z.enum(ReqStatus),
+    reviewedById: z.string(),
+    reviewedAt: z.coerce.date(),
   })
   .strict();
 //------------------------------------------------------

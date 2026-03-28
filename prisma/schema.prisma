@@ -209,6 +209,8 @@ model AvailabilitySlot {
 
   published Boolean @default(false)
 
+  ratingScore Int
+
   validFrom DateTime?
   validTo   DateTime?
 
@@ -236,7 +238,7 @@ model AvailabilityEntry {
   status  AssignmentStatus @default(ACTIVE)
   comment String?
 
-  ratingScore Int?
+  ratingScore Int
   ratedAt     DateTime?
 
   appliedAt           DateTime             @default(now())

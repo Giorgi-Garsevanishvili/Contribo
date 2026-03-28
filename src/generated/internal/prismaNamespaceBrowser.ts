@@ -194,6 +194,7 @@ export const AvailabilitySlotScalarFieldEnum = {
   roleId: 'roleId',
   totalSlots: 'totalSlots',
   published: 'published',
+  ratingScore: 'ratingScore',
   validFrom: 'validFrom',
   validTo: 'validTo',
   createdById: 'createdById',

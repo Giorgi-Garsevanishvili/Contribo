@@ -28,10 +28,12 @@ export type AggregateAvailabilitySlot = {
 
 export type AvailabilitySlotAvgAggregateOutputType = {
   totalSlots: number | null
+  ratingScore: number | null
 }
 
 export type AvailabilitySlotSumAggregateOutputType = {
   totalSlots: number | null
+  ratingScore: number | null
 }
 
 export type AvailabilitySlotMinAggregateOutputType = {
@@ -40,6 +42,7 @@ export type AvailabilitySlotMinAggregateOutputType = {
   roleId: string | null
   totalSlots: number | null
   published: boolean | null
+  ratingScore: number | null
   validFrom: Date | null
   validTo: Date | null
   createdById: string | null
@@ -54,6 +57,7 @@ export type AvailabilitySlotMaxAggregateOutputType = {
   roleId: string | null
   totalSlots: number | null
   published: boolean | null
+  ratingScore: number | null
   validFrom: Date | null
   validTo: Date | null
   createdById: string | null
@@ -68,6 +72,7 @@ export type AvailabilitySlotCountAggregateOutputType = {
   roleId: number
   totalSlots: number
   published: number
+  ratingScore: number
   validFrom: number
   validTo: number
   createdById: number
@@ -80,10 +85,12 @@ export type AvailabilitySlotCountAggregateOutputType = {
 
 export type AvailabilitySlotAvgAggregateInputType = {
   totalSlots?: true
+  ratingScore?: true
 }
 
 export type AvailabilitySlotSumAggregateInputType = {
   totalSlots?: true
+  ratingScore?: true
 }
 
 export type AvailabilitySlotMinAggregateInputType = {
@@ -92,6 +99,7 @@ export type AvailabilitySlotMinAggregateInputType = {
   roleId?: true
   totalSlots?: true
   published?: true
+  ratingScore?: true
   validFrom?: true
   validTo?: true
   createdById?: true
@@ -106,6 +114,7 @@ export type AvailabilitySlotMaxAggregateInputType = {
   roleId?: true
   totalSlots?: true
   published?: true
+  ratingScore?: true
   validFrom?: true
   validTo?: true
   createdById?: true
@@ -120,6 +129,7 @@ export type AvailabilitySlotCountAggregateInputType = {
   roleId?: true
   totalSlots?: true
   published?: true
+  ratingScore?: true
   validFrom?: true
   validTo?: true
   createdById?: true
@@ -221,6 +231,7 @@ export type AvailabilitySlotGroupByOutputType = {
   roleId: string
   totalSlots: number
   published: boolean
+  ratingScore: number
   validFrom: Date | null
   validTo: Date | null
   createdById: string | null
@@ -258,6 +269,7 @@ export type AvailabilitySlotWhereInput = {
   roleId?: Prisma.StringFilter<"AvailabilitySlot"> | string
   totalSlots?: Prisma.IntFilter<"AvailabilitySlot"> | number
   published?: Prisma.BoolFilter<"AvailabilitySlot"> | boolean
+  ratingScore?: Prisma.IntFilter<"AvailabilitySlot"> | number
   validFrom?: Prisma.DateTimeNullableFilter<"AvailabilitySlot"> | Date | string | null
   validTo?: Prisma.DateTimeNullableFilter<"AvailabilitySlot"> | Date | string | null
   createdById?: Prisma.StringNullableFilter<"AvailabilitySlot"> | string | null
@@ -277,6 +289,7 @@ export type AvailabilitySlotOrderByWithRelationInput = {
   roleId?: Prisma.SortOrder
   totalSlots?: Prisma.SortOrder
   published?: Prisma.SortOrder
+  ratingScore?: Prisma.SortOrder
   validFrom?: Prisma.SortOrderInput | Prisma.SortOrder
   validTo?: Prisma.SortOrderInput | Prisma.SortOrder
   createdById?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -299,6 +312,7 @@ export type AvailabilitySlotWhereUniqueInput = Prisma.AtLeast<{
   roleId?: Prisma.StringFilter<"AvailabilitySlot"> | string
   totalSlots?: Prisma.IntFilter<"AvailabilitySlot"> | number
   published?: Prisma.BoolFilter<"AvailabilitySlot"> | boolean
+  ratingScore?: Prisma.IntFilter<"AvailabilitySlot"> | number
   validFrom?: Prisma.DateTimeNullableFilter<"AvailabilitySlot"> | Date | string | null
   validTo?: Prisma.DateTimeNullableFilter<"AvailabilitySlot"> | Date | string | null
   createdById?: Prisma.StringNullableFilter<"AvailabilitySlot"> | string | null
@@ -318,6 +332,7 @@ export type AvailabilitySlotOrderByWithAggregationInput = {
   roleId?: Prisma.SortOrder
   totalSlots?: Prisma.SortOrder
   published?: Prisma.SortOrder
+  ratingScore?: Prisma.SortOrder
   validFrom?: Prisma.SortOrderInput | Prisma.SortOrder
   validTo?: Prisma.SortOrderInput | Prisma.SortOrder
   createdById?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -340,6 +355,7 @@ export type AvailabilitySlotScalarWhereWithAggregatesInput = {
   roleId?: Prisma.StringWithAggregatesFilter<"AvailabilitySlot"> | string
   totalSlots?: Prisma.IntWithAggregatesFilter<"AvailabilitySlot"> | number
   published?: Prisma.BoolWithAggregatesFilter<"AvailabilitySlot"> | boolean
+  ratingScore?: Prisma.IntWithAggregatesFilter<"AvailabilitySlot"> | number
   validFrom?: Prisma.DateTimeNullableWithAggregatesFilter<"AvailabilitySlot"> | Date | string | null
   validTo?: Prisma.DateTimeNullableWithAggregatesFilter<"AvailabilitySlot"> | Date | string | null
   createdById?: Prisma.StringNullableWithAggregatesFilter<"AvailabilitySlot"> | string | null
@@ -352,6 +368,7 @@ export type AvailabilitySlotCreateInput = {
   id?: string
   totalSlots: number
   published?: boolean
+  ratingScore: number
   validFrom?: Date | string | null
   validTo?: Date | string | null
   createdAt?: Date | string
@@ -369,6 +386,7 @@ export type AvailabilitySlotUncheckedCreateInput = {
   roleId: string
   totalSlots: number
   published?: boolean
+  ratingScore: number
   validFrom?: Date | string | null
   validTo?: Date | string | null
   createdById?: string | null
@@ -382,6 +400,7 @@ export type AvailabilitySlotUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   totalSlots?: Prisma.IntFieldUpdateOperationsInput | number
   published?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  ratingScore?: Prisma.IntFieldUpdateOperationsInput | number
   validFrom?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   validTo?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -399,6 +418,7 @@ export type AvailabilitySlotUncheckedUpdateInput = {
   roleId?: Prisma.StringFieldUpdateOperationsInput | string
   totalSlots?: Prisma.IntFieldUpdateOperationsInput | number
   published?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  ratingScore?: Prisma.IntFieldUpdateOperationsInput | number
   validFrom?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   validTo?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -414,6 +434,7 @@ export type AvailabilitySlotCreateManyInput = {
   roleId: string
   totalSlots: number
   published?: boolean
+  ratingScore: number
   validFrom?: Date | string | null
   validTo?: Date | string | null
   createdById?: string | null
@@ -426,6 +447,7 @@ export type AvailabilitySlotUpdateManyMutationInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   totalSlots?: Prisma.IntFieldUpdateOperationsInput | number
   published?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  ratingScore?: Prisma.IntFieldUpdateOperationsInput | number
   validFrom?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   validTo?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -438,6 +460,7 @@ export type AvailabilitySlotUncheckedUpdateManyInput = {
   roleId?: Prisma.StringFieldUpdateOperationsInput | string
   totalSlots?: Prisma.IntFieldUpdateOperationsInput | number
   published?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  ratingScore?: Prisma.IntFieldUpdateOperationsInput | number
   validFrom?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   validTo?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -462,6 +485,7 @@ export type AvailabilitySlotCountOrderByAggregateInput = {
   roleId?: Prisma.SortOrder
   totalSlots?: Prisma.SortOrder
   published?: Prisma.SortOrder
+  ratingScore?: Prisma.SortOrder
   validFrom?: Prisma.SortOrder
   validTo?: Prisma.SortOrder
   createdById?: Prisma.SortOrder
@@ -472,6 +496,7 @@ export type AvailabilitySlotCountOrderByAggregateInput = {
 
 export type AvailabilitySlotAvgOrderByAggregateInput = {
   totalSlots?: Prisma.SortOrder
+  ratingScore?: Prisma.SortOrder
 }
 
 export type AvailabilitySlotMaxOrderByAggregateInput = {
@@ -480,6 +505,7 @@ export type AvailabilitySlotMaxOrderByAggregateInput = {
   roleId?: Prisma.SortOrder
   totalSlots?: Prisma.SortOrder
   published?: Prisma.SortOrder
+  ratingScore?: Prisma.SortOrder
   validFrom?: Prisma.SortOrder
   validTo?: Prisma.SortOrder
   createdById?: Prisma.SortOrder
@@ -494,6 +520,7 @@ export type AvailabilitySlotMinOrderByAggregateInput = {
   roleId?: Prisma.SortOrder
   totalSlots?: Prisma.SortOrder
   published?: Prisma.SortOrder
+  ratingScore?: Prisma.SortOrder
   validFrom?: Prisma.SortOrder
   validTo?: Prisma.SortOrder
   createdById?: Prisma.SortOrder
@@ -504,6 +531,7 @@ export type AvailabilitySlotMinOrderByAggregateInput = {
 
 export type AvailabilitySlotSumOrderByAggregateInput = {
   totalSlots?: Prisma.SortOrder
+  ratingScore?: Prisma.SortOrder
 }
 
 export type AvailabilitySlotScalarRelationFilter = {
@@ -697,6 +725,7 @@ export type AvailabilitySlotCreateWithoutCreatedByInput = {
   id?: string
   totalSlots: number
   published?: boolean
+  ratingScore: number
   validFrom?: Date | string | null
   validTo?: Date | string | null
   createdAt?: Date | string
@@ -713,6 +742,7 @@ export type AvailabilitySlotUncheckedCreateWithoutCreatedByInput = {
   roleId: string
   totalSlots: number
   published?: boolean
+  ratingScore: number
   validFrom?: Date | string | null
   validTo?: Date | string | null
   updatedById?: string | null
@@ -735,6 +765,7 @@ export type AvailabilitySlotCreateWithoutUpdatedByInput = {
   id?: string
   totalSlots: number
   published?: boolean
+  ratingScore: number
   validFrom?: Date | string | null
   validTo?: Date | string | null
   createdAt?: Date | string
@@ -751,6 +782,7 @@ export type AvailabilitySlotUncheckedCreateWithoutUpdatedByInput = {
   roleId: string
   totalSlots: number
   published?: boolean
+  ratingScore: number
   validFrom?: Date | string | null
   validTo?: Date | string | null
   createdById?: string | null
@@ -794,6 +826,7 @@ export type AvailabilitySlotScalarWhereInput = {
   roleId?: Prisma.StringFilter<"AvailabilitySlot"> | string
   totalSlots?: Prisma.IntFilter<"AvailabilitySlot"> | number
   published?: Prisma.BoolFilter<"AvailabilitySlot"> | boolean
+  ratingScore?: Prisma.IntFilter<"AvailabilitySlot"> | number
   validFrom?: Prisma.DateTimeNullableFilter<"AvailabilitySlot"> | Date | string | null
   validTo?: Prisma.DateTimeNullableFilter<"AvailabilitySlot"> | Date | string | null
   createdById?: Prisma.StringNullableFilter<"AvailabilitySlot"> | string | null
@@ -822,6 +855,7 @@ export type AvailabilitySlotCreateWithoutEventInput = {
   id?: string
   totalSlots: number
   published?: boolean
+  ratingScore: number
   validFrom?: Date | string | null
   validTo?: Date | string | null
   createdAt?: Date | string
@@ -837,6 +871,7 @@ export type AvailabilitySlotUncheckedCreateWithoutEventInput = {
   roleId: string
   totalSlots: number
   published?: boolean
+  ratingScore: number
   validFrom?: Date | string | null
   validTo?: Date | string | null
   createdById?: string | null
@@ -876,6 +911,7 @@ export type AvailabilitySlotCreateWithoutRoleInput = {
   id?: string
   totalSlots: number
   published?: boolean
+  ratingScore: number
   validFrom?: Date | string | null
   validTo?: Date | string | null
   createdAt?: Date | string
@@ -891,6 +927,7 @@ export type AvailabilitySlotUncheckedCreateWithoutRoleInput = {
   eventId: string
   totalSlots: number
   published?: boolean
+  ratingScore: number
   validFrom?: Date | string | null
   validTo?: Date | string | null
   createdById?: string | null
@@ -930,6 +967,7 @@ export type AvailabilitySlotCreateWithoutAvailabilityEntriesInput = {
   id?: string
   totalSlots: number
   published?: boolean
+  ratingScore: number
   validFrom?: Date | string | null
   validTo?: Date | string | null
   createdAt?: Date | string
@@ -946,6 +984,7 @@ export type AvailabilitySlotUncheckedCreateWithoutAvailabilityEntriesInput = {
   roleId: string
   totalSlots: number
   published?: boolean
+  ratingScore: number
   validFrom?: Date | string | null
   validTo?: Date | string | null
   createdById?: string | null
@@ -974,6 +1013,7 @@ export type AvailabilitySlotUpdateWithoutAvailabilityEntriesInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   totalSlots?: Prisma.IntFieldUpdateOperationsInput | number
   published?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  ratingScore?: Prisma.IntFieldUpdateOperationsInput | number
   validFrom?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   validTo?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -990,6 +1030,7 @@ export type AvailabilitySlotUncheckedUpdateWithoutAvailabilityEntriesInput = {
   roleId?: Prisma.StringFieldUpdateOperationsInput | string
   totalSlots?: Prisma.IntFieldUpdateOperationsInput | number
   published?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  ratingScore?: Prisma.IntFieldUpdateOperationsInput | number
   validFrom?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   validTo?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1004,6 +1045,7 @@ export type AvailabilitySlotCreateManyCreatedByInput = {
   roleId: string
   totalSlots: number
   published?: boolean
+  ratingScore: number
   validFrom?: Date | string | null
   validTo?: Date | string | null
   updatedById?: string | null
@@ -1017,6 +1059,7 @@ export type AvailabilitySlotCreateManyUpdatedByInput = {
   roleId: string
   totalSlots: number
   published?: boolean
+  ratingScore: number
   validFrom?: Date | string | null
   validTo?: Date | string | null
   createdById?: string | null
@@ -1028,6 +1071,7 @@ export type AvailabilitySlotUpdateWithoutCreatedByInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   totalSlots?: Prisma.IntFieldUpdateOperationsInput | number
   published?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  ratingScore?: Prisma.IntFieldUpdateOperationsInput | number
   validFrom?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   validTo?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1044,6 +1088,7 @@ export type AvailabilitySlotUncheckedUpdateWithoutCreatedByInput = {
   roleId?: Prisma.StringFieldUpdateOperationsInput | string
   totalSlots?: Prisma.IntFieldUpdateOperationsInput | number
   published?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  ratingScore?: Prisma.IntFieldUpdateOperationsInput | number
   validFrom?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   validTo?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   updatedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1058,6 +1103,7 @@ export type AvailabilitySlotUncheckedUpdateManyWithoutCreatedByInput = {
   roleId?: Prisma.StringFieldUpdateOperationsInput | string
   totalSlots?: Prisma.IntFieldUpdateOperationsInput | number
   published?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  ratingScore?: Prisma.IntFieldUpdateOperationsInput | number
   validFrom?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   validTo?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   updatedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1069,6 +1115,7 @@ export type AvailabilitySlotUpdateWithoutUpdatedByInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   totalSlots?: Prisma.IntFieldUpdateOperationsInput | number
   published?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  ratingScore?: Prisma.IntFieldUpdateOperationsInput | number
   validFrom?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   validTo?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1085,6 +1132,7 @@ export type AvailabilitySlotUncheckedUpdateWithoutUpdatedByInput = {
   roleId?: Prisma.StringFieldUpdateOperationsInput | string
   totalSlots?: Prisma.IntFieldUpdateOperationsInput | number
   published?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  ratingScore?: Prisma.IntFieldUpdateOperationsInput | number
   validFrom?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   validTo?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1099,6 +1147,7 @@ export type AvailabilitySlotUncheckedUpdateManyWithoutUpdatedByInput = {
   roleId?: Prisma.StringFieldUpdateOperationsInput | string
   totalSlots?: Prisma.IntFieldUpdateOperationsInput | number
   published?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  ratingScore?: Prisma.IntFieldUpdateOperationsInput | number
   validFrom?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   validTo?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1111,6 +1160,7 @@ export type AvailabilitySlotCreateManyEventInput = {
   roleId: string
   totalSlots: number
   published?: boolean
+  ratingScore: number
   validFrom?: Date | string | null
   validTo?: Date | string | null
   createdById?: string | null
@@ -1123,6 +1173,7 @@ export type AvailabilitySlotUpdateWithoutEventInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   totalSlots?: Prisma.IntFieldUpdateOperationsInput | number
   published?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  ratingScore?: Prisma.IntFieldUpdateOperationsInput | number
   validFrom?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   validTo?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1138,6 +1189,7 @@ export type AvailabilitySlotUncheckedUpdateWithoutEventInput = {
   roleId?: Prisma.StringFieldUpdateOperationsInput | string
   totalSlots?: Prisma.IntFieldUpdateOperationsInput | number
   published?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  ratingScore?: Prisma.IntFieldUpdateOperationsInput | number
   validFrom?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   validTo?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1152,6 +1204,7 @@ export type AvailabilitySlotUncheckedUpdateManyWithoutEventInput = {
   roleId?: Prisma.StringFieldUpdateOperationsInput | string
   totalSlots?: Prisma.IntFieldUpdateOperationsInput | number
   published?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  ratingScore?: Prisma.IntFieldUpdateOperationsInput | number
   validFrom?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   validTo?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1165,6 +1218,7 @@ export type AvailabilitySlotCreateManyRoleInput = {
   eventId: string
   totalSlots: number
   published?: boolean
+  ratingScore: number
   validFrom?: Date | string | null
   validTo?: Date | string | null
   createdById?: string | null
@@ -1177,6 +1231,7 @@ export type AvailabilitySlotUpdateWithoutRoleInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   totalSlots?: Prisma.IntFieldUpdateOperationsInput | number
   published?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  ratingScore?: Prisma.IntFieldUpdateOperationsInput | number
   validFrom?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   validTo?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1192,6 +1247,7 @@ export type AvailabilitySlotUncheckedUpdateWithoutRoleInput = {
   eventId?: Prisma.StringFieldUpdateOperationsInput | string
   totalSlots?: Prisma.IntFieldUpdateOperationsInput | number
   published?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  ratingScore?: Prisma.IntFieldUpdateOperationsInput | number
   validFrom?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   validTo?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1206,6 +1262,7 @@ export type AvailabilitySlotUncheckedUpdateManyWithoutRoleInput = {
   eventId?: Prisma.StringFieldUpdateOperationsInput | string
   totalSlots?: Prisma.IntFieldUpdateOperationsInput | number
   published?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  ratingScore?: Prisma.IntFieldUpdateOperationsInput | number
   validFrom?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   validTo?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1251,6 +1308,7 @@ export type AvailabilitySlotSelect<ExtArgs extends runtime.Types.Extensions.Inte
   roleId?: boolean
   totalSlots?: boolean
   published?: boolean
+  ratingScore?: boolean
   validFrom?: boolean
   validTo?: boolean
   createdById?: boolean
@@ -1271,6 +1329,7 @@ export type AvailabilitySlotSelectCreateManyAndReturn<ExtArgs extends runtime.Ty
   roleId?: boolean
   totalSlots?: boolean
   published?: boolean
+  ratingScore?: boolean
   validFrom?: boolean
   validTo?: boolean
   createdById?: boolean
@@ -1289,6 +1348,7 @@ export type AvailabilitySlotSelectUpdateManyAndReturn<ExtArgs extends runtime.Ty
   roleId?: boolean
   totalSlots?: boolean
   published?: boolean
+  ratingScore?: boolean
   validFrom?: boolean
   validTo?: boolean
   createdById?: boolean
@@ -1307,6 +1367,7 @@ export type AvailabilitySlotSelectScalar = {
   roleId?: boolean
   totalSlots?: boolean
   published?: boolean
+  ratingScore?: boolean
   validFrom?: boolean
   validTo?: boolean
   createdById?: boolean
@@ -1315,7 +1376,7 @@ export type AvailabilitySlotSelectScalar = {
   updatedAt?: boolean
 }
 
-export type AvailabilitySlotOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "eventId" | "roleId" | "totalSlots" | "published" | "validFrom" | "validTo" | "createdById" | "updatedById" | "createdAt" | "updatedAt", ExtArgs["result"]["availabilitySlot"]>
+export type AvailabilitySlotOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "eventId" | "roleId" | "totalSlots" | "published" | "ratingScore" | "validFrom" | "validTo" | "createdById" | "updatedById" | "createdAt" | "updatedAt", ExtArgs["result"]["availabilitySlot"]>
 export type AvailabilitySlotInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   CreatedBy?: boolean | Prisma.AvailabilitySlot$CreatedByArgs<ExtArgs>
   updatedBy?: boolean | Prisma.AvailabilitySlot$updatedByArgs<ExtArgs>
@@ -1352,6 +1413,7 @@ export type $AvailabilitySlotPayload<ExtArgs extends runtime.Types.Extensions.In
     roleId: string
     totalSlots: number
     published: boolean
+    ratingScore: number
     validFrom: Date | null
     validTo: Date | null
     createdById: string | null
@@ -1791,6 +1853,7 @@ export interface AvailabilitySlotFieldRefs {
   readonly roleId: Prisma.FieldRef<"AvailabilitySlot", 'String'>
   readonly totalSlots: Prisma.FieldRef<"AvailabilitySlot", 'Int'>
   readonly published: Prisma.FieldRef<"AvailabilitySlot", 'Boolean'>
+  readonly ratingScore: Prisma.FieldRef<"AvailabilitySlot", 'Int'>
   readonly validFrom: Prisma.FieldRef<"AvailabilitySlot", 'DateTime'>
   readonly validTo: Prisma.FieldRef<"AvailabilitySlot", 'DateTime'>
   readonly createdById: Prisma.FieldRef<"AvailabilitySlot", 'String'>
