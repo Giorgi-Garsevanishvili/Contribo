@@ -26,6 +26,21 @@ export const POST = async (req: NextRequest, context: Context) => {
 
     const body = CreateAssignmentCancelReq.parse(jsonWithCreator);
 
+    const existedRequest = await prisma.assignmentCancelRequest.findMany({
+      where: {
+        OR: [{ status: "PENDING" }, { status: "REQUESTED" }],
+        requestedById: thisUser.user.id,
+        assignmentId: id,
+      },
+    });
+
+    if (existedRequest.length >= 1) {
+      return NextResponse.json(
+        { message: "Cancel Request Already Exists" },
+        { status: 409 },
+      );
+    }
+
     const response = await prisma.assignmentCancelRequest.create({
       data: body,
       select: {

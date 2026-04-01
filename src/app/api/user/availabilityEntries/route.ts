@@ -90,11 +90,11 @@ export const GET = async (req: NextRequest) => {
       take: limit,
     });
 
-    if (!data) {
+    if (!data || data.length === 0) {
       return NextResponse.json(
         {
           data,
-          message: `Availability Entry Not Found for Your Region`,
+          message: `Availability Entries Not Found for You in Region: ${thisUser.user.ownAllowance?.region?.name}`,
         },
         { status: 404 },
       );

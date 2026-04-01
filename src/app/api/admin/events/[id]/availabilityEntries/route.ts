@@ -15,13 +15,12 @@ export const GET = async (req: NextRequest, context: Context) => {
 
     const data = await prisma.availabilityEntry.findMany({
       where: { slot: { eventId: id, event: { regionId: thisUser.user.id } } },
-      include: { slot: { include: { event: true } } },
     });
 
     if (!data || data.length === 0) {
       return NextResponse.json({
         data,
-        message: `Availability Entries For Event: ${data[0].slot.event.name}, not found!`,
+        message: `Availability Entries For Event with ID: ${id}, not found!`,
       });
     }
 

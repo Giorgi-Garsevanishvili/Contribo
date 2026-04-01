@@ -37,11 +37,11 @@ export const GET = async (_req: NextRequest, context: Context) => {
       },
     });
 
-    if (!data) {
+    if (!data || data.length === 0) {
       return NextResponse.json(
         {
           data,
-          message: `Availability Entry Not Found for you with ID: ${id} `,
+          message: `Availability Entry Not Found for you with ID: ${id}`,
         },
         { status: 404 },
       );

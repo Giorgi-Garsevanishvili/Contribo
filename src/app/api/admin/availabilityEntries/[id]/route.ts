@@ -37,11 +37,11 @@ export const GET = async (req: NextRequest, context: Context) => {
       },
     });
 
-    if (!data) {
+    if (!data || data.length === 0) {
       return NextResponse.json(
         {
           data,
-          message: `Availability Entry Not Found with ID${id} `,
+          message: `Availability Entry Not Found with ID: ${id} `,
         },
         { status: 404 },
       );
@@ -69,7 +69,7 @@ export const PUT = async (req: NextRequest, context: Context) => {
 
     const jsonWithCreator = {
       ...json,
-      updatedByID: thisUser.user.id,
+      updatedById: thisUser.user.id,
     };
 
     const body = UpdateAvailabilityEntryAdmin.parse(jsonWithCreator);

@@ -92,11 +92,11 @@ export const GET = async (req: NextRequest) => {
       take: limit,
     });
 
-    if (!data) {
+    if (!data || data.length === 0) {
       return NextResponse.json(
         {
           data,
-          message: `Availability Entry Not Found for Your Region`,
+          message: `Availability Entries Not Found for Your Region`,
         },
         { status: 404 },
       );
