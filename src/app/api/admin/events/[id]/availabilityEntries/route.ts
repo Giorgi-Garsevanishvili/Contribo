@@ -14,7 +14,7 @@ export const GET = async (req: NextRequest, context: Context) => {
     }
 
     const data = await prisma.availabilityEntry.findMany({
-      where: { slot: { eventId: id } },
+      where: { slot: { eventId: id, event: { regionId: thisUser.user.id } } },
       include: { slot: { include: { event: true } } },
     });
 

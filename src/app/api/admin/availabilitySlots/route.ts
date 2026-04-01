@@ -20,7 +20,7 @@ export const GET = async (req: NextRequest) => {
       event: { regionId: thisUser.user.ownAllowance?.regionId },
     };
 
-    const data = await prisma.availabilitySlot.findMany({
+    const responseData = await prisma.availabilitySlot.findMany({
       where: whereClause,
       include: {
         CreatedBy: { select: { name: true } },
@@ -36,6 +36,9 @@ export const GET = async (req: NextRequest) => {
         availabilityEntries: {
           select: { user: { select: { name: true } }, status: true },
         },
+        _count: {
+          select: { availabilityEntries: { where: { status: "ACTIVE" } } },
+        },
       },
       orderBy: {
         createdAt: "desc",
@@ -43,6 +46,13 @@ export const GET = async (req: NextRequest) => {
       skip,
       take: limit,
     });
+
+    const data = responseData.map((slot) => ({
+      ...slot,
+      totalCapacity: slot.totalSlots,
+      activeCount: slot._count.availabilityEntries,
+      available: slot.totalSlots - slot._count.availabilityEntries,
+    }));
 
     const totalCount = await prisma.availabilitySlot.count({
       where: whereClause,

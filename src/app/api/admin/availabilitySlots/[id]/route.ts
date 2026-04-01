@@ -21,7 +21,7 @@ export const GET = async (_req: NextRequest, context: Context) => {
       id,
     };
 
-    const data = await prisma.availabilitySlot.findUnique({
+    const response = await prisma.availabilitySlot.findUnique({
       where: whereClause,
       include: {
         CreatedBy: { select: { name: true } },
@@ -37,15 +37,25 @@ export const GET = async (_req: NextRequest, context: Context) => {
         availabilityEntries: {
           select: { user: { select: { name: true } }, status: true },
         },
+        _count: {
+          select: { availabilityEntries: { where: { status: "ACTIVE" } } },
+        },
       },
     });
 
-    if (!data) {
+    if (!response) {
       return NextResponse.json({
-        data,
+        response,
         message: `Availability Slot with ID: ${id} not found!`,
       });
     }
+
+    const data = {
+      ...response,
+      totalCapacity: response.totalSlots,
+      activeCount: response._count.availabilityEntries,
+      available: response.totalSlots - response._count.availabilityEntries,
+    };
 
     return NextResponse.json(data, { status: 200 });
   } catch (error) {
@@ -71,18 +81,42 @@ export const PUT = async (req: NextRequest, context: Context) => {
 
     const body = UpdateAvailabilitySlot.parse(jsonWithCreator);
 
-    const updatedData = await prisma.availabilitySlot.update({
-      where: { id },
-      data: body,
-      select: { event: { select: { name: true } } },
-    });
+    if (body.ratingScore) {
+      const updatedData = await prisma.$transaction(async (tx) => {
+        const updatedSlot = await tx.availabilitySlot.update({
+          where: { id },
+          data: body,
+          select: { event: { select: { name: true } } },
+        });
 
-    return NextResponse.json(
-      {
-        message: `Availability Slot for Event: ${updatedData.event.name} Updated`,
-      },
-      { status: 200 },
-    );
+        const updatedEntries = await tx.availabilityEntry.updateMany({
+          where: { slotId: id },
+          data: body,
+        });
+
+        return { updatedSlot, updatedEntries };
+      });
+
+      return NextResponse.json(
+        {
+          message: `Availability Slot for Event: ${updatedData.updatedSlot.event.name} and Rating For ${updatedData.updatedEntries.count} Entries Updated`,
+        },
+        { status: 200 },
+      );
+    } else {
+      const updatedData = await prisma.availabilitySlot.update({
+        where: { id },
+        data: body,
+        select: { event: { select: { name: true } } },
+      });
+
+      return NextResponse.json(
+        {
+          message: `Availability Slot for Event: ${updatedData.event.name} Updated`,
+        },
+        { status: 200 },
+      );
+    }
   } catch (error) {
     const { message, status } = handleError(error);
     return NextResponse.json({ message }, { status });

@@ -17,6 +17,7 @@ export const GET = async (_req: NextRequest, context: Context) => {
     const whereClause: AvailabilitySlotWhereInput = {
       eventId: id,
       event: { regionId: thisUser.user.ownAllowance?.regionId },
+      published: true,
     };
 
     const response = await prisma.availabilitySlot.findMany({
@@ -33,13 +34,17 @@ export const GET = async (_req: NextRequest, context: Context) => {
           },
         },
         availabilityEntries: {
+          where: { status: "ACTIVE" },
           select: { user: { select: { name: true } }, status: true },
         },
+        _count: {
+          select: {
+            availabilityEntries: {
+              where: { status: "ACTIVE" },
+            },
+          },
+        },
       },
-    });
-
-    const totalEntries = await prisma.availabilityEntry.findMany({
-      where: { slot: { ...whereClause }, status: "ACTIVE" },
     });
 
     if (!response) {
@@ -49,9 +54,14 @@ export const GET = async (_req: NextRequest, context: Context) => {
       });
     }
 
-    
+    const data = response.map((slot) => ({
+      ...slot,
+      totalCapacity: slot.totalSlots,
+      activeCount: slot._count.availabilityEntries,
+      available: slot.totalSlots - slot._count.availabilityEntries,
+    }));
 
-   
+    return NextResponse.json({ data }, { status: 200 });
   } catch (error) {
     const { message, status } = handleError(error);
     return NextResponse.json({ message }, { status });
