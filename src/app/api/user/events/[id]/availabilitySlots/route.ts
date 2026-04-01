@@ -49,14 +49,9 @@ export const GET = async (_req: NextRequest, context: Context) => {
       });
     }
 
-    const availableSlots = response;
+    
 
-    const data = {
-      response,
-      availableSlots,
-    };
-
-    return NextResponse.json(data, { status: 200 });
+   
   } catch (error) {
     const { message, status } = handleError(error);
     return NextResponse.json({ message }, { status });
