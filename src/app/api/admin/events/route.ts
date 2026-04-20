@@ -109,6 +109,7 @@ export const GET = async (req: NextRequest) => {
         startTime: true,
         endTime:true,
         rating: true,
+        location:true,
         assignments: {
           select: {
             role: { select: { name: true } },
