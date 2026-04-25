@@ -2,6 +2,7 @@
 import usePaginatedData from "@/hooks/usePaginatedData";
 import EventCard from "./EventCard";
 import { ImSpinner9 } from "react-icons/im";
+import { useRouter } from "next/navigation";
 
 type EventDataType = {
   id: string;
@@ -20,24 +21,25 @@ type EventDataType = {
     name: string | null;
   } | null;
   assignments: {
-    role: {
-      name: string;
-    } | null;
     user: {
       name: string | null;
       image: string | null;
     } | null;
-  }[];
-  availabilities: {
     role: {
       name: string;
-    };
+    } | null;
+  }[];
+  availabilities: {
     availabilityEntries: {
       user: {
         name: string | null;
         image: string | null;
       };
     }[];
+    role: {
+      name: string;
+    };
+    totalSlots: number;
   }[];
 };
 
@@ -45,6 +47,8 @@ function UpcomingEvents() {
   const { data, isLoading, pagination, refetch } = usePaginatedData<
     EventDataType[]
   >(`/api/admin/events/upcomingEvents`, []);
+
+  const router = useRouter();
 
   return (
     <>
@@ -65,7 +69,10 @@ function UpcomingEvents() {
                 Events for Next 7 Days
               </p>
             </div>
-            <button className="text-md underline cursor-pointer transition-all duration-300 ease-out hover:text-blue-500 text-blue-700">
+            <button
+              onClick={() => router.push("admin/events")}
+              className="text-md underline cursor-pointer transition-all duration-300 ease-out hover:text-blue-500 text-blue-700"
+            >
               See All
             </button>
           </div>

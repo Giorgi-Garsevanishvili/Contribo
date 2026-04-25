@@ -122,6 +122,7 @@ export const GET = async (req: NextRequest) => {
             availabilityEntries: {
               select: { user: { select: { name: true, image: true } } },
             },
+            totalSlots:true
           },
         },
       },

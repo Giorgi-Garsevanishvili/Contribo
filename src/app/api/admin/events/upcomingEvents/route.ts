@@ -75,6 +75,7 @@ export const GET = async (req: NextRequest) => {
             availabilityEntries: {
               select: { user: { select: { name: true, image: true } } },
             },
+            totalSlots: true,
           },
         },
       },
@@ -82,7 +83,6 @@ export const GET = async (req: NextRequest) => {
         startTime: "asc",
       },
     });
-    
 
     if (!data || data.length === 0) {
       return NextResponse.json({
