@@ -59,6 +59,8 @@ function EventCard({ event }: { event: EventDataType }) {
     <div
       onClick={() =>
         openModal(
+          "",
+          "",
           <div className="bg-amber-50">Here We Are: {event.startTime}</div>,
         )
       }

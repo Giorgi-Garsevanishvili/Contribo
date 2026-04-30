@@ -11,7 +11,9 @@ import {
 type ModalContextType = {
   isOpen: boolean;
   content: ReactNode;
-  openModal: (content?: ReactNode) => void;
+  title: string;
+  subTitle: string;
+  openModal: (title?: string, subTitle?: string, content?: ReactNode) => void;
   closeModal: () => void;
 };
 
@@ -20,15 +22,25 @@ const ModalContext = createContext<ModalContextType | null>(null);
 export function ModalProvider({ children }: { children: ReactNode }) {
   const [isOpen, setIsOpen] = useState(false);
   const [content, setContent] = useState<ReactNode>(null);
+  const [title, setTitle] = useState<string>("");
+  const [subTitle, setSubTitle] = useState<string>("");
 
-  const openModal = (modalContent?: ReactNode) => {
+  const openModal = (
+    title?: string,
+    subTitle?: string,
+    modalContent?: ReactNode,
+  ) => {
     setContent(modalContent || null);
+    setTitle(title || "");
+    setSubTitle(subTitle || "");
     setIsOpen(true);
   };
 
   const closeModal = () => {
     setIsOpen(false);
     setContent(null);
+    setTitle("");
+    setSubTitle("");
   };
 
   useEffect(() => {
@@ -44,7 +56,9 @@ export function ModalProvider({ children }: { children: ReactNode }) {
   }, [isOpen]);
 
   return (
-    <ModalContext.Provider value={{ isOpen, content, openModal, closeModal }}>
+    <ModalContext.Provider
+      value={{ isOpen, title, subTitle, content, openModal, closeModal }}
+    >
       {children}
     </ModalContext.Provider>
   );
