@@ -9,9 +9,9 @@ function GeneralModal() {
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0  z-1000 bg-[#00000040] flex items-center justify-center">
+    <div className="fixed inset-0  z-205 bg-[#00000040] flex items-center justify-center">
       <div
-        className="bg-cyan-950 md:w-[60%] w-[90%] gap-3 items-center justify-start flex flex-col text-white relative rounded-md p-2"
+        className="bg-cyan-950 md:w-[60%] shadow-md shadow-gray-400 border border-gray-700 w-[90%] gap-3 items-center justify-start flex flex-col text-white relative rounded-md p-2"
         onClick={(e) => e.stopPropagation()} // prevent closing when clicking inside
       >
         <div className="flex border-b border-gray-400/40 w-full items-center p-1 gap-1 justify-between">

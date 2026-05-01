@@ -187,6 +187,7 @@ export const POST = async (req: NextRequest) => {
     return NextResponse.json(
       {
         message: `Event: ${response.name}, Created By: ${response.createdBy?.name}`,
+        data: {name: response.name, id: response.id}
       },
       { status: 201 },
     );

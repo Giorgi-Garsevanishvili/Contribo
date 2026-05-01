@@ -59,9 +59,9 @@ function EventCard({ event }: { event: EventDataType }) {
     <div
       onClick={() =>
         openModal(
-          "",
-          "",
-          <div className="bg-amber-50">Here We Are: {event.startTime}</div>,
+          "Event Details",
+          `${event.name}`,
+          <div className="">Here We Are: {event.startTime}</div>,
         )
       }
       className="flex hover:shadow-blue-700 group transition-all duration-300 ease-out flex-col cursor-pointer rounded-sm overflow-hidden shadow-sm bg-white shadow-gray-500 w-2xs h-fit"
