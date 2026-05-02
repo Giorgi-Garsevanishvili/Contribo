@@ -1,6 +1,6 @@
 "use client";
 
-import { useCallback, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { AlertCircle, Loader } from "lucide-react";
 import * as Nominatim from "nominatim-browser";
 
@@ -17,6 +17,8 @@ interface LocationSearchProps {
   onLocationSelect: (location: string) => void;
 }
 
+const DEBOUNCE_DELAY = 1500;
+
 export function LocationSearch({ onLocationSelect }: LocationSearchProps) {
   const [query, setQuery] = useState("");
   const [results, setResults] = useState<NominatimResult[]>([]);
@@ -24,8 +26,9 @@ export function LocationSearch({ onLocationSelect }: LocationSearchProps) {
   const [isOpen, setIsOpen] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [useManualInput, setUseManualInput] = useState<boolean>(false);
+  const debounceTimer = useRef<NodeJS.Timeout | null>(null);
 
-  const searchLocation = useCallback(async (text: string): Promise<void> => {
+  const performSearch = useCallback(async (text: string): Promise<void> => {
     if (!text || text.length < 3) {
       setResults([]);
       setIsOpen(false);
@@ -35,11 +38,13 @@ export function LocationSearch({ onLocationSelect }: LocationSearchProps) {
 
     setLoading(true);
     setIsOpen(true);
+    setError(null);
     try {
       const data: NominatimResult[] = await Nominatim.geocode({
         q: text,
         limit: 4,
         addressdetails: true,
+        
       });
       if (data.length === 0) {
         setError("No locations found. You can enter it manually below.");
@@ -55,6 +60,30 @@ export function LocationSearch({ onLocationSelect }: LocationSearchProps) {
     } finally {
       setLoading(false);
     }
+  }, []);
+
+  const searchLocation = useCallback(
+    (text: string): void => {
+      // Clear previous debounce timer
+      if (debounceTimer.current) {
+        clearTimeout(debounceTimer.current);
+      }
+
+      // Set new debounce timer
+      debounceTimer.current = setTimeout(() => {
+        performSearch(text);
+      }, DEBOUNCE_DELAY);
+    },
+    [performSearch],
+  );
+
+  // Cleanup debounce timer on unmount
+  useEffect(() => {
+    return () => {
+      if (debounceTimer.current) {
+        clearTimeout(debounceTimer.current);
+      }
+    };
   }, []);
 
   const handleSelect = (result: NominatimResult): void => {

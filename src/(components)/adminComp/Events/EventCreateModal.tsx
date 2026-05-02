@@ -9,15 +9,6 @@ import { useRef, useState } from "react";
 import { IoPricetags } from "react-icons/io5";
 import { useModal } from "../../../../context/ModalContext";
 
-//     name: string;
-//     location: string;
-//     startTime: Date;
-//     endTime: Date;
-//     description: string;
-//     createdById: string;
-//     regionId: string;
-//     finalizedAt?: string | undefined;
-
 interface CreateEventFormData {
   name: string;
   description: string;
@@ -39,7 +30,7 @@ function EventCreateModal() {
   const { triggerCompAlert } = useCompAlert();
   const triggerCompAlertRef = useRef(triggerCompAlert);
   const [isLoading, setIsLoading] = useState(false);
-  const { openModal } = useModal();
+  const { openModal, closeModal } = useModal();
 
   const handleLocationSelect = (location: string): void => {
     setFormData((prev) => ({
@@ -48,10 +39,19 @@ function EventCreateModal() {
     }));
   };
 
+  const handleCancel = () => {
+    setIsLoading(false);
+    setFormData(emptyForm);
+    closeModal();
+  };
+
   const handleEventSubmit = async (e: React.SubmitEvent<HTMLFormElement>) => {
     try {
       e.preventDefault();
       setIsLoading(true);
+      if (Object.values(formData).some((val) => val === "")) {
+        throw new Error("All Fields Must be provided");
+      }
       const response = await axios.post("/api/admin/events", formData);
       triggerCompAlertRef.current({
         message: `${response.data.message}`,
@@ -67,8 +67,6 @@ function EventCreateModal() {
       );
     } catch (error) {
       const message = getClientErrorMessage(error);
-      console.log(error);
-
       triggerCompAlertRef.current({
         message: `${message}`,
         type: "error",
@@ -193,7 +191,11 @@ function EventCreateModal() {
             general Information
           </p>
           <div className="flex md:flex-row md:w-fit w-full flex-col justify-center items-center gap-2 ">
-            <button className="p-2 w-full md:w-fit cursor-pointer hover:opacity-70 transition-all duration-300 ease-out bg-gray-600 rounded-sm">
+            <button
+              onClick={handleCancel}
+              type="button"
+              className="p-2 w-full md:w-fit cursor-pointer hover:opacity-70 transition-all duration-300 ease-out bg-gray-600 rounded-sm"
+            >
               Cancel Process
             </button>
             <button
@@ -201,7 +203,7 @@ function EventCreateModal() {
               disabled={
                 isLoading || Object.values(formData).some((e) => e === "")
               }
-              className={`p-2 w-full md:w-fit cursor-pointer hover:opacity-70 transition-all duration-300 ease-out bg-cyan-700 rounded-sm`}
+              className={`p-2 w btn m-0 bg-full md:w-fit cursor-pointer hover:opacity-70 transition-all duration-300 ease-out bg-cyan-700 rounded-sm`}
             >
               {isLoading ? (
                 <Loader

@@ -107,9 +107,9 @@ export const GET = async (req: NextRequest) => {
         updatedBy: { select: { name: true } },
         name: true,
         startTime: true,
-        endTime:true,
+        endTime: true,
         rating: true,
-        location:true,
+        location: true,
         assignments: {
           select: {
             role: { select: { name: true } },
@@ -122,7 +122,7 @@ export const GET = async (req: NextRequest) => {
             availabilityEntries: {
               select: { user: { select: { name: true, image: true } } },
             },
-            totalSlots:true
+            totalSlots: true,
           },
         },
       },
@@ -177,6 +177,13 @@ export const POST = async (req: NextRequest) => {
     };
     const body = CreateEvent.parse(jsonWithCreator);
 
+    if (Object.values(body).some((val) => val === "")) {
+      return NextResponse.json(
+        { message: "Empty Value Presented" },
+        { status: 400 },
+      );
+    }
+
     const response = await prisma.event.create({
       data: body,
       include: {
@@ -187,7 +194,7 @@ export const POST = async (req: NextRequest) => {
     return NextResponse.json(
       {
         message: `Event: ${response.name}, Created By: ${response.createdBy?.name}`,
-        data: {name: response.name, id: response.id}
+        data: { name: response.name, id: response.id },
       },
       { status: 201 },
     );
