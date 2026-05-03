@@ -95,7 +95,7 @@ function RoleAvailabilityComp({
   >("/api/admin/eventRoles", []);
 
   return (
-    <div className="flex flex-col justify-between transition-all duration-300 ease-out w-full p-2 gap-5 rounded-sm bg-cyan-900 border border-gray-600">
+    <div className="flex flex-col justify-between transition-all duration-300 ease-out w-full h-fit p-2 gap-5 rounded-sm bg-cyan-900 border border-gray-600">
       <div className="flex border-b border-gray-400/60 py-2 items-center justify-between gap-2">
         <div className="flex items-center gap-2 justify-start">
           <BsFillPersonLinesFill size={20} className="text-cyan-300" />
@@ -119,17 +119,26 @@ function RoleAvailabilityComp({
         eventId={props.id}
         refetch={refetch}
       />
-      <div className="flex gap-3 flex-wrap">
-        {data.length > 0
-          ? data.map((avv) => (
-              <AvailabilityCreate
-                refetch={refetch}
-                availabilities={avv}
-                key={avv.id}
-                isEdit={isEdit}
-              />
-            ))
-          : "No Availabilities To Display"}
+      <div className="flex gap-3 h-fit flex-wrap ">
+        {isLoadingData ? (
+          <div className="flex w-full h-full items-center justify-center">
+            <Loader
+              className="right-3 top-2.5 animate-spin text-gray-200"
+              size={40}
+            />
+          </div>
+        ) : data.length > 0 ? (
+          data.map((avv) => (
+            <AvailabilityCreate
+              refetch={refetch}
+              availabilities={avv}
+              key={avv.id}
+              isEdit={isEdit}
+            />
+          ))
+        ) : (
+          "No Availabilities To Display"
+        )}
       </div>
       <div className="flex md:flex-row flex-col bg-gray-900/50 rounded-sm mt-1 gap-5 border-t items-center justify-between p-3 border-gray-300/40 w-full h-">
         <div className="flex flex-col items-center gap-2 p-2 w-full ">

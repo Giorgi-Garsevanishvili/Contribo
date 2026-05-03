@@ -150,7 +150,7 @@ function AvailabilityCreate({
         <FaPencil size={15} className="text-gray-400 mx-1" />
       </div>
       <div className="flex w-fit flex-col gap-2">
-        <div className="flex items-center gap-5">
+        <div className="flex md:flex-row flex-col items-center gap-5">
           <div className="flex flex-col gap-1 w-fit">
             <label
               htmlFor="event_role"
@@ -164,7 +164,7 @@ function AvailabilityCreate({
                 setFormData((prev) => ({ ...prev, roleId: e.target.value }))
               }
               name="eventRole"
-              className="cursor-pointer border rounded-sm p-1 border-gray-500"
+              className="cursor-pointer bg-gray-700 border rounded-sm p-1 border-gray-500"
               id="event_role"
             >
               <option value="">Select</option>
@@ -179,49 +179,51 @@ function AvailabilityCreate({
               ))}
             </select>
           </div>
-          <div className="flex flex-col gap-1 w-fit">
-            <label
-              htmlFor="event_role"
-              className="text-xs w-fit uppercase text-gray-200"
-            >
-              Total Slots
-            </label>
-            <input
-              id="total_slot"
-              name="total_slot"
-              min={0}
-              value={formData.totalSlots}
-              onChange={(e) =>
-                setFormData((prev) => ({
-                  ...prev,
-                  totalSlots: Number(e.target.value),
-                }))
-              }
-              type="number"
-              className="cursor-pointer border w-20 rounded-sm p-1 border-gray-500"
-            />
-          </div>
-          <div className="flex flex-col gap-1 w-fit">
-            <label
-              htmlFor="event_role"
-              className="text-xs w-fit uppercase text-gray-200"
-            >
-              Rating
-            </label>
-            <input
-              type="number"
-              value={formData.ratingScore}
-              min={0}
-              name="rating"
-              id="rating"
-              onChange={(e) =>
-                setFormData((prev) => ({
-                  ...prev,
-                  ratingScore: Number(e.target.value),
-                }))
-              }
-              className="cursor-pointer flex w-20 border rounded-sm p-1 border-gray-500"
-            />
+          <div className="flex gap-3">
+            <div className="flex flex-col gap-1 w-fit">
+              <label
+                htmlFor="event_role"
+                className="text-xs w-fit uppercase text-gray-200"
+              >
+                Total Slots
+              </label>
+              <input
+                id="total_slot"
+                name="total_slot"
+                min={0}
+                value={formData.totalSlots}
+                onChange={(e) =>
+                  setFormData((prev) => ({
+                    ...prev,
+                    totalSlots: Number(e.target.value),
+                  }))
+                }
+                type="number"
+                className="cursor-pointer border w-20 rounded-sm p-1 border-gray-500"
+              />
+            </div>
+            <div className="flex flex-col gap-1 w-fit">
+              <label
+                htmlFor="event_role"
+                className="text-xs w-fit uppercase text-gray-200"
+              >
+                Rating
+              </label>
+              <input
+                type="number"
+                value={formData.ratingScore}
+                min={0}
+                name="rating"
+                id="rating"
+                onChange={(e) =>
+                  setFormData((prev) => ({
+                    ...prev,
+                    ratingScore: Number(e.target.value),
+                  }))
+                }
+                className="cursor-pointer flex w-20 border rounded-sm p-1 border-gray-500"
+              />
+            </div>
           </div>
         </div>
         <div className="flex flex-col md:flex-row gap-5 text-gray-200 w-full justify-between  mt-3">
@@ -289,7 +291,7 @@ function AvailabilityCreate({
               isLoading ||
               Object.values(formData).some((e) => e === "" || e === 0)
             }
-            className={`p-2 w btn m-0 bg-full md:w-fit cursor-pointer hover:opacity-70 transition-all duration-300 ease-out bg-cyan-700 rounded-sm`}
+            className={`p-2 w btn m-0 w-full md:w-fit cursor-pointer hover:opacity-70 transition-all duration-300 ease-out bg-cyan-700 rounded-sm`}
           >
             {isLoading ? (
               <Loader
@@ -297,7 +299,7 @@ function AvailabilityCreate({
                 size={20}
               />
             ) : (
-              <div className="flex items-center gap-2 justify-start">
+              <div className="flex justify-center md:w-fit items-center gap-2">
                 <h3>Deploy</h3>
                 <IoRocket size={15} className="text-cyan-200" />
               </div>
@@ -307,7 +309,7 @@ function AvailabilityCreate({
       </div>
     </form>
   ) : availabilities ? (
-    <div className="flex rounded-md items-start bg-gray-700 border-l-2 border-cyan-500  flex-col w-80 h-fit gap-2 p-5">
+    <div className="flex rounded-md items-start bg-gray-700 border-l-2 border-cyan-500  flex-col w-80  h-50 l gap-2 p-5">
       <div className="flex w-full items-center justify-between gap-2">
         <h3 className="uppercase text-md font-bold text-cyan-500">
           Event Role
