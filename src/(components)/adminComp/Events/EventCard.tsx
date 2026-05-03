@@ -9,6 +9,7 @@ import { IoIosTime } from "react-icons/io";
 import { FaCalendarAlt, FaCheckCircle } from "react-icons/fa";
 import { useModal } from "../../../../context/ModalContext";
 import { HiXCircle } from "react-icons/hi2";
+import RoleAvailabilityComp from "./RoleAvailabilityComp";
 
 type EventDataType = {
   id: string;
@@ -61,7 +62,7 @@ function EventCard({ event }: { event: EventDataType }) {
         openModal(
           "Event Details",
           `${event.name}`,
-          <div className="">Here We Are: {event.startTime}</div>,
+          <RoleAvailabilityComp props={event} />,
         )
       }
       className="flex hover:shadow-blue-700 group transition-all duration-300 ease-out flex-col cursor-pointer rounded-sm overflow-hidden shadow-sm bg-white shadow-gray-500 w-2xs h-fit"

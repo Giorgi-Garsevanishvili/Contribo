@@ -126,7 +126,7 @@ function EventsList() {
       ) : data && data?.length > 0 ? (
         <div className="grid md:grid-cols-2 gap-2">
           {data?.map((event) => (
-            <EventsListCard key={event.id} event={event} />
+            <EventsListCard refetch={refetch} key={event.id} event={event} />
           ))}
         </div>
       ) : (

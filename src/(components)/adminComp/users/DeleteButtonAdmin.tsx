@@ -27,6 +27,7 @@ function DeleteButtonAdmin({
 
   return (
     <button
+      type="button"
       onClick={deleteData}
       className={`${isLoadingDelete ? "animate-pulse" : ""} btn ${styleClass}`}
     >

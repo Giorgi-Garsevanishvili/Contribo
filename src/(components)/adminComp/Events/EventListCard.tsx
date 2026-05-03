@@ -9,6 +9,8 @@ import { IoIosTime } from "react-icons/io";
 import { FaCalendarAlt, FaCheckCircle } from "react-icons/fa";
 import { useModal } from "../../../../context/ModalContext";
 import { HiXCircle } from "react-icons/hi2";
+import RoleAvailabilityComp from "./RoleAvailabilityComp";
+import DeleteButtonAdmin from "../users/DeleteButtonAdmin";
 
 type EventDataType = {
   id: string;
@@ -48,8 +50,20 @@ type EventDataType = {
     totalSlots: number;
   }[];
 };
-function EventsListCard({ event }: { event: EventDataType }) {
-  const { openModal } = useModal();
+function EventsListCard({
+  event,
+  refetch,
+}: {
+  event: EventDataType;
+  refetch: () => void;
+}) {
+  const { openModal, closeModal } = useModal();
+
+  const handleDeleteRefetch = () => {
+    closeModal();
+    refetch();
+  };
+
   const availableSlots = event.availabilities.reduce(
     (acc, curr) => acc + curr.totalSlots,
     0,
@@ -57,8 +71,19 @@ function EventsListCard({ event }: { event: EventDataType }) {
   return (
     <div
       onClick={() =>
-        openModal("Event Details",`${event.name}`,
-          <div className="">Here We Are: {event.startTime}</div>,
+        openModal(
+          "Event Details",
+          `${event.name}`,
+          <>
+            <DeleteButtonAdmin
+              url={`/api/admin/events/${event.id}`}
+              value={`Event: ${event.name}`}
+              styleClass="w-fit items-center justify-center p-0 m-0 h-fit bg-transparent text-gray-200 hover:text-red-400"
+              message="This Action will delete Availability with all user related data"
+              fetchAction={handleDeleteRefetch}
+            />
+            <RoleAvailabilityComp props={event} />
+          </>,
         )
       }
       className="flex hover:shadow-blue-700 group transition-all duration-300 ease-out cursor-pointer rounded-sm overflow-hidden shadow-sm bg-white shadow-gray-500 w-full h-fit"
