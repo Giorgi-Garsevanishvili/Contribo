@@ -8,43 +8,44 @@ import { ImSpinner9 } from "react-icons/im";
 import EventsListCard from "./EventListCard";
 
 type EventDataType = {
-    id: string;
+  status: "LIVE" | "ENDED" | "UPCOMING"
+  id: string;
+  name: string;
+  location: string;
+  startTime: string;
+  endTime: string;
+  rating: number | null;
+  region: {
     name: string;
-    location: string;
-    startTime: string;
-    endTime: string;
-    rating: number | null;
-    region: {
-        name: string;
+  } | null;
+  createdBy: {
+    name: string | null;
+  } | null;
+  updatedBy: {
+    name: string | null;
+  } | null;
+  assignments: {
+    user: {
+      name: string | null;
+      image: string | null;
     } | null;
-    createdBy: {
+    role: {
+      name: string;
+    } | null;
+  }[];
+  availabilities: {
+    availabilityEntries: {
+      user: {
         name: string | null;
-    } | null;
-    updatedBy: {
-        name: string | null;
-    } | null;
-    assignments: {
-        user: {
-            name: string | null;
-            image: string | null;
-        } | null;
-        role: {
-            name: string;
-        } | null;
+        image: string | null;
+      };
     }[];
-    availabilities: {
-        availabilityEntries: {
-            user: {
-                name: string | null;
-                image: string | null;
-            };
-        }[];
-        role: {
-            name: string;
-        };
-        totalSlots: number;
-    }[];
-}
+    role: {
+      name: string;
+    };
+    totalSlots: number;
+  }[];
+};
 
 function EventsList() {
   const [currentPage, setCurrentPage] = useState(1);

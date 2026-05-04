@@ -30,12 +30,29 @@ export const GET = async (_req: NextRequest, context: Context) => {
     });
 
     if (!data) {
-      return NextResponse.json({data,
-        message: "Event not found!",
-      });
+      return NextResponse.json({ data, message: "Event not found!" });
     }
 
-    return NextResponse.json(data, { status: 200 });
+    const now = new Date();
+
+    const dataWithStatus = () => {
+      let status: "UPCOMING" | "LIVE" | "ENDED";
+
+      if (now < data.startTime) {
+        status = "UPCOMING";
+      } else if (now >= data.startTime && now <= data.endTime) {
+        status = "LIVE";
+      } else {
+        status = "ENDED";
+      }
+
+      return {
+        ...data,
+        status,
+      };
+    };
+
+    return NextResponse.json({data: dataWithStatus}, { status: 200 });
   } catch (error) {
     const { message, status } = handleError(error);
     return NextResponse.json({ message }, { status });

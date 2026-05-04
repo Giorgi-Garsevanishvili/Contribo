@@ -11,8 +11,10 @@ import { useModal } from "../../../../context/ModalContext";
 import { HiXCircle } from "react-icons/hi2";
 import RoleAvailabilityComp from "./RoleAvailabilityComp";
 import DeleteButtonAdmin from "../users/DeleteButtonAdmin";
+import StatusDisplay from "./StatusDisplay";
 
 type EventDataType = {
+  status: "LIVE" | "ENDED" | "UPCOMING";
   id: string;
   name: string;
   location: string;
@@ -86,7 +88,7 @@ function EventsListCard({
           </>,
         )
       }
-      className="flex hover:shadow-blue-700 group transition-all duration-300 ease-out cursor-pointer rounded-sm overflow-hidden shadow-sm bg-white shadow-gray-500 w-full h-fit"
+      className={`flex ${event.status === "ENDED" ? "opacity-70 hover:opacity-100 bg-white" : " bg-white"} hover:shadow-blue-700 group transition-all relative duration-300 ease-out cursor-pointer rounded-sm overflow-hidden shadow-sm shadow-gray-500 w-full h-fit`}
     >
       <div className="flex w-30 shrink-0 rounded-sm h-auto shadow-inner shadow-black  relative justify-center items-center overflow-hidden">
         <Image
@@ -109,11 +111,13 @@ function EventsListCard({
           </p>
         </div>
       </div>
-      <div className="flex w-full gap-2 p-2">
-        <div className="flex flex-col items-start justify-start">
+      <div className="absolute flex right-2 top-2">
+        <StatusDisplay status={event.status} />
+      </div>
+      <div className="flex w-full relative gap-2 p-2">
+        <div className="flex flex-col items-start w-[95%] justify-start">
           <h3 className="font-bold text-sm text-gray-800">{event.name}</h3>
-
-          <div className="flex gap-1 text-xs items-center text-center text-gray-400 w-full h-fit">
+          <div className="flex gap-1 text-xs items-center text-center text-gray-400 w-[80%] h-fit">
             {availableSlots === 0 ? (
               <HiXCircle size={10} color="red" />
             ) : (
@@ -121,19 +125,19 @@ function EventsListCard({
             )}
             <h5>{availableSlots} Slots Available</h5>
           </div>
-          <div className="flex gap-1 text-xs items-center text-center text-gray-400 w-full h-fit">
+          <div className="flex gap-1 text-xs items-center text-center text-gray-400 w-[80%] h-fit">
             <div>
               <IoIosTime size={10} />
             </div>
             <h5 className="truncate">{`${new Date(event.startTime).toLocaleTimeString("en-US", { hour: "2-digit", minute: "2-digit" })} - ${new Date(event.endTime).toLocaleTimeString("en-US", { hour: "2-digit", minute: "2-digit" })}`}</h5>
           </div>
-          <div className="flex gap-1 text-xs items-center text-center text-gray-400 w-full h-fit">
+          <div className="flex gap-1 text-xs items-center justify-start text-gray-400 w-[80%] h-fit">
             <div>
               <FaLocationDot size={10} />
             </div>
-            <h5 className="truncate">{event.location}</h5>
+            <h5 className="truncate w-[80%]">{event.location}</h5>
           </div>
-          <div className="flex gap-1 text-xs items-center text-center text-gray-400 w-full h-fit">
+          <div className="flex gap-1 text-xs items-center text-center text-gray-400 w-[80%] h-fit">
             <div>
               <FaCalendarAlt size={10} />
             </div>

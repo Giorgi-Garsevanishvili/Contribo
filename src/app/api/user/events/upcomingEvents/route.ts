@@ -40,7 +40,7 @@ type ApiResponse = {
 
 export const GET = async (req: NextRequest) => {
   try {
-    const thisUser = await requireRole("ADMIN");
+    const thisUser = await requireRole("REGULAR");
 
     const now = new Date();
     const future = new Date(now);

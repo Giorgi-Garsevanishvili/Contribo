@@ -10,8 +10,10 @@ import { FaCalendarAlt, FaCheckCircle } from "react-icons/fa";
 import { useModal } from "../../../../context/ModalContext";
 import { HiXCircle } from "react-icons/hi2";
 import RoleAvailabilityComp from "./RoleAvailabilityComp";
+import StatusDisplay from "./StatusDisplay";
 
 type EventDataType = {
+  status: "LIVE" | "ENDED" | "UPCOMING";
   id: string;
   rating: number | null;
   name: string;
@@ -65,7 +67,7 @@ function EventCard({ event }: { event: EventDataType }) {
           <RoleAvailabilityComp props={event} />,
         )
       }
-      className="flex hover:shadow-blue-700 group transition-all duration-300 ease-out flex-col cursor-pointer rounded-sm overflow-hidden shadow-sm bg-white shadow-gray-500 w-2xs h-fit"
+      className={`flex ${event.status === "LIVE" && "animate-pulse animation-duration-3000"} hover:shadow-blue-700 group transition-all duration-300 ease-out flex-col cursor-pointer rounded-sm overflow-hidden relative shadow-sm bg-white shadow-gray-500 w-2xs h-fit`}
     >
       <div className="flex w-full h-35 shadow-inner shadow-black  relative justify-center items-center overflow-hidden">
         <Image
@@ -88,7 +90,10 @@ function EventCard({ event }: { event: EventDataType }) {
           </p>
         </div>
       </div>
-      <div className="flex w-full gap-2 flex-col p-2">
+      <div className="flex relative w-full gap-2 flex-col p-2">
+        <div className="absolute flex right-2 top-2">
+          <StatusDisplay status={event.status} />
+        </div>
         <h3 className="font-bold text-gray-800">{event.name}</h3>
         <div className="flex flex-col gap-0.5">
           <div className="flex  text-gray-400 shrink-0 items-center justify-start gap-2">

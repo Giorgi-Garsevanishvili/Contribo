@@ -57,6 +57,7 @@ export const GET = async (req: NextRequest) => {
     const searchQuery = searchParams.get("search");
     const fromDateFilter = searchParams.get("fromDate");
     const tillDateFilter = searchParams.get("tillDate");
+    const statusFilter = searchParams.get("status");
 
     const whereClause: EventWhereInput = {
       regionId: thisUser.user.ownAllowance?.regionId,
@@ -92,6 +93,19 @@ export const GET = async (req: NextRequest) => {
       whereClause.endTime = {
         lte: new Date(tillDateFilter),
       };
+    }
+
+    if (statusFilter === "LIVE") {
+      whereClause.startTime = { lte: new Date() };
+      whereClause.endTime = { gte: new Date() };
+    }
+
+    if (statusFilter === "ENDED") {
+      whereClause.endTime = { lt: new Date() };
+    }
+
+    if (statusFilter === "UPCOMING") {
+      whereClause.startTime = { gt: new Date() };
     }
 
     const totalCount = await prisma.event.count({
@@ -146,8 +160,27 @@ export const GET = async (req: NextRequest) => {
       });
     }
 
+    const now = new Date();
+
+    const dataWithStatus = data.map((event) => {
+      let status: "UPCOMING" | "LIVE" | "ENDED";
+
+      if (now < event.startTime) {
+        status = "UPCOMING";
+      } else if (now >= event.startTime && now <= event.endTime) {
+        status = "LIVE";
+      } else {
+        status = "ENDED";
+      }
+
+      return {
+        ...event,
+        status,
+      };
+    });
+
     const response: ApiResponse = {
-      data,
+      data: dataWithStatus,
       pagination: {
         currentPage: page,
         totalPages,
