@@ -3,6 +3,8 @@ import { useCompAlert } from "./useCompAlert";
 import axios from "axios";
 import { useSession } from "next-auth/react";
 import { redirect } from "next/navigation";
+import { getClientErrorMessage } from "@/lib/errors/clientErrors";
+import { responseLogOut } from "@/lib/ResponseLogOut";
 
 export function useUpdateData(url: string, data: {}, fetchAction: () => void) {
   const [success, setSuccess] = useState(false);
@@ -64,12 +66,15 @@ export function useUpdateData(url: string, data: {}, fetchAction: () => void) {
     } catch (error) {
       setSuccess(false);
       setError(`${error}`);
+      const message = getClientErrorMessage(error);
 
       triggerCompAlertRef.current({
-        message: `${error}`,
+        message: `${message}`,
         type: "error",
         isOpened: true,
       });
+
+      responseLogOut({ message: message });
     } finally {
       setIsLoadingUpdate(false);
     }

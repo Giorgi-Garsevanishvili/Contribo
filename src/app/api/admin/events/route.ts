@@ -60,7 +60,7 @@ export const GET = async (req: NextRequest) => {
     const statusFilter = searchParams.get("status");
 
     const whereClause: EventWhereInput = {
-      regionId: thisUser.user.ownAllowance?.regionId,
+      regionId: thisUser.user?.regionId,
     };
 
     if (assigneeFilter) {
@@ -205,8 +205,8 @@ export const POST = async (req: NextRequest) => {
     const json = (await req.json()) as z.infer<typeof CreateEvent>;
     const jsonWithCreator = {
       ...json,
-      createdById: thisUser.user.id,
-      regionId: thisUser.user.ownAllowance?.regionId,
+      createdById: thisUser.user.userId,
+      regionId: thisUser.user?.regionId,
     };
     const body = CreateEvent.parse(jsonWithCreator);
 
@@ -243,7 +243,7 @@ export const DELETE = async (_req: NextRequest) => {
 
     const deleted = await prisma.event.deleteMany({
       where: {
-        regionId: thisUser.user.ownAllowance?.regionId,
+        regionId: thisUser.user?.regionId,
       },
     });
 
@@ -252,7 +252,7 @@ export const DELETE = async (_req: NextRequest) => {
     }
 
     return NextResponse.json({
-      message: `All Events deleted for region: ${thisUser.user.ownAllowance?.region?.name}!`,
+      message: `All Events deleted for region: ${thisUser.user?.region?.name}!`,
     });
   } catch (error) {
     const { message, status } = handleError(error);

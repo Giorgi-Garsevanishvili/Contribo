@@ -1,17 +1,36 @@
-
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 import { RootState } from "../../store";
 import { Region, Role } from "@/generated/client";
+import { getClientErrorMessage } from "@/lib/errors/clientErrors";
+import { responseLogOut } from "@/lib/ResponseLogOut";
 
 export const fetchRoles = createAsyncThunk("roles/fetchAll", async () => {
-  const response = await axios.get("/api/console/roles");
-  return response.data;
+  try {
+    const response = await axios.get("/api/console/roles");
+
+    if (response.status === 500) {
+      throw new Error("Something Went Wrong");
+    }
+    return response.data;
+  } catch (error) {
+    const message = getClientErrorMessage(error);
+    responseLogOut({ message: message });
+  }
 });
 
 export const fetchRegions = createAsyncThunk("regions/fetchAll", async () => {
-  const response = await axios.get("/api/console/regions");
-  return response.data;
+  try {
+    const response = await axios.get("/api/console/regions");
+
+    if (response.status === 500) {
+      throw new Error("Something Went Wrong");
+    }
+    return response.data;
+  } catch (error) {
+    const message = getClientErrorMessage(error);
+    responseLogOut({ message: message });
+  }
 });
 
 interface DataState {

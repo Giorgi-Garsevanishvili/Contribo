@@ -25,7 +25,7 @@ export const POST = async (req: NextRequest, context: Context) => {
     const json = (await req.json()) as z.infer<typeof HrWarningCreate>;
     const jsonWithCreator = {
       ...json,
-      createdById: thisUser.user.id,
+      createdById: thisUser.user.userId,
       assigneeId: id,
     };
     const body = HrWarningCreate.parse(jsonWithCreator);
@@ -68,7 +68,7 @@ export const GET = async (req: NextRequest, context: Context) => {
     const whereClause: HrWarningWhereInput = {
       assigneeId: id,
       assignee: {
-        ownAllowance: { regionId: thisUser.user.ownAllowance?.regionId },
+        ownAllowance: { regionId: thisUser.user?.regionId },
       },
     };
 
@@ -153,7 +153,7 @@ export const DELETE = async (_req: NextRequest, context: Context) => {
     const deleted = await prisma.hrWarning.deleteMany({
       where: {
         assignee: {
-          ownAllowance: { regionId: thisUser.user.ownAllowance?.regionId },
+          ownAllowance: { regionId: thisUser.user?.regionId },
           id,
         },
       },

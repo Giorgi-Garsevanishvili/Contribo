@@ -33,7 +33,7 @@ export const POST = async (req: NextRequest) => {
     const thisUser = await requireRole("QIRVEX");
 
     const json = (await req.json()) as z.infer<typeof AllowedUserCreate>;
-    const jsonWithCreator = { ...json, creatorId: thisUser.user.id };
+    const jsonWithCreator = { ...json, creatorId: thisUser.user.userId };
     const body = AllowedUserCreate.parse(jsonWithCreator);
 
     if (!body || !Object.keys(body).length) {
@@ -54,7 +54,7 @@ export const POST = async (req: NextRequest) => {
       data: {
         email: body.email,
         regionId: body.regionId,
-        creatorId: thisUser.user.id,
+        creatorId: thisUser.user.userId,
       },
     });
 

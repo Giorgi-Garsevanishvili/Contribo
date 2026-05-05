@@ -16,7 +16,7 @@ export const GET = async (_req: NextRequest, context: Context) => {
     }
 
     const data = await prisma.allowedUser.findUnique({
-      where: { id, regionId: thisUser.user.ownAllowance?.regionId },
+      where: { id, regionId: thisUser.user?.regionId },
       select: {
         id: true,
         email: true,
@@ -67,7 +67,7 @@ export const PUT = async (req: NextRequest, context: Context) => {
     const json = await req.json();
     const jsonWithCreator = {
       ...json,
-      updatedById: thisUser.user.id,
+      updatedById: thisUser.user.userId,
     };
     const body = AllowedUserUpdate.parse(jsonWithCreator);
 
@@ -118,7 +118,7 @@ export const DELETE = async (req: NextRequest, context: Context) => {
     }
 
     const deletedAllowedUser = await prisma.allowedUser.delete({
-      where: { id, regionId: session.user.ownAllowance?.regionId },
+      where: { id, regionId: session.user?.regionId },
     });
 
     if (!deletedAllowedUser) {

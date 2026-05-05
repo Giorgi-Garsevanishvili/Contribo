@@ -50,7 +50,7 @@ export const GET = async (req: NextRequest) => {
     const searchQuery = searchParams.get("search");
 
     const whereClause: Prisma.JoinRequestWhereInput = {
-      regionId: thisUser.user.ownAllowance?.regionId,
+      regionId: thisUser.user?.regionId,
     };
 
     if (
@@ -132,7 +132,7 @@ export const DELETE = async (_req: NextRequest) => {
 
     const deleted = await prisma.joinRequest.deleteMany({
       where: {
-        regionId: thisUser.user.ownAllowance?.regionId,
+        regionId: thisUser.user?.regionId,
       },
     });
 
@@ -141,7 +141,7 @@ export const DELETE = async (_req: NextRequest) => {
     }
 
     return NextResponse.json({
-      message: `All Join Requests deleted for region: ${thisUser.user.ownAllowance?.region?.name}!`,
+      message: `All Join Requests deleted for region: ${thisUser.user?.region?.name}!`,
     });
   } catch (error) {
     const { message, status } = handleError(error);

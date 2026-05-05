@@ -12,8 +12,8 @@ export const GET = async (_req: NextRequest, context: Context) => {
     const data = await prisma.eventAssignment.findMany({
       where: {
         eventId: id,
-        event: { regionId: thisUser.user.ownAllowance?.regionId },
-        userId: thisUser.user.id,
+        event: { regionId: thisUser.user?.regionId },
+        userId: thisUser.user.userId,
       },
       include: {
         user: { select: { name: true, image: true } },

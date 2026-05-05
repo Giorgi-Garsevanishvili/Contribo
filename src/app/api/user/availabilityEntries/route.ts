@@ -16,8 +16,8 @@ export const GET = async (req: NextRequest) => {
     const roleFilter = searchParams.get("role");
 
     const whereClause: AvailabilityEntryWhereInput = {
-      userId: thisUser.user.id,
-      slot: { event: { regionId: thisUser.user.ownAllowance?.regionId } },
+      userId: thisUser.user.userId || "",
+      slot: { event: { regionId: thisUser.user?.regionId } },
     };
 
     if (statusFilter) {
@@ -26,7 +26,7 @@ export const GET = async (req: NextRequest) => {
 
     if (roleFilter) {
       whereClause.slot = {
-        event: { regionId: thisUser.user.ownAllowance?.regionId },
+        event: { regionId: thisUser.user?.regionId },
         roleId: roleFilter,
       };
     }
@@ -94,7 +94,7 @@ export const GET = async (req: NextRequest) => {
       return NextResponse.json(
         {
           data,
-          message: `Availability Entries Not Found for You in Region: ${thisUser.user.ownAllowance?.region?.name}`,
+          message: `Availability Entries Not Found for You in Region: ${thisUser.user?.region?.name}`,
         },
         { status: 404 },
       );

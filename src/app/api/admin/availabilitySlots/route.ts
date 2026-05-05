@@ -17,7 +17,7 @@ export const GET = async (req: NextRequest) => {
     const skip = (page - 1) * limit;
 
     const whereClause: AvailabilitySlotWhereInput = {
-      event: { regionId: thisUser.user.ownAllowance?.regionId },
+      event: { regionId: thisUser.user?.regionId },
     };
 
     const responseData = await prisma.availabilitySlot.findMany({
@@ -97,7 +97,7 @@ export const DELETE = async (_req: NextRequest) => {
     const deleted = await prisma.availabilitySlot.deleteMany({
       where: {
         event: {
-          regionId: thisUser.user.ownAllowance?.regionId,
+          regionId: thisUser.user?.regionId,
         },
       },
     });
@@ -107,7 +107,7 @@ export const DELETE = async (_req: NextRequest) => {
     }
 
     return NextResponse.json({
-      message: `All Availability Slots deleted for region: ${thisUser.user.ownAllowance?.region?.name}!`,
+      message: `All Availability Slots deleted for region: ${thisUser.user?.region?.name}!`,
     });
   } catch (error) {
     const { message, status } = handleError(error);

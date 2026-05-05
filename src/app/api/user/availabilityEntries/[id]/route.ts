@@ -17,8 +17,8 @@ export const GET = async (_req: NextRequest, context: Context) => {
 
     const whereClause: AvailabilityEntryWhereInput = {
       id,
-      userId: thisUser.user.id,
-      slot: { event: { regionId: thisUser.user.ownAllowance?.regionId } },
+      userId: thisUser.user.userId || "",
+      slot: { event: { regionId: thisUser.user?.regionId } },
     };
 
     const data = await prisma.availabilityEntry.findMany({

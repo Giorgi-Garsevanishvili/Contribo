@@ -16,7 +16,7 @@ export const GET = async (req: NextRequest) => {
     const roleFilter = searchParams.get("role");
 
     const whereClause: AvailabilityEntryWhereInput = {
-      slot: { event: { regionId: thisUser.user.ownAllowance?.regionId } },
+      slot: { event: { regionId: thisUser.user?.regionId } },
     };
 
     if (statusFilter) {
@@ -25,7 +25,7 @@ export const GET = async (req: NextRequest) => {
 
     if (roleFilter) {
       whereClause.slot = {
-        event: { regionId: thisUser.user.ownAllowance?.regionId },
+        event: { regionId: thisUser.user?.regionId },
         roleId: roleFilter,
       };
     }
@@ -121,7 +121,7 @@ export const DELETE = async (_req: NextRequest) => {
     const deleted = await prisma.availabilityEntry.deleteMany({
       where: {
         slot: {
-          event: { regionId: thisUser.user.ownAllowance?.regionId },
+          event: { regionId: thisUser.user?.regionId },
         },
       },
     });
@@ -131,7 +131,7 @@ export const DELETE = async (_req: NextRequest) => {
     }
 
     return NextResponse.json({
-      message: `All Availability Entry Deleted for all Events in region: ${thisUser.user.ownAllowance?.region?.name}!`,
+      message: `All Availability Entry Deleted for all Events in region: ${thisUser.user?.region?.name}!`,
     });
   } catch (error) {
     const { message, status } = handleError(error);

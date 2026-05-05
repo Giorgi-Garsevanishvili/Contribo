@@ -20,7 +20,7 @@ export const POST = async (req: NextRequest, context: Context) => {
     const jsonWithCreator = {
       ...json,
       entryId: id,
-      requestedById: thisUser.user.id,
+      requestedById: thisUser.user.userId,
     };
 
     const body = CreateEntryCancelRequest.parse(jsonWithCreator);

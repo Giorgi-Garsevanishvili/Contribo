@@ -241,12 +241,12 @@ export type AllowedUserOrderByWithRelationInput = {
 export type AllowedUserWhereUniqueInput = Prisma.AtLeast<{
   id?: string
   email?: string
+  userId?: string
   AND?: Prisma.AllowedUserWhereInput | Prisma.AllowedUserWhereInput[]
   OR?: Prisma.AllowedUserWhereInput[]
   NOT?: Prisma.AllowedUserWhereInput | Prisma.AllowedUserWhereInput[]
   regionId?: Prisma.StringNullableFilter<"AllowedUser"> | string | null
   type?: Prisma.EnumGTypesFilter<"AllowedUser"> | $Enums.GTypes
-  userId?: Prisma.StringNullableFilter<"AllowedUser"> | string | null
   updatedAt?: Prisma.DateTimeNullableFilter<"AllowedUser"> | Date | string | null
   createdAt?: Prisma.DateTimeFilter<"AllowedUser"> | Date | string
   creatorId?: Prisma.StringNullableFilter<"AllowedUser"> | string | null
@@ -256,7 +256,7 @@ export type AllowedUserWhereUniqueInput = Prisma.AtLeast<{
   createdBy?: Prisma.XOR<Prisma.UserNullableScalarRelationFilter, Prisma.UserWhereInput> | null
   updatedBy?: Prisma.XOR<Prisma.UserNullableScalarRelationFilter, Prisma.UserWhereInput> | null
   user?: Prisma.XOR<Prisma.UserNullableScalarRelationFilter, Prisma.UserWhereInput> | null
-}, "id" | "email">
+}, "id" | "email" | "userId">
 
 export type AllowedUserOrderByWithAggregationInput = {
   id?: Prisma.SortOrder

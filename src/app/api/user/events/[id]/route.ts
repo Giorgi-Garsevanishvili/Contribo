@@ -12,8 +12,8 @@ export const GET = async (_req: NextRequest, context: Context) => {
     const data = await prisma.event.findUnique({
       where: {
         id,
-        regionId: thisUser.user.ownAllowance?.regionId,
-        assignments: { some: { userId: thisUser.user.id } },
+        regionId: thisUser.user?.regionId,
+        assignments: { some: { userId: thisUser.user.userId } },
       },
       select: {
         id: true,

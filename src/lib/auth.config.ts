@@ -46,12 +46,19 @@ const authConfig: NextAuthConfig = {
 
       if (!allowed) return;
 
-      await prisma.user.update({
-        where: { id: user.id },
-        data: {
-          allowedUserId: allowed.id,
-        },
-      });
+      await prisma.$transaction(async (tx) => [
+        await tx.user.update({
+          where: { id: user.id },
+          data: {
+            allowedUserId: allowed.id,
+          },
+        }),
+
+        await tx.allowedUser.update({
+          where: { id: allowed.id },
+          data: { userId: user.id },
+        }),
+      ]);
     },
 
     async linkAccount({ user, account }) {
@@ -64,6 +71,7 @@ const authConfig: NextAuthConfig = {
     async signIn({ user, account }) {
       if (!user.email) return false;
 
+      // This Query Is Bit Expensive but necessary to revalidate user account is email is changed.
       if (account) {
         const existingAccount = await prisma.account.findUnique({
           where: {
@@ -72,21 +80,21 @@ const authConfig: NextAuthConfig = {
               providerAccountId: account.providerAccountId,
             },
           },
-          include: {
-            user: {
-              include: {
-                ownAllowance: {
-                  include: {
-                    roles: { select: { role: { select: { name: true } } } },
-                  },
-                },
-              },
-            },
+          select: {
+            userId: true,
           },
         });
 
         if (existingAccount) {
-          const userAllowance = existingAccount.user.ownAllowance;
+          // This Is For Existed User Standard Login uses id which was quired from account
+          const userAllowance = await prisma.allowedUser.findUnique({
+            where: { userId: existingAccount.userId },
+            select: { roles: { select: { role: { select: { name: true } } } } },
+          });
+
+          console.log(existingAccount);
+
+          console.log(userAllowance);
 
           if (!userAllowance) return "/unauthorized-user";
 
@@ -97,12 +105,13 @@ const authConfig: NextAuthConfig = {
           return true;
         }
 
+        // This Is For New Provider Or First Login  Uses Email To Check
         const allowed = await prisma.allowedUser.findUnique({
           where: { email: user.email },
           include: {
             region: true,
             roles: { select: { role: { select: { name: true } } } },
-            user: true,
+            user: { include: { accounts: true } },
           },
         });
 
@@ -115,15 +124,11 @@ const authConfig: NextAuthConfig = {
         // If allowed email exists and has a linked User, but no Account for this provider
         // This means admin updated the email and deleted the old Account
 
-        if (allowed.user) {
-          const userAccount = await prisma.account.findMany({
-            where: { userId: allowed.user.id },
-          });
-
+        if (account && allowed.user) {
           // If user has accounts but not for this provider, create new account link
           // OR if user has no accounts at all (admin deleted them), create new account
 
-          const hasThisProvider = userAccount.some(
+          const hasThisProvider = allowed.user.accounts.some(
             (acc) => acc.provider === account?.provider,
           );
 

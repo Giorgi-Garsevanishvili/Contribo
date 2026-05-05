@@ -60,7 +60,7 @@ export const GET = async (req: NextRequest) => {
     const statusFilter = searchParams.get("status");
 
     const whereClause: EventWhereInput = {
-      regionId: thisUser.user.ownAllowance?.regionId,
+      regionId: thisUser.user?.regionId,
     };
 
     if (assigneeFilter) {

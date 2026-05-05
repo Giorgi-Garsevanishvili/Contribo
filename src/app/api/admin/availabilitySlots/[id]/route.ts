@@ -17,7 +17,7 @@ export const GET = async (_req: NextRequest, context: Context) => {
     }
 
     const whereClause: AvailabilitySlotWhereUniqueInput = {
-      event: { regionId: thisUser.user.ownAllowance?.regionId },
+      event: { regionId: thisUser.user?.regionId },
       id,
     };
 
@@ -76,7 +76,7 @@ export const PUT = async (req: NextRequest, context: Context) => {
     const json = (await req.json()) as z.infer<typeof UpdateAvailabilitySlot>;
     const jsonWithCreator = {
       ...json,
-      updatedById: thisUser.user.id,
+      updatedById: thisUser.user.userId,
     };
 
     const body = UpdateAvailabilitySlot.parse(jsonWithCreator);
@@ -136,7 +136,7 @@ export const DELETE = async (_req: NextRequest, context: Context) => {
       where: {
         id,
         event: {
-          regionId: thisUser.user.ownAllowance?.regionId,
+          regionId: thisUser.user?.regionId,
         },
       },
       include: { event: { select: { name: true } } },

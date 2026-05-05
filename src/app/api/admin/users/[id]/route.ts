@@ -18,7 +18,7 @@ export const GET = async (_req: NextRequest, context: Context) => {
     const data = await prisma.user.findUnique({
       where: {
         id,
-        ownAllowance: { regionId: thisUser.user.ownAllowance?.regionId },
+        ownAllowance: { regionId: thisUser.user?.regionId },
       },
       include: {
         memberStatusLogs: {
@@ -81,7 +81,7 @@ export const PUT = async (req: NextRequest, context: Context) => {
     const existingUser = await prisma.user.findUnique({
       where: {
         id,
-        ownAllowance: { regionId: thisUser.user.ownAllowance?.regionId },
+        ownAllowance: { regionId: thisUser.user?.regionId },
       },
     });
 
@@ -93,7 +93,7 @@ export const PUT = async (req: NextRequest, context: Context) => {
     }
 
     const json = await req.json();
-    const body = { ...json, updatedById: thisUser.user.id } as UserUpdateInput;
+    const body = { ...json, updatedById: thisUser.user.userId } as UserUpdateInput;
 
     const bodyWithUpdater = UserUpdateInput.parse(body);
 
@@ -154,7 +154,7 @@ export const PUT = async (req: NextRequest, context: Context) => {
       : `User: ${existingUser.name}, updated successfully.`;
 
     // Check if the admin is updating their own email
-    if (existingUser.id === thisUser.user.id && data.emailChanged) {
+    if (existingUser.id === thisUser.user.userId && data.emailChanged) {
       return NextResponse.json({
         requiresSignOut: true,
         message: "Your email has been updated. Please sign in again.",
@@ -216,7 +216,7 @@ export const DELETE = async (_req: NextRequest, context: Context) => {
       }
     }
 
-    if(user.id === thisUser.user.id){
+    if(user.id === thisUser.user.userId){
       return NextResponse.json({message: `Your account deleted You will be logged out soon.`, logOut:true})
     }
 

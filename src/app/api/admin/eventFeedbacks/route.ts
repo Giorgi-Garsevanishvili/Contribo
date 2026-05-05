@@ -16,7 +16,7 @@ export const GET = async (req: NextRequest) => {
     const searchQuery = searchParams.get("search");
 
     const whereClause: EventFeedbackWhereInput = {
-      event: { regionId: thisUser.user.ownAllowance?.regionId },
+      event: { regionId: thisUser.user?.regionId },
     };
 
     // search params

@@ -19,7 +19,7 @@ export const GET = async (_req: NextRequest, context: Context) => {
       where: {
         id,
         user: {
-          ownAllowance: { regionId: thisUser.user.ownAllowance?.regionId },
+          ownAllowance: { regionId: thisUser.user?.regionId },
         },
       },
       include: {
@@ -56,7 +56,7 @@ export const PUT = async (req: NextRequest, context: Context) => {
     const json = (await req.json()) as z.infer<typeof UpdateMemberStatusLog>;
     const jsonWithCreator = {
       ...json,
-      updatedById: thisUser.user.id,
+      updatedById: thisUser.user.userId,
     };
 
     const body = UpdateMemberStatusLog.parse(jsonWithCreator);
@@ -79,7 +79,7 @@ export const PUT = async (req: NextRequest, context: Context) => {
 
     return NextResponse.json(
       { message: "Member Status Log Updated" },
-      { status: 200 }
+      { status: 200 },
     );
   } catch (error) {
     const { message, status } = handleError(error);

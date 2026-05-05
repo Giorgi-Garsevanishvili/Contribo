@@ -49,7 +49,7 @@ export const PUT = async (req: NextRequest, context: Context) => {
     const json = await req.json();
     const jsonWithCreator = {
       ...json,
-      updatedById: thisUser.user.id,
+      updatedById: thisUser.user.userId,
     };
     const body = AllowedUserUpdate.parse(jsonWithCreator);
 
@@ -71,7 +71,7 @@ export const PUT = async (req: NextRequest, context: Context) => {
       where: { id },
       data: {
         regionId: body.regionId,
-        updatedById:thisUser.user.id
+        updatedById:thisUser.user.userId
       },
       include: { roles: { include: { role: true } } },
     });

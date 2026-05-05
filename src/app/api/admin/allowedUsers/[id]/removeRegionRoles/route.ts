@@ -55,7 +55,7 @@ export const PUT = async (_req: NextRequest, context: Context) => {
         where: { id },
         data: {
           regionId: null,
-          updatedById: thisUser.user.id,
+          updatedById: thisUser.user.userId,
         },
         select: {
           roles: { select: { role: { select: { name: true } } } },

@@ -14,7 +14,7 @@ export const POST = async (req: NextRequest, context: Context) => {
     const jsonWithCreator = {
       ...json,
       eventId: id,
-      userId: thisUser.user.id,
+      userId: thisUser.user.userId,
     };
     const body = CreateEventFeedback.parse(jsonWithCreator);
 

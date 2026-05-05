@@ -18,7 +18,7 @@ export const GET = async (req: NextRequest, context: Context) => {
 
     const whereClause: AvailabilityEntryWhereInput = {
       id,
-      slot: { event: { regionId: thisUser.user.ownAllowance?.regionId } },
+      slot: { event: { regionId: thisUser.user?.regionId } },
     };
 
     const data = await prisma.availabilityEntry.findMany({
@@ -69,7 +69,7 @@ export const PUT = async (req: NextRequest, context: Context) => {
 
     const jsonWithCreator = {
       ...json,
-      updatedById: thisUser.user.id,
+      updatedById: thisUser.user.userId,
     };
 
     const body = UpdateAvailabilityEntryAdmin.parse(jsonWithCreator);
@@ -77,7 +77,7 @@ export const PUT = async (req: NextRequest, context: Context) => {
     const data = await prisma.availabilityEntry.update({
       where: {
         id,
-        slot: { event: { regionId: thisUser.user.ownAllowance?.regionId } },
+        slot: { event: { regionId: thisUser.user?.regionId } },
       },
       data: body,
       include: { slot: { select: { event: { select: { name: true } } } } },
@@ -107,7 +107,7 @@ export const DELETE = async (req: NextRequest, context: Context) => {
     const deleted = await prisma.availabilityEntry.delete({
       where: {
         id,
-        slot: { event: { regionId: thisUser.user.ownAllowance?.regionId } },
+        slot: { event: { regionId: thisUser.user?.regionId } },
       },
       select: { slot: { select: { event: { select: { name: true } } } } },
     });

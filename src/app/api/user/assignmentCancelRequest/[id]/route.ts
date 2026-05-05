@@ -17,9 +17,9 @@ export const GET = async (_req: NextRequest, context: Context) => {
       where: {
         id,
         assignment: {
-          userId: thisUser.user.id,
+          userId: thisUser.user.userId,
           user: {
-            ownAllowance: { regionId: thisUser.user.ownAllowance?.regionId },
+            ownAllowance: { regionId: thisUser.user?.regionId },
           },
         },
       },
@@ -57,7 +57,7 @@ export const DELETE = async (_req: NextRequest, context: Context) => {
     const { id } = await context.params;
 
     const data = await prisma.assignmentCancelRequest.findUnique({
-      where: { id, assignment: { userId: thisUser.user.id } },
+      where: { id, assignment: { userId: thisUser.user.userId } },
     });
 
     if (data?.status === "APPROVED" || data?.status === "REJECTED") {
@@ -71,7 +71,7 @@ export const DELETE = async (_req: NextRequest, context: Context) => {
         id,
         assignment: {
           user: {
-            ownAllowance: { regionId: thisUser.user.ownAllowance?.regionId },
+            ownAllowance: { regionId: thisUser.user?.regionId },
           },
         },
       },

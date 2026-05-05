@@ -18,7 +18,7 @@ export const GET = async (_req: NextRequest, context: Context) => {
 
     const whereClause: AvailabilitySlotWhereInput = {
       eventId: id,
-      event: { regionId: thisUser.user.ownAllowance?.regionId },
+      event: { regionId: thisUser.user?.regionId },
     };
 
     const response = await prisma.availabilitySlot.findMany({
@@ -80,7 +80,7 @@ export const POST = async (req: NextRequest, context: Context) => {
     const json = (await req.json()) as z.infer<typeof CreateAvailabilitySlot>;
     const jsonWithCreator = {
       ...json,
-      createdById: thisUser.user.id,
+      createdById: thisUser.user.userId,
       eventId: id,
     };
     const body = CreateAvailabilitySlot.parse(jsonWithCreator);
@@ -119,7 +119,7 @@ export const DELETE = async (req: NextRequest, context: Context) => {
     const deleted = await prisma.availabilitySlot.deleteMany({
       where: {
         eventId: id,
-        event: { regionId: thisUser.user.ownAllowance?.regionId },
+        event: { regionId: thisUser.user?.regionId },
       },
     });
 

@@ -14,7 +14,7 @@ export const GET = async (req: NextRequest, context: Context) => {
     }
 
     const data = await prisma.availabilityEntry.findMany({
-      where: { slot: { eventId: id, event: { regionId: thisUser.user.id } } },
+      where: { slot: { eventId: id, event: { regionId: thisUser.user.userId } } },
     });
 
     if (!data || data.length === 0) {
@@ -46,7 +46,7 @@ export const DELETE = async (_req: NextRequest, context: Context) => {
       where: {
         slot: {
           eventId: id,
-          event: { regionId: thisUser.user.ownAllowance?.regionId },
+          event: { regionId: thisUser.user?.regionId },
         },
       },
     });

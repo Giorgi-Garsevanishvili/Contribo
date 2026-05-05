@@ -14,7 +14,7 @@ export const GET = async (_req: NextRequest, context: Context) => {
     const data = await prisma.eventAssignment.findMany({
       where: {
         eventId: id,
-        event: { regionId: thisUser.user.ownAllowance?.regionId },
+        event: { regionId: thisUser.user?.regionId },
       },
       include: {
         user: { select: { name: true, image: true } },
@@ -47,7 +47,7 @@ export const POST = async (req: NextRequest, context: Context) => {
     const json = (await req.json()) as z.infer<typeof CreateEventAssignment>;
     const jsonWithCreator = {
       ...json,
-      createdById: thisUser.user.id,
+      createdById: thisUser.user.userId,
       eventId: id,
     };
     const body = CreateEventAssignment.parse(jsonWithCreator);
@@ -86,7 +86,7 @@ export const DELETE = async (_req: NextRequest, context: Context) => {
     const deleted = await prisma.eventAssignment.deleteMany({
       where: {
         eventId: id,
-        event: { regionId: thisUser.user.ownAllowance?.regionId },
+        event: { regionId: thisUser.user?.regionId },
       },
     });
 

@@ -9,8 +9,8 @@ export const GET = async (_req: NextRequest) => {
 
     const data = await prisma.eventFeedback.findMany({
       where: {
-        event: { regionId: thisUser.user.ownAllowance?.regionId },
-        userId: thisUser.user.id,
+        event: { regionId: thisUser.user?.regionId },
+        userId: thisUser.user.userId,
       },
       select: {
         id: true,
@@ -38,8 +38,8 @@ export const DELETE = async (_req: NextRequest) => {
 
     const deleted = await prisma.eventFeedback.deleteMany({
       where: {
-        userId: thisUser.user.id,
-        event: { regionId: thisUser.user.ownAllowance?.regionId },
+        userId: thisUser.user.userId,
+        event: { regionId: thisUser.user?.regionId },
       },
     });
 

@@ -1,7 +1,8 @@
-import { handleError } from "@/lib/errors/handleErrors";
 import axios from "axios";
-import React, { useCallback, useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useCompAlert } from "./useCompAlert";
+import { getClientErrorMessage } from "@/lib/errors/clientErrors";
+import { responseLogOut } from "@/lib/ResponseLogOut";
 
 type PaginationMeta = {
   currentPage: number;
@@ -53,11 +54,16 @@ function usePaginatedData<T>(
           return;
         }
         setError(true);
+        const message = getClientErrorMessage(error);
+
         triggerCompAlertRef.current({
-          message: `${error}`,
+          message: `${message}`,
           type: "error",
           isOpened: true,
         });
+
+        responseLogOut({message:message});
+
         setIsLoading(false);
       }
     };
@@ -96,11 +102,15 @@ function usePaginatedData<T>(
         setIsLoading(true);
         return;
       }
+      const message = getClientErrorMessage(error);
+
       triggerCompAlertRef.current({
-        message: `${error}`,
+        message: `${message}`,
         type: "error",
         isOpened: true,
       });
+
+      responseLogOut({message:message});
       setIsLoading(false);
     }
   };

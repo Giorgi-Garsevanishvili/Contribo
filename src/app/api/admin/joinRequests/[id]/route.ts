@@ -23,7 +23,7 @@ export const GET = async (_req: NextRequest, context: Context) => {
     const data = await prisma.joinRequest.findUnique({
       where: {
         id,
-        regionId: thisUser.user.ownAllowance?.regionId,
+        regionId: thisUser.user?.regionId,
       },
       include: {
         updatedBy: { select: { name: true } },
@@ -62,7 +62,7 @@ export const PUT = async (req: NextRequest, context: Context) => {
     const json = (await req.json()) as z.infer<typeof updateJoinRequest>;
     const jsonWithCreator = {
       ...json,
-      updatedById: thisUser.user.id,
+      updatedById: thisUser.user.userId,
     };
 
     const body = updateJoinRequest.parse(jsonWithCreator);
@@ -96,7 +96,7 @@ export const PUT = async (req: NextRequest, context: Context) => {
       }
 
       const updatedRequest = await tx.joinRequest.update({
-        where: { id, regionId: thisUser.user.ownAllowance?.regionId },
+        where: { id, regionId: thisUser.user?.regionId },
         data: body,
       });
 
@@ -125,7 +125,7 @@ export const DELETE = async (_req: NextRequest, context: Context) => {
     const deleted = await prisma.joinRequest.delete({
       where: {
         id,
-        regionId: thisUser.user.ownAllowance?.regionId,
+        regionId: thisUser.user?.regionId,
       },
       select: {
         createdBy: { select: { name: true } },

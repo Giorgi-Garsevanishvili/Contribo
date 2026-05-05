@@ -15,7 +15,7 @@ export const GET = async (req: NextRequest) => {
     const searchQuery = searchParams.get("search");
 
     const whereClause: EventAssignmentWhereInput = {
-      event: { regionId: thisUser.user.ownAllowance?.regionId },
+      event: { regionId: thisUser.user?.regionId },
     };
 
     // search params
@@ -112,7 +112,7 @@ export const DELETE = async (_req: NextRequest) => {
 
     const deleted = await prisma.eventAssignment.deleteMany({
       where: {
-        event: { regionId: thisUser.user.ownAllowance?.regionId },
+        event: { regionId: thisUser.user?.regionId },
       },
     });
 
@@ -121,7 +121,7 @@ export const DELETE = async (_req: NextRequest) => {
     }
 
     return NextResponse.json({
-      message: `All Events Assignments for region: ${thisUser.user.ownAllowance?.region?.name} Deleted!`,
+      message: `All Events Assignments for region: ${thisUser.user?.region?.name} Deleted!`,
     });
   } catch (error) {
     const { message, status } = handleError(error);

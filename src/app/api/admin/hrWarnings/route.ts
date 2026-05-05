@@ -64,7 +64,7 @@ export const GET = async (req: NextRequest) => {
     const whereClause: Prisma.HrWarningWhereInput = {
       assignee: {
         ownAllowance: {
-          regionId: thisUser.user.ownAllowance?.regionId,
+          regionId: thisUser.user?.regionId,
         },
       },
     };
@@ -155,7 +155,7 @@ export const DELETE = async (_req: NextRequest) => {
     const deleted = await prisma.hrWarning.deleteMany({
       where: {
         assignee: {
-          ownAllowance: { regionId: thisUser.user.ownAllowance?.regionId },
+          ownAllowance: { regionId: thisUser.user?.regionId },
         },
       },
     });
@@ -165,7 +165,7 @@ export const DELETE = async (_req: NextRequest) => {
     }
 
     return NextResponse.json({
-      message: `All HR Warning records deleted for region: ${thisUser.user.ownAllowance?.region?.name}!`,
+      message: `All HR Warning records deleted for region: ${thisUser.user?.region?.name}!`,
     });
   } catch (error) {
     const { message, status } = handleError(error);

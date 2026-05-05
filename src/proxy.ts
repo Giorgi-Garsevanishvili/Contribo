@@ -26,7 +26,7 @@ export async function proxy(req: NextRequest) {
         }
       }
 
-      return NextResponse.redirect(new URL("/unauthorized"));
+      return NextResponse.redirect(new URL("/unauthorized", req.url));
     }
     return NextResponse.next();
   }

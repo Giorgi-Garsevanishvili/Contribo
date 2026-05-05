@@ -47,7 +47,7 @@ export const PUT = async (req: NextRequest, context: Context) => {
     const json = (await req.json()) as z.infer<typeof UpdateRating>;
     const jsonWithCreator = {
       ...json,
-      updatedById: thisUser.user.id,
+      updatedById: thisUser.user.userId,
     };
 
     const body = UpdateRating.parse(jsonWithCreator);

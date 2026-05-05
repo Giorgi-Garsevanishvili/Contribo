@@ -469,7 +469,7 @@ model AllowedUser {
   createdBy User? @relation("createdAllowanceBy", fields: [creatorId], references: [id], onDelete: SetNull)
   updatedBy User? @relation("UpdatedAllowanceBy", fields: [updatedById], references: [id], onDelete: SetNull)
 
-  userId      String?
+  userId      String?   @unique
   user        User?     @relation
   updatedAt   DateTime? @updatedAt
   createdAt   DateTime  @default(now())

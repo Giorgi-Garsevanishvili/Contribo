@@ -14,8 +14,8 @@ export const GET = async (_req: NextRequest, context: Context) => {
     const data = await prisma.eventFeedback.findUnique({
       where: {
         id,
-        event: { regionId: thisUser.user.ownAllowance?.regionId },
-        userId: thisUser.user.id,
+        event: { regionId: thisUser.user?.regionId },
+        userId: thisUser.user.userId,
       },
       select: {
         id: true,
@@ -56,7 +56,7 @@ export const PUT = async (req: NextRequest, context: Context) => {
     const json = (await req.json()) as z.infer<typeof updateEventFeedbackUser>;
     const jsonWithCreator = {
       ...json,
-      updatedById: thisUser.user.id,
+      updatedById: thisUser.user.userId,
       respondedAt: new Date(),
     };
 
@@ -115,7 +115,7 @@ export const DELETE = async (_req: NextRequest, context: Context) => {
     const deleted = await prisma.eventFeedback.delete({
       where: {
         id,
-        userId: thisUser.user.id,
+        userId: thisUser.user.userId,
       },
       select: {
         user: { select: { name: true } },

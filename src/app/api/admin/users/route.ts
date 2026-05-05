@@ -61,7 +61,7 @@ export const GET = async (req: NextRequest) => {
     const membershipFilter = searchParams.get("membership");
 
     const whereClause: UserWhereInput = {
-      ownAllowance: { regionId: thisUser.user.ownAllowance?.regionId },
+      ownAllowance: { regionId: thisUser.user?.regionId },
     };
 
     if (searchQuery && searchQuery.trim()) {

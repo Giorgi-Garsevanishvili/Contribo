@@ -21,7 +21,7 @@ export const POST = async (req: NextRequest, context: Context) => {
     const jsonWithCreator = {
       ...json,
       assignmentId: id,
-      requestedById: thisUser.user.id,
+      requestedById: thisUser.user.userId,
     };
 
     const body = CreateAssignmentCancelReq.parse(jsonWithCreator);
@@ -29,7 +29,7 @@ export const POST = async (req: NextRequest, context: Context) => {
     const existedRequest = await prisma.assignmentCancelRequest.findMany({
       where: {
         OR: [{ status: "PENDING" }, { status: "REQUESTED" }],
-        requestedById: thisUser.user.id,
+        requestedById: thisUser.user.userId || "",
         assignmentId: id,
       },
     });

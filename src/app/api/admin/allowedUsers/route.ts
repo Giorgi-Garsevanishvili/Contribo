@@ -14,7 +14,7 @@ export const GET = async (req: NextRequest) => {
     const { searchParams } = new URL(req.url);
 
     const whereClause: Prisma.AllowedUserWhereInput = {
-      regionId: thisUser.user.ownAllowance?.regionId,
+      regionId: thisUser.user?.regionId,
     };
 
     //Pagination Params
@@ -106,12 +106,12 @@ export const POST = async (req: NextRequest) => {
     const thisUser = await requireRole("ADMIN");
 
     const json = (await req.json()) as z.infer<typeof AllowedUserCreate>;
-    const jsonWithCreator = { ...json, creatorId: thisUser.user.id };
+    const jsonWithCreator = { ...json, creatorId: thisUser.user.userId };
     const body = AllowedUserCreate.parse(jsonWithCreator);
 
     if (!body || !Object.keys(body).length) {
       return NextResponse.json(
-        { message: "At least one filed must be provided" },
+        { message: "At least one field must be provided" },
         { status: 400 },
       );
     }
@@ -126,8 +126,8 @@ export const POST = async (req: NextRequest) => {
     const newAllowedUser = await prisma.allowedUser.create({
       data: {
         email: body.email,
-        regionId: thisUser.user.ownAllowance?.regionId,
-        creatorId: thisUser.user.id,
+        regionId: thisUser.user?.regionId,
+        creatorId: thisUser.user.userId,
       },
     });
 

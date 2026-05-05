@@ -1,6 +1,8 @@
 import { useEffect, useRef, useState } from "react";
 import { useCompAlert } from "./useCompAlert";
 import axios from "axios";
+import { getClientErrorMessage } from "@/lib/errors/clientErrors";
+import { responseLogOut } from "@/lib/ResponseLogOut";
 
 export function useFetchData<T>(url: string, dependencies: unknown[] = []) {
   const [data, setData] = useState<T>();
@@ -38,15 +40,18 @@ export function useFetchData<T>(url: string, dependencies: unknown[] = []) {
         setIsLoadingFetch(false);
         setSuccess(false);
         if (error instanceof Error && error.name === "CanceledError") {
-          setIsLoadingFetch(true)
+          setIsLoadingFetch(true);
           return;
         }
         setError(`${error}`);
+        const message = getClientErrorMessage(error);
         triggerCompAlertRef.current({
-          message: `${error}`,
+          message: `${message}`,
           type: "error",
           isOpened: true,
         });
+
+       responseLogOut({ message: message });
       }
     };
 
@@ -84,14 +89,17 @@ export function useFetchData<T>(url: string, dependencies: unknown[] = []) {
       setSuccess(false);
       setError(`${error}`);
       if (error instanceof Error && error.name === "CanceledError") {
-        setIsLoadingFetch(true)
+        setIsLoadingFetch(true);
         return;
       }
+      const message = getClientErrorMessage(error);
       triggerCompAlertRef.current({
-        message: `${error}`,
+        message: `${message}`,
         type: "error",
         isOpened: true,
       });
+
+      responseLogOut({ message: message });
     }
 
     return () => {

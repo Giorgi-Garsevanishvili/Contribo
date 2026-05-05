@@ -16,7 +16,7 @@ export const GET = async (_req: NextRequest, context: Context) => {
 
     const whereClause: AvailabilitySlotWhereInput = {
       eventId: id,
-      event: { regionId: thisUser.user.ownAllowance?.regionId },
+      event: { regionId: thisUser.user?.regionId },
       published: true,
     };
 

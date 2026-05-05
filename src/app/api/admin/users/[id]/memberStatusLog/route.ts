@@ -19,7 +19,7 @@ export const GET = async (_req: NextRequest, context: Context) => {
       where: {
         userId: id,
         user: {
-          ownAllowance: { regionId: thisUser.user.ownAllowance?.regionId },
+          ownAllowance: { regionId: thisUser.user?.regionId },
         },
       },
       select: {
@@ -69,7 +69,7 @@ export const POST = async (req: NextRequest, context: Context) => {
     const jsonWithCreator = {
       ...json,
       userId: id,
-      createdById: thisUser.user.id,
+      createdById: thisUser.user.userId,
     };
 
     const body = MemberStatusLogCreate.parse(jsonWithCreator);
@@ -115,7 +115,7 @@ export const DELETE = async (_req: NextRequest, context: Context) => {
     const deleted = await prisma.memberStatusLog.deleteMany({
       where: {
         user: {
-          ownAllowance: { regionId: thisUser.user.ownAllowance?.regionId },
+          ownAllowance: { regionId: thisUser.user?.regionId },
           id,
         },
       },

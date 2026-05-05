@@ -3,6 +3,8 @@ import { useCompAlert } from "./useCompAlert";
 import axios from "axios";
 import { useConfirmTab } from "./useConfirmTab";
 import { signOut } from "next-auth/react";
+import { getClientErrorMessage } from "@/lib/errors/clientErrors";
+import { responseLogOut } from "@/lib/ResponseLogOut";
 
 export function useDeleteData<T>(
   url: string,
@@ -59,9 +61,7 @@ export function useDeleteData<T>(
 
       const signOutReq = response.data.requiresSignOut === true;
       if (signOutReq) {
-        return setTimeout(async () => {
-          await signOut({ callbackUrl: "/" });
-        }, 4000);
+        responseLogOut({ signOutReq: signOutReq });
       }
 
       if (fetchAction) return fetchAction();
@@ -69,12 +69,15 @@ export function useDeleteData<T>(
       setIsLoadingDelete(false);
       setSuccess(false);
       setError(`${error}`);
+      const message = getClientErrorMessage(error);
 
       triggerCompAlertRef.current({
-        message: `${error}`,
+        message: `${message}`,
         type: "error",
         isOpened: true,
       });
+
+      responseLogOut({ message: message });
     }
   };
 

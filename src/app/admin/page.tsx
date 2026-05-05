@@ -1,5 +1,4 @@
 import AllowedStats from "@/(components)/adminComp/AllowedStats";
-import EventCard from "@/(components)/adminComp/Events/EventCard";
 import LiveEvents from "@/(components)/adminComp/Events/LiveEvents";
 import UpcomingEvents from "@/(components)/adminComp/Events/UpcomingEvents";
 import EventStats from "@/(components)/adminComp/EventStats";

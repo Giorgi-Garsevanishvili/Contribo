@@ -11,7 +11,7 @@ export const GET = async (_req: NextRequest) => {
 
     const data = await prisma.joinRequest.findMany({
       where: {
-        createdById: thisUser.user.id,
+        createdById: thisUser.user.userId || "",
       },
       select: {
         id: true,
@@ -40,18 +40,18 @@ export const POST = async (req: NextRequest) => {
     const json = (await req.json()) as z.infer<typeof CreateJoinRequest>;
     const jsonWithCreator = {
       ...json,
-      createdById: thisUser.user.id,
+      createdById: thisUser.user.userId,
     };
     const body = CreateJoinRequest.parse(jsonWithCreator);
 
-    if (body.regionId === thisUser.user.ownAllowance?.regionId) {
+    if (body.regionId === thisUser.user?.regionId) {
       return NextResponse.json({
         message: "You Cant Request to Join Your Current Region",
       });
     }
 
     const checkData = await prisma.joinRequest.findMany({
-      where: { createdById: thisUser.user.id, regionId: body.regionId },
+      where: { createdById: thisUser.user.userId || "", regionId: body.regionId },
     });
 
     if (checkData.length > 0) {
@@ -84,7 +84,7 @@ export const DELETE = async (_req: NextRequest) => {
 
     const deleted = await prisma.joinRequest.deleteMany({
       where: {
-        createdById: thisUser.user.id,
+        createdById: thisUser.user.userId || "",
       },
     });
 

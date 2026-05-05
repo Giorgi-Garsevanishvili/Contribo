@@ -14,7 +14,7 @@ export const GET = async (_req: NextRequest, context: Context) => {
     const data = await prisma.joinRequest.findUnique({
       where: {
         id,
-        createdById: thisUser.user.id,
+        createdById: thisUser.user.userId || "",
       },
       include: {
         updatedBy: { select: { name: true } },
@@ -57,12 +57,12 @@ export const PUT = async (req: NextRequest, context: Context) => {
     const json = (await req.json()) as z.infer<typeof updateJoinRequestRegular>;
     const jsonWithCreator = {
       ...json,
-      updatedById: thisUser.user.id,
+      updatedById: thisUser.user.userId,
     };
 
     const body = updateJoinRequestRegular.parse(jsonWithCreator);
 
-    if (body.regionId === thisUser.user.ownAllowance?.regionId) {
+    if (body.regionId === thisUser.user?.regionId) {
       return NextResponse.json({
         message: "You Cant Request to Join Your Current Region",
       });
@@ -92,7 +92,7 @@ export const DELETE = async (_req: NextRequest, context: Context) => {
     const deleted = await prisma.joinRequest.delete({
       where: {
         id,
-        createdById: thisUser.user.id,
+        createdById: thisUser.user.userId || "",
       },
       select: {
         createdBy: { select: { name: true } },

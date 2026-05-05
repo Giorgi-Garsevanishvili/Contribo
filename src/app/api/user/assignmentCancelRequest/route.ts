@@ -21,8 +21,8 @@ export const GET = async (req: NextRequest) => {
     const statusFilter = searchParams.get("status");
 
     const whereClause: AssignmentCancelRequestWhereInput = {
-      assignment: { event: { regionId: thisUser.user.ownAllowance?.regionId } },
-      requestedById: thisUser.user.id,
+      assignment: { event: { regionId: thisUser.user?.regionId } },
+      requestedById: thisUser.user.userId || "",
     };
 
     if (statusFilter) {

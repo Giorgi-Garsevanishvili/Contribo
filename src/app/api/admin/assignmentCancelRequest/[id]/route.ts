@@ -20,7 +20,7 @@ export const GET = async (_req: NextRequest, context: Context) => {
         id,
         assignment: {
           user: {
-            ownAllowance: { regionId: thisUser.user.ownAllowance?.regionId },
+            ownAllowance: { regionId: thisUser.user?.regionId },
           },
         },
       },
@@ -68,7 +68,7 @@ export const PUT = async (req: NextRequest, context: Context) => {
     >;
     const jsonWithCreator = {
       ...json,
-      reviewedById: thisUser.user.id,
+      reviewedById: thisUser.user.userId,
       reviewedAt: reviewTime,
     };
 
@@ -78,7 +78,7 @@ export const PUT = async (req: NextRequest, context: Context) => {
       await prisma.$transaction(async (tx) => {
         const updateAssignment = await tx.eventAssignment.update({
           where: { id: body.assignmentId },
-          data: { updatedById: thisUser.user.id, status: "CANCELLED" },
+          data: { updatedById: thisUser.user.userId, status: "CANCELLED" },
         });
 
         await tx.assignmentCancelRequest.update({
@@ -123,7 +123,7 @@ export const DELETE = async (_req: NextRequest, context: Context) => {
         id,
         assignment: {
           user: {
-            ownAllowance: { regionId: thisUser.user.ownAllowance?.regionId },
+            ownAllowance: { regionId: thisUser.user?.regionId },
           },
         },
       },

@@ -24,7 +24,7 @@ export const GET = async (req: NextRequest) => {
 
     const whereClause: AssignmentCancelRequestWhereInput = {
       requestedBy: {
-        ownAllowance: { regionId: thisUser.user.ownAllowance?.regionId },
+        ownAllowance: { regionId: thisUser.user?.regionId },
       },
     };
 
@@ -114,7 +114,7 @@ export const DELETE = async (_req: NextRequest) => {
     const deleted = await prisma.assignmentCancelRequest.deleteMany({
       where: {
         requestedBy: {
-          ownAllowance: { regionId: thisUser.user.ownAllowance?.regionId },
+          ownAllowance: { regionId: thisUser.user?.regionId },
         },
       },
     });
@@ -124,7 +124,7 @@ export const DELETE = async (_req: NextRequest) => {
     }
 
     return NextResponse.json({
-      message: `All assignment Cancel Request deleted for region: ${thisUser.user.ownAllowance?.region?.name}!`,
+      message: `All assignment Cancel Request deleted for region: ${thisUser.user?.region?.name}!`,
     });
   } catch (error) {
     const { message, status } = handleError(error);

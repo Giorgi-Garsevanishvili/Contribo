@@ -47,7 +47,7 @@ export const GET = async (req: NextRequest) => {
     future.setDate(future.getDate() + 7);
 
     const whereClause: EventWhereInput = {
-      regionId: thisUser.user.ownAllowance?.regionId,
+      regionId: thisUser.user?.regionId,
       startTime: { gte: now, lte: future },
     };
 

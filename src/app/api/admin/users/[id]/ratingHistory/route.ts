@@ -45,7 +45,7 @@ export const POST = async (req: NextRequest, context: Context) => {
       oldValue,
       newValue,
       userId: id,
-      createdById: thisUser.user.id,
+      createdById: thisUser.user.userId,
     };
 
     const body = RatingCreate.parse(jsonWithCreator);
@@ -206,7 +206,7 @@ export const DELETE = async (_req: NextRequest, context: Context) => {
     const deleted = await prisma.ratingHistory.deleteMany({
       where: {
         user: {
-          ownAllowance: { regionId: thisUser.user.ownAllowance?.regionId },
+          ownAllowance: { regionId: thisUser.user?.regionId },
           id,
         },
       },

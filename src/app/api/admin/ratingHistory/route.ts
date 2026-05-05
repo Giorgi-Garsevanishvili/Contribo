@@ -9,7 +9,7 @@ export const GET = async (_req: NextRequest) => {
     const data = await prisma.ratingHistory.findMany({
       where: {
         user: {
-          ownAllowance: { regionId: thisUser.user.ownAllowance?.regionId },
+          ownAllowance: { regionId: thisUser.user?.regionId },
         },
       },
     });
@@ -34,7 +34,7 @@ export const DELETE = async (_req: NextRequest) => {
     const deleted = await prisma.ratingHistory.deleteMany({
       where: {
         user: {
-          ownAllowance: { regionId: thisUser.user.ownAllowance?.regionId },
+          ownAllowance: { regionId: thisUser.user?.regionId },
         },
       },
     });
@@ -44,7 +44,7 @@ export const DELETE = async (_req: NextRequest) => {
     }
 
     return NextResponse.json({
-      message: `All Rating History records deleted for region: ${thisUser.user.ownAllowance?.region?.name}!`,
+      message: `All Rating History records deleted for region: ${thisUser.user?.region?.name}!`,
     });
   } catch (error) {
     const { status, message } = handleError(error);

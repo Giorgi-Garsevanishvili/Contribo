@@ -23,7 +23,7 @@ export const GET = async (req: NextRequest, context: Context) => {
 
     const whereClause: EventFeedbackWhereInput = {
       eventId: id,
-      event: { regionId: thisUser.user.ownAllowance?.regionId },
+      event: { regionId: thisUser.user?.regionId },
     };
 
     //Pagination Params
@@ -209,7 +209,7 @@ export const DELETE = async (_req: NextRequest, context: Context) => {
     const deleted = await prisma.eventFeedback.deleteMany({
       where: {
         eventId: id,
-        event: { regionId: thisUser.user.ownAllowance?.regionId },
+        event: { regionId: thisUser.user?.regionId },
       },
     });
 
