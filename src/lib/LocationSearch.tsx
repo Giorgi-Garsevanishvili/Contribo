@@ -42,7 +42,7 @@ export function LocationSearch({ onLocationSelect }: LocationSearchProps) {
     try {
       const data: NominatimResult[] = await Nominatim.geocode({
         q: text,
-        limit: 4,
+        limit: 5,
         addressdetails: true,
         
       });
@@ -115,7 +115,7 @@ export function LocationSearch({ onLocationSelect }: LocationSearchProps) {
   };
 
   const handleBlur = (): void => {
-    setTimeout(() => setIsOpen(false), 200);
+    setTimeout(() => setIsOpen(false), 450);
   };
 
   return (
@@ -139,13 +139,13 @@ export function LocationSearch({ onLocationSelect }: LocationSearchProps) {
         )}
 
         {isOpen && results.length > 0 && (
-          <div className="absolute top-full overflow-scroll left-0 right-0 mt-1 bg-white border border-gray-300 rounded-lg shadow-lg z-50">
+          <div className="absolute top-full overflow-auto no-scrollbar left-0 right-0 mt-1 bg-white border border-gray-300 rounded-lg shadow-lg z-50">
             {results.map((result) => (
               <button
                 key={result.osm_id}
                 type="button"
                 onClick={() => handleSelect(result)}
-                className="w-full text-left px-4 py-3 hover:bg-gray-100 border-b border-gray-200 last:border-b-0 transition-colors"
+                className="w-full text-left px-4 py-3 cursor-pointer hover:bg-gray-100 border-b border-gray-200 last:border-b-0 transition-colors"
               >
                 <div className="font-medium text-gray-900">
                   {result.display_name.split(",")[0]}
