@@ -8,7 +8,6 @@ function UserList() {
     <>
       <div className=" flex flex-col mt-2 items-center justify-center ">
         <div className="flex items-center flex-col justify-center">
-          <AddEventButton />
           <EventsList />
         </div>
       </div>

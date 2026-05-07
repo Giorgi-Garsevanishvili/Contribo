@@ -1,10 +1,11 @@
 "use client";
 
-import Theme from "../generalComp/Theme";
+
 import { Provider } from "react-redux";
 import { store } from "@/redux/store";
 import { ModalProvider } from "../../../context/ModalContext";
 import GeneralModal from "../generalComp/GeneralModal";
+import ThemeToggle from "../generalComp/ThemeToggle";
 
 export const Providers = ({ children }: { children: React.ReactNode }) => {
   return (
@@ -12,7 +13,7 @@ export const Providers = ({ children }: { children: React.ReactNode }) => {
       <ModalProvider>
         <GeneralModal />
         {children}
-        <Theme />
+        <ThemeToggle />
       </ModalProvider>
     </Provider>
   );

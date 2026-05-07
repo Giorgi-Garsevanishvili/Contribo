@@ -13,15 +13,22 @@ type PaginationMeta = {
   hasPrevPage: boolean;
 };
 
+type CountsType = {
+  availabilityCounts: number;
+  totalDuration: string;
+};
+
 function usePaginatedData<T>(
   url: string,
   initialData: T,
-  dependencies?: unknown,
+  stopFetch?: boolean | null,
+  dependencies?: unknown
 ) {
   const [data, setData] = useState<T>(initialData);
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [error, setError] = useState<boolean>(false);
   const [pagination, setPagination] = useState<PaginationMeta | null>();
+  const [counts, setCounts] = useState<CountsType | null>();
 
   const { triggerCompAlert } = useCompAlert();
   const triggerCompAlertRef = useRef(triggerCompAlert);
@@ -30,7 +37,8 @@ function usePaginatedData<T>(
   useEffect(() => {
     const fetchData = async () => {
       try {
-        if (!url) return;
+        if (!url || stopFetch) return;
+
 
         if (abortControllerRef.current) {
           abortControllerRef.current.abort();
@@ -47,6 +55,9 @@ function usePaginatedData<T>(
         if (responseData.pagination) {
           setPagination(responseData.pagination);
         }
+        if (responseData.counts) {
+          setCounts(responseData.counts);
+        }
         setIsLoading(false);
       } catch (error) {
         if (error instanceof Error && error.name === "CanceledError") {
@@ -62,7 +73,7 @@ function usePaginatedData<T>(
           isOpened: true,
         });
 
-        responseLogOut({message:message});
+        responseLogOut({ message: message });
 
         setIsLoading(false);
       }
@@ -95,6 +106,9 @@ function usePaginatedData<T>(
       if (responseData.pagination) {
         setPagination(responseData.pagination);
       }
+      if (responseData.counts) {
+        setCounts(responseData.counts);
+      }
       setIsLoading(false);
     } catch (error) {
       setError(true);
@@ -110,12 +124,12 @@ function usePaginatedData<T>(
         isOpened: true,
       });
 
-      responseLogOut({message:message});
+      responseLogOut({ message: message });
       setIsLoading(false);
     }
   };
 
-  return { data, isLoading, error, pagination, refetch };
+  return { data, isLoading, error, pagination, refetch, counts };
 }
 
 export default usePaginatedData;

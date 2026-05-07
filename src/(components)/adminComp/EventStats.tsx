@@ -39,17 +39,19 @@ function EventStats() {
   };
 
   return (
-    <>
+    
       <button
         onClick={() => router.push("admin/events")}
-        className={`${isLoadingFetch ? "animate-pulse" : ""} flex hover:shadow-lg backdrop-blur-xs  hover:opacity-95 transition-all duration-300 btn flex-col select-none w-40 h-40 items-center justify-center mt-0 m-2 text-white pt-0 pb-0 p-0.5 bg-[#434d5f98] rounded-xl shadow-sm shadow-white `}
+      className={`${
+        isLoadingFetch ? "animate-pulse" : ""
+      } flex hover:shadow-sm ease-out  hover:opacity-95 transition-all backdrop-blur-xs duration-300 btn w-full h-full gap-4 md:flex-col select-none md:w-40 md:h-40 items-center justify-between  text-white   bg-[#434d5f98] rounded-xl shadow-sm shadow-white `}
       >
-        <BsFillCalendarEventFill size={30} className="m-2 mt-9" />
-        <div className="flex flex-row p-0 m-0 justify-center items-center grow">
+        <BsFillCalendarEventFill size={30} />
+        <div className="flex flex-row gap-2 justify-center items-center grow">
           <h1
             className={`text-2xl ${
               isLoadingFetch ? "animate-spin" : ""
-            } font-bold mr-3`}
+            } font-bold`}
           >
             {isLoadingFetch ? (
               <div
@@ -69,13 +71,13 @@ function EventStats() {
           </h1>
           <h3>Events</h3>
         </div>
-        <div className="flex bg-white items-center border-gray-300 justify-center w-40 p-1.5 m-0 rounded-b-xl">
-          <h3 className="text-black text-sm">
+        <div className="flex bg-white items-center border-gray-300 justify-center w-fit px-4 py-1.5  rounded-sm">
+          <h3 className="text-black text-xs shrink-0">
             {`Average Rating: ${rating}`} &#10024;
           </h3>
         </div>
       </button>
-    </>
+    
   );
 }
 

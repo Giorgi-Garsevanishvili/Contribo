@@ -37,7 +37,7 @@ const newEventDataEmpty: NewEventData = {
   name: "",
 };
 
-function EventCreateModal() {
+function EventCreateModal({ parentRefetch }: { parentRefetch: () => void }) {
   const [formData, setFormData] = useState<CreateEventFormData>(emptyForm);
   const { triggerCompAlert } = useCompAlert();
   const triggerCompAlertRef = useRef(triggerCompAlert);
@@ -80,6 +80,9 @@ function EventCreateModal() {
         id: response.data.data.id,
       });
       setDone(true);
+      if(parentRefetch){
+        parentRefetch()
+      }
     } catch (error) {
       const message = getClientErrorMessage(error);
       triggerCompAlertRef.current({
@@ -243,7 +246,7 @@ function EventCreateModal() {
       )}
 
       {done && newEventData.id ? (
-        <RoleAvailabilityComp stepAction={true} props={newEventData} />
+        <RoleAvailabilityComp parentRefetch={parentRefetch} stepAction={true} props={newEventData} />
       ) : null}
     </div>
   );

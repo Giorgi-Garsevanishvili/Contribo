@@ -70,86 +70,86 @@ function HrWarningStats() {
   }, [hover]);
 
   return (
-    <>
-      <button
-        onClick={() => router.push("admin/hr-warnings")}
-        onMouseEnter={() => setHover(true)}
-        onMouseLeave={() => {
-          setHover(false);
-        }}
-        className={`${isLoading ? "animate-pulse" : ""} flex backdrop-blur-xs hover:shadow-lg  hover:opacity-95 transition-all duration-300 btn flex-col select-none w-40 h-40 items-center justify-center mt-0 m-2 text-white pt-0 p-0.5 bg-[#434d5f98] rounded-xl shadow-sm shadow-white `}
-      >
-        {!hover ? (
-          <>
-            <IoFileTrayStacked size={30} className="m-2" />
-            <h1
-              className={`text-2xl ${
-                isLoading ? "animate-spin transition-all duration-300" : ""
-              } font-bold m-1`}
-            >
-              {isLoading ? (
-                <div
-                  className={`text-sm ${
-                    isLoading ? "animate-spin transition-all duration-300" : ""
-                  } font-bold`}
-                >
-                  <ImSpinner9 className="animate-spin" size={25} />
-                </div>
-              ) : (
-                pagination?.totalCount
-              )}
-            </h1>
-            <h3>HR Cases</h3>
-          </>
-        ) : (
-          <>
-            <div
-              className={`${
-                !statsShow ? "flex" : "hidden"
-              } flex-col justify-center items-center`}
-            >
-              <h1 className="mb-1">HR Cases</h1>
-              {isLoading ? (
-                <h3 className="animate-spin font-bold">.</h3>
-              ) : Object.keys(typeStats).length !== 0 ? (
-                Object.entries(typeStats)
+    <button
+      onClick={() => router.push("admin/hr-warnings")}
+      onMouseEnter={() => setHover(true)}
+      onMouseLeave={() => {
+        setHover(false);
+      }}
+      className={`${
+        isLoading ? "animate-pulse" : ""
+      } flex hover:shadow-sm ease-out  hover:opacity-95 transition-all backdrop-blur-xs duration-300 btn w-full gap-4 md:flex-col select-none md:w-40 md:h-40 items-center justify-center  text-white   bg-[#434d5f98] rounded-xl shadow-sm shadow-white `}
+    >
+      {!hover ? (
+        <>
+          <IoFileTrayStacked size={30} />
+          <h1
+            className={`text-2xl ${
+              isLoading ? "animate-spin transition-all duration-300" : ""
+            } font-bold`}
+          >
+            {isLoading ? (
+              <div
+                className={`text-sm ${
+                  isLoading ? "animate-spin transition-all duration-300" : ""
+                } font-bold`}
+              >
+                <ImSpinner9 className="animate-spin" size={25} />
+              </div>
+            ) : (
+              pagination?.totalCount
+            )}
+          </h1>
+          <h3>HR Cases</h3>
+        </>
+      ) : (
+        <>
+          <div
+            className={`${
+              !statsShow ? "flex" : "hidden"
+            } flex-col justify-center items-center`}
+          >
+            <h1 className="mb-1">HR Cases</h1>
+            {isLoading ? (
+              <h3 className="animate-spin font-bold">.</h3>
+            ) : Object.keys(typeStats).length !== 0 ? (
+              Object.entries(typeStats)
+                .slice(0, 3)
+                .map(([status, count]) => (
+                  <div
+                    className="mt-1 p-1 border-2 rounded-lg text-sm"
+                    key={status}
+                  >
+                    {status} : <span className="font-bold ">{count}</span>
+                  </div>
+                ))
+            ) : (
+              "No Stats To Display"
+            )}
+          </div>
+          <div
+            className={`${
+              statsShow ? "flex" : "hidden"
+            } flex-col h-full pt-1.5 transition-all duration-300 `}
+          >
+            <h2 className="mb-0.5">Case Statuses</h2>
+            {Object.keys(statusStats).length !== 0
+              ? Object.entries(statusStats)
                   .slice(0, 3)
-                  .map(([status, count]) => (
+                  .map(([type, count]) => (
                     <div
                       className="mt-1 p-1 border-2 rounded-lg text-sm"
-                      key={status}
+                      key={type}
                     >
-                      {status} : <span className="font-bold ">{count}</span>
+                      {type} : {count}
                     </div>
                   ))
-              ) : (
-                "No Stats To Display"
-              )}
-            </div>
-            <div
-              className={`${
-                statsShow ? "flex" : "hidden"
-              } flex-col h-full pt-1.5 transition-all duration-300 `}
-            >
-              <h2 className="mb-0.5">Case Statuses</h2>
-              {Object.keys(statusStats).length !== 0
-                ? Object.entries(statusStats)
-                    .slice(0, 3)
-                    .map(([type, count]) => (
-                      <div
-                        className="mt-1 p-1 border-2 rounded-lg text-sm"
-                        key={type}
-                      >
-                        {type} : {count}
-                      </div>
-                    ))
-                : "No Stats To Display"}
-              <h3>...</h3>
-            </div>
-          </>
-        )}
-      </button>
-    </>
+              : "No Stats To Display"}
+            <h3>...</h3>
+          </div>
+        </>
+      )}
+    </button>
   );
 }
 

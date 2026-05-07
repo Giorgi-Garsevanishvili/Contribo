@@ -50,7 +50,7 @@ async function SideBar({ page }: { page: string }) {
           </p>
         </div>
       </div>
-      <nav className="flex-1 px-4 space-y-1 text-white overflow-auto">
+      <nav className="flex-1 px-4 space-y-1 no-scrollbar text-white overflow-auto">
         <div className="pt-4 pb-2 px-3 text-[10px] font-bold uppercase tracking-widest text-slate-300">
           Switch Role
         </div>

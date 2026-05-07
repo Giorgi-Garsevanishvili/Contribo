@@ -1,15 +1,15 @@
 "use client";
 import { BsFillPersonLinesFill } from "react-icons/bs";
 import { IoIosInformationCircleOutline } from "react-icons/io";
-import { IoAdd, IoRocket } from "react-icons/io5";
+import { IoAdd } from "react-icons/io5";
 import { useModal } from "../../../../context/ModalContext";
 import { useState } from "react";
 import { Loader } from "lucide-react";
-import { useFetchData } from "@/hooks/useDataFetch";
 import { AssignmentStatus, GTypes } from "@/generated/enums";
 import usePaginatedData from "@/hooks/usePaginatedData";
 import AvailabilityCreate from "./AvailabilityCreate";
 import { TbPencilOff } from "react-icons/tb";
+import AvailabilityDisplay from "./AvailabilityDisplay";
 
 interface NewDataProps {
   id: string;
@@ -70,9 +70,11 @@ interface RolesData {
 function RoleAvailabilityComp({
   props,
   stepAction,
+  parentRefetch,
 }: {
   props: NewDataProps;
   stepAction?: boolean;
+  parentRefetch: () => void;
 }) {
   const { closeModal } = useModal();
   const [isEdit, setIsEdit] = useState(false);
@@ -87,7 +89,7 @@ function RoleAvailabilityComp({
     refetch,
   } = usePaginatedData<AvailabilityData[]>(
     `/api/admin/events/${props.id}/availabilitySlots`,
-    [],
+    [],stepAction
   );
 
   const { data: RolesData, isLoading: isLoadingRoles } = usePaginatedData<
@@ -118,6 +120,7 @@ function RoleAvailabilityComp({
         roles={RolesData}
         eventId={props.id}
         refetch={refetch}
+        parentRefetch={parentRefetch}
       />
       <div className="flex gap-3 h-fit flex-wrap ">
         {isLoadingData ? (
@@ -129,11 +132,10 @@ function RoleAvailabilityComp({
           </div>
         ) : data.length > 0 ? (
           data.map((avv) => (
-            <AvailabilityCreate
+            <AvailabilityDisplay
               refetch={refetch}
               availabilities={avv}
               key={avv.id}
-              isEdit={isEdit}
             />
           ))
         ) : (

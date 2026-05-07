@@ -13,7 +13,12 @@ type ModalContextType = {
   content: ReactNode;
   title: string;
   subTitle: string;
-  openModal: (title?: string, subTitle?: string, content?: ReactNode) => void;
+  openModal: (
+    title?: string,
+    subTitle?: string,
+    content?: ReactNode,
+    parentRefetch?: () => void,
+  ) => void;
   closeModal: () => void;
 };
 
@@ -24,16 +29,21 @@ export function ModalProvider({ children }: { children: ReactNode }) {
   const [content, setContent] = useState<ReactNode>(null);
   const [title, setTitle] = useState<string>("");
   const [subTitle, setSubTitle] = useState<string>("");
+  const [parentRefetch, setParentRefetch] = useState<(() => void) | null>(null);
 
   const openModal = (
     title?: string,
     subTitle?: string,
     modalContent?: ReactNode,
+    parentRefetch?: () => void,
   ) => {
     setContent(modalContent || null);
     setTitle(title || "");
     setSubTitle(subTitle || "");
     setIsOpen(true);
+    if (parentRefetch) {
+      setParentRefetch(() => parentRefetch);
+    }
   };
 
   const closeModal = () => {
@@ -41,6 +51,7 @@ export function ModalProvider({ children }: { children: ReactNode }) {
     setContent(null);
     setTitle("");
     setSubTitle("");
+    setParentRefetch(null);
   };
 
   useEffect(() => {
@@ -57,7 +68,14 @@ export function ModalProvider({ children }: { children: ReactNode }) {
 
   return (
     <ModalContext.Provider
-      value={{ isOpen, title, subTitle, content, openModal, closeModal }}
+      value={{
+        isOpen,
+        title,
+        subTitle,
+        content,
+        openModal,
+        closeModal,
+      }}
     >
       {children}
     </ModalContext.Provider>

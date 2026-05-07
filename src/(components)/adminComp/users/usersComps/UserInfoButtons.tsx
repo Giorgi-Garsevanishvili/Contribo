@@ -26,7 +26,7 @@ function UserInfoButtons({ APIPath, title, Icon, URLPath, refetchKey }: Props) {
 
   const { data, isLoading, pagination } = usePaginatedData<Data>(
     `/api/admin/users/${params.userId}/${APIPath}?limit=100`,
-    [],
+    [],null,
     refetchKey,
   );
 

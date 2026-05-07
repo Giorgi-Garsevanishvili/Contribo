@@ -92,10 +92,6 @@ const authConfig: NextAuthConfig = {
             select: { roles: { select: { role: { select: { name: true } } } } },
           });
 
-          console.log(existingAccount);
-
-          console.log(userAllowance);
-
           if (!userAllowance) return "/unauthorized-user";
 
           if (userAllowance.roles.some((r) => r.role.name === "RESTRICT")) {

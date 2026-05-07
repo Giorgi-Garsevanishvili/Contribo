@@ -1,4 +1,3 @@
-import { useFetchData } from "@/hooks/useDataFetch";
 import { useMemo, useState } from "react";
 import { FaInfoCircle } from "react-icons/fa";
 import { IoIosCloseCircle } from "react-icons/io";

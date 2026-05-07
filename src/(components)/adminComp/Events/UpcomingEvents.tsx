@@ -4,16 +4,14 @@ import EventCard from "./EventCard";
 import { ImSpinner9 } from "react-icons/im";
 import { useRouter } from "next/navigation";
 import { IoIosArrowForward } from "react-icons/io";
-import { BsBroadcast } from "react-icons/bs";
 import { IoCalendarOutline } from "react-icons/io5";
+import { PiUserCircleCheck } from "react-icons/pi";
+import { GoClock } from "react-icons/go";
+import { AiOutlineAlert } from "react-icons/ai";
 
 type EventDataType = {
+  status: "LIVE" | "ENDED" | "UPCOMING";
   id: string;
-  name: string;
-  location: string;
-  startTime: string;
-  endTime: string;
-  rating: number | null;
   region: {
     name: string;
   } | null;
@@ -23,6 +21,11 @@ type EventDataType = {
   updatedBy: {
     name: string | null;
   } | null;
+  name: string;
+  location: string;
+  startTime: Date;
+  endTime: Date;
+  rating: number | null;
   assignments: {
     user: {
       name: string | null;
@@ -33,24 +36,26 @@ type EventDataType = {
     } | null;
   }[];
   availabilities: {
+    _count: {
+      availabilityEntries: number;
+    };
+    role: {
+      name: string;
+    };
     availabilityEntries: {
       user: {
         name: string | null;
         image: string | null;
       };
     }[];
-    role: {
-      name: string;
-    };
     totalSlots: number;
   }[];
-  status: "LIVE" | "ENDED" | "UPCOMING";
 };
 
 function UpcomingEvents() {
-  const { data, isLoading, pagination, refetch } = usePaginatedData<
+  const { data, isLoading, counts, refetch } = usePaginatedData<
     EventDataType[]
-  >(`/api/admin/events/upcomingEvents`, []);
+  >(`/api/admin/events?status=FUTURE`, []);
 
   const router = useRouter();
 
@@ -62,11 +67,14 @@ function UpcomingEvents() {
         </div>
       ) : (
         <div
-          className={`${data.length === 0 ? "hidden" : "flex"} p-2 flex-col md:w-full w-90  bg-gray-50 rounded-md gap-2`}
+          className={`${data.length === 0 ? "hidden" : "flex"} p-2 flex-col md:w-[80%] w-100 shadow  bg-gray-50 rounded-md gap-2`}
         >
           <div className="flex px-2 border-b border-gray-300 p-1 w-full relative items-center text-center justify-start gap-3">
             <div className="flex items-center p-2 justify-center bg-gray-200 rounded-md">
-              <IoCalendarOutline size={22} className="text-blue-600 animate-pulse" />
+              <IoCalendarOutline
+                size={22}
+                className="text-blue-600"
+              />
             </div>
             <div className="flex flex-col items-start justify-center">
               <h3 className=" cursor-default leading-6 font-bold text-xl text-blue-950">
@@ -86,9 +94,38 @@ function UpcomingEvents() {
           <div className="flex gap-2 px-1 overflow-x-auto snap-x snap-mandatory  pb-2">
             {data.map((event) => (
               <div key={event.id} className="flex shrink-0 snap-center">
-                <EventCard event={event} />
+                <EventCard parentRefetch={refetch} event={event} />
               </div>
             ))}
+          </div>
+          <div className="flex border-t p-2 w-full text-sm text-center  h-fit items-center justify-between border-gray-300">
+            <div className="flex select-none gap-1 w-full flex-col p-2 items-center justify-center">
+              <div className="flex items-center justify-center gap-3">
+                <AiOutlineAlert className="text-blue-500" />
+                <h3 className="font-semibold text-md">{data.length}</h3>
+              </div>
+              <h3 className="text-xs text-gray-600">Upcoming Events</h3>
+            </div>
+            <div className="border-l border-gray-300 h-7 w-1"></div>
+            <div className="flex select-none gap-1 w-full flex-col p-2 items-center justify-center">
+              <div className="flex items-center justify-center gap-3">
+                <PiUserCircleCheck className="text-green-500" />
+                <h3 className="font-semibold text-md">
+                  {counts?.availabilityCounts}
+                </h3>
+              </div>
+              <h3 className="text-xs text-gray-600">Slots Available</h3>
+            </div>
+            <div className="border-l border-gray-300 h-7 w-1"></div>
+            <div className="flex select-none gap-1 w-full flex-col p-2 items-center justify-center">
+              <div className="flex items-center justify-center gap-3">
+                <GoClock className="text-purple-500" />
+                <h3 className="font-semibold text-md">
+                  {counts?.totalDuration}h
+                </h3>
+              </div>
+              <h3 className="text-xs text-gray-600">Duration</h3>
+            </div>
           </div>
         </div>
       )}

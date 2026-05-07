@@ -9,20 +9,42 @@ import z from "zod";
 type EventResponse = {
   id: string;
   name: string;
-  updatedBy: {
-    name: string | null;
-  } | null;
+  location: string;
+  startTime: Date;
+  endTime: Date;
+  rating: number | null;
   region: {
     name: string;
   } | null;
   createdBy: {
     name: string | null;
   } | null;
-  startTime: Date;
+  updatedBy: {
+    name: string | null;
+  } | null;
   assignments: {
     user: {
       name: string | null;
+      image: string | null;
     } | null;
+    role: {
+      name: string;
+    } | null;
+  }[];
+  availabilities: {
+    _count: {
+      availabilityEntries: number;
+    };
+    availabilityEntries: {
+      user: {
+        name: string | null;
+        image: string | null;
+      };
+    }[];
+    role: {
+      name: string;
+    };
+    totalSlots: number;
   }[];
 };
 
@@ -38,6 +60,10 @@ type PaginationMeta = {
 type ApiResponse = {
   data: EventResponse[];
   pagination: PaginationMeta;
+  counts: {
+    availabilityCounts: number;
+    totalDuration: string;
+  };
 };
 
 export const GET = async (req: NextRequest) => {
@@ -58,6 +84,8 @@ export const GET = async (req: NextRequest) => {
     const fromDateFilter = searchParams.get("fromDate");
     const tillDateFilter = searchParams.get("tillDate");
     const statusFilter = searchParams.get("status");
+
+    const now = new Date();
 
     const whereClause: EventWhereInput = {
       regionId: thisUser.user?.regionId,
@@ -108,6 +136,12 @@ export const GET = async (req: NextRequest) => {
       whereClause.startTime = { gt: new Date() };
     }
 
+    if (statusFilter === "FUTURE") {
+      const future = new Date(now);
+      future.setDate(future.getDate() + 7);
+      whereClause.startTime = { gte: now, lte: future };
+    }
+
     const totalCount = await prisma.event.count({
       where: whereClause,
     });
@@ -137,11 +171,14 @@ export const GET = async (req: NextRequest) => {
               select: { user: { select: { name: true, image: true } } },
             },
             totalSlots: true,
+            _count: {
+              select: { availabilityEntries: { where: { status: "ACTIVE" } } },
+            },
           },
         },
       },
       orderBy: {
-        createdAt: "desc",
+        startTime: "desc",
       },
       skip,
       take: limit,
@@ -160,7 +197,34 @@ export const GET = async (req: NextRequest) => {
       });
     }
 
-    const now = new Date();
+    // calculate totals
+
+    const getAvailableSlots = (event: EventResponse) => {
+      return event.availabilities.reduce((total, slot) => {
+        const taken = slot.availabilityEntries.length;
+        const available = slot.totalSlots - taken;
+        return total + available;
+      }, 0);
+    };
+
+    const getTotalDuration = (events: EventResponse[]) => {
+      const totalMs = events.reduce((sum, event) => {
+        return (
+          sum +
+          (new Date(event.endTime).getTime() -
+            new Date(event.startTime).getTime())
+        );
+      }, 0);
+
+      return (totalMs / (1000 * 60 * 60)).toFixed(1);
+    };
+
+    const availabilityCounts = data.reduce(
+      (total, event) => total + getAvailableSlots(event),
+      0,
+    );
+
+    const totalDuration = getTotalDuration(data);
 
     const dataWithStatus = data.map((event) => {
       let status: "UPCOMING" | "LIVE" | "ENDED";
@@ -188,6 +252,10 @@ export const GET = async (req: NextRequest) => {
         limit,
         hasNextPage,
         hasPrevPage,
+      },
+      counts: {
+        availabilityCounts,
+        totalDuration,
       },
     };
 

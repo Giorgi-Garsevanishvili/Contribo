@@ -6,15 +6,12 @@ import QueryFilter from "@/(components)/generalComp/QueryFilter";
 import { RiRefreshLine } from "react-icons/ri";
 import { ImSpinner9 } from "react-icons/im";
 import EventsListCard from "./EventListCard";
+import AddEventButton from "./AddEventButton";
+import LoadingCard from "./LoadingCard";
 
 type EventDataType = {
-  status: "LIVE" | "ENDED" | "UPCOMING"
+  status: "LIVE" | "ENDED" | "UPCOMING";
   id: string;
-  name: string;
-  location: string;
-  startTime: string;
-  endTime: string;
-  rating: number | null;
   region: {
     name: string;
   } | null;
@@ -24,6 +21,11 @@ type EventDataType = {
   updatedBy: {
     name: string | null;
   } | null;
+  name: string;
+  location: string;
+  startTime: Date;
+  endTime: Date;
+  rating: number | null;
   assignments: {
     user: {
       name: string | null;
@@ -34,15 +36,18 @@ type EventDataType = {
     } | null;
   }[];
   availabilities: {
+    _count: {
+      availabilityEntries: number;
+    };
+    role: {
+      name: string;
+    };
     availabilityEntries: {
       user: {
         name: string | null;
         image: string | null;
       };
     }[];
-    role: {
-      name: string;
-    };
     totalSlots: number;
   }[];
 };
@@ -120,12 +125,17 @@ function EventsList() {
           statusValue={statusFilter}
         />
       </div>
+      <div className="absolute">
+        <AddEventButton parentRefetch={refetch} />
+      </div>
       {isLoadingFetch ? (
-        <div className="flex bg-gray-100/60 items-center rounded-lg shadow-lg p-10 justify-center">
-          <ImSpinner9 className="animate-spin" size={40} />
+        <div className="grid transition-all duration-300 ease-out w-full md:grid-cols-2 gap-2">
+          {Array.from({ length: 10 })?.map((_, index) => (
+            <LoadingCard key={index} />
+          ))}
         </div>
       ) : data && data?.length > 0 ? (
-        <div className="grid md:grid-cols-2 gap-2">
+        <div className="grid transition-all duration-300 ease-out  md:grid-cols-2 gap-2">
           {data?.map((event) => (
             <EventsListCard refetch={refetch} key={event.id} event={event} />
           ))}

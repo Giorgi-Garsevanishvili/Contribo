@@ -16,11 +16,6 @@ import StatusDisplay from "./StatusDisplay";
 type EventDataType = {
   status: "LIVE" | "ENDED" | "UPCOMING";
   id: string;
-  name: string;
-  location: string;
-  startTime: string;
-  endTime: string;
-  rating: number | null;
   region: {
     name: string;
   } | null;
@@ -30,6 +25,11 @@ type EventDataType = {
   updatedBy: {
     name: string | null;
   } | null;
+  name: string;
+  location: string;
+  startTime: Date;
+  endTime: Date;
+  rating: number | null;
   assignments: {
     user: {
       name: string | null;
@@ -40,18 +40,22 @@ type EventDataType = {
     } | null;
   }[];
   availabilities: {
+    _count: {
+      availabilityEntries: number;
+    };
+    role: {
+      name: string;
+    };
     availabilityEntries: {
       user: {
         name: string | null;
         image: string | null;
       };
     }[];
-    role: {
-      name: string;
-    };
     totalSlots: number;
   }[];
 };
+
 function EventsListCard({
   event,
   refetch,
@@ -66,10 +70,17 @@ function EventsListCard({
     refetch();
   };
 
-  const availableSlots = event.availabilities.reduce(
+  const takenSlot = event.availabilities.reduce(
+    (acc, curr) => acc + curr._count.availabilityEntries,
+    0,
+  );
+  const totalAvailableSlots = event.availabilities.reduce(
     (acc, curr) => acc + curr.totalSlots,
     0,
   );
+
+  
+
   return (
     <div
       onClick={() =>
@@ -84,8 +95,9 @@ function EventsListCard({
               message="This Action will delete Availability with all user related data"
               fetchAction={handleDeleteRefetch}
             />
-            <RoleAvailabilityComp props={event} />
+            <RoleAvailabilityComp parentRefetch={refetch} props={event} />
           </>,
+          refetch,
         )
       }
       className={`flex ${event.status === "ENDED" ? "opacity-70 hover:opacity-100 bg-white" : " bg-white"} hover:shadow-blue-700 group transition-all relative duration-300 ease-out cursor-pointer rounded-sm overflow-hidden shadow-sm shadow-gray-500 w-full h-fit`}
@@ -110,22 +122,31 @@ function EventsListCard({
             {new Date(event.startTime).getDate()}
           </p>
         </div>
+        <div className="absolute md:hidden flex   bottom-2 bg-gray-50 p-1 rounded-sm left-2">
+          <StatusDisplay status={event.status} />
+        </div>
       </div>
-      <div className="absolute flex right-2 top-2">
+      <div className="absolute md:flex hidden right-2 top-2">
         <StatusDisplay status={event.status} />
       </div>
-      <div className="flex w-full relative gap-2 p-2">
+      <div className="flex w-[90%] overflow-hidden relative gap-2 p-2">
         <div className="flex flex-col items-start w-[95%] justify-start">
-          <h3 className="font-bold text-sm text-gray-800">{event.name}</h3>
-          <div className="flex gap-1 text-xs items-center text-center text-gray-400 w-[80%] h-fit">
-            {availableSlots === 0 ? (
+          <h3 className="font-bold text-sm text-gray-800 w-full truncate">
+            {event.name}
+          </h3>
+          <div className="flex gap-1 text-xs items-center text-center text-gray-400 w-fit h-fit">
+            {totalAvailableSlots === 0 ? (
               <HiXCircle size={10} color="red" />
             ) : (
               <FaCheckCircle size={10} color="green" />
             )}
-            <h5>{availableSlots} Slots Available</h5>
+            <h5>
+              {" "}
+              {totalAvailableSlots - takenSlot} / {totalAvailableSlots} Slots
+              Available
+            </h5>
           </div>
-          <div className="flex gap-1 text-xs items-center text-center text-gray-400 w-[80%] h-fit">
+          <div className="flex gap-1 text-xs items-center text-center text-gray-400 w-fit h-fit">
             <div>
               <IoIosTime size={10} />
             </div>
@@ -137,11 +158,11 @@ function EventsListCard({
             </div>
             <h5 className="truncate w-[80%]">{event.location}</h5>
           </div>
-          <div className="flex gap-1 text-xs items-center text-center text-gray-400 w-[80%] h-fit">
+          <div className="flex gap-1 text-xs items-center text-center text-gray-400 w-fit h-fit">
             <div>
               <FaCalendarAlt size={10} />
             </div>
-            <h5 className="truncate">{`${new Date(event.startTime).toLocaleDateString()}`}</h5>
+            <h5 className="truncate">{`${new Date(event.startTime).toLocaleDateString("en-US", { day: "numeric", month: "short", year: "numeric" })} - ${new Date(event.endTime).toLocaleDateString("en-US", { day: "numeric", month: "short", year: "numeric" })}`}</h5>
           </div>
         </div>
       </div>

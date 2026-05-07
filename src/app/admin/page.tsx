@@ -8,18 +8,16 @@ import UserStats from "@/(components)/adminComp/UserStats";
 
 function Admin() {
   return (
-    <div className="flex flex-col p-3 md:flex-row items-center md:items-start justify-center my-3 gap-10">
-      <div className="flex flex-col flex-wrap items-center justify-start gap-1">
-        <div className="flex flex-wrap items-center justify-center gap-1">
-          <UserStats />
-          <JoinStats />
-          <EventStats />
-          <HrWarningStats />
-          <AllowedStats />
-        </div>
-        <LiveEvents />
-        <UpcomingEvents />
+    <div className="flex flex-col flex-wrap items-center my-3 justify-start gap-1">
+      <div className="flex duration-300 transition-all ease-out flex-col w-full md:flex-row items-center justify-center gap-1">
+        <UserStats />
+        <JoinStats />
+        <EventStats />
+        <HrWarningStats />
+        <AllowedStats />
       </div>
+      <LiveEvents />
+      <UpcomingEvents />
     </div>
   );
 }

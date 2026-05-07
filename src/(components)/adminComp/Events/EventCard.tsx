@@ -15,11 +15,6 @@ import StatusDisplay from "./StatusDisplay";
 type EventDataType = {
   status: "LIVE" | "ENDED" | "UPCOMING";
   id: string;
-  rating: number | null;
-  name: string;
-  location: string;
-  startTime: string;
-  endTime: string;
   region: {
     name: string;
   } | null;
@@ -29,16 +24,24 @@ type EventDataType = {
   updatedBy: {
     name: string | null;
   } | null;
+  name: string;
+  location: string;
+  startTime: Date;
+  endTime: Date;
+  rating: number | null;
   assignments: {
-    role: {
-      name: string;
-    } | null;
     user: {
       name: string | null;
       image: string | null;
     } | null;
+    role: {
+      name: string;
+    } | null;
   }[];
   availabilities: {
+    _count: {
+      availabilityEntries: number;
+    };
     role: {
       name: string;
     };
@@ -52,19 +55,33 @@ type EventDataType = {
   }[];
 };
 
-function EventCard({ event }: { event: EventDataType }) {
+
+
+function EventCard({
+  event,
+  parentRefetch,
+}: {
+  event: EventDataType;
+  parentRefetch: () => void;
+}) {
   const { openModal } = useModal();
-  const availableSlots = event.availabilities.reduce(
+  const takenSlots = event.availabilities.reduce(
+    (acc, curr) => acc + curr._count.availabilityEntries,
+    0,
+  );
+  const totalAvailableSlots = event.availabilities.reduce(
     (acc, curr) => acc + curr.totalSlots,
     0,
   );
+
   return (
     <div
       onClick={() =>
         openModal(
           "Event Details",
           `${event.name}`,
-          <RoleAvailabilityComp props={event} />,
+          <RoleAvailabilityComp parentRefetch={parentRefetch} props={event} />,
+          parentRefetch,
         )
       }
       className={`flex ${event.status === "LIVE" && "animate-pulse animation-duration-3000"} hover:shadow-blue-700 group transition-all duration-300 ease-out flex-col cursor-pointer rounded-sm overflow-hidden relative shadow-sm bg-white shadow-gray-500 w-2xs h-fit`}
@@ -94,15 +111,19 @@ function EventCard({ event }: { event: EventDataType }) {
         <div className="absolute flex right-2 top-2">
           <StatusDisplay status={event.status} />
         </div>
-        <h3 className="font-bold text-gray-800">{event.name}</h3>
+        <h3 className="font-bold text-gray-800 w-[55%] truncate">{event.name}</h3>
         <div className="flex flex-col gap-0.5">
           <div className="flex  text-gray-400 shrink-0 items-center justify-start gap-2">
-            {availableSlots === 0 ? (
+            {totalAvailableSlots === 0 ||
+            takenSlots - totalAvailableSlots === 0 ? (
               <HiXCircle size={15} color="red" />
             ) : (
               <FaCheckCircle size={15} color="green" />
             )}
-            <h5>{availableSlots} Slots Available</h5>
+            <h5>
+              {totalAvailableSlots - takenSlots} / {totalAvailableSlots} Slots
+              Available
+            </h5>
           </div>
           <div className="flex gap-2 items-center text-center text-gray-400 w-full h-fit">
             <div>
@@ -120,7 +141,7 @@ function EventCard({ event }: { event: EventDataType }) {
             <div>
               <FaCalendarAlt size={15} />
             </div>
-            <h5 className="truncate">{`${new Date(event.startTime).toLocaleDateString()}`}</h5>
+            <h5 className="truncate">{`${new Date(event.startTime).toLocaleDateString("en-US", { day: "numeric", month: "short", year: "numeric" })} - ${new Date(event.endTime).toLocaleDateString("en-US", { day: "numeric", month: "short", year: "numeric" })}`}</h5>
           </div>
         </div>
       </div>
