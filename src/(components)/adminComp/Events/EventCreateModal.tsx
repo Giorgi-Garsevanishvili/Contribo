@@ -10,6 +10,7 @@ import { IoPricetags } from "react-icons/io5";
 import { useModal } from "../../../../context/ModalContext";
 import RoleAvailabilityComp from "./RoleAvailabilityComp";
 import { MdDone } from "react-icons/md";
+import AssignmentCreate from "./AssignmentCreate";
 
 interface CreateEventFormData {
   name: string;
@@ -80,8 +81,8 @@ function EventCreateModal({ parentRefetch }: { parentRefetch: () => void }) {
         id: response.data.data.id,
       });
       setDone(true);
-      if(parentRefetch){
-        parentRefetch()
+      if (parentRefetch) {
+        parentRefetch();
       }
     } catch (error) {
       const message = getClientErrorMessage(error);
@@ -246,7 +247,11 @@ function EventCreateModal({ parentRefetch }: { parentRefetch: () => void }) {
       )}
 
       {done && newEventData.id ? (
-        <RoleAvailabilityComp parentRefetch={parentRefetch} stepAction={true} props={newEventData} />
+        <RoleAvailabilityComp
+          parentRefetch={parentRefetch}
+          stepAction={true}
+          props={newEventData}
+        />
       ) : null}
     </div>
   );
