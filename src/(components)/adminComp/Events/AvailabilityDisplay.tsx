@@ -57,7 +57,7 @@ function AvailabilityDisplay({
     <div className="flex rounded-md items-start bg-gray-700 border-l-2 border-cyan-500  flex-col w-80  h-50 l gap-2 p-5">
       <div className="flex w-full items-center justify-between gap-2">
         <h3 className="uppercase text-md font-bold text-cyan-500">
-          Event Role
+          Available Role
         </h3>
 
         <DeleteButtonAdmin

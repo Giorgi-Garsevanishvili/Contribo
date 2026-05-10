@@ -1,6 +1,5 @@
 "use client";
 
-import AddEventButton from "@/(components)/adminComp/Events/AddEventButton";
 import EventsList from "@/(components)/adminComp/Events/EventsList";
 
 function UserList() {

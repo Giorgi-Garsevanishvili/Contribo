@@ -11,6 +11,7 @@ import { useModal } from "../../../../context/ModalContext";
 import RoleAvailabilityComp from "./RoleAvailabilityComp";
 import { MdDone } from "react-icons/md";
 import AssignmentCreate from "./AssignmentCreate";
+import AssignmentsModalComp from "./AssigmentsModalComp";
 
 interface CreateEventFormData {
   name: string;
@@ -45,8 +46,27 @@ function EventCreateModal({ parentRefetch }: { parentRefetch: () => void }) {
   const [isLoading, setIsLoading] = useState(false);
   const { closeModal } = useModal();
   const [done, setDone] = useState(false);
+  const [skip, setSkip] = useState(false);
+
+  const handleComplete = () => {
+    closeModal();
+  };
+
   const [newEventData, setNewEventData] =
     useState<NewEventData>(newEventDataEmpty);
+
+  const validation = () => {
+    if (
+      !formData.endTime ||
+      !formData.location ||
+      !formData.name ||
+      !formData.startTime
+    ) {
+      return false;
+    }
+
+    return true;
+  };
 
   const handleLocationSelect = (location: string): void => {
     setFormData((prev) => ({
@@ -65,9 +85,10 @@ function EventCreateModal({ parentRefetch }: { parentRefetch: () => void }) {
     try {
       e.preventDefault();
       setIsLoading(true);
-      if (Object.values(formData).some((val) => val === "")) {
+      if (!validation()) {
         throw new Error("All Fields Must be provided");
       }
+
       const response = await axios.post("/api/admin/events", formData);
       triggerCompAlertRef.current({
         message: `${response.data.message}`,
@@ -201,6 +222,7 @@ function EventCreateModal({ parentRefetch }: { parentRefetch: () => void }) {
                 <textarea
                   id="event_description"
                   name="description"
+                  value={formData.description}
                   onChange={(e) =>
                     setFormData((prev) => ({
                       ...prev,
@@ -227,9 +249,7 @@ function EventCreateModal({ parentRefetch }: { parentRefetch: () => void }) {
               </button>
               <button
                 type="submit"
-                disabled={
-                  isLoading || Object.values(formData).some((e) => e === "")
-                }
+                disabled={isLoading || !validation()}
                 className={`p-2 w btn m-0 bg-full md:w-fit cursor-pointer hover:opacity-70 transition-all duration-300 ease-out bg-cyan-700 rounded-sm`}
               >
                 {isLoading ? (
@@ -247,11 +267,45 @@ function EventCreateModal({ parentRefetch }: { parentRefetch: () => void }) {
       )}
 
       {done && newEventData.id ? (
-        <RoleAvailabilityComp
-          parentRefetch={parentRefetch}
-          stepAction={true}
-          props={newEventData}
-        />
+        <div className="flex w-full flex-col">
+          {!skip ? (
+            <AssignmentsModalComp
+              props={newEventData}
+              parentRefetch={parentRefetch}
+            />
+          ) : (
+            <RoleAvailabilityComp
+              parentRefetch={parentRefetch}
+              props={newEventData}
+            />
+          )}
+
+          <div className="flex bg-gray-900/50 rounded-sm mt-3 border-t items-center justify-between p-3 border-gray-300/40 w-full h-">
+            <p className="text-sm md:flex hidden text-gray-400 capitalize">
+              Logistics Panels
+            </p>
+            <div className="flex md:flex-row md:w-fit w-full flex-col justify-center items-center gap-2 ">
+              {skip && (
+                <button
+                  onClick={handleComplete}
+                  type="button"
+                  className="p-2 w-full md:w-fit cursor-pointer hover:opacity-70 transition-all duration-300 ease-out bg-gray-600 rounded-sm"
+                >
+                  Complete
+                </button>
+              )}
+              {!skip && (
+                <button
+                  onClick={() => setSkip(true)}
+                  type="button"
+                  className={`p-2 w btn m-0 bg-full md:w-fit cursor-pointer hover:opacity-70 transition-all duration-300 ease-out bg-cyan-700 rounded-sm`}
+                >
+                  Next Step
+                </button>
+              )}
+            </div>
+          </div>
+        </div>
       ) : null}
     </div>
   );

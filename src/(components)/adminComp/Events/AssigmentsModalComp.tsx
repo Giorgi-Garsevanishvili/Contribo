@@ -10,53 +10,49 @@ import usePaginatedData from "@/hooks/usePaginatedData";
 import AvailabilityCreate from "./AvailabilityCreate";
 import { TbPencilOff } from "react-icons/tb";
 import AvailabilityDisplay from "./AvailabilityDisplay";
+import AssignmentCreate from "./AssignmentCreate";
+import AssignmentDisplay from "./AssignmentDisplay";
 
 interface NewDataProps {
   id: string;
   name: string;
 }
 
-type AvailabilityData = {
-  totalCapacity: number;
-  activeCount: number;
-  available: number;
+type AssignmentsData = {
   role: {
     name: string;
-  };
-  event: {
-    name: string;
-    region: {
-      name: string;
-    } | null;
-    finalizedAt: Date | null;
-  };
+  } | null;
+  createdBy: {
+    name: string | null;
+    image: string | null;
+  } | null;
   updatedBy: {
     name: string | null;
+    image: string | null;
   } | null;
-  availabilityEntries: {
-    user: {
-      name: string | null;
-    };
-    status: AssignmentStatus;
-  }[];
-  _count: {
-    availabilityEntries: number;
+  event: {
+    name: string;
   };
-  CreatedBy: {
+  user: {
     name: string | null;
+    image: string | null;
   } | null;
+} & {
   id: string;
-  createdAt: Date;
-  updatedAt: Date | null;
-  updatedById: string | null;
-  roleId: string;
-  ratingScore: number;
   eventId: string;
-  totalSlots: number;
-  published: boolean;
+  userId: string | null;
+  roleId: string | null;
+  ratingScore: number | null;
+  comment: string | null;
   validFrom: Date | null;
   validTo: Date | null;
+  assignedAt: Date;
+  ratedAt: Date | null;
+  status: AssignmentStatus;
+  createdAt: Date;
+  updatedAt: Date | null;
   createdById: string | null;
+  updatedById: string | null;
 };
 
 interface RolesData {
@@ -67,7 +63,7 @@ interface RolesData {
   updatedAt: Date | null;
 }
 
-function RoleAvailabilityComp({
+function AssignmentsModalComp({
   props,
   stepAction,
   parentRefetch,
@@ -80,15 +76,15 @@ function RoleAvailabilityComp({
   const [isOpen, setIsOpen] = useState(false);
 
   const handleSkip = () => {
-    closeModal();
+    closeModal;
   };
 
   const {
     data,
     isLoading: isLoadingData,
     refetch,
-  } = usePaginatedData<AvailabilityData[]>(
-    `/api/admin/events/${props.id}/availabilitySlots`,
+  } = usePaginatedData<AssignmentsData[]>(
+    `/api/admin/events/${props.id}/eventAssignments`,
     [],
     stepAction,
   );
@@ -98,13 +94,13 @@ function RoleAvailabilityComp({
   >("/api/admin/eventRoles", []);
 
   return (
-    <div className="flex flex-col justify-between transition-all duration-300 ease-out w-full h-fit p-2 gap-5 rounded-sm bg-cyan-900 border border-gray-600">
+    <div className="flex flex-col justify-between transition-all duration-300 ease-out w-full h-full p-2 gap-5 rounded-sm bg-emerald-900 border border-gray-600">
       <div className="flex border-b border-gray-400/60 py-2 items-center justify-between gap-2">
         <div className="flex items-center gap-2 justify-start">
           <BsFillPersonLinesFill size={20} className="text-cyan-300" />
           <div className="flex h-7 border border-cyan-950 "></div>
           <div className="flex items-start flex-col justify-start">
-            <h2 className="text-md">Role Availability</h2>
+            <h2 className="text-md">Assignments</h2>
             <h3 className="text-xs text-gray-300">{props.name}</h3>
           </div>
         </div>
@@ -116,12 +112,12 @@ function RoleAvailabilityComp({
           {isOpen ? <TbPencilOff /> : <IoAdd />}
         </button>
       </div>
-      <AvailabilityCreate
+      <AssignmentCreate
+        refetch={refetch}
+        parentRefetch={parentRefetch}
         isOpen={isOpen}
         roles={RolesData}
         eventId={props.id}
-        refetch={refetch}
-        parentRefetch={parentRefetch}
       />
       <div className="flex gap-3 h-fit flex-wrap ">
         {isLoadingData ? (
@@ -132,26 +128,20 @@ function RoleAvailabilityComp({
             />
           </div>
         ) : data.length > 0 ? (
-          data.map((avv) => (
-            <AvailabilityDisplay
-              refetch={refetch}
-              availabilities={avv}
-              key={avv.id}
-            />
-          ))
+          data.map((assignment) => <AssignmentDisplay key={assignment.id} assignment={assignment} refetch={refetch} />)
         ) : (
-          "No Availabilities To Display"
+          "No Assignments To Display"
         )}
       </div>
       <div className="flex md:flex-row flex-col bg-gray-900/50 rounded-sm mt-1 gap-5 border-t items-center justify-between p-3 border-gray-300/40 w-full h-">
         <div className="flex flex-col items-center gap-2 p-2 w-full ">
           <div className="flex text-md text-gray-300 items-center justify-center gap-3">
-            <h3 className="">Total Personnel Required</h3>
-            <h1>{data.reduce((acc, curr) => acc + curr.totalSlots, 0)}</h1>
+            <h3 className="">Total Assignments</h3>
+            <h1>{data.length}</h1>
           </div>
           <div className="flex flex-col md:flex-row text-sm text-center items-center gap-3 text-cyan-300 justify-start">
             <IoIosInformationCircleOutline size={18} />
-            <h3>Availability will be live immediately after publishing.</h3>
+            <h3>Assignment will be live immediately after publishing.</h3>
           </div>
         </div>
 
@@ -171,4 +161,4 @@ function RoleAvailabilityComp({
   );
 }
 
-export default RoleAvailabilityComp;
+export default AssignmentsModalComp;

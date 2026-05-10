@@ -81,13 +81,13 @@ const emptyForm = {
 };
 
 function AvailabilityCreate({
-  isEdit,
+  isOpen,
   roles,
   eventId,
   refetch,
   parentRefetch,
 }: {
-  isEdit: boolean;
+  isOpen: boolean;
   roles?: RolesData[];
   eventId?: string;
   refetch: () => void;
@@ -99,13 +99,27 @@ function AvailabilityCreate({
   const { triggerCompAlert } = useCompAlert();
   const triggerCompAlertRef = useRef(triggerCompAlert);
 
+  const validation = () => {
+    if (
+      !formData.roleId ||
+      !formData.validFrom ||
+      !formData.validTo ||
+      formData.ratingScore === 0 ||
+      formData.totalSlots === 0
+    ) {
+      return false;
+    }
+
+    return true;
+  };
+
   const handleAvailabilitySubmit = async (
     e: React.SubmitEvent<HTMLFormElement>,
   ) => {
     try {
       e.preventDefault();
       setIsLoading(true);
-      if (Object.values(formData).some((val) => val === "" || val === 0)) {
+      if (!validation()) {
         throw new Error("All Fields Must be provided");
       }
 
@@ -139,7 +153,7 @@ function AvailabilityCreate({
     }
   };
 
-  return isEdit && roles ? (
+  return isOpen && roles ? (
     <form
       onSubmit={handleAvailabilitySubmit}
       className="flex rounded-md items-center bg-gray-700 border-l-2 border-cyan-500  flex-col w-full h-fit gap-2 p-2"
@@ -289,10 +303,7 @@ function AvailabilityCreate({
           </button>
           <button
             type="submit"
-            disabled={
-              isLoading ||
-              Object.values(formData).some((e) => e === "" || e === 0)
-            }
+            disabled={isLoading || !validation()}
             className={`p-2 w btn m-0 w-full md:w-fit cursor-pointer hover:opacity-70 transition-all duration-300 ease-out bg-cyan-700 rounded-sm`}
           >
             {isLoading ? (

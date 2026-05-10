@@ -11,6 +11,7 @@ import { useModal } from "../../../../context/ModalContext";
 import { HiXCircle } from "react-icons/hi2";
 import RoleAvailabilityComp from "./RoleAvailabilityComp";
 import StatusDisplay from "./StatusDisplay";
+import EventInfoModal from "./EventInfoModal";
 
 type EventDataType = {
   status: "LIVE" | "ENDED" | "UPCOMING";
@@ -78,7 +79,7 @@ function LiveEventsCard({
         openModal(
           "Event Details",
           `${event.name}`,
-          <RoleAvailabilityComp parentRefetch={parentRefetch} props={event} />,
+          <EventInfoModal event={event} parentFetch={parentRefetch} />,
           parentRefetch,
         )
       }

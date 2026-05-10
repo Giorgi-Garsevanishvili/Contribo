@@ -278,7 +278,15 @@ export const POST = async (req: NextRequest) => {
     };
     const body = CreateEvent.parse(jsonWithCreator);
 
-    if (Object.values(body).some((val) => val === "")) {
+    const validation = () => {
+      if (!body.endTime || !body.location || !body.name || !body.startTime) {
+        return false;
+      }
+
+      return true;
+    };
+
+    if (!validation()) {
       return NextResponse.json(
         { message: "Empty Value Presented" },
         { status: 400 },

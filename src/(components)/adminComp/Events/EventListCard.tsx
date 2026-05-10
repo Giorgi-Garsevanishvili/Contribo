@@ -12,6 +12,7 @@ import { HiXCircle } from "react-icons/hi2";
 import RoleAvailabilityComp from "./RoleAvailabilityComp";
 import DeleteButtonAdmin from "../users/DeleteButtonAdmin";
 import StatusDisplay from "./StatusDisplay";
+import EventInfoModal from "./EventInfoModal";
 
 type EventDataType = {
   status: "LIVE" | "ENDED" | "UPCOMING";
@@ -79,8 +80,6 @@ function EventsListCard({
     0,
   );
 
-  
-
   return (
     <div
       onClick={() =>
@@ -95,7 +94,7 @@ function EventsListCard({
               message="This Action will delete Availability with all user related data"
               fetchAction={handleDeleteRefetch}
             />
-            <RoleAvailabilityComp parentRefetch={refetch} props={event} />
+            <EventInfoModal event={event} parentFetch={refetch} />
           </>,
           refetch,
         )
