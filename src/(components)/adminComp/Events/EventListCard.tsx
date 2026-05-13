@@ -66,11 +66,6 @@ function EventsListCard({
 }) {
   const { openModal, closeModal } = useModal();
 
-  const handleDeleteRefetch = () => {
-    closeModal();
-    refetch();
-  };
-
   const takenSlot = event.availabilities.reduce(
     (acc, curr) => acc + curr._count.availabilityEntries,
     0,
@@ -87,13 +82,6 @@ function EventsListCard({
           "Event Details",
           `${event.name}`,
           <>
-            <DeleteButtonAdmin
-              url={`/api/admin/events/${event.id}`}
-              value={`Event: ${event.name}`}
-              styleClass="w-fit items-center justify-center p-0 m-0 h-fit bg-transparent text-gray-200 hover:text-red-400"
-              message="This Action will delete Availability with all user related data"
-              fetchAction={handleDeleteRefetch}
-            />
             <EventInfoModal event={event} parentFetch={refetch} />
           </>,
           refetch,

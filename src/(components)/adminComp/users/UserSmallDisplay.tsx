@@ -13,13 +13,13 @@ function UserSmallDisplay({ user }: { user: UserResponse }) {
         <Image
           src={user.image}
           alt={user.name ?? ""}
-          width={20}
-          height={20}
+          width={25}
+          height={25}
           className="rounded-full select-none"
         />
       )}
 
-      <span className="whitespace-nowrap">{user.name}</span>
+      <span className="whitespace-nowrap truncate">{user.name}</span>
     </div>
   );
 }

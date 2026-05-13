@@ -10,8 +10,7 @@ import { IoPricetags } from "react-icons/io5";
 import { useModal } from "../../../../context/ModalContext";
 import RoleAvailabilityComp from "./RoleAvailabilityComp";
 import { MdDone } from "react-icons/md";
-import AssignmentCreate from "./AssignmentCreate";
-import AssignmentsModalComp from "./AssigmentsModalComp";
+import AssignmentsModalComp from "./AssignmentsModalComp";
 
 interface CreateEventFormData {
   name: string;

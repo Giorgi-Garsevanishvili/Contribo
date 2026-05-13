@@ -1,7 +1,8 @@
 import React from "react";
-import AssignmentsModalComp from "./AssigmentsModalComp";
 import RoleAvailabilityComp from "./RoleAvailabilityComp";
 import EventCard from "./EventCard";
+import AssignmentsModalComp from "./AssignmentsModalComp";
+import EventDetails from "./EventDetails";
 
 type EventData = {
   status: "LIVE" | "ENDED" | "UPCOMING";
@@ -55,8 +56,8 @@ function EventInfoModal({
 }) {
   return (
     <div className="flex m-2 flex-col h-fit w-full items-start justify-between gap-4 p-2">
-      <div className="flex h-full w-f">
-        <EventCard event={event} parentRefetch={parentFetch} />
+      <div className="flex h-fit w-full w-f">
+        <EventDetails event={event} parentRefetch={parentFetch} />
       </div>
       <div className="flex md:flex-row flex-col h-fit w-full items-start justify-between gap-3">
         <AssignmentsModalComp

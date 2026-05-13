@@ -53,7 +53,7 @@ export function EventLocationDisplay({
   ];
 
   return (
-    <div className="space-y-3 flex items-center justify-center w-full">
+    <div className="space-y-3 flex flex-col md:flex-row gap-2 items-center justify-center w-full">
       <div className="flex justify-center items-center w-full gap-2">
         <MapPin size={20} className="text-blue-100 mt-0.5 flex shrink-0" />
         <p className="font-semibold text-gray-200">{location}</p>
