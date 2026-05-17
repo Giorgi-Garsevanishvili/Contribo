@@ -1,10 +1,12 @@
-import React from "react";
+import React, { useEffect } from "react";
 import RoleAvailabilityComp from "./RoleAvailabilityComp";
 import EventCard from "./EventCard";
 import AssignmentsModalComp from "./AssignmentsModalComp";
 import EventDetails from "./EventDetails";
+import { useFetchData } from "@/hooks/useDataFetch";
+import usePaginatedData from "@/hooks/usePaginatedData";
 
-type EventData = {
+type EventDataType = {
   status: "LIVE" | "ENDED" | "UPCOMING";
   id: string;
   region: {
@@ -52,21 +54,34 @@ function EventInfoModal({
   parentFetch,
 }: {
   parentFetch: () => void;
-  event: EventData;
+  event: EventDataType;
 }) {
+  const { data, isLoading, refetch } = usePaginatedData<EventDataType | null>(
+    `/api/admin/events/${event.id}`,
+    null,
+    null,
+  );
+  useEffect(() => {
+    parentFetch();
+  }, [refetch]);
+
   return (
     <div className="flex m-2 flex-col h-fit w-full items-start justify-between gap-4 p-2">
       <div className="flex h-fit w-full w-f">
-        <EventDetails event={event} parentRefetch={parentFetch} />
+        <EventDetails
+          isLoading={isLoading}
+          event={data}
+          parentRefetch={parentFetch}
+        />
       </div>
       <div className="flex md:flex-row flex-col h-fit w-full items-start justify-between gap-3">
         <AssignmentsModalComp
           props={{ name: event.name, id: event.id }}
-          parentRefetch={parentFetch}
+          parentRefetch={refetch}
         />
         <RoleAvailabilityComp
           props={{ name: event.name, id: event.id }}
-          parentRefetch={parentFetch}
+          parentRefetch={refetch}
         />
       </div>
     </div>
