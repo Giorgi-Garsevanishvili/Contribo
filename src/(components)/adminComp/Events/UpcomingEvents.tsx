@@ -23,8 +23,9 @@ type EventDataType = {
   } | null;
   name: string;
   location: string;
-  startTime: Date;
-  endTime: Date;
+  description: string | null;
+  startTime: string;
+  endTime: string;
   rating: number | null;
   assignments: {
     user: {
@@ -71,10 +72,7 @@ function UpcomingEvents() {
         >
           <div className="flex px-2 border-b border-gray-300 p-1 w-full relative items-center text-center justify-start gap-3">
             <div className="flex items-center p-2 justify-center bg-gray-200 rounded-md">
-              <IoCalendarOutline
-                size={22}
-                className="text-blue-600"
-              />
+              <IoCalendarOutline size={22} className="text-blue-600" />
             </div>
             <div className="flex flex-col items-start justify-center">
               <h3 className=" cursor-default leading-6 font-bold text-xl text-blue-950">

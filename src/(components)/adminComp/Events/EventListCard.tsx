@@ -28,8 +28,9 @@ type EventDataType = {
   } | null;
   name: string;
   location: string;
-  startTime: Date;
-  endTime: Date;
+  startTime: string;
+  endTime: string;
+  description: string | null
   rating: number | null;
   assignments: {
     user: {

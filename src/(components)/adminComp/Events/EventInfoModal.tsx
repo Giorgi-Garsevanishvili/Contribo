@@ -20,8 +20,9 @@ type EventDataType = {
   } | null;
   name: string;
   location: string;
-  startTime: Date;
-  endTime: Date;
+  startTime: string;
+  description: string | null
+  endTime: string;
   rating: number | null;
   assignments: {
     user: {
@@ -71,7 +72,7 @@ function EventInfoModal({
         <EventDetails
           isLoading={isLoading}
           event={data}
-          parentRefetch={parentFetch}
+          parentRefetch={refetch}
         />
       </div>
       <div className="flex md:flex-row flex-col h-fit w-full items-start justify-between gap-3">
