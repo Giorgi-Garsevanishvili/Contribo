@@ -3,10 +3,9 @@ import usePaginatedData from "@/hooks/usePaginatedData";
 import { useMemo, useState } from "react";
 import QueryFilter from "@/(components)/generalComp/QueryFilter";
 import { RiRefreshLine } from "react-icons/ri";
-import EventsListCard from "./EventListCard";
-import AddEventButton from "./AddEventButton";
+import EventsListCard from "@/(components)/adminComp/Events/EventListCard";
 import LoadingCard from "@/(components)/generalComp/LoadingCard";
-
+import EventsListCardVolunteer from "./EventListCardVolunteer";
 
 type EventDataType = {
   status: "LIVE" | "ENDED" | "UPCOMING";
@@ -52,7 +51,7 @@ type EventDataType = {
   }[];
 };
 
-function EventsList() {
+function EventsListVolunteer() {
   const [currentPage, setCurrentPage] = useState(1);
   const [limit, setLimit] = useState(10);
   const [statusFilter, setStatusFilter] = useState("");
@@ -71,7 +70,7 @@ function EventsList() {
     const hasFilter = statusFilter || (searchQuery.length >= 3 && searchQuery);
     setFilterOn(!!hasFilter);
 
-    return `/api/admin/events?${searchParams.toString()}`;
+    return `/api/user/events?${searchParams.toString()}`;
   }, [limit, currentPage, searchQuery, statusFilter]);
 
   const {
@@ -123,9 +122,6 @@ function EventsList() {
           onSearchQueryChange={handleSearchQuery}
         />
       </div>
-      <div className="absolute">
-        <AddEventButton parentRefetch={refetch} />
-      </div>
       {isLoadingFetch ? (
         <div className="grid transition-all duration-300 ease-out w-full md:grid-cols-2 gap-2">
           {Array.from({ length: 10 })?.map((_, index) => (
@@ -133,9 +129,9 @@ function EventsList() {
           ))}
         </div>
       ) : data && data?.length > 0 ? (
-        <div className="grid transition-all duration-300 ease-out  md:grid-cols-2 gap-2">
+        <div className="grid transition-all w-full duration-300 ease-out  md:grid-cols-2 gap-2">
           {data?.map((event) => (
-            <EventsListCard refetch={refetch} key={event.id} event={event} />
+            <EventsListCardVolunteer refetch={refetch} key={event.id} event={event} />
           ))}
         </div>
       ) : (
@@ -159,4 +155,4 @@ function EventsList() {
   );
 }
 
-export default EventsList;
+export default EventsListVolunteer;

@@ -9,10 +9,8 @@ import { IoIosTime } from "react-icons/io";
 import { FaCalendarAlt, FaCheckCircle } from "react-icons/fa";
 import { useModal } from "../../../../context/ModalContext";
 import { HiXCircle } from "react-icons/hi2";
-import RoleAvailabilityComp from "./RoleAvailabilityComp";
-import DeleteButtonAdmin from "../users/DeleteButtonAdmin";
-import StatusDisplay from "./StatusDisplay";
 import EventInfoModal from "./EventInfoModal";
+import StatusDisplay from "@/(components)/generalComp/StatusDisplay";
 
 type EventDataType = {
   status: "LIVE" | "ENDED" | "UPCOMING";
@@ -88,7 +86,7 @@ function EventsListCard({
           refetch,
         )
       }
-      className={`flex ${event.status === "ENDED" ? "opacity-70 hover:opacity-100 bg-white" : " bg-white"} hover:shadow-blue-700 group transition-all relative duration-300 ease-out cursor-pointer rounded-sm overflow-hidden shadow-sm shadow-gray-500 w-full h-fit`}
+      className={`flex ${event.status === "ENDED" ? "opacity-70 hover:opacity-100 bg-white" : " bg-white"} hover:shadow-blue-700 group transition-all relative duration-300 ease-out cursor-pointer rounded-sm overflow-hidden shadow-sm shadow-gray-500 max-w-full h-fit`}
     >
       <div className="flex w-30 shrink-0 rounded-sm h-auto shadow-inner shadow-black  relative justify-center items-center overflow-hidden">
         <Image

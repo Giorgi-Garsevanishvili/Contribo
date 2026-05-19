@@ -13,7 +13,6 @@ export const GET = async (_req: NextRequest, context: Context) => {
       where: {
         id,
         regionId: thisUser.user?.regionId,
-        assignments: { some: { userId: thisUser.user.userId } },
       },
       select: {
         id: true,
@@ -26,8 +25,23 @@ export const GET = async (_req: NextRequest, context: Context) => {
         rating: true,
         endTime: true,
         location: true,
+        availabilities: {
+          select: {
+            role: { select: { name: true } },
+            availabilityEntries: {
+              select: { user: { select: { name: true, image: true } } },
+            },
+            totalSlots: true,
+            _count: {
+              select: { availabilityEntries: { where: { status: "ACTIVE" } } },
+            },
+          },
+        },
         assignments: {
-          select: { user: { select: { name: true, image: true } } },
+          include: {
+            user: { select: { name: true } },
+            role: { select: { name: true } },
+          },
         },
       },
     });
@@ -58,7 +72,7 @@ export const GET = async (_req: NextRequest, context: Context) => {
       };
     };
 
-    return NextResponse.json({ data: dataWithStatus }, { status: 200 });
+    return NextResponse.json({ data: dataWithStatus() }, { status: 200 });
   } catch (error) {
     const { message, status } = handleError(error);
     return NextResponse.json({ message }, { status });

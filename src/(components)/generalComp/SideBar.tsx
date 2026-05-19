@@ -14,6 +14,7 @@ import ContriboLogo from "../../../public/Ind-Logo-Contribo-4-no-fill.svg";
 import { MdSettingsSuggest } from "react-icons/md";
 import ConsoleSideBarActions from "./ConsoleSideBarActions";
 import AdminSideBarActions from "./AdminSideBarActions";
+import VolunteerSideBarActions from "./VolunteerSideBarActions";
 
 async function SideBar({ page }: { page: string }) {
   const session = await auth();
@@ -66,7 +67,7 @@ async function SideBar({ page }: { page: string }) {
         ) : currentRole === "admin" ? (
           <AdminSideBarActions />
         ) : (
-          ""
+          <VolunteerSideBarActions />
         )}
       </nav>
       <BrandMark />

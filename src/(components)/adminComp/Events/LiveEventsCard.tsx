@@ -1,17 +1,12 @@
 "use client";
 
-import Image from "next/image";
-import Photo1 from "../../../../public/eventPhotos/eventPhoto1.jpg";
-import Photo2 from "../../../../public/eventPhotos/eventPhoto2.jpg";
-import Photo3 from "../../../../public/eventPhotos/eventPhoto3.jpg";
 import { FaLocationDot } from "react-icons/fa6";
 import { IoIosTime } from "react-icons/io";
 import { FaCalendarAlt, FaCheckCircle } from "react-icons/fa";
 import { useModal } from "../../../../context/ModalContext";
 import { HiXCircle } from "react-icons/hi2";
-import RoleAvailabilityComp from "./RoleAvailabilityComp";
-import StatusDisplay from "./StatusDisplay";
 import EventInfoModal from "./EventInfoModal";
+import StatusDisplay from "@/(components)/generalComp/StatusDisplay";
 
 type EventDataType = {
   status: "LIVE" | "ENDED" | "UPCOMING";

@@ -2,7 +2,7 @@ import React from "react";
 
 function LoadingCard() {
   return (
-    <div className="mx-auto bg-white md:w-200 w-full rounded-md border">
+    <div className="mx-auto bg-white md:w-200 max-w-full rounded-md border">
       <div className="flex relative animate-pulse items-center space-x-2">
         <div className="h-30 w-30 rounded-sm bg-gray-200"></div>
         <div className="flex-1  items-center space-y-2 gap-2 ">

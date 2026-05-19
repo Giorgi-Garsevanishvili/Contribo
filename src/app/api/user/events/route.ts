@@ -5,24 +5,45 @@ import { requireRole } from "@/lib/serverAuth";
 import { NextRequest, NextResponse } from "next/server";
 
 type EventResponse = {
+  status: "LIVE" | "ENDED" | "UPCOMING";
   id: string;
-  name: string;
-  updatedBy: {
-    name: string | null;
-  } | null;
   region: {
     name: string;
   } | null;
   createdBy: {
     name: string | null;
   } | null;
+  updatedBy: {
+    name: string | null;
+  } | null;
+  name: string;
   startTime: Date;
+  endTime: Date;
   assignments: {
     user: {
       name: string | null;
+      image: string | null;
+    } | null;
+    role: {
+      name: string;
     } | null;
   }[];
-};
+  availabilities: {
+    _count: {
+      availabilityEntries: number;
+    };
+    role: {
+      name: string;
+    };
+    availabilityEntries: {
+      user: {
+        name: string | null;
+        image: string | null;
+      };
+    }[];
+    totalSlots: number;
+  }[];
+}
 
 type PaginationMeta = {
   currentPage: number;
@@ -122,6 +143,7 @@ export const GET = async (req: NextRequest) => {
         name: true,
         startTime: true,
         endTime: true,
+        location: true,
         assignments: {
           select: {
             role: { select: { name: true } },
@@ -133,6 +155,10 @@ export const GET = async (req: NextRequest) => {
             role: { select: { name: true } },
             availabilityEntries: {
               select: { user: { select: { name: true, image: true } } },
+            },
+            totalSlots: true,
+            _count: {
+              select: { availabilityEntries: { where: { status: "ACTIVE" } } },
             },
           },
         },

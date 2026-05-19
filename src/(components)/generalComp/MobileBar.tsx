@@ -1,6 +1,7 @@
 import { normalizePage } from "@/lib/roleRoutes";
 import ConsoleSideBarActions from "./ConsoleSideBarActions";
 import AdminSideBarActions from "./AdminSideBarActions";
+import VolunteerSideBarActions from "./VolunteerSideBarActions";
 
 async function MobileBar({ page }: { page: string }) {
   const currentRole = normalizePage(page);
@@ -13,7 +14,7 @@ async function MobileBar({ page }: { page: string }) {
           ) : currentRole === "admin" ? (
             <AdminSideBarActions />
           ) : (
-            ""
+            <VolunteerSideBarActions />
           )}
         </div>
       </nav>

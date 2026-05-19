@@ -3,13 +3,10 @@ import { FaCalendarAlt } from "react-icons/fa";
 import { EventLocationDisplay } from "@/lib/EventLocationDisplay";
 import { IoIosTime } from "react-icons/io";
 import { MdOutlineEdit } from "react-icons/md";
-import DeleteButtonAdmin from "../users/DeleteButtonAdmin";
 import { useModal } from "../../../../context/ModalContext";
 import { TbPencilOff, TbUserCheck, TbUserSearch } from "react-icons/tb";
 import { Loader } from "lucide-react";
 import { useState } from "react";
-import EventCreateModal from "./EventCreateModal";
-import EventUpdate from "./EventUpdate";
 import { BiSolidDetail } from "react-icons/bi";
 import StatusDisplay from "@/(components)/generalComp/StatusDisplay";
 
@@ -57,7 +54,7 @@ type EventDataType = {
   }[];
 };
 
-function EventDetails({
+function EventDetailsVolunteer({
   event,
   parentRefetch,
   isLoading,
@@ -95,25 +92,6 @@ function EventDetails({
         <div className="bg-white w-fit h-fit rounded-md">
           <StatusDisplay status={event.status} />
         </div>
-        <div className="flex gap-2 w-fit not-visited: items-center justify-center">
-          <button
-            onClick={() => setEditOpen(!editOpen)}
-            type="button"
-            className="cursor-pointer hover:text-orange-400 transition-all duration-300 ease-out p-1 bg-cyan-600/60 rounded-md"
-          >
-            {editOpen ? <TbPencilOff size={20} /> : <MdOutlineEdit size={20} />}
-          </button>
-          <DeleteButtonAdmin
-            url={`/api/admin/events/${event.id}`}
-            value={`Event: ${event.name}`}
-            styleClass="w-fit items-center justify-center p-1 bg-cyan-600/60 rounded-md p-0 m-0 h-fit text-gray-200 hover:text-red-400"
-            message="This Action will delete Event with all user related event"
-            fetchAction={handleDelete}
-          />
-        </div>
-      </div>
-      <div className={`${editOpen ? "flex" : "hidden"} w-full`}>
-        <EventUpdate parentRefetch={parentRefetch} event={event} />
       </div>
       <div
         className={`${editOpen ? "hidden" : "flex"} w-full flex-col items-center justify-between gap-5 px-2`}
@@ -176,4 +154,4 @@ function EventDetails({
   ) : null;
 }
 
-export default EventDetails;
+export default EventDetailsVolunteer;
