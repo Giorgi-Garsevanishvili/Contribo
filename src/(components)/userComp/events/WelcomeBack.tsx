@@ -77,7 +77,7 @@ function WelcomeBack() {
               </p>
             </div>
             <button
-              onClick={() => router.push("user/events")}
+              onClick={() => router.push("volunteer/events")}
               className="text-sm text-center font-semibold w-full md:w-fit md:absolute md:right-1 cursor-pointer flex gap-1 items-center justify-center transition-all duration-300 ease-out bg-blue-800 p-2 rounded-md hover:bg-blue-400 text-white"
             >
               View All Events <IoIosArrowForward size={16} />

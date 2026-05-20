@@ -66,7 +66,7 @@ function MyOldEventsVolunteer() {
   return (
     <>
       {isLoading ? (
-        <div className="flex bg-gray-50 items-center  rounded-lg shadow-lg p-2 justify-center">
+        <div className="flex w-full animate-pulse md:w-[80%] bg-gray-50 items-center  rounded-lg shadow-lg p-2 justify-center">
           <ImSpinner9 className="animate-spin" size={20} />
         </div>
       ) : (
@@ -86,7 +86,7 @@ function MyOldEventsVolunteer() {
               </p>
             </div>
             <button
-              onClick={() => router.push("user/events")}
+              onClick={() => router.push("volunteer/events")}
               className="text-xs absolute right-2 cursor-pointer flex gap-1 items-center justify-center transition-all duration-300 ease-out hover:text-blue-400 text-blue-600"
             >
               View All <IoIosArrowForward />

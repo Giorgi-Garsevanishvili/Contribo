@@ -85,7 +85,7 @@ function UpcomingEventsVolunteer() {
               </p>
             </div>
             <button
-              onClick={() => router.push("user/events")}
+              onClick={() => router.push("volunteer/events")}
               className="text-xs absolute right-2 cursor-pointer flex gap-1 items-center justify-center transition-all duration-300 ease-out hover:text-blue-400 text-blue-600"
             >
               View All <IoIosArrowForward />
