@@ -29,11 +29,12 @@ type EventDataType = {
   name: string;
   location: string;
   startTime: string;
-  endTime: string;
   description: string | null;
+  endTime: string;
   rating: number | null;
   assignments: {
     user: {
+      id: string;
       name: string | null;
       image: string | null;
     } | null;

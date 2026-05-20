@@ -2,13 +2,64 @@
 import { FaCalendarAlt } from "react-icons/fa";
 import { EventLocationDisplay } from "@/lib/EventLocationDisplay";
 import { IoIosTime } from "react-icons/io";
-import { MdOutlineEdit } from "react-icons/md";
-import { useModal } from "../../../../context/ModalContext";
-import { TbPencilOff, TbUserCheck, TbUserSearch } from "react-icons/tb";
+import { TbUserCheck, TbUserSearch } from "react-icons/tb";
 import { Loader } from "lucide-react";
-import { useState } from "react";
 import { BiSolidDetail } from "react-icons/bi";
 import StatusDisplay from "@/(components)/generalComp/StatusDisplay";
+import UserSmallDisplay from "@/(components)/adminComp/users/UserSmallDisplay";
+import AvailabilityDisplayVolunteer from "./AvailabilityDisplayVolunteer";
+import usePaginatedData from "@/hooks/usePaginatedData";
+import { AssignmentStatus } from "@/generated/enums";
+import { useEffect, useRef, useState } from "react";
+import { useCompAlert } from "@/hooks/useCompAlert";
+import axios from "axios";
+import { getClientErrorMessage } from "@/lib/errors/clientErrors";
+
+type AvailabilityDataReturn = {
+  taken: boolean;
+  totalCapacity: number;
+  activeCount: number;
+  available: number;
+  role: {
+    name: string;
+  };
+  event: {
+    name: string;
+    region: {
+      name: string;
+    } | null;
+    finalizedAt: Date | null;
+  };
+  updatedBy: {
+    name: string | null;
+  } | null;
+  availabilityEntries: {
+    user: {
+      id: string;
+      name: string | null;
+      image: string | null;
+    };
+    status: AssignmentStatus;
+  }[];
+  _count: {
+    availabilityEntries: number;
+  };
+  CreatedBy: {
+    name: string | null;
+  } | null;
+  id: string;
+  createdAt: Date;
+  updatedAt: Date | null;
+  updatedById: string | null;
+  roleId: string;
+  ratingScore: number;
+  eventId: string;
+  totalSlots: number;
+  published: boolean;
+  validFrom: Date | null;
+  validTo: Date | null;
+  createdById: string | null;
+};
 
 type EventDataType = {
   status: "LIVE" | "ENDED" | "UPCOMING";
@@ -30,6 +81,7 @@ type EventDataType = {
   rating: number | null;
   assignments: {
     user: {
+      id: string;
       name: string | null;
       image: string | null;
     } | null;
@@ -61,6 +113,10 @@ function EventDetailsVolunteer({
   event: EventDataType | null;
   isLoading: boolean;
 }) {
+  const [isLoadingCreate, setIsLoadingCreate] = useState(false);
+  const { triggerCompAlert } = useCompAlert();
+  const triggerCompAlertRef = useRef(triggerCompAlert);
+
   const takenSlots =
     event?.availabilities.reduce(
       (acc, curr) => acc + curr._count.availabilityEntries,
@@ -69,7 +125,99 @@ function EventDetailsVolunteer({
   const totalAvailableSlots =
     event?.availabilities.reduce((acc, curr) => acc + curr.totalSlots, 0) || 0;
 
-  return isLoading ? (
+  const {
+    data,
+    isLoading: AvailabilitiesLoad,
+    refetch,
+  } = usePaginatedData<AvailabilityDataReturn[] | null>(
+    `/api/user/events/${event?.id}/availabilitySlots`,
+    [],
+    null,
+  );
+
+  useEffect(() => {
+    console.log(data);
+  }, [data]);
+
+  const handleSpotTake = async ({
+    e,
+    ratingScore,
+    slotId,
+  }: {
+    e: React.MouseEvent<HTMLButtonElement>;
+    ratingScore: number;
+    slotId: string;
+  }) => {
+    try {
+      e.preventDefault();
+      setIsLoadingCreate(true);
+
+      const response = await axios.post(
+        `/api/user/events/${event?.id}/availabilityEntries`,
+        { slotId: slotId, ratingScore: ratingScore },
+      );
+      triggerCompAlertRef.current({
+        message: `${response.data.message}`,
+        type: "success",
+        isOpened: true,
+      });
+
+      if (refetch) {
+        refetch();
+      }
+    } catch (error) {
+      const message = getClientErrorMessage(error);
+      triggerCompAlertRef.current({
+        message: `${message}`,
+        type: "error",
+        isOpened: true,
+      });
+    } finally {
+      setIsLoadingCreate(false);
+    }
+  };
+
+  const handleSpotCancel = async ({
+    e,
+    slotId,
+  }: {
+    e: React.MouseEvent<HTMLButtonElement>;
+    slotId: string;
+  }) => {
+    try {
+      e.preventDefault();
+      setIsLoadingCreate(true);
+
+      const response = await axios.delete(
+        `/api/user/events/${event?.id}/availabilityEntries`,
+        {
+          data: {
+            slotId,
+          },
+        },
+      );
+      triggerCompAlertRef.current({
+        message: `${response.data.message}`,
+        type: "success",
+        isOpened: true,
+      });
+
+      if (refetch) {
+        refetch();
+      }
+    } catch (error) {
+      const message = getClientErrorMessage(error);
+      triggerCompAlertRef.current({
+        message: `${message}`,
+        type: "error",
+        isOpened: true,
+      });
+    } finally {
+      setIsLoadingCreate(false);
+    }
+  };
+
+  return isLoading || isLoadingCreate ? (
     <div className="flex w-full h-full items-center justify-center">
       <Loader
         className="right-3 top-2.5 animate-spin text-gray-200"
@@ -139,6 +287,60 @@ function EventDetailsVolunteer({
         <div className="flex w-full rounded-md bg-gray-400/40 p-2">
           <EventLocationDisplay location={event.location} />
         </div>
+      </div>
+      <div className="flex w-full flex-col md:flex-row gap-3 rounded-md bg-gray-400/40 p-2">
+        <div className="flex shrink-0 gap-2 w-fit justify-start flex-col">
+          {event.assignments
+            ? event.assignments.map((user, index) => {
+                return (
+                  user.user && (
+                    <div
+                      className="flex bg-cyan-900 rounded-md gap-2 p-2"
+                      key={`${user.user.id}${index}`}
+                    >
+                      <UserSmallDisplay
+                        user={{
+                          name: `${user.user.name?.slice(0, 12)}...`,
+                          image: user.user.image,
+                        }}
+                      />
+                      <h3 className="text-green-500">{user.role?.name}</h3>
+                    </div>
+                  )
+                );
+              })
+            : null}
+        </div>
+        {AvailabilitiesLoad ? (
+          <div className="flex w-full h-full items-center justify-center">
+            <Loader
+              className="right-3 top-2.5 animate-spin text-gray-200"
+              size={40}
+            />
+          </div>
+        ) : (
+          data &&
+          data.map((avv) => (
+            <AvailabilityDisplayVolunteer
+              taken={avv.taken}
+              key={avv.id}
+              handleClaim={({ e, slotId, ratingScore }) =>
+                handleSpotTake({
+                  e,
+                  slotId: slotId,
+                  ratingScore: ratingScore,
+                })
+              }
+              handleCancel={({ e, slotId }) =>
+                handleSpotCancel({
+                  e,
+                  slotId: slotId,
+                })
+              }
+              availabilities={avv}
+            />
+          ))
+        )}
       </div>
     </div>
   ) : null;

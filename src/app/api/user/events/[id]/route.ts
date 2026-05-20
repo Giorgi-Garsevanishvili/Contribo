@@ -39,7 +39,7 @@ export const GET = async (_req: NextRequest, context: Context) => {
         },
         assignments: {
           include: {
-            user: { select: { name: true } },
+            user: { select: { name: true, image: true, id: true } },
             role: { select: { name: true } },
           },
         },

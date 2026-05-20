@@ -16,8 +16,8 @@ export const GET = async (_req: NextRequest, context: Context) => {
 
     const whereClause: AvailabilitySlotWhereInput = {
       eventId: id,
-      event: { regionId: thisUser.user?.regionId },
-      published: true,
+      event: { regionId: thisUser.user.regionId },
+      published: false,
     };
 
     const response = await prisma.availabilitySlot.findMany({
@@ -35,7 +35,7 @@ export const GET = async (_req: NextRequest, context: Context) => {
         },
         availabilityEntries: {
           where: { status: "ACTIVE" },
-          select: { user: { select: { name: true } }, status: true },
+          select: { user: { select: { name: true, id: true, image:true } }, status: true },
         },
         _count: {
           select: {
@@ -56,6 +56,9 @@ export const GET = async (_req: NextRequest, context: Context) => {
 
     const data = response.map((slot) => ({
       ...slot,
+      taken: slot.availabilityEntries.some(
+        (avv) => avv.user.id === thisUser.user.userId,
+      ),
       totalCapacity: slot.totalSlots,
       activeCount: slot._count.availabilityEntries,
       available: slot.totalSlots - slot._count.availabilityEntries,

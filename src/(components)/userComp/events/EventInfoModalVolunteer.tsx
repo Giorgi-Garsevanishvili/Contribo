@@ -17,11 +17,12 @@ type EventDataType = {
   name: string;
   location: string;
   startTime: string;
-  description: string | null
+  description: string | null;
   endTime: string;
   rating: number | null;
   assignments: {
     user: {
+      id: string;
       name: string | null;
       image: string | null;
     } | null;
@@ -65,10 +66,7 @@ function EventInfoModalVolunteer({
   return (
     <div className="flex m-2 flex-col h-fit w-full items-start justify-between gap-4 p-2">
       <div className="flex h-fit w-full w-f">
-        <EventDetailsVolunteer
-          isLoading={isLoading}
-          event={data}
-        />
+        <EventDetailsVolunteer isLoading={isLoading} event={data} />
       </div>
     </div>
   );

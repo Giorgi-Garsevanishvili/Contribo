@@ -475,6 +475,13 @@ export const CreateAvailabilityEntry = z
   })
   .strict();
 
+export const DeleteAvailabilitySlotVolunteer = z
+  .object({
+    slotId: z.string(),
+    userId: z.string(),
+  })
+  .strict();
+
 export const UpdateAvailabilityEntryAdmin = z
   .object({
     status: z.enum(AssignmentStatus).optional(),
