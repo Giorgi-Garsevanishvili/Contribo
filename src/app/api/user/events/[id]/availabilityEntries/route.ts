@@ -30,12 +30,34 @@ export const POST = async (req: NextRequest, context: Context) => {
       status: "ACTIVE" as "ACTIVE" | "CANCEL_REQUESTED" | "CANCELLED",
     };
 
-    const createResponse = await prisma.availabilityEntry.create({
-      data: jsonWithCreator,
+    const creationResponse = await prisma.$transaction(async (tx) => {
+      const totalSlots = await tx.availabilitySlot.findUnique({
+        where: { id: json.slotId },
+        select: { totalSlots: true },
+      });
+
+      const takenSlots = await tx.availabilityEntry.count({
+        where: { slotId: json.slotId, status: "ACTIVE" },
+      });
+
+      const availableToCreate = Number(totalSlots?.totalSlots) - takenSlots;
+
+      if (availableToCreate > 0) {
+        const createResponse = await tx.availabilityEntry.create({
+          data: jsonWithCreator,
+        });
+
+        return true;
+      } else {
+        return false;
+      }
     });
 
-    if (!createResponse) {
-      return NextResponse.json({ message: "Creation Failed" }, { status: 500 });
+    if (!creationResponse) {
+      return NextResponse.json(
+        { message: `Creation Failed: Slot Is Full` },
+        { status: 500 },
+      );
     }
 
     return NextResponse.json({ message: "You Get Slot" }, { status: 201 });

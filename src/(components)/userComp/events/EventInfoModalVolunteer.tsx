@@ -47,13 +47,7 @@ type EventDataType = {
   }[];
 };
 
-function EventInfoModalVolunteer({
-  event,
-  parentFetch,
-}: {
-  parentFetch: () => void;
-  event: EventDataType;
-}) {
+function EventInfoModalVolunteer({ event }: { event: EventDataType }) {
   const { data, isLoading, refetch } = usePaginatedData<EventDataType | null>(
     `/api/user/events/${event.id}`,
     null,

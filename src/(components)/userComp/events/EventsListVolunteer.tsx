@@ -7,12 +7,8 @@ import QueryFilter, {
 import { RiRefreshLine } from "react-icons/ri";
 import LoadingCard from "@/(components)/generalComp/LoadingCard";
 import EventsListCardVolunteer from "./EventListCardVolunteer";
-
-type UserResponse = {
-  id: string;
-  name: string | null;
-  image: string | null;
-};
+import { auth } from "@/lib/auth";
+import { useSession } from "next-auth/react";
 
 type EventDataType = {
   status: "LIVE" | "ENDED" | "UPCOMING";
@@ -67,6 +63,16 @@ function EventsListVolunteer() {
   const [filterOn, setFilterOn] = useState(false);
   const [fromDateFilter, setFromDateFilter] = useState("");
   const [tillDateFilter, setTillDateFilter] = useState("");
+  const [assigneeFilter, setAssigneeFilter] = useState("");
+  const { data: session } = useSession();
+
+  const userObject = [
+    {
+      id: session?.user.userId || "",
+      name: session?.user.name || "",
+      image: session?.user.image || "",
+    },
+  ];
 
   const paginatedUrl = useMemo(() => {
     const searchParams = new URLSearchParams();
@@ -75,6 +81,7 @@ function EventsListVolunteer() {
     searchParams.append("status", statusFilter.toString());
     searchParams.append("fromDate", fromDateFilter.toString());
     searchParams.append("tillDate", tillDateFilter.toString());
+    searchParams.append("assignee", assigneeFilter.toString());
     if (searchQuery.length >= 3) {
       searchParams.append("search", searchQuery);
     }
@@ -83,6 +90,7 @@ function EventsListVolunteer() {
       fromDateFilter ||
       tillDateFilter ||
       statusFilter ||
+      assigneeFilter ||
       (searchQuery.length >= 3 && searchQuery);
     setFilterOn(!!hasFilter);
 
@@ -94,6 +102,7 @@ function EventsListVolunteer() {
     statusFilter,
     fromDateFilter,
     tillDateFilter,
+    assigneeFilter,
   ]);
 
   const {
@@ -133,11 +142,17 @@ function EventsListVolunteer() {
     setCurrentPage(1);
   };
 
+  const handleAssigneeFilterChange = (assigneeId: string) => {
+    setAssigneeFilter(assigneeId);
+    setCurrentPage(1);
+  };
+
   const clearFilter = () => {
     handleSearchQuery("");
     handleStatusFilterChange("");
     handleTillDateFilterChange("");
     handleFromDateFilterChange("");
+    setAssigneeFilter("")
     setCurrentPage(1);
   };
 
@@ -153,6 +168,9 @@ function EventsListVolunteer() {
           statusValue={statusFilter as EventStatusFilter}
           fromDateFilter={fromDateFilter}
           tillDateFilter={tillDateFilter}
+          assigneeFilter={assigneeFilter}
+          userData={userObject}
+          onAssigneeFilterChange={handleAssigneeFilterChange}
           onFromDateFilterChange={handleFromDateFilterChange}
           onStatusFilterChange={handleStatusFilterChange}
           onTillDateFilterChange={handleTillDateFilterChange}

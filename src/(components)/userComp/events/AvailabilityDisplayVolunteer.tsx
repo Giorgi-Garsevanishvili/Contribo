@@ -97,15 +97,21 @@ function AvailabilityDisplayVolunteer({
                     e,
                     slotId: availabilities.id,
                   })
-                : handleClaim({
-                    e,
-                    slotId: availabilities.id,
-                    ratingScore: availabilities.ratingScore,
-                  })
+                : availabilities.available > 0
+                  ? handleClaim({
+                      e,
+                      slotId: availabilities.id,
+                      ratingScore: availabilities.ratingScore,
+                    })
+                  : null
             }
-            className={`flex bottom-34 z-150 right-4 md:right-6 md:bottom-20 ring ring-gray-900/30 ${taken ? "bg-red-800" : "bg-yellow-700"}  text-gray-50 rounded-sm p-2 text-md transition-all duration-300 ease-out items-center justify-center gap-2 shadow-sm focus:opacity-100 hover:shadow-md cursor-pointer hover:opacity-75`}
+            className={`flex bottom-34 z-150 right-4 md:right-6 md:bottom-20 ring ring-gray-900/30 ${taken ? "bg-red-800" : availabilities.available === 0 ? "bg-green-900 hover:opacity-100" : "bg-yellow-700"}  text-gray-50 rounded-sm p-2 text-md transition-all duration-300 ease-out items-center justify-center gap-2 shadow-sm focus:opacity-100 hover:shadow-md cursor-pointer hover:opacity-75`}
           >
-            {taken ? "Cancel" : "Claim Slot"}
+            {taken
+              ? "Cancel"
+              : availabilities.available === 0
+                ? "All Slots Are taken"
+                : "Claim Slot"}
             <BsLightningChargeFill size={15} />
           </button>
         </div>
@@ -150,16 +156,14 @@ function AvailabilityDisplayVolunteer({
           {availabilities.availabilityEntries.length > 0 && (
             <div className="flex w-full relative py-2 border-t border-gray-500/60">
               {availabilities.availabilityEntries.map((avv) => (
-                <>
-                  <UserSmallDisplay
-                    key={avv.user.id}
-                    user={{
-                      image: avv.user.image,
-                      name: avv.user.name,
-                      visualBar: true,
-                    }}
-                  />
-                </>
+                <UserSmallDisplay
+                  key={avv.user.id}
+                  user={{
+                    image: avv.user.image,
+                    name: avv.user.name,
+                    visualBar: true,
+                  }}
+                />
               ))}
             </div>
           )}

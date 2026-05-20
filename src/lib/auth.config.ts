@@ -193,6 +193,7 @@ const authConfig: NextAuthConfig = {
         const dbUser = await prisma.allowedUser.findUnique({
           where: { id: token.id as string },
           select: {
+            userId: true,
             roles: { select: { role: { select: { name: true } } } },
             region: true,
           },
@@ -201,6 +202,7 @@ const authConfig: NextAuthConfig = {
         if (dbUser) {
           token.roles = dbUser.roles.map((r) => r.role.name);
           token.region = dbUser.region?.name as string;
+          token.userId = dbUser.userId as string;
         }
       }
       return token;
@@ -208,6 +210,7 @@ const authConfig: NextAuthConfig = {
     async session({ session, token }) {
       if (session?.user && token) {
         session.user.id = token.id as string;
+        session.user.userId = token.userId as string
         session.user.roles = token.roles as string[];
         session.user.region = token.region as string;
       }

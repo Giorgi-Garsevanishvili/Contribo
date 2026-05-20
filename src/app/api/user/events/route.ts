@@ -5,8 +5,12 @@ import { requireRole } from "@/lib/serverAuth";
 import { NextRequest, NextResponse } from "next/server";
 
 type EventResponse = {
-  status: "LIVE" | "ENDED" | "UPCOMING";
   id: string;
+  name: string;
+  location: string;
+  startTime: Date;
+  endTime: Date;
+  rating: number | null;
   region: {
     name: string;
   } | null;
@@ -16,9 +20,6 @@ type EventResponse = {
   updatedBy: {
     name: string | null;
   } | null;
-  name: string;
-  startTime: Date;
-  endTime: Date;
   assignments: {
     user: {
       name: string | null;
@@ -32,15 +33,15 @@ type EventResponse = {
     _count: {
       availabilityEntries: number;
     };
-    role: {
-      name: string;
-    };
     availabilityEntries: {
       user: {
         name: string | null;
         image: string | null;
       };
     }[];
+    role: {
+      name: string;
+    };
     totalSlots: number;
   }[];
 };
@@ -57,6 +58,10 @@ type PaginationMeta = {
 type ApiResponse = {
   data: EventResponse[];
   pagination: PaginationMeta;
+  counts: {
+    availabilityCounts: number;
+    totalDuration: string;
+  };
 };
 
 export const GET = async (req: NextRequest) => {
@@ -152,6 +157,7 @@ export const GET = async (req: NextRequest) => {
         startTime: true,
         endTime: true,
         location: true,
+        rating: true,
         assignments: {
           select: {
             role: { select: { name: true } },
@@ -191,6 +197,33 @@ export const GET = async (req: NextRequest) => {
       });
     }
 
+    const getAvailableSlots = (event: EventResponse) => {
+      return event.availabilities.reduce((total, slot) => {
+        const taken = slot.availabilityEntries.length;
+        const available = slot.totalSlots - taken;
+        return total + available;
+      }, 0);
+    };
+
+    const getTotalDuration = (events: EventResponse[]) => {
+      const totalMs = events.reduce((sum, event) => {
+        return (
+          sum +
+          (new Date(event.endTime).getTime() -
+            new Date(event.startTime).getTime())
+        );
+      }, 0);
+
+      return (totalMs / (1000 * 60 * 60)).toFixed(1);
+    };
+
+    const availabilityCounts = data.reduce(
+      (total, event) => total + getAvailableSlots(event),
+      0,
+    );
+
+    const totalDuration = getTotalDuration(data);
+
     const dataWithStatus = data.map((event) => {
       let status: "UPCOMING" | "LIVE" | "ENDED";
 
@@ -217,6 +250,10 @@ export const GET = async (req: NextRequest) => {
         limit,
         hasNextPage,
         hasPrevPage,
+      },
+      counts: {
+        availabilityCounts,
+        totalDuration,
       },
     };
 
