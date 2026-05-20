@@ -56,21 +56,11 @@ type EventDataType = {
 
 function EventDetailsVolunteer({
   event,
-  parentRefetch,
   isLoading,
 }: {
   event: EventDataType | null;
   isLoading: boolean;
-  parentRefetch: () => void;
 }) {
-  const [editOpen, setEditOpen] = useState(false);
-  const { closeModal } = useModal();
-
-  const handleDelete = () => {
-    parentRefetch();
-    closeModal();
-  };
-
   const takenSlots =
     event?.availabilities.reduce(
       (acc, curr) => acc + curr._count.availabilityEntries,
@@ -94,7 +84,7 @@ function EventDetailsVolunteer({
         </div>
       </div>
       <div
-        className={`${editOpen ? "hidden" : "flex"} w-full flex-col items-center justify-between gap-5 px-2`}
+        className={`flex w-full flex-col items-center justify-between gap-5 px-2`}
       >
         <div className="flex items-start flex-col md:flex-row  md:justify-end w-full  py-1  justify-between gap-3">
           <div className="flex w-full h-full gap-4">

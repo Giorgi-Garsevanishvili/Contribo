@@ -1,6 +1,15 @@
+"use client";
+
 import { HrWarningStatus, RatingAction, ReqStatus } from "@/generated/enums";
 import { IoFilterSharp } from "react-icons/io5";
 import { MdFilterListOff } from "react-icons/md";
+
+
+type UserResponse = {
+  id: string;
+  name: string | null;
+  image: string | null;
+};
 
 type RoleRegionMembershipDataType = {
   id: string;
@@ -17,7 +26,14 @@ type DataType = {
   updatedAt: string;
 }[];
 
-type FilterType = "UNIVERSAL" | "HR-CASES" | "USERS" | "RATING";
+const EventStatusFilterOBJ = {
+  LIVE: "LIVE",
+  UPCOMING: "UPCOMING",
+  ENDED: "ENDED",
+  FUTURE: "FUTURE",
+};
+
+export type EventStatusFilter = "LIVE" | "UPCOMING" | "ENDED" | "FUTURE";
 
 type FilterPropType =
   | {
@@ -67,6 +83,22 @@ type FilterPropType =
       statusValue: string;
       onSearchQueryChange: (search: string) => void;
       onStatusFilterChange: (status: string) => void;
+      filterOn: boolean;
+      clearFilter: () => void;
+    }
+  | {
+      filterType: "EVENTS";
+      statusValue: EventStatusFilter;
+      searchValue: string;
+      assigneeFilter?: string;
+      fromDateFilter: string;
+      tillDateFilter: string;
+      userData?: UserResponse[];
+      onAssigneeFilterChange?: (assigneeId: string) => void;
+      onFromDateFilterChange: (fromDate: string) => void;
+      onTillDateFilterChange: (tillDate: string) => void;
+      onStatusFilterChange: (status: EventStatusFilter) => void;
+      onSearchQueryChange: (search: string) => void;
       filterOn: boolean;
       clearFilter: () => void;
     };
@@ -245,6 +277,101 @@ function QueryFilter(props: FilterPropType) {
                 ))}
               </select>
             </div>
+          </div>
+        ) : props.filterType === "EVENTS" ? (
+          <div
+            /** This Is Filters For Rating List */ className="flex md:overflow-auto  overflow-x-scroll p-1 flex-row"
+          >
+            <div className="flex bg-gray-300 ring-1 ring-gray-600/30 md:ring-0 p-1 rounded-md md:bg-transparent m-2 w-full items-center justify-between">
+              <label
+                htmlFor="type"
+                className="text-gray-700 flex items-center justify-center m-1 h-full"
+              >
+                Status
+              </label>
+              <select
+                value={props.statusValue}
+                onChange={(e) =>
+                  props.onStatusFilterChange(
+                    e.target.value as EventStatusFilter,
+                  )
+                }
+                className="text-center px-0.5 h-fit rounded-sm bg-gray-300 cursor-pointer"
+                name="action"
+                id="action"
+              >
+                <option className="p-0 m-0" value="">
+                  ALL
+                </option>
+                {Object.values(EventStatusFilterOBJ)?.map((item, index) => (
+                  <option key={index} value={item}>
+                    {item}
+                  </option>
+                ))}
+              </select>
+            </div>
+            <div className="flex bg-gray-300 ring-1 ring-gray-600/30 md:ring-0 p-1 rounded-md md:bg-transparent m-2 w-full items-center justify-between">
+              <label
+                htmlFor="type"
+                className="text-gray-700 flex items-center justify-center m-1 h-full"
+              >
+                Start
+              </label>
+              <input
+                type="datetime-local"
+                value={props.fromDateFilter}
+                onChange={(e) => props.onFromDateFilterChange(e.target.value)}
+                className="text-center px-0.5 h-fit rounded-sm bg-gray-300 cursor-pointer"
+                name="from-date"
+                id="from-date"
+              />
+            </div>
+            <div className="flex bg-gray-300 ring-1 ring-gray-600/30 md:ring-0 p-1 rounded-md md:bg-transparent m-2 w-full items-center justify-between">
+              <label
+                htmlFor="type"
+                className="text-gray-700 flex items-center justify-center m-1 h-full"
+              >
+                End
+              </label>
+              <input
+                type="datetime-local"
+                value={props.tillDateFilter}
+                onChange={(e) => props.onTillDateFilterChange(e.target.value)}
+                className="text-center px-0.5 h-fit rounded-sm bg-gray-300 cursor-pointer"
+                name="till-date"
+                id="till-date"
+              />
+            </div>
+            {props.assigneeFilter !== undefined &&
+            props.onAssigneeFilterChange !== undefined &&
+            props.userData !== undefined ? (
+              <div className="flex bg-gray-300 ring-1 ring-gray-600/30 md:ring-0 p-1 rounded-md md:bg-transparent m-2 w-full items-center justify-between">
+                <label
+                  htmlFor="type"
+                  className="text-gray-700 flex items-center justify-center m-1 h-full"
+                >
+                  Assignee
+                </label>
+                <select
+                  value={props.assigneeFilter}
+                  onChange={(e) =>
+                    props.onAssigneeFilterChange!(e.target.value)
+                  }
+                  className="text-center px-0.5 h-fit rounded-sm bg-gray-300 cursor-pointer"
+                  name="assignee"
+                  id="assignee"
+                >
+                  <option className="p-0 m-0" value="">
+                    ALL
+                  </option>
+                  {props.userData?.map((user, index) => (
+                    <option key={index} value={user.id}>
+                      {user.name}
+                    </option>
+                  ))}
+                </select>
+              </div>
+            ) : null}
           </div>
         ) : props.filterType === "STANDARD" ? null : null}
         <div className="flex items-center justify-center">

@@ -1,12 +1,19 @@
 import Pagination from "@/(components)/generalComp/Pagination";
 import usePaginatedData from "@/hooks/usePaginatedData";
 import { useMemo, useState } from "react";
-import QueryFilter from "@/(components)/generalComp/QueryFilter";
+import QueryFilter, {
+  EventStatusFilter,
+} from "@/(components)/generalComp/QueryFilter";
 import { RiRefreshLine } from "react-icons/ri";
 import EventsListCard from "./EventListCard";
 import AddEventButton from "./AddEventButton";
 import LoadingCard from "@/(components)/generalComp/LoadingCard";
 
+type UserResponse = {
+  id: string;
+  name: string | null;
+  image: string | null;
+};
 
 type EventDataType = {
   status: "LIVE" | "ENDED" | "UPCOMING";
@@ -58,21 +65,45 @@ function EventsList() {
   const [statusFilter, setStatusFilter] = useState("");
   const [searchQuery, setSearchQuery] = useState("");
   const [filterOn, setFilterOn] = useState(false);
+  const [assigneeFilter, setAssigneeFilter] = useState("");
+  const [fromDateFilter, setFromDateFilter] = useState("");
+  const [tillDateFilter, setTillDateFilter] = useState("");
 
   const paginatedUrl = useMemo(() => {
     const searchParams = new URLSearchParams();
     searchParams.append("page", currentPage.toString());
     searchParams.append("limit", limit.toString());
     searchParams.append("status", statusFilter.toString());
+    searchParams.append("assignee", assigneeFilter.toString());
+    searchParams.append("fromDate", fromDateFilter.toString());
+    searchParams.append("tillDate", tillDateFilter.toString());
     if (searchQuery.length >= 3) {
       searchParams.append("search", searchQuery);
     }
 
-    const hasFilter = statusFilter || (searchQuery.length >= 3 && searchQuery);
+    const hasFilter =
+      assigneeFilter ||
+      fromDateFilter ||
+      tillDateFilter ||
+      statusFilter ||
+      (searchQuery.length >= 3 && searchQuery);
     setFilterOn(!!hasFilter);
 
-    return `/api/admin/events?${searchParams.toString()}`;
-  }, [limit, currentPage, searchQuery, statusFilter]);
+    return `/api/user/events?${searchParams.toString()}`;
+  }, [
+    limit,
+    currentPage,
+    searchQuery,
+    statusFilter,
+    assigneeFilter,
+    fromDateFilter,
+    tillDateFilter,
+  ]);
+
+  const { data: UserData, isLoading } = usePaginatedData<UserResponse[]>(
+    "/api/admin/users/selectList",
+    [],
+  );
 
   const {
     data,
@@ -92,6 +123,19 @@ function EventsList() {
     window.scroll({ top: 0, behavior: "smooth" });
   };
 
+  const handleAssigneeFilterChange = (assigneeId: string) => {
+    setAssigneeFilter(assigneeId);
+    setCurrentPage(1);
+  };
+  const handleFromDateFilterChange = (fromDate: string) => {
+    setFromDateFilter(fromDate);
+    setCurrentPage(1);
+  };
+  const handleTillDateFilterChange = (tillDate: string) => {
+    setTillDateFilter(tillDate);
+    setCurrentPage(1);
+  };
+
   const handleSearchQuery = (searchQuery: string) => {
     setSearchQuery(searchQuery);
     setCurrentPage(1);
@@ -105,6 +149,9 @@ function EventsList() {
   const clearFilter = () => {
     handleSearchQuery("");
     handleStatusFilterChange("");
+    handleTillDateFilterChange("");
+    handleFromDateFilterChange("");
+    setAssigneeFilter("");
     setCurrentPage(1);
   };
 
@@ -116,7 +163,16 @@ function EventsList() {
     >
       <div className="flex text-black m-1 mb-2 w-full items-center justify-center">
         <QueryFilter
-          filterType="STANDARD"
+          filterType="EVENTS"
+          statusValue={statusFilter as EventStatusFilter}
+          assigneeFilter={assigneeFilter}
+          fromDateFilter={fromDateFilter}
+          tillDateFilter={tillDateFilter}
+          userData={UserData}
+          onAssigneeFilterChange={handleAssigneeFilterChange}
+          onFromDateFilterChange={handleFromDateFilterChange}
+          onStatusFilterChange={handleStatusFilterChange}
+          onTillDateFilterChange={handleTillDateFilterChange}
           searchValue={searchQuery}
           filterOn={filterOn}
           clearFilter={clearFilter}
@@ -133,14 +189,14 @@ function EventsList() {
           ))}
         </div>
       ) : data && data?.length > 0 ? (
-        <div className="grid transition-all duration-300 ease-out  md:grid-cols-2 gap-2">
+        <div className="grid w-full transition-all duration-300 ease-out  md:grid-cols-2 gap-2">
           {data?.map((event) => (
             <EventsListCard refetch={refetch} key={event.id} event={event} />
           ))}
         </div>
       ) : (
         <div className="flex flex-col mt-2 text-black bg-gray-100/90  items-center rounded-lg shadow-lg p-10 justify-center">
-          <h3 className="font-bold">No Join Requests to display.</h3>
+          <h3 className="font-bold">No Events to display.</h3>
           <button className="btn text-gray-300 bg-cyan-900" onClick={refetch}>
             <RiRefreshLine size={22} className="mr-2" /> Refetch
           </button>

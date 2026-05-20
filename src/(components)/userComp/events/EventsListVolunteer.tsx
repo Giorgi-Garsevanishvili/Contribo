@@ -1,11 +1,18 @@
 import Pagination from "@/(components)/generalComp/Pagination";
 import usePaginatedData from "@/hooks/usePaginatedData";
 import { useMemo, useState } from "react";
-import QueryFilter from "@/(components)/generalComp/QueryFilter";
+import QueryFilter, {
+  EventStatusFilter,
+} from "@/(components)/generalComp/QueryFilter";
 import { RiRefreshLine } from "react-icons/ri";
-import EventsListCard from "@/(components)/adminComp/Events/EventListCard";
 import LoadingCard from "@/(components)/generalComp/LoadingCard";
 import EventsListCardVolunteer from "./EventListCardVolunteer";
+
+type UserResponse = {
+  id: string;
+  name: string | null;
+  image: string | null;
+};
 
 type EventDataType = {
   status: "LIVE" | "ENDED" | "UPCOMING";
@@ -57,21 +64,36 @@ function EventsListVolunteer() {
   const [statusFilter, setStatusFilter] = useState("");
   const [searchQuery, setSearchQuery] = useState("");
   const [filterOn, setFilterOn] = useState(false);
+  const [fromDateFilter, setFromDateFilter] = useState("");
+  const [tillDateFilter, setTillDateFilter] = useState("");
 
   const paginatedUrl = useMemo(() => {
     const searchParams = new URLSearchParams();
     searchParams.append("page", currentPage.toString());
     searchParams.append("limit", limit.toString());
     searchParams.append("status", statusFilter.toString());
+    searchParams.append("fromDate", fromDateFilter.toString());
+    searchParams.append("tillDate", tillDateFilter.toString());
     if (searchQuery.length >= 3) {
       searchParams.append("search", searchQuery);
     }
 
-    const hasFilter = statusFilter || (searchQuery.length >= 3 && searchQuery);
+    const hasFilter =
+      fromDateFilter ||
+      tillDateFilter ||
+      statusFilter ||
+      (searchQuery.length >= 3 && searchQuery);
     setFilterOn(!!hasFilter);
 
     return `/api/user/events?${searchParams.toString()}`;
-  }, [limit, currentPage, searchQuery, statusFilter]);
+  }, [
+    limit,
+    currentPage,
+    searchQuery,
+    statusFilter,
+    fromDateFilter,
+    tillDateFilter,
+  ]);
 
   const {
     data,
@@ -96,6 +118,15 @@ function EventsListVolunteer() {
     setCurrentPage(1);
   };
 
+  const handleFromDateFilterChange = (fromDate: string) => {
+    setFromDateFilter(fromDate);
+    setCurrentPage(1);
+  };
+  const handleTillDateFilterChange = (tillDate: string) => {
+    setTillDateFilter(tillDate);
+    setCurrentPage(1);
+  };
+
   const handleStatusFilterChange = (status: string) => {
     setStatusFilter(status);
     setCurrentPage(1);
@@ -104,6 +135,8 @@ function EventsListVolunteer() {
   const clearFilter = () => {
     handleSearchQuery("");
     handleStatusFilterChange("");
+    handleTillDateFilterChange("");
+    handleFromDateFilterChange("");
     setCurrentPage(1);
   };
 
@@ -115,7 +148,13 @@ function EventsListVolunteer() {
     >
       <div className="flex text-black m-1 mb-2 w-full items-center justify-center">
         <QueryFilter
-          filterType="STANDARD"
+          filterType="EVENTS"
+          statusValue={statusFilter as EventStatusFilter}
+          fromDateFilter={fromDateFilter}
+          tillDateFilter={tillDateFilter}
+          onFromDateFilterChange={handleFromDateFilterChange}
+          onStatusFilterChange={handleStatusFilterChange}
+          onTillDateFilterChange={handleTillDateFilterChange}
           searchValue={searchQuery}
           filterOn={filterOn}
           clearFilter={clearFilter}
@@ -131,12 +170,16 @@ function EventsListVolunteer() {
       ) : data && data?.length > 0 ? (
         <div className="grid transition-all w-full duration-300 ease-out  md:grid-cols-2 gap-2">
           {data?.map((event) => (
-            <EventsListCardVolunteer refetch={refetch} key={event.id} event={event} />
+            <EventsListCardVolunteer
+              refetch={refetch}
+              key={event.id}
+              event={event}
+            />
           ))}
         </div>
       ) : (
         <div className="flex flex-col mt-2 text-black bg-gray-100/90  items-center rounded-lg shadow-lg p-10 justify-center">
-          <h3 className="font-bold">No Join Requests to display.</h3>
+          <h3 className="font-bold">No Events to display.</h3>
           <button className="btn text-gray-300 bg-cyan-900" onClick={refetch}>
             <RiRefreshLine size={22} className="mr-2" /> Refetch
           </button>

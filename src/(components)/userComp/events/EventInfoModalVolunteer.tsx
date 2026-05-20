@@ -58,9 +58,9 @@ function EventInfoModalVolunteer({
     null,
     null,
   );
-  useEffect(() => {
-    parentFetch();
-  }, [refetch]);
+  // useEffect(() => {
+  //   parentFetch();
+  // }, [refetch]);
 
   return (
     <div className="flex m-2 flex-col h-fit w-full items-start justify-between gap-4 p-2">
@@ -68,7 +68,6 @@ function EventInfoModalVolunteer({
         <EventDetailsVolunteer
           isLoading={isLoading}
           event={data}
-          parentRefetch={refetch}
         />
       </div>
     </div>

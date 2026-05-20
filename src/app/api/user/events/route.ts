@@ -43,7 +43,7 @@ type EventResponse = {
     }[];
     totalSlots: number;
   }[];
-}
+};
 
 type PaginationMeta = {
   currentPage: number;
@@ -79,6 +79,8 @@ export const GET = async (req: NextRequest) => {
     const fromDateFilter = searchParams.get("fromDate");
     const tillDateFilter = searchParams.get("tillDate");
     const statusFilter = searchParams.get("status");
+
+    const now = new Date();
 
     const whereClause: EventWhereInput = {
       regionId: thisUser.user?.regionId,
@@ -127,6 +129,12 @@ export const GET = async (req: NextRequest) => {
 
     if (statusFilter === "UPCOMING") {
       whereClause.startTime = { gt: new Date() };
+    }
+
+    if (statusFilter === "FUTURE") {
+      const future = new Date(now);
+      future.setDate(future.getDate() + 7);
+      whereClause.startTime = { gte: now, lte: future };
     }
 
     const totalCount = await prisma.event.count({
@@ -182,8 +190,6 @@ export const GET = async (req: NextRequest) => {
         message: "Events not found!",
       });
     }
-
-    const now = new Date();
 
     const dataWithStatus = data.map((event) => {
       let status: "UPCOMING" | "LIVE" | "ENDED";
