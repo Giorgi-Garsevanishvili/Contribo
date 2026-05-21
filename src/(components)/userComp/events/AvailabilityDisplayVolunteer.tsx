@@ -2,7 +2,6 @@ import { IoIosTime } from "react-icons/io";
 import { AssignmentStatus } from "@/generated/enums";
 import { FaUser } from "react-icons/fa6";
 import { TiStarFullOutline } from "react-icons/ti";
-import { IoAdd } from "react-icons/io5";
 import { BsLightningChargeFill } from "react-icons/bs";
 import UserSmallDisplay from "@/(components)/adminComp/users/UserSmallDisplay";
 
@@ -53,11 +52,13 @@ type AvailabilityData = {
 };
 
 function AvailabilityDisplayVolunteer({
+  eventStatus,
   availabilities,
   taken,
   handleCancel,
   handleClaim,
 }: {
+  eventStatus: "LIVE" | "ENDED" | "UPCOMING";
   availabilities: AvailabilityData;
   taken: boolean;
   handleClaim: ({
@@ -91,6 +92,7 @@ function AvailabilityDisplayVolunteer({
           </div>
           <button
             type="button"
+            disabled={eventStatus === "ENDED"}
             onClick={(e) =>
               taken
                 ? handleCancel({
@@ -105,13 +107,15 @@ function AvailabilityDisplayVolunteer({
                     })
                   : null
             }
-            className={`flex bottom-34 z-150 right-4 md:right-6 md:bottom-20 ring ring-gray-900/30 ${taken ? "bg-red-800" : availabilities.available === 0 ? "bg-green-900 hover:opacity-100" : "bg-yellow-700"}  text-gray-50 rounded-sm p-2 text-md transition-all duration-300 ease-out items-center justify-center gap-2 shadow-sm focus:opacity-100 hover:shadow-md cursor-pointer hover:opacity-75`}
+            className={`flex bottom-34 z-150 right-4 md:right-6 md:bottom-20 ring ring-gray-900/30 ${eventStatus === "ENDED" ? "bg-gray-600" : taken ? "bg-red-800" : availabilities.available === 0 ? "bg-green-900 hover:opacity-100" : "bg-yellow-700"}  text-gray-50 rounded-sm p-2 text-md transition-all duration-300 ease-out items-center justify-center gap-2 shadow-sm focus:opacity-100 hover:shadow-md cursor-pointer hover:opacity-75`}
           >
-            {taken
-              ? "Cancel"
-              : availabilities.available === 0
-                ? "All Slots Are taken"
-                : "Claim Slot"}
+            {eventStatus === "ENDED"
+              ? "Closed"
+              : taken
+                ? "Cancel"
+                : availabilities.available === 0
+                  ? "All Slots Are taken"
+                  : "Claim Slot"}
             <BsLightningChargeFill size={15} />
           </button>
         </div>

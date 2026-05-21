@@ -36,6 +36,7 @@ export const POST = async (req: NextRequest, context: Context) => {
         select: {
           totalSlots: true,
           eventId: true,
+          event: { select: { startTime: true, endTime: true } },
           validFrom: true,
           validTo: true,
         },
@@ -43,6 +44,15 @@ export const POST = async (req: NextRequest, context: Context) => {
 
       if (!totalSlots) {
         throw new Error("Slot Not Found");
+      }
+
+      // prevent claim if Event Ended
+      const now = new Date();
+      if (totalSlots.event.endTime <= now) {
+        return {
+          success: false,
+          message: "Event Already Ended",
+        };
       }
 
       // prevent duplicate same slot

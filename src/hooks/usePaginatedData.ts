@@ -18,17 +18,29 @@ type CountsType = {
   totalDuration: string;
 };
 
+type DashboardStats = {
+  totalEvents: number;
+  assignedEvents: number;
+  attendedEvents: number;
+  upcomingEvents: number;
+  endedEvents: number;
+  liveEvents: number;
+  totalDurationHours: string;
+  totalAvailableSlots: number;
+};
+
 function usePaginatedData<T>(
   url: string,
   initialData: T,
   stopFetch?: boolean | null,
-  dependencies?: unknown
+  dependencies?: unknown,
 ) {
   const [data, setData] = useState<T>(initialData);
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [error, setError] = useState<boolean>(false);
   const [pagination, setPagination] = useState<PaginationMeta | null>();
   const [counts, setCounts] = useState<CountsType | null>();
+  const [stats, setStats] = useState<DashboardStats>();
 
   const { triggerCompAlert } = useCompAlert();
   const triggerCompAlertRef = useRef(triggerCompAlert);
@@ -38,7 +50,6 @@ function usePaginatedData<T>(
     const fetchData = async () => {
       try {
         if (!url || stopFetch) return;
-
 
         if (abortControllerRef.current) {
           abortControllerRef.current.abort();
@@ -57,6 +68,10 @@ function usePaginatedData<T>(
         }
         if (responseData.counts) {
           setCounts(responseData.counts);
+        }
+
+        if (responseData.stats) {
+          setStats(responseData.stats);
         }
         setIsLoading(false);
       } catch (error) {
@@ -109,6 +124,10 @@ function usePaginatedData<T>(
       if (responseData.counts) {
         setCounts(responseData.counts);
       }
+
+      if (responseData.stats) {
+          setStats(responseData.stats);
+        }
       setIsLoading(false);
     } catch (error) {
       setError(true);
@@ -129,7 +148,7 @@ function usePaginatedData<T>(
     }
   };
 
-  return { data, isLoading, error, pagination, refetch, counts };
+  return { data, isLoading, error, pagination, refetch, counts, stats };
 }
 
 export default usePaginatedData;

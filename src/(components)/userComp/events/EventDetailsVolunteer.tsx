@@ -324,6 +324,7 @@ function EventDetailsVolunteer({
             <AvailabilityDisplayVolunteer
               taken={avv.taken}
               key={avv.id}
+              eventStatus={event.status}
               handleClaim={({ e, slotId, ratingScore }) =>
                 handleSpotTake({
                   e,
