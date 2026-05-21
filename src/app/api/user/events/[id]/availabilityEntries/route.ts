@@ -33,30 +33,87 @@ export const POST = async (req: NextRequest, context: Context) => {
     const creationResponse = await prisma.$transaction(async (tx) => {
       const totalSlots = await tx.availabilitySlot.findUnique({
         where: { id: json.slotId },
-        select: { totalSlots: true },
+        select: {
+          totalSlots: true,
+          eventId: true,
+          validFrom: true,
+          validTo: true,
+        },
       });
 
+      if (!totalSlots) {
+        throw new Error("Slot Not Found");
+      }
+
+      // prevent duplicate same slot
+      const existingSameSlot = await tx.availabilityEntry.findFirst({
+        where: {
+          userId: thisUser.user.userId!,
+          slotId: json.slotId,
+          status: "ACTIVE",
+        },
+      });
+
+      if (existingSameSlot) {
+        return {
+          success: false,
+          message: "You already have this slot",
+        };
+      }
+
+      // Overlap Prevention
+      const overlappingAvailability = await tx.availabilityEntry.findFirst({
+        where: {
+          userId: thisUser.user.userId!,
+          status: "ACTIVE",
+          slot: {
+            validFrom: {
+              lt: totalSlots.validTo as Date,
+            },
+            validTo: {
+              gt: totalSlots.validFrom as Date,
+            },
+          },
+        },
+        select: { slot: { select: { event: { select: { name: true } } } } },
+      });
+
+      if (overlappingAvailability) {
+        return {
+          success: false,
+          message: `You already have overlapping availability in Event: ${overlappingAvailability.slot.event.name}`,
+        };
+      }
+
+      // count active taken slots
       const takenSlots = await tx.availabilityEntry.count({
-        where: { slotId: json.slotId, status: "ACTIVE" },
+        where: {
+          slotId: json.slotId,
+          status: "ACTIVE",
+        },
       });
-
       const availableToCreate = Number(totalSlots?.totalSlots) - takenSlots;
 
-      if (availableToCreate > 0) {
-        const createResponse = await tx.availabilityEntry.create({
-          data: jsonWithCreator,
-        });
-
-        return true;
-      } else {
-        return false;
+      if (availableToCreate <= 0) {
+        return {
+          success: false,
+          message: "Slot is full",
+        };
       }
+
+      await tx.availabilityEntry.create({
+        data: jsonWithCreator,
+      });
+
+      return {
+        success: true,
+      };
     });
 
-    if (!creationResponse) {
+    if (!creationResponse.success) {
       return NextResponse.json(
-        { message: `Creation Failed: Slot Is Full` },
-        { status: 500 },
+        { message: `${creationResponse.message}` },
+        { status: 400 },
       );
     }
 
