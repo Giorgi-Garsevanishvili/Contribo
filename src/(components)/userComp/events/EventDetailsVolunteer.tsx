@@ -135,10 +135,6 @@ function EventDetailsVolunteer({
     null,
   );
 
-  useEffect(() => {
-    console.log(data);
-  }, [data]);
-
   const handleSpotTake = async ({
     e,
     ratingScore,

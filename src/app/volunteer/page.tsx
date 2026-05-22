@@ -5,7 +5,7 @@ import WelcomeBack from "@/(components)/userComp/WelcomeBack";
 
 async function Volunteer() {
   return (
-    <div className="flex flex-col w-full flex-wrap items-center my-3 justify-start gap-1">
+    <div className="flex flex-col w-full flex-wrap items-center my-3 justify-start gap-2">
       <WelcomeBack />
       <HomeEventStats />
       <LiveEventsVolunteer />

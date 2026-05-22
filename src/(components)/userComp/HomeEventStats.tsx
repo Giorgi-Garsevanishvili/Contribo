@@ -95,81 +95,98 @@ type ApiResponse = {
 };
 
 function HomeEventStats() {
-  const { data, isLoading, stats, refetch } =
-    usePaginatedData<ApiResponse | null>(`/api/user/events/myStats`, null);
+  const { isLoading, stats, refetch } = usePaginatedData<ApiResponse | null>(
+    `/api/user/events/myStats`,
+    null,
+  );
 
-  useEffect(() => {
-    console.log(data);
-  }, [data]);
-
-  return isLoading ? (
-    <div className="flex w-full animate-pulse md:w-[80%] bg-gray-50 items-center  rounded-lg shadow-lg p-2 justify-center">
-      <ImSpinner9 className="animate-spin" size={20} />
-    </div>
-  ) : (
-    stats && (
-      <div className="p-2 flex-wrap flex-col md:w-[80%] w-100 shadow  bg-gray-50 rounded-md gap-1 flex">
-        <div className="flex p-1 gap-2 flex-wrap w-full text-sm text-center  h-fit items-center justify-between border-gray-300">
-          <div className="flex select-none gap-1 w-40 flex-col p-2 items-center border border-gray-600/40  rounded-md grow   justify-center">
-            <div className="flex items-center justify-center gap-3">
-              <CiCalendar className="text-blue-500" size={20} />
-              <h3 className="font-semibold text-md">
-                {stats.upcomingEvents || 0}
-              </h3>
-            </div>
-            <h3 className="text-xs text-gray-600">My Upcoming Events</h3>
+  return (
+    <div className="p-2 flex-wrap flex-col md:w-[80%] w-100 bg-gray-700 text-white shadow shadow-white rounded-md gap-1 flex">
+      <h3 className="w-full items-center text-center">My Events Overview</h3>
+      <div className="flex p-1 gap-2 flex-wrap w-full text-sm text-center  h-fit items-center justify-between border-gray-300">
+        <div
+          className={`flex ${isLoading ? "animate-pulse opacity-80" : ""} select-none bg-gray-900/50 gap-1 w-40 flex-col p-2 items-center border border-gray-100/40  rounded-md grow   justify-center`}
+        >
+          <div className="flex items-center justify-center gap-3">
+            <CiCalendar className="text-blue-500" size={20} />
+            <h3 className="font-semibold text-md">
+              {(stats && stats.upcomingEvents) || 0}
+            </h3>
           </div>
+          <h3 className="text-xs font-semibold text-gray-200">
+            My Upcoming Events
+          </h3>
+        </div>
 
-          <div className="flex select-none gap-1 w-40 flex-col p-2 items-center border border-gray-600/40  rounded-md grow   justify-center">
-            <div className="flex items-center justify-center gap-3">
-              <MdEventAvailable className="text-green-700" size={20} />
-              <h3 className="font-semibold text-md">
-                {stats.attendedEvents || 0}
-              </h3>
-            </div>
-            <h3 className="text-xs text-gray-600">My Attended Events</h3>
+        <div
+          className={`flex ${isLoading ? "animate-pulse opacity-80" : ""} select-none bg-gray-900/50 gap-1 w-40 flex-col p-2 items-center border border-gray-100/40  rounded-md grow   justify-center`}
+        >
+          <div className="flex items-center justify-center gap-3">
+            <MdEventAvailable className="text-green-700" size={20} />
+            <h3 className="font-semibold text-md">
+              {(stats && stats.attendedEvents) || 0}
+            </h3>
           </div>
+          <h3 className="text-xs font-semibold text-gray-200">
+            My Availabilities
+          </h3>
+        </div>
 
-          <div className="flex select-none gap-1 w-40 flex-col p-2 items-center border border-gray-600/40  rounded-md grow   justify-center">
-            <div className="flex items-center justify-center gap-3">
-              <AiOutlineAppstore size={20} className="text-blue-500" />
-              <h3 className="font-semibold text-md">
-                {stats.totalEvents || 0}
-              </h3>
-            </div>
-            <h3 className="text-xs text-gray-600">Total Events</h3>
+        <div
+          className={`flex ${isLoading ? "animate-pulse opacity-80" : ""} select-none bg-gray-900/50 gap-1 w-40 flex-col p-2 items-center border border-gray-100/40  rounded-md grow   justify-center`}
+        >
+          <div className="flex items-center justify-center gap-3">
+            <PiUserCircleCheck className="text-orange-500" size={20} />
+            <h3 className="font-semibold text-md">
+              {(stats && stats.assignedEvents) || 0}
+            </h3>
           </div>
+          <h3 className="text-xs font-semibold text-gray-200">
+            My Assignments
+          </h3>
+        </div>
 
-          <div className="flex select-none gap-1 w-40 flex-col p-2 items-center border border-gray-600/40  rounded-md grow   justify-center">
-            <div className="flex items-center justify-center gap-3">
-              <PiUserCircleCheck className="text-orange-500" size={20} />
-              <h3 className="font-semibold text-md">
-                {stats.assignedEvents || 0}
-              </h3>
-            </div>
-            <h3 className="text-xs text-gray-600">My Assignments</h3>
+        <div
+          className={`flex ${isLoading ? "animate-pulse opacity-80" : ""} select-none bg-gray-900/50 gap-1 w-40 flex-col p-2 items-center border border-gray-100/40  rounded-md grow   justify-center`}
+        >
+          <div className="flex items-center justify-center gap-3">
+            <AiOutlineAppstore size={20} className="text-blue-500" />
+            <h3 className="font-semibold text-md">
+              {(stats && stats.totalEvents) || 0}
+            </h3>
           </div>
+          <h3 className="text-xs font-semibold text-gray-200">
+            Total Attended Events
+          </h3>
+        </div>
 
-          <div className="flex select-none gap-1 w-40 flex-col p-2 items-center border border-gray-600/40  rounded-md grow   justify-center">
-            <div className="flex items-center justify-center gap-3">
-              <GoClock className="text-purple-500" size={20} />
-              <h3 className="font-semibold text-md">
-                {stats.totalDurationHours}h
-              </h3>
-            </div>
-            <h3 className="text-xs text-gray-600">Total Duration</h3>
+        <div
+          className={`flex ${isLoading ? "animate-pulse opacity-80" : ""} select-none bg-gray-900/50 gap-1 w-40 flex-col p-2 items-center border border-gray-100/40  rounded-md grow   justify-center`}
+        >
+          <div className="flex items-center justify-center gap-3">
+            <GoClock className="text-purple-500" size={20} />
+            <h3 className="font-semibold text-md">
+              {(stats && stats.totalDurationHours) || 0}h
+            </h3>
           </div>
+          <h3 className="text-xs font-semibold text-gray-200">
+            Total Duration
+          </h3>
+        </div>
 
-          <div className="flex select-none gap-1 w-40 flex-col p-2 items-center border border-gray-600/40  rounded-md grow   justify-center">
-            <div className="flex items-center justify-center gap-3">
-              <AiFillPlayCircle className="text-green-700" size={20} />
-              <h3 className="font-semibold text-md">{stats.liveEvents}</h3>
-            </div>
-            <h3 className="text-xs text-gray-600">Live Events</h3>
+        <div
+          className={`flex ${isLoading ? "animate-pulse opacity-80" : ""} select-none bg-gray-900/50 gap-1 w-40 flex-col p-2 items-center border border-gray-100/40  rounded-md grow   justify-center`}
+        >
+          <div className="flex items-center justify-center gap-3">
+            <AiFillPlayCircle className="text-green-700" size={20} />
+            <h3 className="font-semibold text-md">
+              {(stats && stats.liveEvents) || 0}
+            </h3>
           </div>
+          <h3 className="text-xs font-semibold text-gray-200">Live Events</h3>
         </div>
       </div>
-    )
+    </div>
   );
 }
 

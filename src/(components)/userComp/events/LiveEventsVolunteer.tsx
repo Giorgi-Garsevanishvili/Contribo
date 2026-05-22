@@ -65,28 +65,28 @@ function LiveEventsVolunteer() {
   return (
     <>
       {isLoading ? (
-        <div className="flex w-full animate-pulse md:w-[80%] bg-gray-50  items-center  rounded-lg shadow-lg p-2 justify-center">
+        <div className="flex w-full animate-pulse md:w-[80%] bg-gray-700  items-center  rounded-lg shadow-lg p-2 justify-center">
           <ImSpinner9 className="animate-spin" size={20} />
         </div>
       ) : (
         <div
-          className={`${data.length === 0 ? "hidden" : "flex"} p-2 flex-col justify-start overflow-hidden md:w-[80%] w-100 items-center bg-gray-50 shadow rounded-md gap-2`}
+          className={`${data.length === 0 ? "hidden" : "flex"} shadow-white p-2 flex-col justify-start overflow-hidden md:w-[80%] w-100 items-center bg-gray-700  shadow rounded-md gap-2`}
         >
           <div className="flex px-2 border-b border-gray-300 p-1 w-full relative items-center text-center justify-start gap-3">
-            <div className="flex items-center p-2 justify-center bg-gray-200 rounded-md">
-              <BsBroadcast size={22} className="text-blue-600 animate-pulse" />
+            <div className="flex items-center p-2 justify-center bg-gray-500 rounded-md">
+              <BsBroadcast size={22} className="text-blue-50 animate-pulse" />
             </div>
             <div className="flex flex-col items-start justify-center">
-              <h3 className=" cursor-default leading-6 font-bold text-xl text-blue-950">
+              <h3 className=" cursor-default leading-6 font-bold text-xl text-blue-200">
                 Live Events
               </h3>
-              <p className="text-xs text-gray-500 leading-6">
+              <p className="text-xs text-gray-50 leading-6">
                 Events Currently Live
               </p>
             </div>
             <button
               onClick={() => router.push("volunteer/events")}
-              className="text-xs absolute right-2 cursor-pointer flex gap-1 items-center justify-center transition-all duration-300 ease-out hover:text-blue-400 text-blue-600"
+              className="text-xs absolute right-2 cursor-pointer flex gap-1 items-center justify-center transition-all duration-300 ease-out hover:text-blue-400 text-blue-200"
             >
               View All <IoIosArrowForward />
             </button>
@@ -98,36 +98,36 @@ function LiveEventsVolunteer() {
               </div>
             ))}
           </div>
-          <div className="flex border-t p-2 w-full text-sm text-center  h-fit items-center justify-between border-gray-300">
-            <div className="flex select-none gap-1 w-full flex-col p-2 items-center justify-center">
+          <div className="flex  text-gray-50 border-t p-2 gap-2 flex-wrap w-full text-sm text-center  h-fit items-center justify-between border-gray-300">
+            <div className="flex select-none gap-1 grow flex-col p-2 items-center rounded-md bg-gray-800 ring ring-gray-400/60  justify-center">
               <div className="flex items-center justify-center gap-3">
                 <LuPartyPopper className="text-blue-500" />
                 <h3 className="font-semibold text-md">{data.length}</h3>
               </div>
-              <h3 className="text-xs text-gray-600">Live Events</h3>
+              <h3 className="text-xs text-gray-50">Live Events</h3>
             </div>
-            <div className="border-l border-gray-300 h-7 w-1"></div>
-            <div className="flex select-none gap-1 w-full flex-col p-2 items-center justify-center">
+            
+            <div className="flex select-none gap-1 grow flex-col p-2 items-center rounded-md bg-gray-800 ring ring-gray-400/60  justify-center">
               <div className="flex items-center justify-center gap-3">
                 <PiUserCircleCheck className="text-green-500" />
                 <h3 className="font-semibold text-md">
                   {counts?.availabilityCounts}
                 </h3>
               </div>
-              <h3 className="text-xs text-gray-600">Slots Available</h3>
+              <h3 className="text-xs text-gray-50">Slots Available</h3>
             </div>
-            <div className="border-l border-gray-300 h-7 w-1"></div>
-            <div className="flex select-none gap-1 w-full flex-col p-2 items-center justify-center">
+            
+            <div className="flex select-none gap-1 grow flex-col p-2 items-center rounded-md bg-gray-800 ring ring-gray-400/60  justify-center">
               <div className="flex items-center justify-center gap-3">
                 <GoClock className="text-purple-500" />
                 <h3 className="font-semibold text-md">
                   {counts?.totalDuration}h
                 </h3>
               </div>
-              <h3 className="text-xs text-gray-600">Duration</h3>
+              <h3 className="text-xs text-gray-50">Duration</h3>
             </div>
-            <div className="border-l border-gray-300 h-7 w-1"></div>
-            <div className="flex select-none w-full flex-col p-2 gap-1 items-center justify-center">
+            
+            <div className="flex select-none w-full md:w-auto md:grow rounded-md bg-gray-800 ring ring-gray-400/60 flex-col p-2 gap-1 items-center justify-center">
               <div className="flex items-center justify-center gap-3">
                 <CiCalendar className="text-yellow-500" />
                 <h3 className="font-semibold text-md">
@@ -137,7 +137,7 @@ function LiveEventsVolunteer() {
                   })}
                 </h3>
               </div>
-              <h3 className="text-xs text-gray-600">Date</h3>
+              <h3 className="text-xs text-gray-50">Date</h3>
             </div>
           </div>
         </div>
