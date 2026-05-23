@@ -4,11 +4,8 @@ import { useRouter } from "next/navigation";
 import { IoIosArrowForward } from "react-icons/io";
 import { useSession } from "next-auth/react";
 import { BiSolidBookmarkHeart } from "react-icons/bi";
-import { useEffect } from "react";
 import { HrWarningStatus, RatingAction } from "@/generated/enums";
 import MyHrStats from "./MyHrStats";
-import Image from "next/image";
-import { IoPersonSharp } from "react-icons/io5";
 
 type UserStatsType = {
   updatedAt: Date | null;
@@ -69,25 +66,10 @@ function WelcomeBack() {
   return (
     <div className="flex md:flex-row h-fit flex-col md:w-[80%] grow w-100 gap-2">
       <div
-        className={`flex p-3 h-auto flex-col grow shadow items-center justify-center bg-gray-700 shadow-white text-white rounded-md gap-2`}
+        className={`flex p-3 h-auto flex-col shrink-0 grow shadow items-center justify-center bg-gray-700/70 shadow-white text-white rounded-md gap-2`}
       >
         <div className="flex px-1 p-1 w-full md:flex-row flex-col relative items-center text-center justify-start gap-3">
-          <div className="flex relative">
-            <div className="flex w-20 h-20 ring ring-gray-600/30 bg-gray-400/30 items-center justify-center overflow-hidden rounded-full">
-              {data?.image ? (
-                <Image
-                  src={data?.image}
-                  alt=""
-                  width={80}
-                  height={80}
-                  className="object-cover"
-                />
-              ) : (
-                <IoPersonSharp size={40} className="text-gray-700" />
-              )}
-            </div>
-            <div className="flex rounded-full ring ring-green-900/60 absolute bottom-0 right-2 bg-green-600 w-3.5 h-3.5"></div>
-          </div>
+          <BiSolidBookmarkHeart size={75}  />
           <div className="flex flex-col gap-1 items-center md:items-start justify-center">
             <h3 className=" cursor-default items-center justify-center leading-6 font-bold text-2xl text-blue-100">
               Welcome Back, {session?.user.name?.split(" ")[0]}! 👋

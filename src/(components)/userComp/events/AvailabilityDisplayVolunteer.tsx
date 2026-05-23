@@ -82,7 +82,7 @@ function AvailabilityDisplayVolunteer({
     <div
       className={`flex ${taken ? "border-orange-300 border-2" : ""} rounded-md items-start bg-gray-700 border-l-2 border-cyan-500  flex-col w-full l gap-2 p-2`}
     >
-      <div className="flex w-full flex-col gap-2">
+      <div className="flex w-full grow flex-col gap-2">
         <div className="flex ml-2 gap-3 justify-between items-center py-2 border-b border-gray-500/60">
           <div className="flex items-center justify-center text-xs gap-3">
             <div className="flex p-2 rounded-full bg-cyan-600/20">
@@ -119,7 +119,7 @@ function AvailabilityDisplayVolunteer({
             <BsLightningChargeFill size={15} />
           </button>
         </div>
-        <div className="flex gap-3 px-2 w-full items-center justify-between flex-wrap">
+        <div className="flex gap-3 grow px-2 w-full items-center justify-between flex-wrap">
           {availabilities.validFrom && availabilities.validTo ? (
             <div className="flex py-1 flex-col md:flex-row gap-5 text-gray-200 w-fit items-center justify-between ">
               <div className="flex items-start justify-start w-full">
@@ -157,7 +157,7 @@ function AvailabilityDisplayVolunteer({
               </h3>
             </div>
           </div>
-          {availabilities.availabilityEntries.length > 0 && (
+          {availabilities.availabilityEntries.length > 0 ? (
             <div className="flex w-full relative py-2 border-t border-gray-500/60">
               {availabilities.availabilityEntries.map((avv) => (
                 <UserSmallDisplay
@@ -170,6 +170,10 @@ function AvailabilityDisplayVolunteer({
                 />
               ))}
             </div>
+          ) : (
+            <h3 className="flex text-xs text-gray-400 items-center grow my-2.5 justify-center w-full relative py-2  border-t border-gray-500/60">
+              You Will See Availabilities Here
+            </h3>
           )}
         </div>
       </div>

@@ -35,7 +35,11 @@ export const GET = async (_req: NextRequest, context: Context) => {
           },
         },
         availabilityEntries: {
-          select: { user: { select: { name: true } }, status: true },
+          select: {
+            id: true,
+            user: { select: { name: true, image: true, id: true } },
+            status: true,
+          },
         },
         _count: {
           select: {

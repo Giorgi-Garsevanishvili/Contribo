@@ -3,58 +3,62 @@ import DeleteButtonAdmin from "../users/DeleteButtonAdmin";
 import { AssignmentStatus } from "@/generated/enums";
 import { FaUser } from "react-icons/fa6";
 import { TiStarFullOutline } from "react-icons/ti";
+import UserSmallDisplay from "../users/UserSmallDisplay";
 
 type AvailabilityData = {
   totalCapacity: number;
   activeCount: number;
   available: number;
-  role: {
-    name: string;
-  };
   event: {
     name: string;
+    finalizedAt: Date | null;
     region: {
       name: string;
     } | null;
-    finalizedAt: Date | null;
   };
-  updatedBy: {
-    name: string | null;
-  } | null;
-  availabilityEntries: {
-    user: {
-      name: string | null;
-    };
-    status: AssignmentStatus;
-  }[];
-  _count: {
-    availabilityEntries: number;
+  role: {
+    name: string;
   };
   CreatedBy: {
     name: string | null;
   } | null;
+  updatedBy: {
+    name: string | null;
+  } | null;
+  availabilityEntries: {
+        id: string;
+        user: {
+            id: string;
+            name: string | null;
+            image: string | null;
+        };
+        status: AssignmentStatus;
+    }[];
+  _count: {
+    availabilityEntries: number;
+  };
   id: string;
-  createdAt: Date;
-  updatedAt: Date | null;
-  updatedById: string | null;
-  roleId: string;
-  ratingScore: number;
   eventId: string;
+  roleId: string;
   totalSlots: number;
   published: boolean;
+  ratingScore: number;
   validFrom: Date | null;
   validTo: Date | null;
   createdById: string | null;
+  updatedById: string | null;
+  createdAt: Date;
+  updatedAt: Date | null;
 };
 
 function AvailabilityDisplay({
   availabilities,
   refetch,
-  parentRefetch
+  parentRefetch,
 }: {
   refetch: () => void;
   availabilities: AvailabilityData;
-   parentRefetch: () => void;
+  parentRefetch: () => void;
 }) {
   const handleDelete = () => {
     refetch();
@@ -117,6 +121,30 @@ function AvailabilityDisplay({
               </h3>
             </div>
           </div>
+          {availabilities.availabilityEntries.length > 0 && (
+            <div className="flex w-full relative gap-1 flex-wrap py-2 border-t border-gray-500/60">
+              {availabilities.availabilityEntries.map((avv) => (
+                <div key={avv.user.id} className="flex w-fit gap-2 p-1 bg-gray-900 rounded-full group h-fit relative">
+                  <UserSmallDisplay
+                    user={{
+                      image: avv.user.image,
+                      name: avv.user.name,
+                      visualBar: true,
+                    }}
+                  />
+                  <div className="md:group-hover:flex md:hidden flex">
+                    <DeleteButtonAdmin
+                      url={`/api/admin/availabilityEntries/${avv.id}`}
+                      value={`Availability ${availabilities.role.name} for ${avv.user.name}`}
+                      styleClass="w-fit items-center justify-center p-0 m-0 h-fit bg-transparent text-gray-200 hover:text-red-400"
+                      message="This Action will delete Availability with all user related data"
+                      fetchAction={refetch}
+                    />
+                  </div>
+                </div>
+              ))}
+            </div>
+          )}
         </div>
       </div>
     </div>

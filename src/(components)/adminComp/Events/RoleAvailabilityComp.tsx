@@ -20,43 +20,46 @@ type AvailabilityData = {
   totalCapacity: number;
   activeCount: number;
   available: number;
-  role: {
-    name: string;
-  };
   event: {
     name: string;
+    finalizedAt: Date | null;
     region: {
       name: string;
     } | null;
-    finalizedAt: Date | null;
   };
+  role: {
+    name: string;
+  };
+  CreatedBy: {
+    name: string | null;
+  } | null;
   updatedBy: {
     name: string | null;
   } | null;
   availabilityEntries: {
+    id: string;
     user: {
+      id: string;
       name: string | null;
+      image: string | null;
     };
     status: AssignmentStatus;
   }[];
   _count: {
     availabilityEntries: number;
   };
-  CreatedBy: {
-    name: string | null;
-  } | null;
   id: string;
-  createdAt: Date;
-  updatedAt: Date | null;
-  updatedById: string | null;
-  roleId: string;
-  ratingScore: number;
   eventId: string;
+  roleId: string;
   totalSlots: number;
   published: boolean;
+  ratingScore: number;
   validFrom: Date | null;
   validTo: Date | null;
   createdById: string | null;
+  updatedById: string | null;
+  createdAt: Date;
+  updatedAt: Date | null;
 };
 
 interface RolesData {
@@ -111,9 +114,7 @@ function RoleAvailabilityComp({
                 {data.length}
               </h2>
             </div>
-            <h3 className="text-xs text-gray-300">
-              Roles open for volunteers
-            </h3>
+            <h3 className="text-xs text-gray-300">Roles open for volunteers</h3>
           </div>
         </div>
         <button

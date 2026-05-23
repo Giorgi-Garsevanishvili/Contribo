@@ -79,16 +79,16 @@ function LiveEventsCard({
           parentRefetch,
         )
       }
-      className={`flex ${event.status === "LIVE" && "animate-pulse animation-duration-3000"} hover:shadow-blue-700 group transition-all duration-300 ease-out cursor-pointer hover:animate-none rounded-sm overflow-hidden relative gap-3  shadow-sm bg-white shadow-gray-500 w-xs flex p-2 justify-between h-fit`}
+      className={`flex ${event.status === "LIVE" && "animate-pulse animation-duration-3000"} hover:shadow-blue-700 group transition-all duration-300 ease-out cursor-pointer hover:animate-none rounded-sm overflow-hidden relative gap-3  shadow-sm bg-gray-900 shadow-gray-500 w-xs flex p-2 justify-between h-fit`}
     >
       <div className="flex flex-col w-full items-center justify-center gap-2">
-        <div className="flex items-center rounded-md overflow-hidden shadow shadow-gray-500/30 h-fit w-15 shrink-0 flex-col justify-start">
-          <p className="text-xs p-1 h-fit  flex-col w-full flex items-center font-semibold justify-center text-white bg-blue-900">
+        <div className="flex items-center bg-gray-200/20 rounded-md overflow-hidden shadow shadow-gray-500/30 h-fit w-15 shrink-0 flex-col justify-start">
+          <p className="text-xs p-1 h-fit  flex-col w-full flex items-center font-semibold justify-center text-white bg-blue-600">
             {new Date(event.startTime).toLocaleString("en-US", {
               month: "short",
             })}
           </p>
-          <p className="text-black p-1 h-fit w-fit text-2xl">
+          <p className="text-white p-1 h-fit w-fit text-2xl">
             {" "}
             {new Date(event.startTime).getDate()}
           </p>
@@ -97,8 +97,8 @@ function LiveEventsCard({
       </div>
 
       <div className="flex relative gap-1 w-55  flex-col">
-        <h3 className="font-bold text-gray-800 truncate w-full">{event.name}</h3>
-        <div className="flex text-sm text-gray-500  flex-col grow gap-1 w-fit">
+        <h3 className="font-bold text-gray-200 truncate w-full">{event.name}</h3>
+        <div className="flex text-sm text-gray-300  flex-col grow gap-1 w-fit">
           <div className="flex  shrink-0 w-fit items-center justify-start gap-2">
             {totalAvailableSlots === 0 ? (
               <HiXCircle size={15} color="red" />

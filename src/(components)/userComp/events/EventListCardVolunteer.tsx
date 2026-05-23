@@ -87,7 +87,7 @@ function EventsListCardVolunteer({
           refetch,
         )
       }
-      className={`flex ${event.status === "ENDED" ? "opacity-70 hover:opacity-100 bg-white" : " bg-white"} hover:shadow-blue-700 group transition-all relative duration-300 ease-out cursor-pointer rounded-sm overflow-hidden shadow-sm shadow-gray-500 max-w-full h-fit`}
+      className={`flex ${event.status === "ENDED" ? "opacity-70 hover:opacity-100 bg-gray-900/70" : " bg-gray-900"} hover:shadow-blue-700 group transition-all relative duration-300 ease-out cursor-pointer rounded-sm overflow-hidden shadow-sm shadow-gray-500 max-w-full h-fit`}
     >
       <div className="flex w-30 shrink-0 rounded-sm h-auto shadow-inner shadow-black  relative justify-center items-center overflow-hidden">
         <Image
@@ -118,10 +118,10 @@ function EventsListCardVolunteer({
       </div>
       <div className="flex w-[90%] overflow-hidden relative gap-2 p-2">
         <div className="flex flex-col items-start w-[95%] justify-start">
-          <h3 className="font-bold text-sm text-gray-800 w-full truncate">
+          <h3 className="font-bold text-sm text-gray-200 w-full truncate">
             {event.name}
           </h3>
-          <div className="flex gap-1 text-xs items-center text-center text-gray-400 w-fit h-fit">
+          <div className="flex gap-1 text-xs items-center text-center text-gray-200 w-fit h-fit">
             {totalAvailableSlots === 0 ? (
               <HiXCircle size={10} color="red" />
             ) : (
@@ -133,19 +133,19 @@ function EventsListCardVolunteer({
               Available
             </h5>
           </div>
-          <div className="flex gap-1 text-xs items-center text-center text-gray-400 w-fit h-fit">
+          <div className="flex gap-1 text-xs items-center text-center text-gray-200 w-fit h-fit">
             <div>
               <IoIosTime size={10} />
             </div>
             <h5 className="truncate">{`${new Date(event.startTime).toLocaleTimeString("en-US", { hour: "2-digit", minute: "2-digit" })} - ${new Date(event.endTime).toLocaleTimeString("en-US", { hour: "2-digit", minute: "2-digit" })}`}</h5>
           </div>
-          <div className="flex gap-1 text-xs items-center justify-start text-gray-400 w-[80%] h-fit">
+          <div className="flex gap-1 text-xs items-center justify-start text-gray-200 w-[80%] h-fit">
             <div>
               <FaLocationDot size={10} />
             </div>
             <h5 className="truncate w-[80%]">{event.location}</h5>
           </div>
-          <div className="flex gap-1 text-xs items-center text-center text-gray-400 w-fit h-fit">
+          <div className="flex gap-1 text-xs items-center text-center text-gray-200 w-fit h-fit">
             <div>
               <FaCalendarAlt size={10} />
             </div>

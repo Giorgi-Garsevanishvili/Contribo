@@ -152,7 +152,7 @@ function EventsListVolunteer() {
     handleStatusFilterChange("");
     handleTillDateFilterChange("");
     handleFromDateFilterChange("");
-    setAssigneeFilter("")
+    setAssigneeFilter("");
     setCurrentPage(1);
   };
 
@@ -160,7 +160,7 @@ function EventsListVolunteer() {
     <div
       className={`flex ${
         isLoadingFetch ? "" : " w-auto"
-      } flex-col items-center relative justify-center mt-4 shadow-sm bg-gray-300/90 m-2  rounded-lg p-1.5 select-none`}
+      } flex-col items-center relative justify-center mt-4 shadow-sm bg-gray-700/70 m-2  rounded-lg p-1.5 select-none`}
     >
       <div className="flex text-black m-1 mb-2 w-full items-center justify-center">
         <QueryFilter

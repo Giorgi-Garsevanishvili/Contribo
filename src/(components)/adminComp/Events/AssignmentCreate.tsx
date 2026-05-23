@@ -9,14 +9,6 @@ import { getClientErrorMessage } from "@/lib/errors/clientErrors";
 import axios from "axios";
 import { useCompAlert } from "@/hooks/useCompAlert";
 
-//     eventId: string;
-//     userId: string;
-//     roleId: string;
-//     ratingScore: number;
-//     comment?: string | undefined;
-//     validFrom?: Date | undefined;
-//     validTo?: Date | undefined;
-
 interface AssignmentCreate {
   userId: string;
   roleId: string;
@@ -83,7 +75,15 @@ function AssignmentCreate({
         throw new Error("All Fields Must be provided");
       }
 
-      const validatedData = { ...formData, eventId: eventId };
+      const validatedData = {
+        comment: formData.comment,
+        userId: formData.userId,
+        roleId: formData.roleId,
+        ratingScore: formData.ratingScore,
+        eventId: eventId,
+        validFrom: new Date(formData.validFrom).toISOString(),
+        validTo: new Date(formData.validTo).toISOString(),
+      };
 
       const response = await axios.post(
         `/api/admin/events/${eventId}/eventAssignments`,

@@ -131,7 +131,7 @@ function UsersList() {
     <div
       className={`flex ${
         isLoading ? "" : " w-auto"
-      } flex-col items-center justify-center mt-4 shadow-sm bg-gray-300/90 m-2  rounded-lg p-1.5 select-none`}
+      } flex-col items-center justify-center mt-4 shadow-sm bg-gray-700/70 m-2  rounded-lg p-1.5 select-none`}
     >
       <div className="flex text-black m-1 mb-2 w-full items-center justify-center">
         {roles && membership ? (
@@ -160,7 +160,7 @@ function UsersList() {
       </div>
       {isLoading ? (
         <div
-          className={`text-sm m-2 text-black ${
+          className={`text-sm m-2 text-cyan-950 ${
             isLoading ? "animate-spin transition-all duration-300" : ""
           } font-bold`}
         >
@@ -170,7 +170,7 @@ function UsersList() {
         <div className="flex flex-col">
           {data.length > 0 ? (
             <>
-              <div className=" hidden md:grid font-bold text-sm grid-cols-5 gap-4 uppercase grid-rows-1 select-none justify-start items-center bg-gray-100/80 text-gray-700 p-2 m-1 rounded-lg">
+              <div className=" hidden md:grid font-bold text-sm grid-cols-5 gap-4 uppercase grid-rows-1 select-none justify-start items-center bg-gray-200/80 text-gray-700 p-2 m-1 rounded-lg">
                 <h3 className="flex justify-start items-center">
                   Name & Email
                 </h3>
@@ -190,7 +190,7 @@ function UsersList() {
               {data.map((user) => (
                 <button
                   onClick={() => router.push(`/admin/users/${user.id}`)}
-                  className={`${updateSession.data?.user.email === user.email ? "border-2 border-green-900 bg-green-100/50" : "bg-white/80"} grid grid-cols-[2fr_auto] md:grid-cols-5 gap-1 md:gap-4 grid-rows-1 btn select-none text-sm justify-start items-center  text-black p-2 m-1 rounded-lg`}
+                  className={`${updateSession.data?.user.email === user.email ? "border-2 border-green-900 bg-green-100/50" : "bg-gray-200/80"} grid grid-cols-[2fr_auto] md:grid-cols-5 gap-1 md:gap-4 grid-rows-1 btn select-none text-sm justify-start items-center  text-cyan-950 p-2 m-1 rounded-lg`}
                   key={user.id}
                 >
                   <div className="flex justify-start items-center min-w-0">

@@ -105,7 +105,7 @@ type FilterPropType =
 
 function QueryFilter(props: FilterPropType) {
   return (
-    <div className="flex w-[20rem] md:w-auto  flex-col md:shadow-md shadow-white bg-gray-200/95 md:px-5 rounded-lg">
+    <div className="flex w-[20rem] md:w-auto  flex-col md:shadow-md shadow-white bg-gray-400/50 text-white md:px-5 rounded-lg">
       <div className="flex mt-2 items-center justify-center">
         <h3 className="px-4">Filter</h3>
         <IoFilterSharp size={20} />
@@ -116,17 +116,17 @@ function QueryFilter(props: FilterPropType) {
           <div
             /** This Is Filters For HR cases */ className="flex md:overflow-auto  overflow-x-scroll p-1 flex-row"
           >
-            <div className="flex bg-gray-300 ring-1 ring-gray-600/30 md:ring-0 p-1 rounded-md md:bg-transparent m-2 w-full items-center justify-between">
+            <div className="flex bg-gray-600 ring-1 ring-gray-600/30 md:ring-0 p-1 rounded-md md:bg-transparent m-2 w-full items-center justify-between">
               <label
                 htmlFor="type"
-                className="text-gray-700 flex items-center justify-center m-0.5 h-full"
+                className="text-gray-200 flex items-center justify-center m-0.5 h-full"
               >
                 Type:
               </label>
               <select
                 value={props.typeValue}
                 onChange={(e) => props.onTypeFilterChange(e.target.value)}
-                className="text-center px-0.5 h-fit rounded-sm bg-gray-300 cursor-pointer"
+                className="text-center px-0.5 h-fit rounded-sm bg-gray-600 cursor-pointer"
                 name="type"
                 id="type"
               >
@@ -140,16 +140,16 @@ function QueryFilter(props: FilterPropType) {
                 ))}
               </select>
             </div>
-            <div className="flex bg-gray-300 ring-1 ring-gray-600/30 md:ring-0 p-1 rounded-md md:bg-transparent m-2 w-full items-center justify-between">
+            <div className="flex bg-gray-600 ring-1 ring-gray-600/30 md:ring-0 p-1 rounded-md md:bg-transparent m-2 w-full items-center justify-between">
               <label
                 htmlFor="status"
-                className="text-gray-700 flex items-center justify-center m-0.5 h-full"
+                className="text-gray-200 flex items-center justify-center m-0.5 h-full"
               >
                 Status:
               </label>
               <select
                 value={props.statusValue}
-                className="text-center px-0.5 h-fit rounded-sm bg-gray-300 cursor-pointer"
+                className="text-center px-0.5 h-fit rounded-sm bg-gray-600 cursor-pointer"
                 onChange={(e) =>
                   props.onStatusFilterChange(e.target.value as HrWarningStatus)
                 }
@@ -171,17 +171,17 @@ function QueryFilter(props: FilterPropType) {
           <div
             /** This Is Filters For Users List */ className="flex md:overflow-auto  overflow-x-scroll p-1 flex-row"
           >
-            <div className="flex bg-gray-300 ring-1 ring-gray-600/30 md:ring-0 p-1 rounded-md md:bg-transparent m-2 w-full items-center justify-between">
+            <div className="flex bg-gray-600 ring-1 ring-gray-600/30 md:ring-0 p-1 rounded-md md:bg-transparent m-2 w-full items-center justify-between">
               <label
                 htmlFor="role"
-                className="text-gray-700 flex items-center justify-center m-1 h-full"
+                className="text-gray-200 flex items-center justify-center m-1 h-full"
               >
                 Role:
               </label>
               <select
                 value={props.roleValue}
                 onChange={(e) => props.onRoleFilterChange(e.target.value)}
-                className="text-center px-0.5 h-fit rounded-sm bg-gray-300 cursor-pointer"
+                className="text-center px-0.5 h-fit rounded-sm bg-gray-600 cursor-pointer"
                 name="role"
                 id="role"
               >
@@ -195,17 +195,17 @@ function QueryFilter(props: FilterPropType) {
                 ))}
               </select>
             </div>
-            <div className="flex bg-gray-300 ring-1 ring-gray-600/30 md:ring-0 p-1 rounded-md md:bg-transparent m-2 w-full items-center justify-between">
+            <div className="flex bg-gray-600 ring-1 ring-gray-600/30 md:ring-0 p-1 rounded-md md:bg-transparent m-2 w-full items-center justify-between">
               <label
                 htmlFor="membership"
-                className="text-gray-700 flex items-center justify-center m-1 h-full"
+                className="text-gray-200 flex items-center justify-center m-1 h-full"
               >
                 Membership:
               </label>
               <select
                 value={props.membershipValue}
                 onChange={(e) => props.onMembershipFilterChange(e.target.value)}
-                className="text-center px-0.5 h-fit rounded-sm bg-gray-300 cursor-pointer"
+                className="text-center px-0.5 h-fit rounded-sm bg-gray-600 cursor-pointer"
                 name="membership"
                 id="membership"
               >
@@ -224,17 +224,17 @@ function QueryFilter(props: FilterPropType) {
           <div
             /** This Is Filters For Rating List */ className="flex md:overflow-auto  overflow-x-scroll p-1 flex-row"
           >
-            <div className="flex bg-gray-300 ring-1 ring-gray-600/30 md:ring-0 p-1 rounded-md md:bg-transparent m-2 w-full items-center justify-between">
+            <div className="flex bg-gray-600 ring-1 ring-gray-600/30 md:ring-0 p-1 rounded-md md:bg-transparent m-2 w-full items-center justify-between">
               <label
                 htmlFor="type"
-                className="text-gray-700 flex items-center justify-center m-1 h-full"
+                className="text-gray-200 flex items-center justify-center m-1 h-full"
               >
                 Action
               </label>
               <select
                 value={props.actionValue}
                 onChange={(e) => props.onActionFilterChange(e.target.value)}
-                className="text-center px-0.5 h-fit rounded-sm bg-gray-300 cursor-pointer"
+                className="text-center px-0.5 h-fit rounded-sm bg-gray-600 cursor-pointer"
                 name="action"
                 id="action"
               >
@@ -253,17 +253,17 @@ function QueryFilter(props: FilterPropType) {
           <div
             /** This Is Filters For Rating List */ className="flex md:overflow-auto  overflow-x-scroll p-1 flex-row"
           >
-            <div className="flex bg-gray-300 ring-1 ring-gray-600/30 md:ring-0 p-1 rounded-md md:bg-transparent m-2 w-full items-center justify-between">
+            <div className="flex bg-gray-600 ring-1 ring-gray-600/30 md:ring-0 p-1 rounded-md md:bg-transparent m-2 w-full items-center justify-between">
               <label
                 htmlFor="type"
-                className="text-gray-700 flex items-center justify-center m-1 h-full"
+                className="text-gray-200 flex items-center justify-center m-1 h-full"
               >
                 Status
               </label>
               <select
                 value={props.statusValue}
                 onChange={(e) => props.onStatusFilterChange(e.target.value)}
-                className="text-center px-0.5 h-fit rounded-sm bg-gray-300 cursor-pointer"
+                className="text-center px-0.5 h-fit rounded-sm bg-gray-600 cursor-pointer"
                 name="action"
                 id="action"
               >
@@ -282,10 +282,10 @@ function QueryFilter(props: FilterPropType) {
           <div
             /** This Is Filters For Rating List */ className="flex md:overflow-auto  overflow-x-scroll p-1 flex-row"
           >
-            <div className="flex bg-gray-300 ring-1 ring-gray-600/30 md:ring-0 p-1 rounded-md md:bg-transparent m-2 w-full items-center justify-between">
+            <div className="flex bg-gray-600 ring-1 ring-gray-600/30 md:ring-0 p-1 rounded-md md:bg-transparent m-2 w-full items-center justify-between">
               <label
                 htmlFor="type"
-                className="text-gray-700 flex items-center justify-center m-1 h-full"
+                className="text-gray-200 flex items-center justify-center m-1 h-full"
               >
                 Status
               </label>
@@ -296,7 +296,7 @@ function QueryFilter(props: FilterPropType) {
                     e.target.value as EventStatusFilter,
                   )
                 }
-                className="text-center px-0.5 h-fit rounded-sm bg-gray-300 cursor-pointer"
+                className="text-center px-0.5 h-fit rounded-sm bg-gray-600 cursor-pointer"
                 name="action"
                 id="action"
               >
@@ -310,10 +310,10 @@ function QueryFilter(props: FilterPropType) {
                 ))}
               </select>
             </div>
-            <div className="flex bg-gray-300 ring-1 ring-gray-600/30 md:ring-0 p-1 rounded-md md:bg-transparent m-2 w-full items-center justify-between">
+            <div className="flex bg-gray-600 ring-1 ring-gray-600/30 md:ring-0 p-1 rounded-md md:bg-transparent m-2 w-full items-center justify-between">
               <label
                 htmlFor="type"
-                className="text-gray-700 flex items-center justify-center m-1 h-full"
+                className="text-gray-200 flex items-center justify-center m-1 h-full"
               >
                 Start
               </label>
@@ -321,15 +321,15 @@ function QueryFilter(props: FilterPropType) {
                 type="datetime-local"
                 value={props.fromDateFilter}
                 onChange={(e) => props.onFromDateFilterChange(e.target.value)}
-                className="text-center px-0.5 h-fit rounded-sm bg-gray-300 cursor-pointer"
+                className="text-center px-0.5 h-fit rounded-sm bg-gray-600 cursor-pointer"
                 name="from-date"
                 id="from-date"
               />
             </div>
-            <div className="flex bg-gray-300 ring-1 ring-gray-600/30 md:ring-0 p-1 rounded-md md:bg-transparent m-2 w-full items-center justify-between">
+            <div className="flex bg-gray-600 ring-1 ring-gray-600/30 md:ring-0 p-1 rounded-md md:bg-transparent m-2 w-full items-center justify-between">
               <label
                 htmlFor="type"
-                className="text-gray-700 flex items-center justify-center m-1 h-full"
+                className="text-gray-200 flex items-center justify-center m-1 h-full"
               >
                 End
               </label>
@@ -337,7 +337,7 @@ function QueryFilter(props: FilterPropType) {
                 type="datetime-local"
                 value={props.tillDateFilter}
                 onChange={(e) => props.onTillDateFilterChange(e.target.value)}
-                className="text-center px-0.5 h-fit rounded-sm bg-gray-300 cursor-pointer"
+                className="text-center px-0.5 h-fit rounded-sm bg-gray-600 cursor-pointer"
                 name="till-date"
                 id="till-date"
               />
@@ -345,10 +345,10 @@ function QueryFilter(props: FilterPropType) {
             {props.assigneeFilter !== undefined &&
             props.onAssigneeFilterChange !== undefined &&
             props.userData !== undefined ? (
-              <div className="flex bg-gray-300 ring-1 ring-gray-600/30 md:ring-0 p-1 rounded-md md:bg-transparent m-2 w-full items-center justify-between">
+              <div className="flex bg-gray-600 ring-1 ring-gray-600/30 md:ring-0 p-1 rounded-md md:bg-transparent m-2 w-full items-center justify-between">
                 <label
                   htmlFor="type"
-                  className="text-gray-700 flex items-center justify-center m-1 h-full"
+                  className="text-gray-200 flex items-center justify-center m-1 h-full"
                 >
                   Assignee
                 </label>
@@ -357,7 +357,7 @@ function QueryFilter(props: FilterPropType) {
                   onChange={(e) =>
                     props.onAssigneeFilterChange!(e.target.value)
                   }
-                  className="text-center px-0.5 h-fit rounded-sm bg-gray-300 cursor-pointer"
+                  className="text-center px-0.5 h-fit rounded-sm bg-gray-600 cursor-pointer"
                   name="assignee"
                   id="assignee"
                 >
@@ -378,7 +378,7 @@ function QueryFilter(props: FilterPropType) {
           <input
             value={props.searchValue}
             placeholder="search"
-            className=" border rounded-md border-gray-400 md:mb-0 mb-2 px-3 text-black h-fit"
+            className=" border rounded-md border-gray-400 md:mb-0 mb-2 px-3 text-gray-200 h-fit"
             onChange={(e) => props.onSearchQueryChange(e.target.value)}
             type="text"
             name="search"
@@ -388,7 +388,7 @@ function QueryFilter(props: FilterPropType) {
       </div>
       <button
         onClick={props.clearFilter}
-        className={`${props.filterOn ? "flex" : "hidden"} btn px-5 py-0 bg-orange-100`}
+        className={`${props.filterOn ? "flex" : "hidden"} btn px-5 py-0 bg-orange-500`}
       >
         Clear
         <MdFilterListOff className="mx-2" size={20} />

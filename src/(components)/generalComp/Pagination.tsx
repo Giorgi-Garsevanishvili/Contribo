@@ -71,8 +71,8 @@ function Pagination({
   const pageNumbers = getPageNumbers();
 
   return (
-    <div className="flex flex-col shadow shadow-white items-center justify-center bg-gray-300/90  m-4 mt-2 rounded-lg">
-      <div className="text-sm mt-2 text-gray-600">
+    <div className="flex flex-col shadow shadow-white items-center justify-center bg-gray-400/50  m-4 mt-2 rounded-lg">
+      <div className="text-sm mt-2 text-gray-200">
         Showing{" "}
         {Math.min(
           (pagination.currentPage - 1) * pagination.limit + 1,
@@ -85,17 +85,17 @@ function Pagination({
         )}{" "}
         of {pagination.totalCount} results
       </div>
-      <div className="flex items-center justify-center">
+      <div className="flex items-center text-white justify-center">
         <button
           onClick={() => onPageChange(1)}
-          className="btn rounded-lg border p-2 transition-colors bg-white"
+          className="btn rounded-lg border p-2 transition-colors bg-gray-800"
           disabled={!pagination?.hasPrevPage}
         >
           <FaAngleDoubleLeft size={14} />
         </button>
         <button
           onClick={() => onPageChange(pagination.currentPage - 1)}
-          className="btn rounded-lg border p-2 transition-colors bg-white"
+          className="btn rounded-lg border p-2 transition-colors bg-gray-800"
           disabled={!pagination?.hasPrevPage}
         >
           <FaAngleLeft size={14} />
@@ -107,8 +107,8 @@ function Pagination({
                 page === pagination.currentPage
                   ? "bg-blue-500 text-white border-blue-500"
                   : page === "..."
-                    ? "cursor-default bg-white border-transparent"
-                    : "bg-white hover:bg-gray-50"
+                    ? "cursor-default bg-gray-800 border-transparent"
+                    : "bg-gray-800 hover:bg-gray-50"
               }`}
               disabled={page === "..."}
               onClick={() => typeof page === "number" && onPageChange(page)}
@@ -120,7 +120,7 @@ function Pagination({
         </div>
         <div className="flex md:hidden">
           <select
-            className="flex bg-white p-2 m-2 items-center justify-center rounded-lg"
+            className="flex bg-gray-800 p-2 m-2 items-center justify-center rounded-lg"
             onChange={(e) => onPageChange(Number(e.target.value))}
             value={pagination.currentPage}
             name="page"
@@ -135,23 +135,23 @@ function Pagination({
         </div>
         <button
           onClick={() => onPageChange(pagination.currentPage + 1)}
-          className=" btn rounded-lg border p-2 transition-colors bg-white"
+          className=" btn rounded-lg border p-2 transition-colors bg-gray-800"
           disabled={!pagination?.hasNextPage}
         >
           <FaAngleRight size={14} />
         </button>
         <button
           onClick={() => onPageChange(pagination.totalPages)}
-          className="btn rounded-lg border p-2 transition-colors bg-white"
+          className="btn rounded-lg border p-2 transition-colors bg-gray-800"
           disabled={!pagination?.hasNextPage}
         >
           <FaAngleDoubleRight size={14} />
         </button>
       </div>
-      <div className="m-1.5 mt-0 bg-gray-100 rounded-2xl text-sm p-0.5 flex items-center justify-center">
+      <div className="m-1.5 mt-0 text-white bg-gray-400/50 rounded-2xl text-sm p-0.5 flex items-center justify-center">
         <h3 className="m-1">Set Data Limit:</h3>
         <select
-          className="rounded-2xl border p-1"
+          className="rounded-2xl bg-gray-600 text-white border p-1"
           defaultValue={pagination.limit}
           onChange={(e) => onLimitChange(Number(e.target.value))}
           name="limit"

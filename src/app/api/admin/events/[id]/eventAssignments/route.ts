@@ -52,17 +52,116 @@ export const POST = async (req: NextRequest, context: Context) => {
     };
     const body = CreateEventAssignment.parse(jsonWithCreator);
 
-    const response = await prisma.eventAssignment.create({
-      data: body,
-      select: {
-        event: { select: { name: true } },
-        user: { select: { name: true } },
-      },
+    const creationResponse = await prisma.$transaction(async (tx) => {
+      const event = await tx.event.findUnique({
+        where: { id: json.eventId },
+        select: {
+          name: true,
+          startTime: true,
+          endTime: true,
+        },
+      });
+
+      if (!event) {
+        throw new Error("Slot Not Found");
+      }
+
+      // prevent claim if Event Ended
+      const now = new Date();
+      if (event.endTime <= now) {
+        return {
+          success: false,
+          message: "Event Already Ended",
+        };
+      }
+
+      // prevent duplicate same slot
+      const existingSameSlot = await tx.eventAssignment.findFirst({
+        where: {
+          eventId: json.eventId,
+          roleId: json.roleId,
+          userId: json.userId,
+          status: "ACTIVE",
+        },
+      });
+
+      if (existingSameSlot) {
+        return {
+          success: false,
+          message: "User Already Have Assignment For This Role",
+        };
+      }
+
+      // Overlap Prevention
+      const overlappingAvailability = await tx.availabilityEntry.findFirst({
+        where: {
+          userId: json.userId,
+          status: "ACTIVE",
+          slot: {
+            validFrom: {
+              lt: new Date(body.validTo as Date),
+            },
+            validTo: {
+              gt: new Date(body.validTo as Date),
+            },
+          },
+        },
+        select: { slot: { select: { event: { select: { name: true } } } } },
+      });
+
+      const overlappingAssignment = await tx.eventAssignment.findFirst({
+        where: {
+          userId: json.userId,
+          status: "ACTIVE",
+
+          validFrom: {
+            lt: new Date(body.validTo as Date),
+          },
+          validTo: {
+            gt: new Date(body.validFrom as Date),
+          },
+        },
+        select: { event: { select: { name: true } } },
+      });
+
+      if (overlappingAssignment) {
+        return {
+          success: false,
+          message: `User Already Have overlapping eventAssignment in Event: ${overlappingAssignment.event.name}`,
+        };
+      }
+
+      if (overlappingAvailability) {
+        return {
+          success: false,
+          message: `User already have overlapping availability in Event: ${overlappingAvailability.slot.event.name}`,
+        };
+      }
+
+      const finalResponse = await tx.eventAssignment.create({
+        data: jsonWithCreator,
+        select: {
+          user: { select: { name: true } },
+          role: { select: { name: true } },
+        },
+      });
+
+      return {
+        success: true,
+        message: `Assignment Created For ${finalResponse.user?.name} as ${finalResponse.role?.name}, In Event: ${event.name} `,
+      };
     });
+
+    if (!creationResponse.success) {
+      return NextResponse.json(
+        { message: `${creationResponse.message}` },
+        { status: 400 },
+      );
+    }
 
     return NextResponse.json(
       {
-        message: `Event Assignment for Event: ${response.event?.name}, Created For: ${response.user?.name}`,
+        message: `${creationResponse.message}`,
       },
       { status: 201 },
     );

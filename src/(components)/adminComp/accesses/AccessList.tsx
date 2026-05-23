@@ -113,7 +113,7 @@ function AccessList() {
     <div
       className={`flex ${
         isLoading ? "" : " w-auto"
-      } flex-col items-center justify-center mt-4 shadow-sm bg-gray-300/90 m-2  rounded-lg p-1.5 select-none`}
+      } flex-col items-center justify-center mt-4 shadow-sm bg-gray-700/70 m-2  rounded-lg p-1.5 select-none`}
     >
       <div className="flex text-black m-1 mb-2 w-full items-center justify-center">
         {
@@ -156,7 +156,7 @@ function AccessList() {
               <AccessListTitleBar />
               {data.map((access) => (
                 <div
-                  className={`md:grid ${updateSession.data?.user.id === access.id ? "border-2 border-green-900 bg-green-100/50" : "bg-white/80"} relative pb-5 flex flex-col  w-full  md:grid-cols-[0.7fr_0.5fr_0.8fr_0.3fr_0.3fr_0.1fr_0.15fr] gap-1 md:gap-4 md:grid-rows-1 select-none text-sm justify-start items-center  text-black p-1 px-3 m-1 rounded-lg`}
+                  className={`md:grid ${updateSession.data?.user.id === access.id ? "border-2 border-green-900 bg-green-200/50" : "bg-gray-200/80"} relative pb-5 flex flex-col  w-full   md:grid-cols-[0.7fr_0.5fr_0.8fr_0.3fr_0.3fr_0.1fr_0.15fr] gap-1 md:gap-4 md:grid-rows-1 select-none text-sm justify-start items-center  text-cyan-950 p-1 px-3 m-1 rounded-lg`}
                   key={access.id}
                 >
                   <div className="md:flex grid grid-cols-[1fr_2fr_0.2fr] border-b border-gray-600/30 rounded-md my-2 md:border-0 p-1 justify-start truncate items-center">
@@ -182,7 +182,7 @@ function AccessList() {
                         {access.email}
                       </h3>
                       {updateSession.data?.user.id === access.id ? (
-                        <div className="flex gap-2 items-center justify-center absolute top-0.5 left-4 truncate text-xs text-green-900">
+                        <div className="flex gap-2 items-center justify-center absolute top-0.5 left-4 truncate text-xs text-green-500">
                           My Account <FaRegCircleDot size={10} />
                         </div>
                       ) : null}

@@ -88,6 +88,28 @@ export const POST = async (req: NextRequest, context: Context) => {
         select: { slot: { select: { event: { select: { name: true } } } } },
       });
 
+      const overlappingAssignment = await tx.eventAssignment.findFirst({
+        where: {
+          userId: thisUser.user.userId!,
+          status: "ACTIVE",
+
+          validFrom: {
+            lt: totalSlots.validTo as Date,
+          },
+          validTo: {
+            gt: totalSlots.validFrom as Date,
+          },
+        },
+        select: { event: { select: { name: true } } },
+      });
+
+      if (overlappingAssignment) {
+        return {
+          success: false,
+          message: `You already have overlapping eventAssignment in Event: ${overlappingAssignment.event.name}`,
+        };
+      }
+
       if (overlappingAvailability) {
         return {
           success: false,

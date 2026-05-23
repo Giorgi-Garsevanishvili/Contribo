@@ -101,11 +101,11 @@ function HomeEventStats() {
   );
 
   return (
-    <div className="p-2 flex-wrap flex-col md:w-[80%] w-100 bg-gray-700 text-white shadow shadow-white rounded-md gap-1 flex">
-      <h3 className="w-full items-center text-center">My Events Overview</h3>
-      <div className="flex p-1 gap-2 flex-wrap w-full text-sm text-center  h-fit items-center justify-between border-gray-300">
+    <div className="p-2 flex-wrap flex-col md:w-[80%] w-100 bg-gray-700/70 text-white shadow shadow-white rounded-md gap-1 flex">
+      <h3 className="w-full items-center text-center">Events Overview</h3>
+      <div className="flex p-1 gap-2 overflow-auto no-scrollbar md:flex-wrap w-full text-sm text-center  h-fit items-center justify-between border-gray-300">
         <div
-          className={`flex ${isLoading ? "animate-pulse opacity-80" : ""} select-none bg-gray-900/50 gap-1 w-40 flex-col p-2 items-center border border-gray-100/40  rounded-md grow   justify-center`}
+          className={`flex ${isLoading ? "animate-pulse opacity-80" : ""} select-none bg-gray-900/50 gap-1 w-40 flex-col p-2 items-center border border-gray-100/40  rounded-md grow  shrink-0  justify-center`}
         >
           <div className="flex items-center justify-center gap-3">
             <CiCalendar className="text-blue-500" size={20} />
@@ -119,7 +119,7 @@ function HomeEventStats() {
         </div>
 
         <div
-          className={`flex ${isLoading ? "animate-pulse opacity-80" : ""} select-none bg-gray-900/50 gap-1 w-40 flex-col p-2 items-center border border-gray-100/40  rounded-md grow   justify-center`}
+          className={`flex ${isLoading ? "animate-pulse opacity-80" : ""} select-none bg-gray-900/50 gap-1 w-40 flex-col p-2 items-center border border-gray-100/40  rounded-md grow  shrink-0  justify-center`}
         >
           <div className="flex items-center justify-center gap-3">
             <MdEventAvailable className="text-green-700" size={20} />
@@ -133,7 +133,7 @@ function HomeEventStats() {
         </div>
 
         <div
-          className={`flex ${isLoading ? "animate-pulse opacity-80" : ""} select-none bg-gray-900/50 gap-1 w-40 flex-col p-2 items-center border border-gray-100/40  rounded-md grow   justify-center`}
+          className={`flex ${isLoading ? "animate-pulse opacity-80" : ""} select-none bg-gray-900/50 gap-1 w-40 flex-col p-2 items-center border border-gray-100/40  rounded-md grow  shrink-0  justify-center`}
         >
           <div className="flex items-center justify-center gap-3">
             <PiUserCircleCheck className="text-orange-500" size={20} />
@@ -147,7 +147,7 @@ function HomeEventStats() {
         </div>
 
         <div
-          className={`flex ${isLoading ? "animate-pulse opacity-80" : ""} select-none bg-gray-900/50 gap-1 w-40 flex-col p-2 items-center border border-gray-100/40  rounded-md grow   justify-center`}
+          className={`flex ${isLoading ? "animate-pulse opacity-80" : ""} select-none bg-gray-900/50 gap-1 w-40 flex-col p-2 items-center border border-gray-100/40  rounded-md grow  shrink-0  justify-center`}
         >
           <div className="flex items-center justify-center gap-3">
             <AiOutlineAppstore size={20} className="text-blue-500" />
@@ -161,7 +161,7 @@ function HomeEventStats() {
         </div>
 
         <div
-          className={`flex ${isLoading ? "animate-pulse opacity-80" : ""} select-none bg-gray-900/50 gap-1 w-40 flex-col p-2 items-center border border-gray-100/40  rounded-md grow   justify-center`}
+          className={`flex ${isLoading ? "animate-pulse opacity-80" : ""} select-none bg-gray-900/50 gap-1 w-40 flex-col p-2 items-center border border-gray-100/40  rounded-md grow  shrink-0  justify-center`}
         >
           <div className="flex items-center justify-center gap-3">
             <GoClock className="text-purple-500" size={20} />
@@ -175,7 +175,7 @@ function HomeEventStats() {
         </div>
 
         <div
-          className={`flex ${isLoading ? "animate-pulse opacity-80" : ""} select-none bg-gray-900/50 gap-1 w-40 flex-col p-2 items-center border border-gray-100/40  rounded-md grow   justify-center`}
+          className={`flex ${isLoading ? "animate-pulse opacity-80" : ""} select-none bg-gray-900/50 gap-1 w-40 flex-col p-2 items-center border border-gray-100/40  rounded-md grow  shrink-0  justify-center`}
         >
           <div className="flex items-center justify-center gap-3">
             <AiFillPlayCircle className="text-green-700" size={20} />

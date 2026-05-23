@@ -230,8 +230,8 @@ function EventDetailsVolunteer({
       <div
         className={`flex w-full flex-col items-center justify-between gap-5 px-2`}
       >
-        <div className="flex items-start flex-col md:flex-row  md:justify-end w-full  py-1  justify-between gap-3">
-          <div className="flex w-full h-full gap-4">
+        <div className="flex items-start flex-col md:flex-row  md:justify-end w-full  py-1  justify-between gap-4">
+          <div className="flex md:grow w-full md:w-fit h-full gap-4">
             <div className="flex items-center justify-between bg-white rounded-md overflow-hidden shadow shadow-gray-500/30 h-full w-25 shrink-0 flex-col">
               <p className="text-md p-1 h-[35%]  flex-col w-full flex items-center font-semibold justify-center text-white bg-blue-900">
                 {new Date(event.startTime).toLocaleString("en-US", {
@@ -257,11 +257,11 @@ function EventDetailsVolunteer({
                 </div>
                 <h5 className="truncate text-gray-200">{`${new Date(event.startTime).toLocaleDateString("en-US", { day: "numeric", month: "short", year: "numeric" })} - ${new Date(event.endTime).toLocaleDateString("en-US", { day: "numeric", month: "short", year: "numeric" })}`}</h5>
               </div>
-              <div className="flex gap-2 items-center text-center w-fit h-fit">
-                <BiSolidDetail size={15} />
-                {event.description || "Description is not provided"}
-              </div>
             </div>
+          </div>
+          <div className="flex gap-2 items-center text-center w-full bg-cyan-800/80 h-full rounded-md border border-orange-300 p-2 grow">
+            <BiSolidDetail size={15} />
+            {event.description || "Description is not provided"}
           </div>
           <div className="flex shrink-0 gap-2 w-full md:w-fit">
             <div className="flex bg-green-600/30 rounded-md px-2 py-1 flex-col w-fit grow h-full gap-2">
@@ -284,19 +284,20 @@ function EventDetailsVolunteer({
           <EventLocationDisplay location={event.location} />
         </div>
       </div>
-      <div className="flex w-full flex-col md:flex-row gap-3 rounded-md bg-gray-400/40 p-2">
-        <div className="flex shrink-0 gap-2 w-fit justify-start flex-col">
+      <div className="flex grow w-full flex-col shrink-0 md:flex-row gap-3 rounded-md bg-gray-400/40 p-2">
+        <div className="flex grow shrink-0 gap-2  justify-start flex-col">
+          <h3>Assignments:</h3>
           {event.assignments
             ? event.assignments.map((user, index) => {
                 return (
                   user.user && (
                     <div
-                      className="flex bg-cyan-900 rounded-md gap-2 p-2"
+                      className="flex w-full bg-cyan-900 rounded-md gap-2 p-2"
                       key={`${user.user.id}${index}`}
                     >
                       <UserSmallDisplay
                         user={{
-                          name: `${user.user.name?.slice(0, 12)}...`,
+                          name: `${user.user.name?.slice(0, 20)}...`,
                           image: user.user.image,
                         }}
                       />
@@ -307,37 +308,41 @@ function EventDetailsVolunteer({
               })
             : null}
         </div>
-        {AvailabilitiesLoad ? (
-          <div className="flex w-full h-full items-center justify-center">
-            <Loader
-              className="right-3 top-2.5 animate-spin text-gray-200"
-              size={40}
-            />
-          </div>
-        ) : (
-          data &&
-          data.map((avv) => (
-            <AvailabilityDisplayVolunteer
-              taken={avv.taken}
-              key={avv.id}
-              eventStatus={event.status}
-              handleClaim={({ e, slotId, ratingScore }) =>
-                handleSpotTake({
-                  e,
-                  slotId: slotId,
-                  ratingScore: ratingScore,
-                })
-              }
-              handleCancel={({ e, slotId }) =>
-                handleSpotCancel({
-                  e,
-                  slotId: slotId,
-                })
-              }
-              availabilities={avv}
-            />
-          ))
-        )}
+        <div className="flex justify-center grow flex-wrap gap-2">
+          {AvailabilitiesLoad ? (
+            <div className="flex w-full h-full items-center justify-center">
+              <Loader
+                className="right-3 top-2.5 animate-spin text-gray-200"
+                size={40}
+              />
+            </div>
+          ) : (
+            data &&
+            data.map((avv) => (
+              <div key={avv.id} className="flex flex-wrap w-80">
+                <AvailabilityDisplayVolunteer
+                  taken={avv.taken}
+                  key={avv.id}
+                  eventStatus={event.status}
+                  handleClaim={({ e, slotId, ratingScore }) =>
+                    handleSpotTake({
+                      e,
+                      slotId: slotId,
+                      ratingScore: ratingScore,
+                    })
+                  }
+                  handleCancel={({ e, slotId }) =>
+                    handleSpotCancel({
+                      e,
+                      slotId: slotId,
+                    })
+                  }
+                  availabilities={avv}
+                />
+              </div>
+            ))
+          )}
+        </div>
       </div>
     </div>
   ) : null;
