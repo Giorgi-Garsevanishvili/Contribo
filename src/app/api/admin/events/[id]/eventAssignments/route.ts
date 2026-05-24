@@ -109,6 +109,13 @@ export const POST = async (req: NextRequest, context: Context) => {
         select: { slot: { select: { event: { select: { name: true } } } } },
       });
 
+      if (overlappingAvailability) {
+        return {
+          success: false,
+          message: `User have overlapping availability in Event: ${overlappingAvailability.slot.event.name}`,
+        };
+      }
+
       const overlappingAssignment = await tx.eventAssignment.findFirst({
         where: {
           userId: json.userId,
@@ -127,14 +134,7 @@ export const POST = async (req: NextRequest, context: Context) => {
       if (overlappingAssignment) {
         return {
           success: false,
-          message: `User Already Have overlapping eventAssignment in Event: ${overlappingAssignment.event.name}`,
-        };
-      }
-
-      if (overlappingAvailability) {
-        return {
-          success: false,
-          message: `User already have overlapping availability in Event: ${overlappingAvailability.slot.event.name}`,
+          message: `User Have overlapping eventAssignment in Event: ${overlappingAssignment.event.name}`,
         };
       }
 

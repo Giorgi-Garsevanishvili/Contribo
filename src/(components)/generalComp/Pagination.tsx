@@ -108,7 +108,7 @@ function Pagination({
                   ? "bg-blue-500 text-white border-blue-500"
                   : page === "..."
                     ? "cursor-default bg-gray-800 border-transparent"
-                    : "bg-gray-800 hover:bg-gray-50"
+                    : "bg-gray-800 hover:bg-gray-50 hover:text-gray-950"
               }`}
               disabled={page === "..."}
               onClick={() => typeof page === "number" && onPageChange(page)}

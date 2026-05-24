@@ -285,9 +285,9 @@ function EventDetailsVolunteer({
         </div>
       </div>
       <div className="flex grow w-full flex-col shrink-0 md:flex-row gap-3 rounded-md bg-gray-400/40 p-2">
-        <div className="flex grow shrink-0 gap-2  justify-start flex-col">
-          <h3>Assignments:</h3>
-          {event.assignments
+        <div className="flex grow md:min-w-80 rounded-md border p-2 bg-gray-800/50 border-orange-300 shrink-0 gap-2  justify-start flex-col">
+          <h3 className="text-lg text-cyan-100" >Assignments:</h3>
+          {event.assignments.length > 0
             ? event.assignments.map((user, index) => {
                 return (
                   user.user && (
@@ -306,9 +306,9 @@ function EventDetailsVolunteer({
                   )
                 );
               })
-            : null}
+            : <h3 className="text-md text-gray-300">No Assignments To Display</h3>}
         </div>
-        <div className="flex justify-center grow flex-wrap gap-2">
+        <div className="flex justify-start grow flex-wrap gap-1">
           {AvailabilitiesLoad ? (
             <div className="flex w-full h-full items-center justify-center">
               <Loader
