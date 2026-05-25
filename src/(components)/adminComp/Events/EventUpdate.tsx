@@ -6,7 +6,7 @@ import { EventLocationDisplay } from "@/lib/EventLocationDisplay";
 import LocationSearch from "@/lib/LocationSearch";
 import axios from "axios";
 import { Loader } from "lucide-react";
-import { useRef, useState } from "react";
+import { Dispatch, SetStateAction, useRef, useState } from "react";
 import { RxUpdate } from "react-icons/rx";
 
 type EventDataType = {
@@ -64,9 +64,11 @@ interface UpdateEventForm {
 function EventUpdate({
   event,
   parentRefetch,
+  setEditOpen
 }: {
   event: EventDataType;
   parentRefetch: () => void;
+  setEditOpen: Dispatch<SetStateAction<boolean>>
 }) {
   const [formData, setFormData] = useState<UpdateEventForm>({});
   const { triggerCompAlert } = useCompAlert();
@@ -99,6 +101,7 @@ function EventUpdate({
       });
       setFormData({});
       parentRefetch();
+      setEditOpen(false)
     } catch (error) {
       const message = getClientErrorMessage(error);
       triggerCompAlertRef.current({

@@ -11,6 +11,7 @@ import { useModal } from "../../../../context/ModalContext";
 import RoleAvailabilityComp from "./RoleAvailabilityComp";
 import { MdDone } from "react-icons/md";
 import AssignmentsModalComp from "./AssignmentsModalComp";
+import { Prisma } from "@/generated/client";
 
 interface CreateEventFormData {
   name: string;
@@ -23,6 +24,9 @@ interface CreateEventFormData {
 interface NewEventData {
   id: string;
   name: string;
+  finalized: string | null;
+  eventStart: string;
+  eventEnd: string;
 }
 
 const emptyForm = {
@@ -36,6 +40,9 @@ const emptyForm = {
 const newEventDataEmpty: NewEventData = {
   id: "",
   name: "",
+  eventStart: "",
+  eventEnd: "",
+  finalized: null,
 };
 
 function EventCreateModal({ parentRefetch }: { parentRefetch: () => void }) {
@@ -99,6 +106,9 @@ function EventCreateModal({ parentRefetch }: { parentRefetch: () => void }) {
       setNewEventData({
         name: response.data.data.name,
         id: response.data.data.id,
+        finalized: response.data.data.finalizedAt,
+        eventStart: response.data.data.startTime,
+        eventEnd: response.data.data.endTime,
       });
       setDone(true);
       if (parentRefetch) {
@@ -269,6 +279,8 @@ function EventCreateModal({ parentRefetch }: { parentRefetch: () => void }) {
         <div className="flex w-full flex-col">
           {!skip ? (
             <AssignmentsModalComp
+              eventStart={newEventData.eventStart}
+              eventEnd={newEventData.eventEnd}
               props={newEventData}
               parentRefetch={parentRefetch}
             />

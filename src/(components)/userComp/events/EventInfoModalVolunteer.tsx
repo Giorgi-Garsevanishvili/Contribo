@@ -29,6 +29,7 @@ type EventDataType = {
     role: {
       name: string;
     } | null;
+    comment: string | null;
   }[];
   availabilities: {
     _count: {
@@ -53,9 +54,6 @@ function EventInfoModalVolunteer({ event }: { event: EventDataType }) {
     null,
     null,
   );
-  // useEffect(() => {
-  //   parentFetch();
-  // }, [refetch]);
 
   return (
     <div className="flex m-2 flex-col h-fit w-full items-start justify-between gap-4 p-2">

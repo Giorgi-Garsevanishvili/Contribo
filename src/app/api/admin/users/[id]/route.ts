@@ -93,7 +93,10 @@ export const PUT = async (req: NextRequest, context: Context) => {
     }
 
     const json = await req.json();
-    const body = { ...json, updatedById: thisUser.user.userId } as UserUpdateInput;
+    const body = {
+      ...json,
+      updatedById: thisUser.user.userId,
+    } as UserUpdateInput;
 
     const bodyWithUpdater = UserUpdateInput.parse(body);
 
@@ -181,11 +184,40 @@ export const DELETE = async (_req: NextRequest, context: Context) => {
 
     const user = await prisma.user.findUnique({
       where: { id },
-      select: { email: true, deleted: true, allowedUserId: true, id:true },
+      select: { email: true, deleted: true, allowedUserId: true, id: true },
     });
 
     if (!user) {
       return NextResponse.json({ message: "user not found" }, { status: 404 });
+    }
+
+    const isQirvexAdmin = await prisma.userRole.findFirst({
+      where: { userId: user.allowedUserId!, role: { name: "QIRVEX" } },
+    });
+
+    const currentUserIsQirvex = thisUser.user.roles.some(
+      (role) => role.role.name === "QIRVEX",
+    );
+
+    const moreQirvexAdmin = await prisma.userRole.findMany({
+      where: { role: { name: "QIRVEX" } },
+    });
+
+    if (isQirvexAdmin && !currentUserIsQirvex) {
+      return NextResponse.json(
+        { message: "Only Qirvex Admin Can Delete QIRVEX Role User." },
+        { status: 404 },
+      );
+    }
+
+    if (isQirvexAdmin && moreQirvexAdmin.length === 1) {
+      return NextResponse.json(
+        {
+          message:
+            "At least One Qirvex Admin must be presented. Please Add Other To delete this!",
+        },
+        { status: 404 },
+      );
     }
 
     //Based on DB schema if Allowed user table is deleted user table automatically deleting therefore Account table as well.
@@ -216,8 +248,11 @@ export const DELETE = async (_req: NextRequest, context: Context) => {
       }
     }
 
-    if(user.id === thisUser.user.userId){
-      return NextResponse.json({message: `Your account deleted You will be logged out soon.`, logOut:true})
+    if (user.id === thisUser.user.userId) {
+      return NextResponse.json({
+        message: `Your account deleted You will be logged out soon.`,
+        logOut: true,
+      });
     }
 
     return NextResponse.json({

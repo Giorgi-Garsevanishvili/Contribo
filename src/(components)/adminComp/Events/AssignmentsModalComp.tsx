@@ -1,22 +1,22 @@
 "use client";
-import { BsFillPersonLinesFill } from "react-icons/bs";
+
 import { IoIosInformationCircleOutline } from "react-icons/io";
-import { IoAdd, IoAddOutline } from "react-icons/io5";
+import { IoAddOutline } from "react-icons/io5";
 import { useModal } from "../../../../context/ModalContext";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Loader } from "lucide-react";
 import { AssignmentStatus, GTypes } from "@/generated/enums";
 import usePaginatedData from "@/hooks/usePaginatedData";
-import AvailabilityCreate from "./AvailabilityCreate";
 import { TbPencilOff } from "react-icons/tb";
-import AvailabilityDisplay from "./AvailabilityDisplay";
 import AssignmentCreate from "./AssignmentCreate";
 import AssignmentDisplay from "./AssignmentDisplay";
 import { FaBriefcase } from "react-icons/fa6";
+import DeleteButtonAdmin from "../users/DeleteButtonAdmin";
 
 interface NewDataProps {
   id: string;
   name: string;
+  finalized: string | null;
 }
 
 type AssignmentsData = {
@@ -49,6 +49,7 @@ type AssignmentsData = {
   validTo: Date | null;
   assignedAt: Date;
   ratedAt: Date | null;
+  finalizedAt: string | null;
   status: AssignmentStatus;
   createdAt: Date;
   updatedAt: Date | null;
@@ -68,8 +69,12 @@ function AssignmentsModalComp({
   props,
   stepAction,
   parentRefetch,
+  eventEnd,
+  eventStart,
 }: {
   props: NewDataProps;
+  eventEnd: string;
+  eventStart: string;
   stepAction?: boolean;
   parentRefetch: () => void;
 }) {
@@ -94,9 +99,13 @@ function AssignmentsModalComp({
     RolesData[]
   >("/api/admin/eventRoles", []);
 
+  useEffect(() => {
+    refetch();
+  }, [parentRefetch]);
+
   return (
     <div className="flex flex-col justify-between transition-all duration-300 ease-out w-full h-full p-2 gap-5 rounded-sm bg-cyan-900 border border-gray-600">
-      <div className="flex border-b border-gray-400/60 py-2 items-center justify-between gap-2">
+      <div className="flex border-b flex-col md:flex-row border-gray-400/60 py-2 items-center justify-between gap-2">
         <div className="flex items-center gap-2 justify-start">
           <div className="flex p-3 rounded-full bg-green-600/20">
             <FaBriefcase size={20} className="text-green-500" />
@@ -113,18 +122,34 @@ function AssignmentsModalComp({
             </h3>
           </div>
         </div>
-        <button
-          type="button"
-          onClick={() => setIsOpen(!isOpen)}
-          className="flex bottom-34 z-150 right-4 md:right-6 md:bottom-20  bg-green-600/30 text-green-300 rounded-sm p-2 text-md transition-all items-center justify-center text-sm gap-2 duration-300 ease-out shadow-sm focus:opacity-100 hover:shadow-md cursor-pointer hover:opacity-75"
-        >
-          {isOpen ? <TbPencilOff size={20} /> : <IoAddOutline size={20} />}
-        </button>
+
+        <div className="flex gap-2 items-center md:w-fit w-full justify-center">
+          {data.length > 0 && props.finalized === null ? (
+            <DeleteButtonAdmin
+              extraTXT="All Assignment"
+              url={`/api/admin/events/${props.id}/eventAssignments`}
+              value={`All Assignments For Event: ${data[0].event.name}`}
+              styleClass="w-fit items-center justify-center p-1 grow md:w-fit bg-cyan-600/60 rounded-md p-0 m-0 h-fit text-gray-200 hover:text-red-300"
+              message="This Action will delete All Assignments for this event, All related data will be deleted. Action Is Permanent!"
+              fetchAction={refetch}
+            />
+          ) : null}
+          <button
+            type="button"
+            disabled={props.finalized !== null}
+            onClick={() => setIsOpen(!isOpen)}
+            className="flex bottom-34 z-150 right-4 disabled:opacity-20 md:right-6 md:bottom-20 grow  bg-green-600/30 text-green-300 rounded-sm p-2 text-md transition-all items-center justify-center text-sm gap-2 duration-300 ease-out shadow-sm focus:opacity-100 hover:shadow-md cursor-pointer hover:opacity-75"
+          >
+            {isOpen ? <TbPencilOff size={20} /> : <IoAddOutline size={20} />}
+          </button>
+        </div>
       </div>
       <AssignmentCreate
         refetch={refetch}
         parentRefetch={parentRefetch}
         isOpen={isOpen}
+        eventEnd={eventEnd}
+        eventStart={eventStart}
         roles={RolesData}
         eventId={props.id}
       />
@@ -140,13 +165,14 @@ function AssignmentsModalComp({
           data.map((assignment) => (
             <AssignmentDisplay
               key={assignment.id}
+              finalized={props.finalized}
               assignment={assignment}
               refetch={refetch}
               parentRefetch={parentRefetch}
             />
           ))
         ) : (
-          "No Assignments To Display"
+          <h3 className="text-sm text-gray-300">No Assignments To Display</h3>
         )}
       </div>
       <div className="flex md:flex-row flex-col bg-gray-900/50 rounded-sm mt-1 gap-5 border-t items-center justify-between p-3 border-gray-300/40 w-full h-">

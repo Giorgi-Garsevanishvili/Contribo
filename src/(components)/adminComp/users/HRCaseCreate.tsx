@@ -1,6 +1,7 @@
 import { HrWarningStatus } from "@/generated/enums";
 import { useCompAlert } from "@/hooks/useCompAlert";
 import { useFetchData } from "@/hooks/useDataFetch";
+import { getClientErrorMessage } from "@/lib/errors/clientErrors";
 import axios from "axios";
 import { useParams } from "next/navigation";
 import { FormEvent, useRef, useState } from "react";
@@ -67,8 +68,9 @@ function HRCaseCreate({ onCreated }: Props) {
       onCreated();
     } catch (error) {
       setIsLoading(false);
-      triggerCompAlertRef.current({
-        message: `${error}`,
+      const message = getClientErrorMessage(error);
+      return triggerCompAlertRef.current({
+        message: `${message}`,
         type: "error",
         isOpened: true,
       });

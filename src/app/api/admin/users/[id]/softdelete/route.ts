@@ -9,7 +9,7 @@ import { Context } from "@/types/general-types";
 
 export const DELETE = async (_req: NextRequest, context: Context) => {
   try {
-    await requireRole("ADMIN");
+    const thisUser = await requireRole("ADMIN");
     const { id } = await context.params;
 
     if (!id) {
@@ -18,11 +18,47 @@ export const DELETE = async (_req: NextRequest, context: Context) => {
 
     const user = await prisma.user.findUnique({
       where: { id },
-      select: { email: true, id: true, ownAllowance: true },
+      select: {
+        email: true,
+        id: true,
+        ownAllowance: true,
+        allowedUserId: true,
+      },
     });
 
     if (!user) {
       return NextResponse.json({ message: "user not found" }, { status: 404 });
+    }
+
+    const isQirvexAdmin = await prisma.userRole.findFirst({
+      where: { userId: user.allowedUserId!, role: { name: "QIRVEX" } },
+    });
+
+    const currentUserIsQirvex = thisUser.user.roles.some(
+      (role) => role.role.name === "QIRVEX",
+    );
+
+    const moreQirvexAdmin = await prisma.userRole.findMany({
+      where: { role: { name: "QIRVEX" } },
+    });
+
+  
+
+    if (isQirvexAdmin && !currentUserIsQirvex) {
+      return NextResponse.json(
+        { message: "Only Qirvex Admin Can Delete QIRVEX Role User." },
+        { status: 404 },
+      );
+    }
+
+      if (isQirvexAdmin && moreQirvexAdmin.length === 1) {
+      return NextResponse.json(
+        {
+          message:
+            "At least One Qirvex Admin must be presented. Please Add Other To delete this!",
+        },
+        { status: 404 },
+      );
     }
 
     const anonymizedIdentifier = `deleted_${id}_${Date.now()}`;

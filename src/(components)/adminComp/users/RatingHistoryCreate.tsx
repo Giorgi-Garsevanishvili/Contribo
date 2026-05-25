@@ -8,13 +8,13 @@ import { FormEvent, useRef, useState } from "react";
 import { ImSpinner9 } from "react-icons/im";
 
 type DataAddObj = {
-  newValue: number;
+  newValue: string;
   action: RatingAction;
   reason: string;
 };
 
 export const DataAddObj = {
-  newValue: 0,
+  newValue: "",
   action: "INCREASE",
   reason: "",
 } as DataAddObj;
@@ -37,7 +37,7 @@ function RatingHistoryCreate({ onCreated }: Props) {
       e.preventDefault();
       setIsLoading(true);
 
-      if (createData.newValue === 0 || createData.reason === "") {
+      if (!createData.newValue || createData.reason === "") {
         setIsLoading(false);
         return triggerCompAlertRef.current({
           message: `All fields with * should be filled `,
@@ -46,7 +46,15 @@ function RatingHistoryCreate({ onCreated }: Props) {
         });
       }
 
-      await axios.post(`/api/admin/users/${userId}/ratingHistory`, createData);
+      const validatedData = {
+        ...createData,
+        newValue: Number(createData.newValue),
+      };
+
+      await axios.post(
+        `/api/admin/users/${userId}/ratingHistory`,
+        validatedData,
+      );
 
       setIsLoading(false);
       setCreateData(DataAddObj);
@@ -89,11 +97,12 @@ function RatingHistoryCreate({ onCreated }: Props) {
                   onChange={(e) =>
                     setCreateData((prev) => ({
                       ...prev,
-                      newValue: Math.max(0, Number(e.target.value) || 0),
+                      newValue: e.target.value,
                     }))
                   }
                   className="input-def  bg-gray-400/95 border-white text-white rounded-sm grow"
                   type="number"
+                  min={0}
                   name="score"
                   id="score"
                   placeholder="Score"
@@ -109,7 +118,7 @@ function RatingHistoryCreate({ onCreated }: Props) {
                     onChange={(e) =>
                       setCreateData((prev) => ({
                         ...prev,
-                        newValue: Number(e.target.value),
+                        newValue: e.target.value,
                       }))
                     }
                     className="input-def  bg-gray-400/95 border-white text-white rounded-sm grow"

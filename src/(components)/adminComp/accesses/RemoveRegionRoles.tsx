@@ -1,5 +1,6 @@
 import { useCompAlert } from "@/hooks/useCompAlert";
 import { useConfirmTab } from "@/hooks/useConfirmTab";
+import { getClientErrorMessage } from "@/lib/errors/clientErrors";
 import axios from "axios";
 import { useSession } from "next-auth/react";
 import { redirect } from "next/navigation";
@@ -103,8 +104,9 @@ function RemoveRegionRoles({
       }
       refetch();
     } catch (error) {
+      const message = getClientErrorMessage(error);      
       return triggerCompAlertRef.current({
-        message: `${error}`,
+        message: `${message}`,
         type: "error",
         isOpened: true,
       });

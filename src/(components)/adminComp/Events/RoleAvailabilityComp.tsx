@@ -3,17 +3,21 @@ import { BsFillPersonLinesFill } from "react-icons/bs";
 import { IoIosInformationCircleOutline } from "react-icons/io";
 import { IoAdd } from "react-icons/io5";
 import { useModal } from "../../../../context/ModalContext";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Loader } from "lucide-react";
 import { AssignmentStatus, GTypes } from "@/generated/enums";
 import usePaginatedData from "@/hooks/usePaginatedData";
 import AvailabilityCreate from "./AvailabilityCreate";
 import { TbPencilOff } from "react-icons/tb";
 import AvailabilityDisplay from "./AvailabilityDisplay";
+import DeleteButtonAdmin from "../users/DeleteButtonAdmin";
 
 interface NewDataProps {
   id: string;
   name: string;
+  finalized: string | null;
+  eventStart: string
+  eventEnd:string
 }
 
 type AvailabilityData = {
@@ -96,13 +100,17 @@ function RoleAvailabilityComp({
     stepAction,
   );
 
+  useEffect(() => {
+    refetch();
+  }, [parentRefetch]);
+
   const { data: RolesData, isLoading: isLoadingRoles } = usePaginatedData<
     RolesData[]
   >("/api/admin/eventRoles", []);
 
   return (
     <div className="flex flex-col justify-between transition-all duration-300 ease-out w-full h-fit p-2 gap-5 rounded-sm bg-cyan-900 border border-gray-600">
-      <div className="flex border-b border-gray-400/60 py-2 items-center justify-between gap-2">
+      <div className="flex border-b flex-col w-full md:flex-row border-gray-400/60 py-2 items-center justify-between gap-2">
         <div className="flex items-center gap-2 justify-start">
           <div className="flex p-3 rounded-full bg-cyan-600/20">
             <BsFillPersonLinesFill size={20} className="text-cyan-500" />
@@ -117,16 +125,31 @@ function RoleAvailabilityComp({
             <h3 className="text-xs text-gray-300">Roles open for volunteers</h3>
           </div>
         </div>
-        <button
-          type="button"
-          onClick={() => setIsOpen(!isOpen)}
-          className="flex bottom-34 z-150 right-4 md:right-6 md:bottom-20 ring ring-gray-900/30 bg-cyan-400 text-gray-700 rounded-sm p-2 text-md transition-all duration-300 ease-out shadow-sm focus:opacity-100 hover:shadow-md cursor-pointer hover:opacity-75"
-        >
-          {isOpen ? <TbPencilOff /> : <IoAdd />}
-        </button>
+        <div className="flex gap-2 w-full md:w-fit items-center justify-between">
+          {data.length > 0 && props.finalized === null ? (
+            <DeleteButtonAdmin
+              extraTXT="All Availabilities"
+              url={`/api/admin/events/${props.id}/availabilitySlots`}
+              value={`All Availabilities For Event: ${data[0].event.name}`}
+              styleClass="w-fit items-center justify-center  p-1 grow md:w-fit bg-cyan-600/60 rounded-md p-0 m-0 h-fit text-gray-200 hover:text-red-200"
+              message="This Action will delete All Availabilities for this event, All related data will be deleted. Action Is Permanent!"
+              fetchAction={refetch}
+            />
+          ) : null}
+          <button
+            type="button"
+            disabled={props.finalized !== null}
+            onClick={() => setIsOpen(!isOpen)}
+            className="flex bottom-34 disabled:opacity-20 z-150 right-4 md:right-6 md:bottom-20 ring grow items-center justify-center ring-gray-900/30 bg-cyan-400 text-gray-700 rounded-sm p-2 text-md transition-all duration-300 ease-out shadow-sm focus:opacity-100 hover:shadow-md cursor-pointer hover:opacity-75"
+          >
+            {isOpen ? <TbPencilOff /> : <IoAdd />}
+          </button>
+        </div>
       </div>
       <AvailabilityCreate
         isOpen={isOpen}
+        eventEnd={props.eventEnd}
+        eventStart={props.eventStart}
         roles={RolesData}
         eventId={props.id}
         refetch={refetch}
@@ -150,7 +173,9 @@ function RoleAvailabilityComp({
             />
           ))
         ) : (
-          "No Availabilities To Display"
+          <h3 className="text-sm text-gray-300">
+            No Availabilities To Display
+          </h3>
         )}
       </div>
       <div className="flex md:flex-row flex-col bg-gray-900/50 rounded-sm mt-1 gap-5 border-t items-center justify-between p-3 border-gray-300/40 w-full h-">

@@ -39,6 +39,7 @@ type EventDataType = {
     role: {
       name: string;
     } | null;
+    comment: string | null;
   }[];
   availabilities: {
     _count: {

@@ -9,7 +9,6 @@ import { GoClock } from "react-icons/go";
 import { AiOutlineAlert } from "react-icons/ai";
 import EventCardVolunteer from "./EventCardVolunteer";
 
-
 type EventDataType = {
   status: "LIVE" | "ENDED" | "UPCOMING";
   id: string;
@@ -37,6 +36,7 @@ type EventDataType = {
     role: {
       name: string;
     } | null;
+    comment: string | null;
   }[];
   availabilities: {
     _count: {
@@ -94,7 +94,7 @@ function UpcomingEventsVolunteer() {
           <div className="flex gap-2 px-1 overflow-x-auto snap-x snap-mandatory  pb-2">
             {data.map((event) => (
               <div key={event.id} className="flex shrink-0 snap-center">
-                <EventCardVolunteer  event={event} />
+                <EventCardVolunteer event={event} />
               </div>
             ))}
           </div>

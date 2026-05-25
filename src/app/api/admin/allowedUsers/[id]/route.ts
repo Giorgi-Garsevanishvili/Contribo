@@ -64,6 +64,41 @@ export const PUT = async (req: NextRequest, context: Context) => {
     if (!id) {
       return NextResponse.json({ message: "Id is missing!" }, { status: 400 });
     }
+
+    const user = await prisma.allowedUser.findUnique({
+      where: { id },
+      select: { user: { select: { name: true } }, id: true },
+    });
+
+    const isQirvexAdmin = await prisma.userRole.findFirst({
+      where: { userId: user?.id, role: { name: "QIRVEX" } },
+    });
+
+    const currentUserIsQirvex = thisUser.user.roles.some(
+      (role) => role.role.name === "QIRVEX",
+    );
+
+    const moreQirvexAdmin = await prisma.userRole.findMany({
+      where: { role: { name: "QIRVEX" } },
+    });
+
+    if (isQirvexAdmin && !currentUserIsQirvex) {
+      return NextResponse.json(
+        { message: "Only Qirvex Admin Can Revoke Access to QIRVEX Role User." },
+        { status: 404 },
+      );
+    }
+
+    if (isQirvexAdmin && moreQirvexAdmin.length === 1) {
+      return NextResponse.json(
+        {
+          message:
+            "At least One Qirvex Admin must be presented. Please Add Other To delete this!",
+        },
+        { status: 404 },
+      );
+    }
+
     const json = await req.json();
     const jsonWithCreator = {
       ...json,
@@ -94,11 +129,6 @@ export const PUT = async (req: NextRequest, context: Context) => {
       return NextResponse.json({ message: "Role is not provided" });
     }
 
-    const user = await prisma.allowedUser.findUnique({
-      where: { id },
-      select: { user: { select: { name: true } } },
-    });
-
     return NextResponse.json({
       message: `Allowed User, ${user?.user?.name}, updated successfully`,
     });
@@ -110,15 +140,50 @@ export const PUT = async (req: NextRequest, context: Context) => {
 
 export const DELETE = async (req: NextRequest, context: Context) => {
   try {
-    const session = await requireRole("ADMIN");
+    const thisUser = await requireRole("ADMIN");
     const { id } = await context.params;
 
     if (!id) {
       return NextResponse.json({ message: "Id is missing" }, { status: 400 });
     }
 
+    const user = await prisma.allowedUser.findFirst({
+      where: {
+        id,
+      },
+    });
+
+    const isQirvexAdmin = await prisma.userRole.findFirst({
+      where: { userId: user?.id, role: { name: "QIRVEX" } },
+    });
+
+    const currentUserIsQirvex = thisUser.user.roles.some(
+      (role) => role.role.name === "QIRVEX",
+    );
+
+    const moreQirvexAdmin = await prisma.userRole.findMany({
+      where: { role: { name: "QIRVEX" } },
+    });
+
+    if (isQirvexAdmin && !currentUserIsQirvex) {
+      return NextResponse.json(
+        { message: "Only Qirvex Admin Can Delete QIRVEX Role User." },
+        { status: 404 },
+      );
+    }
+
+    if (isQirvexAdmin && moreQirvexAdmin.length === 1) {
+      return NextResponse.json(
+        {
+          message:
+            "At least One Qirvex Admin must be presented. Please Add Other To delete this!",
+        },
+        { status: 404 },
+      );
+    }
+
     const deletedAllowedUser = await prisma.allowedUser.delete({
-      where: { id, regionId: session.user?.regionId },
+      where: { id, regionId: thisUser.user?.regionId },
     });
 
     if (!deletedAllowedUser) {
@@ -128,7 +193,7 @@ export const DELETE = async (req: NextRequest, context: Context) => {
       );
     }
 
-    if (deletedAllowedUser.email === session?.user.email) {
+    if (deletedAllowedUser.email === thisUser?.user.email) {
       return NextResponse.json({
         requiresSignOut: true,
         message: "Your permissions were revoked",

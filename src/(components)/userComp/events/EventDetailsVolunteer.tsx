@@ -10,10 +10,11 @@ import UserSmallDisplay from "@/(components)/adminComp/users/UserSmallDisplay";
 import AvailabilityDisplayVolunteer from "./AvailabilityDisplayVolunteer";
 import usePaginatedData from "@/hooks/usePaginatedData";
 import { AssignmentStatus } from "@/generated/enums";
-import { useEffect, useRef, useState } from "react";
+import { use, useEffect, useRef, useState } from "react";
 import { useCompAlert } from "@/hooks/useCompAlert";
 import axios from "axios";
 import { getClientErrorMessage } from "@/lib/errors/clientErrors";
+import { useSession } from "next-auth/react";
 
 type AvailabilityDataReturn = {
   taken: boolean;
@@ -88,6 +89,7 @@ type EventDataType = {
     role: {
       name: string;
     } | null;
+    comment: string | null;
   }[];
   availabilities: {
     _count: {
@@ -116,6 +118,7 @@ function EventDetailsVolunteer({
   const [isLoadingCreate, setIsLoadingCreate] = useState(false);
   const { triggerCompAlert } = useCompAlert();
   const triggerCompAlertRef = useRef(triggerCompAlert);
+  const session = useSession();
 
   const takenSlots =
     event?.availabilities.reduce(
@@ -286,15 +289,16 @@ function EventDetailsVolunteer({
       </div>
       <div className="flex grow w-full flex-col shrink-0 md:flex-row gap-3 rounded-md bg-gray-400/40 p-2">
         <div className="flex grow md:min-w-80 rounded-md border p-2 bg-gray-800/50 border-orange-300 shrink-0 gap-2  justify-start flex-col">
-          <h3 className="text-lg text-cyan-100" >Assignments:</h3>
-          {event.assignments.length > 0
-            ? event.assignments.map((user, index) => {
-                return (
-                  user.user && (
-                    <div
-                      className="flex w-full bg-cyan-900 rounded-md gap-2 p-2"
-                      key={`${user.user.id}${index}`}
-                    >
+          <h3 className="text-lg text-cyan-100">Assignments:</h3>
+          {event.assignments.length > 0 ? (
+            event.assignments.map((user, index) => {
+              return (
+                user.user && (
+                  <div
+                    className="flex w-full flex-col bg-cyan-900 rounded-md gap-2 p-2"
+                    key={`${user.user.id}${index}`}
+                  >
+                    <div className="flex items-center justify-start gap-2">
                       <UserSmallDisplay
                         user={{
                           name: `${user.user.name?.slice(0, 20)}...`,
@@ -303,10 +307,26 @@ function EventDetailsVolunteer({
                       />
                       <h3 className="text-green-500">{user.role?.name}</h3>
                     </div>
-                  )
-                );
-              })
-            : <h3 className="text-md text-gray-300">No Assignments To Display</h3>}
+                    {user.user.id === session.data?.user.userId && (
+                      <div className="border-t flex gap-2 flex-col py-2 border-gray-500/60">
+                        <label
+                          htmlFor="event_role"
+                          className="text-xs w-fit uppercase text-gray-200"
+                        >
+                          Comment
+                        </label>
+                        <h5 className="w-full items-center rounded-md p-2 text-sm justify-center text-start border border-yellow-500/60 ">
+                          {user.comment}
+                        </h5>
+                      </div>
+                    )}
+                  </div>
+                )
+              );
+            })
+          ) : (
+            <h3 className="text-md text-gray-300">No Assignments To Display</h3>
+          )}
         </div>
         <div className="flex justify-start grow flex-wrap gap-1">
           {AvailabilitiesLoad ? (

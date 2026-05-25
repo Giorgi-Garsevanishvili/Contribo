@@ -37,6 +37,7 @@ type EventDataType = {
     role: {
       name: string;
     } | null;
+    comment: string | null;
   }[];
   availabilities: {
     _count: {
@@ -106,7 +107,7 @@ function LiveEventsVolunteer() {
               </div>
               <h3 className="text-xs text-gray-50">Live Events</h3>
             </div>
-            
+
             <div className="flex select-none gap-1 grow flex-col p-2 items-center rounded-md bg-gray-800 ring ring-gray-400/60  justify-center">
               <div className="flex items-center justify-center gap-3">
                 <PiUserCircleCheck size={20} className="text-green-500" />
@@ -116,7 +117,7 @@ function LiveEventsVolunteer() {
               </div>
               <h3 className="text-xs text-gray-50">Slots Available</h3>
             </div>
-            
+
             <div className="flex select-none gap-1 grow flex-col p-2 items-center rounded-md bg-gray-800 ring ring-gray-400/60  justify-center">
               <div className="flex items-center justify-center gap-3">
                 <GoClock size={20} className="text-purple-500" />
@@ -126,7 +127,7 @@ function LiveEventsVolunteer() {
               </div>
               <h3 className="text-xs text-gray-50">Duration</h3>
             </div>
-            
+
             <div className="flex select-none w-full md:w-auto md:grow rounded-md bg-gray-800 ring ring-gray-400/60 flex-col p-2 gap-1 items-center justify-center">
               <div className="flex items-center justify-center gap-3">
                 <CiCalendar size={20} className="text-yellow-500" />

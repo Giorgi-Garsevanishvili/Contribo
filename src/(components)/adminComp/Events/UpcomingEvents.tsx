@@ -23,6 +23,7 @@ type EventDataType = {
   } | null;
   name: string;
   location: string;
+  finalizedAt: string | null;
   description: string | null;
   startTime: string;
   endTime: string;
@@ -104,7 +105,7 @@ function UpcomingEvents() {
               </div>
               <h3 className="text-xs text-gray-100">Upcoming Events</h3>
             </div>
-            
+
             <div className="flex select-none gap-1 w-full flex-col p-2 items-center rounded-md bg-gray-900 ring ring-gray-600/60 justify-center">
               <div className="flex items-center justify-center gap-3">
                 <PiUserCircleCheck size={22} className="text-green-500" />
@@ -114,7 +115,7 @@ function UpcomingEvents() {
               </div>
               <h3 className="text-xs text-gray-100">Slots Available</h3>
             </div>
-            
+
             <div className="flex select-none gap-1 w-full flex-col p-2 items-center rounded-md bg-gray-900 ring ring-gray-600/60 justify-center">
               <div className="flex items-center justify-center gap-3">
                 <GoClock size={22} className="text-purple-500" />

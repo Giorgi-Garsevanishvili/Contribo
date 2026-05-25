@@ -27,7 +27,7 @@ export const GET = async (_req: NextRequest, context: Context) => {
     if (!data) {
       return NextResponse.json(
         { data, message: "user not found" },
-        { status: 404 }
+        { status: 404 },
       );
     }
 
@@ -71,7 +71,7 @@ export const PUT = async (req: NextRequest, context: Context) => {
       where: { id },
       data: {
         regionId: body.regionId,
-        updatedById:thisUser.user.userId
+        updatedById: thisUser.user.userId,
       },
       include: { roles: { include: { role: true } } },
     });
@@ -79,7 +79,7 @@ export const PUT = async (req: NextRequest, context: Context) => {
     if (!updatedAllowedUser) {
       return NextResponse.json(
         { message: "something went wrong!" },
-        { status: 400 }
+        { status: 400 },
       );
     }
     if (updatedAllowedUser.email === thisUser?.user.email) {
@@ -107,6 +107,30 @@ export const DELETE = async (req: NextRequest, context: Context) => {
       return NextResponse.json({ message: "Id is missing" }, { status: 400 });
     }
 
+    const user = await prisma.allowedUser.findUnique({
+      where: { id },
+      select: { user: { select: { name: true } }, id: true },
+    });
+
+    const isQirvexAdmin = await prisma.userRole.findMany({
+      where: { userId: user?.id, role: { name: "QIRVEX" } },
+    });
+
+    const moreQirvexAdmin = await prisma.userRole.findMany({
+      where: { role: { name: "QIRVEX" } },
+    });
+
+
+    if (isQirvexAdmin && moreQirvexAdmin.length === 1) {
+      return NextResponse.json(
+        {
+          message:
+            "At least One Qirvex Admin must be presented. Please Add Other To delete this!",
+        },
+        { status: 404 },
+      );
+    }
+
     const deletedAllowedUser = await prisma.allowedUser.delete({
       where: { id },
     });
@@ -114,7 +138,7 @@ export const DELETE = async (req: NextRequest, context: Context) => {
     if (!deletedAllowedUser) {
       return NextResponse.json(
         { message: "something went wrong!" },
-        { status: 400 }
+        { status: 400 },
       );
     }
 

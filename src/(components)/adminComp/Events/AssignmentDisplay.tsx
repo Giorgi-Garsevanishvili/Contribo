@@ -30,6 +30,7 @@ type AssignmentData = {
   id: string;
   eventId: string;
   status: AssignmentStatus;
+  finalizedAt: string | null;
   createdById: string | null;
   updatedById: string | null;
   createdAt: Date;
@@ -45,30 +46,34 @@ type AssignmentData = {
 function AssignmentDisplay({
   assignment,
   refetch,
-  parentRefetch
+  parentRefetch,
+  finalized,
 }: {
   refetch: () => void;
   parentRefetch: () => void;
   assignment?: AssignmentData;
+  finalized: string | null;
 }) {
-
   const handleDelete = () => {
-    refetch()
-    parentRefetch()
-  }
+    refetch();
+    parentRefetch();
+  };
 
   return assignment ? (
     <div className="flex rounded-md items-start bg-gray-700 border-l-2 border-cyan-500  flex-col w-full l gap-2 p-2">
       <div className="flex w-full flex-col gap-2">
-        <div className="flex ml-2 gap-3 justify-between py-2 border-b border-gray-500/60">
+        <div className="flex ml-2 gap-3 flex-wrap justify-between py-2 border-b border-gray-500/60">
           {assignment.user && <UserSmallDisplay user={assignment.user} />}
-          <DeleteButtonAdmin
-            url={`/api/admin/eventAssignments/${assignment.id}`}
-            value={`Availability: ${assignment.role?.name} for ${assignment.user?.name}`}
-            styleClass="w-fit items-center justify-center p-0 m-0 h-fit bg-transparent text-gray-200 hover:text-red-400"
-            message="This Action will delete User Assignment"
-            fetchAction={handleDelete}
-          />
+          {finalized === null && (
+            <DeleteButtonAdmin
+              extraTXT="Assignment"
+              url={`/api/admin/eventAssignments/${assignment.id}`}
+              value={`Availability: ${assignment.role?.name} for ${assignment.user?.name}`}
+              styleClass="w-fit items-center justify-center w-full md:w-fit rounded-md bg-gray-500/40 p-1 m-0 h-fit  text-gray-200 hover:text-red-400"
+              message="This Action will delete User Assignment"
+              fetchAction={handleDelete}
+            />
+          )}
         </div>
         <div className="flex gap-3 w-full items-center justify-start flex-wrap">
           <div className="flex ml-2 border border-gray-400 w-fit shrink-0 rounded-md p-2 text-sm items-center my-2 gap-3">

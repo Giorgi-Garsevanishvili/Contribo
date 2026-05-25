@@ -28,6 +28,7 @@ type EventDataType = {
   location: string;
   startTime: string;
   endTime: string;
+  finalizedAt: string | null;
   description: string | null;
   rating: number | null;
   assignments: {

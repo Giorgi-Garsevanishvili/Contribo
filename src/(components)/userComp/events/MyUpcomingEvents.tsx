@@ -37,6 +37,7 @@ type EventDataType = {
     role: {
       name: string;
     } | null;
+    comment: string | null;
   }[];
   availabilities: {
     _count: {
@@ -107,7 +108,7 @@ function MyUpcomingEventsVolunteer() {
               </div>
               <h3 className="text-xs text-gray-100">Upcoming Events</h3>
             </div>
-            
+
             <div className="flex select-none text-white gap-1 w-full flex-col p-2 rounded-md bg-gray-800 ring ring-gray-400/60 items-center justify-center">
               <div className="flex items-center justify-center gap-3">
                 <PiUserCircleCheck size={20} className="text-green-500" />
@@ -117,7 +118,7 @@ function MyUpcomingEventsVolunteer() {
               </div>
               <h3 className="text-xs text-gray-100">Slots Available</h3>
             </div>
-            
+
             <div className="flex select-none text-white gap-1 w-full flex-col p-2 rounded-md bg-gray-800 ring ring-gray-400/60 items-center justify-center">
               <div className="flex items-center justify-center gap-3">
                 <GoClock size={20} className="text-purple-500" />

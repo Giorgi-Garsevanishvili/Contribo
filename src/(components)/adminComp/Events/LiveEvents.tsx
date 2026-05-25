@@ -28,6 +28,7 @@ type EventDataType = {
   startTime: string;
   endTime: string;
   rating: number | null;
+  finalizedAt: string | null;
   assignments: {
     user: {
       name: string | null;

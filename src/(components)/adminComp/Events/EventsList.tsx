@@ -8,6 +8,7 @@ import { RiRefreshLine } from "react-icons/ri";
 import EventsListCard from "./EventListCard";
 import AddEventButton from "./AddEventButton";
 import LoadingCard from "@/(components)/generalComp/LoadingCard";
+import DeleteButtonAdmin from "../users/DeleteButtonAdmin";
 
 type UserResponse = {
   id: string;
@@ -29,6 +30,7 @@ type EventDataType = {
   } | null;
   name: string;
   location: string;
+  finalizedAt: string | null;
   startTime: string;
   endTime: string;
   description: string | null;
@@ -161,7 +163,17 @@ function EventsList() {
         isLoadingFetch ? "" : " w-auto"
       } flex-col items-center relative justify-center mt-4 shadow-sm bg-gray-700/70 m-2  rounded-lg p-1.5 select-none`}
     >
-      <div className="flex text-black m-1 mb-2 w-full items-center justify-center">
+      <div className="flex flex-col gap-2 text-black m-1 mb-2 w-full items-center justify-center">
+        {data.length > 0 && (
+          <DeleteButtonAdmin
+            url={`/api/admin/events`}
+            extraTXT="Delete All Events"
+            value={`All Events For ${data[0].region?.name}`}
+            styleClass="w-fit items-center w-full justify-center p-1 bg-cyan-600/60 rounded-md p-0 m-0 h-fit text-gray-200 hover:text-red-300"
+            message="This Action will delete All Events In Your Region, All related data will be deleted. Action Is Permanent!"
+            fetchAction={refetch}
+          />
+        )}
         <QueryFilter
           filterType="EVENTS"
           statusValue={statusFilter as EventStatusFilter}

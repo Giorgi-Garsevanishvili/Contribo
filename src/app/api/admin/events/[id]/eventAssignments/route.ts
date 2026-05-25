@@ -20,7 +20,7 @@ export const GET = async (_req: NextRequest, context: Context) => {
         user: { select: { name: true, image: true } },
         createdBy: { select: { name: true, image: true } },
         updatedBy: { select: { name: true, image: true } },
-        event: { select: { name: true } },
+        event: { select: { name: true, finalizedAt: true } },
         role: { select: { name: true } },
       },
     });

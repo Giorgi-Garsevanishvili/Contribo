@@ -35,6 +35,7 @@ type EventDataType = {
     role: {
       name: string;
     } | null;
+    comment: string | null;
   }[];
   availabilities: {
     _count: {
@@ -91,9 +92,7 @@ function LiveEventsCardVolunteer({ event }: { event: EventDataType }) {
       </div>
 
       <div className="flex relative gap-1 w-55  flex-col">
-        <h3 className="font-bold text-gray-50 truncate w-full">
-          {event.name}
-        </h3>
+        <h3 className="font-bold text-gray-50 truncate w-full">{event.name}</h3>
         <div className="flex text-sm text-gray-200  flex-col grow gap-1 w-fit">
           <div className="flex  shrink-0 w-fit items-center justify-start gap-2">
             {totalAvailableSlots === 0 ? (

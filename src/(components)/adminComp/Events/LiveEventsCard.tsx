@@ -24,8 +24,9 @@ type EventDataType = {
   location: string;
   startTime: string;
   endTime: string;
-  description: string | null
+  description: string | null;
   rating: number | null;
+  finalizedAt: string | null;
   assignments: {
     user: {
       name: string | null;
@@ -97,7 +98,9 @@ function LiveEventsCard({
       </div>
 
       <div className="flex relative gap-1 w-55  flex-col">
-        <h3 className="font-bold text-gray-200 truncate w-full">{event.name}</h3>
+        <h3 className="font-bold text-gray-200 truncate w-full">
+          {event.name}
+        </h3>
         <div className="flex text-sm text-gray-300  flex-col grow gap-1 w-fit">
           <div className="flex  shrink-0 w-fit items-center justify-start gap-2">
             {totalAvailableSlots === 0 ? (

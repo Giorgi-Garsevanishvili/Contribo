@@ -21,8 +21,9 @@ type EventDataType = {
   name: string;
   location: string;
   startTime: string;
-  description: string | null
+  description: string | null;
   endTime: string;
+  finalizedAt: string | null;
   rating: number | null;
   assignments: {
     user: {
@@ -77,11 +78,23 @@ function EventInfoModal({
       </div>
       <div className="flex md:flex-row flex-col h-fit w-full items-start justify-between gap-3">
         <AssignmentsModalComp
-          props={{ name: event.name, id: event.id }}
+          eventEnd={event.endTime}
+          eventStart={event.startTime}
+          props={{
+            name: event.name,
+            id: event.id,
+            finalized: data?.finalizedAt || null,
+          }}
           parentRefetch={refetch}
         />
         <RoleAvailabilityComp
-          props={{ name: event.name, id: event.id }}
+          props={{
+            eventEnd: event.endTime,
+            eventStart: event.startTime,
+            name: event.name,
+            id: event.id,
+            finalized: data?.finalizedAt || null,
+          }}
           parentRefetch={refetch}
         />
       </div>

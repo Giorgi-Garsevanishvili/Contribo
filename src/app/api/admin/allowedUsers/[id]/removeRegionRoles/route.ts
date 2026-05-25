@@ -23,6 +23,34 @@ export const PUT = async (_req: NextRequest, context: Context) => {
     }
 
     const data = await prisma.$transaction(async (tx) => {
+      const user = await tx.allowedUser.findFirst({ where: { id: id } });
+
+      const isQirvexAdmin = await prisma.userRole.findFirst({
+        where: { userId: user?.id!, role: { name: "QIRVEX" } },
+      });
+
+      const currentUserIsQirvex = thisUser.user.roles.some(
+        (role) => role.role.name === "QIRVEX",
+      );
+
+      const moreQirvexAdmin = await tx.userRole.findMany({
+        where: { role: { name: "QIRVEX" } },
+      });
+
+      if (isQirvexAdmin && !currentUserIsQirvex) {
+        throw new TransactionError(
+          "Only Qirvex Admin Can Revoke Access to Qirvex User",
+          404,
+        );
+      }
+
+      if (isQirvexAdmin && moreQirvexAdmin.length === 1) {
+        throw new TransactionError(
+          "At least One Qirvex Admin must be presented. Please Add Other To delete this!",
+          404,
+        );
+      }
+
       const regularRole = await tx.role.findUnique({
         where: { name: "REGULAR" },
         select: { id: true },
