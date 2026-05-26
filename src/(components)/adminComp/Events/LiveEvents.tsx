@@ -70,7 +70,7 @@ function LiveEvents() {
         </div>
       ) : (
         <div
-          className={`${data.length === 0 ? "hidden" : "flex"} p-2 flex-col justify-start overflow-hidden md:w-[80%] w-100 items-center bg-gray-700/70 text-white shadow rounded-md gap-2`}
+          className={`${data.length === 0 ? "hidden" : "flex"} p-2 flex-col justify-start overflow-hidden md:w-[80%] w-full items-center bg-gray-700/70 text-white shadow rounded-md gap-2`}
         >
           <div className="flex px-2 border-b border-gray-300 p-1 w-full relative items-center text-center justify-start gap-3">
             <div className="flex items-center p-2 justify-center bg-gray-600 rounded-md">

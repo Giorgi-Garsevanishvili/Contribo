@@ -17,6 +17,8 @@ export const GET = async (_req: NextRequest) => {
         ownAllowance: { regionId: thisUser.user?.regionId },
       },
       select: {
+        email:true,
+        createdAt:true,
         memberStatusLogs: {
           where: { ended: false },
           select: {

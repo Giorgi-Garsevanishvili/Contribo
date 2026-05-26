@@ -13,19 +13,20 @@ export const GET = async (_req: NextRequest) => {
           ownAllowance: { regionId: thisUser.user?.regionId },
         },
       },
-      select: {
-        id: true,
+      include: {
         user: { select: { name: true } },
-        ended: true,
         position: { select: { name: true } },
       },
     });
 
     if (!data || data.length === 0) {
-      return NextResponse.json({
-        data,
-        message: "Position History in your region not found!",
-      }, {status: 200});
+      return NextResponse.json(
+        {
+          data,
+          message: "Position History in your region not found!",
+        },
+        { status: 200 },
+      );
     }
 
     return NextResponse.json({ data: data }, { status: 200 });

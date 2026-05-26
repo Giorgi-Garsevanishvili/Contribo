@@ -72,7 +72,7 @@ function MyOldEventsVolunteer() {
         </div>
       ) : (
         <div
-          className={`${data.length === 0 ? "hidden" : "flex"} p-2 flex-col md:w-[80%] w-100 shadow  bg-gray-50 rounded-md gap-2`}
+          className={`${data.length === 0 ? "hidden" : "flex"} p-2 flex-col md:w-[80%] w-full shadow  bg-gray-50 rounded-md gap-2`}
         >
           <div className="flex px-2 border-b border-gray-300 p-1 w-full relative items-center text-center justify-start gap-3">
             <div className="flex items-center p-2 justify-center bg-gray-200 rounded-md">

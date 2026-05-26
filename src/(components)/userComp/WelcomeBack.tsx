@@ -64,7 +64,7 @@ function WelcomeBack() {
   const router = useRouter();
 
   return (
-    <div className="flex md:flex-row h-fit flex-col md:w-[80%] grow w-100 gap-2">
+    <div className="flex md:flex-row h-fit flex-col md:w-[80%] grow w-full gap-2">
       <div
         className={`flex p-3 h-auto flex-col shrink-0 grow shadow items-center justify-center bg-gray-700/70 shadow-white text-white rounded-md gap-2`}
       >

@@ -30,6 +30,20 @@ function VolunteerSideBarActions() {
         Icon={MdOutlineEvent}
         title="Events"
       />
+
+      <SideBarActionButtons
+        currentPath={currentPath}
+        pathCheck="/volunteer/hrCases"
+        Icon={IoBriefcaseOutline}
+        title="HR Cases"
+      />
+
+      <SideBarActionButtons
+        currentPath={currentPath}
+        pathCheck="/volunteer/myProfile"
+        Icon={LuUsersRound}
+        title="My Profile"
+      />
     </div>
   );
 }

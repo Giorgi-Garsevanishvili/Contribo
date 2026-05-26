@@ -67,12 +67,12 @@ function MyUpcomingEventsVolunteer() {
   return (
     <>
       {isLoading ? (
-        <div className="flex w-full animate-pulse md:w-[80%] bg-gray-700 items-center  rounded-lg shadow-lg p-2 justify-center">
+        <div className="flex w-auto animate-pulse md:w-[80%] bg-gray-700 items-center  rounded-lg shadow-lg p-2 justify-center">
           <ImSpinner9 className="animate-spin" size={20} />
         </div>
       ) : (
         <div
-          className={`${data.length === 0 ? "hidden" : "flex"} p-2 flex-col md:w-[80%] w-100 shadow  bg-gray-700/70 rounded-md gap-2`}
+          className={`${data.length === 0 ? "hidden" : "flex"} p-2 flex-col md:w-[80%] w-full shadow  bg-gray-700/70 rounded-md gap-2`}
         >
           <div className="flex px-2 border-b border-gray-300 p-1 w-full relative items-center text-center justify-start gap-3">
             <div className="flex items-center p-2 justify-center bg-gray-600 rounded-md">

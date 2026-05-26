@@ -101,7 +101,7 @@ function HomeEventStats() {
   );
 
   return (
-    <div className="p-2 flex-wrap flex-col md:w-[80%] w-100 bg-gray-700/70 text-white shadow shadow-white rounded-md gap-1 flex">
+    <div className="p-2 flex-wrap flex-col md:w-[80%] w-full bg-gray-700/70 text-white shadow shadow-white rounded-md gap-1 flex">
       <h3 className="w-full items-center text-center">Events Overview</h3>
       <div className="flex p-1 gap-2 overflow-auto no-scrollbar md:flex-wrap w-full text-sm text-center  h-fit items-center justify-between border-gray-300">
         <div

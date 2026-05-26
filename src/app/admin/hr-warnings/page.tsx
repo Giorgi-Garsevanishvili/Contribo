@@ -3,11 +3,11 @@
 import HrCasesList from "@/(components)/adminComp/users/hrCasesComps/HrCasesList";
 import { useParams } from "next/navigation";
 
-function User() {
+function hrCasePageAdmin() {
   const params = useParams()
   const id = params.userId
   return <div className="flex w-full items-center m-0 p-0 justify-center flex-col">
     <HrCasesList fetchUrl={`/api/admin/hrWarnings`} />
   </div>;
 }
-export default User;
+export default hrCasePageAdmin;

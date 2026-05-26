@@ -80,7 +80,7 @@ export const POST = async (req: NextRequest) => {
 
 export const DELETE = async (_req: NextRequest) => {
   try {
-    const thisUser = await requireRole("ADMIN");
+    const thisUser = await requireRole("REGULAR");
 
     const deleted = await prisma.joinRequest.deleteMany({
       where: {
