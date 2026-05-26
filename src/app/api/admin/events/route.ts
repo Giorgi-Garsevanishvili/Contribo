@@ -303,7 +303,13 @@ export const POST = async (req: NextRequest) => {
     return NextResponse.json(
       {
         message: `Event: ${response.name}, Created By: ${response.createdBy?.name}`,
-        data: { name: response.name, id: response.id },
+        data: {
+          name: response.name,
+          id: response.id,
+          startTime: response.startTime,
+          endTime: response.endTime,
+          finalizedAt: response.finalizedAt,
+        },
       },
       { status: 201 },
     );
