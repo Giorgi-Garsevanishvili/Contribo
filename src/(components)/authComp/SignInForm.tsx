@@ -28,12 +28,13 @@ const SignInForm = async ({ showLogo }: { showLogo: boolean }) => {
           </p>
           <div className="mt-2 flex flex-col">
             <SignIn
-              prov={"slack"}
-              icon={<FaSlack className="text-4xl" />}
-            ></SignIn>
-            <SignIn
               prov={"google"}
               icon={<FcGoogle className="text-4xl" />}
+            ></SignIn>
+            <SignIn
+              disabled={true}
+              prov={"slack"}
+              icon={<FaSlack className="text-4xl" />}
             ></SignIn>
           </div>
         </div>

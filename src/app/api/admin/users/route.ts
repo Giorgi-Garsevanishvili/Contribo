@@ -1,4 +1,4 @@
-import { UserWhereInput } from "@/generated/models";
+import { AllowedUserWhereInput, UserWhereInput } from "@/generated/models";
 import { handleError } from "@/lib/errors/handleErrors";
 import { prisma } from "@/lib/prisma";
 import { requireRole } from "@/lib/serverAuth";
@@ -56,12 +56,21 @@ export const GET = async (req: NextRequest) => {
     const skip = (page - 1) * limit;
 
     const searchQuery = searchParams.get("search");
-    const regionFilter = searchParams.get("region");
     const roleFilter = searchParams.get("role");
     const membershipFilter = searchParams.get("membership");
 
+    const ownAllowanceWhere: AllowedUserWhereInput = {
+      regionId: thisUser.user?.regionId,
+    };
+
+    if (roleFilter) {
+      ownAllowanceWhere.roles = {
+        some: { roleId: roleFilter },
+      };
+    }
+
     const whereClause: UserWhereInput = {
-      ownAllowance: { regionId: thisUser.user?.regionId },
+      ownAllowance: ownAllowanceWhere,
     };
 
     if (searchQuery && searchQuery.trim()) {
@@ -73,15 +82,6 @@ export const GET = async (req: NextRequest) => {
           email: { contains: searchQuery.trim(), mode: "insensitive" },
         },
       ];
-    }
-
-    if (roleFilter && whereClause.ownAllowance?.roles) {
-      whereClause.ownAllowance = {
-        ...whereClause.ownAllowance,
-        roles: {
-          some: { roleId: roleFilter },
-        },
-      };
     }
 
     if (membershipFilter) {

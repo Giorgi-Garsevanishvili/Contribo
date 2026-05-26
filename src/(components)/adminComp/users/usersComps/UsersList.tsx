@@ -52,7 +52,6 @@ function UsersList() {
   const { data: membership, isLoadingFetch: isLoadingFetchMembership } =
     useFetchData<RoleRegionMembershipDataType>(`/api/admin/memberStatus`, []);
 
-  const [regionFilter, setRegionFilter] = useState("");
   const [roleFilter, setRoleFilter] = useState("");
   const [membershipFilter, setMembershipFilter] = useState("");
 
@@ -62,7 +61,6 @@ function UsersList() {
     const searchParams = new URLSearchParams();
     searchParams.append("page", currentPage.toString());
     searchParams.append("limit", limit.toString());
-    searchParams.append("region", regionFilter.toString());
     searchParams.append("role", roleFilter.toString());
     searchParams.append("membership", membershipFilter.toString());
     if (searchQuery.length >= 3) {
@@ -70,21 +68,13 @@ function UsersList() {
     }
 
     const hasFilter =
-      regionFilter ||
       membershipFilter ||
       roleFilter ||
       (searchQuery.length >= 3 && searchQuery);
     setFilterOn(!!hasFilter);
 
     return `/api/admin/users?${searchParams.toString()}`;
-  }, [
-    limit,
-    currentPage,
-    searchQuery,
-    regionFilter,
-    roleFilter,
-    membershipFilter,
-  ]);
+  }, [limit, currentPage, searchQuery, roleFilter, membershipFilter]);
 
   const { data, isLoading, pagination, refetch } = usePaginatedData<Data[]>(
     paginatedUrl,
@@ -93,8 +83,8 @@ function UsersList() {
 
   const clearFilter = () => {
     handleSearchQuery("");
-    handleRegionFilterChange("");
     handleRoleFilterChange("");
+    handleMembershipFilterChange("");
     setCurrentPage(1);
   };
 
@@ -112,10 +102,7 @@ function UsersList() {
     setRoleFilter(role);
     setCurrentPage(1);
   };
-  const handleRegionFilterChange = (region: string) => {
-    setRegionFilter(region);
-    setCurrentPage(1);
-  };
+
   const handleMembershipFilterChange = (membership: string) => {
     setMembershipFilter(membership);
     setCurrentPage(1);
