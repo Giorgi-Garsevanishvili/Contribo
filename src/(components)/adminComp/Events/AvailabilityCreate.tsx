@@ -203,6 +203,8 @@ function AvailabilityCreate({
         eventId: eventId,
         ratingScore: Number(formData.ratingScore),
         totalSlots: Number(formData.totalSlots),
+        validFrom: new Date(formData.validFrom).toISOString(),
+        validTo: new Date(formData.validTo).toISOString(),
       };
 
       const response = await axios.post(

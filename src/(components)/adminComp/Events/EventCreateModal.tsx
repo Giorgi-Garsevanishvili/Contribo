@@ -95,7 +95,13 @@ function EventCreateModal({ parentRefetch }: { parentRefetch: () => void }) {
         throw new Error("All Fields Must be provided");
       }
 
-      const response = await axios.post("/api/admin/events", formData);
+       const payload = {
+      ...formData,
+      startTime: new Date(formData.startTime).toISOString(),
+      endTime: new Date(formData.endTime).toISOString(),
+    };
+
+      const response = await axios.post("/api/admin/events", payload);
       triggerCompAlertRef.current({
         message: `${response.data.message}`,
         type: "success",
