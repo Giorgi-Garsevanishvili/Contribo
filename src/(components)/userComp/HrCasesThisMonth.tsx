@@ -6,6 +6,8 @@ import RatingCardVolunteer from "./myRatingRecordsComps/RatingCardVolunteer";
 import { useState } from "react";
 import HrCaseCardVolunteer from "./myHrCases/HrCaseCardVolunteer";
 import { GoDotFill } from "react-icons/go";
+import { IoIosArrowForward } from "react-icons/io";
+import { useRouter } from "next/navigation";
 
 type HrCaseDataType = {
   id: string;
@@ -24,12 +26,13 @@ type HrCaseDataType = {
 
 function HrCasesThisMonth() {
   const [isOpenId, setIsOpenId] = useState("");
+  const router = useRouter();
   const { data, isLoading } = usePaginatedData<HrCaseDataType[]>(
     "/api/user/myHrCases?monthLimit=true",
     [],
   );
   return (
-    <div className="p-2 flex-wrap items-center justify-center flex-col md:w-[80%] w-full bg-gray-700/70 shadow shadow-white rounded-md gap-1 flex">
+    <div className="p-2 relative flex-wrap items-center justify-center flex-col w-full bg-gray-700/70 shadow shadow-white rounded-md gap-1 flex">
       <div className="flex border-b border-gray-400/40 w-auto p-1 mb-2 items-center justify-center gap-2">
         <h3 className="w-fit items-center text-white text-center">
           HR Cases This Month
@@ -38,6 +41,12 @@ function HrCasesThisMonth() {
           {data.length}
         </h2>
       </div>
+      <button
+        onClick={() => router.push("/volunteer/hrCases")}
+        className="text-xs absolute right-2 top-5 cursor-pointer flex gap-1 items-center justify-center transition-all duration-300 ease-out hover:text-blue-400 text-blue-200"
+      >
+        View All <IoIosArrowForward />
+      </button>
       {isLoading ? (
         <div className="flex w-full animate-pulse  bg-gray-700   items-center  rounded-lg shadow-lg p-2 justify-center">
           <ImSpinner9 className="animate-spin" size={20} />

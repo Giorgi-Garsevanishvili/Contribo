@@ -1,3 +1,4 @@
+import { FeedbackRequestStatus } from "@/generated/enums";
 import { EventWhereInput } from "@/generated/models";
 import { handleError } from "@/lib/errors/handleErrors";
 import { prisma } from "@/lib/prisma";
@@ -78,10 +79,26 @@ type DashboardStats = {
   totalAvailableSlots: number;
 };
 
+type EventFeedbackType = {
+  id: string;
+  userId: string | null;
+  updatedAt: Date | null;
+  createdAt: Date;
+  updatedById: string | null;
+  rating: number | null;
+  feedback: string | null;
+  eventId: string;
+  requestStatus: FeedbackRequestStatus;
+  requestedAt: Date;
+  respondedAt: Date | null;
+  responded: boolean;
+};
+
 type ApiResponse = {
   data: EventResponse[];
   pagination: PaginationMeta;
   stats: DashboardStats;
+  eventFeedbacks: EventFeedbackType[];
 };
 
 export const GET = async (req: NextRequest) => {
@@ -278,144 +295,149 @@ export const GET = async (req: NextRequest) => {
     // DATABASE QUERIES
     // ---------------------------------------
 
-    const [totalCount, events, statsEvents] = await prisma.$transaction([
-      prisma.event.count({
-        where: whereClause,
-      }),
+    const [totalCount, events, statsEvents, eventFeedbacks] =
+      await prisma.$transaction([
+        prisma.event.count({
+          where: whereClause,
+        }),
 
-      prisma.event.findMany({
-        where: whereClause,
+        prisma.event.findMany({
+          where: whereClause,
 
-        select: {
-          id: true,
-          name: true,
-          location: true,
-          startTime: true,
-          endTime: true,
-          rating: true,
+          select: {
+            id: true,
+            name: true,
+            location: true,
+            startTime: true,
+            endTime: true,
+            rating: true,
 
-          region: {
-            select: {
-              name: true,
-            },
-          },
-
-          createdBy: {
-            select: {
-              name: true,
-            },
-          },
-
-          updatedBy: {
-            select: {
-              name: true,
-            },
-          },
-
-          assignments: {
-            select: {
-              role: {
-                select: {
-                  name: true,
-                },
-              },
-
-              user: {
-                select: {
-                  name: true,
-                  image: true,
-                },
+            region: {
+              select: {
+                name: true,
               },
             },
-          },
 
-          availabilities: {
-            select: {
-              role: {
-                select: {
-                  name: true,
-                },
+            createdBy: {
+              select: {
+                name: true,
               },
+            },
 
-              totalSlots: true,
+            updatedBy: {
+              select: {
+                name: true,
+              },
+            },
 
-              availabilityEntries: {
-                select: {
-                  user: {
-                    select: {
-                      name: true,
-                      image: true,
-                    },
+            assignments: {
+              select: {
+                role: {
+                  select: {
+                    name: true,
                   },
                 },
-              },
 
-              _count: {
-                select: {
-                  availabilityEntries: {
-                    where: {
-                      status: "ACTIVE",
-                    },
+                user: {
+                  select: {
+                    name: true,
+                    image: true,
                   },
                 },
               },
             },
-          },
-        },
 
-        orderBy: {
-          createdAt: "desc",
-        },
+            availabilities: {
+              select: {
+                role: {
+                  select: {
+                    name: true,
+                  },
+                },
 
-        skip,
-        take: limit,
-      }),
+                totalSlots: true,
 
-      prisma.event.findMany({
-        where: baseWhereClause,
+                availabilityEntries: {
+                  select: {
+                    user: {
+                      select: {
+                        name: true,
+                        image: true,
+                      },
+                    },
+                  },
+                },
 
-        select: {
-          startTime: true,
-          endTime: true,
-
-          assignments: {
-            where: {
-              userId,
-            },
-
-            select: {
-              id: true,
-            },
-          },
-
-          availabilities: {
-            select: {
-              totalSlots: true,
-
-              _count: {
-                select: {
-                  availabilityEntries: {
-                    where: {
-                      status: "ACTIVE",
+                _count: {
+                  select: {
+                    availabilityEntries: {
+                      where: {
+                        status: "ACTIVE",
+                      },
                     },
                   },
                 },
               },
+            },
+          },
 
-              availabilityEntries: {
-                where: {
-                  userId,
+          orderBy: {
+            createdAt: "desc",
+          },
+
+          skip,
+          take: limit,
+        }),
+
+        prisma.event.findMany({
+          where: baseWhereClause,
+
+          select: {
+            startTime: true,
+            endTime: true,
+
+            assignments: {
+              where: {
+                userId,
+              },
+
+              select: {
+                id: true,
+              },
+            },
+
+            availabilities: {
+              select: {
+                totalSlots: true,
+
+                _count: {
+                  select: {
+                    availabilityEntries: {
+                      where: {
+                        status: "ACTIVE",
+                      },
+                    },
+                  },
                 },
 
-                select: {
-                  id: true,
+                availabilityEntries: {
+                  where: {
+                    userId,
+                  },
+
+                  select: {
+                    id: true,
+                  },
                 },
               },
             },
           },
-        },
-      }),
-    ]);
+        }),
+
+        prisma.eventFeedback.findMany({
+          where: { userId: thisUser.user.userId, requestStatus: "PENDING" },
+        }),
+      ]);
 
     // ---------------------------------------
     // EVENT STATUS
@@ -517,6 +539,8 @@ export const GET = async (req: NextRequest) => {
 
         totalAvailableSlots,
       },
+
+      eventFeedbacks,
     };
 
     return NextResponse.json(

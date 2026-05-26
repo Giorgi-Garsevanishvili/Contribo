@@ -4,7 +4,11 @@ import { useRouter } from "next/navigation";
 import { IoIosArrowForward } from "react-icons/io";
 import { useSession } from "next-auth/react";
 import { BiSolidBookmarkHeart } from "react-icons/bi";
-import { HrWarningStatus, RatingAction } from "@/generated/enums";
+import {
+  FeedbackRequestStatus,
+  HrWarningStatus,
+  RatingAction,
+} from "@/generated/enums";
 import MyHrStats from "./MyHrStats";
 
 type UserStatsType = {
@@ -18,6 +22,20 @@ type UserStatsType = {
   name: string | null;
   image: string;
   rating: number;
+  providedFeedbacks: {
+    id: string;
+    userId: string | null;
+    updatedAt: Date | null;
+    createdAt: Date;
+    updatedById: string | null;
+    rating: number | null;
+    eventId: string;
+    requestStatus: FeedbackRequestStatus;
+    requestedAt: Date;
+    respondedAt: Date | null;
+    responded: boolean;
+    feedback: string | null;
+  }[];
   memberStatusLogs: {
     updatedAt: Date | null;
     createdAt: Date;
@@ -69,7 +87,7 @@ function WelcomeBack() {
         className={`flex p-3 h-auto flex-col shrink-0 grow shadow items-center justify-center bg-gray-700/70 shadow-white text-white rounded-md gap-2`}
       >
         <div className="flex px-1 p-1 w-full md:flex-row flex-col relative items-center text-center justify-start gap-3">
-          <BiSolidBookmarkHeart size={75}  />
+          <BiSolidBookmarkHeart size={75} />
           <div className="flex flex-col gap-1 items-center md:items-start justify-center">
             <h3 className=" cursor-default items-center justify-center leading-6 font-bold text-2xl text-blue-100">
               Welcome Back, {session?.user.name?.split(" ")[0]}! 👋

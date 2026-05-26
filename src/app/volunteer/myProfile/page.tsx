@@ -14,6 +14,8 @@ import UserInfoButtons from "@/(components)/adminComp/users/usersComps/UserInfoB
 import UserInfo from "@/(components)/adminComp/users/usersComps/UserInfo";
 import UserInfoVolunteer from "@/(components)/userComp/myProfileComps/UserInfoVolunteer";
 import UserInfoButtonsVolunteer from "@/(components)/userComp/myProfileComps/UserInfoButtonsVolunteer";
+import RatingThisMonth from "@/(components)/userComp/RatingThisMonth";
+import HrCasesThisMonth from "@/(components)/userComp/HrCasesThisMonth";
 
 function User() {
   const [refetchKey, setRefetch] = useState(0);
@@ -21,7 +23,7 @@ function User() {
   const [openStats, setOpenStats] = useState(false);
 
   return (
-    <div className="flex flex-col">
+    <div className="flex m-1 p-1 w-full md:w-[80%]  flex-col">
       <UserInfoVolunteer />
       <div
         className={`${openStats ? "flex" : "hidden"} md:flex-row md:flex flex-col items-center justify-between`}
@@ -54,6 +56,11 @@ function User() {
           title="Member Status Logs"
           APIPath="myMembershipHistory"
         />
+      </div>
+
+      <div className="flex flex-col p-1 w-full my-1  gap-2 w-grow items-center justify-start">
+        <RatingThisMonth />
+        <HrCasesThisMonth />
       </div>
 
       <button

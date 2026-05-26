@@ -3,6 +3,7 @@ import { useEffect, useRef, useState } from "react";
 import { useCompAlert } from "./useCompAlert";
 import { getClientErrorMessage } from "@/lib/errors/clientErrors";
 import { responseLogOut } from "@/lib/ResponseLogOut";
+import { FeedbackRequestStatus } from "@/generated/enums";
 
 type PaginationMeta = {
   currentPage: number;
@@ -29,6 +30,21 @@ type DashboardStats = {
   totalAvailableSlots: number;
 };
 
+type EventFeedbackType = {
+  id: string;
+  userId: string | null;
+  updatedAt: Date | null;
+  createdAt: Date;
+  updatedById: string | null;
+  rating: number | null;
+  feedback: string | null;
+  eventId: string;
+  requestStatus: FeedbackRequestStatus;
+  requestedAt: Date;
+  respondedAt: Date | null;
+  responded: boolean;
+};
+
 function usePaginatedData<T>(
   url: string,
   initialData: T,
@@ -41,6 +57,7 @@ function usePaginatedData<T>(
   const [pagination, setPagination] = useState<PaginationMeta | null>();
   const [counts, setCounts] = useState<CountsType | null>();
   const [stats, setStats] = useState<DashboardStats>();
+  const [eventFeedbacks, setEventFeedbacks] = useState<EventFeedbackType[]>();
 
   const { triggerCompAlert } = useCompAlert();
   const triggerCompAlertRef = useRef(triggerCompAlert);
@@ -72,6 +89,10 @@ function usePaginatedData<T>(
 
         if (responseData.stats) {
           setStats(responseData.stats);
+        }
+
+        if (responseData.eventFeedbacks) {
+          setEventFeedbacks(responseData.eventFeedbacks);
         }
         setIsLoading(false);
       } catch (error) {
@@ -126,8 +147,12 @@ function usePaginatedData<T>(
       }
 
       if (responseData.stats) {
-          setStats(responseData.stats);
-        }
+        setStats(responseData.stats);
+      }
+
+      if (responseData.eventFeedbacks) {
+        setEventFeedbacks(responseData.eventFeedbacks);
+      }
       setIsLoading(false);
     } catch (error) {
       setError(true);
@@ -148,7 +173,16 @@ function usePaginatedData<T>(
     }
   };
 
-  return { data, isLoading, error, pagination, refetch, counts, stats };
+  return {
+    data,
+    isLoading,
+    error,
+    pagination,
+    refetch,
+    counts,
+    stats,
+    eventFeedbacks,
+  };
 }
 
 export default usePaginatedData;

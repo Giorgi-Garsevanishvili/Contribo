@@ -1,9 +1,7 @@
 "use client";
-import { LuUsersRound } from "react-icons/lu";
-import { MdOutlineEvent } from "react-icons/md";
-import { BiShieldQuarter } from "react-icons/bi";
+import { LuUserRound } from "react-icons/lu";
+import { MdOutlineEvent, MdOutlineRateReview } from "react-icons/md";
 import { MdOutlineDashboard } from "react-icons/md";
-import { HiOutlineHandRaised } from "react-icons/hi2";
 import { IoBriefcaseOutline } from "react-icons/io5";
 import { usePathname } from "next/navigation";
 import SideBarActionButtons from "./SideBarActionButtons";
@@ -33,6 +31,13 @@ function VolunteerSideBarActions() {
 
       <SideBarActionButtons
         currentPath={currentPath}
+        pathCheck="/volunteer/myEventFeedbacks"
+        Icon={MdOutlineRateReview}
+        title="Event Feedbacks"
+      />
+
+      <SideBarActionButtons
+        currentPath={currentPath}
         pathCheck="/volunteer/hrCases"
         Icon={IoBriefcaseOutline}
         title="HR Cases"
@@ -41,7 +46,7 @@ function VolunteerSideBarActions() {
       <SideBarActionButtons
         currentPath={currentPath}
         pathCheck="/volunteer/myProfile"
-        Icon={LuUsersRound}
+        Icon={LuUserRound}
         title="My Profile"
       />
     </div>
