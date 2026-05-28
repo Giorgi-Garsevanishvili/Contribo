@@ -1,9 +1,8 @@
 "use client";
 
-import { HrWarningStatus, RatingAction, ReqStatus } from "@/generated/enums";
+import { FeedbackRequestStatus, HrWarningStatus, RatingAction, ReqStatus } from "@/generated/enums";
 import { IoFilterSharp } from "react-icons/io5";
 import { MdFilterListOff } from "react-icons/md";
-
 
 type UserResponse = {
   id: string;
@@ -72,6 +71,15 @@ type FilterPropType =
     }
   | {
       filterType: "STANDARD";
+      searchValue: string;
+      onSearchQueryChange: (search: string) => void;
+      filterOn: boolean;
+      clearFilter: () => void;
+    }
+  | {
+      filterType: "FEEDBACK";
+      statusValue: string; // For Feedback
+      onStatusFilterChange: (status: string) => void;
       searchValue: string;
       onSearchQueryChange: (search: string) => void;
       filterOn: boolean;
@@ -244,6 +252,37 @@ function QueryFilter(props: FilterPropType) {
                 {Object.values(RatingAction)?.map((item, index) => (
                   <option key={index} value={item}>
                     {item}
+                  </option>
+                ))}
+              </select>
+            </div>
+          </div>
+        ) : props.filterType === "FEEDBACK" ? (
+          <div
+            /** This Is Filters For Event Feedbacks*/ className="flex md:overflow-auto  overflow-x-scroll p-1 flex-row"
+          >
+            <div className="flex bg-gray-600 ring-1 ring-gray-600/30 md:ring-0 p-1 rounded-md md:bg-transparent m-2 w-full items-center justify-between">
+              <label
+                htmlFor="status"
+                className="text-gray-200 flex items-center justify-center m-0.5 h-full"
+              >
+                Status:
+              </label>
+              <select
+                value={props.statusValue}
+                className="text-center px-0.5 h-fit rounded-sm bg-gray-600 cursor-pointer"
+                onChange={(e) =>
+                  props.onStatusFilterChange(e.target.value as FeedbackRequestStatus)
+                }
+                name="status"
+                id="status"
+              >
+                <option className="p-0 m-0" value="">
+                  ALL
+                </option>
+                {Object.keys(FeedbackRequestStatus).map((status, index) => (
+                  <option key={index} value={status}>
+                    {status}
                   </option>
                 ))}
               </select>

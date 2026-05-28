@@ -77,6 +77,9 @@ export const GET = async (req: NextRequest, context: Context) => {
     const data = await prisma.eventFeedback.findMany({
       where: whereClause,
       select: {
+        id:true,
+        responded:true,
+        rating:true,
         user: { select: { name: true } },
         requestStatus: true,
         event: { select: { name: true } },

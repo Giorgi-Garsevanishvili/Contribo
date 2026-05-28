@@ -65,8 +65,8 @@ function MemberStatusLogCreate({ onCreated }: Props) {
 
       const payload = {
         ...createData,
-        startedAt: new Date(createData.startedAt),
-        endedAt: createData.endedAt ? new Date(createData.endedAt) : null,
+        startedAt: new Date(createData.startedAt).toISOString(),
+        endedAt: createData.endedAt ? new Date(createData.endedAt).toISOString() : null,
       };
 
       if (

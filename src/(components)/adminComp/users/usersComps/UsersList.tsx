@@ -154,7 +154,7 @@ function UsersList() {
           <ImSpinner9 className="animate-spin" size={25} />
         </div>
       ) : (
-        <div className="flex flex-col">
+        <div className="flex w-full flex-col">
           {data.length > 0 ? (
             <>
               <div className=" hidden md:grid font-bold text-sm grid-cols-5 gap-4 uppercase grid-rows-1 select-none justify-start items-center bg-gray-200/80 text-gray-700 p-2 m-1 rounded-lg">
@@ -177,7 +177,7 @@ function UsersList() {
               {data.map((user) => (
                 <button
                   onClick={() => router.push(`/admin/users/${user.id}`)}
-                  className={`${updateSession.data?.user.email === user.email ? "border-2 border-green-900 bg-green-100/50" : "bg-gray-200/80"} grid grid-cols-[2fr_auto] md:grid-cols-5 gap-1 md:gap-4 grid-rows-1 btn select-none text-sm justify-start items-center  text-cyan-950 p-2 m-1 rounded-lg`}
+                  className={`${updateSession.data?.user.email === user.email ? "border-2 border-green-900 bg-green-100/50" : "bg-gray-200/80"} grow grid grid-cols-[2fr_auto] md:grid-cols-5 gap-1 md:gap-4 grid-rows-1 btn select-none text-sm justify-start items-center  text-cyan-950 p-2 m-1 rounded-lg`}
                   key={user.id}
                 >
                   <div className="flex justify-start items-center min-w-0">

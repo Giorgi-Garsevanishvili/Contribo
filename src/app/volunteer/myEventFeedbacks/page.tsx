@@ -7,7 +7,7 @@ import { useParams } from "next/navigation";
 function User() {
   const params = useParams()
   const id = params.userId
-  return <div className="flex w-full items-center m-0 p-0 justify-center flex-col">
+  return <div className="flex w-full items-center m-0 md:p-0 p-2 justify-center flex-col">
     <FeedbacksListVolunteer fetchUrl={`/api/user/eventFeedbacks`}/>
   </div>;
 }

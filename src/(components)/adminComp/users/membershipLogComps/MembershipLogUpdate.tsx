@@ -65,7 +65,7 @@ function MembershipUpdate({
                     onChange={(e) =>
                       setUpdateData((prev) => ({
                         ...prev,
-                        startedAt: e.target.value,
+                        startedAt: e.target.value.toString(),
                       }))
                     }
                     className="input-def  bg-gray-400/95 border-white text-white rounded-sm grow"
@@ -84,7 +84,7 @@ function MembershipUpdate({
                     onChange={(e) =>
                       setUpdateData((prev) => ({
                         ...prev,
-                        endedAt: e.target.value,
+                        endedAt: e.target.value.toString(),
                       }))
                     }
                     className="input-def  bg-gray-400/95 border-white text-white rounded-sm grow"

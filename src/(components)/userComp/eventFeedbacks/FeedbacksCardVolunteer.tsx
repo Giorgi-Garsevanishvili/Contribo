@@ -27,7 +27,7 @@ type FeedbackData = {
 interface FeedbackCardProps {
   feedbackData: FeedbackData;
   isLoading?: boolean;
-  parentRefetch: () => void
+  parentRefetch: () => void;
 }
 
 export const FeedbacksCardVolunteer: React.FC<FeedbackCardProps> = ({
@@ -36,9 +36,9 @@ export const FeedbacksCardVolunteer: React.FC<FeedbackCardProps> = ({
   isLoading = false,
 }) => {
   const [isEditing, setIsEditing] = useState(false);
-  const [rating, setRating] = useState(feedbackData.rating || 0);
+  const [rating, setRating] = useState(0);
   const [hoverRating, setHoverRating] = useState(0);
-  const [feedback, setFeedback] = useState(feedbackData.feedback || "");
+  const [feedback, setFeedback] = useState("");
   const [submitLoading, setSubmitLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
@@ -85,7 +85,7 @@ export const FeedbacksCardVolunteer: React.FC<FeedbackCardProps> = ({
       });
       setRating(0);
       setFeedback("");
-      parentRefetch()
+      parentRefetch();
     } catch (error) {
       const message = getClientErrorMessage(error);
       triggerCompAlertRef.current({
@@ -99,14 +99,14 @@ export const FeedbacksCardVolunteer: React.FC<FeedbackCardProps> = ({
   };
 
   const handleCancel = () => {
-    setRating(feedbackData.rating || 0);
-    setFeedback(feedbackData.feedback || "");
+    setRating(0);
+    setFeedback("");
     setError(null);
     setIsEditing(false);
   };
 
   return (
-    <div className="relative overflow-hidden rounded-lg border border-slate-700 bg-slate-800/40 backdrop-blur-sm transition-all duration-300 hover:border-slate-600 hover:bg-slate-800/60">
+    <div className="relative overflow-hidden rounded-lg border border-slate-700 bg-slate-800/90 backdrop-blur-sm transition-all duration-300 hover:border-slate-600 hover:bg-slate-800/60">
       {/* Status Badge */}
       <div className="absolute right-4 top-4 z-10">
         <span

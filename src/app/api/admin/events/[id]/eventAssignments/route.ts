@@ -59,6 +59,7 @@ export const POST = async (req: NextRequest, context: Context) => {
           name: true,
           startTime: true,
           endTime: true,
+          finalizedAt: true
         },
       });
 
@@ -66,12 +67,12 @@ export const POST = async (req: NextRequest, context: Context) => {
         throw new Error("Slot Not Found");
       }
 
-      // prevent claim if Event Ended
-      const now = new Date();
-      if (event.endTime <= now) {
+      // // prevent claim if Event Ended
+      // const now = new Date();
+      if (event.finalizedAt !== null) {
         return {
           success: false,
-          message: "Event Already Ended",
+          message: "Event Already Finalized",
         };
       }
 

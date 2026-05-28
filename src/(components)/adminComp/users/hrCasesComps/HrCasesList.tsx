@@ -88,9 +88,16 @@ const TYPE_ORDER = [
   "ARCHIVED",
 ];
 
+type HRListType = "INDIVIDUAL" | "GLOBAL";
 export type WarningStatus = keyof typeof WARNING_STATUS_COLORS;
 
-function HrCasesList({ fetchUrl }: { fetchUrl: string }) {
+function HrCasesList({
+  fetchUrl,
+  type,
+}: {
+  fetchUrl: string;
+  type: HRListType;
+}) {
   const [isOpenId, setIsOpenId] = useState("");
   const [colorInfoOpen, setColorInfoOpen] = useState(false);
   const [onEdit, setOnEdit] = useState("");
@@ -221,9 +228,13 @@ function HrCasesList({ fetchUrl }: { fetchUrl: string }) {
             <DeleteButtonAdmin
               styleClass="bg-red-900 text-white"
               extraTXT="Delete All"
-              url={`/api/admin/users/${id}/hrWarning`}
+              url={
+                type === "GLOBAL"
+                  ? `/api/admin/hrWarnings`
+                  : `/api/admin/users/${id}/hrWarning`
+              }
               fetchAction={refetch}
-              value={`All HR warnings for ${sortedData[0].assignee.name}?`}
+              value={`All HR warnings for your region`}
             />
           ) : null}
         </div>

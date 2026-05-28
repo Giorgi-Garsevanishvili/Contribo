@@ -1,10 +1,10 @@
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 import RoleAvailabilityComp from "./RoleAvailabilityComp";
-import EventCard from "./EventCard";
 import AssignmentsModalComp from "./AssignmentsModalComp";
 import EventDetails from "./EventDetails";
-import { useFetchData } from "@/hooks/useDataFetch";
 import usePaginatedData from "@/hooks/usePaginatedData";
+import { FeedbackRequestStatus } from "@/generated/enums";
+import FeedbacksCardAdminInEvent from "../eventFeedbacks/FeedbacksCardAdminInEvent";
 
 type EventDataType = {
   status: "LIVE" | "ENDED" | "UPCOMING";
@@ -51,6 +51,24 @@ type EventDataType = {
   }[];
 };
 
+type FeedbackDataType = {
+  id: string;
+  userId: string | null;
+  user: {
+    name: string | null;
+  } | null;
+  eventId: string;
+  requestStatus: FeedbackRequestStatus;
+  requestedAt: Date;
+  respondedAt: Date | null;
+  responded: boolean;
+  feedback: string | null;
+  rating: number | null;
+  event: {
+    name: string;
+  };
+};
+
 function EventInfoModal({
   event,
   parentFetch,
@@ -63,6 +81,16 @@ function EventInfoModal({
     null,
     null,
   );
+  const {
+    data: feedbacks,
+    isLoading: isLoadingFeedback,
+    refetch: refetchFeedbacks,
+  } = usePaginatedData<FeedbackDataType[] | null>(
+    `/api/admin/events/${event.id}/eventFeedbacks`,
+    null,
+    null,
+  );
+
   useEffect(() => {
     parentFetch();
   }, [refetch]);
@@ -98,6 +126,17 @@ function EventInfoModal({
           parentRefetch={refetch}
         />
       </div>
+      {feedbacks && feedbacks.length > 0 && (
+        <div className="flex w-full flex-col gap-2">
+          {feedbacks?.map((feedback) => (
+            <FeedbacksCardAdminInEvent
+              key={feedback.id}
+              parentRefetch={refetch}
+              feedbackData={feedback}
+            />
+          ))}
+        </div>
+      )}
     </div>
   );
 }

@@ -64,11 +64,11 @@ interface UpdateEventForm {
 function EventUpdate({
   event,
   parentRefetch,
-  setEditOpen
+  setEditOpen,
 }: {
   event: EventDataType;
   parentRefetch: () => void;
-  setEditOpen: Dispatch<SetStateAction<boolean>>
+  setEditOpen: Dispatch<SetStateAction<boolean>>;
 }) {
   const [formData, setFormData] = useState<UpdateEventForm>({});
   const { triggerCompAlert } = useCompAlert();
@@ -90,9 +90,19 @@ function EventUpdate({
         throw new Error("All Fields Must be provided");
       }
 
+      const payload = {
+        ...formData,
+        ...(formData.startTime && {
+          startTime: new Date(formData.startTime).toISOString(),
+        }),
+        ...(formData.endTime && {
+          endTime: new Date(formData.endTime).toISOString(),
+        }),
+      };
+
       const response = await axios.put(
         `/api/admin/events/${event.id}`,
-        formData,
+        payload,
       );
       triggerCompAlertRef.current({
         message: `${response.data.message}`,
@@ -101,7 +111,7 @@ function EventUpdate({
       });
       setFormData({});
       parentRefetch();
-      setEditOpen(false)
+      setEditOpen(false);
     } catch (error) {
       const message = getClientErrorMessage(error);
       triggerCompAlertRef.current({

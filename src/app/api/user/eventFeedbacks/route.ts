@@ -28,14 +28,6 @@ export const GET = async (req: NextRequest) => {
     if (searchQuery && searchQuery.trim()) {
       whereClause.OR = [
         {
-          user: {
-            email: { contains: searchQuery.trim(), mode: "insensitive" },
-          },
-        },
-        {
-          user: { name: { contains: searchQuery.trim(), mode: "insensitive" } },
-        },
-        {
           event: {
             name: { contains: searchQuery.trim(), mode: "insensitive" },
           },
@@ -83,7 +75,7 @@ export const GET = async (req: NextRequest) => {
         feedback: true,
         rating: true,
       },
-      orderBy: { requestedAt: "desc" },
+      orderBy: { requestStatus: "asc" },
       skip,
       take: limit,
     });

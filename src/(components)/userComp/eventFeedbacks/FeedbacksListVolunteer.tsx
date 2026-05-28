@@ -1,9 +1,7 @@
-import { useFetchData } from "@/hooks/useDataFetch";
 import { useMemo, useState } from "react";
 import usePaginatedData from "@/hooks/usePaginatedData";
 import Pagination from "@/(components)/generalComp/Pagination";
 import QueryFilter from "@/(components)/generalComp/QueryFilter";
-import { useParams } from "next/navigation";
 import { ImSpinner9 } from "react-icons/im";
 import { RiRefreshLine } from "react-icons/ri";
 import { FeedbackRequestStatus } from "@/generated/enums";
@@ -113,13 +111,16 @@ function FeedbacksListVolunteer({ fetchUrl }: { fetchUrl: string }) {
   }, [data]);
 
   return (
+    
     <div
-      className={`flex w-full items-center justify-center xl:px-25 xl:py-5 px-2 flex-col`}
+      className={`flex-col w-full md:w-[80%] flex items-center relative justify-center mt-4 shadow-sm bg-gray-700/70 m-2  rounded-lg p-1.5 select-none`}
     >
       <div className="flex flex-col items-center md:flex-row m-2 justify-center">
         <div className="flex text-black m-1 mb-2 w-full items-center justify-center">
           <QueryFilter
-            filterType="STANDARD"
+            filterType="FEEDBACK"
+            statusValue={statusFilter}
+            onStatusFilterChange={handleStatusFilterChange}
             searchValue={searchQuery}
             clearFilter={clearFilter}
             onSearchQueryChange={handleSearchQuery}
@@ -133,9 +134,15 @@ function FeedbacksListVolunteer({ fetchUrl }: { fetchUrl: string }) {
           <ImSpinner9 className="animate-spin" size={40} />
         </div>
       ) : sortedData && sortedData?.length > 0 ? (
-        sortedData?.map((item) => (
-          <FeedbacksCardVolunteer parentRefetch={refetch} key={item.id} feedbackData={item} />
-        ))
+        <div className="flex w-full flex-col gap-2">
+          {sortedData?.map((item) => (
+            <FeedbacksCardVolunteer
+              key={item.id}
+              parentRefetch={refetch}
+              feedbackData={item}
+            />
+          ))}
+        </div>
       ) : (
         <div className="flex flex-col mt-2 text-black bg-gray-100/90  items-center rounded-lg shadow-lg p-10 justify-center">
           <h3 className="font-bold">No HR Cases to display.</h3>

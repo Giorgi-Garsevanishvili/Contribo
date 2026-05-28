@@ -89,6 +89,20 @@ export const POST = async (req: NextRequest, context: Context) => {
     };
     const body = CreateAvailabilitySlot.parse(jsonWithCreator);
 
+    const event = await prisma.event.findUnique({
+      where: { id: body.eventId },
+      select: { finalizedAt: true },
+    });
+
+    if (event?.finalizedAt !== null) {
+      return NextResponse.json(
+        {
+          message: "Event Already Finalized",
+        },
+        { status: 400 },
+      );
+    }
+
     const response = await prisma.availabilitySlot.create({
       data: body,
       select: {
