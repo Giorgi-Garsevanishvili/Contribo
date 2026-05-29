@@ -71,9 +71,9 @@ function EventStats() {
           </h1>
           <h3>Events</h3>
         </div>
-        <div className="flex bg-white items-center border-gray-300 justify-center w-fit px-4 py-1.5  rounded-sm">
+        <div className="flex bg-white items-center border-gray-300 justify-center w-fit px-5 py-1.5  rounded-sm">
           <h3 className="text-black text-xs shrink-0">
-            {`Average Rating: ${rating}`} &#10024;
+            {`Average Rating: ${rating.toFixed(1)}`} &#10024;
           </h3>
         </div>
       </button>

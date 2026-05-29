@@ -115,7 +115,7 @@ function RatingRecordsListVolunteer({ fetchUrl }: { fetchUrl: string }) {
 
   return (
     <div
-      className={`flex w-full items-center justify-center xl:px-25 xl:py-5 px-2 flex-col`}
+      className={`flex w-full flex-col items-center relative justify-center mt-4 shadow-sm bg-gray-700/70 m-2  rounded-lg p-1.5 select-none`}
     >
       <div className="flex flex-col items-center md:flex-row m-2 justify-center">
         <QueryFilter

@@ -114,7 +114,7 @@ export const GET = async (req: NextRequest) => {
         },
       },
       orderBy: {
-        name: "desc",
+        name: "asc",
       },
       skip,
       take: limit,
