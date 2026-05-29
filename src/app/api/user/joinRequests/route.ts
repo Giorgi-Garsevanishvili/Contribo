@@ -1,3 +1,5 @@
+import { ReqStatus } from "@/generated/enums";
+import { JoinRequestWhereInput } from "@/generated/models";
 import { handleError } from "@/lib/errors/handleErrors";
 import { prisma } from "@/lib/prisma";
 import { requireRole } from "@/lib/serverAuth";
@@ -5,24 +7,41 @@ import { CreateJoinRequest } from "@/lib/zod";
 import { NextRequest, NextResponse } from "next/server";
 import z from "zod";
 
-export const GET = async (_req: NextRequest) => {
+export const GET = async (req: NextRequest) => {
   try {
     const thisUser = await requireRole("REGULAR");
+    const { searchParams } = new URL(req.url);
+
+    const statusFilter = searchParams.get("status");
+
+    const whereClause: JoinRequestWhereInput = {
+      createdById: thisUser.user.userId || "",
+    };
+
+    if (statusFilter) {
+      const statuses = statusFilter.split(",");
+
+      whereClause.status = {
+        in: statuses as ReqStatus[],
+      };
+    }
 
     const data = await prisma.joinRequest.findMany({
-      where: {
-        createdById: thisUser.user.userId || "",
-      },
+      where: whereClause,
       select: {
         id: true,
-        createdBy: { select: { name: true } },
+        createdBy: { select: { name: true, image: true } },
         region: { select: { name: true } },
         status: true,
+        updatedAt: true,
+        updatedBy: { select: { name: true } },
+        requestedAt: true,
       },
     });
 
     if (!data || data.length === 0) {
-      return NextResponse.json({data,
+      return NextResponse.json({
+        data,
         message: "Join Request for you not found!",
       });
     }
@@ -50,8 +69,14 @@ export const POST = async (req: NextRequest) => {
       });
     }
 
+    const statusFilter: ReqStatus[] = ["PENDING", "REQUESTED"];
+
     const checkData = await prisma.joinRequest.findMany({
-      where: { createdById: thisUser.user.userId || "", regionId: body.regionId },
+      where: {
+        createdById: thisUser.user.userId || "",
+        regionId: body.regionId,
+        status: { in: statusFilter },
+      },
     });
 
     if (checkData.length > 0) {
@@ -70,7 +95,7 @@ export const POST = async (req: NextRequest) => {
       {
         message: `Join Request Created for region: ${response.region?.name}`,
       },
-      { status: 201 }
+      { status: 201 },
     );
   } catch (error) {
     const { message, status } = handleError(error);

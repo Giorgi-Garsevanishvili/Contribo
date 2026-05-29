@@ -16,6 +16,7 @@ import UserInfoVolunteer from "@/(components)/userComp/myProfileComps/UserInfoVo
 import UserInfoButtonsVolunteer from "@/(components)/userComp/myProfileComps/UserInfoButtonsVolunteer";
 import RatingThisMonth from "@/(components)/userComp/RatingThisMonth";
 import HrCasesThisMonth from "@/(components)/userComp/HrCasesThisMonth";
+import { HiHandRaised } from "react-icons/hi2";
 
 function User() {
   const [refetchKey, setRefetch] = useState(0);
@@ -24,7 +25,7 @@ function User() {
 
   return (
     <div className="flex m-1 p-1 w-full md:w-[80%]  flex-col">
-      <UserInfoVolunteer />
+      <UserInfoVolunteer setRefetchKey={setRefetch} />
       <div
         className={`${openStats ? "flex" : "hidden"} md:flex-row md:flex flex-col items-center justify-between`}
       >
@@ -55,6 +56,13 @@ function User() {
           Icon={FaBoxArchive}
           title="Member Status Logs"
           APIPath="myMembershipHistory"
+        />
+        <UserInfoButtonsVolunteer
+          refetchKey={refetchKey}
+          URLPath="joinRequests"
+          Icon={HiHandRaised}
+          title="Region Join Logs"
+          APIPath="joinRequests"
         />
       </div>
 

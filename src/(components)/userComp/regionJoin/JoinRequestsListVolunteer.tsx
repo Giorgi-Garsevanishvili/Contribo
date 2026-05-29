@@ -2,12 +2,11 @@ import Pagination from "@/(components)/generalComp/Pagination";
 import { ReqStatus } from "@/generated/enums";
 import usePaginatedData from "@/hooks/usePaginatedData";
 import { useMemo, useState } from "react";
-import JoinRequestCard from "./JoinRequestCard";
-import JoinRequestTitleBar from "./JoinRequestTitleBar";
 import QueryFilter from "@/(components)/generalComp/QueryFilter";
 import { RiRefreshLine } from "react-icons/ri";
 import { ImSpinner9 } from "react-icons/im";
-import DeleteButtonAdmin from "../users/DeleteButtonAdmin";
+import JoinRequestTitleBar from "@/(components)/adminComp/join-requests/JoinRequestTitleBar";
+import RegionJoinCard from "./RegionJoinCard";
 
 type Data = {
   id: string;
@@ -24,7 +23,7 @@ type Data = {
   updatedBy: { name: string | null };
 };
 
-function JoinRequestsList() {
+function JoinRequestsListVolunteer() {
   const [currentPage, setCurrentPage] = useState(1);
   const [limit, setLimit] = useState(5);
   const [statusFilter, setStatusFilter] = useState("");
@@ -43,7 +42,7 @@ function JoinRequestsList() {
     const hasFilter = statusFilter || (searchQuery.length >= 3 && searchQuery);
     setFilterOn(!!hasFilter);
 
-    return `/api/admin/joinRequests?${searchParams.toString()}`;
+    return `/api/user/joinRequests?${searchParams.toString()}`;
   }, [limit, currentPage, searchQuery, statusFilter]);
 
   const {
@@ -86,7 +85,7 @@ function JoinRequestsList() {
         isLoadingFetch ? "" : " w-auto"
       } flex-col items-center relative justify-center mt-4 shadow-sm bg-gray-300/90 m-2  rounded-lg p-1.5 select-none`}
     >
-      <div className="flex md:flex-row flex-col text-black m-1 mb-2 w-full items-center justify-center">
+      <div className="flex text-black m-1 mb-2 w-full items-center justify-center">
         <QueryFilter
           filterType="JOIN_REQUEST"
           searchValue={searchQuery}
@@ -96,17 +95,6 @@ function JoinRequestsList() {
           onStatusFilterChange={handleStatusFilterChange}
           statusValue={statusFilter}
         />
-        <div className="flex w-fit shadow-md shadow-white bg-gray-200/95 p-2 m-2 rounded-lg">
-          {data.length > 0 ? (
-            <DeleteButtonAdmin
-              styleClass="bg-red-900 text-white"
-              extraTXT="Delete All"
-              url={`/api/admin/joinRequests`}
-              fetchAction={refetch}
-              value={`All Join Requests for your region`}
-            />
-          ) : null}
-        </div>
       </div>
       <JoinRequestTitleBar />
       {isLoadingFetch ? (
@@ -115,7 +103,7 @@ function JoinRequestsList() {
         </div>
       ) : data && data?.length > 0 ? (
         data?.map((JoinData) => (
-          <JoinRequestCard
+          <RegionJoinCard
             refetch={refetch}
             key={JoinData.id}
             joinData={JoinData}
@@ -142,4 +130,4 @@ function JoinRequestsList() {
   );
 }
 
-export default JoinRequestsList;
+export default JoinRequestsListVolunteer;

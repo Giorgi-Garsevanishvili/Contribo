@@ -1,9 +1,9 @@
+import DeleteButtonAdmin from "@/(components)/adminComp/users/DeleteButtonAdmin";
+import JoinReqDetails from "@/(components)/generalComp/JoinReqDetails";
 import { ReqStatus } from "@/generated/enums";
 import Image from "next/image";
 import { FcDeleteDatabase } from "react-icons/fc";
 import { IoMdGlobe } from "react-icons/io";
-import JoinReqActions from "./JoinReqActions";
-import JoinReqDetails from "@/(components)/generalComp/JoinReqDetails";
 
 export const JOIN_STATUS_COLORS = {
   APPROVED: {
@@ -43,7 +43,7 @@ type Data = {
   updatedBy: { name: string | null };
 };
 
-function JoinRequestCard({
+function RegionJoinCard({
   joinData,
   refetch,
 }: {
@@ -108,15 +108,18 @@ function JoinRequestCard({
         {joinData.status === "REJECTED" || joinData.status === "APPROVED" ? (
           <JoinReqDetails joinData={joinData} />
         ) : (
-          <JoinReqActions
-            id={joinData.id}
-            refetch={refetch}
-            currentStatus={joinData.status}
-          />
+            <DeleteButtonAdmin
+          url={`/api/user/joinRequests/${joinData.id}`}
+          fetchAction={refetch}
+          extraTXT="Delete Request"
+          value={`Join Request For Section: ${joinData.region?.name}`}
+          styleClass="items-center  rounded-sm justify-center px-5 py-1 md:w-fit h-fit bg-red-200/40 text-red-600 border border-red-700/20 hover:border-red-800 hover:text-red-800"
+          message="This Action will delete Action Permanently"
+        />
         )}
       </div>
     </div>
   );
 }
 
-export default JoinRequestCard;
+export default RegionJoinCard;

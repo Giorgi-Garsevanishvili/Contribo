@@ -1,7 +1,8 @@
 import { ReqStatus } from "@/generated/enums";
 import { useState } from "react";
 import { IoIosCloseCircle } from "react-icons/io";
-import { JOIN_STATUS_COLORS } from "./JoinRequestCard";
+import { JOIN_STATUS_COLORS } from "../adminComp/join-requests/JoinRequestCard";
+
 
 type Data = {
   id: string;
