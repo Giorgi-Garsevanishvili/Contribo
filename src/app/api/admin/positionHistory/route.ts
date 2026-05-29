@@ -12,6 +12,7 @@ export const GET = async (_req: NextRequest) => {
         user: {
           ownAllowance: { regionId: thisUser.user?.regionId },
         },
+        regionId: thisUser.user.regionId,
       },
       include: {
         user: { select: { name: true } },
@@ -45,6 +46,7 @@ export const DELETE = async (_req: NextRequest) => {
         user: {
           ownAllowance: { regionId: thisUser.user?.regionId },
         },
+        regionId: thisUser.user.regionId,
       },
     });
 

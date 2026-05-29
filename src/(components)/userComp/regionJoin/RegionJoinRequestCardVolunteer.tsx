@@ -108,9 +108,9 @@ function RegionJoinRequestCardVolunteer({
         <span className="uppercase text-sm font-semibold">Current:</span>
         <div className="flex items-center justify-center right-4 bg-gray-800 rounded-full p-0 m-0 top-4 z-10">
           <span
-            className={`inline-flex items-center rounded-full h-full w-full  px-3 py-1 text-xs font-medium bg-emerald-500/20 text-emerald-200`}
+            className={`${session.data?.user.region ? " bg-emerald-500/20 text-emerald-200" : " bg-red-500/20 text-red-200"} inline-flex items-center rounded-full h-full w-full  px-3 py-1 text-xs font-medium`}
           >
-            {session.data?.user.region}
+            {session.data?.user.region || "You Don`t Have Region!"}
           </span>
         </div>
       </div>

@@ -35,6 +35,7 @@ export type MemberStatusLogMinAggregateOutputType = {
   createdById: string | null
   createdAt: Date | null
   updatedAt: Date | null
+  regionId: string | null
 }
 
 export type MemberStatusLogMaxAggregateOutputType = {
@@ -48,6 +49,7 @@ export type MemberStatusLogMaxAggregateOutputType = {
   createdById: string | null
   createdAt: Date | null
   updatedAt: Date | null
+  regionId: string | null
 }
 
 export type MemberStatusLogCountAggregateOutputType = {
@@ -61,6 +63,7 @@ export type MemberStatusLogCountAggregateOutputType = {
   createdById: number
   createdAt: number
   updatedAt: number
+  regionId: number
   _all: number
 }
 
@@ -76,6 +79,7 @@ export type MemberStatusLogMinAggregateInputType = {
   createdById?: true
   createdAt?: true
   updatedAt?: true
+  regionId?: true
 }
 
 export type MemberStatusLogMaxAggregateInputType = {
@@ -89,6 +93,7 @@ export type MemberStatusLogMaxAggregateInputType = {
   createdById?: true
   createdAt?: true
   updatedAt?: true
+  regionId?: true
 }
 
 export type MemberStatusLogCountAggregateInputType = {
@@ -102,6 +107,7 @@ export type MemberStatusLogCountAggregateInputType = {
   createdById?: true
   createdAt?: true
   updatedAt?: true
+  regionId?: true
   _all?: true
 }
 
@@ -188,6 +194,7 @@ export type MemberStatusLogGroupByOutputType = {
   createdById: string | null
   createdAt: Date
   updatedAt: Date | null
+  regionId: string | null
   _count: MemberStatusLogCountAggregateOutputType | null
   _min: MemberStatusLogMinAggregateOutputType | null
   _max: MemberStatusLogMaxAggregateOutputType | null
@@ -222,8 +229,10 @@ export type MemberStatusLogWhereInput = {
   createdById?: Prisma.StringNullableFilter<"MemberStatusLog"> | string | null
   createdAt?: Prisma.DateTimeFilter<"MemberStatusLog"> | Date | string
   updatedAt?: Prisma.DateTimeNullableFilter<"MemberStatusLog"> | Date | string | null
+  regionId?: Prisma.StringNullableFilter<"MemberStatusLog"> | string | null
   updatedBy?: Prisma.XOR<Prisma.UserNullableScalarRelationFilter, Prisma.UserWhereInput> | null
   createdBy?: Prisma.XOR<Prisma.UserNullableScalarRelationFilter, Prisma.UserWhereInput> | null
+  region?: Prisma.XOR<Prisma.RegionNullableScalarRelationFilter, Prisma.RegionWhereInput> | null
   user?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
   status?: Prisma.XOR<Prisma.MemberStatusNullableScalarRelationFilter, Prisma.MemberStatusWhereInput> | null
 }
@@ -239,8 +248,10 @@ export type MemberStatusLogOrderByWithRelationInput = {
   createdById?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrderInput | Prisma.SortOrder
+  regionId?: Prisma.SortOrderInput | Prisma.SortOrder
   updatedBy?: Prisma.UserOrderByWithRelationInput
   createdBy?: Prisma.UserOrderByWithRelationInput
+  region?: Prisma.RegionOrderByWithRelationInput
   user?: Prisma.UserOrderByWithRelationInput
   status?: Prisma.MemberStatusOrderByWithRelationInput
 }
@@ -259,8 +270,10 @@ export type MemberStatusLogWhereUniqueInput = Prisma.AtLeast<{
   createdById?: Prisma.StringNullableFilter<"MemberStatusLog"> | string | null
   createdAt?: Prisma.DateTimeFilter<"MemberStatusLog"> | Date | string
   updatedAt?: Prisma.DateTimeNullableFilter<"MemberStatusLog"> | Date | string | null
+  regionId?: Prisma.StringNullableFilter<"MemberStatusLog"> | string | null
   updatedBy?: Prisma.XOR<Prisma.UserNullableScalarRelationFilter, Prisma.UserWhereInput> | null
   createdBy?: Prisma.XOR<Prisma.UserNullableScalarRelationFilter, Prisma.UserWhereInput> | null
+  region?: Prisma.XOR<Prisma.RegionNullableScalarRelationFilter, Prisma.RegionWhereInput> | null
   user?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
   status?: Prisma.XOR<Prisma.MemberStatusNullableScalarRelationFilter, Prisma.MemberStatusWhereInput> | null
 }, "id">
@@ -276,6 +289,7 @@ export type MemberStatusLogOrderByWithAggregationInput = {
   createdById?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrderInput | Prisma.SortOrder
+  regionId?: Prisma.SortOrderInput | Prisma.SortOrder
   _count?: Prisma.MemberStatusLogCountOrderByAggregateInput
   _max?: Prisma.MemberStatusLogMaxOrderByAggregateInput
   _min?: Prisma.MemberStatusLogMinOrderByAggregateInput
@@ -295,6 +309,7 @@ export type MemberStatusLogScalarWhereWithAggregatesInput = {
   createdById?: Prisma.StringNullableWithAggregatesFilter<"MemberStatusLog"> | string | null
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"MemberStatusLog"> | Date | string
   updatedAt?: Prisma.DateTimeNullableWithAggregatesFilter<"MemberStatusLog"> | Date | string | null
+  regionId?: Prisma.StringNullableWithAggregatesFilter<"MemberStatusLog"> | string | null
 }
 
 export type MemberStatusLogCreateInput = {
@@ -306,6 +321,7 @@ export type MemberStatusLogCreateInput = {
   updatedAt?: Date | string | null
   updatedBy?: Prisma.UserCreateNestedOneWithoutMemberStatusChangesInput
   createdBy?: Prisma.UserCreateNestedOneWithoutMemberStatusCreatedInput
+  region?: Prisma.RegionCreateNestedOneWithoutMemberStatusLogsInput
   user: Prisma.UserCreateNestedOneWithoutMemberStatusLogsInput
   status?: Prisma.MemberStatusCreateNestedOneWithoutMemberStatusLogsInput
 }
@@ -321,6 +337,7 @@ export type MemberStatusLogUncheckedCreateInput = {
   createdById?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string | null
+  regionId?: string | null
 }
 
 export type MemberStatusLogUpdateInput = {
@@ -332,6 +349,7 @@ export type MemberStatusLogUpdateInput = {
   updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   updatedBy?: Prisma.UserUpdateOneWithoutMemberStatusChangesNestedInput
   createdBy?: Prisma.UserUpdateOneWithoutMemberStatusCreatedNestedInput
+  region?: Prisma.RegionUpdateOneWithoutMemberStatusLogsNestedInput
   user?: Prisma.UserUpdateOneRequiredWithoutMemberStatusLogsNestedInput
   status?: Prisma.MemberStatusUpdateOneWithoutMemberStatusLogsNestedInput
 }
@@ -347,6 +365,7 @@ export type MemberStatusLogUncheckedUpdateInput = {
   createdById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  regionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 export type MemberStatusLogCreateManyInput = {
@@ -360,6 +379,7 @@ export type MemberStatusLogCreateManyInput = {
   createdById?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string | null
+  regionId?: string | null
 }
 
 export type MemberStatusLogUpdateManyMutationInput = {
@@ -382,6 +402,7 @@ export type MemberStatusLogUncheckedUpdateManyInput = {
   createdById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  regionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 export type MemberStatusLogListRelationFilter = {
@@ -405,6 +426,7 @@ export type MemberStatusLogCountOrderByAggregateInput = {
   createdById?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
+  regionId?: Prisma.SortOrder
 }
 
 export type MemberStatusLogMaxOrderByAggregateInput = {
@@ -418,6 +440,7 @@ export type MemberStatusLogMaxOrderByAggregateInput = {
   createdById?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
+  regionId?: Prisma.SortOrder
 }
 
 export type MemberStatusLogMinOrderByAggregateInput = {
@@ -431,6 +454,7 @@ export type MemberStatusLogMinOrderByAggregateInput = {
   createdById?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
+  regionId?: Prisma.SortOrder
 }
 
 export type MemberStatusLogCreateNestedManyWithoutCreatedByInput = {
@@ -601,6 +625,48 @@ export type MemberStatusLogUncheckedUpdateManyWithoutStatusNestedInput = {
   deleteMany?: Prisma.MemberStatusLogScalarWhereInput | Prisma.MemberStatusLogScalarWhereInput[]
 }
 
+export type MemberStatusLogCreateNestedManyWithoutRegionInput = {
+  create?: Prisma.XOR<Prisma.MemberStatusLogCreateWithoutRegionInput, Prisma.MemberStatusLogUncheckedCreateWithoutRegionInput> | Prisma.MemberStatusLogCreateWithoutRegionInput[] | Prisma.MemberStatusLogUncheckedCreateWithoutRegionInput[]
+  connectOrCreate?: Prisma.MemberStatusLogCreateOrConnectWithoutRegionInput | Prisma.MemberStatusLogCreateOrConnectWithoutRegionInput[]
+  createMany?: Prisma.MemberStatusLogCreateManyRegionInputEnvelope
+  connect?: Prisma.MemberStatusLogWhereUniqueInput | Prisma.MemberStatusLogWhereUniqueInput[]
+}
+
+export type MemberStatusLogUncheckedCreateNestedManyWithoutRegionInput = {
+  create?: Prisma.XOR<Prisma.MemberStatusLogCreateWithoutRegionInput, Prisma.MemberStatusLogUncheckedCreateWithoutRegionInput> | Prisma.MemberStatusLogCreateWithoutRegionInput[] | Prisma.MemberStatusLogUncheckedCreateWithoutRegionInput[]
+  connectOrCreate?: Prisma.MemberStatusLogCreateOrConnectWithoutRegionInput | Prisma.MemberStatusLogCreateOrConnectWithoutRegionInput[]
+  createMany?: Prisma.MemberStatusLogCreateManyRegionInputEnvelope
+  connect?: Prisma.MemberStatusLogWhereUniqueInput | Prisma.MemberStatusLogWhereUniqueInput[]
+}
+
+export type MemberStatusLogUpdateManyWithoutRegionNestedInput = {
+  create?: Prisma.XOR<Prisma.MemberStatusLogCreateWithoutRegionInput, Prisma.MemberStatusLogUncheckedCreateWithoutRegionInput> | Prisma.MemberStatusLogCreateWithoutRegionInput[] | Prisma.MemberStatusLogUncheckedCreateWithoutRegionInput[]
+  connectOrCreate?: Prisma.MemberStatusLogCreateOrConnectWithoutRegionInput | Prisma.MemberStatusLogCreateOrConnectWithoutRegionInput[]
+  upsert?: Prisma.MemberStatusLogUpsertWithWhereUniqueWithoutRegionInput | Prisma.MemberStatusLogUpsertWithWhereUniqueWithoutRegionInput[]
+  createMany?: Prisma.MemberStatusLogCreateManyRegionInputEnvelope
+  set?: Prisma.MemberStatusLogWhereUniqueInput | Prisma.MemberStatusLogWhereUniqueInput[]
+  disconnect?: Prisma.MemberStatusLogWhereUniqueInput | Prisma.MemberStatusLogWhereUniqueInput[]
+  delete?: Prisma.MemberStatusLogWhereUniqueInput | Prisma.MemberStatusLogWhereUniqueInput[]
+  connect?: Prisma.MemberStatusLogWhereUniqueInput | Prisma.MemberStatusLogWhereUniqueInput[]
+  update?: Prisma.MemberStatusLogUpdateWithWhereUniqueWithoutRegionInput | Prisma.MemberStatusLogUpdateWithWhereUniqueWithoutRegionInput[]
+  updateMany?: Prisma.MemberStatusLogUpdateManyWithWhereWithoutRegionInput | Prisma.MemberStatusLogUpdateManyWithWhereWithoutRegionInput[]
+  deleteMany?: Prisma.MemberStatusLogScalarWhereInput | Prisma.MemberStatusLogScalarWhereInput[]
+}
+
+export type MemberStatusLogUncheckedUpdateManyWithoutRegionNestedInput = {
+  create?: Prisma.XOR<Prisma.MemberStatusLogCreateWithoutRegionInput, Prisma.MemberStatusLogUncheckedCreateWithoutRegionInput> | Prisma.MemberStatusLogCreateWithoutRegionInput[] | Prisma.MemberStatusLogUncheckedCreateWithoutRegionInput[]
+  connectOrCreate?: Prisma.MemberStatusLogCreateOrConnectWithoutRegionInput | Prisma.MemberStatusLogCreateOrConnectWithoutRegionInput[]
+  upsert?: Prisma.MemberStatusLogUpsertWithWhereUniqueWithoutRegionInput | Prisma.MemberStatusLogUpsertWithWhereUniqueWithoutRegionInput[]
+  createMany?: Prisma.MemberStatusLogCreateManyRegionInputEnvelope
+  set?: Prisma.MemberStatusLogWhereUniqueInput | Prisma.MemberStatusLogWhereUniqueInput[]
+  disconnect?: Prisma.MemberStatusLogWhereUniqueInput | Prisma.MemberStatusLogWhereUniqueInput[]
+  delete?: Prisma.MemberStatusLogWhereUniqueInput | Prisma.MemberStatusLogWhereUniqueInput[]
+  connect?: Prisma.MemberStatusLogWhereUniqueInput | Prisma.MemberStatusLogWhereUniqueInput[]
+  update?: Prisma.MemberStatusLogUpdateWithWhereUniqueWithoutRegionInput | Prisma.MemberStatusLogUpdateWithWhereUniqueWithoutRegionInput[]
+  updateMany?: Prisma.MemberStatusLogUpdateManyWithWhereWithoutRegionInput | Prisma.MemberStatusLogUpdateManyWithWhereWithoutRegionInput[]
+  deleteMany?: Prisma.MemberStatusLogScalarWhereInput | Prisma.MemberStatusLogScalarWhereInput[]
+}
+
 export type MemberStatusLogCreateWithoutCreatedByInput = {
   id?: string
   startedAt?: Date | string
@@ -609,6 +675,7 @@ export type MemberStatusLogCreateWithoutCreatedByInput = {
   createdAt?: Date | string
   updatedAt?: Date | string | null
   updatedBy?: Prisma.UserCreateNestedOneWithoutMemberStatusChangesInput
+  region?: Prisma.RegionCreateNestedOneWithoutMemberStatusLogsInput
   user: Prisma.UserCreateNestedOneWithoutMemberStatusLogsInput
   status?: Prisma.MemberStatusCreateNestedOneWithoutMemberStatusLogsInput
 }
@@ -623,6 +690,7 @@ export type MemberStatusLogUncheckedCreateWithoutCreatedByInput = {
   updatedById?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string | null
+  regionId?: string | null
 }
 
 export type MemberStatusLogCreateOrConnectWithoutCreatedByInput = {
@@ -644,6 +712,7 @@ export type MemberStatusLogCreateWithoutUserInput = {
   updatedAt?: Date | string | null
   updatedBy?: Prisma.UserCreateNestedOneWithoutMemberStatusChangesInput
   createdBy?: Prisma.UserCreateNestedOneWithoutMemberStatusCreatedInput
+  region?: Prisma.RegionCreateNestedOneWithoutMemberStatusLogsInput
   status?: Prisma.MemberStatusCreateNestedOneWithoutMemberStatusLogsInput
 }
 
@@ -657,6 +726,7 @@ export type MemberStatusLogUncheckedCreateWithoutUserInput = {
   createdById?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string | null
+  regionId?: string | null
 }
 
 export type MemberStatusLogCreateOrConnectWithoutUserInput = {
@@ -677,6 +747,7 @@ export type MemberStatusLogCreateWithoutUpdatedByInput = {
   createdAt?: Date | string
   updatedAt?: Date | string | null
   createdBy?: Prisma.UserCreateNestedOneWithoutMemberStatusCreatedInput
+  region?: Prisma.RegionCreateNestedOneWithoutMemberStatusLogsInput
   user: Prisma.UserCreateNestedOneWithoutMemberStatusLogsInput
   status?: Prisma.MemberStatusCreateNestedOneWithoutMemberStatusLogsInput
 }
@@ -691,6 +762,7 @@ export type MemberStatusLogUncheckedCreateWithoutUpdatedByInput = {
   createdById?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string | null
+  regionId?: string | null
 }
 
 export type MemberStatusLogCreateOrConnectWithoutUpdatedByInput = {
@@ -733,6 +805,7 @@ export type MemberStatusLogScalarWhereInput = {
   createdById?: Prisma.StringNullableFilter<"MemberStatusLog"> | string | null
   createdAt?: Prisma.DateTimeFilter<"MemberStatusLog"> | Date | string
   updatedAt?: Prisma.DateTimeNullableFilter<"MemberStatusLog"> | Date | string | null
+  regionId?: Prisma.StringNullableFilter<"MemberStatusLog"> | string | null
 }
 
 export type MemberStatusLogUpsertWithWhereUniqueWithoutUserInput = {
@@ -776,6 +849,7 @@ export type MemberStatusLogCreateWithoutStatusInput = {
   updatedAt?: Date | string | null
   updatedBy?: Prisma.UserCreateNestedOneWithoutMemberStatusChangesInput
   createdBy?: Prisma.UserCreateNestedOneWithoutMemberStatusCreatedInput
+  region?: Prisma.RegionCreateNestedOneWithoutMemberStatusLogsInput
   user: Prisma.UserCreateNestedOneWithoutMemberStatusLogsInput
 }
 
@@ -789,6 +863,7 @@ export type MemberStatusLogUncheckedCreateWithoutStatusInput = {
   createdById?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string | null
+  regionId?: string | null
 }
 
 export type MemberStatusLogCreateOrConnectWithoutStatusInput = {
@@ -817,6 +892,58 @@ export type MemberStatusLogUpdateManyWithWhereWithoutStatusInput = {
   data: Prisma.XOR<Prisma.MemberStatusLogUpdateManyMutationInput, Prisma.MemberStatusLogUncheckedUpdateManyWithoutStatusInput>
 }
 
+export type MemberStatusLogCreateWithoutRegionInput = {
+  id?: string
+  startedAt?: Date | string
+  endedAt?: Date | string | null
+  ended?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string | null
+  updatedBy?: Prisma.UserCreateNestedOneWithoutMemberStatusChangesInput
+  createdBy?: Prisma.UserCreateNestedOneWithoutMemberStatusCreatedInput
+  user: Prisma.UserCreateNestedOneWithoutMemberStatusLogsInput
+  status?: Prisma.MemberStatusCreateNestedOneWithoutMemberStatusLogsInput
+}
+
+export type MemberStatusLogUncheckedCreateWithoutRegionInput = {
+  id?: string
+  userId: string
+  memberStatusId?: string | null
+  startedAt?: Date | string
+  endedAt?: Date | string | null
+  ended?: boolean
+  updatedById?: string | null
+  createdById?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string | null
+}
+
+export type MemberStatusLogCreateOrConnectWithoutRegionInput = {
+  where: Prisma.MemberStatusLogWhereUniqueInput
+  create: Prisma.XOR<Prisma.MemberStatusLogCreateWithoutRegionInput, Prisma.MemberStatusLogUncheckedCreateWithoutRegionInput>
+}
+
+export type MemberStatusLogCreateManyRegionInputEnvelope = {
+  data: Prisma.MemberStatusLogCreateManyRegionInput | Prisma.MemberStatusLogCreateManyRegionInput[]
+  skipDuplicates?: boolean
+}
+
+export type MemberStatusLogUpsertWithWhereUniqueWithoutRegionInput = {
+  where: Prisma.MemberStatusLogWhereUniqueInput
+  update: Prisma.XOR<Prisma.MemberStatusLogUpdateWithoutRegionInput, Prisma.MemberStatusLogUncheckedUpdateWithoutRegionInput>
+  create: Prisma.XOR<Prisma.MemberStatusLogCreateWithoutRegionInput, Prisma.MemberStatusLogUncheckedCreateWithoutRegionInput>
+}
+
+export type MemberStatusLogUpdateWithWhereUniqueWithoutRegionInput = {
+  where: Prisma.MemberStatusLogWhereUniqueInput
+  data: Prisma.XOR<Prisma.MemberStatusLogUpdateWithoutRegionInput, Prisma.MemberStatusLogUncheckedUpdateWithoutRegionInput>
+}
+
+export type MemberStatusLogUpdateManyWithWhereWithoutRegionInput = {
+  where: Prisma.MemberStatusLogScalarWhereInput
+  data: Prisma.XOR<Prisma.MemberStatusLogUpdateManyMutationInput, Prisma.MemberStatusLogUncheckedUpdateManyWithoutRegionInput>
+}
+
 export type MemberStatusLogCreateManyCreatedByInput = {
   id?: string
   userId: string
@@ -827,6 +954,7 @@ export type MemberStatusLogCreateManyCreatedByInput = {
   updatedById?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string | null
+  regionId?: string | null
 }
 
 export type MemberStatusLogCreateManyUserInput = {
@@ -839,6 +967,7 @@ export type MemberStatusLogCreateManyUserInput = {
   createdById?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string | null
+  regionId?: string | null
 }
 
 export type MemberStatusLogCreateManyUpdatedByInput = {
@@ -851,6 +980,7 @@ export type MemberStatusLogCreateManyUpdatedByInput = {
   createdById?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string | null
+  regionId?: string | null
 }
 
 export type MemberStatusLogUpdateWithoutCreatedByInput = {
@@ -861,6 +991,7 @@ export type MemberStatusLogUpdateWithoutCreatedByInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   updatedBy?: Prisma.UserUpdateOneWithoutMemberStatusChangesNestedInput
+  region?: Prisma.RegionUpdateOneWithoutMemberStatusLogsNestedInput
   user?: Prisma.UserUpdateOneRequiredWithoutMemberStatusLogsNestedInput
   status?: Prisma.MemberStatusUpdateOneWithoutMemberStatusLogsNestedInput
 }
@@ -875,6 +1006,7 @@ export type MemberStatusLogUncheckedUpdateWithoutCreatedByInput = {
   updatedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  regionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 export type MemberStatusLogUncheckedUpdateManyWithoutCreatedByInput = {
@@ -887,6 +1019,7 @@ export type MemberStatusLogUncheckedUpdateManyWithoutCreatedByInput = {
   updatedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  regionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 export type MemberStatusLogUpdateWithoutUserInput = {
@@ -898,6 +1031,7 @@ export type MemberStatusLogUpdateWithoutUserInput = {
   updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   updatedBy?: Prisma.UserUpdateOneWithoutMemberStatusChangesNestedInput
   createdBy?: Prisma.UserUpdateOneWithoutMemberStatusCreatedNestedInput
+  region?: Prisma.RegionUpdateOneWithoutMemberStatusLogsNestedInput
   status?: Prisma.MemberStatusUpdateOneWithoutMemberStatusLogsNestedInput
 }
 
@@ -911,6 +1045,7 @@ export type MemberStatusLogUncheckedUpdateWithoutUserInput = {
   createdById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  regionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 export type MemberStatusLogUncheckedUpdateManyWithoutUserInput = {
@@ -923,6 +1058,7 @@ export type MemberStatusLogUncheckedUpdateManyWithoutUserInput = {
   createdById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  regionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 export type MemberStatusLogUpdateWithoutUpdatedByInput = {
@@ -933,6 +1069,7 @@ export type MemberStatusLogUpdateWithoutUpdatedByInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdBy?: Prisma.UserUpdateOneWithoutMemberStatusCreatedNestedInput
+  region?: Prisma.RegionUpdateOneWithoutMemberStatusLogsNestedInput
   user?: Prisma.UserUpdateOneRequiredWithoutMemberStatusLogsNestedInput
   status?: Prisma.MemberStatusUpdateOneWithoutMemberStatusLogsNestedInput
 }
@@ -947,6 +1084,7 @@ export type MemberStatusLogUncheckedUpdateWithoutUpdatedByInput = {
   createdById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  regionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 export type MemberStatusLogUncheckedUpdateManyWithoutUpdatedByInput = {
@@ -959,6 +1097,7 @@ export type MemberStatusLogUncheckedUpdateManyWithoutUpdatedByInput = {
   createdById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  regionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 export type MemberStatusLogCreateManyStatusInput = {
@@ -971,6 +1110,7 @@ export type MemberStatusLogCreateManyStatusInput = {
   createdById?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string | null
+  regionId?: string | null
 }
 
 export type MemberStatusLogUpdateWithoutStatusInput = {
@@ -982,6 +1122,7 @@ export type MemberStatusLogUpdateWithoutStatusInput = {
   updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   updatedBy?: Prisma.UserUpdateOneWithoutMemberStatusChangesNestedInput
   createdBy?: Prisma.UserUpdateOneWithoutMemberStatusCreatedNestedInput
+  region?: Prisma.RegionUpdateOneWithoutMemberStatusLogsNestedInput
   user?: Prisma.UserUpdateOneRequiredWithoutMemberStatusLogsNestedInput
 }
 
@@ -995,11 +1136,65 @@ export type MemberStatusLogUncheckedUpdateWithoutStatusInput = {
   createdById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  regionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 export type MemberStatusLogUncheckedUpdateManyWithoutStatusInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   userId?: Prisma.StringFieldUpdateOperationsInput | string
+  startedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  endedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  ended?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  updatedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  regionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+}
+
+export type MemberStatusLogCreateManyRegionInput = {
+  id?: string
+  userId: string
+  memberStatusId?: string | null
+  startedAt?: Date | string
+  endedAt?: Date | string | null
+  ended?: boolean
+  updatedById?: string | null
+  createdById?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string | null
+}
+
+export type MemberStatusLogUpdateWithoutRegionInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  startedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  endedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  ended?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  updatedBy?: Prisma.UserUpdateOneWithoutMemberStatusChangesNestedInput
+  createdBy?: Prisma.UserUpdateOneWithoutMemberStatusCreatedNestedInput
+  user?: Prisma.UserUpdateOneRequiredWithoutMemberStatusLogsNestedInput
+  status?: Prisma.MemberStatusUpdateOneWithoutMemberStatusLogsNestedInput
+}
+
+export type MemberStatusLogUncheckedUpdateWithoutRegionInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  userId?: Prisma.StringFieldUpdateOperationsInput | string
+  memberStatusId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  startedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  endedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  ended?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  updatedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+}
+
+export type MemberStatusLogUncheckedUpdateManyWithoutRegionInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  userId?: Prisma.StringFieldUpdateOperationsInput | string
+  memberStatusId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   startedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   endedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   ended?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -1022,8 +1217,10 @@ export type MemberStatusLogSelect<ExtArgs extends runtime.Types.Extensions.Inter
   createdById?: boolean
   createdAt?: boolean
   updatedAt?: boolean
+  regionId?: boolean
   updatedBy?: boolean | Prisma.MemberStatusLog$updatedByArgs<ExtArgs>
   createdBy?: boolean | Prisma.MemberStatusLog$createdByArgs<ExtArgs>
+  region?: boolean | Prisma.MemberStatusLog$regionArgs<ExtArgs>
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   status?: boolean | Prisma.MemberStatusLog$statusArgs<ExtArgs>
 }, ExtArgs["result"]["memberStatusLog"]>
@@ -1039,8 +1236,10 @@ export type MemberStatusLogSelectCreateManyAndReturn<ExtArgs extends runtime.Typ
   createdById?: boolean
   createdAt?: boolean
   updatedAt?: boolean
+  regionId?: boolean
   updatedBy?: boolean | Prisma.MemberStatusLog$updatedByArgs<ExtArgs>
   createdBy?: boolean | Prisma.MemberStatusLog$createdByArgs<ExtArgs>
+  region?: boolean | Prisma.MemberStatusLog$regionArgs<ExtArgs>
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   status?: boolean | Prisma.MemberStatusLog$statusArgs<ExtArgs>
 }, ExtArgs["result"]["memberStatusLog"]>
@@ -1056,8 +1255,10 @@ export type MemberStatusLogSelectUpdateManyAndReturn<ExtArgs extends runtime.Typ
   createdById?: boolean
   createdAt?: boolean
   updatedAt?: boolean
+  regionId?: boolean
   updatedBy?: boolean | Prisma.MemberStatusLog$updatedByArgs<ExtArgs>
   createdBy?: boolean | Prisma.MemberStatusLog$createdByArgs<ExtArgs>
+  region?: boolean | Prisma.MemberStatusLog$regionArgs<ExtArgs>
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   status?: boolean | Prisma.MemberStatusLog$statusArgs<ExtArgs>
 }, ExtArgs["result"]["memberStatusLog"]>
@@ -1073,24 +1274,28 @@ export type MemberStatusLogSelectScalar = {
   createdById?: boolean
   createdAt?: boolean
   updatedAt?: boolean
+  regionId?: boolean
 }
 
-export type MemberStatusLogOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "userId" | "memberStatusId" | "startedAt" | "endedAt" | "ended" | "updatedById" | "createdById" | "createdAt" | "updatedAt", ExtArgs["result"]["memberStatusLog"]>
+export type MemberStatusLogOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "userId" | "memberStatusId" | "startedAt" | "endedAt" | "ended" | "updatedById" | "createdById" | "createdAt" | "updatedAt" | "regionId", ExtArgs["result"]["memberStatusLog"]>
 export type MemberStatusLogInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   updatedBy?: boolean | Prisma.MemberStatusLog$updatedByArgs<ExtArgs>
   createdBy?: boolean | Prisma.MemberStatusLog$createdByArgs<ExtArgs>
+  region?: boolean | Prisma.MemberStatusLog$regionArgs<ExtArgs>
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   status?: boolean | Prisma.MemberStatusLog$statusArgs<ExtArgs>
 }
 export type MemberStatusLogIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   updatedBy?: boolean | Prisma.MemberStatusLog$updatedByArgs<ExtArgs>
   createdBy?: boolean | Prisma.MemberStatusLog$createdByArgs<ExtArgs>
+  region?: boolean | Prisma.MemberStatusLog$regionArgs<ExtArgs>
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   status?: boolean | Prisma.MemberStatusLog$statusArgs<ExtArgs>
 }
 export type MemberStatusLogIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   updatedBy?: boolean | Prisma.MemberStatusLog$updatedByArgs<ExtArgs>
   createdBy?: boolean | Prisma.MemberStatusLog$createdByArgs<ExtArgs>
+  region?: boolean | Prisma.MemberStatusLog$regionArgs<ExtArgs>
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   status?: boolean | Prisma.MemberStatusLog$statusArgs<ExtArgs>
 }
@@ -1100,6 +1305,7 @@ export type $MemberStatusLogPayload<ExtArgs extends runtime.Types.Extensions.Int
   objects: {
     updatedBy: Prisma.$UserPayload<ExtArgs> | null
     createdBy: Prisma.$UserPayload<ExtArgs> | null
+    region: Prisma.$RegionPayload<ExtArgs> | null
     user: Prisma.$UserPayload<ExtArgs>
     status: Prisma.$MemberStatusPayload<ExtArgs> | null
   }
@@ -1114,6 +1320,7 @@ export type $MemberStatusLogPayload<ExtArgs extends runtime.Types.Extensions.Int
     createdById: string | null
     createdAt: Date
     updatedAt: Date | null
+    regionId: string | null
   }, ExtArgs["result"]["memberStatusLog"]>
   composites: {}
 }
@@ -1510,6 +1717,7 @@ export interface Prisma__MemberStatusLogClient<T, Null = never, ExtArgs extends 
   readonly [Symbol.toStringTag]: "PrismaPromise"
   updatedBy<T extends Prisma.MemberStatusLog$updatedByArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.MemberStatusLog$updatedByArgs<ExtArgs>>): Prisma.Prisma__UserClient<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   createdBy<T extends Prisma.MemberStatusLog$createdByArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.MemberStatusLog$createdByArgs<ExtArgs>>): Prisma.Prisma__UserClient<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+  region<T extends Prisma.MemberStatusLog$regionArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.MemberStatusLog$regionArgs<ExtArgs>>): Prisma.Prisma__RegionClient<runtime.Types.Result.GetResult<Prisma.$RegionPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   user<T extends Prisma.UserDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UserDefaultArgs<ExtArgs>>): Prisma.Prisma__UserClient<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   status<T extends Prisma.MemberStatusLog$statusArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.MemberStatusLog$statusArgs<ExtArgs>>): Prisma.Prisma__MemberStatusClient<runtime.Types.Result.GetResult<Prisma.$MemberStatusPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   /**
@@ -1551,6 +1759,7 @@ export interface MemberStatusLogFieldRefs {
   readonly createdById: Prisma.FieldRef<"MemberStatusLog", 'String'>
   readonly createdAt: Prisma.FieldRef<"MemberStatusLog", 'DateTime'>
   readonly updatedAt: Prisma.FieldRef<"MemberStatusLog", 'DateTime'>
+  readonly regionId: Prisma.FieldRef<"MemberStatusLog", 'String'>
 }
     
 
@@ -1982,6 +2191,25 @@ export type MemberStatusLog$createdByArgs<ExtArgs extends runtime.Types.Extensio
    */
   include?: Prisma.UserInclude<ExtArgs> | null
   where?: Prisma.UserWhereInput
+}
+
+/**
+ * MemberStatusLog.region
+ */
+export type MemberStatusLog$regionArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Region
+   */
+  select?: Prisma.RegionSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Region
+   */
+  omit?: Prisma.RegionOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.RegionInclude<ExtArgs> | null
+  where?: Prisma.RegionWhereInput
 }
 
 /**

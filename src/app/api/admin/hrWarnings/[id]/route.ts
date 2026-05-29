@@ -19,6 +19,7 @@ export const GET = async (_req: NextRequest, context: Context) => {
             regionId: thisUser.user?.regionId,
           },
         },
+        regionId: thisUser.user.regionId,
       },
       include: {
         assignee: { select: { name: true } },
@@ -29,9 +30,7 @@ export const GET = async (_req: NextRequest, context: Context) => {
     });
 
     if (!data) {
-      return NextResponse.json({data,
-        message: "HR Warning not found!",
-      });
+      return NextResponse.json({ data, message: "HR Warning not found!" });
     }
 
     return NextResponse.json(data, { status: 200 });
@@ -65,7 +64,7 @@ export const PUT = async (req: NextRequest, context: Context) => {
 
     return NextResponse.json(
       { message: "HR Warning Updated" },
-      { status: 200 }
+      { status: 200 },
     );
   } catch (error) {
     const { message, status } = handleError(error);
@@ -84,6 +83,7 @@ export const DELETE = async (_req: NextRequest, context: Context) => {
         assignee: {
           ownAllowance: { regionId: thisUser.user?.regionId },
         },
+        regionId: thisUser.user.regionId,
       },
     });
 

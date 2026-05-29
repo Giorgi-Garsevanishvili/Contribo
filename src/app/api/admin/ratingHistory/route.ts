@@ -11,11 +11,13 @@ export const GET = async (_req: NextRequest) => {
         user: {
           ownAllowance: { regionId: thisUser.user?.regionId },
         },
+        regionId: thisUser.user.regionId,
       },
     });
 
     if (!data || data.length === 0) {
-      return NextResponse.json({data,
+      return NextResponse.json({
+        data,
         message: "Rating History in your region not found!",
       });
     }
@@ -36,6 +38,7 @@ export const DELETE = async (_req: NextRequest) => {
         user: {
           ownAllowance: { regionId: thisUser.user?.regionId },
         },
+        regionId: thisUser.user.regionId,
       },
     });
 

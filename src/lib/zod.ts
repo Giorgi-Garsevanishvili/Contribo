@@ -101,6 +101,7 @@ export const RatingCreate = z
     action: z.enum(RatingAction),
     reason: z.string().optional(),
     createdById: z.string(),
+    regionId: z.string(),
   })
   .strict();
 
@@ -122,6 +123,7 @@ export const PositionHistoryCreate = z
     endedAt: z.coerce.date().optional().nullable(),
     ended: z.boolean().optional(),
     createdById: z.string(),
+    regionId: z.string(),
   })
   .strict()
   .superRefine((data, ctx) => {
@@ -179,6 +181,7 @@ export const HrWarningCreate = z
     comment: z.string().optional(),
     status: z.enum(HrWarningStatus).default("ACTIVE"),
     createdById: z.string(),
+    regionId: z.string(),
   })
   .strict();
 
@@ -205,6 +208,7 @@ export const MemberStatusLogCreate = z
     endedAt: z.coerce.date().optional().nullable(),
     ended: z.boolean().optional(),
     createdById: z.string(),
+    regionId: z.string(),
   })
   .strict()
   .superRefine((data, ctx) => {

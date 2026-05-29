@@ -46,6 +46,7 @@ export const POST = async (req: NextRequest, context: Context) => {
       newValue,
       userId: id,
       createdById: thisUser.user.userId,
+      regionId: thisUser.user.regionId,
     };
 
     const body = RatingCreate.parse(jsonWithCreator);
@@ -106,7 +107,7 @@ export const POST = async (req: NextRequest, context: Context) => {
 
 export const GET = async (req: NextRequest, context: Context) => {
   try {
-    await requireRole("ADMIN");
+    const thisUser = await requireRole("ADMIN");
     const { id } = await context.params;
 
     if (!id) {
@@ -120,6 +121,7 @@ export const GET = async (req: NextRequest, context: Context) => {
 
     const whereClause: RatingHistoryWhereInput = {
       userId: id,
+      regionId: thisUser.user.regionId,
     };
 
     if (actionFilter) {
@@ -209,6 +211,7 @@ export const DELETE = async (_req: NextRequest, context: Context) => {
           ownAllowance: { regionId: thisUser.user?.regionId },
           id,
         },
+        regionId: thisUser.user.regionId,
       },
     });
 

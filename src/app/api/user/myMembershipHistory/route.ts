@@ -13,6 +13,7 @@ export const GET = async (_req: NextRequest) => {
         user: {
           ownAllowance: { regionId: thisUser.user?.regionId },
         },
+        regionId: thisUser.user.regionId,
       },
       select: {
         user: { select: { name: true } },

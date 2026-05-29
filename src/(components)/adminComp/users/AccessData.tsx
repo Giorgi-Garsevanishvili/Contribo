@@ -64,10 +64,10 @@ function AccessData({ id, refetchKey }: { id: string; refetchKey: boolean }) {
                   {data?.roles.map((role) => role.role.name).join(", ")}
                 </h2>
                 <h2>
-                  <strong>Region:</strong> {data?.region.name}
+                  <strong>Region:</strong> {data?.region?.name || "No Region Specified"}
                 </h2>
                 <h2>
-                  <strong>Region Status:</strong> {data?.region.status}
+                  <strong>Region Status:</strong> {data?.region?.status || "No Region Specified"}
                 </h2>
                 <h2>
                   <strong>Access Granted At:</strong>{" "}

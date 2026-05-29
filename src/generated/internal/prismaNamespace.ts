@@ -2376,7 +2376,8 @@ export const HrWarningScalarFieldEnum = {
   createdAt: 'createdAt',
   updatedAt: 'updatedAt',
   createdById: 'createdById',
-  updatedById: 'updatedById'
+  updatedById: 'updatedById',
+  regionId: 'regionId'
 } as const
 
 export type HrWarningScalarFieldEnum = (typeof HrWarningScalarFieldEnum)[keyof typeof HrWarningScalarFieldEnum]
@@ -2507,7 +2508,8 @@ export const RatingHistoryScalarFieldEnum = {
   createdById: 'createdById',
   updatedById: 'updatedById',
   createdAt: 'createdAt',
-  updatedAt: 'updatedAt'
+  updatedAt: 'updatedAt',
+  regionId: 'regionId'
 } as const
 
 export type RatingHistoryScalarFieldEnum = (typeof RatingHistoryScalarFieldEnum)[keyof typeof RatingHistoryScalarFieldEnum]
@@ -2535,7 +2537,8 @@ export const PositionHistoryScalarFieldEnum = {
   updatedById: 'updatedById',
   createdById: 'createdById',
   createdAt: 'createdAt',
-  updatedAt: 'updatedAt'
+  updatedAt: 'updatedAt',
+  regionId: 'regionId'
 } as const
 
 export type PositionHistoryScalarFieldEnum = (typeof PositionHistoryScalarFieldEnum)[keyof typeof PositionHistoryScalarFieldEnum]
@@ -2562,7 +2565,8 @@ export const MemberStatusLogScalarFieldEnum = {
   updatedById: 'updatedById',
   createdById: 'createdById',
   createdAt: 'createdAt',
-  updatedAt: 'updatedAt'
+  updatedAt: 'updatedAt',
+  regionId: 'regionId'
 } as const
 
 export type MemberStatusLogScalarFieldEnum = (typeof MemberStatusLogScalarFieldEnum)[keyof typeof MemberStatusLogScalarFieldEnum]

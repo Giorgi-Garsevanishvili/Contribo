@@ -67,6 +67,7 @@ export const GET = async (req: NextRequest) => {
           regionId: thisUser.user?.regionId,
         },
       },
+      regionId: thisUser.user.regionId,
     };
 
     if (
@@ -157,6 +158,7 @@ export const DELETE = async (_req: NextRequest) => {
         assignee: {
           ownAllowance: { regionId: thisUser.user?.regionId },
         },
+        regionId: thisUser.user.regionId,
       },
     });
 

@@ -21,6 +21,7 @@ export const GET = async (_req: NextRequest, context: Context) => {
         user: {
           ownAllowance: { regionId: thisUser.user?.regionId },
         },
+        regionId: thisUser.user.regionId,
       },
       select: {
         user: { select: { name: true } },
@@ -70,6 +71,7 @@ export const POST = async (req: NextRequest, context: Context) => {
       ...json,
       userId: id,
       createdById: thisUser.user.userId,
+      regionId: thisUser.user.regionId,
     };
 
     const body = MemberStatusLogCreate.parse(jsonWithCreator);
@@ -118,6 +120,7 @@ export const DELETE = async (_req: NextRequest, context: Context) => {
           ownAllowance: { regionId: thisUser.user?.regionId },
           id,
         },
+        regionId: thisUser.user.regionId,
       },
     });
 

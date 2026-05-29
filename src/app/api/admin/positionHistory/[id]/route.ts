@@ -21,6 +21,7 @@ export const GET = async (_req: NextRequest, context: Context) => {
         user: {
           ownAllowance: { regionId: thisUser.user?.regionId },
         },
+        regionId: thisUser.user.regionId,
       },
       include: {
         user: { select: { name: true } },
@@ -89,7 +90,7 @@ export const PUT = async (req: NextRequest, context: Context) => {
 
 export const DELETE = async (_req: NextRequest, context: Context) => {
   try {
-    await requireRole("ADMIN");
+    const thisUser = await requireRole("ADMIN");
     const { id } = await context.params;
 
     if (!id) {
@@ -97,7 +98,7 @@ export const DELETE = async (_req: NextRequest, context: Context) => {
     }
 
     const deleted = await prisma.positionHistory.delete({
-      where: { id },
+      where: { id, regionId: thisUser.user.regionId },
     });
 
     if (!deleted) {

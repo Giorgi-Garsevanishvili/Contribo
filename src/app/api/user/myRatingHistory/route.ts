@@ -1,8 +1,8 @@
 import { RatingAction } from "@/generated/enums";
 import { RatingHistoryWhereInput } from "@/generated/models";
 import { handleError } from "@/lib/errors/handleErrors";
-import { requireRole } from "@/lib/guards";
 import prisma from "@/lib/prisma";
+import { requireRole } from "@/lib/serverAuth";
 import { NextRequest, NextResponse } from "next/server";
 
 type PaginationMeta = {
@@ -32,6 +32,7 @@ export const GET = async (req: NextRequest) => {
 
     const whereClause: RatingHistoryWhereInput = {
       userId: thisUser.user.userId!,
+      regionId: thisUser.user.regionId,
     };
 
     if (monthLimitFilter) {

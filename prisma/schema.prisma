@@ -137,8 +137,11 @@ model HrWarning {
   updatedAt   DateTime?       @updatedAt
   createdById String?
   updatedById String?
-  updatedBy   User?           @relation("UpdatedHrWarnings", fields: [updatedById], references: [id], onDelete: SetNull)
-  createdBy   User?           @relation("CreatedHrWarnings", fields: [createdById], references: [id], onDelete: SetNull)
+  regionId    String?
+
+  region    Region? @relation(fields: [regionId], references: [id], onDelete: Cascade)
+  updatedBy User?   @relation("UpdatedHrWarnings", fields: [updatedById], references: [id], onDelete: SetNull)
+  createdBy User?   @relation("CreatedHrWarnings", fields: [createdById], references: [id], onDelete: SetNull)
 }
 
 model HrWarningType {
@@ -327,6 +330,9 @@ model RatingHistory {
   updatedById String?
   createdAt   DateTime     @default(now())
   updatedAt   DateTime?    @updatedAt
+  regionId    String?
+
+  region Region? @relation(fields: [regionId], references: [id], onDelete: Cascade)
 
   user      User  @relation("UserRating", fields: [userId], references: [id], onDelete: Cascade)
   createdBy User? @relation("CreatedRatingBy", fields: [createdById], references: [id], onDelete: SetNull)
@@ -361,6 +367,10 @@ model PositionHistory {
   createdAt DateTime  @default(now())
   updatedAt DateTime? @updatedAt
 
+  regionId String?
+
+  region Region? @relation(fields: [regionId], references: [id], onDelete: Cascade)
+
   user     User      @relation(fields: [userId], references: [id], onDelete: Cascade)
   position Position? @relation(fields: [positionId], references: [id], onDelete: SetNull)
 
@@ -392,6 +402,9 @@ model MemberStatusLog {
 
   createdAt DateTime  @default(now())
   updatedAt DateTime? @updatedAt
+  regionId  String?
+
+  region Region? @relation(fields: [regionId], references: [id], onDelete: Cascade)
 
   user   User          @relation(fields: [userId], references: [id], onDelete: Cascade)
   status MemberStatus? @relation(fields: [memberStatusId], references: [id], onDelete: SetNull)
@@ -434,9 +447,13 @@ model Region {
   updatedAt   DateTime?    @updatedAt
   status      RegionStatus @default(PENDING)
 
-  allowedUsers AllowedUser[]
-  joinRequests JoinRequest[]
-  Event        Event[]       @relation("EventRegion")
+  allowedUsers      AllowedUser[]
+  joinRequests      JoinRequest[]
+  Event             Event[]           @relation("EventRegion")
+  hrWarnings        HrWarning[]
+  positionHistories PositionHistory[]
+  ratingHistories   RatingHistory[]
+  memberStatusLogs  MemberStatusLog[]
 }
 
 enum RegionStatus {

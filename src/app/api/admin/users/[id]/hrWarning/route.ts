@@ -27,6 +27,7 @@ export const POST = async (req: NextRequest, context: Context) => {
       ...json,
       createdById: thisUser.user.userId,
       assigneeId: id,
+      regionId: thisUser.user.regionId,
     };
     const body = HrWarningCreate.parse(jsonWithCreator);
 
@@ -70,6 +71,7 @@ export const GET = async (req: NextRequest, context: Context) => {
       assignee: {
         ownAllowance: { regionId: thisUser.user?.regionId },
       },
+      regionId: thisUser.user.regionId,
     };
 
     if (
@@ -156,6 +158,7 @@ export const DELETE = async (_req: NextRequest, context: Context) => {
           ownAllowance: { regionId: thisUser.user?.regionId },
           id,
         },
+        regionId: thisUser.user.regionId,
       },
     });
 

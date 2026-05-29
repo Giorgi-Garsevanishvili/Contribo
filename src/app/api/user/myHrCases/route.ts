@@ -77,6 +77,7 @@ export const GET = async (req: NextRequest) => {
           regionId: thisUser.user?.regionId,
         },
       },
+      regionId: thisUser.user.regionId,
     };
 
     if (monthLimitFilter) {

@@ -12,6 +12,7 @@ export const GET = async (_req: NextRequest) => {
         user: {
           ownAllowance: { regionId: thisUser.user?.regionId },
         },
+        regionId: thisUser.user.regionId,
       },
       select: {
         id: true,
@@ -22,12 +23,13 @@ export const GET = async (_req: NextRequest) => {
     });
 
     if (!data || data.length === 0) {
-      return NextResponse.json({data,
+      return NextResponse.json({
+        data,
         message: "Member Status Logs in your region not found!",
       });
     }
 
-    return NextResponse.json({data}, { status: 200 });
+    return NextResponse.json({ data }, { status: 200 });
   } catch (error) {
     const { message, status } = handleError(error);
     return NextResponse.json({ message }, { status });
@@ -43,9 +45,9 @@ export const DELETE = async (_req: NextRequest) => {
         user: {
           ownAllowance: { regionId: thisUser.user?.regionId },
         },
+        regionId: thisUser.user.regionId,
       },
     });
-    
 
     if (deleted.count === 0) {
       return NextResponse.json({ message: "Nothing Deleted!" });

@@ -36,6 +36,7 @@ export type PositionHistoryMinAggregateOutputType = {
   createdById: string | null
   createdAt: Date | null
   updatedAt: Date | null
+  regionId: string | null
 }
 
 export type PositionHistoryMaxAggregateOutputType = {
@@ -50,6 +51,7 @@ export type PositionHistoryMaxAggregateOutputType = {
   createdById: string | null
   createdAt: Date | null
   updatedAt: Date | null
+  regionId: string | null
 }
 
 export type PositionHistoryCountAggregateOutputType = {
@@ -64,6 +66,7 @@ export type PositionHistoryCountAggregateOutputType = {
   createdById: number
   createdAt: number
   updatedAt: number
+  regionId: number
   _all: number
 }
 
@@ -80,6 +83,7 @@ export type PositionHistoryMinAggregateInputType = {
   createdById?: true
   createdAt?: true
   updatedAt?: true
+  regionId?: true
 }
 
 export type PositionHistoryMaxAggregateInputType = {
@@ -94,6 +98,7 @@ export type PositionHistoryMaxAggregateInputType = {
   createdById?: true
   createdAt?: true
   updatedAt?: true
+  regionId?: true
 }
 
 export type PositionHistoryCountAggregateInputType = {
@@ -108,6 +113,7 @@ export type PositionHistoryCountAggregateInputType = {
   createdById?: true
   createdAt?: true
   updatedAt?: true
+  regionId?: true
   _all?: true
 }
 
@@ -195,6 +201,7 @@ export type PositionHistoryGroupByOutputType = {
   createdById: string | null
   createdAt: Date
   updatedAt: Date | null
+  regionId: string | null
   _count: PositionHistoryCountAggregateOutputType | null
   _min: PositionHistoryMinAggregateOutputType | null
   _max: PositionHistoryMaxAggregateOutputType | null
@@ -230,8 +237,10 @@ export type PositionHistoryWhereInput = {
   createdById?: Prisma.StringNullableFilter<"PositionHistory"> | string | null
   createdAt?: Prisma.DateTimeFilter<"PositionHistory"> | Date | string
   updatedAt?: Prisma.DateTimeNullableFilter<"PositionHistory"> | Date | string | null
+  regionId?: Prisma.StringNullableFilter<"PositionHistory"> | string | null
   updatedBy?: Prisma.XOR<Prisma.UserNullableScalarRelationFilter, Prisma.UserWhereInput> | null
   createdBy?: Prisma.XOR<Prisma.UserNullableScalarRelationFilter, Prisma.UserWhereInput> | null
+  region?: Prisma.XOR<Prisma.RegionNullableScalarRelationFilter, Prisma.RegionWhereInput> | null
   user?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
   position?: Prisma.XOR<Prisma.PositionNullableScalarRelationFilter, Prisma.PositionWhereInput> | null
 }
@@ -248,8 +257,10 @@ export type PositionHistoryOrderByWithRelationInput = {
   createdById?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrderInput | Prisma.SortOrder
+  regionId?: Prisma.SortOrderInput | Prisma.SortOrder
   updatedBy?: Prisma.UserOrderByWithRelationInput
   createdBy?: Prisma.UserOrderByWithRelationInput
+  region?: Prisma.RegionOrderByWithRelationInput
   user?: Prisma.UserOrderByWithRelationInput
   position?: Prisma.PositionOrderByWithRelationInput
 }
@@ -269,8 +280,10 @@ export type PositionHistoryWhereUniqueInput = Prisma.AtLeast<{
   createdById?: Prisma.StringNullableFilter<"PositionHistory"> | string | null
   createdAt?: Prisma.DateTimeFilter<"PositionHistory"> | Date | string
   updatedAt?: Prisma.DateTimeNullableFilter<"PositionHistory"> | Date | string | null
+  regionId?: Prisma.StringNullableFilter<"PositionHistory"> | string | null
   updatedBy?: Prisma.XOR<Prisma.UserNullableScalarRelationFilter, Prisma.UserWhereInput> | null
   createdBy?: Prisma.XOR<Prisma.UserNullableScalarRelationFilter, Prisma.UserWhereInput> | null
+  region?: Prisma.XOR<Prisma.RegionNullableScalarRelationFilter, Prisma.RegionWhereInput> | null
   user?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
   position?: Prisma.XOR<Prisma.PositionNullableScalarRelationFilter, Prisma.PositionWhereInput> | null
 }, "id">
@@ -287,6 +300,7 @@ export type PositionHistoryOrderByWithAggregationInput = {
   createdById?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrderInput | Prisma.SortOrder
+  regionId?: Prisma.SortOrderInput | Prisma.SortOrder
   _count?: Prisma.PositionHistoryCountOrderByAggregateInput
   _max?: Prisma.PositionHistoryMaxOrderByAggregateInput
   _min?: Prisma.PositionHistoryMinOrderByAggregateInput
@@ -307,6 +321,7 @@ export type PositionHistoryScalarWhereWithAggregatesInput = {
   createdById?: Prisma.StringNullableWithAggregatesFilter<"PositionHistory"> | string | null
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"PositionHistory"> | Date | string
   updatedAt?: Prisma.DateTimeNullableWithAggregatesFilter<"PositionHistory"> | Date | string | null
+  regionId?: Prisma.StringNullableWithAggregatesFilter<"PositionHistory"> | string | null
 }
 
 export type PositionHistoryCreateInput = {
@@ -319,6 +334,7 @@ export type PositionHistoryCreateInput = {
   updatedAt?: Date | string | null
   updatedBy?: Prisma.UserCreateNestedOneWithoutPositionChangesInput
   createdBy?: Prisma.UserCreateNestedOneWithoutPositionCreationsInput
+  region?: Prisma.RegionCreateNestedOneWithoutPositionHistoriesInput
   user: Prisma.UserCreateNestedOneWithoutPositionHistoriesInput
   position?: Prisma.PositionCreateNestedOneWithoutPositionHistoriesInput
 }
@@ -335,6 +351,7 @@ export type PositionHistoryUncheckedCreateInput = {
   createdById?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string | null
+  regionId?: string | null
 }
 
 export type PositionHistoryUpdateInput = {
@@ -347,6 +364,7 @@ export type PositionHistoryUpdateInput = {
   updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   updatedBy?: Prisma.UserUpdateOneWithoutPositionChangesNestedInput
   createdBy?: Prisma.UserUpdateOneWithoutPositionCreationsNestedInput
+  region?: Prisma.RegionUpdateOneWithoutPositionHistoriesNestedInput
   user?: Prisma.UserUpdateOneRequiredWithoutPositionHistoriesNestedInput
   position?: Prisma.PositionUpdateOneWithoutPositionHistoriesNestedInput
 }
@@ -363,6 +381,7 @@ export type PositionHistoryUncheckedUpdateInput = {
   createdById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  regionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 export type PositionHistoryCreateManyInput = {
@@ -377,6 +396,7 @@ export type PositionHistoryCreateManyInput = {
   createdById?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string | null
+  regionId?: string | null
 }
 
 export type PositionHistoryUpdateManyMutationInput = {
@@ -401,6 +421,7 @@ export type PositionHistoryUncheckedUpdateManyInput = {
   createdById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  regionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 export type PositionHistoryListRelationFilter = {
@@ -425,6 +446,7 @@ export type PositionHistoryCountOrderByAggregateInput = {
   createdById?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
+  regionId?: Prisma.SortOrder
 }
 
 export type PositionHistoryMaxOrderByAggregateInput = {
@@ -439,6 +461,7 @@ export type PositionHistoryMaxOrderByAggregateInput = {
   createdById?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
+  regionId?: Prisma.SortOrder
 }
 
 export type PositionHistoryMinOrderByAggregateInput = {
@@ -453,6 +476,7 @@ export type PositionHistoryMinOrderByAggregateInput = {
   createdById?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
+  regionId?: Prisma.SortOrder
 }
 
 export type PositionHistoryCreateNestedManyWithoutUpdatedByInput = {
@@ -623,6 +647,48 @@ export type PositionHistoryUncheckedUpdateManyWithoutPositionNestedInput = {
   deleteMany?: Prisma.PositionHistoryScalarWhereInput | Prisma.PositionHistoryScalarWhereInput[]
 }
 
+export type PositionHistoryCreateNestedManyWithoutRegionInput = {
+  create?: Prisma.XOR<Prisma.PositionHistoryCreateWithoutRegionInput, Prisma.PositionHistoryUncheckedCreateWithoutRegionInput> | Prisma.PositionHistoryCreateWithoutRegionInput[] | Prisma.PositionHistoryUncheckedCreateWithoutRegionInput[]
+  connectOrCreate?: Prisma.PositionHistoryCreateOrConnectWithoutRegionInput | Prisma.PositionHistoryCreateOrConnectWithoutRegionInput[]
+  createMany?: Prisma.PositionHistoryCreateManyRegionInputEnvelope
+  connect?: Prisma.PositionHistoryWhereUniqueInput | Prisma.PositionHistoryWhereUniqueInput[]
+}
+
+export type PositionHistoryUncheckedCreateNestedManyWithoutRegionInput = {
+  create?: Prisma.XOR<Prisma.PositionHistoryCreateWithoutRegionInput, Prisma.PositionHistoryUncheckedCreateWithoutRegionInput> | Prisma.PositionHistoryCreateWithoutRegionInput[] | Prisma.PositionHistoryUncheckedCreateWithoutRegionInput[]
+  connectOrCreate?: Prisma.PositionHistoryCreateOrConnectWithoutRegionInput | Prisma.PositionHistoryCreateOrConnectWithoutRegionInput[]
+  createMany?: Prisma.PositionHistoryCreateManyRegionInputEnvelope
+  connect?: Prisma.PositionHistoryWhereUniqueInput | Prisma.PositionHistoryWhereUniqueInput[]
+}
+
+export type PositionHistoryUpdateManyWithoutRegionNestedInput = {
+  create?: Prisma.XOR<Prisma.PositionHistoryCreateWithoutRegionInput, Prisma.PositionHistoryUncheckedCreateWithoutRegionInput> | Prisma.PositionHistoryCreateWithoutRegionInput[] | Prisma.PositionHistoryUncheckedCreateWithoutRegionInput[]
+  connectOrCreate?: Prisma.PositionHistoryCreateOrConnectWithoutRegionInput | Prisma.PositionHistoryCreateOrConnectWithoutRegionInput[]
+  upsert?: Prisma.PositionHistoryUpsertWithWhereUniqueWithoutRegionInput | Prisma.PositionHistoryUpsertWithWhereUniqueWithoutRegionInput[]
+  createMany?: Prisma.PositionHistoryCreateManyRegionInputEnvelope
+  set?: Prisma.PositionHistoryWhereUniqueInput | Prisma.PositionHistoryWhereUniqueInput[]
+  disconnect?: Prisma.PositionHistoryWhereUniqueInput | Prisma.PositionHistoryWhereUniqueInput[]
+  delete?: Prisma.PositionHistoryWhereUniqueInput | Prisma.PositionHistoryWhereUniqueInput[]
+  connect?: Prisma.PositionHistoryWhereUniqueInput | Prisma.PositionHistoryWhereUniqueInput[]
+  update?: Prisma.PositionHistoryUpdateWithWhereUniqueWithoutRegionInput | Prisma.PositionHistoryUpdateWithWhereUniqueWithoutRegionInput[]
+  updateMany?: Prisma.PositionHistoryUpdateManyWithWhereWithoutRegionInput | Prisma.PositionHistoryUpdateManyWithWhereWithoutRegionInput[]
+  deleteMany?: Prisma.PositionHistoryScalarWhereInput | Prisma.PositionHistoryScalarWhereInput[]
+}
+
+export type PositionHistoryUncheckedUpdateManyWithoutRegionNestedInput = {
+  create?: Prisma.XOR<Prisma.PositionHistoryCreateWithoutRegionInput, Prisma.PositionHistoryUncheckedCreateWithoutRegionInput> | Prisma.PositionHistoryCreateWithoutRegionInput[] | Prisma.PositionHistoryUncheckedCreateWithoutRegionInput[]
+  connectOrCreate?: Prisma.PositionHistoryCreateOrConnectWithoutRegionInput | Prisma.PositionHistoryCreateOrConnectWithoutRegionInput[]
+  upsert?: Prisma.PositionHistoryUpsertWithWhereUniqueWithoutRegionInput | Prisma.PositionHistoryUpsertWithWhereUniqueWithoutRegionInput[]
+  createMany?: Prisma.PositionHistoryCreateManyRegionInputEnvelope
+  set?: Prisma.PositionHistoryWhereUniqueInput | Prisma.PositionHistoryWhereUniqueInput[]
+  disconnect?: Prisma.PositionHistoryWhereUniqueInput | Prisma.PositionHistoryWhereUniqueInput[]
+  delete?: Prisma.PositionHistoryWhereUniqueInput | Prisma.PositionHistoryWhereUniqueInput[]
+  connect?: Prisma.PositionHistoryWhereUniqueInput | Prisma.PositionHistoryWhereUniqueInput[]
+  update?: Prisma.PositionHistoryUpdateWithWhereUniqueWithoutRegionInput | Prisma.PositionHistoryUpdateWithWhereUniqueWithoutRegionInput[]
+  updateMany?: Prisma.PositionHistoryUpdateManyWithWhereWithoutRegionInput | Prisma.PositionHistoryUpdateManyWithWhereWithoutRegionInput[]
+  deleteMany?: Prisma.PositionHistoryScalarWhereInput | Prisma.PositionHistoryScalarWhereInput[]
+}
+
 export type PositionHistoryCreateWithoutUpdatedByInput = {
   id?: string
   startedAt?: Date | string
@@ -632,6 +698,7 @@ export type PositionHistoryCreateWithoutUpdatedByInput = {
   createdAt?: Date | string
   updatedAt?: Date | string | null
   createdBy?: Prisma.UserCreateNestedOneWithoutPositionCreationsInput
+  region?: Prisma.RegionCreateNestedOneWithoutPositionHistoriesInput
   user: Prisma.UserCreateNestedOneWithoutPositionHistoriesInput
   position?: Prisma.PositionCreateNestedOneWithoutPositionHistoriesInput
 }
@@ -647,6 +714,7 @@ export type PositionHistoryUncheckedCreateWithoutUpdatedByInput = {
   createdById?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string | null
+  regionId?: string | null
 }
 
 export type PositionHistoryCreateOrConnectWithoutUpdatedByInput = {
@@ -668,6 +736,7 @@ export type PositionHistoryCreateWithoutCreatedByInput = {
   createdAt?: Date | string
   updatedAt?: Date | string | null
   updatedBy?: Prisma.UserCreateNestedOneWithoutPositionChangesInput
+  region?: Prisma.RegionCreateNestedOneWithoutPositionHistoriesInput
   user: Prisma.UserCreateNestedOneWithoutPositionHistoriesInput
   position?: Prisma.PositionCreateNestedOneWithoutPositionHistoriesInput
 }
@@ -683,6 +752,7 @@ export type PositionHistoryUncheckedCreateWithoutCreatedByInput = {
   updatedById?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string | null
+  regionId?: string | null
 }
 
 export type PositionHistoryCreateOrConnectWithoutCreatedByInput = {
@@ -705,6 +775,7 @@ export type PositionHistoryCreateWithoutUserInput = {
   updatedAt?: Date | string | null
   updatedBy?: Prisma.UserCreateNestedOneWithoutPositionChangesInput
   createdBy?: Prisma.UserCreateNestedOneWithoutPositionCreationsInput
+  region?: Prisma.RegionCreateNestedOneWithoutPositionHistoriesInput
   position?: Prisma.PositionCreateNestedOneWithoutPositionHistoriesInput
 }
 
@@ -719,6 +790,7 @@ export type PositionHistoryUncheckedCreateWithoutUserInput = {
   createdById?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string | null
+  regionId?: string | null
 }
 
 export type PositionHistoryCreateOrConnectWithoutUserInput = {
@@ -762,6 +834,7 @@ export type PositionHistoryScalarWhereInput = {
   createdById?: Prisma.StringNullableFilter<"PositionHistory"> | string | null
   createdAt?: Prisma.DateTimeFilter<"PositionHistory"> | Date | string
   updatedAt?: Prisma.DateTimeNullableFilter<"PositionHistory"> | Date | string | null
+  regionId?: Prisma.StringNullableFilter<"PositionHistory"> | string | null
 }
 
 export type PositionHistoryUpsertWithWhereUniqueWithoutCreatedByInput = {
@@ -806,6 +879,7 @@ export type PositionHistoryCreateWithoutPositionInput = {
   updatedAt?: Date | string | null
   updatedBy?: Prisma.UserCreateNestedOneWithoutPositionChangesInput
   createdBy?: Prisma.UserCreateNestedOneWithoutPositionCreationsInput
+  region?: Prisma.RegionCreateNestedOneWithoutPositionHistoriesInput
   user: Prisma.UserCreateNestedOneWithoutPositionHistoriesInput
 }
 
@@ -820,6 +894,7 @@ export type PositionHistoryUncheckedCreateWithoutPositionInput = {
   createdById?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string | null
+  regionId?: string | null
 }
 
 export type PositionHistoryCreateOrConnectWithoutPositionInput = {
@@ -848,6 +923,60 @@ export type PositionHistoryUpdateManyWithWhereWithoutPositionInput = {
   data: Prisma.XOR<Prisma.PositionHistoryUpdateManyMutationInput, Prisma.PositionHistoryUncheckedUpdateManyWithoutPositionInput>
 }
 
+export type PositionHistoryCreateWithoutRegionInput = {
+  id?: string
+  startedAt?: Date | string
+  endedAt?: Date | string | null
+  ended?: boolean
+  changedAt?: Date | string
+  createdAt?: Date | string
+  updatedAt?: Date | string | null
+  updatedBy?: Prisma.UserCreateNestedOneWithoutPositionChangesInput
+  createdBy?: Prisma.UserCreateNestedOneWithoutPositionCreationsInput
+  user: Prisma.UserCreateNestedOneWithoutPositionHistoriesInput
+  position?: Prisma.PositionCreateNestedOneWithoutPositionHistoriesInput
+}
+
+export type PositionHistoryUncheckedCreateWithoutRegionInput = {
+  id?: string
+  userId: string
+  positionId?: string | null
+  startedAt?: Date | string
+  endedAt?: Date | string | null
+  ended?: boolean
+  changedAt?: Date | string
+  updatedById?: string | null
+  createdById?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string | null
+}
+
+export type PositionHistoryCreateOrConnectWithoutRegionInput = {
+  where: Prisma.PositionHistoryWhereUniqueInput
+  create: Prisma.XOR<Prisma.PositionHistoryCreateWithoutRegionInput, Prisma.PositionHistoryUncheckedCreateWithoutRegionInput>
+}
+
+export type PositionHistoryCreateManyRegionInputEnvelope = {
+  data: Prisma.PositionHistoryCreateManyRegionInput | Prisma.PositionHistoryCreateManyRegionInput[]
+  skipDuplicates?: boolean
+}
+
+export type PositionHistoryUpsertWithWhereUniqueWithoutRegionInput = {
+  where: Prisma.PositionHistoryWhereUniqueInput
+  update: Prisma.XOR<Prisma.PositionHistoryUpdateWithoutRegionInput, Prisma.PositionHistoryUncheckedUpdateWithoutRegionInput>
+  create: Prisma.XOR<Prisma.PositionHistoryCreateWithoutRegionInput, Prisma.PositionHistoryUncheckedCreateWithoutRegionInput>
+}
+
+export type PositionHistoryUpdateWithWhereUniqueWithoutRegionInput = {
+  where: Prisma.PositionHistoryWhereUniqueInput
+  data: Prisma.XOR<Prisma.PositionHistoryUpdateWithoutRegionInput, Prisma.PositionHistoryUncheckedUpdateWithoutRegionInput>
+}
+
+export type PositionHistoryUpdateManyWithWhereWithoutRegionInput = {
+  where: Prisma.PositionHistoryScalarWhereInput
+  data: Prisma.XOR<Prisma.PositionHistoryUpdateManyMutationInput, Prisma.PositionHistoryUncheckedUpdateManyWithoutRegionInput>
+}
+
 export type PositionHistoryCreateManyUpdatedByInput = {
   id?: string
   userId: string
@@ -859,6 +988,7 @@ export type PositionHistoryCreateManyUpdatedByInput = {
   createdById?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string | null
+  regionId?: string | null
 }
 
 export type PositionHistoryCreateManyCreatedByInput = {
@@ -872,6 +1002,7 @@ export type PositionHistoryCreateManyCreatedByInput = {
   updatedById?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string | null
+  regionId?: string | null
 }
 
 export type PositionHistoryCreateManyUserInput = {
@@ -885,6 +1016,7 @@ export type PositionHistoryCreateManyUserInput = {
   createdById?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string | null
+  regionId?: string | null
 }
 
 export type PositionHistoryUpdateWithoutUpdatedByInput = {
@@ -896,6 +1028,7 @@ export type PositionHistoryUpdateWithoutUpdatedByInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdBy?: Prisma.UserUpdateOneWithoutPositionCreationsNestedInput
+  region?: Prisma.RegionUpdateOneWithoutPositionHistoriesNestedInput
   user?: Prisma.UserUpdateOneRequiredWithoutPositionHistoriesNestedInput
   position?: Prisma.PositionUpdateOneWithoutPositionHistoriesNestedInput
 }
@@ -911,6 +1044,7 @@ export type PositionHistoryUncheckedUpdateWithoutUpdatedByInput = {
   createdById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  regionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 export type PositionHistoryUncheckedUpdateManyWithoutUpdatedByInput = {
@@ -924,6 +1058,7 @@ export type PositionHistoryUncheckedUpdateManyWithoutUpdatedByInput = {
   createdById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  regionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 export type PositionHistoryUpdateWithoutCreatedByInput = {
@@ -935,6 +1070,7 @@ export type PositionHistoryUpdateWithoutCreatedByInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   updatedBy?: Prisma.UserUpdateOneWithoutPositionChangesNestedInput
+  region?: Prisma.RegionUpdateOneWithoutPositionHistoriesNestedInput
   user?: Prisma.UserUpdateOneRequiredWithoutPositionHistoriesNestedInput
   position?: Prisma.PositionUpdateOneWithoutPositionHistoriesNestedInput
 }
@@ -950,6 +1086,7 @@ export type PositionHistoryUncheckedUpdateWithoutCreatedByInput = {
   updatedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  regionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 export type PositionHistoryUncheckedUpdateManyWithoutCreatedByInput = {
@@ -963,6 +1100,7 @@ export type PositionHistoryUncheckedUpdateManyWithoutCreatedByInput = {
   updatedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  regionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 export type PositionHistoryUpdateWithoutUserInput = {
@@ -975,6 +1113,7 @@ export type PositionHistoryUpdateWithoutUserInput = {
   updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   updatedBy?: Prisma.UserUpdateOneWithoutPositionChangesNestedInput
   createdBy?: Prisma.UserUpdateOneWithoutPositionCreationsNestedInput
+  region?: Prisma.RegionUpdateOneWithoutPositionHistoriesNestedInput
   position?: Prisma.PositionUpdateOneWithoutPositionHistoriesNestedInput
 }
 
@@ -989,6 +1128,7 @@ export type PositionHistoryUncheckedUpdateWithoutUserInput = {
   createdById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  regionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 export type PositionHistoryUncheckedUpdateManyWithoutUserInput = {
@@ -1002,6 +1142,7 @@ export type PositionHistoryUncheckedUpdateManyWithoutUserInput = {
   createdById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  regionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 export type PositionHistoryCreateManyPositionInput = {
@@ -1015,6 +1156,7 @@ export type PositionHistoryCreateManyPositionInput = {
   createdById?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string | null
+  regionId?: string | null
 }
 
 export type PositionHistoryUpdateWithoutPositionInput = {
@@ -1027,6 +1169,7 @@ export type PositionHistoryUpdateWithoutPositionInput = {
   updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   updatedBy?: Prisma.UserUpdateOneWithoutPositionChangesNestedInput
   createdBy?: Prisma.UserUpdateOneWithoutPositionCreationsNestedInput
+  region?: Prisma.RegionUpdateOneWithoutPositionHistoriesNestedInput
   user?: Prisma.UserUpdateOneRequiredWithoutPositionHistoriesNestedInput
 }
 
@@ -1041,11 +1184,69 @@ export type PositionHistoryUncheckedUpdateWithoutPositionInput = {
   createdById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  regionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 export type PositionHistoryUncheckedUpdateManyWithoutPositionInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   userId?: Prisma.StringFieldUpdateOperationsInput | string
+  startedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  endedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  ended?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  changedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  regionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+}
+
+export type PositionHistoryCreateManyRegionInput = {
+  id?: string
+  userId: string
+  positionId?: string | null
+  startedAt?: Date | string
+  endedAt?: Date | string | null
+  ended?: boolean
+  changedAt?: Date | string
+  updatedById?: string | null
+  createdById?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string | null
+}
+
+export type PositionHistoryUpdateWithoutRegionInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  startedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  endedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  ended?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  changedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  updatedBy?: Prisma.UserUpdateOneWithoutPositionChangesNestedInput
+  createdBy?: Prisma.UserUpdateOneWithoutPositionCreationsNestedInput
+  user?: Prisma.UserUpdateOneRequiredWithoutPositionHistoriesNestedInput
+  position?: Prisma.PositionUpdateOneWithoutPositionHistoriesNestedInput
+}
+
+export type PositionHistoryUncheckedUpdateWithoutRegionInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  userId?: Prisma.StringFieldUpdateOperationsInput | string
+  positionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  startedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  endedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  ended?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  changedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+}
+
+export type PositionHistoryUncheckedUpdateManyWithoutRegionInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  userId?: Prisma.StringFieldUpdateOperationsInput | string
+  positionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   startedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   endedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   ended?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -1070,8 +1271,10 @@ export type PositionHistorySelect<ExtArgs extends runtime.Types.Extensions.Inter
   createdById?: boolean
   createdAt?: boolean
   updatedAt?: boolean
+  regionId?: boolean
   updatedBy?: boolean | Prisma.PositionHistory$updatedByArgs<ExtArgs>
   createdBy?: boolean | Prisma.PositionHistory$createdByArgs<ExtArgs>
+  region?: boolean | Prisma.PositionHistory$regionArgs<ExtArgs>
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   position?: boolean | Prisma.PositionHistory$positionArgs<ExtArgs>
 }, ExtArgs["result"]["positionHistory"]>
@@ -1088,8 +1291,10 @@ export type PositionHistorySelectCreateManyAndReturn<ExtArgs extends runtime.Typ
   createdById?: boolean
   createdAt?: boolean
   updatedAt?: boolean
+  regionId?: boolean
   updatedBy?: boolean | Prisma.PositionHistory$updatedByArgs<ExtArgs>
   createdBy?: boolean | Prisma.PositionHistory$createdByArgs<ExtArgs>
+  region?: boolean | Prisma.PositionHistory$regionArgs<ExtArgs>
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   position?: boolean | Prisma.PositionHistory$positionArgs<ExtArgs>
 }, ExtArgs["result"]["positionHistory"]>
@@ -1106,8 +1311,10 @@ export type PositionHistorySelectUpdateManyAndReturn<ExtArgs extends runtime.Typ
   createdById?: boolean
   createdAt?: boolean
   updatedAt?: boolean
+  regionId?: boolean
   updatedBy?: boolean | Prisma.PositionHistory$updatedByArgs<ExtArgs>
   createdBy?: boolean | Prisma.PositionHistory$createdByArgs<ExtArgs>
+  region?: boolean | Prisma.PositionHistory$regionArgs<ExtArgs>
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   position?: boolean | Prisma.PositionHistory$positionArgs<ExtArgs>
 }, ExtArgs["result"]["positionHistory"]>
@@ -1124,24 +1331,28 @@ export type PositionHistorySelectScalar = {
   createdById?: boolean
   createdAt?: boolean
   updatedAt?: boolean
+  regionId?: boolean
 }
 
-export type PositionHistoryOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "userId" | "positionId" | "startedAt" | "endedAt" | "ended" | "changedAt" | "updatedById" | "createdById" | "createdAt" | "updatedAt", ExtArgs["result"]["positionHistory"]>
+export type PositionHistoryOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "userId" | "positionId" | "startedAt" | "endedAt" | "ended" | "changedAt" | "updatedById" | "createdById" | "createdAt" | "updatedAt" | "regionId", ExtArgs["result"]["positionHistory"]>
 export type PositionHistoryInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   updatedBy?: boolean | Prisma.PositionHistory$updatedByArgs<ExtArgs>
   createdBy?: boolean | Prisma.PositionHistory$createdByArgs<ExtArgs>
+  region?: boolean | Prisma.PositionHistory$regionArgs<ExtArgs>
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   position?: boolean | Prisma.PositionHistory$positionArgs<ExtArgs>
 }
 export type PositionHistoryIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   updatedBy?: boolean | Prisma.PositionHistory$updatedByArgs<ExtArgs>
   createdBy?: boolean | Prisma.PositionHistory$createdByArgs<ExtArgs>
+  region?: boolean | Prisma.PositionHistory$regionArgs<ExtArgs>
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   position?: boolean | Prisma.PositionHistory$positionArgs<ExtArgs>
 }
 export type PositionHistoryIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   updatedBy?: boolean | Prisma.PositionHistory$updatedByArgs<ExtArgs>
   createdBy?: boolean | Prisma.PositionHistory$createdByArgs<ExtArgs>
+  region?: boolean | Prisma.PositionHistory$regionArgs<ExtArgs>
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   position?: boolean | Prisma.PositionHistory$positionArgs<ExtArgs>
 }
@@ -1151,6 +1362,7 @@ export type $PositionHistoryPayload<ExtArgs extends runtime.Types.Extensions.Int
   objects: {
     updatedBy: Prisma.$UserPayload<ExtArgs> | null
     createdBy: Prisma.$UserPayload<ExtArgs> | null
+    region: Prisma.$RegionPayload<ExtArgs> | null
     user: Prisma.$UserPayload<ExtArgs>
     position: Prisma.$PositionPayload<ExtArgs> | null
   }
@@ -1166,6 +1378,7 @@ export type $PositionHistoryPayload<ExtArgs extends runtime.Types.Extensions.Int
     createdById: string | null
     createdAt: Date
     updatedAt: Date | null
+    regionId: string | null
   }, ExtArgs["result"]["positionHistory"]>
   composites: {}
 }
@@ -1562,6 +1775,7 @@ export interface Prisma__PositionHistoryClient<T, Null = never, ExtArgs extends 
   readonly [Symbol.toStringTag]: "PrismaPromise"
   updatedBy<T extends Prisma.PositionHistory$updatedByArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.PositionHistory$updatedByArgs<ExtArgs>>): Prisma.Prisma__UserClient<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   createdBy<T extends Prisma.PositionHistory$createdByArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.PositionHistory$createdByArgs<ExtArgs>>): Prisma.Prisma__UserClient<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+  region<T extends Prisma.PositionHistory$regionArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.PositionHistory$regionArgs<ExtArgs>>): Prisma.Prisma__RegionClient<runtime.Types.Result.GetResult<Prisma.$RegionPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   user<T extends Prisma.UserDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UserDefaultArgs<ExtArgs>>): Prisma.Prisma__UserClient<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   position<T extends Prisma.PositionHistory$positionArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.PositionHistory$positionArgs<ExtArgs>>): Prisma.Prisma__PositionClient<runtime.Types.Result.GetResult<Prisma.$PositionPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   /**
@@ -1604,6 +1818,7 @@ export interface PositionHistoryFieldRefs {
   readonly createdById: Prisma.FieldRef<"PositionHistory", 'String'>
   readonly createdAt: Prisma.FieldRef<"PositionHistory", 'DateTime'>
   readonly updatedAt: Prisma.FieldRef<"PositionHistory", 'DateTime'>
+  readonly regionId: Prisma.FieldRef<"PositionHistory", 'String'>
 }
     
 
@@ -2035,6 +2250,25 @@ export type PositionHistory$createdByArgs<ExtArgs extends runtime.Types.Extensio
    */
   include?: Prisma.UserInclude<ExtArgs> | null
   where?: Prisma.UserWhereInput
+}
+
+/**
+ * PositionHistory.region
+ */
+export type PositionHistory$regionArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Region
+   */
+  select?: Prisma.RegionSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Region
+   */
+  omit?: Prisma.RegionOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.RegionInclude<ExtArgs> | null
+  where?: Prisma.RegionWhereInput
 }
 
 /**

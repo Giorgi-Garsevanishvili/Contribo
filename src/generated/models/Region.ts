@@ -233,6 +233,10 @@ export type RegionWhereInput = {
   allowedUsers?: Prisma.AllowedUserListRelationFilter
   joinRequests?: Prisma.JoinRequestListRelationFilter
   Event?: Prisma.EventListRelationFilter
+  hrWarnings?: Prisma.HrWarningListRelationFilter
+  positionHistories?: Prisma.PositionHistoryListRelationFilter
+  ratingHistories?: Prisma.RatingHistoryListRelationFilter
+  memberStatusLogs?: Prisma.MemberStatusLogListRelationFilter
 }
 
 export type RegionOrderByWithRelationInput = {
@@ -250,6 +254,10 @@ export type RegionOrderByWithRelationInput = {
   allowedUsers?: Prisma.AllowedUserOrderByRelationAggregateInput
   joinRequests?: Prisma.JoinRequestOrderByRelationAggregateInput
   Event?: Prisma.EventOrderByRelationAggregateInput
+  hrWarnings?: Prisma.HrWarningOrderByRelationAggregateInput
+  positionHistories?: Prisma.PositionHistoryOrderByRelationAggregateInput
+  ratingHistories?: Prisma.RatingHistoryOrderByRelationAggregateInput
+  memberStatusLogs?: Prisma.MemberStatusLogOrderByRelationAggregateInput
 }
 
 export type RegionWhereUniqueInput = Prisma.AtLeast<{
@@ -270,6 +278,10 @@ export type RegionWhereUniqueInput = Prisma.AtLeast<{
   allowedUsers?: Prisma.AllowedUserListRelationFilter
   joinRequests?: Prisma.JoinRequestListRelationFilter
   Event?: Prisma.EventListRelationFilter
+  hrWarnings?: Prisma.HrWarningListRelationFilter
+  positionHistories?: Prisma.PositionHistoryListRelationFilter
+  ratingHistories?: Prisma.RatingHistoryListRelationFilter
+  memberStatusLogs?: Prisma.MemberStatusLogListRelationFilter
 }, "id" | "name" | "email">
 
 export type RegionOrderByWithAggregationInput = {
@@ -321,6 +333,10 @@ export type RegionCreateInput = {
   allowedUsers?: Prisma.AllowedUserCreateNestedManyWithoutRegionInput
   joinRequests?: Prisma.JoinRequestCreateNestedManyWithoutRegionInput
   Event?: Prisma.EventCreateNestedManyWithoutRegionInput
+  hrWarnings?: Prisma.HrWarningCreateNestedManyWithoutRegionInput
+  positionHistories?: Prisma.PositionHistoryCreateNestedManyWithoutRegionInput
+  ratingHistories?: Prisma.RatingHistoryCreateNestedManyWithoutRegionInput
+  memberStatusLogs?: Prisma.MemberStatusLogCreateNestedManyWithoutRegionInput
 }
 
 export type RegionUncheckedCreateInput = {
@@ -338,6 +354,10 @@ export type RegionUncheckedCreateInput = {
   allowedUsers?: Prisma.AllowedUserUncheckedCreateNestedManyWithoutRegionInput
   joinRequests?: Prisma.JoinRequestUncheckedCreateNestedManyWithoutRegionInput
   Event?: Prisma.EventUncheckedCreateNestedManyWithoutRegionInput
+  hrWarnings?: Prisma.HrWarningUncheckedCreateNestedManyWithoutRegionInput
+  positionHistories?: Prisma.PositionHistoryUncheckedCreateNestedManyWithoutRegionInput
+  ratingHistories?: Prisma.RatingHistoryUncheckedCreateNestedManyWithoutRegionInput
+  memberStatusLogs?: Prisma.MemberStatusLogUncheckedCreateNestedManyWithoutRegionInput
 }
 
 export type RegionUpdateInput = {
@@ -355,6 +375,10 @@ export type RegionUpdateInput = {
   allowedUsers?: Prisma.AllowedUserUpdateManyWithoutRegionNestedInput
   joinRequests?: Prisma.JoinRequestUpdateManyWithoutRegionNestedInput
   Event?: Prisma.EventUpdateManyWithoutRegionNestedInput
+  hrWarnings?: Prisma.HrWarningUpdateManyWithoutRegionNestedInput
+  positionHistories?: Prisma.PositionHistoryUpdateManyWithoutRegionNestedInput
+  ratingHistories?: Prisma.RatingHistoryUpdateManyWithoutRegionNestedInput
+  memberStatusLogs?: Prisma.MemberStatusLogUpdateManyWithoutRegionNestedInput
 }
 
 export type RegionUncheckedUpdateInput = {
@@ -372,6 +396,10 @@ export type RegionUncheckedUpdateInput = {
   allowedUsers?: Prisma.AllowedUserUncheckedUpdateManyWithoutRegionNestedInput
   joinRequests?: Prisma.JoinRequestUncheckedUpdateManyWithoutRegionNestedInput
   Event?: Prisma.EventUncheckedUpdateManyWithoutRegionNestedInput
+  hrWarnings?: Prisma.HrWarningUncheckedUpdateManyWithoutRegionNestedInput
+  positionHistories?: Prisma.PositionHistoryUncheckedUpdateManyWithoutRegionNestedInput
+  ratingHistories?: Prisma.RatingHistoryUncheckedUpdateManyWithoutRegionNestedInput
+  memberStatusLogs?: Prisma.MemberStatusLogUncheckedUpdateManyWithoutRegionNestedInput
 }
 
 export type RegionCreateManyInput = {
@@ -479,6 +507,70 @@ export type RegionUpdateOneWithoutEventNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.RegionUpdateToOneWithWhereWithoutEventInput, Prisma.RegionUpdateWithoutEventInput>, Prisma.RegionUncheckedUpdateWithoutEventInput>
 }
 
+export type RegionCreateNestedOneWithoutHrWarningsInput = {
+  create?: Prisma.XOR<Prisma.RegionCreateWithoutHrWarningsInput, Prisma.RegionUncheckedCreateWithoutHrWarningsInput>
+  connectOrCreate?: Prisma.RegionCreateOrConnectWithoutHrWarningsInput
+  connect?: Prisma.RegionWhereUniqueInput
+}
+
+export type RegionUpdateOneWithoutHrWarningsNestedInput = {
+  create?: Prisma.XOR<Prisma.RegionCreateWithoutHrWarningsInput, Prisma.RegionUncheckedCreateWithoutHrWarningsInput>
+  connectOrCreate?: Prisma.RegionCreateOrConnectWithoutHrWarningsInput
+  upsert?: Prisma.RegionUpsertWithoutHrWarningsInput
+  disconnect?: Prisma.RegionWhereInput | boolean
+  delete?: Prisma.RegionWhereInput | boolean
+  connect?: Prisma.RegionWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.RegionUpdateToOneWithWhereWithoutHrWarningsInput, Prisma.RegionUpdateWithoutHrWarningsInput>, Prisma.RegionUncheckedUpdateWithoutHrWarningsInput>
+}
+
+export type RegionCreateNestedOneWithoutRatingHistoriesInput = {
+  create?: Prisma.XOR<Prisma.RegionCreateWithoutRatingHistoriesInput, Prisma.RegionUncheckedCreateWithoutRatingHistoriesInput>
+  connectOrCreate?: Prisma.RegionCreateOrConnectWithoutRatingHistoriesInput
+  connect?: Prisma.RegionWhereUniqueInput
+}
+
+export type RegionUpdateOneWithoutRatingHistoriesNestedInput = {
+  create?: Prisma.XOR<Prisma.RegionCreateWithoutRatingHistoriesInput, Prisma.RegionUncheckedCreateWithoutRatingHistoriesInput>
+  connectOrCreate?: Prisma.RegionCreateOrConnectWithoutRatingHistoriesInput
+  upsert?: Prisma.RegionUpsertWithoutRatingHistoriesInput
+  disconnect?: Prisma.RegionWhereInput | boolean
+  delete?: Prisma.RegionWhereInput | boolean
+  connect?: Prisma.RegionWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.RegionUpdateToOneWithWhereWithoutRatingHistoriesInput, Prisma.RegionUpdateWithoutRatingHistoriesInput>, Prisma.RegionUncheckedUpdateWithoutRatingHistoriesInput>
+}
+
+export type RegionCreateNestedOneWithoutPositionHistoriesInput = {
+  create?: Prisma.XOR<Prisma.RegionCreateWithoutPositionHistoriesInput, Prisma.RegionUncheckedCreateWithoutPositionHistoriesInput>
+  connectOrCreate?: Prisma.RegionCreateOrConnectWithoutPositionHistoriesInput
+  connect?: Prisma.RegionWhereUniqueInput
+}
+
+export type RegionUpdateOneWithoutPositionHistoriesNestedInput = {
+  create?: Prisma.XOR<Prisma.RegionCreateWithoutPositionHistoriesInput, Prisma.RegionUncheckedCreateWithoutPositionHistoriesInput>
+  connectOrCreate?: Prisma.RegionCreateOrConnectWithoutPositionHistoriesInput
+  upsert?: Prisma.RegionUpsertWithoutPositionHistoriesInput
+  disconnect?: Prisma.RegionWhereInput | boolean
+  delete?: Prisma.RegionWhereInput | boolean
+  connect?: Prisma.RegionWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.RegionUpdateToOneWithWhereWithoutPositionHistoriesInput, Prisma.RegionUpdateWithoutPositionHistoriesInput>, Prisma.RegionUncheckedUpdateWithoutPositionHistoriesInput>
+}
+
+export type RegionCreateNestedOneWithoutMemberStatusLogsInput = {
+  create?: Prisma.XOR<Prisma.RegionCreateWithoutMemberStatusLogsInput, Prisma.RegionUncheckedCreateWithoutMemberStatusLogsInput>
+  connectOrCreate?: Prisma.RegionCreateOrConnectWithoutMemberStatusLogsInput
+  connect?: Prisma.RegionWhereUniqueInput
+}
+
+export type RegionUpdateOneWithoutMemberStatusLogsNestedInput = {
+  create?: Prisma.XOR<Prisma.RegionCreateWithoutMemberStatusLogsInput, Prisma.RegionUncheckedCreateWithoutMemberStatusLogsInput>
+  connectOrCreate?: Prisma.RegionCreateOrConnectWithoutMemberStatusLogsInput
+  upsert?: Prisma.RegionUpsertWithoutMemberStatusLogsInput
+  disconnect?: Prisma.RegionWhereInput | boolean
+  delete?: Prisma.RegionWhereInput | boolean
+  connect?: Prisma.RegionWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.RegionUpdateToOneWithWhereWithoutMemberStatusLogsInput, Prisma.RegionUpdateWithoutMemberStatusLogsInput>, Prisma.RegionUncheckedUpdateWithoutMemberStatusLogsInput>
+}
+
 export type RegionCreateNestedOneWithoutJoinRequestsInput = {
   create?: Prisma.XOR<Prisma.RegionCreateWithoutJoinRequestsInput, Prisma.RegionUncheckedCreateWithoutJoinRequestsInput>
   connectOrCreate?: Prisma.RegionCreateOrConnectWithoutJoinRequestsInput
@@ -529,6 +621,10 @@ export type RegionCreateWithoutEventInput = {
   status?: $Enums.RegionStatus
   allowedUsers?: Prisma.AllowedUserCreateNestedManyWithoutRegionInput
   joinRequests?: Prisma.JoinRequestCreateNestedManyWithoutRegionInput
+  hrWarnings?: Prisma.HrWarningCreateNestedManyWithoutRegionInput
+  positionHistories?: Prisma.PositionHistoryCreateNestedManyWithoutRegionInput
+  ratingHistories?: Prisma.RatingHistoryCreateNestedManyWithoutRegionInput
+  memberStatusLogs?: Prisma.MemberStatusLogCreateNestedManyWithoutRegionInput
 }
 
 export type RegionUncheckedCreateWithoutEventInput = {
@@ -545,6 +641,10 @@ export type RegionUncheckedCreateWithoutEventInput = {
   status?: $Enums.RegionStatus
   allowedUsers?: Prisma.AllowedUserUncheckedCreateNestedManyWithoutRegionInput
   joinRequests?: Prisma.JoinRequestUncheckedCreateNestedManyWithoutRegionInput
+  hrWarnings?: Prisma.HrWarningUncheckedCreateNestedManyWithoutRegionInput
+  positionHistories?: Prisma.PositionHistoryUncheckedCreateNestedManyWithoutRegionInput
+  ratingHistories?: Prisma.RatingHistoryUncheckedCreateNestedManyWithoutRegionInput
+  memberStatusLogs?: Prisma.MemberStatusLogUncheckedCreateNestedManyWithoutRegionInput
 }
 
 export type RegionCreateOrConnectWithoutEventInput = {
@@ -577,6 +677,10 @@ export type RegionUpdateWithoutEventInput = {
   status?: Prisma.EnumRegionStatusFieldUpdateOperationsInput | $Enums.RegionStatus
   allowedUsers?: Prisma.AllowedUserUpdateManyWithoutRegionNestedInput
   joinRequests?: Prisma.JoinRequestUpdateManyWithoutRegionNestedInput
+  hrWarnings?: Prisma.HrWarningUpdateManyWithoutRegionNestedInput
+  positionHistories?: Prisma.PositionHistoryUpdateManyWithoutRegionNestedInput
+  ratingHistories?: Prisma.RatingHistoryUpdateManyWithoutRegionNestedInput
+  memberStatusLogs?: Prisma.MemberStatusLogUpdateManyWithoutRegionNestedInput
 }
 
 export type RegionUncheckedUpdateWithoutEventInput = {
@@ -593,6 +697,394 @@ export type RegionUncheckedUpdateWithoutEventInput = {
   status?: Prisma.EnumRegionStatusFieldUpdateOperationsInput | $Enums.RegionStatus
   allowedUsers?: Prisma.AllowedUserUncheckedUpdateManyWithoutRegionNestedInput
   joinRequests?: Prisma.JoinRequestUncheckedUpdateManyWithoutRegionNestedInput
+  hrWarnings?: Prisma.HrWarningUncheckedUpdateManyWithoutRegionNestedInput
+  positionHistories?: Prisma.PositionHistoryUncheckedUpdateManyWithoutRegionNestedInput
+  ratingHistories?: Prisma.RatingHistoryUncheckedUpdateManyWithoutRegionNestedInput
+  memberStatusLogs?: Prisma.MemberStatusLogUncheckedUpdateManyWithoutRegionNestedInput
+}
+
+export type RegionCreateWithoutHrWarningsInput = {
+  id?: string
+  name: string
+  logo?: string | null
+  email?: string | null
+  phone?: string | null
+  description?: string | null
+  address?: string | null
+  website?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string | null
+  status?: $Enums.RegionStatus
+  allowedUsers?: Prisma.AllowedUserCreateNestedManyWithoutRegionInput
+  joinRequests?: Prisma.JoinRequestCreateNestedManyWithoutRegionInput
+  Event?: Prisma.EventCreateNestedManyWithoutRegionInput
+  positionHistories?: Prisma.PositionHistoryCreateNestedManyWithoutRegionInput
+  ratingHistories?: Prisma.RatingHistoryCreateNestedManyWithoutRegionInput
+  memberStatusLogs?: Prisma.MemberStatusLogCreateNestedManyWithoutRegionInput
+}
+
+export type RegionUncheckedCreateWithoutHrWarningsInput = {
+  id?: string
+  name: string
+  logo?: string | null
+  email?: string | null
+  phone?: string | null
+  description?: string | null
+  address?: string | null
+  website?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string | null
+  status?: $Enums.RegionStatus
+  allowedUsers?: Prisma.AllowedUserUncheckedCreateNestedManyWithoutRegionInput
+  joinRequests?: Prisma.JoinRequestUncheckedCreateNestedManyWithoutRegionInput
+  Event?: Prisma.EventUncheckedCreateNestedManyWithoutRegionInput
+  positionHistories?: Prisma.PositionHistoryUncheckedCreateNestedManyWithoutRegionInput
+  ratingHistories?: Prisma.RatingHistoryUncheckedCreateNestedManyWithoutRegionInput
+  memberStatusLogs?: Prisma.MemberStatusLogUncheckedCreateNestedManyWithoutRegionInput
+}
+
+export type RegionCreateOrConnectWithoutHrWarningsInput = {
+  where: Prisma.RegionWhereUniqueInput
+  create: Prisma.XOR<Prisma.RegionCreateWithoutHrWarningsInput, Prisma.RegionUncheckedCreateWithoutHrWarningsInput>
+}
+
+export type RegionUpsertWithoutHrWarningsInput = {
+  update: Prisma.XOR<Prisma.RegionUpdateWithoutHrWarningsInput, Prisma.RegionUncheckedUpdateWithoutHrWarningsInput>
+  create: Prisma.XOR<Prisma.RegionCreateWithoutHrWarningsInput, Prisma.RegionUncheckedCreateWithoutHrWarningsInput>
+  where?: Prisma.RegionWhereInput
+}
+
+export type RegionUpdateToOneWithWhereWithoutHrWarningsInput = {
+  where?: Prisma.RegionWhereInput
+  data: Prisma.XOR<Prisma.RegionUpdateWithoutHrWarningsInput, Prisma.RegionUncheckedUpdateWithoutHrWarningsInput>
+}
+
+export type RegionUpdateWithoutHrWarningsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  logo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  status?: Prisma.EnumRegionStatusFieldUpdateOperationsInput | $Enums.RegionStatus
+  allowedUsers?: Prisma.AllowedUserUpdateManyWithoutRegionNestedInput
+  joinRequests?: Prisma.JoinRequestUpdateManyWithoutRegionNestedInput
+  Event?: Prisma.EventUpdateManyWithoutRegionNestedInput
+  positionHistories?: Prisma.PositionHistoryUpdateManyWithoutRegionNestedInput
+  ratingHistories?: Prisma.RatingHistoryUpdateManyWithoutRegionNestedInput
+  memberStatusLogs?: Prisma.MemberStatusLogUpdateManyWithoutRegionNestedInput
+}
+
+export type RegionUncheckedUpdateWithoutHrWarningsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  logo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  status?: Prisma.EnumRegionStatusFieldUpdateOperationsInput | $Enums.RegionStatus
+  allowedUsers?: Prisma.AllowedUserUncheckedUpdateManyWithoutRegionNestedInput
+  joinRequests?: Prisma.JoinRequestUncheckedUpdateManyWithoutRegionNestedInput
+  Event?: Prisma.EventUncheckedUpdateManyWithoutRegionNestedInput
+  positionHistories?: Prisma.PositionHistoryUncheckedUpdateManyWithoutRegionNestedInput
+  ratingHistories?: Prisma.RatingHistoryUncheckedUpdateManyWithoutRegionNestedInput
+  memberStatusLogs?: Prisma.MemberStatusLogUncheckedUpdateManyWithoutRegionNestedInput
+}
+
+export type RegionCreateWithoutRatingHistoriesInput = {
+  id?: string
+  name: string
+  logo?: string | null
+  email?: string | null
+  phone?: string | null
+  description?: string | null
+  address?: string | null
+  website?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string | null
+  status?: $Enums.RegionStatus
+  allowedUsers?: Prisma.AllowedUserCreateNestedManyWithoutRegionInput
+  joinRequests?: Prisma.JoinRequestCreateNestedManyWithoutRegionInput
+  Event?: Prisma.EventCreateNestedManyWithoutRegionInput
+  hrWarnings?: Prisma.HrWarningCreateNestedManyWithoutRegionInput
+  positionHistories?: Prisma.PositionHistoryCreateNestedManyWithoutRegionInput
+  memberStatusLogs?: Prisma.MemberStatusLogCreateNestedManyWithoutRegionInput
+}
+
+export type RegionUncheckedCreateWithoutRatingHistoriesInput = {
+  id?: string
+  name: string
+  logo?: string | null
+  email?: string | null
+  phone?: string | null
+  description?: string | null
+  address?: string | null
+  website?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string | null
+  status?: $Enums.RegionStatus
+  allowedUsers?: Prisma.AllowedUserUncheckedCreateNestedManyWithoutRegionInput
+  joinRequests?: Prisma.JoinRequestUncheckedCreateNestedManyWithoutRegionInput
+  Event?: Prisma.EventUncheckedCreateNestedManyWithoutRegionInput
+  hrWarnings?: Prisma.HrWarningUncheckedCreateNestedManyWithoutRegionInput
+  positionHistories?: Prisma.PositionHistoryUncheckedCreateNestedManyWithoutRegionInput
+  memberStatusLogs?: Prisma.MemberStatusLogUncheckedCreateNestedManyWithoutRegionInput
+}
+
+export type RegionCreateOrConnectWithoutRatingHistoriesInput = {
+  where: Prisma.RegionWhereUniqueInput
+  create: Prisma.XOR<Prisma.RegionCreateWithoutRatingHistoriesInput, Prisma.RegionUncheckedCreateWithoutRatingHistoriesInput>
+}
+
+export type RegionUpsertWithoutRatingHistoriesInput = {
+  update: Prisma.XOR<Prisma.RegionUpdateWithoutRatingHistoriesInput, Prisma.RegionUncheckedUpdateWithoutRatingHistoriesInput>
+  create: Prisma.XOR<Prisma.RegionCreateWithoutRatingHistoriesInput, Prisma.RegionUncheckedCreateWithoutRatingHistoriesInput>
+  where?: Prisma.RegionWhereInput
+}
+
+export type RegionUpdateToOneWithWhereWithoutRatingHistoriesInput = {
+  where?: Prisma.RegionWhereInput
+  data: Prisma.XOR<Prisma.RegionUpdateWithoutRatingHistoriesInput, Prisma.RegionUncheckedUpdateWithoutRatingHistoriesInput>
+}
+
+export type RegionUpdateWithoutRatingHistoriesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  logo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  status?: Prisma.EnumRegionStatusFieldUpdateOperationsInput | $Enums.RegionStatus
+  allowedUsers?: Prisma.AllowedUserUpdateManyWithoutRegionNestedInput
+  joinRequests?: Prisma.JoinRequestUpdateManyWithoutRegionNestedInput
+  Event?: Prisma.EventUpdateManyWithoutRegionNestedInput
+  hrWarnings?: Prisma.HrWarningUpdateManyWithoutRegionNestedInput
+  positionHistories?: Prisma.PositionHistoryUpdateManyWithoutRegionNestedInput
+  memberStatusLogs?: Prisma.MemberStatusLogUpdateManyWithoutRegionNestedInput
+}
+
+export type RegionUncheckedUpdateWithoutRatingHistoriesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  logo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  status?: Prisma.EnumRegionStatusFieldUpdateOperationsInput | $Enums.RegionStatus
+  allowedUsers?: Prisma.AllowedUserUncheckedUpdateManyWithoutRegionNestedInput
+  joinRequests?: Prisma.JoinRequestUncheckedUpdateManyWithoutRegionNestedInput
+  Event?: Prisma.EventUncheckedUpdateManyWithoutRegionNestedInput
+  hrWarnings?: Prisma.HrWarningUncheckedUpdateManyWithoutRegionNestedInput
+  positionHistories?: Prisma.PositionHistoryUncheckedUpdateManyWithoutRegionNestedInput
+  memberStatusLogs?: Prisma.MemberStatusLogUncheckedUpdateManyWithoutRegionNestedInput
+}
+
+export type RegionCreateWithoutPositionHistoriesInput = {
+  id?: string
+  name: string
+  logo?: string | null
+  email?: string | null
+  phone?: string | null
+  description?: string | null
+  address?: string | null
+  website?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string | null
+  status?: $Enums.RegionStatus
+  allowedUsers?: Prisma.AllowedUserCreateNestedManyWithoutRegionInput
+  joinRequests?: Prisma.JoinRequestCreateNestedManyWithoutRegionInput
+  Event?: Prisma.EventCreateNestedManyWithoutRegionInput
+  hrWarnings?: Prisma.HrWarningCreateNestedManyWithoutRegionInput
+  ratingHistories?: Prisma.RatingHistoryCreateNestedManyWithoutRegionInput
+  memberStatusLogs?: Prisma.MemberStatusLogCreateNestedManyWithoutRegionInput
+}
+
+export type RegionUncheckedCreateWithoutPositionHistoriesInput = {
+  id?: string
+  name: string
+  logo?: string | null
+  email?: string | null
+  phone?: string | null
+  description?: string | null
+  address?: string | null
+  website?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string | null
+  status?: $Enums.RegionStatus
+  allowedUsers?: Prisma.AllowedUserUncheckedCreateNestedManyWithoutRegionInput
+  joinRequests?: Prisma.JoinRequestUncheckedCreateNestedManyWithoutRegionInput
+  Event?: Prisma.EventUncheckedCreateNestedManyWithoutRegionInput
+  hrWarnings?: Prisma.HrWarningUncheckedCreateNestedManyWithoutRegionInput
+  ratingHistories?: Prisma.RatingHistoryUncheckedCreateNestedManyWithoutRegionInput
+  memberStatusLogs?: Prisma.MemberStatusLogUncheckedCreateNestedManyWithoutRegionInput
+}
+
+export type RegionCreateOrConnectWithoutPositionHistoriesInput = {
+  where: Prisma.RegionWhereUniqueInput
+  create: Prisma.XOR<Prisma.RegionCreateWithoutPositionHistoriesInput, Prisma.RegionUncheckedCreateWithoutPositionHistoriesInput>
+}
+
+export type RegionUpsertWithoutPositionHistoriesInput = {
+  update: Prisma.XOR<Prisma.RegionUpdateWithoutPositionHistoriesInput, Prisma.RegionUncheckedUpdateWithoutPositionHistoriesInput>
+  create: Prisma.XOR<Prisma.RegionCreateWithoutPositionHistoriesInput, Prisma.RegionUncheckedCreateWithoutPositionHistoriesInput>
+  where?: Prisma.RegionWhereInput
+}
+
+export type RegionUpdateToOneWithWhereWithoutPositionHistoriesInput = {
+  where?: Prisma.RegionWhereInput
+  data: Prisma.XOR<Prisma.RegionUpdateWithoutPositionHistoriesInput, Prisma.RegionUncheckedUpdateWithoutPositionHistoriesInput>
+}
+
+export type RegionUpdateWithoutPositionHistoriesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  logo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  status?: Prisma.EnumRegionStatusFieldUpdateOperationsInput | $Enums.RegionStatus
+  allowedUsers?: Prisma.AllowedUserUpdateManyWithoutRegionNestedInput
+  joinRequests?: Prisma.JoinRequestUpdateManyWithoutRegionNestedInput
+  Event?: Prisma.EventUpdateManyWithoutRegionNestedInput
+  hrWarnings?: Prisma.HrWarningUpdateManyWithoutRegionNestedInput
+  ratingHistories?: Prisma.RatingHistoryUpdateManyWithoutRegionNestedInput
+  memberStatusLogs?: Prisma.MemberStatusLogUpdateManyWithoutRegionNestedInput
+}
+
+export type RegionUncheckedUpdateWithoutPositionHistoriesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  logo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  status?: Prisma.EnumRegionStatusFieldUpdateOperationsInput | $Enums.RegionStatus
+  allowedUsers?: Prisma.AllowedUserUncheckedUpdateManyWithoutRegionNestedInput
+  joinRequests?: Prisma.JoinRequestUncheckedUpdateManyWithoutRegionNestedInput
+  Event?: Prisma.EventUncheckedUpdateManyWithoutRegionNestedInput
+  hrWarnings?: Prisma.HrWarningUncheckedUpdateManyWithoutRegionNestedInput
+  ratingHistories?: Prisma.RatingHistoryUncheckedUpdateManyWithoutRegionNestedInput
+  memberStatusLogs?: Prisma.MemberStatusLogUncheckedUpdateManyWithoutRegionNestedInput
+}
+
+export type RegionCreateWithoutMemberStatusLogsInput = {
+  id?: string
+  name: string
+  logo?: string | null
+  email?: string | null
+  phone?: string | null
+  description?: string | null
+  address?: string | null
+  website?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string | null
+  status?: $Enums.RegionStatus
+  allowedUsers?: Prisma.AllowedUserCreateNestedManyWithoutRegionInput
+  joinRequests?: Prisma.JoinRequestCreateNestedManyWithoutRegionInput
+  Event?: Prisma.EventCreateNestedManyWithoutRegionInput
+  hrWarnings?: Prisma.HrWarningCreateNestedManyWithoutRegionInput
+  positionHistories?: Prisma.PositionHistoryCreateNestedManyWithoutRegionInput
+  ratingHistories?: Prisma.RatingHistoryCreateNestedManyWithoutRegionInput
+}
+
+export type RegionUncheckedCreateWithoutMemberStatusLogsInput = {
+  id?: string
+  name: string
+  logo?: string | null
+  email?: string | null
+  phone?: string | null
+  description?: string | null
+  address?: string | null
+  website?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string | null
+  status?: $Enums.RegionStatus
+  allowedUsers?: Prisma.AllowedUserUncheckedCreateNestedManyWithoutRegionInput
+  joinRequests?: Prisma.JoinRequestUncheckedCreateNestedManyWithoutRegionInput
+  Event?: Prisma.EventUncheckedCreateNestedManyWithoutRegionInput
+  hrWarnings?: Prisma.HrWarningUncheckedCreateNestedManyWithoutRegionInput
+  positionHistories?: Prisma.PositionHistoryUncheckedCreateNestedManyWithoutRegionInput
+  ratingHistories?: Prisma.RatingHistoryUncheckedCreateNestedManyWithoutRegionInput
+}
+
+export type RegionCreateOrConnectWithoutMemberStatusLogsInput = {
+  where: Prisma.RegionWhereUniqueInput
+  create: Prisma.XOR<Prisma.RegionCreateWithoutMemberStatusLogsInput, Prisma.RegionUncheckedCreateWithoutMemberStatusLogsInput>
+}
+
+export type RegionUpsertWithoutMemberStatusLogsInput = {
+  update: Prisma.XOR<Prisma.RegionUpdateWithoutMemberStatusLogsInput, Prisma.RegionUncheckedUpdateWithoutMemberStatusLogsInput>
+  create: Prisma.XOR<Prisma.RegionCreateWithoutMemberStatusLogsInput, Prisma.RegionUncheckedCreateWithoutMemberStatusLogsInput>
+  where?: Prisma.RegionWhereInput
+}
+
+export type RegionUpdateToOneWithWhereWithoutMemberStatusLogsInput = {
+  where?: Prisma.RegionWhereInput
+  data: Prisma.XOR<Prisma.RegionUpdateWithoutMemberStatusLogsInput, Prisma.RegionUncheckedUpdateWithoutMemberStatusLogsInput>
+}
+
+export type RegionUpdateWithoutMemberStatusLogsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  logo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  status?: Prisma.EnumRegionStatusFieldUpdateOperationsInput | $Enums.RegionStatus
+  allowedUsers?: Prisma.AllowedUserUpdateManyWithoutRegionNestedInput
+  joinRequests?: Prisma.JoinRequestUpdateManyWithoutRegionNestedInput
+  Event?: Prisma.EventUpdateManyWithoutRegionNestedInput
+  hrWarnings?: Prisma.HrWarningUpdateManyWithoutRegionNestedInput
+  positionHistories?: Prisma.PositionHistoryUpdateManyWithoutRegionNestedInput
+  ratingHistories?: Prisma.RatingHistoryUpdateManyWithoutRegionNestedInput
+}
+
+export type RegionUncheckedUpdateWithoutMemberStatusLogsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  logo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  status?: Prisma.EnumRegionStatusFieldUpdateOperationsInput | $Enums.RegionStatus
+  allowedUsers?: Prisma.AllowedUserUncheckedUpdateManyWithoutRegionNestedInput
+  joinRequests?: Prisma.JoinRequestUncheckedUpdateManyWithoutRegionNestedInput
+  Event?: Prisma.EventUncheckedUpdateManyWithoutRegionNestedInput
+  hrWarnings?: Prisma.HrWarningUncheckedUpdateManyWithoutRegionNestedInput
+  positionHistories?: Prisma.PositionHistoryUncheckedUpdateManyWithoutRegionNestedInput
+  ratingHistories?: Prisma.RatingHistoryUncheckedUpdateManyWithoutRegionNestedInput
 }
 
 export type RegionCreateWithoutJoinRequestsInput = {
@@ -609,6 +1101,10 @@ export type RegionCreateWithoutJoinRequestsInput = {
   status?: $Enums.RegionStatus
   allowedUsers?: Prisma.AllowedUserCreateNestedManyWithoutRegionInput
   Event?: Prisma.EventCreateNestedManyWithoutRegionInput
+  hrWarnings?: Prisma.HrWarningCreateNestedManyWithoutRegionInput
+  positionHistories?: Prisma.PositionHistoryCreateNestedManyWithoutRegionInput
+  ratingHistories?: Prisma.RatingHistoryCreateNestedManyWithoutRegionInput
+  memberStatusLogs?: Prisma.MemberStatusLogCreateNestedManyWithoutRegionInput
 }
 
 export type RegionUncheckedCreateWithoutJoinRequestsInput = {
@@ -625,6 +1121,10 @@ export type RegionUncheckedCreateWithoutJoinRequestsInput = {
   status?: $Enums.RegionStatus
   allowedUsers?: Prisma.AllowedUserUncheckedCreateNestedManyWithoutRegionInput
   Event?: Prisma.EventUncheckedCreateNestedManyWithoutRegionInput
+  hrWarnings?: Prisma.HrWarningUncheckedCreateNestedManyWithoutRegionInput
+  positionHistories?: Prisma.PositionHistoryUncheckedCreateNestedManyWithoutRegionInput
+  ratingHistories?: Prisma.RatingHistoryUncheckedCreateNestedManyWithoutRegionInput
+  memberStatusLogs?: Prisma.MemberStatusLogUncheckedCreateNestedManyWithoutRegionInput
 }
 
 export type RegionCreateOrConnectWithoutJoinRequestsInput = {
@@ -657,6 +1157,10 @@ export type RegionUpdateWithoutJoinRequestsInput = {
   status?: Prisma.EnumRegionStatusFieldUpdateOperationsInput | $Enums.RegionStatus
   allowedUsers?: Prisma.AllowedUserUpdateManyWithoutRegionNestedInput
   Event?: Prisma.EventUpdateManyWithoutRegionNestedInput
+  hrWarnings?: Prisma.HrWarningUpdateManyWithoutRegionNestedInput
+  positionHistories?: Prisma.PositionHistoryUpdateManyWithoutRegionNestedInput
+  ratingHistories?: Prisma.RatingHistoryUpdateManyWithoutRegionNestedInput
+  memberStatusLogs?: Prisma.MemberStatusLogUpdateManyWithoutRegionNestedInput
 }
 
 export type RegionUncheckedUpdateWithoutJoinRequestsInput = {
@@ -673,6 +1177,10 @@ export type RegionUncheckedUpdateWithoutJoinRequestsInput = {
   status?: Prisma.EnumRegionStatusFieldUpdateOperationsInput | $Enums.RegionStatus
   allowedUsers?: Prisma.AllowedUserUncheckedUpdateManyWithoutRegionNestedInput
   Event?: Prisma.EventUncheckedUpdateManyWithoutRegionNestedInput
+  hrWarnings?: Prisma.HrWarningUncheckedUpdateManyWithoutRegionNestedInput
+  positionHistories?: Prisma.PositionHistoryUncheckedUpdateManyWithoutRegionNestedInput
+  ratingHistories?: Prisma.RatingHistoryUncheckedUpdateManyWithoutRegionNestedInput
+  memberStatusLogs?: Prisma.MemberStatusLogUncheckedUpdateManyWithoutRegionNestedInput
 }
 
 export type RegionCreateWithoutAllowedUsersInput = {
@@ -689,6 +1197,10 @@ export type RegionCreateWithoutAllowedUsersInput = {
   status?: $Enums.RegionStatus
   joinRequests?: Prisma.JoinRequestCreateNestedManyWithoutRegionInput
   Event?: Prisma.EventCreateNestedManyWithoutRegionInput
+  hrWarnings?: Prisma.HrWarningCreateNestedManyWithoutRegionInput
+  positionHistories?: Prisma.PositionHistoryCreateNestedManyWithoutRegionInput
+  ratingHistories?: Prisma.RatingHistoryCreateNestedManyWithoutRegionInput
+  memberStatusLogs?: Prisma.MemberStatusLogCreateNestedManyWithoutRegionInput
 }
 
 export type RegionUncheckedCreateWithoutAllowedUsersInput = {
@@ -705,6 +1217,10 @@ export type RegionUncheckedCreateWithoutAllowedUsersInput = {
   status?: $Enums.RegionStatus
   joinRequests?: Prisma.JoinRequestUncheckedCreateNestedManyWithoutRegionInput
   Event?: Prisma.EventUncheckedCreateNestedManyWithoutRegionInput
+  hrWarnings?: Prisma.HrWarningUncheckedCreateNestedManyWithoutRegionInput
+  positionHistories?: Prisma.PositionHistoryUncheckedCreateNestedManyWithoutRegionInput
+  ratingHistories?: Prisma.RatingHistoryUncheckedCreateNestedManyWithoutRegionInput
+  memberStatusLogs?: Prisma.MemberStatusLogUncheckedCreateNestedManyWithoutRegionInput
 }
 
 export type RegionCreateOrConnectWithoutAllowedUsersInput = {
@@ -737,6 +1253,10 @@ export type RegionUpdateWithoutAllowedUsersInput = {
   status?: Prisma.EnumRegionStatusFieldUpdateOperationsInput | $Enums.RegionStatus
   joinRequests?: Prisma.JoinRequestUpdateManyWithoutRegionNestedInput
   Event?: Prisma.EventUpdateManyWithoutRegionNestedInput
+  hrWarnings?: Prisma.HrWarningUpdateManyWithoutRegionNestedInput
+  positionHistories?: Prisma.PositionHistoryUpdateManyWithoutRegionNestedInput
+  ratingHistories?: Prisma.RatingHistoryUpdateManyWithoutRegionNestedInput
+  memberStatusLogs?: Prisma.MemberStatusLogUpdateManyWithoutRegionNestedInput
 }
 
 export type RegionUncheckedUpdateWithoutAllowedUsersInput = {
@@ -753,6 +1273,10 @@ export type RegionUncheckedUpdateWithoutAllowedUsersInput = {
   status?: Prisma.EnumRegionStatusFieldUpdateOperationsInput | $Enums.RegionStatus
   joinRequests?: Prisma.JoinRequestUncheckedUpdateManyWithoutRegionNestedInput
   Event?: Prisma.EventUncheckedUpdateManyWithoutRegionNestedInput
+  hrWarnings?: Prisma.HrWarningUncheckedUpdateManyWithoutRegionNestedInput
+  positionHistories?: Prisma.PositionHistoryUncheckedUpdateManyWithoutRegionNestedInput
+  ratingHistories?: Prisma.RatingHistoryUncheckedUpdateManyWithoutRegionNestedInput
+  memberStatusLogs?: Prisma.MemberStatusLogUncheckedUpdateManyWithoutRegionNestedInput
 }
 
 
@@ -764,12 +1288,20 @@ export type RegionCountOutputType = {
   allowedUsers: number
   joinRequests: number
   Event: number
+  hrWarnings: number
+  positionHistories: number
+  ratingHistories: number
+  memberStatusLogs: number
 }
 
 export type RegionCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   allowedUsers?: boolean | RegionCountOutputTypeCountAllowedUsersArgs
   joinRequests?: boolean | RegionCountOutputTypeCountJoinRequestsArgs
   Event?: boolean | RegionCountOutputTypeCountEventArgs
+  hrWarnings?: boolean | RegionCountOutputTypeCountHrWarningsArgs
+  positionHistories?: boolean | RegionCountOutputTypeCountPositionHistoriesArgs
+  ratingHistories?: boolean | RegionCountOutputTypeCountRatingHistoriesArgs
+  memberStatusLogs?: boolean | RegionCountOutputTypeCountMemberStatusLogsArgs
 }
 
 /**
@@ -803,6 +1335,34 @@ export type RegionCountOutputTypeCountEventArgs<ExtArgs extends runtime.Types.Ex
   where?: Prisma.EventWhereInput
 }
 
+/**
+ * RegionCountOutputType without action
+ */
+export type RegionCountOutputTypeCountHrWarningsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.HrWarningWhereInput
+}
+
+/**
+ * RegionCountOutputType without action
+ */
+export type RegionCountOutputTypeCountPositionHistoriesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.PositionHistoryWhereInput
+}
+
+/**
+ * RegionCountOutputType without action
+ */
+export type RegionCountOutputTypeCountRatingHistoriesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.RatingHistoryWhereInput
+}
+
+/**
+ * RegionCountOutputType without action
+ */
+export type RegionCountOutputTypeCountMemberStatusLogsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.MemberStatusLogWhereInput
+}
+
 
 export type RegionSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -819,6 +1379,10 @@ export type RegionSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs =
   allowedUsers?: boolean | Prisma.Region$allowedUsersArgs<ExtArgs>
   joinRequests?: boolean | Prisma.Region$joinRequestsArgs<ExtArgs>
   Event?: boolean | Prisma.Region$EventArgs<ExtArgs>
+  hrWarnings?: boolean | Prisma.Region$hrWarningsArgs<ExtArgs>
+  positionHistories?: boolean | Prisma.Region$positionHistoriesArgs<ExtArgs>
+  ratingHistories?: boolean | Prisma.Region$ratingHistoriesArgs<ExtArgs>
+  memberStatusLogs?: boolean | Prisma.Region$memberStatusLogsArgs<ExtArgs>
   _count?: boolean | Prisma.RegionCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["region"]>
 
@@ -869,6 +1433,10 @@ export type RegionInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs 
   allowedUsers?: boolean | Prisma.Region$allowedUsersArgs<ExtArgs>
   joinRequests?: boolean | Prisma.Region$joinRequestsArgs<ExtArgs>
   Event?: boolean | Prisma.Region$EventArgs<ExtArgs>
+  hrWarnings?: boolean | Prisma.Region$hrWarningsArgs<ExtArgs>
+  positionHistories?: boolean | Prisma.Region$positionHistoriesArgs<ExtArgs>
+  ratingHistories?: boolean | Prisma.Region$ratingHistoriesArgs<ExtArgs>
+  memberStatusLogs?: boolean | Prisma.Region$memberStatusLogsArgs<ExtArgs>
   _count?: boolean | Prisma.RegionCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type RegionIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {}
@@ -880,6 +1448,10 @@ export type $RegionPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs
     allowedUsers: Prisma.$AllowedUserPayload<ExtArgs>[]
     joinRequests: Prisma.$JoinRequestPayload<ExtArgs>[]
     Event: Prisma.$EventPayload<ExtArgs>[]
+    hrWarnings: Prisma.$HrWarningPayload<ExtArgs>[]
+    positionHistories: Prisma.$PositionHistoryPayload<ExtArgs>[]
+    ratingHistories: Prisma.$RatingHistoryPayload<ExtArgs>[]
+    memberStatusLogs: Prisma.$MemberStatusLogPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -1290,6 +1862,10 @@ export interface Prisma__RegionClient<T, Null = never, ExtArgs extends runtime.T
   allowedUsers<T extends Prisma.Region$allowedUsersArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Region$allowedUsersArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$AllowedUserPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   joinRequests<T extends Prisma.Region$joinRequestsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Region$joinRequestsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$JoinRequestPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   Event<T extends Prisma.Region$EventArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Region$EventArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$EventPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  hrWarnings<T extends Prisma.Region$hrWarningsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Region$hrWarningsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$HrWarningPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  positionHistories<T extends Prisma.Region$positionHistoriesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Region$positionHistoriesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$PositionHistoryPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  ratingHistories<T extends Prisma.Region$ratingHistoriesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Region$ratingHistoriesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$RatingHistoryPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  memberStatusLogs<T extends Prisma.Region$memberStatusLogsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Region$memberStatusLogsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$MemberStatusLogPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1787,6 +2363,102 @@ export type Region$EventArgs<ExtArgs extends runtime.Types.Extensions.InternalAr
   take?: number
   skip?: number
   distinct?: Prisma.EventScalarFieldEnum | Prisma.EventScalarFieldEnum[]
+}
+
+/**
+ * Region.hrWarnings
+ */
+export type Region$hrWarningsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the HrWarning
+   */
+  select?: Prisma.HrWarningSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the HrWarning
+   */
+  omit?: Prisma.HrWarningOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.HrWarningInclude<ExtArgs> | null
+  where?: Prisma.HrWarningWhereInput
+  orderBy?: Prisma.HrWarningOrderByWithRelationInput | Prisma.HrWarningOrderByWithRelationInput[]
+  cursor?: Prisma.HrWarningWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.HrWarningScalarFieldEnum | Prisma.HrWarningScalarFieldEnum[]
+}
+
+/**
+ * Region.positionHistories
+ */
+export type Region$positionHistoriesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the PositionHistory
+   */
+  select?: Prisma.PositionHistorySelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the PositionHistory
+   */
+  omit?: Prisma.PositionHistoryOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.PositionHistoryInclude<ExtArgs> | null
+  where?: Prisma.PositionHistoryWhereInput
+  orderBy?: Prisma.PositionHistoryOrderByWithRelationInput | Prisma.PositionHistoryOrderByWithRelationInput[]
+  cursor?: Prisma.PositionHistoryWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.PositionHistoryScalarFieldEnum | Prisma.PositionHistoryScalarFieldEnum[]
+}
+
+/**
+ * Region.ratingHistories
+ */
+export type Region$ratingHistoriesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the RatingHistory
+   */
+  select?: Prisma.RatingHistorySelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the RatingHistory
+   */
+  omit?: Prisma.RatingHistoryOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.RatingHistoryInclude<ExtArgs> | null
+  where?: Prisma.RatingHistoryWhereInput
+  orderBy?: Prisma.RatingHistoryOrderByWithRelationInput | Prisma.RatingHistoryOrderByWithRelationInput[]
+  cursor?: Prisma.RatingHistoryWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.RatingHistoryScalarFieldEnum | Prisma.RatingHistoryScalarFieldEnum[]
+}
+
+/**
+ * Region.memberStatusLogs
+ */
+export type Region$memberStatusLogsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the MemberStatusLog
+   */
+  select?: Prisma.MemberStatusLogSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the MemberStatusLog
+   */
+  omit?: Prisma.MemberStatusLogOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.MemberStatusLogInclude<ExtArgs> | null
+  where?: Prisma.MemberStatusLogWhereInput
+  orderBy?: Prisma.MemberStatusLogOrderByWithRelationInput | Prisma.MemberStatusLogOrderByWithRelationInput[]
+  cursor?: Prisma.MemberStatusLogWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.MemberStatusLogScalarFieldEnum | Prisma.MemberStatusLogScalarFieldEnum[]
 }
 
 /**

@@ -35,6 +35,7 @@ export type HrWarningMinAggregateOutputType = {
   updatedAt: Date | null
   createdById: string | null
   updatedById: string | null
+  regionId: string | null
 }
 
 export type HrWarningMaxAggregateOutputType = {
@@ -48,6 +49,7 @@ export type HrWarningMaxAggregateOutputType = {
   updatedAt: Date | null
   createdById: string | null
   updatedById: string | null
+  regionId: string | null
 }
 
 export type HrWarningCountAggregateOutputType = {
@@ -61,6 +63,7 @@ export type HrWarningCountAggregateOutputType = {
   updatedAt: number
   createdById: number
   updatedById: number
+  regionId: number
   _all: number
 }
 
@@ -76,6 +79,7 @@ export type HrWarningMinAggregateInputType = {
   updatedAt?: true
   createdById?: true
   updatedById?: true
+  regionId?: true
 }
 
 export type HrWarningMaxAggregateInputType = {
@@ -89,6 +93,7 @@ export type HrWarningMaxAggregateInputType = {
   updatedAt?: true
   createdById?: true
   updatedById?: true
+  regionId?: true
 }
 
 export type HrWarningCountAggregateInputType = {
@@ -102,6 +107,7 @@ export type HrWarningCountAggregateInputType = {
   updatedAt?: true
   createdById?: true
   updatedById?: true
+  regionId?: true
   _all?: true
 }
 
@@ -188,6 +194,7 @@ export type HrWarningGroupByOutputType = {
   updatedAt: Date | null
   createdById: string | null
   updatedById: string | null
+  regionId: string | null
   _count: HrWarningCountAggregateOutputType | null
   _min: HrWarningMinAggregateOutputType | null
   _max: HrWarningMaxAggregateOutputType | null
@@ -222,8 +229,10 @@ export type HrWarningWhereInput = {
   updatedAt?: Prisma.DateTimeNullableFilter<"HrWarning"> | Date | string | null
   createdById?: Prisma.StringNullableFilter<"HrWarning"> | string | null
   updatedById?: Prisma.StringNullableFilter<"HrWarning"> | string | null
+  regionId?: Prisma.StringNullableFilter<"HrWarning"> | string | null
   type?: Prisma.XOR<Prisma.HrWarningTypeScalarRelationFilter, Prisma.HrWarningTypeWhereInput>
   assignee?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
+  region?: Prisma.XOR<Prisma.RegionNullableScalarRelationFilter, Prisma.RegionWhereInput> | null
   updatedBy?: Prisma.XOR<Prisma.UserNullableScalarRelationFilter, Prisma.UserWhereInput> | null
   createdBy?: Prisma.XOR<Prisma.UserNullableScalarRelationFilter, Prisma.UserWhereInput> | null
 }
@@ -239,8 +248,10 @@ export type HrWarningOrderByWithRelationInput = {
   updatedAt?: Prisma.SortOrderInput | Prisma.SortOrder
   createdById?: Prisma.SortOrderInput | Prisma.SortOrder
   updatedById?: Prisma.SortOrderInput | Prisma.SortOrder
+  regionId?: Prisma.SortOrderInput | Prisma.SortOrder
   type?: Prisma.HrWarningTypeOrderByWithRelationInput
   assignee?: Prisma.UserOrderByWithRelationInput
+  region?: Prisma.RegionOrderByWithRelationInput
   updatedBy?: Prisma.UserOrderByWithRelationInput
   createdBy?: Prisma.UserOrderByWithRelationInput
 }
@@ -259,8 +270,10 @@ export type HrWarningWhereUniqueInput = Prisma.AtLeast<{
   updatedAt?: Prisma.DateTimeNullableFilter<"HrWarning"> | Date | string | null
   createdById?: Prisma.StringNullableFilter<"HrWarning"> | string | null
   updatedById?: Prisma.StringNullableFilter<"HrWarning"> | string | null
+  regionId?: Prisma.StringNullableFilter<"HrWarning"> | string | null
   type?: Prisma.XOR<Prisma.HrWarningTypeScalarRelationFilter, Prisma.HrWarningTypeWhereInput>
   assignee?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
+  region?: Prisma.XOR<Prisma.RegionNullableScalarRelationFilter, Prisma.RegionWhereInput> | null
   updatedBy?: Prisma.XOR<Prisma.UserNullableScalarRelationFilter, Prisma.UserWhereInput> | null
   createdBy?: Prisma.XOR<Prisma.UserNullableScalarRelationFilter, Prisma.UserWhereInput> | null
 }, "id">
@@ -276,6 +289,7 @@ export type HrWarningOrderByWithAggregationInput = {
   updatedAt?: Prisma.SortOrderInput | Prisma.SortOrder
   createdById?: Prisma.SortOrderInput | Prisma.SortOrder
   updatedById?: Prisma.SortOrderInput | Prisma.SortOrder
+  regionId?: Prisma.SortOrderInput | Prisma.SortOrder
   _count?: Prisma.HrWarningCountOrderByAggregateInput
   _max?: Prisma.HrWarningMaxOrderByAggregateInput
   _min?: Prisma.HrWarningMinOrderByAggregateInput
@@ -295,6 +309,7 @@ export type HrWarningScalarWhereWithAggregatesInput = {
   updatedAt?: Prisma.DateTimeNullableWithAggregatesFilter<"HrWarning"> | Date | string | null
   createdById?: Prisma.StringNullableWithAggregatesFilter<"HrWarning"> | string | null
   updatedById?: Prisma.StringNullableWithAggregatesFilter<"HrWarning"> | string | null
+  regionId?: Prisma.StringNullableWithAggregatesFilter<"HrWarning"> | string | null
 }
 
 export type HrWarningCreateInput = {
@@ -306,6 +321,7 @@ export type HrWarningCreateInput = {
   updatedAt?: Date | string | null
   type: Prisma.HrWarningTypeCreateNestedOneWithoutHrWarningInput
   assignee: Prisma.UserCreateNestedOneWithoutHrWarningsInput
+  region?: Prisma.RegionCreateNestedOneWithoutHrWarningsInput
   updatedBy?: Prisma.UserCreateNestedOneWithoutUpdatedHrWarningsInput
   createdBy?: Prisma.UserCreateNestedOneWithoutCreatedHrWarningInput
 }
@@ -321,6 +337,7 @@ export type HrWarningUncheckedCreateInput = {
   updatedAt?: Date | string | null
   createdById?: string | null
   updatedById?: string | null
+  regionId?: string | null
 }
 
 export type HrWarningUpdateInput = {
@@ -332,6 +349,7 @@ export type HrWarningUpdateInput = {
   updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   type?: Prisma.HrWarningTypeUpdateOneRequiredWithoutHrWarningNestedInput
   assignee?: Prisma.UserUpdateOneRequiredWithoutHrWarningsNestedInput
+  region?: Prisma.RegionUpdateOneWithoutHrWarningsNestedInput
   updatedBy?: Prisma.UserUpdateOneWithoutUpdatedHrWarningsNestedInput
   createdBy?: Prisma.UserUpdateOneWithoutCreatedHrWarningNestedInput
 }
@@ -347,6 +365,7 @@ export type HrWarningUncheckedUpdateInput = {
   updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   updatedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  regionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 export type HrWarningCreateManyInput = {
@@ -360,6 +379,7 @@ export type HrWarningCreateManyInput = {
   updatedAt?: Date | string | null
   createdById?: string | null
   updatedById?: string | null
+  regionId?: string | null
 }
 
 export type HrWarningUpdateManyMutationInput = {
@@ -382,6 +402,7 @@ export type HrWarningUncheckedUpdateManyInput = {
   updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   updatedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  regionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 export type HrWarningListRelationFilter = {
@@ -405,6 +426,7 @@ export type HrWarningCountOrderByAggregateInput = {
   updatedAt?: Prisma.SortOrder
   createdById?: Prisma.SortOrder
   updatedById?: Prisma.SortOrder
+  regionId?: Prisma.SortOrder
 }
 
 export type HrWarningMaxOrderByAggregateInput = {
@@ -418,6 +440,7 @@ export type HrWarningMaxOrderByAggregateInput = {
   updatedAt?: Prisma.SortOrder
   createdById?: Prisma.SortOrder
   updatedById?: Prisma.SortOrder
+  regionId?: Prisma.SortOrder
 }
 
 export type HrWarningMinOrderByAggregateInput = {
@@ -431,6 +454,7 @@ export type HrWarningMinOrderByAggregateInput = {
   updatedAt?: Prisma.SortOrder
   createdById?: Prisma.SortOrder
   updatedById?: Prisma.SortOrder
+  regionId?: Prisma.SortOrder
 }
 
 export type HrWarningCreateNestedManyWithoutAssigneeInput = {
@@ -605,6 +629,48 @@ export type HrWarningUncheckedUpdateManyWithoutTypeNestedInput = {
   deleteMany?: Prisma.HrWarningScalarWhereInput | Prisma.HrWarningScalarWhereInput[]
 }
 
+export type HrWarningCreateNestedManyWithoutRegionInput = {
+  create?: Prisma.XOR<Prisma.HrWarningCreateWithoutRegionInput, Prisma.HrWarningUncheckedCreateWithoutRegionInput> | Prisma.HrWarningCreateWithoutRegionInput[] | Prisma.HrWarningUncheckedCreateWithoutRegionInput[]
+  connectOrCreate?: Prisma.HrWarningCreateOrConnectWithoutRegionInput | Prisma.HrWarningCreateOrConnectWithoutRegionInput[]
+  createMany?: Prisma.HrWarningCreateManyRegionInputEnvelope
+  connect?: Prisma.HrWarningWhereUniqueInput | Prisma.HrWarningWhereUniqueInput[]
+}
+
+export type HrWarningUncheckedCreateNestedManyWithoutRegionInput = {
+  create?: Prisma.XOR<Prisma.HrWarningCreateWithoutRegionInput, Prisma.HrWarningUncheckedCreateWithoutRegionInput> | Prisma.HrWarningCreateWithoutRegionInput[] | Prisma.HrWarningUncheckedCreateWithoutRegionInput[]
+  connectOrCreate?: Prisma.HrWarningCreateOrConnectWithoutRegionInput | Prisma.HrWarningCreateOrConnectWithoutRegionInput[]
+  createMany?: Prisma.HrWarningCreateManyRegionInputEnvelope
+  connect?: Prisma.HrWarningWhereUniqueInput | Prisma.HrWarningWhereUniqueInput[]
+}
+
+export type HrWarningUpdateManyWithoutRegionNestedInput = {
+  create?: Prisma.XOR<Prisma.HrWarningCreateWithoutRegionInput, Prisma.HrWarningUncheckedCreateWithoutRegionInput> | Prisma.HrWarningCreateWithoutRegionInput[] | Prisma.HrWarningUncheckedCreateWithoutRegionInput[]
+  connectOrCreate?: Prisma.HrWarningCreateOrConnectWithoutRegionInput | Prisma.HrWarningCreateOrConnectWithoutRegionInput[]
+  upsert?: Prisma.HrWarningUpsertWithWhereUniqueWithoutRegionInput | Prisma.HrWarningUpsertWithWhereUniqueWithoutRegionInput[]
+  createMany?: Prisma.HrWarningCreateManyRegionInputEnvelope
+  set?: Prisma.HrWarningWhereUniqueInput | Prisma.HrWarningWhereUniqueInput[]
+  disconnect?: Prisma.HrWarningWhereUniqueInput | Prisma.HrWarningWhereUniqueInput[]
+  delete?: Prisma.HrWarningWhereUniqueInput | Prisma.HrWarningWhereUniqueInput[]
+  connect?: Prisma.HrWarningWhereUniqueInput | Prisma.HrWarningWhereUniqueInput[]
+  update?: Prisma.HrWarningUpdateWithWhereUniqueWithoutRegionInput | Prisma.HrWarningUpdateWithWhereUniqueWithoutRegionInput[]
+  updateMany?: Prisma.HrWarningUpdateManyWithWhereWithoutRegionInput | Prisma.HrWarningUpdateManyWithWhereWithoutRegionInput[]
+  deleteMany?: Prisma.HrWarningScalarWhereInput | Prisma.HrWarningScalarWhereInput[]
+}
+
+export type HrWarningUncheckedUpdateManyWithoutRegionNestedInput = {
+  create?: Prisma.XOR<Prisma.HrWarningCreateWithoutRegionInput, Prisma.HrWarningUncheckedCreateWithoutRegionInput> | Prisma.HrWarningCreateWithoutRegionInput[] | Prisma.HrWarningUncheckedCreateWithoutRegionInput[]
+  connectOrCreate?: Prisma.HrWarningCreateOrConnectWithoutRegionInput | Prisma.HrWarningCreateOrConnectWithoutRegionInput[]
+  upsert?: Prisma.HrWarningUpsertWithWhereUniqueWithoutRegionInput | Prisma.HrWarningUpsertWithWhereUniqueWithoutRegionInput[]
+  createMany?: Prisma.HrWarningCreateManyRegionInputEnvelope
+  set?: Prisma.HrWarningWhereUniqueInput | Prisma.HrWarningWhereUniqueInput[]
+  disconnect?: Prisma.HrWarningWhereUniqueInput | Prisma.HrWarningWhereUniqueInput[]
+  delete?: Prisma.HrWarningWhereUniqueInput | Prisma.HrWarningWhereUniqueInput[]
+  connect?: Prisma.HrWarningWhereUniqueInput | Prisma.HrWarningWhereUniqueInput[]
+  update?: Prisma.HrWarningUpdateWithWhereUniqueWithoutRegionInput | Prisma.HrWarningUpdateWithWhereUniqueWithoutRegionInput[]
+  updateMany?: Prisma.HrWarningUpdateManyWithWhereWithoutRegionInput | Prisma.HrWarningUpdateManyWithWhereWithoutRegionInput[]
+  deleteMany?: Prisma.HrWarningScalarWhereInput | Prisma.HrWarningScalarWhereInput[]
+}
+
 export type HrWarningCreateWithoutAssigneeInput = {
   id?: string
   name: string
@@ -613,6 +679,7 @@ export type HrWarningCreateWithoutAssigneeInput = {
   createdAt?: Date | string
   updatedAt?: Date | string | null
   type: Prisma.HrWarningTypeCreateNestedOneWithoutHrWarningInput
+  region?: Prisma.RegionCreateNestedOneWithoutHrWarningsInput
   updatedBy?: Prisma.UserCreateNestedOneWithoutUpdatedHrWarningsInput
   createdBy?: Prisma.UserCreateNestedOneWithoutCreatedHrWarningInput
 }
@@ -627,6 +694,7 @@ export type HrWarningUncheckedCreateWithoutAssigneeInput = {
   updatedAt?: Date | string | null
   createdById?: string | null
   updatedById?: string | null
+  regionId?: string | null
 }
 
 export type HrWarningCreateOrConnectWithoutAssigneeInput = {
@@ -648,6 +716,7 @@ export type HrWarningCreateWithoutCreatedByInput = {
   updatedAt?: Date | string | null
   type: Prisma.HrWarningTypeCreateNestedOneWithoutHrWarningInput
   assignee: Prisma.UserCreateNestedOneWithoutHrWarningsInput
+  region?: Prisma.RegionCreateNestedOneWithoutHrWarningsInput
   updatedBy?: Prisma.UserCreateNestedOneWithoutUpdatedHrWarningsInput
 }
 
@@ -661,6 +730,7 @@ export type HrWarningUncheckedCreateWithoutCreatedByInput = {
   createdAt?: Date | string
   updatedAt?: Date | string | null
   updatedById?: string | null
+  regionId?: string | null
 }
 
 export type HrWarningCreateOrConnectWithoutCreatedByInput = {
@@ -682,6 +752,7 @@ export type HrWarningCreateWithoutUpdatedByInput = {
   updatedAt?: Date | string | null
   type: Prisma.HrWarningTypeCreateNestedOneWithoutHrWarningInput
   assignee: Prisma.UserCreateNestedOneWithoutHrWarningsInput
+  region?: Prisma.RegionCreateNestedOneWithoutHrWarningsInput
   createdBy?: Prisma.UserCreateNestedOneWithoutCreatedHrWarningInput
 }
 
@@ -695,6 +766,7 @@ export type HrWarningUncheckedCreateWithoutUpdatedByInput = {
   createdAt?: Date | string
   updatedAt?: Date | string | null
   createdById?: string | null
+  regionId?: string | null
 }
 
 export type HrWarningCreateOrConnectWithoutUpdatedByInput = {
@@ -737,6 +809,7 @@ export type HrWarningScalarWhereInput = {
   updatedAt?: Prisma.DateTimeNullableFilter<"HrWarning"> | Date | string | null
   createdById?: Prisma.StringNullableFilter<"HrWarning"> | string | null
   updatedById?: Prisma.StringNullableFilter<"HrWarning"> | string | null
+  regionId?: Prisma.StringNullableFilter<"HrWarning"> | string | null
 }
 
 export type HrWarningUpsertWithWhereUniqueWithoutCreatedByInput = {
@@ -779,6 +852,7 @@ export type HrWarningCreateWithoutTypeInput = {
   createdAt?: Date | string
   updatedAt?: Date | string | null
   assignee: Prisma.UserCreateNestedOneWithoutHrWarningsInput
+  region?: Prisma.RegionCreateNestedOneWithoutHrWarningsInput
   updatedBy?: Prisma.UserCreateNestedOneWithoutUpdatedHrWarningsInput
   createdBy?: Prisma.UserCreateNestedOneWithoutCreatedHrWarningInput
 }
@@ -793,6 +867,7 @@ export type HrWarningUncheckedCreateWithoutTypeInput = {
   updatedAt?: Date | string | null
   createdById?: string | null
   updatedById?: string | null
+  regionId?: string | null
 }
 
 export type HrWarningCreateOrConnectWithoutTypeInput = {
@@ -821,6 +896,58 @@ export type HrWarningUpdateManyWithWhereWithoutTypeInput = {
   data: Prisma.XOR<Prisma.HrWarningUpdateManyMutationInput, Prisma.HrWarningUncheckedUpdateManyWithoutTypeInput>
 }
 
+export type HrWarningCreateWithoutRegionInput = {
+  id?: string
+  name: string
+  comment?: string | null
+  status?: $Enums.HrWarningStatus
+  createdAt?: Date | string
+  updatedAt?: Date | string | null
+  type: Prisma.HrWarningTypeCreateNestedOneWithoutHrWarningInput
+  assignee: Prisma.UserCreateNestedOneWithoutHrWarningsInput
+  updatedBy?: Prisma.UserCreateNestedOneWithoutUpdatedHrWarningsInput
+  createdBy?: Prisma.UserCreateNestedOneWithoutCreatedHrWarningInput
+}
+
+export type HrWarningUncheckedCreateWithoutRegionInput = {
+  id?: string
+  name: string
+  typeId: string
+  assigneeId: string
+  comment?: string | null
+  status?: $Enums.HrWarningStatus
+  createdAt?: Date | string
+  updatedAt?: Date | string | null
+  createdById?: string | null
+  updatedById?: string | null
+}
+
+export type HrWarningCreateOrConnectWithoutRegionInput = {
+  where: Prisma.HrWarningWhereUniqueInput
+  create: Prisma.XOR<Prisma.HrWarningCreateWithoutRegionInput, Prisma.HrWarningUncheckedCreateWithoutRegionInput>
+}
+
+export type HrWarningCreateManyRegionInputEnvelope = {
+  data: Prisma.HrWarningCreateManyRegionInput | Prisma.HrWarningCreateManyRegionInput[]
+  skipDuplicates?: boolean
+}
+
+export type HrWarningUpsertWithWhereUniqueWithoutRegionInput = {
+  where: Prisma.HrWarningWhereUniqueInput
+  update: Prisma.XOR<Prisma.HrWarningUpdateWithoutRegionInput, Prisma.HrWarningUncheckedUpdateWithoutRegionInput>
+  create: Prisma.XOR<Prisma.HrWarningCreateWithoutRegionInput, Prisma.HrWarningUncheckedCreateWithoutRegionInput>
+}
+
+export type HrWarningUpdateWithWhereUniqueWithoutRegionInput = {
+  where: Prisma.HrWarningWhereUniqueInput
+  data: Prisma.XOR<Prisma.HrWarningUpdateWithoutRegionInput, Prisma.HrWarningUncheckedUpdateWithoutRegionInput>
+}
+
+export type HrWarningUpdateManyWithWhereWithoutRegionInput = {
+  where: Prisma.HrWarningScalarWhereInput
+  data: Prisma.XOR<Prisma.HrWarningUpdateManyMutationInput, Prisma.HrWarningUncheckedUpdateManyWithoutRegionInput>
+}
+
 export type HrWarningCreateManyAssigneeInput = {
   id?: string
   name: string
@@ -831,6 +958,7 @@ export type HrWarningCreateManyAssigneeInput = {
   updatedAt?: Date | string | null
   createdById?: string | null
   updatedById?: string | null
+  regionId?: string | null
 }
 
 export type HrWarningCreateManyCreatedByInput = {
@@ -843,6 +971,7 @@ export type HrWarningCreateManyCreatedByInput = {
   createdAt?: Date | string
   updatedAt?: Date | string | null
   updatedById?: string | null
+  regionId?: string | null
 }
 
 export type HrWarningCreateManyUpdatedByInput = {
@@ -855,6 +984,7 @@ export type HrWarningCreateManyUpdatedByInput = {
   createdAt?: Date | string
   updatedAt?: Date | string | null
   createdById?: string | null
+  regionId?: string | null
 }
 
 export type HrWarningUpdateWithoutAssigneeInput = {
@@ -865,6 +995,7 @@ export type HrWarningUpdateWithoutAssigneeInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   type?: Prisma.HrWarningTypeUpdateOneRequiredWithoutHrWarningNestedInput
+  region?: Prisma.RegionUpdateOneWithoutHrWarningsNestedInput
   updatedBy?: Prisma.UserUpdateOneWithoutUpdatedHrWarningsNestedInput
   createdBy?: Prisma.UserUpdateOneWithoutCreatedHrWarningNestedInput
 }
@@ -879,6 +1010,7 @@ export type HrWarningUncheckedUpdateWithoutAssigneeInput = {
   updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   updatedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  regionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 export type HrWarningUncheckedUpdateManyWithoutAssigneeInput = {
@@ -891,6 +1023,7 @@ export type HrWarningUncheckedUpdateManyWithoutAssigneeInput = {
   updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   updatedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  regionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 export type HrWarningUpdateWithoutCreatedByInput = {
@@ -902,6 +1035,7 @@ export type HrWarningUpdateWithoutCreatedByInput = {
   updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   type?: Prisma.HrWarningTypeUpdateOneRequiredWithoutHrWarningNestedInput
   assignee?: Prisma.UserUpdateOneRequiredWithoutHrWarningsNestedInput
+  region?: Prisma.RegionUpdateOneWithoutHrWarningsNestedInput
   updatedBy?: Prisma.UserUpdateOneWithoutUpdatedHrWarningsNestedInput
 }
 
@@ -915,6 +1049,7 @@ export type HrWarningUncheckedUpdateWithoutCreatedByInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   updatedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  regionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 export type HrWarningUncheckedUpdateManyWithoutCreatedByInput = {
@@ -927,6 +1062,7 @@ export type HrWarningUncheckedUpdateManyWithoutCreatedByInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   updatedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  regionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 export type HrWarningUpdateWithoutUpdatedByInput = {
@@ -938,6 +1074,7 @@ export type HrWarningUpdateWithoutUpdatedByInput = {
   updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   type?: Prisma.HrWarningTypeUpdateOneRequiredWithoutHrWarningNestedInput
   assignee?: Prisma.UserUpdateOneRequiredWithoutHrWarningsNestedInput
+  region?: Prisma.RegionUpdateOneWithoutHrWarningsNestedInput
   createdBy?: Prisma.UserUpdateOneWithoutCreatedHrWarningNestedInput
 }
 
@@ -951,6 +1088,7 @@ export type HrWarningUncheckedUpdateWithoutUpdatedByInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  regionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 export type HrWarningUncheckedUpdateManyWithoutUpdatedByInput = {
@@ -963,6 +1101,7 @@ export type HrWarningUncheckedUpdateManyWithoutUpdatedByInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  regionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 export type HrWarningCreateManyTypeInput = {
@@ -975,6 +1114,7 @@ export type HrWarningCreateManyTypeInput = {
   updatedAt?: Date | string | null
   createdById?: string | null
   updatedById?: string | null
+  regionId?: string | null
 }
 
 export type HrWarningUpdateWithoutTypeInput = {
@@ -985,6 +1125,7 @@ export type HrWarningUpdateWithoutTypeInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   assignee?: Prisma.UserUpdateOneRequiredWithoutHrWarningsNestedInput
+  region?: Prisma.RegionUpdateOneWithoutHrWarningsNestedInput
   updatedBy?: Prisma.UserUpdateOneWithoutUpdatedHrWarningsNestedInput
   createdBy?: Prisma.UserUpdateOneWithoutCreatedHrWarningNestedInput
 }
@@ -999,11 +1140,65 @@ export type HrWarningUncheckedUpdateWithoutTypeInput = {
   updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   updatedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  regionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 export type HrWarningUncheckedUpdateManyWithoutTypeInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  assigneeId?: Prisma.StringFieldUpdateOperationsInput | string
+  comment?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.EnumHrWarningStatusFieldUpdateOperationsInput | $Enums.HrWarningStatus
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  updatedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  regionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+}
+
+export type HrWarningCreateManyRegionInput = {
+  id?: string
+  name: string
+  typeId: string
+  assigneeId: string
+  comment?: string | null
+  status?: $Enums.HrWarningStatus
+  createdAt?: Date | string
+  updatedAt?: Date | string | null
+  createdById?: string | null
+  updatedById?: string | null
+}
+
+export type HrWarningUpdateWithoutRegionInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  comment?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.EnumHrWarningStatusFieldUpdateOperationsInput | $Enums.HrWarningStatus
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  type?: Prisma.HrWarningTypeUpdateOneRequiredWithoutHrWarningNestedInput
+  assignee?: Prisma.UserUpdateOneRequiredWithoutHrWarningsNestedInput
+  updatedBy?: Prisma.UserUpdateOneWithoutUpdatedHrWarningsNestedInput
+  createdBy?: Prisma.UserUpdateOneWithoutCreatedHrWarningNestedInput
+}
+
+export type HrWarningUncheckedUpdateWithoutRegionInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  typeId?: Prisma.StringFieldUpdateOperationsInput | string
+  assigneeId?: Prisma.StringFieldUpdateOperationsInput | string
+  comment?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.EnumHrWarningStatusFieldUpdateOperationsInput | $Enums.HrWarningStatus
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  updatedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+}
+
+export type HrWarningUncheckedUpdateManyWithoutRegionInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  typeId?: Prisma.StringFieldUpdateOperationsInput | string
   assigneeId?: Prisma.StringFieldUpdateOperationsInput | string
   comment?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumHrWarningStatusFieldUpdateOperationsInput | $Enums.HrWarningStatus
@@ -1026,8 +1221,10 @@ export type HrWarningSelect<ExtArgs extends runtime.Types.Extensions.InternalArg
   updatedAt?: boolean
   createdById?: boolean
   updatedById?: boolean
+  regionId?: boolean
   type?: boolean | Prisma.HrWarningTypeDefaultArgs<ExtArgs>
   assignee?: boolean | Prisma.UserDefaultArgs<ExtArgs>
+  region?: boolean | Prisma.HrWarning$regionArgs<ExtArgs>
   updatedBy?: boolean | Prisma.HrWarning$updatedByArgs<ExtArgs>
   createdBy?: boolean | Prisma.HrWarning$createdByArgs<ExtArgs>
 }, ExtArgs["result"]["hrWarning"]>
@@ -1043,8 +1240,10 @@ export type HrWarningSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Ext
   updatedAt?: boolean
   createdById?: boolean
   updatedById?: boolean
+  regionId?: boolean
   type?: boolean | Prisma.HrWarningTypeDefaultArgs<ExtArgs>
   assignee?: boolean | Prisma.UserDefaultArgs<ExtArgs>
+  region?: boolean | Prisma.HrWarning$regionArgs<ExtArgs>
   updatedBy?: boolean | Prisma.HrWarning$updatedByArgs<ExtArgs>
   createdBy?: boolean | Prisma.HrWarning$createdByArgs<ExtArgs>
 }, ExtArgs["result"]["hrWarning"]>
@@ -1060,8 +1259,10 @@ export type HrWarningSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Ext
   updatedAt?: boolean
   createdById?: boolean
   updatedById?: boolean
+  regionId?: boolean
   type?: boolean | Prisma.HrWarningTypeDefaultArgs<ExtArgs>
   assignee?: boolean | Prisma.UserDefaultArgs<ExtArgs>
+  region?: boolean | Prisma.HrWarning$regionArgs<ExtArgs>
   updatedBy?: boolean | Prisma.HrWarning$updatedByArgs<ExtArgs>
   createdBy?: boolean | Prisma.HrWarning$createdByArgs<ExtArgs>
 }, ExtArgs["result"]["hrWarning"]>
@@ -1077,24 +1278,28 @@ export type HrWarningSelectScalar = {
   updatedAt?: boolean
   createdById?: boolean
   updatedById?: boolean
+  regionId?: boolean
 }
 
-export type HrWarningOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "typeId" | "assigneeId" | "comment" | "status" | "createdAt" | "updatedAt" | "createdById" | "updatedById", ExtArgs["result"]["hrWarning"]>
+export type HrWarningOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "typeId" | "assigneeId" | "comment" | "status" | "createdAt" | "updatedAt" | "createdById" | "updatedById" | "regionId", ExtArgs["result"]["hrWarning"]>
 export type HrWarningInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   type?: boolean | Prisma.HrWarningTypeDefaultArgs<ExtArgs>
   assignee?: boolean | Prisma.UserDefaultArgs<ExtArgs>
+  region?: boolean | Prisma.HrWarning$regionArgs<ExtArgs>
   updatedBy?: boolean | Prisma.HrWarning$updatedByArgs<ExtArgs>
   createdBy?: boolean | Prisma.HrWarning$createdByArgs<ExtArgs>
 }
 export type HrWarningIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   type?: boolean | Prisma.HrWarningTypeDefaultArgs<ExtArgs>
   assignee?: boolean | Prisma.UserDefaultArgs<ExtArgs>
+  region?: boolean | Prisma.HrWarning$regionArgs<ExtArgs>
   updatedBy?: boolean | Prisma.HrWarning$updatedByArgs<ExtArgs>
   createdBy?: boolean | Prisma.HrWarning$createdByArgs<ExtArgs>
 }
 export type HrWarningIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   type?: boolean | Prisma.HrWarningTypeDefaultArgs<ExtArgs>
   assignee?: boolean | Prisma.UserDefaultArgs<ExtArgs>
+  region?: boolean | Prisma.HrWarning$regionArgs<ExtArgs>
   updatedBy?: boolean | Prisma.HrWarning$updatedByArgs<ExtArgs>
   createdBy?: boolean | Prisma.HrWarning$createdByArgs<ExtArgs>
 }
@@ -1104,6 +1309,7 @@ export type $HrWarningPayload<ExtArgs extends runtime.Types.Extensions.InternalA
   objects: {
     type: Prisma.$HrWarningTypePayload<ExtArgs>
     assignee: Prisma.$UserPayload<ExtArgs>
+    region: Prisma.$RegionPayload<ExtArgs> | null
     updatedBy: Prisma.$UserPayload<ExtArgs> | null
     createdBy: Prisma.$UserPayload<ExtArgs> | null
   }
@@ -1118,6 +1324,7 @@ export type $HrWarningPayload<ExtArgs extends runtime.Types.Extensions.InternalA
     updatedAt: Date | null
     createdById: string | null
     updatedById: string | null
+    regionId: string | null
   }, ExtArgs["result"]["hrWarning"]>
   composites: {}
 }
@@ -1514,6 +1721,7 @@ export interface Prisma__HrWarningClient<T, Null = never, ExtArgs extends runtim
   readonly [Symbol.toStringTag]: "PrismaPromise"
   type<T extends Prisma.HrWarningTypeDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.HrWarningTypeDefaultArgs<ExtArgs>>): Prisma.Prisma__HrWarningTypeClient<runtime.Types.Result.GetResult<Prisma.$HrWarningTypePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   assignee<T extends Prisma.UserDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UserDefaultArgs<ExtArgs>>): Prisma.Prisma__UserClient<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+  region<T extends Prisma.HrWarning$regionArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.HrWarning$regionArgs<ExtArgs>>): Prisma.Prisma__RegionClient<runtime.Types.Result.GetResult<Prisma.$RegionPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   updatedBy<T extends Prisma.HrWarning$updatedByArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.HrWarning$updatedByArgs<ExtArgs>>): Prisma.Prisma__UserClient<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   createdBy<T extends Prisma.HrWarning$createdByArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.HrWarning$createdByArgs<ExtArgs>>): Prisma.Prisma__UserClient<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   /**
@@ -1555,6 +1763,7 @@ export interface HrWarningFieldRefs {
   readonly updatedAt: Prisma.FieldRef<"HrWarning", 'DateTime'>
   readonly createdById: Prisma.FieldRef<"HrWarning", 'String'>
   readonly updatedById: Prisma.FieldRef<"HrWarning", 'String'>
+  readonly regionId: Prisma.FieldRef<"HrWarning", 'String'>
 }
     
 
@@ -1948,6 +2157,25 @@ export type HrWarningDeleteManyArgs<ExtArgs extends runtime.Types.Extensions.Int
    * Limit how many HrWarnings to delete.
    */
   limit?: number
+}
+
+/**
+ * HrWarning.region
+ */
+export type HrWarning$regionArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Region
+   */
+  select?: Prisma.RegionSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Region
+   */
+  omit?: Prisma.RegionOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.RegionInclude<ExtArgs> | null
+  where?: Prisma.RegionWhereInput
 }
 
 /**

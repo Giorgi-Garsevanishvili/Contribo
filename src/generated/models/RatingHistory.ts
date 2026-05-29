@@ -50,6 +50,7 @@ export type RatingHistoryMinAggregateOutputType = {
   updatedById: string | null
   createdAt: Date | null
   updatedAt: Date | null
+  regionId: string | null
 }
 
 export type RatingHistoryMaxAggregateOutputType = {
@@ -64,6 +65,7 @@ export type RatingHistoryMaxAggregateOutputType = {
   updatedById: string | null
   createdAt: Date | null
   updatedAt: Date | null
+  regionId: string | null
 }
 
 export type RatingHistoryCountAggregateOutputType = {
@@ -78,6 +80,7 @@ export type RatingHistoryCountAggregateOutputType = {
   updatedById: number
   createdAt: number
   updatedAt: number
+  regionId: number
   _all: number
 }
 
@@ -106,6 +109,7 @@ export type RatingHistoryMinAggregateInputType = {
   updatedById?: true
   createdAt?: true
   updatedAt?: true
+  regionId?: true
 }
 
 export type RatingHistoryMaxAggregateInputType = {
@@ -120,6 +124,7 @@ export type RatingHistoryMaxAggregateInputType = {
   updatedById?: true
   createdAt?: true
   updatedAt?: true
+  regionId?: true
 }
 
 export type RatingHistoryCountAggregateInputType = {
@@ -134,6 +139,7 @@ export type RatingHistoryCountAggregateInputType = {
   updatedById?: true
   createdAt?: true
   updatedAt?: true
+  regionId?: true
   _all?: true
 }
 
@@ -235,6 +241,7 @@ export type RatingHistoryGroupByOutputType = {
   updatedById: string | null
   createdAt: Date
   updatedAt: Date | null
+  regionId: string | null
   _count: RatingHistoryCountAggregateOutputType | null
   _avg: RatingHistoryAvgAggregateOutputType | null
   _sum: RatingHistorySumAggregateOutputType | null
@@ -272,6 +279,8 @@ export type RatingHistoryWhereInput = {
   updatedById?: Prisma.StringNullableFilter<"RatingHistory"> | string | null
   createdAt?: Prisma.DateTimeFilter<"RatingHistory"> | Date | string
   updatedAt?: Prisma.DateTimeNullableFilter<"RatingHistory"> | Date | string | null
+  regionId?: Prisma.StringNullableFilter<"RatingHistory"> | string | null
+  region?: Prisma.XOR<Prisma.RegionNullableScalarRelationFilter, Prisma.RegionWhereInput> | null
   user?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
   createdBy?: Prisma.XOR<Prisma.UserNullableScalarRelationFilter, Prisma.UserWhereInput> | null
   updatedBy?: Prisma.XOR<Prisma.UserNullableScalarRelationFilter, Prisma.UserWhereInput> | null
@@ -289,6 +298,8 @@ export type RatingHistoryOrderByWithRelationInput = {
   updatedById?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrderInput | Prisma.SortOrder
+  regionId?: Prisma.SortOrderInput | Prisma.SortOrder
+  region?: Prisma.RegionOrderByWithRelationInput
   user?: Prisma.UserOrderByWithRelationInput
   createdBy?: Prisma.UserOrderByWithRelationInput
   updatedBy?: Prisma.UserOrderByWithRelationInput
@@ -309,6 +320,8 @@ export type RatingHistoryWhereUniqueInput = Prisma.AtLeast<{
   updatedById?: Prisma.StringNullableFilter<"RatingHistory"> | string | null
   createdAt?: Prisma.DateTimeFilter<"RatingHistory"> | Date | string
   updatedAt?: Prisma.DateTimeNullableFilter<"RatingHistory"> | Date | string | null
+  regionId?: Prisma.StringNullableFilter<"RatingHistory"> | string | null
+  region?: Prisma.XOR<Prisma.RegionNullableScalarRelationFilter, Prisma.RegionWhereInput> | null
   user?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
   createdBy?: Prisma.XOR<Prisma.UserNullableScalarRelationFilter, Prisma.UserWhereInput> | null
   updatedBy?: Prisma.XOR<Prisma.UserNullableScalarRelationFilter, Prisma.UserWhereInput> | null
@@ -326,6 +339,7 @@ export type RatingHistoryOrderByWithAggregationInput = {
   updatedById?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrderInput | Prisma.SortOrder
+  regionId?: Prisma.SortOrderInput | Prisma.SortOrder
   _count?: Prisma.RatingHistoryCountOrderByAggregateInput
   _avg?: Prisma.RatingHistoryAvgOrderByAggregateInput
   _max?: Prisma.RatingHistoryMaxOrderByAggregateInput
@@ -348,6 +362,7 @@ export type RatingHistoryScalarWhereWithAggregatesInput = {
   updatedById?: Prisma.StringNullableWithAggregatesFilter<"RatingHistory"> | string | null
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"RatingHistory"> | Date | string
   updatedAt?: Prisma.DateTimeNullableWithAggregatesFilter<"RatingHistory"> | Date | string | null
+  regionId?: Prisma.StringNullableWithAggregatesFilter<"RatingHistory"> | string | null
 }
 
 export type RatingHistoryCreateInput = {
@@ -359,6 +374,7 @@ export type RatingHistoryCreateInput = {
   reason?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string | null
+  region?: Prisma.RegionCreateNestedOneWithoutRatingHistoriesInput
   user: Prisma.UserCreateNestedOneWithoutRatingHistoryInput
   createdBy?: Prisma.UserCreateNestedOneWithoutCreatedRatingsInput
   updatedBy?: Prisma.UserCreateNestedOneWithoutUpdatedRatingsInput
@@ -376,6 +392,7 @@ export type RatingHistoryUncheckedCreateInput = {
   updatedById?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string | null
+  regionId?: string | null
 }
 
 export type RatingHistoryUpdateInput = {
@@ -387,6 +404,7 @@ export type RatingHistoryUpdateInput = {
   reason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  region?: Prisma.RegionUpdateOneWithoutRatingHistoriesNestedInput
   user?: Prisma.UserUpdateOneRequiredWithoutRatingHistoryNestedInput
   createdBy?: Prisma.UserUpdateOneWithoutCreatedRatingsNestedInput
   updatedBy?: Prisma.UserUpdateOneWithoutUpdatedRatingsNestedInput
@@ -404,6 +422,7 @@ export type RatingHistoryUncheckedUpdateInput = {
   updatedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  regionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 export type RatingHistoryCreateManyInput = {
@@ -418,6 +437,7 @@ export type RatingHistoryCreateManyInput = {
   updatedById?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string | null
+  regionId?: string | null
 }
 
 export type RatingHistoryUpdateManyMutationInput = {
@@ -443,6 +463,7 @@ export type RatingHistoryUncheckedUpdateManyInput = {
   updatedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  regionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 export type RatingHistoryListRelationFilter = {
@@ -467,6 +488,7 @@ export type RatingHistoryCountOrderByAggregateInput = {
   updatedById?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
+  regionId?: Prisma.SortOrder
 }
 
 export type RatingHistoryAvgOrderByAggregateInput = {
@@ -487,6 +509,7 @@ export type RatingHistoryMaxOrderByAggregateInput = {
   updatedById?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
+  regionId?: Prisma.SortOrder
 }
 
 export type RatingHistoryMinOrderByAggregateInput = {
@@ -501,6 +524,7 @@ export type RatingHistoryMinOrderByAggregateInput = {
   updatedById?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
+  regionId?: Prisma.SortOrder
 }
 
 export type RatingHistorySumOrderByAggregateInput = {
@@ -639,6 +663,48 @@ export type EnumRatingActionFieldUpdateOperationsInput = {
   set?: $Enums.RatingAction
 }
 
+export type RatingHistoryCreateNestedManyWithoutRegionInput = {
+  create?: Prisma.XOR<Prisma.RatingHistoryCreateWithoutRegionInput, Prisma.RatingHistoryUncheckedCreateWithoutRegionInput> | Prisma.RatingHistoryCreateWithoutRegionInput[] | Prisma.RatingHistoryUncheckedCreateWithoutRegionInput[]
+  connectOrCreate?: Prisma.RatingHistoryCreateOrConnectWithoutRegionInput | Prisma.RatingHistoryCreateOrConnectWithoutRegionInput[]
+  createMany?: Prisma.RatingHistoryCreateManyRegionInputEnvelope
+  connect?: Prisma.RatingHistoryWhereUniqueInput | Prisma.RatingHistoryWhereUniqueInput[]
+}
+
+export type RatingHistoryUncheckedCreateNestedManyWithoutRegionInput = {
+  create?: Prisma.XOR<Prisma.RatingHistoryCreateWithoutRegionInput, Prisma.RatingHistoryUncheckedCreateWithoutRegionInput> | Prisma.RatingHistoryCreateWithoutRegionInput[] | Prisma.RatingHistoryUncheckedCreateWithoutRegionInput[]
+  connectOrCreate?: Prisma.RatingHistoryCreateOrConnectWithoutRegionInput | Prisma.RatingHistoryCreateOrConnectWithoutRegionInput[]
+  createMany?: Prisma.RatingHistoryCreateManyRegionInputEnvelope
+  connect?: Prisma.RatingHistoryWhereUniqueInput | Prisma.RatingHistoryWhereUniqueInput[]
+}
+
+export type RatingHistoryUpdateManyWithoutRegionNestedInput = {
+  create?: Prisma.XOR<Prisma.RatingHistoryCreateWithoutRegionInput, Prisma.RatingHistoryUncheckedCreateWithoutRegionInput> | Prisma.RatingHistoryCreateWithoutRegionInput[] | Prisma.RatingHistoryUncheckedCreateWithoutRegionInput[]
+  connectOrCreate?: Prisma.RatingHistoryCreateOrConnectWithoutRegionInput | Prisma.RatingHistoryCreateOrConnectWithoutRegionInput[]
+  upsert?: Prisma.RatingHistoryUpsertWithWhereUniqueWithoutRegionInput | Prisma.RatingHistoryUpsertWithWhereUniqueWithoutRegionInput[]
+  createMany?: Prisma.RatingHistoryCreateManyRegionInputEnvelope
+  set?: Prisma.RatingHistoryWhereUniqueInput | Prisma.RatingHistoryWhereUniqueInput[]
+  disconnect?: Prisma.RatingHistoryWhereUniqueInput | Prisma.RatingHistoryWhereUniqueInput[]
+  delete?: Prisma.RatingHistoryWhereUniqueInput | Prisma.RatingHistoryWhereUniqueInput[]
+  connect?: Prisma.RatingHistoryWhereUniqueInput | Prisma.RatingHistoryWhereUniqueInput[]
+  update?: Prisma.RatingHistoryUpdateWithWhereUniqueWithoutRegionInput | Prisma.RatingHistoryUpdateWithWhereUniqueWithoutRegionInput[]
+  updateMany?: Prisma.RatingHistoryUpdateManyWithWhereWithoutRegionInput | Prisma.RatingHistoryUpdateManyWithWhereWithoutRegionInput[]
+  deleteMany?: Prisma.RatingHistoryScalarWhereInput | Prisma.RatingHistoryScalarWhereInput[]
+}
+
+export type RatingHistoryUncheckedUpdateManyWithoutRegionNestedInput = {
+  create?: Prisma.XOR<Prisma.RatingHistoryCreateWithoutRegionInput, Prisma.RatingHistoryUncheckedCreateWithoutRegionInput> | Prisma.RatingHistoryCreateWithoutRegionInput[] | Prisma.RatingHistoryUncheckedCreateWithoutRegionInput[]
+  connectOrCreate?: Prisma.RatingHistoryCreateOrConnectWithoutRegionInput | Prisma.RatingHistoryCreateOrConnectWithoutRegionInput[]
+  upsert?: Prisma.RatingHistoryUpsertWithWhereUniqueWithoutRegionInput | Prisma.RatingHistoryUpsertWithWhereUniqueWithoutRegionInput[]
+  createMany?: Prisma.RatingHistoryCreateManyRegionInputEnvelope
+  set?: Prisma.RatingHistoryWhereUniqueInput | Prisma.RatingHistoryWhereUniqueInput[]
+  disconnect?: Prisma.RatingHistoryWhereUniqueInput | Prisma.RatingHistoryWhereUniqueInput[]
+  delete?: Prisma.RatingHistoryWhereUniqueInput | Prisma.RatingHistoryWhereUniqueInput[]
+  connect?: Prisma.RatingHistoryWhereUniqueInput | Prisma.RatingHistoryWhereUniqueInput[]
+  update?: Prisma.RatingHistoryUpdateWithWhereUniqueWithoutRegionInput | Prisma.RatingHistoryUpdateWithWhereUniqueWithoutRegionInput[]
+  updateMany?: Prisma.RatingHistoryUpdateManyWithWhereWithoutRegionInput | Prisma.RatingHistoryUpdateManyWithWhereWithoutRegionInput[]
+  deleteMany?: Prisma.RatingHistoryScalarWhereInput | Prisma.RatingHistoryScalarWhereInput[]
+}
+
 export type RatingHistoryCreateWithoutUserInput = {
   id?: string
   newValue: number
@@ -648,6 +714,7 @@ export type RatingHistoryCreateWithoutUserInput = {
   reason?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string | null
+  region?: Prisma.RegionCreateNestedOneWithoutRatingHistoriesInput
   createdBy?: Prisma.UserCreateNestedOneWithoutCreatedRatingsInput
   updatedBy?: Prisma.UserCreateNestedOneWithoutUpdatedRatingsInput
 }
@@ -663,6 +730,7 @@ export type RatingHistoryUncheckedCreateWithoutUserInput = {
   updatedById?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string | null
+  regionId?: string | null
 }
 
 export type RatingHistoryCreateOrConnectWithoutUserInput = {
@@ -684,6 +752,7 @@ export type RatingHistoryCreateWithoutCreatedByInput = {
   reason?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string | null
+  region?: Prisma.RegionCreateNestedOneWithoutRatingHistoriesInput
   user: Prisma.UserCreateNestedOneWithoutRatingHistoryInput
   updatedBy?: Prisma.UserCreateNestedOneWithoutUpdatedRatingsInput
 }
@@ -699,6 +768,7 @@ export type RatingHistoryUncheckedCreateWithoutCreatedByInput = {
   updatedById?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string | null
+  regionId?: string | null
 }
 
 export type RatingHistoryCreateOrConnectWithoutCreatedByInput = {
@@ -720,6 +790,7 @@ export type RatingHistoryCreateWithoutUpdatedByInput = {
   reason?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string | null
+  region?: Prisma.RegionCreateNestedOneWithoutRatingHistoriesInput
   user: Prisma.UserCreateNestedOneWithoutRatingHistoryInput
   createdBy?: Prisma.UserCreateNestedOneWithoutCreatedRatingsInput
 }
@@ -735,6 +806,7 @@ export type RatingHistoryUncheckedCreateWithoutUpdatedByInput = {
   createdById?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string | null
+  regionId?: string | null
 }
 
 export type RatingHistoryCreateOrConnectWithoutUpdatedByInput = {
@@ -778,6 +850,7 @@ export type RatingHistoryScalarWhereInput = {
   updatedById?: Prisma.StringNullableFilter<"RatingHistory"> | string | null
   createdAt?: Prisma.DateTimeFilter<"RatingHistory"> | Date | string
   updatedAt?: Prisma.DateTimeNullableFilter<"RatingHistory"> | Date | string | null
+  regionId?: Prisma.StringNullableFilter<"RatingHistory"> | string | null
 }
 
 export type RatingHistoryUpsertWithWhereUniqueWithoutCreatedByInput = {
@@ -812,6 +885,60 @@ export type RatingHistoryUpdateManyWithWhereWithoutUpdatedByInput = {
   data: Prisma.XOR<Prisma.RatingHistoryUpdateManyMutationInput, Prisma.RatingHistoryUncheckedUpdateManyWithoutUpdatedByInput>
 }
 
+export type RatingHistoryCreateWithoutRegionInput = {
+  id?: string
+  newValue: number
+  oldValue: number
+  value: number
+  action: $Enums.RatingAction
+  reason?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string | null
+  user: Prisma.UserCreateNestedOneWithoutRatingHistoryInput
+  createdBy?: Prisma.UserCreateNestedOneWithoutCreatedRatingsInput
+  updatedBy?: Prisma.UserCreateNestedOneWithoutUpdatedRatingsInput
+}
+
+export type RatingHistoryUncheckedCreateWithoutRegionInput = {
+  id?: string
+  userId: string
+  newValue: number
+  oldValue: number
+  value: number
+  action: $Enums.RatingAction
+  reason?: string | null
+  createdById?: string | null
+  updatedById?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string | null
+}
+
+export type RatingHistoryCreateOrConnectWithoutRegionInput = {
+  where: Prisma.RatingHistoryWhereUniqueInput
+  create: Prisma.XOR<Prisma.RatingHistoryCreateWithoutRegionInput, Prisma.RatingHistoryUncheckedCreateWithoutRegionInput>
+}
+
+export type RatingHistoryCreateManyRegionInputEnvelope = {
+  data: Prisma.RatingHistoryCreateManyRegionInput | Prisma.RatingHistoryCreateManyRegionInput[]
+  skipDuplicates?: boolean
+}
+
+export type RatingHistoryUpsertWithWhereUniqueWithoutRegionInput = {
+  where: Prisma.RatingHistoryWhereUniqueInput
+  update: Prisma.XOR<Prisma.RatingHistoryUpdateWithoutRegionInput, Prisma.RatingHistoryUncheckedUpdateWithoutRegionInput>
+  create: Prisma.XOR<Prisma.RatingHistoryCreateWithoutRegionInput, Prisma.RatingHistoryUncheckedCreateWithoutRegionInput>
+}
+
+export type RatingHistoryUpdateWithWhereUniqueWithoutRegionInput = {
+  where: Prisma.RatingHistoryWhereUniqueInput
+  data: Prisma.XOR<Prisma.RatingHistoryUpdateWithoutRegionInput, Prisma.RatingHistoryUncheckedUpdateWithoutRegionInput>
+}
+
+export type RatingHistoryUpdateManyWithWhereWithoutRegionInput = {
+  where: Prisma.RatingHistoryScalarWhereInput
+  data: Prisma.XOR<Prisma.RatingHistoryUpdateManyMutationInput, Prisma.RatingHistoryUncheckedUpdateManyWithoutRegionInput>
+}
+
 export type RatingHistoryCreateManyUserInput = {
   id?: string
   newValue: number
@@ -823,6 +950,7 @@ export type RatingHistoryCreateManyUserInput = {
   updatedById?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string | null
+  regionId?: string | null
 }
 
 export type RatingHistoryCreateManyCreatedByInput = {
@@ -836,6 +964,7 @@ export type RatingHistoryCreateManyCreatedByInput = {
   updatedById?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string | null
+  regionId?: string | null
 }
 
 export type RatingHistoryCreateManyUpdatedByInput = {
@@ -849,6 +978,7 @@ export type RatingHistoryCreateManyUpdatedByInput = {
   createdById?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string | null
+  regionId?: string | null
 }
 
 export type RatingHistoryUpdateWithoutUserInput = {
@@ -860,6 +990,7 @@ export type RatingHistoryUpdateWithoutUserInput = {
   reason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  region?: Prisma.RegionUpdateOneWithoutRatingHistoriesNestedInput
   createdBy?: Prisma.UserUpdateOneWithoutCreatedRatingsNestedInput
   updatedBy?: Prisma.UserUpdateOneWithoutUpdatedRatingsNestedInput
 }
@@ -875,6 +1006,7 @@ export type RatingHistoryUncheckedUpdateWithoutUserInput = {
   updatedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  regionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 export type RatingHistoryUncheckedUpdateManyWithoutUserInput = {
@@ -888,6 +1020,7 @@ export type RatingHistoryUncheckedUpdateManyWithoutUserInput = {
   updatedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  regionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 export type RatingHistoryUpdateWithoutCreatedByInput = {
@@ -899,6 +1032,7 @@ export type RatingHistoryUpdateWithoutCreatedByInput = {
   reason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  region?: Prisma.RegionUpdateOneWithoutRatingHistoriesNestedInput
   user?: Prisma.UserUpdateOneRequiredWithoutRatingHistoryNestedInput
   updatedBy?: Prisma.UserUpdateOneWithoutUpdatedRatingsNestedInput
 }
@@ -914,6 +1048,7 @@ export type RatingHistoryUncheckedUpdateWithoutCreatedByInput = {
   updatedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  regionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 export type RatingHistoryUncheckedUpdateManyWithoutCreatedByInput = {
@@ -927,6 +1062,7 @@ export type RatingHistoryUncheckedUpdateManyWithoutCreatedByInput = {
   updatedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  regionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 export type RatingHistoryUpdateWithoutUpdatedByInput = {
@@ -938,6 +1074,7 @@ export type RatingHistoryUpdateWithoutUpdatedByInput = {
   reason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  region?: Prisma.RegionUpdateOneWithoutRatingHistoriesNestedInput
   user?: Prisma.UserUpdateOneRequiredWithoutRatingHistoryNestedInput
   createdBy?: Prisma.UserUpdateOneWithoutCreatedRatingsNestedInput
 }
@@ -953,6 +1090,7 @@ export type RatingHistoryUncheckedUpdateWithoutUpdatedByInput = {
   createdById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  regionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 export type RatingHistoryUncheckedUpdateManyWithoutUpdatedByInput = {
@@ -964,6 +1102,63 @@ export type RatingHistoryUncheckedUpdateManyWithoutUpdatedByInput = {
   action?: Prisma.EnumRatingActionFieldUpdateOperationsInput | $Enums.RatingAction
   reason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  regionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+}
+
+export type RatingHistoryCreateManyRegionInput = {
+  id?: string
+  userId: string
+  newValue: number
+  oldValue: number
+  value: number
+  action: $Enums.RatingAction
+  reason?: string | null
+  createdById?: string | null
+  updatedById?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string | null
+}
+
+export type RatingHistoryUpdateWithoutRegionInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  newValue?: Prisma.IntFieldUpdateOperationsInput | number
+  oldValue?: Prisma.IntFieldUpdateOperationsInput | number
+  value?: Prisma.IntFieldUpdateOperationsInput | number
+  action?: Prisma.EnumRatingActionFieldUpdateOperationsInput | $Enums.RatingAction
+  reason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  user?: Prisma.UserUpdateOneRequiredWithoutRatingHistoryNestedInput
+  createdBy?: Prisma.UserUpdateOneWithoutCreatedRatingsNestedInput
+  updatedBy?: Prisma.UserUpdateOneWithoutUpdatedRatingsNestedInput
+}
+
+export type RatingHistoryUncheckedUpdateWithoutRegionInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  userId?: Prisma.StringFieldUpdateOperationsInput | string
+  newValue?: Prisma.IntFieldUpdateOperationsInput | number
+  oldValue?: Prisma.IntFieldUpdateOperationsInput | number
+  value?: Prisma.IntFieldUpdateOperationsInput | number
+  action?: Prisma.EnumRatingActionFieldUpdateOperationsInput | $Enums.RatingAction
+  reason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  updatedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+}
+
+export type RatingHistoryUncheckedUpdateManyWithoutRegionInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  userId?: Prisma.StringFieldUpdateOperationsInput | string
+  newValue?: Prisma.IntFieldUpdateOperationsInput | number
+  oldValue?: Prisma.IntFieldUpdateOperationsInput | number
+  value?: Prisma.IntFieldUpdateOperationsInput | number
+  action?: Prisma.EnumRatingActionFieldUpdateOperationsInput | $Enums.RatingAction
+  reason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  updatedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
 }
@@ -982,6 +1177,8 @@ export type RatingHistorySelect<ExtArgs extends runtime.Types.Extensions.Interna
   updatedById?: boolean
   createdAt?: boolean
   updatedAt?: boolean
+  regionId?: boolean
+  region?: boolean | Prisma.RatingHistory$regionArgs<ExtArgs>
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   createdBy?: boolean | Prisma.RatingHistory$createdByArgs<ExtArgs>
   updatedBy?: boolean | Prisma.RatingHistory$updatedByArgs<ExtArgs>
@@ -999,6 +1196,8 @@ export type RatingHistorySelectCreateManyAndReturn<ExtArgs extends runtime.Types
   updatedById?: boolean
   createdAt?: boolean
   updatedAt?: boolean
+  regionId?: boolean
+  region?: boolean | Prisma.RatingHistory$regionArgs<ExtArgs>
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   createdBy?: boolean | Prisma.RatingHistory$createdByArgs<ExtArgs>
   updatedBy?: boolean | Prisma.RatingHistory$updatedByArgs<ExtArgs>
@@ -1016,6 +1215,8 @@ export type RatingHistorySelectUpdateManyAndReturn<ExtArgs extends runtime.Types
   updatedById?: boolean
   createdAt?: boolean
   updatedAt?: boolean
+  regionId?: boolean
+  region?: boolean | Prisma.RatingHistory$regionArgs<ExtArgs>
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   createdBy?: boolean | Prisma.RatingHistory$createdByArgs<ExtArgs>
   updatedBy?: boolean | Prisma.RatingHistory$updatedByArgs<ExtArgs>
@@ -1033,20 +1234,24 @@ export type RatingHistorySelectScalar = {
   updatedById?: boolean
   createdAt?: boolean
   updatedAt?: boolean
+  regionId?: boolean
 }
 
-export type RatingHistoryOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "userId" | "newValue" | "oldValue" | "value" | "action" | "reason" | "createdById" | "updatedById" | "createdAt" | "updatedAt", ExtArgs["result"]["ratingHistory"]>
+export type RatingHistoryOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "userId" | "newValue" | "oldValue" | "value" | "action" | "reason" | "createdById" | "updatedById" | "createdAt" | "updatedAt" | "regionId", ExtArgs["result"]["ratingHistory"]>
 export type RatingHistoryInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  region?: boolean | Prisma.RatingHistory$regionArgs<ExtArgs>
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   createdBy?: boolean | Prisma.RatingHistory$createdByArgs<ExtArgs>
   updatedBy?: boolean | Prisma.RatingHistory$updatedByArgs<ExtArgs>
 }
 export type RatingHistoryIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  region?: boolean | Prisma.RatingHistory$regionArgs<ExtArgs>
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   createdBy?: boolean | Prisma.RatingHistory$createdByArgs<ExtArgs>
   updatedBy?: boolean | Prisma.RatingHistory$updatedByArgs<ExtArgs>
 }
 export type RatingHistoryIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  region?: boolean | Prisma.RatingHistory$regionArgs<ExtArgs>
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   createdBy?: boolean | Prisma.RatingHistory$createdByArgs<ExtArgs>
   updatedBy?: boolean | Prisma.RatingHistory$updatedByArgs<ExtArgs>
@@ -1055,6 +1260,7 @@ export type RatingHistoryIncludeUpdateManyAndReturn<ExtArgs extends runtime.Type
 export type $RatingHistoryPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "RatingHistory"
   objects: {
+    region: Prisma.$RegionPayload<ExtArgs> | null
     user: Prisma.$UserPayload<ExtArgs>
     createdBy: Prisma.$UserPayload<ExtArgs> | null
     updatedBy: Prisma.$UserPayload<ExtArgs> | null
@@ -1071,6 +1277,7 @@ export type $RatingHistoryPayload<ExtArgs extends runtime.Types.Extensions.Inter
     updatedById: string | null
     createdAt: Date
     updatedAt: Date | null
+    regionId: string | null
   }, ExtArgs["result"]["ratingHistory"]>
   composites: {}
 }
@@ -1465,6 +1672,7 @@ readonly fields: RatingHistoryFieldRefs;
  */
 export interface Prisma__RatingHistoryClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
+  region<T extends Prisma.RatingHistory$regionArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.RatingHistory$regionArgs<ExtArgs>>): Prisma.Prisma__RegionClient<runtime.Types.Result.GetResult<Prisma.$RegionPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   user<T extends Prisma.UserDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UserDefaultArgs<ExtArgs>>): Prisma.Prisma__UserClient<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   createdBy<T extends Prisma.RatingHistory$createdByArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.RatingHistory$createdByArgs<ExtArgs>>): Prisma.Prisma__UserClient<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   updatedBy<T extends Prisma.RatingHistory$updatedByArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.RatingHistory$updatedByArgs<ExtArgs>>): Prisma.Prisma__UserClient<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
@@ -1508,6 +1716,7 @@ export interface RatingHistoryFieldRefs {
   readonly updatedById: Prisma.FieldRef<"RatingHistory", 'String'>
   readonly createdAt: Prisma.FieldRef<"RatingHistory", 'DateTime'>
   readonly updatedAt: Prisma.FieldRef<"RatingHistory", 'DateTime'>
+  readonly regionId: Prisma.FieldRef<"RatingHistory", 'String'>
 }
     
 
@@ -1901,6 +2110,25 @@ export type RatingHistoryDeleteManyArgs<ExtArgs extends runtime.Types.Extensions
    * Limit how many RatingHistories to delete.
    */
   limit?: number
+}
+
+/**
+ * RatingHistory.region
+ */
+export type RatingHistory$regionArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Region
+   */
+  select?: Prisma.RegionSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Region
+   */
+  omit?: Prisma.RegionOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.RegionInclude<ExtArgs> | null
+  where?: Prisma.RegionWhereInput
 }
 
 /**

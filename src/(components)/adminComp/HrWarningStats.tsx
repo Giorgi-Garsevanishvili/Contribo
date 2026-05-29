@@ -97,7 +97,7 @@ function HrWarningStats() {
                 <ImSpinner9 className="animate-spin" size={25} />
               </div>
             ) : (
-              pagination?.totalCount
+              pagination?.totalCount || 0
             )}
           </h1>
           <h3>HR Cases</h3>

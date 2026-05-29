@@ -8,7 +8,7 @@ import z from "zod";
 
 export const GET = async (_req: NextRequest, context: Context) => {
   try {
-    await requireRole("ADMIN");
+    const thisUser = await requireRole("ADMIN");
     const { id } = await context.params;
 
     if (!id) {
@@ -18,12 +18,14 @@ export const GET = async (_req: NextRequest, context: Context) => {
     const data = await prisma.ratingHistory.findUnique({
       where: {
         id,
+        regionId: thisUser.user.regionId,
       },
       include: { user: { select: { name: true } } },
     });
 
     if (!data) {
-      return NextResponse.json({data,
+      return NextResponse.json({
+        data,
         message: `Rating History with ID:${id} not found!`,
       });
     }
@@ -56,7 +58,7 @@ export const PUT = async (req: NextRequest, context: Context) => {
 
     return NextResponse.json(
       { message: "Rating history Updated" },
-      { status: 200 }
+      { status: 200 },
     );
   } catch (error) {
     const { status, message } = handleError(error);
@@ -66,7 +68,7 @@ export const PUT = async (req: NextRequest, context: Context) => {
 
 export const DELETE = async (_req: NextRequest, context: Context) => {
   try {
-    await requireRole("ADMIN");
+    const thisUser = await requireRole("ADMIN");
     const { id } = await context.params;
 
     if (!id) {
@@ -74,7 +76,7 @@ export const DELETE = async (_req: NextRequest, context: Context) => {
     }
 
     const deleted = await prisma.ratingHistory.delete({
-      where: { id },
+      where: { id, regionId: thisUser.user.regionId },
     });
 
     if (!deleted) {

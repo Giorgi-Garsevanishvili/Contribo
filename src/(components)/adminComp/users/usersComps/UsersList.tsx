@@ -226,7 +226,7 @@ function UsersList() {
                   <div className="md:flex hidden jus items-center gap-1.5">
                     <IoMdGlobe size={18} className="text-gray-500" />
                     <h3 className="font-medium truncate">
-                      {user.ownAllowance.region.name}
+                      {user.ownAllowance.region?.name || "No Region Specified"}
                     </h3>
                   </div>
 
