@@ -1,6 +1,7 @@
 "use client";
 import { FeedbackRequestStatus } from "@/generated/enums";
 import { Star } from "lucide-react";
+import DeleteButtonAdmin from "../users/DeleteButtonAdmin";
 
 type FeedbackData = {
   id: string;
@@ -27,7 +28,7 @@ interface FeedbackCardProps {
 }
 
 export const FeedbacksCardAdminInEvent: React.FC<FeedbackCardProps> = ({
-  feedbackData,
+  feedbackData,parentRefetch
 }) => {
   const isPending = feedbackData.requestStatus === "PENDING";
   const isResponded = feedbackData.requestStatus === "SUBMITTED";
@@ -59,7 +60,7 @@ export const FeedbacksCardAdminInEvent: React.FC<FeedbackCardProps> = ({
       </div>
 
       {/* Header Section */}
-      <div className="space-y-4 border-b border-slate-700/50 px-6 py-5">
+      <div className="space-y-4 border-b w-full border-slate-700/50 px-6 py-5">
         <div className="flex items-start justify-between gap-4 pr-24">
           <div className="min-w-0 flex-1">
             <h3 className="truncate text-lg font-semibold text-slate-100">
@@ -96,7 +97,7 @@ export const FeedbacksCardAdminInEvent: React.FC<FeedbackCardProps> = ({
       </div>
 
       {/* Content Section */}
-      <div className="px-6 py-5">
+      <div className="px-6 flex flex-col  md:flex-row w-full justify-between md:items-center items-start gap-2 py-5">
         {isResponded ? (
           // Display Mode (Already Responded)
           <div className="space-y-4">
@@ -129,6 +130,14 @@ export const FeedbacksCardAdminInEvent: React.FC<FeedbackCardProps> = ({
             This feedback request was cancelled.
           </p>
         )}
+        <DeleteButtonAdmin
+          url={`/api/admin/eventFeedbacks/${feedbackData.id}`}
+          fetchAction={parentRefetch}
+          extraTXT="Delete Feedback"
+          value={`Feedback request For: ${feedbackData.user?.name}`}
+          styleClass="items-center  rounded-sm w-full md:w-fit justify-center px-5 py-1 md:w-fit h-fit bg-red-900 text-red-200 border border-red-200 hover:border-red-200 hover:text-red-200"
+          message="This Action will delete Feedback Permanently"
+        />
       </div>
     </div>
   );

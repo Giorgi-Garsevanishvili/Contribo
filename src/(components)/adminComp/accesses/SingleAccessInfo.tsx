@@ -157,7 +157,7 @@ function SingleAccessInfo({ id }: { id: ParamValue }) {
             </>
           ) : (
             <div className="flex flex-col mt-2 text-black bg-gray-100/60 items-center rounded-lg shadow-lg p-10 justify-center">
-              <h3 className="font-bold">No Users to display.</h3>
+              <h3 className="font-bold">No Access to display.</h3>
               <button
                 className="btn text-gray-300 bg-cyan-900"
                 onClick={refetch}

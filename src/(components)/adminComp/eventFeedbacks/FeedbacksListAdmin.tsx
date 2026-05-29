@@ -5,7 +5,8 @@ import QueryFilter from "@/(components)/generalComp/QueryFilter";
 import { ImSpinner9 } from "react-icons/im";
 import { RiRefreshLine } from "react-icons/ri";
 import { FeedbackRequestStatus } from "@/generated/enums";
-import FeedbacksCardVolunteer from "./FeedbacksCardVolunteer";
+import FeedbacksCardAdminInEvent from "./FeedbacksCardAdminInEvent";
+import DeleteButtonAdmin from "../users/DeleteButtonAdmin";
 
 type Data = {
   id: string;
@@ -36,7 +37,7 @@ const TYPE_ORDER = [
   "ARCHIVED",
 ];
 
-function FeedbacksListVolunteer({ fetchUrl }: { fetchUrl: string }) {
+function FeedbacksListAdmin({ fetchUrl }: { fetchUrl: string }) {
   const [currentPage, setCurrentPage] = useState(1);
   const [limit, setLimit] = useState(10);
   const [statusFilter, setStatusFilter] = useState("");
@@ -111,12 +112,11 @@ function FeedbacksListVolunteer({ fetchUrl }: { fetchUrl: string }) {
   }, [data]);
 
   return (
-    
     <div
       className={`flex-col w-full md:w-[80%] flex items-center relative justify-center mt-4 shadow-sm bg-gray-700/70 m-2  rounded-lg p-1.5 select-none`}
     >
       <div className="flex flex-col items-center md:flex-row m-2 justify-center">
-        <div className="flex text-black m-1 mb-2 w-full items-center justify-center">
+        <div className="flex flex-col text-black m-1 mb-2 w-full items-center justify-center">
           <QueryFilter
             filterType="FEEDBACK"
             statusValue={statusFilter}
@@ -126,6 +126,16 @@ function FeedbacksListVolunteer({ fetchUrl }: { fetchUrl: string }) {
             onSearchQueryChange={handleSearchQuery}
             filterOn={filterOn}
           />
+          {sortedData.length > 0 && (
+            <DeleteButtonAdmin
+              url={`/api/admin/eventFeedbacks`}
+              fetchAction={refetch}
+              extraTXT="Delete All Feedback"
+              value={`all Feedbacks for this region`}
+              styleClass="items-center  rounded-sm w-full justify-center px-5 py-1 h-fit bg-red-900 text-red-200 border border-red-200 hover:border-red-200 hover:text-red-200"
+              message="This Action will delete Feedback Permanently"
+            />
+          )}
         </div>
       </div>
 
@@ -136,7 +146,7 @@ function FeedbacksListVolunteer({ fetchUrl }: { fetchUrl: string }) {
       ) : sortedData && sortedData?.length > 0 ? (
         <div className="flex w-full flex-col gap-2">
           {sortedData?.map((item) => (
-            <FeedbacksCardVolunteer
+            <FeedbacksCardAdminInEvent
               key={item.id}
               parentRefetch={refetch}
               feedbackData={item}
@@ -145,7 +155,7 @@ function FeedbacksListVolunteer({ fetchUrl }: { fetchUrl: string }) {
         </div>
       ) : (
         <div className="flex flex-col mt-2 text-black bg-gray-100/90  items-center rounded-lg shadow-lg p-10 justify-center">
-          <h3 className="font-bold">No Feedbacks to display.</h3>
+          <h3 className="font-bold">No Event Feedbacks to display.</h3>
           <button className="btn text-gray-300 bg-cyan-900" onClick={refetch}>
             <RiRefreshLine size={22} className="mr-2" /> Refetch
           </button>
@@ -162,4 +172,4 @@ function FeedbacksListVolunteer({ fetchUrl }: { fetchUrl: string }) {
   );
 }
 
-export default FeedbacksListVolunteer;
+export default FeedbacksListAdmin;

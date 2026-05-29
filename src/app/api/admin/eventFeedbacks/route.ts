@@ -3,7 +3,6 @@ import { EventFeedbackWhereInput } from "@/generated/models";
 import { handleError } from "@/lib/errors/handleErrors";
 import { prisma } from "@/lib/prisma";
 import { requireRole } from "@/lib/serverAuth";
-import { Context } from "@/types/general-types";
 import { NextRequest, NextResponse } from "next/server";
 
 export const GET = async (req: NextRequest) => {
@@ -28,17 +27,12 @@ export const GET = async (req: NextRequest) => {
     if (searchQuery && searchQuery.trim()) {
       whereClause.OR = [
         {
-          user: {
-            email: { contains: searchQuery.trim(), mode: "insensitive" },
+          event: {
+            name: { contains: searchQuery.trim(), mode: "insensitive" },
           },
         },
         {
           user: { name: { contains: searchQuery.trim(), mode: "insensitive" } },
-        },
-        {
-          event: {
-            name: { contains: searchQuery.trim(), mode: "insensitive" },
-          },
         },
       ];
     }
@@ -107,5 +101,26 @@ export const GET = async (req: NextRequest) => {
   } catch (error) {
     const { status, message } = handleError(error);
     return NextResponse.json({ message }, { status: status });
+  }
+};
+
+export const DELETE = async (_req: NextRequest) => {
+  try {
+    const thisUser = await requireRole("ADMIN");
+
+    const deleted = await prisma.eventFeedback.deleteMany({
+      where: { event: { regionId: thisUser.user?.regionId } },
+    });
+
+    if (deleted.count === 0) {
+      return NextResponse.json({ message: "Nothing Deleted" });
+    }
+
+    return NextResponse.json({
+      message: `${deleted.count} Feedbacks deleted!`,
+    });
+  } catch (error) {
+    const { message, status } = handleError(error);
+    return NextResponse.json({ message }, { status });
   }
 };

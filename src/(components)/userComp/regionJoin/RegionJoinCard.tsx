@@ -114,7 +114,7 @@ function RegionJoinCard({
           extraTXT="Delete Request"
           value={`Join Request For Section: ${joinData.region?.name}`}
           styleClass="items-center  rounded-sm justify-center px-5 py-1 md:w-fit h-fit bg-red-200/40 text-red-600 border border-red-700/20 hover:border-red-800 hover:text-red-800"
-          message="This Action will delete Action Permanently"
+          message="This Action will delete Join Request Permanently"
         />
         )}
       </div>

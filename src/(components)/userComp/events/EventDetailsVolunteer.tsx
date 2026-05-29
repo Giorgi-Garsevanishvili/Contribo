@@ -15,6 +15,7 @@ import { useCompAlert } from "@/hooks/useCompAlert";
 import axios from "axios";
 import { getClientErrorMessage } from "@/lib/errors/clientErrors";
 import { useSession } from "next-auth/react";
+import { PiStarFill } from "react-icons/pi";
 
 type AvailabilityDataReturn = {
   taken: boolean;
@@ -259,6 +260,21 @@ function EventDetailsVolunteer({
                   <FaCalendarAlt size={15} />
                 </div>
                 <h5 className="truncate text-gray-200">{`${new Date(event.startTime).toLocaleDateString("en-US", { day: "numeric", month: "short", year: "numeric" })} - ${new Date(event.endTime).toLocaleDateString("en-US", { day: "numeric", month: "short", year: "numeric" })}`}</h5>
+              </div>
+              <div className="flex gap-2 items-center text-center w-fit h-fit">
+                <div className="text-orange-300">
+                  <PiStarFill size={15} />
+                </div>
+                {event.rating ? (
+                  <div className="flex items-start flex-row justify-between gap-2">
+                    <h2 className="font-bold text-green-300">Rated:</h2>
+                    <h5 className="truncate text-gray-200">
+                      {event.rating.toFixed(2)}
+                    </h5>
+                  </div>
+                ) : (
+                  "Not Rated"
+                )}
               </div>
             </div>
           </div>

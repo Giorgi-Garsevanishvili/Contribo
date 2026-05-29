@@ -1,6 +1,6 @@
 "use client";
 import { LuUsersRound } from "react-icons/lu";
-import { MdOutlineEvent } from "react-icons/md";
+import { MdOutlineEvent, MdOutlineRateReview } from "react-icons/md";
 import { BiShieldQuarter } from "react-icons/bi";
 import { MdOutlineDashboard } from "react-icons/md";
 import { HiOutlineHandRaised } from "react-icons/hi2";
@@ -31,12 +31,6 @@ function AdminSideBarActions() {
       />
       <SideBarActionButtons
         currentPath={currentPath}
-        pathCheck="/admin/join-requests"
-        Icon={HiOutlineHandRaised}
-        title="Join Requests"
-      />
-      <SideBarActionButtons
-        currentPath={currentPath}
         pathCheck="/admin/hr-warnings"
         Icon={IoBriefcaseOutline}
         title="HR Cases"
@@ -46,6 +40,19 @@ function AdminSideBarActions() {
         pathCheck="/admin/events"
         Icon={MdOutlineEvent}
         title="Events"
+      />
+      <SideBarActionButtons
+        currentPath={currentPath}
+        pathCheck="/admin/eventFeedbacks"
+        Icon={MdOutlineRateReview}
+        title="Event Feedbacks"
+      />
+
+      <SideBarActionButtons
+        currentPath={currentPath}
+        pathCheck="/admin/join-requests"
+        Icon={HiOutlineHandRaised}
+        title="Join Requests"
       />
       <SideBarActionButtons
         currentPath={currentPath}
