@@ -48,7 +48,7 @@ function HrCasesThisMonth() {
         View All <IoIosArrowForward />
       </button>
       {isLoading ? (
-        <div className="flex w-full animate-pulse  bg-gray-700   items-center  rounded-lg shadow-lg p-2 justify-center">
+        <div className="flex w-full animate-pulse text-white bg-gray-700   items-center  rounded-lg shadow-lg p-2 justify-center">
           <ImSpinner9 className="animate-spin" size={20} />
         </div>
       ) : data.length > 0 ? (
@@ -61,7 +61,7 @@ function HrCasesThisMonth() {
           />
         ))
       ) : (
-        <h3 className="flex w-full items-center justify-center text-gray-400">
+        <h3 className="flex w-full items-center justify-center text-gray-300">
           You don`t have Hr Cases this month
         </h3>
       )}

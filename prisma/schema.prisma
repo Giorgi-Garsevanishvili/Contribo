@@ -29,6 +29,7 @@ model User {
   updatedAt                        DateTime?                 @updatedAt
   updatedById                      String?
   updatedBy                        User?                     @relation("UpdatedByUser", fields: [updatedById], references: [id], onDelete: SetNull)
+  lastLoginAt                      DateTime?
   //-----------------------------------------
   memberStatusCreated              MemberStatusLog[]         @relation("CreatedMemberStatusLog")
   memberStatusLogs                 MemberStatusLog[]

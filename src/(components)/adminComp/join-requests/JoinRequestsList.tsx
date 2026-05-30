@@ -84,7 +84,7 @@ function JoinRequestsList() {
     <div
       className={`flex ${
         isLoadingFetch ? "" : " w-auto"
-      } flex-col items-center relative justify-center mt-4 shadow-sm bg-gray-300/90 m-2  rounded-lg p-1.5 select-none`}
+      }  w-full flex-col items-center relative justify-center mt-4 shadow-sm bg-gray-700/70 m-2  rounded-lg p-1.5 select-none`}
     >
       <div className="flex md:flex-row flex-col text-black m-1 mb-2 w-full items-center justify-center">
         <QueryFilter
@@ -96,8 +96,8 @@ function JoinRequestsList() {
           onStatusFilterChange={handleStatusFilterChange}
           statusValue={statusFilter}
         />
-        <div className="flex w-fit shadow-md shadow-white bg-gray-200/95 p-2 m-2 rounded-lg">
-          {data.length > 0 ? (
+        {data.length > 0 ? (
+          <div className="flex w-fit shadow-md shadow-white bg-gray-200/95 p-2 m-2 rounded-lg">
             <DeleteButtonAdmin
               styleClass="bg-red-900 text-white"
               extraTXT="Delete All"
@@ -105,12 +105,12 @@ function JoinRequestsList() {
               fetchAction={refetch}
               value={`All Join Requests for your region`}
             />
-          ) : null}
-        </div>
+          </div>
+        ) : null}
       </div>
       <JoinRequestTitleBar />
       {isLoadingFetch ? (
-        <div className="flex bg-gray-100/60 items-center rounded-lg shadow-lg p-10 justify-center">
+        <div className="flex bg-gray-100/60 text-white items-center rounded-lg shadow-lg p-10 justify-center">
           <ImSpinner9 className="animate-spin" size={40} />
         </div>
       ) : data && data?.length > 0 ? (

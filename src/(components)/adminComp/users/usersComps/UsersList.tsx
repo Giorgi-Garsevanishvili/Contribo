@@ -15,6 +15,7 @@ import { useFetchData } from "@/hooks/useDataFetch";
 import { RiRefreshLine } from "react-icons/ri";
 import { FaRegCircleDot } from "react-icons/fa6";
 import { useSession } from "next-auth/react";
+import VolunteerStats from "../VolunteersStats";
 
 type RoleRegionMembershipDataType = {
   id: string;
@@ -118,8 +119,13 @@ function UsersList() {
     <div
       className={`flex ${
         isLoading ? "" : " w-auto"
-      } flex-col items-center justify-center mt-4 shadow-sm bg-gray-700/70 m-2  rounded-lg p-1.5 select-none`}
+      } flex-col items-center justify-center mt-4 shadow-sm bg-gray-700/70 m-2  gap-2 rounded-lg p-1.5 select-none`}
     >
+      {data.length > 0 && (
+        <div className="flex flex-row items-center justify-center">
+          <VolunteerStats data={data} />
+        </div>
+      )}
       <div className="flex text-black m-1 mb-2 w-full items-center justify-center">
         {roles && membership ? (
           <QueryFilter
@@ -137,7 +143,7 @@ function UsersList() {
           />
         ) : (
           <div
-            className={`text-sm m-2 text-black ${
+            className={`text-sm m-2 text-white ${
               isLoading ? "animate-spin transition-all duration-300" : ""
             } font-bold`}
           >
@@ -147,7 +153,7 @@ function UsersList() {
       </div>
       {isLoading ? (
         <div
-          className={`text-sm m-2 text-cyan-950 ${
+          className={`text-sm m-2 text-white ${
             isLoading ? "animate-spin transition-all duration-300" : ""
           } font-bold`}
         >

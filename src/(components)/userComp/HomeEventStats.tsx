@@ -115,10 +115,6 @@ function HomeEventStats() {
   const { isLoading, stats, eventFeedbacks, refetch } =
     usePaginatedData<ApiResponse | null>(`/api/user/events/myStats`, null);
 
-  useEffect(() => {
-    console.log(eventFeedbacks);
-  }, [eventFeedbacks]);
-
   return (
     <div className="p-2 flex-wrap flex-col md:w-[80%] w-full bg-gray-700/70 text-white shadow shadow-white rounded-md gap-1 flex">
       <h3 className="w-full items-center text-center">Events Overview</h3>

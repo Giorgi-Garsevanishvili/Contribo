@@ -82,7 +82,7 @@ function UserUpdate({ id, refetch }: { id: ParamValue; refetch: () => void }) {
   return (
     <form
       onSubmit={updateUser}
-      className={`flex flex-col justify-center items-center`}
+      className={`flex flex-col w-full justify-center items-center`}
     >
       {isLoading ? (
         <div
@@ -93,7 +93,7 @@ function UserUpdate({ id, refetch }: { id: ParamValue; refetch: () => void }) {
           <ImSpinner9 className="animate-spin" size={25} />
         </div>
       ) : (
-        <>
+        <div className="flex items-center w-full justify-center flex-col">
           <input
             type="text"
             id="name"
@@ -127,7 +127,7 @@ function UserUpdate({ id, refetch }: { id: ParamValue; refetch: () => void }) {
           >
             Update User
           </button>
-        </>
+        </div>
       )}
     </form>
   );

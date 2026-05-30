@@ -1,3 +1,4 @@
+"use client";
 import packageJson from "../../../package.json";
 import { SiGooglesearchconsole } from "react-icons/si";
 import { FaUser } from "react-icons/fa";
@@ -15,9 +16,10 @@ import { MdSettingsSuggest } from "react-icons/md";
 import ConsoleSideBarActions from "./ConsoleSideBarActions";
 import AdminSideBarActions from "./AdminSideBarActions";
 import VolunteerSideBarActions from "./VolunteerSideBarActions";
+import { useSession } from "next-auth/react";
 
-async function SideBar({ page }: { page: string }) {
-  const session = await auth();
+function SideBar({ page }: { page: string }) {
+  const session = useSession();
   const currentRole = normalizePage(page);
   return (
     <aside className="w-60 h-full border-r border-slate-200 flex flex-col bg-gray-600 text-2xl z-150">
@@ -56,7 +58,7 @@ async function SideBar({ page }: { page: string }) {
           Switch Role
         </div>
         <div className="flex flex-wrap">
-          {session?.user.roles
+          {session?.data?.user.roles
             ?.filter((role) => ROLE_ROUTE_MAP[role] !== currentRole)
             .map((role) => (
               <SwitchPageButton key={role} name={role} />
@@ -77,13 +79,13 @@ async function SideBar({ page }: { page: string }) {
             <div
               className={`size-8 items-center justify-center flex rounded-full overflow-hidden bg-blue-200`}
             >
-              {session?.user.image ? (
+              {session?.data?.user.image ? (
                 <Image
                   className="w-full h-full object-cover"
                   alt="Admin user profile picture"
                   width={40}
                   height={40}
-                  src={session?.user.image}
+                  src={session?.data?.user.image}
                 />
               ) : (
                 <div className="flex items-center justify-center">
@@ -92,9 +94,13 @@ async function SideBar({ page }: { page: string }) {
               )}
             </div>
             <div className="flex mt-1 grow w-full items-center justify-center gap-1">
-              {session?.user.roles?.map((r, index) =>
+              {session?.data?.user.roles?.map((r, index) =>
                 r.includes("ADMIN") ? (
-                  <PiPlantFill key={index} size={12} className="text-green-800" />
+                  <PiPlantFill
+                    key={index}
+                    size={12}
+                    className="text-green-800"
+                  />
                 ) : r.includes("REGULAR") ? (
                   <FaStar size={12} key={index} className="text-yellow-500" />
                 ) : r.includes("QIRVEX") ? (
@@ -105,15 +111,19 @@ async function SideBar({ page }: { page: string }) {
             {
               <h2 className="text-[10px] mt-1 italic text-gray-400 flex">
                 Region:{" "}
-                {session?.user.region ? session?.user.region : "No Region"}
+                {session?.data?.user.region
+                  ? session?.data?.user.region
+                  : "No Region"}
               </h2>
             }
           </div>
           <div className="flex-1 overflow-hidden">
-            <p className="text-xs font-bold truncate">{session?.user.name}</p>
+            <p className="text-xs font-bold truncate">
+              {session?.data?.user.name}
+            </p>
 
             <p className="text-[10px] text-slate-500 truncate">
-              {session?.user.email}
+              {session?.data?.user.email}
             </p>
           </div>
           <div className="text-sm text-slate-500  hover:text-primary transition-colors">

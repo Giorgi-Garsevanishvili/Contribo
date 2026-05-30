@@ -16,6 +16,7 @@ import { useFetchData } from "@/hooks/useDataFetch";
 import { FcDeleteDatabase } from "react-icons/fc";
 import { ImSpinner9 } from "react-icons/im";
 import RegionJoinRequestCardVolunteer from "../regionJoin/RegionJoinRequestCardVolunteer";
+import UpdatePhoto from "./UpdatePhoto";
 
 type Data = {
   CreatedAllowedUser: [];
@@ -76,7 +77,11 @@ type Data = {
   } | null;
 };
 
-function UserInfoVolunteer({setRefetchKey}: {setRefetchKey: Dispatch<SetStateAction<number>>}) {
+function UserInfoVolunteer({
+  setRefetchKey,
+}: {
+  setRefetchKey: Dispatch<SetStateAction<number>>;
+}) {
   const params = useParams();
   const id = params.userId;
 
@@ -109,12 +114,12 @@ function UserInfoVolunteer({setRefetchKey}: {setRefetchKey: Dispatch<SetStateAct
       {
         <div className="flex md:flex-row w-full flex-col m-2 h-full justify-center items-center">
           <div
-            className={`${isLoadingFetch ? "animate-pulse transition-all duration-300" : ""} h-full select-none flex p-2 items-center justify-center bg-gray-200/60 w-full rounded-lg shadow-lg`}
+            className={`${isLoadingFetch ? "animate-pulse transition-all duration-300" : ""} h-full select-none flex p-1.5 items-center justify-center bg-gray-200/60 border border-gray-400/20 w-full rounded-lg shadow-lg`}
           >
             {data ? (
               <div className="flex flex-col gap-2 w-full h-full items-center justify-center">
-                <div className="flex items-center flex-col md:flex-row justify-start w-full bg-gray-200/60 rounded-sm p-1 h-full">
-                  <div className="flex w-52 rounded-md h-auto m-1">
+                <div className="flex md:items-stretch items-center  flex-col md:flex-row justify-start w-full bg-gray-200/60 rounded-sm p-2 h-fit">
+                  <div className="flex w-full shrink-0 items-center md:w-52 gap-2 flex-col rounded-md h-auto m-1">
                     {data && data.image ? (
                       <Image
                         priority
@@ -129,12 +134,15 @@ function UserInfoVolunteer({setRefetchKey}: {setRefetchKey: Dispatch<SetStateAct
                         <FcDeleteDatabase className="mr-2" size={60} />
                       </div>
                     )}
+                    <div className="flex items-center  justify-center w-full">
+                      <UpdatePhoto parentRefetch={refetch} />
+                    </div>
                   </div>
                   <div
-                    className={`grid flex-col p-4 m-1 grow  justify-start bg-gray-200/60 rounded-lg shadow-sm`}
+                    className={`flex flex-col p-2 m-1 grow min-h-full w-full  justify-between bg-gray-200/60 rounded-lg shadow-sm`}
                   >
                     <div
-                      className={`${openUserUpdate ? "hidden" : ""} min-w-0`}
+                      className={`${openUserUpdate ? "hidden" : ""} flex flex-col h-full min-w-0 justify-center gap-1`}
                     >
                       <h2 className="flex items-center">
                         <FaUser className="mr-2" size={22} />{" "}
@@ -149,14 +157,27 @@ function UserInfoVolunteer({setRefetchKey}: {setRefetchKey: Dispatch<SetStateAct
                         <strong className="mr-2">Since:</strong>{" "}
                         {new Date(data.createdAt).toDateString()}
                       </h2>
-                      <h2 className="flex items-center">
+                      <div className="flex items-center">
                         <HiWrenchScrewdriver className="mr-2" size={22} />
-                        <strong className="mr-2">Last Update:</strong>{" "}
-                        {new Date(data.updatedAt).toDateString()}
+                        <strong className="mr-2 shrink-0">
+                          Last Update:
+                        </strong>{" "}
+                        <h2 className="truncate">
+                          {new Date(data.updatedAt).toLocaleTimeString(
+                            "us-US",
+                            {
+                              year: "numeric",
+                              month: "short",
+                              day: "2-digit",
+                              hour: "2-digit",
+                              minute: "2-digit",
+                            },
+                          )}
+                        </h2>
                         <button
                           onMouseEnter={() => setOpenUpdate(true)}
                           onMouseLeave={() => setOpenUpdate(false)}
-                          onClick={() => setOpen(!open)}
+                          onClick={() => setOpenUpdate(!open)}
                           className="ml-2 cursor-pointer text-gray-500"
                         >
                           <IoMdInformationCircleOutline size={22} />
@@ -175,7 +196,7 @@ function UserInfoVolunteer({setRefetchKey}: {setRefetchKey: Dispatch<SetStateAct
                             </div>
                           )}
                         </button>
-                      </h2>
+                      </div>
                       <h2 className="flex items-center">
                         <MdCardMembership className="mr-2" size={22} />
                         <strong className="mr-2">Status:</strong>{" "}
@@ -288,12 +309,14 @@ function UserInfoVolunteer({setRefetchKey}: {setRefetchKey: Dispatch<SetStateAct
                   </div>
                 </div>
                 <div className="flex items-center justify-center w-full">
-                  <RegionJoinRequestCardVolunteer setRefetchKey={setRefetchKey} />
+                  <RegionJoinRequestCardVolunteer
+                    setRefetchKey={setRefetchKey}
+                  />
                 </div>
               </div>
             ) : (
               <div
-                className={`flex flex-col justify-center items-center w-40 p-10 h-25}`}
+                className={`flex flex-col justify-center items-center text-gray-800 w-40 p-10 h-25}`}
               >
                 <h3 className="mb-4">User Info</h3>
                 <ImSpinner9 className="animate-spin" size={25} />

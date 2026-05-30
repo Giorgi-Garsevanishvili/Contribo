@@ -21,11 +21,13 @@ import { useDeleteData } from "@/hooks/useDeleteData";
 import { FcDeleteDatabase } from "react-icons/fc";
 import { ImSpinner9 } from "react-icons/im";
 import AccessData from "../AccessData";
+import { FaClockRotateLeft } from "react-icons/fa6";
 
 type Data = {
   CreatedAllowedUser: [];
   allowedUserId: string;
   createdAt: string;
+  lastLoginAt: string;
   deleted: boolean;
   deletedAt: string | null;
   email: string;
@@ -139,13 +141,13 @@ function UserInfo({
   return (
     <div className="flex flex-col w-full justify-center items-center">
       {
-        <div className="flex md:flex-row flex-col m-2 justify-center items-center">
+        <div className="flex md:flex-row h-fit w-full p-1 flex-col m-2 gap-2 justify-center items-stretch">
           <div
-            className={`${isLoadingFetch || softdeleteLoading || fullDeleteLoading ? "animate-pulse transition-all duration-300" : ""} select-none flex p-2 items-center justify-center bg-gray-200/60 rounded-lg shadow-lg`}
+            className={`${isLoadingFetch || softdeleteLoading || fullDeleteLoading ? "animate-pulse transition-all duration-300" : ""} select-none flex  items-center justify-center bg-gray-200/60 border border-gray-400/30 rounded-lg shadow-lg`}
           >
             {data ? (
-              <div className="flex flex-col md:flex-row items-center justify-center">
-                <div className="flex w-52 rounded-md h-auto m-1">
+              <div className="flex flex-col md:items-stretch h-fit p-2 md:flex-row items-center justify-center">
+                <div className="flex w-full shrink-0 items-center justify-center md:w-52 rounded-md h-auto  m-1">
                   {data && data.image ? (
                     <Image
                       priority
@@ -162,10 +164,10 @@ function UserInfo({
                   )}
                 </div>
                 <div
-                  className={`grid flex-col p-4 m-1 justify-start bg-gray-200/60 rounded-lg shadow-sm`}
+                  className={`flex flex-col p-2 w-fit  m-1 justify-center bg-gray-200/60 rounded-lg shadow-sm`}
                 >
                   <div
-                    className={`${openUserUpdate ? "flex flex-col justify-center items-center" : "hidden"}`}
+                    className={`${openUserUpdate ? "flex flex-col w-full justify-center items-center" : "hidden"}`}
                   >
                     <UserUpdate id={id} refetch={refetch} />
                   </div>
@@ -183,14 +185,38 @@ function UserInfo({
                       <strong className="mr-2">Since:</strong>{" "}
                       {new Date(data.createdAt).toDateString()}
                     </h2>
-                    <h2 className="flex items-center">
+                    <div className="flex items-center">
+                      <FaClockRotateLeft className="mr-2" size={22} />
+                      <strong className="mr-2 shrink-0">Last Log In:</strong>{" "}
+                      <h2 className="truncate">
+                        {new Date(data.lastLoginAt).toLocaleTimeString(
+                          "us-US",
+                          {
+                            year: "numeric",
+                            month: "short",
+                            day: "2-digit",
+                            hour: "2-digit",
+                            minute: "2-digit",
+                          },
+                        )}
+                      </h2>
+                    </div>
+                    <div className="flex items-center">
                       <HiWrenchScrewdriver className="mr-2" size={22} />
-                      <strong className="mr-2">Last Update:</strong>{" "}
-                      {new Date(data.updatedAt).toDateString()}
+                      <strong className="mr-2 shrink-0">Last Update:</strong>{" "}
+                      <h2 className="truncate">
+                        {new Date(data.updatedAt).toLocaleTimeString("us-US", {
+                          year: "numeric",
+                          month: "short",
+                          day: "2-digit",
+                          hour: "2-digit",
+                          minute: "2-digit",
+                        })}
+                      </h2>
                       <button
                         onMouseEnter={() => setOpenUpdate(true)}
                         onMouseLeave={() => setOpenUpdate(false)}
-                        onClick={() => setOpen(!open)}
+                        onClick={() => setOpenUpdate(!open)}
                         className="ml-2 cursor-pointer text-gray-500"
                       >
                         <IoMdInformationCircleOutline size={22} />
@@ -209,7 +235,7 @@ function UserInfo({
                           </div>
                         )}
                       </button>
-                    </h2>
+                    </div>
                     <h2 className="flex items-center">
                       <MdCardMembership className="mr-2" size={22} />
                       <strong className="mr-2">Status:</strong>{" "}
@@ -319,7 +345,7 @@ function UserInfo({
                     </h2>
                   </div>
                 </div>
-                <div className="flex flex-col w-full md:w-fit ">
+                <div className="flex flex-col w-full justify-center md:w-fit ">
                   <button
                     onClick={() => setOpenUserUpdate(!openUserUpdate)}
                     className={`flex ${openUserUpdate ? "bg-red-900/85 text-white" : "bg-gray-300/70"} btn  active:bg-blue-900/60 active:text-white active:opacity-50
@@ -358,7 +384,7 @@ function UserInfo({
             )}
           </div>
           <div
-            className={`${openData ? "flex" : "hidden"} md:flex  m-2 ${isLoadingFetch || softdeleteLoading || fullDeleteLoading ? " p-2 bg-gray-200/60 rounded-lg shadow-lg" : ""}`}
+            className={`${openData ? "flex" : "hidden"} md:flex min-h-full bg-gray-200/60 border border-gray-400/30 rounded-md p-1 ${isLoadingFetch || softdeleteLoading || fullDeleteLoading ? " p-2 rounded-lg shadow-lg" : ""}`}
           >
             {data ? (
               <AccessData

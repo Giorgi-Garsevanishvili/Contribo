@@ -77,7 +77,7 @@ function GrantAccessComp({ refetch }: { refetch: () => void }) {
             items-center  justify-center ease-in-out duration-300 transition`}
         >
           {isLoadingFetch || isLoading ? (
-            <div className={`text-sm m-2 text-black  font-bold`}>
+            <div className={`text-sm m-2 text-white  font-bold`}>
               <ImSpinner9 className="animate-spin" size={25} />
             </div>
           ) : (

@@ -83,7 +83,7 @@ function SingleAccessInfo({ id }: { id: ParamValue }) {
       <div className="flex text-black m-1 mb-2 w-full items-center justify-center"></div>
       {isLoading || isLoadingFetch ? (
         <div
-          className={`text-sm m-2 text-black ${
+          className={`text-sm m-2 text-white ${
             isLoading ? "animate-spin transition-all duration-300" : ""
           } font-bold`}
         >

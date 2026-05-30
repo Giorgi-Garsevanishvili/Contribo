@@ -169,7 +169,23 @@ const authConfig: NextAuthConfig = {
       return true;
     },
 
-    async jwt({ token, user }) {
+    async jwt({ token, user, account }) {
+      if (account?.access_token) {
+        await prisma.account.update({
+          where: {
+            provider_providerAccountId: {
+              provider: account.provider,
+              providerAccountId: account.providerAccountId,
+            },
+          },
+          data: {
+            access_token: account.access_token,
+            refresh_token: account.refresh_token ?? undefined,
+            expires_at: account.expires_at ?? undefined,
+          },
+        });
+      }
+
       if (user?.email) {
         const dbUser = await prisma.allowedUser.findUnique({
           where: { email: user.email },
@@ -179,6 +195,7 @@ const authConfig: NextAuthConfig = {
               select: { role: { select: { name: true } } },
             },
             region: true,
+            user: { select: { image: true } },
           },
         });
 
@@ -186,6 +203,15 @@ const authConfig: NextAuthConfig = {
           token.id = dbUser.id;
           token.roles = dbUser.roles.map((r) => r.role.name);
           token.region = dbUser.region?.name as string;
+          token.image = dbUser.user?.image ?? null;
+
+          await prisma.user.update({
+            where: { email: token.email! },
+            data: {
+              lastLoginAt: new Date().toISOString(),
+              updatedById: user.id,
+            },
+          });
         }
       }
 
@@ -196,6 +222,7 @@ const authConfig: NextAuthConfig = {
             userId: true,
             roles: { select: { role: { select: { name: true } } } },
             region: true,
+            user: { select: { image: true } },
           },
         });
 
@@ -203,6 +230,7 @@ const authConfig: NextAuthConfig = {
           token.roles = dbUser.roles.map((r) => r.role.name);
           token.region = dbUser.region?.name as string;
           token.userId = dbUser.userId as string;
+          token.image = dbUser.user?.image ?? null;
         }
       }
       return token;
@@ -210,9 +238,10 @@ const authConfig: NextAuthConfig = {
     async session({ session, token }) {
       if (session?.user && token) {
         session.user.id = token.id as string;
-        session.user.userId = token.userId as string
+        session.user.userId = token.userId as string;
         session.user.roles = token.roles as string[];
         session.user.region = token.region as string;
+        session.user.image = token.image as string;
       }
       return session;
     },

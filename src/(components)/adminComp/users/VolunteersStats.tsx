@@ -15,10 +15,8 @@ type Data = {
   }[];
 };
 
-function VolunteerStats() {
+function VolunteerStats({ data }: { data: Data[] }) {
   const [statusStats, setStatusStats] = useState<Record<string, number>>({});
-
-  const { data, isLoadingFetch } = useFetchData<Data[]>("/api/admin/users", []);
 
   useEffect(() => {
     if (data) {
@@ -38,34 +36,22 @@ function VolunteerStats() {
 
   return (
     <>
-      {
+      {Object.keys(statusStats).length !== 0 ? (
         <div
-          className={`${isLoadingFetch ? "animate-pulse " : ""} gap-1.5 text-sm shadow-sm bg-gray-200/70  rounded-lg p-1.5 flex w-full items-center justify-between select-none`}
+          className={` gap-1.5 text-sm shadow-sm bg-gray-400/70  rounded-lg p-1.5 flex w-full items-center justify-between select-none`}
         >
-          {isLoadingFetch ? (
-            <div
-              className={`text-sm text-black ${
-                isLoadingFetch ? "animate-spin transition-all duration-300" : ""
-              } font-bold m-1`}
-            >
-              <ImSpinner9  className="animate-spin" size={40} />
-            </div>
-          ) : Object.keys(statusStats).length !== 0 ? (
-            Object.entries(statusStats)
-              .slice(0, 3)
-              .map(([status, count]) => (
-                <div
-                  className="p-1.5 bg-[#434d5f98] border-2 rounded-lg"
-                  key={status}
-                >
-                  {status} : <span className="font-bold ">{count}</span>
-                </div>
-              ))
-          ) : (
-            "No Stats To Display"
-          )}
+          {Object.entries(statusStats)
+            .slice(0, 3)
+            .map(([status, count]) => (
+              <div
+                className="p-1.5 bg-[#434d5f98] border-2 rounded-lg"
+                key={status}
+              >
+                {status} : <span className="font-bold ">{count}</span>
+              </div>
+            ))}
         </div>
-      }
+      ) : null}
     </>
   );
 }

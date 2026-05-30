@@ -64,7 +64,7 @@ function UpcomingEvents() {
   return (
     <>
       {isLoading ? (
-        <div className="flex bg-gray-700 items-center  rounded-lg shadow-lg p-2 justify-center">
+        <div className="flex bg-gray-700 items-center text-white  rounded-lg shadow-lg p-2 justify-center">
           <ImSpinner9 className="animate-spin" size={20} />
         </div>
       ) : (

@@ -30,14 +30,14 @@ function AccessData({ id, refetchKey }: { id: string; refetchKey: boolean }) {
   );
 
   return (
-    <div className="flex justify-center items-center">
+    <div className="flex w-full justify-center items-center">
       {
-        <div className="flex flex-col justify-center items-center">
+        <div className="flex flex-col w-full justify-center items-center">
           {" "}
           <div
-            className={`${isLoadingFetch ? "animate-pulse transition-all duration-300" : ""} select-none flex p-1 items-center justify-center bg-gray-200/60 rounded-lg shadow-lg`}
+            className={`${isLoadingFetch ? "animate-pulse transition-all duration-300" : ""} select-none w-full flex p-1 items-center justify-center rounded-lg `}
           >
-            <div className="flex relative flex-col bg-gray-200/60 p-1.5 rounded-lg">
+            <div className="flex relative flex-col w-full bg-gray-200/60 p-1.5 rounded-lg">
               <h3 className="font-bold">Access Details</h3>
               {isLoadingFetch ? (
                 ""
@@ -64,10 +64,12 @@ function AccessData({ id, refetchKey }: { id: string; refetchKey: boolean }) {
                   {data?.roles.map((role) => role.role.name).join(", ")}
                 </h2>
                 <h2>
-                  <strong>Region:</strong> {data?.region?.name || "No Region Specified"}
+                  <strong>Region:</strong>{" "}
+                  {data?.region?.name || "No Region Specified"}
                 </h2>
                 <h2>
-                  <strong>Region Status:</strong> {data?.region?.status || "No Region Specified"}
+                  <strong>Region Status:</strong>{" "}
+                  {data?.region?.status || "No Region Specified"}
                 </h2>
                 <h2>
                   <strong>Access Granted At:</strong>{" "}

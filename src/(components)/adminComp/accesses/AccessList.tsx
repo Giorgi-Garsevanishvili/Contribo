@@ -143,7 +143,7 @@ function AccessList() {
       </div>
       {isLoading ? (
         <div
-          className={`text-sm m-2 text-black ${
+          className={`text-sm m-2 text-white ${
             isLoading ? "animate-spin transition-all duration-300" : ""
           } font-bold`}
         >

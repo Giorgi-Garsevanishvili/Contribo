@@ -38,7 +38,7 @@ function JoinStats() {
         {isLoadingFetch ? (
           <div
             className={`text-sm ${
-              isLoadingFetch ? "animate-spin transition-all duration-300" : ""
+              isLoadingFetch ? "animate-spin transition-all text-white duration-300" : ""
             } font-bold`}
           >
             <ImSpinner9 className="animate-spin" size={25} />

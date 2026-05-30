@@ -159,7 +159,7 @@ function RegionJoinRequestCardVolunteer({
           <button
             type="button"
             onClick={(e) => handleJoinRequest(e)}
-            disabled={selectedRegion === ""}
+            disabled={isLoading || selectedRegion === ""}
             className="flex w-fit cursor-pointer transition-all text-center duration-300 ease-out p-1 px-2 disabled:opacity-20 rounded-sm items-center justify-center bg-blue-400 gap-2 text-white"
           >
             <BiPlus size={22} /> Request To Join New Region
