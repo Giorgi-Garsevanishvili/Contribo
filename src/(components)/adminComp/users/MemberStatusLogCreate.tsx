@@ -66,7 +66,9 @@ function MemberStatusLogCreate({ onCreated }: Props) {
       const payload = {
         ...createData,
         startedAt: new Date(createData.startedAt).toISOString(),
-        endedAt: createData.endedAt ? new Date(createData.endedAt).toISOString() : null,
+        endedAt: createData.endedAt
+          ? new Date(createData.endedAt).toISOString()
+          : null,
       };
 
       if (
@@ -121,7 +123,7 @@ function MemberStatusLogCreate({ onCreated }: Props) {
   return (
     <div className="flex items-center justify-center p-5 w-full">
       {isLoading || isLoadingFetch ? (
-        <ImSpinner9   className="animate-spin" size={40} />
+        <ImSpinner9 className="animate-spin" size={40} />
       ) : (
         <form
           onSubmit={(e) => createCase(e)}
@@ -169,50 +171,55 @@ function MemberStatusLogCreate({ onCreated }: Props) {
               </div>
             </div>
 
-            <div className="flex grow">
-              <select
-                value={createData.memberStatusId}
-                onChange={(e) =>
-                  setCreateData((prev) => ({
-                    ...prev,
-                    memberStatusId: e.target.value,
-                  }))
-                }
-                className="grow border-2 m-1 rounded-md p-1.5  bg-gray-400/95 text-white"
-                name="type"
-                id="type"
-              >
-                <option value={""}>Status</option>
-                {data?.map((status) => (
-                  <option key={status.id} value={status.id}>
-                    {status.name}
-                  </option>
-                ))}
-              </select>
-              <label htmlFor="type">
-                <strong className="text-red-500">*</strong>
-              </label>
-
-              <label className="inline-flex m-4 items-center cursor-pointer">
-                <span className="select-none text-sm font-medium text-heading">
-                  Present
-                </span>
-                <input
+            <div className="flex flex-col md:flex-row grow">
+              <div className="flex w-full flex-col grow">
+                <label htmlFor="position" className="text-gray-500 ml-2">
+                  Status
+                  <strong className="text-red-500 ml-1">*</strong>
+                </label>
+                <select
+                  value={createData.memberStatusId}
                   onChange={(e) =>
                     setCreateData((prev) => ({
                       ...prev,
-                      ended: e.target.checked,
+                      memberStatusId: e.target.value,
                     }))
                   }
-                  type="checkbox"
-                  checked={createData.ended}
-                  className="sr-only peer"
-                />
-                <div className="relative mx-2 w-11 h-6 bg-neutral-400 peer-focus:outline-none peer-focus:ring-1 peer-focus:ring-brand-soft dark:peer-focus:ring-gray-500 rounded-full peer peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-buffer after:content-[''] after:absolute after:top-0.5 after:start-s-px after:bg-white after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-green-800"></div>
-                <span className="select-none text-sm font-medium text-heading">
-                  Ended
-                </span>
-              </label>
+                  className="grow border-2 m-1 rounded-md p-1.5  bg-gray-400/95 text-white"
+                  name="type"
+                  id="type"
+                >
+                  <option value={""}>Status</option>
+                  {data?.map((status) => (
+                    <option key={status.id} value={status.id}>
+                      {status.name}
+                    </option>
+                  ))}
+                </select>
+              </div>
+
+              <div className="flex items-center justify-center">
+                <label className="inline-flex m-4 items-center cursor-pointer">
+                  <span className="select-none text-sm font-medium text-heading">
+                    Present
+                  </span>
+                  <input
+                    onChange={(e) =>
+                      setCreateData((prev) => ({
+                        ...prev,
+                        ended: e.target.checked,
+                      }))
+                    }
+                    type="checkbox"
+                    checked={createData.ended}
+                    className="sr-only peer"
+                  />
+                  <div className="relative mx-2 w-11 h-6 bg-neutral-400 peer-focus:outline-none peer-focus:ring-1 peer-focus:ring-brand-soft dark:peer-focus:ring-gray-500 rounded-full peer peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-buffer after:content-[''] after:absolute after:top-0.5 after:start-s-px after:bg-white after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-green-800"></div>
+                  <span className="select-none text-sm font-medium text-heading">
+                    Ended
+                  </span>
+                </label>
+              </div>
             </div>
             <button
               disabled={isLoading}

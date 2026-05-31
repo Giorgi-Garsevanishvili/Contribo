@@ -65,7 +65,7 @@ function User() {
         />
       </div>
       <div
-        className={`${openCreate ? "flex" : "hidden"} md:flex mt-8 flex-col items-center justify-center`}
+        className={`${openCreate ? "flex" : "hidden"} md:flex mt-8 p-1 flex-col items-center justify-center`}
       >
         <CreateDataWrapper
           componentProps={{ onCreated: triggerRefetch }}
