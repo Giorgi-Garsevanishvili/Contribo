@@ -4,13 +4,9 @@ import EventsList from "@/(components)/adminComp/Events/EventsList";
 
 function UserList() {
   return (
-    <>
-      <div className=" flex flex-col mt-2 items-center justify-center ">
-        <div className="flex items-center flex-col justify-center">
-          <EventsList />
-        </div>
-      </div>
-    </>
+    <div className="flex w-full md:w-[80%] items-center m-0 md:p-0 p-2 justify-center flex-col">
+      <EventsList />
+    </div>
   );
 }
 export default UserList;

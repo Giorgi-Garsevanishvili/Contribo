@@ -81,15 +81,13 @@ export const GET = async (req: NextRequest) => {
       skip,
       take: limit,
     });
+ 
 
-    if (!data) {
-      return NextResponse.json(
-        {
-          data,
-          message: `Feedbacks Not Found for Your Region`,
-        },
-        { status: 404 },
-      );
+   if (!data || data.length === 0) {
+      return NextResponse.json({
+        data,
+        message: "Event Feedbacks Not Found For Your Region",
+      });
     }
 
     const response = {

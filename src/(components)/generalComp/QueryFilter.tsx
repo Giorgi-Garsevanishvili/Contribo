@@ -319,9 +319,9 @@ function QueryFilter(props: FilterPropType) {
           </div>
         ) : props.filterType === "EVENTS" ? (
           <div
-            /** This Is Filters For Rating List */ className="flex md:overflow-auto  overflow-x-scroll p-1 flex-row"
+            /** This Is Filters For Rating List */ className="flex md:overflow-auto gap-2  overflow-x-scroll p-1 flex-row"
           >
-            <div className="flex bg-gray-600 ring-1 ring-gray-600/30 md:ring-0 p-1 rounded-md md:bg-transparent m-2 w-full items-center justify-between">
+            <div className="flex bg-gray-600 ring-1 ring-gray-600/30 md:ring-0 p-1 rounded-md md:bg-transparent w-full items-center justify-between">
               <label
                 htmlFor="type"
                 className="text-gray-200 flex items-center justify-center m-1 h-full"
@@ -349,7 +349,7 @@ function QueryFilter(props: FilterPropType) {
                 ))}
               </select>
             </div>
-            <div className="flex bg-gray-600 ring-1 ring-gray-600/30 md:ring-0 p-1 rounded-md md:bg-transparent m-2 w-full items-center justify-between">
+            <div className="flex bg-gray-600 ring-1 ring-gray-600/30 md:ring-0 p-1 rounded-md md:bg-transparent w-full items-center justify-between">
               <label
                 htmlFor="type"
                 className="text-gray-200 flex items-center justify-center m-1 h-full"
@@ -365,7 +365,7 @@ function QueryFilter(props: FilterPropType) {
                 id="from-date"
               />
             </div>
-            <div className="flex bg-gray-600 ring-1 ring-gray-600/30 md:ring-0 p-1 rounded-md md:bg-transparent m-2 w-full items-center justify-between">
+            <div className="flex bg-gray-600 ring-1 ring-gray-600/30 md:ring-0 p-1 rounded-md md:bg-transparent w-full items-center justify-between">
               <label
                 htmlFor="type"
                 className="text-gray-200 flex items-center justify-center m-1 h-full"
@@ -384,7 +384,7 @@ function QueryFilter(props: FilterPropType) {
             {props.assigneeFilter !== undefined &&
             props.onAssigneeFilterChange !== undefined &&
             props.userData !== undefined ? (
-              <div className="flex bg-gray-600 ring-1 ring-gray-600/30 md:ring-0 p-1 rounded-md md:bg-transparent m-2 w-full items-center justify-between">
+              <div className="flex bg-gray-600 ring-1 ring-gray-600/30 md:ring-0 p-1 rounded-md md:bg-transparent w-full items-center justify-between">
                 <label
                   htmlFor="type"
                   className="text-gray-200 flex items-center justify-center m-1 h-full"

@@ -87,6 +87,7 @@ export const POST = async (req: NextRequest, context: Context) => {
             action: assignments.ratingScore >= 0 ? "INCREASE" : "DECREASE",
             reason: `Assignment Score from event: ${event.name}. SYSTEM`,
             createdById: thisUser.user.userId,
+            regionId: thisUser.user.regionId,
           },
         });
 
