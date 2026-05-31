@@ -213,7 +213,7 @@ function PositionHistoryCreate({ onCreated }: Props) {
                     checked={createData.ended}
                     className="sr-only peer"
                   />
-                  <div className="relative mx-2 w-11 h-6 bg-neutral-400 peer-focus:outline-none peer-focus:ring-1 peer-focus:ring-brand-soft dark:peer-focus:ring-gray-500 rounded-full peer peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-buffer after:content-[''] after:absolute after:top-0.5 after:start-px after:bg-white after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-green-800"></div>
+                  <div className="relative mx-2 w-11 h-6 bg-neutral-400 peer-focus:outline-none peer-focus:ring-1 peer-focus:ring-brand-soft dark:peer-focus:ring-gray-500 rounded-full peer peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-buffer after:content-[''] after:absolute after:top-0.5 after:inset-s-px after:bg-white after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-green-800"></div>
                   <span className="select-none text-sm font-medium text-heading">
                     Ended
                   </span>
