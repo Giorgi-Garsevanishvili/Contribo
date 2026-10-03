@@ -17,7 +17,7 @@ export const GET = async (_req: NextRequest) => {
     if (!data || data.length === 0) {
       return NextResponse.json(
         { data, message: "Allowed users not found" },
-        { status: 404 }
+        { status: 404 },
       );
     }
 
@@ -39,20 +39,20 @@ export const POST = async (req: NextRequest) => {
     if (!body || !Object.keys(body).length) {
       return NextResponse.json(
         { message: "At least one filed must be provided" },
-        { status: 400 }
+        { status: 400 },
       );
     }
 
     if (!body.email) {
       return NextResponse.json(
         { message: "Email and type field must be provided" },
-        { status: 400 }
+        { status: 400 },
       );
     }
 
     const newAllowedUser = await prisma.allowedUser.create({
       data: {
-        email: body.email,
+        email: body.email.toLowerCase(),
         regionId: body.regionId,
         creatorId: thisUser.user.userId,
       },
@@ -70,7 +70,7 @@ export const POST = async (req: NextRequest) => {
     if (!newAllowedUser) {
       return NextResponse.json(
         { message: "Something went wrong!" },
-        { status: 400 }
+        { status: 400 },
       );
     }
 

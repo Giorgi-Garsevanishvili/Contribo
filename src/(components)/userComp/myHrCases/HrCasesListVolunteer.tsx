@@ -93,7 +93,7 @@ function HrCasesListVolunteer({ fetchUrl }: { fetchUrl: string }) {
   const [isOpenId, setIsOpenId] = useState("");
   const [colorInfoOpen, setColorInfoOpen] = useState(false);
   const { data: types, isLoadingFetch: isLoadingFetchTypes } =
-    useFetchData<DataType>(`/api/admin/hrWarningTypes`, []);
+    useFetchData<DataType>(`/api/user/hrWarningTypes`, []);
 
   const [currentPage, setCurrentPage] = useState(1);
   const [limit, setLimit] = useState(10);

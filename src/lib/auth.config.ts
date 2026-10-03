@@ -62,9 +62,7 @@ const authConfig: NextAuthConfig = {
     },
 
     async linkAccount({ user, account }) {
-      console.log(
-        `Linking account: ${account.provider} for user: ${user.email}`,
-      );
+      console.log(`Linking account: ${account.provider}`);
     },
   },
   callbacks: {
@@ -143,9 +141,7 @@ const authConfig: NextAuthConfig = {
                 id_token: account.id_token,
               },
             });
-            console.log(
-              `Auto-linked ${account.provider} account for ${user.email}`,
-            );
+            console.log(`Auto-linked ${account.provider} account`);
           }
           return true;
         }

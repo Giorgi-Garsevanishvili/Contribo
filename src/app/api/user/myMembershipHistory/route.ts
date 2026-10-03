@@ -5,7 +5,7 @@ import { NextRequest, NextResponse } from "next/server";
 
 export const GET = async (_req: NextRequest) => {
   try {
-    const thisUser = await requireRole("ADMIN");
+    const thisUser = await requireRole("REGULAR");
 
     const data = await prisma.memberStatusLog.findMany({
       where: {

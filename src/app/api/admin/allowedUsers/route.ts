@@ -123,7 +123,7 @@ export const POST = async (req: NextRequest) => {
 
     const newAllowedUser = await prisma.allowedUser.create({
       data: {
-        email: body.email,
+        email: body.email.toLowerCase(),
         regionId: thisUser.user?.regionId,
         creatorId: thisUser.user.userId,
       },
