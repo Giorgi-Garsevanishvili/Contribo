@@ -158,7 +158,7 @@ export type HrWarningTypeGroupByOutputType = {
   _max: HrWarningTypeMaxAggregateOutputType | null
 }
 
-type GetHrWarningTypeGroupByPayload<T extends HrWarningTypeGroupByArgs> = Prisma.PrismaPromise<
+export type GetHrWarningTypeGroupByPayload<T extends HrWarningTypeGroupByArgs> = Prisma.PrismaPromise<
   Array<
     Prisma.PickEnumerable<HrWarningTypeGroupByOutputType, T['by']> &
       {
@@ -1088,6 +1088,11 @@ export type HrWarningTypeFindManyArgs<ExtArgs extends runtime.Types.Extensions.I
    * Skip the first `n` HrWarningTypes.
    */
   skip?: number
+  /**
+   * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+   * 
+   * Filter by unique combinations of HrWarningTypes.
+   */
   distinct?: Prisma.HrWarningTypeScalarFieldEnum | Prisma.HrWarningTypeScalarFieldEnum[]
 }
 

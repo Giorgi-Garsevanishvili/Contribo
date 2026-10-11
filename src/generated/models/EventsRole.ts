@@ -158,7 +158,7 @@ export type EventsRoleGroupByOutputType = {
   _max: EventsRoleMaxAggregateOutputType | null
 }
 
-type GetEventsRoleGroupByPayload<T extends EventsRoleGroupByArgs> = Prisma.PrismaPromise<
+export type GetEventsRoleGroupByPayload<T extends EventsRoleGroupByArgs> = Prisma.PrismaPromise<
   Array<
     Prisma.PickEnumerable<EventsRoleGroupByOutputType, T['by']> &
       {
@@ -1189,6 +1189,11 @@ export type EventsRoleFindManyArgs<ExtArgs extends runtime.Types.Extensions.Inte
    * Skip the first `n` EventsRoles.
    */
   skip?: number
+  /**
+   * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+   * 
+   * Filter by unique combinations of EventsRoles.
+   */
   distinct?: Prisma.EventsRoleScalarFieldEnum | Prisma.EventsRoleScalarFieldEnum[]
 }
 

@@ -158,7 +158,7 @@ export type PositionGroupByOutputType = {
   _max: PositionMaxAggregateOutputType | null
 }
 
-type GetPositionGroupByPayload<T extends PositionGroupByArgs> = Prisma.PrismaPromise<
+export type GetPositionGroupByPayload<T extends PositionGroupByArgs> = Prisma.PrismaPromise<
   Array<
     Prisma.PickEnumerable<PositionGroupByOutputType, T['by']> &
       {
@@ -1090,6 +1090,11 @@ export type PositionFindManyArgs<ExtArgs extends runtime.Types.Extensions.Intern
    * Skip the first `n` Positions.
    */
   skip?: number
+  /**
+   * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+   * 
+   * Filter by unique combinations of Positions.
+   */
   distinct?: Prisma.PositionScalarFieldEnum | Prisma.PositionScalarFieldEnum[]
 }
 

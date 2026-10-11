@@ -245,7 +245,7 @@ export type AvailabilitySlotGroupByOutputType = {
   _max: AvailabilitySlotMaxAggregateOutputType | null
 }
 
-type GetAvailabilitySlotGroupByPayload<T extends AvailabilitySlotGroupByArgs> = Prisma.PrismaPromise<
+export type GetAvailabilitySlotGroupByPayload<T extends AvailabilitySlotGroupByArgs> = Prisma.PrismaPromise<
   Array<
     Prisma.PickEnumerable<AvailabilitySlotGroupByOutputType, T['by']> &
       {
@@ -2056,6 +2056,11 @@ export type AvailabilitySlotFindManyArgs<ExtArgs extends runtime.Types.Extension
    * Skip the first `n` AvailabilitySlots.
    */
   skip?: number
+  /**
+   * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+   * 
+   * Filter by unique combinations of AvailabilitySlots.
+   */
   distinct?: Prisma.AvailabilitySlotScalarFieldEnum | Prisma.AvailabilitySlotScalarFieldEnum[]
 }
 

@@ -1,6 +1,6 @@
 "use client";
 
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useCallback, useState, type FormEvent } from "react";
 import { AlertCircle, Loader } from "lucide-react";
 import * as Nominatim from "nominatim-browser";
 
@@ -17,16 +17,13 @@ interface LocationSearchProps {
   onLocationSelect: (location: string) => void;
 }
 
-const DEBOUNCE_DELAY = 1500;
-
 export function LocationSearch({ onLocationSelect }: LocationSearchProps) {
   const [query, setQuery] = useState("");
   const [results, setResults] = useState<NominatimResult[]>([]);
   const [loading, setLoading] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
   const [error, setError] = useState<string | null>(null);
-  const [useManualInput, setUseManualInput] = useState<boolean>(false);
-  const debounceTimer = useRef<NodeJS.Timeout | null>(null);
+  const [useManualInput, setUseManualInput] = useState(false);
 
   const performSearch = useCallback(async (text: string): Promise<void> => {
     if (!text || text.length < 3) {
@@ -39,18 +36,19 @@ export function LocationSearch({ onLocationSelect }: LocationSearchProps) {
     setLoading(true);
     setIsOpen(true);
     setError(null);
+
     try {
       const data: NominatimResult[] = await Nominatim.geocode({
         q: text,
         limit: 5,
         addressdetails: true,
-        
       });
+
       if (data.length === 0) {
         setError("No locations found. You can enter it manually below.");
-        setResults([] as NominatimResult[]);
+        setResults([]);
       } else {
-        setResults(data as NominatimResult[]);
+        setResults(data);
         setError(null);
       }
     } catch (error) {
@@ -62,29 +60,22 @@ export function LocationSearch({ onLocationSelect }: LocationSearchProps) {
     }
   }, []);
 
-  const searchLocation = useCallback(
-    (text: string): void => {
-      // Clear previous debounce timer
-      if (debounceTimer.current) {
-        clearTimeout(debounceTimer.current);
-      }
+  const handleSearchSubmit = (event: FormEvent<HTMLFormElement>): void => {
+    event.preventDefault();
 
-      // Set new debounce timer
-      debounceTimer.current = setTimeout(() => {
-        performSearch(text);
-      }, DEBOUNCE_DELAY);
-    },
-    [performSearch],
-  );
+    if (loading || query.trim().length < 3) {
+      return;
+    }
 
-  // Cleanup debounce timer on unmount
-  useEffect(() => {
-    return () => {
-      if (debounceTimer.current) {
-        clearTimeout(debounceTimer.current);
-      }
-    };
-  }, []);
+    void performSearch(query.trim());
+  };
+
+  const handleInputChange = (value: string): void => {
+    setQuery(value);
+    setResults([]);
+    setIsOpen(false);
+    setError(null);
+  };
 
   const handleSelect = (result: NominatimResult): void => {
     onLocationSelect(result.display_name);
@@ -96,68 +87,87 @@ export function LocationSearch({ onLocationSelect }: LocationSearchProps) {
   };
 
   const handleManualSubmit = (): void => {
-    if (query.trim()) {
-      onLocationSelect(query.trim());
+    const location = query.trim();
+
+    if (location) {
+      onLocationSelect(location);
       setQuery("");
+      setResults([]);
+      setIsOpen(false);
       setError(null);
       setUseManualInput(false);
     }
   };
 
-  const handleInputChange = (value: string): void => {
-    setQuery(value);
-    if (value.length >= 3) {
-      searchLocation(value);
-    } else {
-      setResults([]);
-      setError(null);
-    }
-  };
-
-  const handleBlur = (): void => {
-    setTimeout(() => setIsOpen(false), 450);
-  };
-
   return (
     <div className="space-y-2 w-full">
-      <div className="relative">
-        <input
-          type="text"
-          placeholder="Search location (e.g., Riga, Latvia)"
-          value={query}
-          onChange={(e) => handleInputChange(e.target.value)}
-          onFocus={() => query.length >= 3 && setIsOpen(true)}
-          onBlur={handleBlur}
-          className="w-full px-4 py-2  bg-gray-800  rounded-xs ring-1 ring-gray-700 focus:outline-none focus:ring-2"
-        />
+      <form
+        className="space-y-2"
+        onSubmit={handleSearchSubmit}
+        onBlur={(event) => {
+          const nextFocusedElement = event.relatedTarget;
 
-        {loading && (
-          <Loader
-            className="absolute right-3 top-2.5 animate-spin text-gray-400"
-            size={20}
+          if (
+            nextFocusedElement instanceof Node &&
+            event.currentTarget.contains(nextFocusedElement)
+          ) {
+            return;
+          }
+
+          setIsOpen(false);
+        }}
+      >
+        <div className="relative">
+          <label htmlFor="location-search" className="sr-only">
+            Search location
+          </label>
+          <input
+            id="location-search"
+            type="text"
+            placeholder="Search location (e.g., Riga, Latvia)"
+            value={query}
+            onChange={(event) => handleInputChange(event.target.value)}
+            autoComplete="off"
+            className="w-full px-4 py-2 bg-gray-800 rounded-xs ring-1 ring-gray-700 focus:outline-none focus:ring-2"
           />
-        )}
 
-        {isOpen && results.length > 0 && (
-          <div className="absolute top-full overflow-auto no-scrollbar left-0 right-0 mt-1 bg-white border border-gray-300 rounded-lg shadow-lg z-50">
-            {results.map((result) => (
-              <button
-                key={result.osm_id}
-                type="button"
-                onClick={() => handleSelect(result)}
-                className="w-full text-left px-4 py-3 cursor-pointer hover:bg-gray-100 border-b border-gray-200 last:border-b-0 transition-colors"
-              >
-                <div className="font-medium text-gray-900">
-                  {result.display_name.split(",")[0]}
-                </div>
-                <div className="text-sm text-gray-600">
-                  {result.display_name.split(",").slice(1).join(",")}
-                </div>
-              </button>
-            ))}
-          </div>
-        )}
-      </div>
+          {loading && (
+            <Loader
+              aria-hidden="true"
+              className="absolute right-3 top-2.5 animate-spin text-gray-400"
+              size={20}
+            />
+          )}
+
+          {isOpen && results.length > 0 && (
+            <div className="absolute top-full overflow-auto no-scrollbar left-0 right-0 mt-1 bg-white border border-gray-300 rounded-lg shadow-lg z-50">
+              {results.map((result) => (
+                <button
+                  key={result.osm_id}
+                  type="button"
+                  onClick={() => handleSelect(result)}
+                  className="w-full text-left px-4 py-3 cursor-pointer hover:bg-gray-100 border-b border-gray-200 last:border-b-0 transition-colors"
+                >
+                  <div className="font-medium text-gray-900">
+                    {result.display_name.split(",")[0]}
+                  </div>
+                  <div className="text-sm text-gray-600">
+                    {result.display_name.split(",").slice(1).join(",")}
+                  </div>
+                </button>
+              ))}
+            </div>
+          )}
+        </div>
+
+        <button
+          type="submit"
+          disabled={loading || query.trim().length < 3}
+          className="px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 disabled:bg-gray-400 disabled:cursor-not-allowed text-sm font-medium transition-colors"
+        >
+          {loading ? "Searching…" : "Search"}
+        </button>
+      </form>
 
       {error && (
         <div className="p-3 bg-yellow-50 border border-yellow-200 rounded-lg flex gap-2">
@@ -179,15 +189,19 @@ export function LocationSearch({ onLocationSelect }: LocationSearchProps) {
 
       {useManualInput && (
         <div className="space-y-2 p-3 bg-blue-50 border border-blue-200 rounded-lg">
-          <label className="block text-sm font-medium text-gray-700">
+          <label
+            htmlFor="manual-location"
+            className="block text-sm font-medium text-gray-700"
+          >
             Enter location manually
           </label>
           <div className="flex gap-2">
             <input
+              id="manual-location"
               type="text"
               placeholder="e.g., Riga, Latvia"
               value={query}
-              onChange={(e) => setQuery(e.target.value)}
+              onChange={(event) => setQuery(event.target.value)}
               className="flex-1 px-3 py-2 border text-gray-900 border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm"
             />
             <button
@@ -201,6 +215,18 @@ export function LocationSearch({ onLocationSelect }: LocationSearchProps) {
           </div>
         </div>
       )}
+
+      <p className="text-xs text-gray-500">
+        Search data ©{" "}
+        <a
+          href="https://www.openstreetmap.org/copyright"
+          target="_blank"
+          rel="noreferrer"
+          className="underline"
+        >
+          OpenStreetMap contributors
+        </a>
+      </p>
     </div>
   );
 }

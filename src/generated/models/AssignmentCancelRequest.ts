@@ -186,7 +186,7 @@ export type AssignmentCancelRequestGroupByOutputType = {
   _max: AssignmentCancelRequestMaxAggregateOutputType | null
 }
 
-type GetAssignmentCancelRequestGroupByPayload<T extends AssignmentCancelRequestGroupByArgs> = Prisma.PrismaPromise<
+export type GetAssignmentCancelRequestGroupByPayload<T extends AssignmentCancelRequestGroupByArgs> = Prisma.PrismaPromise<
   Array<
     Prisma.PickEnumerable<AssignmentCancelRequestGroupByOutputType, T['by']> &
       {
@@ -1550,6 +1550,11 @@ export type AssignmentCancelRequestFindManyArgs<ExtArgs extends runtime.Types.Ex
    * Skip the first `n` AssignmentCancelRequests.
    */
   skip?: number
+  /**
+   * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+   * 
+   * Filter by unique combinations of AssignmentCancelRequests.
+   */
   distinct?: Prisma.AssignmentCancelRequestScalarFieldEnum | Prisma.AssignmentCancelRequestScalarFieldEnum[]
 }
 
