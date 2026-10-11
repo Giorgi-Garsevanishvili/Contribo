@@ -186,7 +186,7 @@ export type AllowedUserGroupByOutputType = {
   _max: AllowedUserMaxAggregateOutputType | null
 }
 
-type GetAllowedUserGroupByPayload<T extends AllowedUserGroupByArgs> = Prisma.PrismaPromise<
+export type GetAllowedUserGroupByPayload<T extends AllowedUserGroupByArgs> = Prisma.PrismaPromise<
   Array<
     Prisma.PickEnumerable<AllowedUserGroupByOutputType, T['by']> &
       {
@@ -1803,6 +1803,11 @@ export type AllowedUserFindManyArgs<ExtArgs extends runtime.Types.Extensions.Int
    * Skip the first `n` AllowedUsers.
    */
   skip?: number
+  /**
+   * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+   * 
+   * Filter by unique combinations of AllowedUsers.
+   */
   distinct?: Prisma.AllowedUserScalarFieldEnum | Prisma.AllowedUserScalarFieldEnum[]
 }
 

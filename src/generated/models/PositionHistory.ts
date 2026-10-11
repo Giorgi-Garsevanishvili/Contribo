@@ -207,7 +207,7 @@ export type PositionHistoryGroupByOutputType = {
   _max: PositionHistoryMaxAggregateOutputType | null
 }
 
-type GetPositionHistoryGroupByPayload<T extends PositionHistoryGroupByArgs> = Prisma.PrismaPromise<
+export type GetPositionHistoryGroupByPayload<T extends PositionHistoryGroupByArgs> = Prisma.PrismaPromise<
   Array<
     Prisma.PickEnumerable<PositionHistoryGroupByOutputType, T['by']> &
       {
@@ -2015,6 +2015,11 @@ export type PositionHistoryFindManyArgs<ExtArgs extends runtime.Types.Extensions
    * Skip the first `n` PositionHistories.
    */
   skip?: number
+  /**
+   * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+   * 
+   * Filter by unique combinations of PositionHistories.
+   */
   distinct?: Prisma.PositionHistoryScalarFieldEnum | Prisma.PositionHistoryScalarFieldEnum[]
 }
 

@@ -186,7 +186,7 @@ export type EntryCancelRequestGroupByOutputType = {
   _max: EntryCancelRequestMaxAggregateOutputType | null
 }
 
-type GetEntryCancelRequestGroupByPayload<T extends EntryCancelRequestGroupByArgs> = Prisma.PrismaPromise<
+export type GetEntryCancelRequestGroupByPayload<T extends EntryCancelRequestGroupByArgs> = Prisma.PrismaPromise<
   Array<
     Prisma.PickEnumerable<EntryCancelRequestGroupByOutputType, T['by']> &
       {
@@ -1550,6 +1550,11 @@ export type EntryCancelRequestFindManyArgs<ExtArgs extends runtime.Types.Extensi
    * Skip the first `n` EntryCancelRequests.
    */
   skip?: number
+  /**
+   * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+   * 
+   * Filter by unique combinations of EntryCancelRequests.
+   */
   distinct?: Prisma.EntryCancelRequestScalarFieldEnum | Prisma.EntryCancelRequestScalarFieldEnum[]
 }
 

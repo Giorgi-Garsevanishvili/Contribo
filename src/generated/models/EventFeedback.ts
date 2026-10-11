@@ -241,7 +241,7 @@ export type EventFeedbackGroupByOutputType = {
   _max: EventFeedbackMaxAggregateOutputType | null
 }
 
-type GetEventFeedbackGroupByPayload<T extends EventFeedbackGroupByArgs> = Prisma.PrismaPromise<
+export type GetEventFeedbackGroupByPayload<T extends EventFeedbackGroupByArgs> = Prisma.PrismaPromise<
   Array<
     Prisma.PickEnumerable<EventFeedbackGroupByOutputType, T['by']> &
       {
@@ -1745,6 +1745,11 @@ export type EventFeedbackFindManyArgs<ExtArgs extends runtime.Types.Extensions.I
    * Skip the first `n` EventFeedbacks.
    */
   skip?: number
+  /**
+   * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+   * 
+   * Filter by unique combinations of EventFeedbacks.
+   */
   distinct?: Prisma.EventFeedbackScalarFieldEnum | Prisma.EventFeedbackScalarFieldEnum[]
 }
 

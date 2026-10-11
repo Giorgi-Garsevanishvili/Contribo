@@ -262,7 +262,7 @@ export type EventAssignmentGroupByOutputType = {
   _max: EventAssignmentMaxAggregateOutputType | null
 }
 
-type GetEventAssignmentGroupByPayload<T extends EventAssignmentGroupByArgs> = Prisma.PrismaPromise<
+export type GetEventAssignmentGroupByPayload<T extends EventAssignmentGroupByArgs> = Prisma.PrismaPromise<
   Array<
     Prisma.PickEnumerable<EventAssignmentGroupByOutputType, T['by']> &
       {
@@ -2405,6 +2405,11 @@ export type EventAssignmentFindManyArgs<ExtArgs extends runtime.Types.Extensions
    * Skip the first `n` EventAssignments.
    */
   skip?: number
+  /**
+   * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+   * 
+   * Filter by unique combinations of EventAssignments.
+   */
   distinct?: Prisma.EventAssignmentScalarFieldEnum | Prisma.EventAssignmentScalarFieldEnum[]
 }
 

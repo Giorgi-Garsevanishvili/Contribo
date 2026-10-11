@@ -249,7 +249,7 @@ export type RatingHistoryGroupByOutputType = {
   _max: RatingHistoryMaxAggregateOutputType | null
 }
 
-type GetRatingHistoryGroupByPayload<T extends RatingHistoryGroupByArgs> = Prisma.PrismaPromise<
+export type GetRatingHistoryGroupByPayload<T extends RatingHistoryGroupByArgs> = Prisma.PrismaPromise<
   Array<
     Prisma.PickEnumerable<RatingHistoryGroupByOutputType, T['by']> &
       {
@@ -1913,6 +1913,11 @@ export type RatingHistoryFindManyArgs<ExtArgs extends runtime.Types.Extensions.I
    * Skip the first `n` RatingHistories.
    */
   skip?: number
+  /**
+   * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+   * 
+   * Filter by unique combinations of RatingHistories.
+   */
   distinct?: Prisma.RatingHistoryScalarFieldEnum | Prisma.RatingHistoryScalarFieldEnum[]
 }
 
