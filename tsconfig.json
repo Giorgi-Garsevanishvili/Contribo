@@ -20,7 +20,8 @@
     ],
     "paths": {
       "@/*": ["./src/*"]
-    }
+    },
+    "types": ["vitest/globals", "node"]
   },
   "include": [
     "next-auth.d.ts",
@@ -30,7 +31,8 @@
     "**/*.d.ts",
     ".next/types/**/*.ts",
     "src/app/redux/store.js",
-    ".next/dev/types/**/*.ts"
-, "src/app/api/user/myProfile"  ],
+    ".next/dev/types/**/*.ts",
+    "src/app/api/user/myProfile"
+  ],
   "exclude": ["node_modules"]
 }

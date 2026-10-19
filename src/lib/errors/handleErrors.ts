@@ -23,6 +23,17 @@ export function handleError(error: unknown): {
     }
   }
 
+  if (error instanceof Error) {
+    const status = (error as Error & { status?: number }).status;
+
+    if (status === 401 || status === 403) {
+      return {
+        status,
+        message: error.message,
+      };
+    }
+  }
+
   //zod errors
   if (error instanceof ZodError) {
     return {

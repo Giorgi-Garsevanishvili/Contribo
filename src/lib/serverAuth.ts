@@ -10,6 +10,11 @@ interface AuthError extends Error {
 export const requireRole = async (role: string) => {
   const session = await auth();
 
+  if (!session) {
+    const err: AuthError = new Error("Unauthenticated");
+    err.status = 401;
+    throw err;
+  }
   if (!session?.user.email) {
     const err: AuthError = new Error("Unauthorized access");
     err.status = 403;
