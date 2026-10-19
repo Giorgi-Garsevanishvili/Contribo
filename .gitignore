@@ -41,4 +41,7 @@ yarn-error.log*
 *.tsbuildinfo
 next-env.d.ts
 
+# Vitest reports and artifacts
+.vitest/
+
 /src/generated/prisma
