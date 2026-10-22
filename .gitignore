@@ -45,3 +45,4 @@ next-env.d.ts
 .vitest/
 
 /src/generated/prisma
+/src/generated
